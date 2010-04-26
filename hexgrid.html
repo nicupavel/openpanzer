@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 Canvas HexGrid</title>
+    <script>
+	var s = 36;   
+	var h = s/2;  
+	var r = s * 0.886025404;
+	var imgRes = new Array();
+	var img = new Array();
+	
+	img[0] = "ger-tank-1.png";
+	img[1] = "eng-tank-1.png";
+	img[2] = "ger-plane-1.png";
+	img[3] = "eng-plane-1.png";
+	img[4] = "ger-inf-1.png";
+	img[5] = "eng-inf-1.png";
+	img[6] = "ger-artl-1.png";
+	img[7] = "eng-artl-1.png";
+	
+
+
+	function drawHex(c, x0, y0, tileImg)
+	{
+		c.strokeStyle = "yellow";
+		c.fillStyle = "green";
+
+		c.beginPath();
+		c.moveTo(x0, y0);
+		c.lineTo(x0 + s, y0);
+		c.lineTo(x0 + s + h, y0 + r);
+		c.lineTo(x0 + s, y0 + 2 * r);
+		c.lineTo(x0, y0 + 2 *r);
+		c.lineTo(x0 - h, y0 + r);
+		c.fill();
+		if (tileImg) 
+		{
+			c.drawImage(tileImg, x0, y0 + 20);
+		}
+
+		c.stroke();
+		c.closePath();
+      }
+      
+      function drawHexGrid(c, x, y, rows, cols)
+      {
+		var posx;
+		var posy;
+		var n;
+
+		for (row = 0; row < rows; row++) 
+		{
+			for (col = 0; col < cols; col++) 
+			{
+				n = Math.round(Math.random() * 50); // don't fill up entire map with tiles
+				posy =   y + row * r;
+				posx  = (row & 1 ) * (h + s) + x + 2 * col  * (s + h);
+				
+				drawHex(c, posx , posy, imgRes[n]);
+			}
+		}
+	}
+	
+	function renderStart()
+	{
+		var canvas = document.getElementById('hex');
+		canvas.addEventListener("click", 
+                        function(e) 
+			{ 
+                           alert("x:"+(e.clientX-canvas.offsetLeft)
+                                 +" y:"+(e.clientY-canvas.offsetTop)); 
+                        },
+			false);
+
+		var c = canvas.getContext('2d');
+		
+		for (i = 0; i < img.length; i++)
+		{
+			imgRes[i]  = new Image();
+			imgRes[i].src = img[i];
+		}
+		
+		drawHexGrid(c, 20, 20, 15, 6);
+	}
+      </script> 
+  </head>
+  <body onload="renderStart();">
+    <canvas id="hex" width="800" height="600">
+   HexGrid
+    </canvas>
+  </body>
+</html>
