@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HTML5 Canvas HexGrid</title>
+    <title>HTML5 Canvas HexGrid with pixel mapping</title>
+    <meta name="Author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
+    <meta name="description" content="Hexagonal Grid Map with mouse coordinates pixel to hex conversion"/>
     <script>
-	var s = 36;   
+	var s = 36; //hexagon segment size   
 	var h = s/2;  
-	var r = s * 0.886025404;
+	var r = s * 0.886025404; //maybe do it s/4 
 	var imgRes = new Array();
 	var img = new Array();
 	
@@ -18,13 +20,11 @@
 	img[6] = "ger-artl-1.png";
 	img[7] = "eng-artl-1.png";
 	
-
-
-	function drawHex(c, x0, y0, tileImg)
+	function drawHex(c, x0, y0, fColor, sColor, text, tileImg)
 	{
-		c.strokeStyle = "yellow";
-		c.fillStyle = "green";
-
+		c.strokeStyle = sColor;
+		
+		
 		c.beginPath();
 		c.moveTo(x0, y0);
 		c.lineTo(x0 + s, y0);
@@ -32,7 +32,13 @@
 		c.lineTo(x0 + s, y0 + 2 * r);
 		c.lineTo(x0, y0 + 2 *r);
 		c.lineTo(x0 - h, y0 + r);
-		c.fill();
+		
+		if (fColor)
+		{
+		    c.fillStyle = fColor;
+		    c.fill();
+		}
+		
 		if (tileImg) 
 		{
 			c.drawImage(tileImg, x0, y0 + 20);
@@ -40,6 +46,14 @@
 
 		c.stroke();
 		c.closePath();
+		
+		if (text)
+		{
+		    c.font = "10px sans-serif"
+		    c.fillStyle = "white";
+		    c.fillText(text, x0 + h/2, y0 + 2 * r - 2);
+		
+		}
       }
       
       function drawHexGrid(c, x, y, rows, cols)
@@ -47,32 +61,67 @@
 		var posx;
 		var posy;
 		var n;
+		var coord;
 
 		for (row = 0; row < rows; row++) 
 		{
-			for (col = 0; col < cols; col++) 
+			//we space the hexagons on each line next column being on the row below 
+			for (col = 0; col < cols/2; col++) 
 			{
 				n = Math.round(Math.random() * 50); // don't fill up entire map with tiles
 				posy =   y + row * r;
 				posx  = (row & 1 ) * (h + s) + x + 2 * col  * (s + h);
-				
-				drawHex(c, posx , posy, imgRes[n]);
+				coord = "(" + col + "," + row + ")";	
+				drawHex(c, posx , posy, "green", "yellow", coord, imgRes[n]);
 			}
 		}
 	}
 	
 	function renderStart()
 	{
+		var MAP_ORIGIN_X = 20;
+		var MAP_ORIGIN_Y = 20;
+		var MAP_COLS = 12;
+		var MAP_ROWS = 15;
+		
+		var statusText = document.getElementById('mousestatus');
 		var canvas = document.getElementById('hex');
+		var c = canvas.getContext('2d');
+		
 		canvas.addEventListener("click", 
                         function(e) 
 			{ 
-                           alert("x:"+(e.clientX-canvas.offsetLeft)
-                                 +" y:"+(e.clientY-canvas.offsetTop)); 
+			    var mx, my, tcol, vcol, trow, vrow,  posx, posy;
+
+                            mx = e.clientX-canvas.offsetLeft;
+                            my = e.clientY-canvas.offsetTop;
+			    //a graphical column in the grid not the array column
+			    vcol = parseInt(mx / (s + h)); 
+			    //real array column
+			    tcol = parseInt(vcol/2);
+			    // a graphical row not the array row
+			    vrow = parseInt((my + r * (~vcol & 1)) / r); 
+			    
+			    //shift to correct row index
+			    if (vcol & 1)
+			    {
+				trow = vrow - 1;
+			    }
+			    else
+			    {
+				trow = vrow - 2;
+			    }
+			    
+			    //Add top offset (r) if graphical column is even substract if odd
+			    posy =   MAP_ORIGIN_Y + r * (vcol & 1)  - r * (vcol & 1) + trow * r;
+			    posx  = (trow & 1 ) * (h + s) + MAP_ORIGIN_X + 2 * tcol  * (s + h);
+			    drawHex(c, posx, posy, null, "blue", null, null);	
+			    
+			    statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;
                         },
 			false);
 
-		var c = canvas.getContext('2d');
+		
 		
 		for (i = 0; i < img.length; i++)
 		{
@@ -80,13 +129,16 @@
 			imgRes[i].src = img[i];
 		}
 		
-		drawHexGrid(c, 20, 20, 15, 6);
+		drawHexGrid(c, MAP_ORIGIN_X, MAP_ORIGIN_Y, MAP_ROWS, MAP_COLS);
 	}
       </script> 
   </head>
   <body onload="renderStart();">
-    <canvas id="hex" width="800" height="600">
-   HexGrid
+    <input type="text" id="mousestatus" size=100/>
+    <br/>
+    <canvas id="hex" width="800" height="700">
+   HexGrid get a html5 capable browser
     </canvas>
+    
   </body>
 </html>
