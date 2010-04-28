@@ -142,18 +142,17 @@
                         },
 			false);
 		
-		//image preloading 
-		for (i = 0; i < img.length; i++)
-		{
-		    imgRes[i]  = new Image();
-		    imgRes[i].src = img[i];
-		    imgRes[i].onload = function()
-		    {
-			c.drawImage(this, 0, 0);
-		    }
-		    
-		}
-		
+		//image preloading not working very well at first page load
+		//for (i = 0; i < img.length; i++)
+		//{
+		//    imgRes[i]  = new Image();
+		//    imgRes[i].src = img[i];
+		//    imgRes[i].onload = function()
+		//    {
+		//	c.drawImage(this, MAP_ORIGIN_X, MAP_ORIGIN_Y);
+		//    }
+		//}
+
 		drawHexGrid(c, MAP_ORIGIN_X, MAP_ORIGIN_Y, MAP_ROWS, MAP_COLS);
 	}
       </script> 
