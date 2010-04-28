@@ -39,10 +39,22 @@
 		    c.fill();
 		}
 		
-		if (tileImg) 
+		//Slower method but works better
+		if (tileImg < img.length)
 		{
-			c.drawImage(tileImg, x0, y0 + 20);
+		    imgRes  = new Image();
+		    imgRes.src = img[tileImg];
+		    imgRes.onload = function()
+		    {
+			c.drawImage(this, x0, y0 + 20);
+		    }
 		}
+		
+		//Directly sending the image object doesn't always work
+		//if (tileImg) 
+		//{
+		//	c.drawImage(tileImg, x0, y0 + 20);
+		//}
 
 		c.stroke();
 		c.closePath();
@@ -52,7 +64,6 @@
 		    c.font = "10px sans-serif"
 		    c.fillStyle = "white";
 		    c.fillText(text, x0 + h/2, y0 + 2 * r - 2);
-		
 		}
       }
       
@@ -71,8 +82,10 @@
 				n = Math.round(Math.random() * 50); // don't fill up entire map with tiles
 				posy =   y + row * r;
 				posx  = (row & 1 ) * (h + s) + x + 2 * col  * (s + h);
-				coord = "(" + col + "," + row + ")";	
-				drawHex(c, posx , posy, "green", "yellow", coord, imgRes[n]);
+				coord = "(" + col + "," + row + ")";
+				//Sending an image object first time the page is loaded doesn't work properly	
+				//drawHex(c, posx , posy, "green", "yellow", coord, imgRes[n]);
+				drawHex(c, posx , posy, "green", "yellow", coord, n);
 			}
 		}
 	}
@@ -115,18 +128,30 @@
 			    //Add top offset (r) if graphical column is even substract if odd
 			    posy =   MAP_ORIGIN_Y + r * (vcol & 1)  - r * (vcol & 1) + trow * r;
 			    posx  = (trow & 1 ) * (h + s) + MAP_ORIGIN_X + 2 * tcol  * (s + h);
-			    drawHex(c, posx, posy, null, "blue", null, null);	
 			    
-			    statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;
+			    if ((vcol <= MAP_COLS) && (trow <= MAP_ROWS))
+			    {
+				drawHex(c, posx, posy, null, "blue", null, null);
+				statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;	
+			    }
+			    else 
+			    {
+				statusText.value = "Outside Map";
+			    }
+			    
                         },
 			false);
-
 		
-		
+		//image preloading 
 		for (i = 0; i < img.length; i++)
 		{
-			imgRes[i]  = new Image();
-			imgRes[i].src = img[i];
+		    imgRes[i]  = new Image();
+		    imgRes[i].src = img[i];
+		    imgRes[i].onload = function()
+		    {
+			c.drawImage(this, 0, 0);
+		    }
+		    
 		}
 		
 		drawHexGrid(c, MAP_ORIGIN_X, MAP_ORIGIN_Y, MAP_ROWS, MAP_COLS);
@@ -134,10 +159,10 @@
       </script> 
   </head>
   <body onload="renderStart();">
-    <input type="text" id="mousestatus" size=100/>
+    <input type="text" id="mousestatus" size=100/> 
     <br/>
     <canvas id="hex" width="800" height="700">
-   HexGrid get a html5 capable browser
+   HexGrid. Get a html5 capable browser !
     </canvas>
     
   </body>
