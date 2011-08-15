@@ -8,9 +8,19 @@
 	var s = 36; //hexagon segment size   
 	var h = s/2;  
 	var r = s * 0.886025404; //maybe do it s/4 
-	var imgRes = new Array();
-	var img = new Array();
 	
+	var MAP_ORIGIN_X = 20;
+	var MAP_ORIGIN_Y = 20;
+	var MAP_ROWS = 42;
+	var MAP_COLS = 18*2;
+		
+	var statusText;
+	var canvas;
+	var c;
+		
+	var imgRes = {};
+	
+	var img = new Array();
 	img[0] = "ger-tank-1.png";
 	img[1] = "eng-tank-1.png";
 	img[2] = "ger-plane-1.png";
@@ -20,11 +30,57 @@
 	img[6] = "ger-artl-1.png";
 	img[7] = "eng-artl-1.png";
 	
-	function drawHex(c, x0, y0, fColor, sColor, text, tileImg)
+	var mapImg = "map17_dessau.png";
+	var totalImgs = img.length + 1;
+	var curImgs = 0;
+	
+	function mapDataArray(rows, cols)
 	{
+		var a = new Array(rows);
+		for(i = 0; i < rows; i++)
+		{
+			a[i] = new Array(cols);
+		}
+		return a;
+	}
+	
+	mapData = new mapDataArray(MAP_ROWS, MAP_COLS);
+	mapData[1][2] = img[0]; 
+	mapData[1][3] = img[4];
+	mapData[1][4] = img[6];
+	mapData[2][1] = img[2];  
+	
+	mapData[4][12] = img[1]; 
+	mapData[4][13] = img[3];
+	mapData[4][14] = img[5];
+	mapData[4][11] = img[7];    
+	
+	function doneLoading()
+	{
+		curImgs++;
+		if (curImgs == totalImgs) 
+		{
+			//setInterval(render, 1000/30);
+			render();
+		}	
+	}
+	
+	function loadImage(file)
+	{
+		imgRes[file] = new Image();
+		imgRes[file].src = file;
+		imgRes[file].onload = function()
+		    {
+				doneLoading();
+			}
+	}
+	
+	
+		
+	function drawHex(c, x0, y0, tColor, sColor, fColor, text, unit)
+	{
+	
 		c.strokeStyle = sColor;
-		
-		
 		c.beginPath();
 		c.moveTo(x0, y0);
 		c.lineTo(x0 + s, y0);
@@ -33,36 +89,24 @@
 		c.lineTo(x0, y0 + 2 *r);
 		c.lineTo(x0 - h, y0 + r);
 		
-		if (fColor)
+		if (tColor)
 		{
-		    c.fillStyle = fColor;
+		    c.fillStyle = tColor;
 		    c.fill();
 		}
 		
-		//Slower method but works better
-		if (tileImg < img.length)
+		if (imgRes[unit]) 
 		{
-		    imgRes  = new Image();
-		    imgRes.src = img[tileImg];
-		    imgRes.onload = function()
-		    {
-			c.drawImage(this, x0, y0 + 20);
-		    }
+			c.drawImage(imgRes[unit], x0, y0 + 20);
 		}
-		
-		//Directly sending the image object doesn't always work
-		//if (tileImg) 
-		//{
-		//	c.drawImage(tileImg, x0, y0 + 20);
-		//}
-
-		c.stroke();
 		c.closePath();
+		c.stroke();
+		
 		
 		if (text)
 		{
 		    c.font = "10px sans-serif"
-		    c.fillStyle = "white";
+		    c.fillStyle = fColor;
 		    c.fillText(text, x0 + h/2, y0 + 2 * r - 2);
 		}
       }
@@ -79,35 +123,28 @@
 			//we space the hexagons on each line next column being on the row below 
 			for (col = 0; col < cols/2; col++) 
 			{
-				n = Math.round(Math.random() * 50); // don't fill up entire map with tiles
 				posy =   y + row * r;
 				posx  = (row & 1 ) * (h + s) + x + 2 * col  * (s + h);
 				coord = "(" + col + "," + row + ")";
-				//Sending an image object first time the page is loaded doesn't work properly	
-				//drawHex(c, posx , posy, "green", "yellow", coord, imgRes[n]);
-				drawHex(c, posx , posy, "green", "yellow", coord, n);
+				drawHex(c, posx , posy, null, "rgba(255,255,255,0.8)", "rgba(0,0,0,0.8)", coord, mapData[row][col]);
 			}
 		}
 	}
 	
 	function renderStart()
 	{
-		var MAP_ORIGIN_X = 20;
-		var MAP_ORIGIN_Y = 20;
-		var MAP_COLS = 12;
-		var MAP_ROWS = 15;
-		
-		var statusText = document.getElementById('mousestatus');
-		var canvas = document.getElementById('hex');
-		var c = canvas.getContext('2d');
-		
+	
+		statusText = document.getElementById('mousestatus');
+		canvas = document.getElementById('hex');
+		c = canvas.getContext('2d');
+
 		canvas.addEventListener("click", 
-                        function(e) 
+			function(e) 
 			{ 
 			    var mx, my, tcol, vcol, trow, vrow,  posx, posy;
 
-                            mx = e.clientX-canvas.offsetLeft;
-                            my = e.clientY-canvas.offsetTop;
+				mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
+				my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;
 			    //a graphical column in the grid not the array column
 			    vcol = parseInt(mx / (s + h)); 
 			    //real array column
@@ -131,36 +168,38 @@
 			    
 			    if ((vcol <= MAP_COLS) && (trow <= MAP_ROWS))
 			    {
-				drawHex(c, posx, posy, null, "blue", null, null);
-				statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;	
+					render();
+					drawHex(c, posx, posy, "rgba(100,180,0,0.3)", "yellow", null, null);
+					statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;	
 			    }
 			    else 
 			    {
-				statusText.value = "Outside Map";
+					statusText.value = "Outside Map";
 			    }
 			    
-                        },
+			},
 			false);
-		
-		//image preloading not working very well at first page load
-		//for (i = 0; i < img.length; i++)
-		//{
-		//    imgRes[i]  = new Image();
-		//    imgRes[i].src = img[i];
-		//    imgRes[i].onload = function()
-		//    {
-		//	c.drawImage(this, MAP_ORIGIN_X, MAP_ORIGIN_Y);
-		//    }
-		//}
-
-		drawHexGrid(c, MAP_ORIGIN_X, MAP_ORIGIN_Y, MAP_ROWS, MAP_COLS);
+			
+		for(i = 0; i < img.length; i++)
+		{
+			loadImage(img[i]);
+		}	
+		loadImage(mapImg);
 	}
+	
+	function render()
+	{	
+		c.drawImage(imgRes[mapImg], 0 , MAP_ORIGIN_Y);
+		drawHexGrid(c, MAP_ORIGIN_X, MAP_ORIGIN_Y, MAP_ROWS, MAP_COLS);
+
+	}
+	
       </script> 
   </head>
   <body onload="renderStart();">
     <input type="text" id="mousestatus" size=100/> 
     <br/>
-    <canvas id="hex" width="800" height="700">
+    <canvas id="hex" width="1750" height="1410">
    HexGrid. Get a html5 capable browser !
     </canvas>
     
