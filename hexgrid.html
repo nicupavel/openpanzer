@@ -20,6 +20,14 @@
 		
 	var imgRes = {};
 	
+	// Used when displaying unit properties
+	var locationInfo = {
+		x: 0,
+		y: 0,
+		row: 0,
+		col: 0,
+	};
+	
 	var img = new Array();
 	img[0] = "ger-tank-1.png";
 	img[1] = "eng-tank-1.png";
@@ -76,7 +84,28 @@
 	}
 	
 	
+	function drawInfoPanel(c, x, y, row, col, text)
+	{
+		c.beginPath();
+		c.lineWidth = 1;
+		c.strokeStyle = "black";
+		c.fillStyle = "grey";
+		c.rect(x + 5, y + 5, 400, 100);
+		c.fill();
+		c.stroke();
 		
+		c.font = "12pt Calibri";
+ 		c.fillStyle = "black";
+		c.textBaseline = "top";
+		c.fillText(text, x + 10, y + 10);
+		
+		if (imgRes[mapData[row][col]]) 
+		{
+			c.fillText("Unit: ", x + 10, y + 30);
+			c.drawImage(imgRes[mapData[row][col]], x + 10, y + 50);
+		}
+	}
+	
 	function drawHex(c, x0, y0, tColor, sColor, fColor, text, unit)
 	{
 	
@@ -133,49 +162,61 @@
 	
 	function renderStart()
 	{
+		window.oncontextmenu = function() { return false; }
 	
 		statusText = document.getElementById('mousestatus');
 		canvas = document.getElementById('hex');
 		c = canvas.getContext('2d');
 
-		canvas.addEventListener("click", 
+		canvas.addEventListener("mousedown", 
 			function(e) 
 			{ 
-			    var mx, my, tcol, vcol, trow, vrow,  posx, posy;
-
+				var mx, my, tcol, vcol, trow, vrow,  posx, posy;
+				var rightclick;
+				
+				if (e.which) rightclick = (e.which == 3);
+				else if (e.button) rightclick = (e.button == 2);
+				
 				mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
 				my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;
-			    //a graphical column in the grid not the array column
-			    vcol = parseInt(mx / (s + h)); 
-			    //real array column
-			    tcol = parseInt(vcol/2);
-			    // a graphical row not the array row
-			    vrow = parseInt((my + r * (~vcol & 1)) / r); 
+				//a graphical column in the grid not the array column
+				vcol = parseInt(mx / (s + h)); 
+				//real array column
+				tcol = parseInt(vcol/2);
+				// a graphical row not the array row
+				vrow = parseInt((my + r * (~vcol & 1)) / r); 
 			    
-			    //shift to correct row index
-			    if (vcol & 1)
-			    {
-				trow = vrow - 1;
-			    }
-			    else
-			    {
-				trow = vrow - 2;
-			    }
+				//shift to correct row index
+				if (vcol & 1)
+				{
+					trow = vrow - 1;
+				}
+				else
+				{
+					trow = vrow - 2;
+				}
 			    
-			    //Add top offset (r) if graphical column is even substract if odd
-			    posy =   MAP_ORIGIN_Y + r * (vcol & 1)  - r * (vcol & 1) + trow * r;
-			    posx  = (trow & 1 ) * (h + s) + MAP_ORIGIN_X + 2 * tcol  * (s + h);
+				//Add top offset (r) if graphical column is even substract if odd
+				posy =   MAP_ORIGIN_Y + r * (vcol & 1)  - r * (vcol & 1) + trow * r;
+				posx  = (trow & 1 ) * (h + s) + MAP_ORIGIN_X + 2 * tcol  * (s + h);
 			    
-			    if ((vcol <= MAP_COLS) && (trow <= MAP_ROWS))
-			    {
+				if ((vcol <= MAP_COLS) && (trow <= MAP_ROWS))
+				{
+					var text = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;
+					
 					render();
 					drawHex(c, posx, posy, "rgba(100,180,0,0.3)", "yellow", null, null);
-					statusText.value = "Mouse at: X:" + mx + " Y:" + my + " Hex is at: Col:" +  tcol + " Row:" + trow + " VCol:" + vcol + " VRow:" + vrow;	
-			    }
-			    else 
-			    {
+					if (rightclick)
+					{
+						drawInfoPanel(c, mx, my, trow, tcol, text);
+					}
+					
+					statusText.value = text;
+				}
+				else 
+				{
 					statusText.value = "Outside Map";
-			    }
+				}
 			    
 			},
 			false);
