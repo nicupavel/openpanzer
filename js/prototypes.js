@@ -134,7 +134,10 @@ function Map()
 		//the column
 		for (var i = minRow; i <= maxRow; i++)
 		{
-			if (i != row) { this.map[i][col].isSelected = true; }
+			if (i != row && (this.map[i][col].unit === null)) 
+			{ 
+				this.map[i][col].isSelected = true; 
+			}
 		}
 		//the rows around
 		for (var colOff = 1; colOff <= range; colOff++)
@@ -142,10 +145,17 @@ function Map()
 			//rows have a ripple effect
 			if ((col + colOff) % 2 == 1) { if (maxRow > 0) { maxRow--; }}
 			else { if (minRow < this.rows) { minRow++; }}
+			
 			for (var i = minRow; i <= maxRow; i++)
 			{
-				if ((col + colOff) <= this.cols) { this.map[i][col + colOff].isSelected = true; }
-				if ((col - colOff) >= 0) { this.map[i][col - colOff].isSelected = true; }
+				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null))
+				{ 
+					this.map[i][col + colOff].isSelected = true; 
+				}
+				if (((col - colOff) >= 0) && (this.map[i][col - colOff].unit === null)) 
+				{ 
+					this.map[i][col - colOff].isSelected = true; 
+				}
 			}
 		}
 	

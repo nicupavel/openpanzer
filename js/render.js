@@ -36,7 +36,7 @@ function Render(mapObj)
 			//we space the hexagons on each line next column being on the row below 
 			for (col = 0; col < map.cols; col++) 
 			{
-				text = "(" + row + "," + col + ")";
+				//text = "(" + row + "," + col + ")";
 				hex = map.map[row][col];
 				if (hex.unit !== null) { image = imgCache[hex.unit.getIcon()]; }
 				else { image = null; };
@@ -50,6 +50,11 @@ function Render(mapObj)
 				{
 					if (hex.isSelected) 
 					{ 
+						//TODO 
+						//remove the selected flag after rendering the row 
+						//the flag will be set again on another click
+						//this shouldn't be done here
+						hex.isSelected = false;
 						this.drawHex(row, col, "rgba(100,180,0,0.3)", "yellow", "rgba(0,0,0,0.8)", text, image);
 					}
 					else 
@@ -61,6 +66,7 @@ function Render(mapObj)
 		}
 	}
 	
+	//tColor = tile fill color, sColor = lines stroke color, fColor = font Color
 	this.drawHex = function (row, col, tColor, sColor, fColor, text, image, lineWidth, lineJoin)
 	{
 	
