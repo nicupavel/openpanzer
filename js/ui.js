@@ -18,10 +18,42 @@ function handleMouseClick(e)
 	var cell = r.screenToCell(minfo.x, minfo.y);
 	var row = cell.row;
 	var col = cell.col;
-	map.delCurrentHex();
-	map.setCurrentHex(row, col);
+	
 	hex = map.map[row][col];
-	if (hex.unit) { map.setHexRange(row, col, hex.unit.unitData.moveRadius); }
+	
+	//Selected hex has a unit ?
+	if (hex.unit) 
+	{
+		map.delCurrentHex();
+		map.setCurrentHex(row, col);
+		map.delSelected();
+		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.moveRadius); }
+		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.attackRadius); } }
+	}	
+	else
+	{
+		//Do we already have a selected unit ?
+		if (map.currentHex != null)
+		{	
+			console.log("A unit is selected");
+			//move to an allowed hex
+			if (hex.isSelected) 
+			{
+				//TODO move function in map class
+				//value copy 
+				hex.unit = map.currentHex.unit;
+				map.currentHex.delUnit();
+			}
+			map.delCurrentHex();
+		}
+		else
+		{
+			console.log("No unit selected");
+		}
+		map.delSelected();
+	}
+	
+
 	
 	//ToDo partial screen updates
 	r.drawHexes(); 

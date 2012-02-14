@@ -60,11 +60,6 @@ function Render(mapObj)
 				{
 					if (hex.isSelected) 
 					{ 
-						//TODO 
-						//remove the selected flag after rendering the row 
-						//the flag will be set again on another click
-						//this shouldn't be done here
-						hex.isSelected = false;
 						this.drawHex(row, col, "rgba(100,180,0,0.3)", "yellow", fColor, text, image);
 					}
 					else 

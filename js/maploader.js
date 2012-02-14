@@ -79,7 +79,7 @@ function MapLoader()
 						{
 							tmphex.newUnit(eqId);
 							tmphex.unit.setUnitToPlayer(playerId);
-							tmphex.unit.dumpUnit();
+							//tmphex.unit.dumpUnit();
 							break;
 						}
 					}

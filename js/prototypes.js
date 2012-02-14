@@ -88,6 +88,7 @@ function Map()
 	this.terrainImage = null;
 	this.unitImagesList = [];
 	this.currentHex = null;
+	this.selectedHexes = [];
 	
 	this.allocMap = function()
 	{
@@ -117,6 +118,20 @@ function Map()
 		}
 	}
 	
+	this.setSelected = function(row, col)
+	{
+		this.selectedHexes.push(new Cell(row, col));
+		this.map[row][col].isSelected = true; 
+	}
+	this.delSelected = function()
+	{
+		for (var i = 0; i < this.selectedHexes.length; i++)
+		{
+			var c = this.selectedHexes[i];
+			this.map[c.row][c.col].isSelected = false;
+		}
+		this.selectedHexes = [];
+	}
 	
 	this.setHex = function(row, col, hex)
 	{
@@ -133,12 +148,13 @@ function Map()
 		if (minRow < 0) { minRow = 0; }
 		if (maxRow > this.rows) { maxRow = this.rows; }
 		
+				
 		//the column
 		for (var i = minRow; i <= maxRow; i++)
 		{
 			if (i != row && (this.map[i][col].unit === null)) 
-			{ 
-				this.map[i][col].isSelected = true; 
+			{
+				this.setSelected(i, col);
 			}
 		}
 		//the rows around
@@ -153,11 +169,11 @@ function Map()
 				//TODO add terrain factor
 				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null))
 				{ 
-					this.map[i][col + colOff].isSelected = true; 
+					this.setSelected(i, col + colOff);
 				}
 				if (((col - colOff) >= 0) && (this.map[i][col - colOff].unit === null)) 
 				{ 
-					this.map[i][col - colOff].isSelected = true; 
+					this.setSelected(i, col - colOff);
 				}
 			}
 		}
