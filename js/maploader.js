@@ -74,12 +74,12 @@ function MapLoader()
 					{
 						//create the unit object
 						var eqId = hexNodes[i].childNodes[j].getAttribute("id");
-						//console.log("Equipment file id: " + eqId);
-						if (eqId > 0)
+						var playerId = hexNodes[i].childNodes[j].getAttribute("player");
+						if (eqId >= 0 &&  playerId >= 0)
 						{
 							tmphex.newUnit(eqId);
-							//tmphex.unit.dumpUnit();
-							//console.log(tmphex.unit.getImage());
+							tmphex.unit.setUnitToPlayer(playerId);
+							tmphex.unit.dumpUnit();
 							break;
 						}
 					}

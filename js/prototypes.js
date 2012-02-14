@@ -34,14 +34,16 @@ var unitData =
 function Unit(unitDataId)
 {
 	this.id = null;
+	this.belongsTo = -1;
 	this.unitData = equipment[unitDataId];
-	this.hasMoved = 0;
-	this.hasFired = 0;
-	this.hasRessuplied = 0;
-	this.ammo = 0;
-	this.fuel = 0;
-	this.strength = 0;
+	this.hasMoved = false;
+	this.hasFired = false;
+	this.hasRessuplied = false;
+	this.ammo = equipment[unitDataId].maxAmmo;
+	this.fuel = equipment[unitDataId].maxFuel;
+	this.strength = 10;
 	
+	this.setUnitToPlayer = function(playerId) { this.belongsTo = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; } //Why doesn't return this.unitData.icon work ?
 	this.dumpUnit = function() { console.log(this);	}
 };

@@ -28,6 +28,7 @@ function Render(mapObj)
 		var text;
 		var image;
 		var hex;
+		var fColor;
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		
@@ -36,15 +37,24 @@ function Render(mapObj)
 			//we space the hexagons on each line next column being on the row below 
 			for (col = 0; col < map.cols; col++) 
 			{
-				//text = "(" + row + "," + col + ")";
+				image = null;
+				text = null;
+				fColor = "black";
 				hex = map.map[row][col];
-				if (hex.unit !== null) { image = imgCache[hex.unit.getIcon()]; }
-				else { image = null; };
+
+				if (hex.unit !== null) 
+				{ 
+					image = imgCache[hex.unit.getIcon()]; 
+					text = "" + hex.unit.strength;
+					if (hex.unit.belongsTo == 1) { fColor = "green"; }
+				}
 				
+				
+				//text = "(" + row + "," + col + ")";
 				// TODO implement styles
 				if (hex.isCurrent)
 				{
-					this.drawHex(row, col, null, "rgba(255,255,255,0.8)", "rgba(0,0,0,0.8)", text, image, 3, "round");
+					this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image, 3, "round");
 				}
 				else 
 				{
@@ -55,11 +65,11 @@ function Render(mapObj)
 						//the flag will be set again on another click
 						//this shouldn't be done here
 						hex.isSelected = false;
-						this.drawHex(row, col, "rgba(100,180,0,0.3)", "yellow", "rgba(0,0,0,0.8)", text, image);
+						this.drawHex(row, col, "rgba(100,180,0,0.3)", "yellow", fColor, text, image);
 					}
 					else 
 					{
-						this.drawHex(row, col, null, "rgba(255,255,255,0.8)", "rgba(0,0,0,0.8)", text, image);
+						this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image);
 					}
 				}
 			}
@@ -113,9 +123,14 @@ function Render(mapObj)
 		
 		if (text)
 		{
+			var tx = x0 + h/2;
+			var ty = y0 + 2 * r - 14;
+			c.moveTo(tx, ty);
+			c.fillStyle = fColor;
+			c.fillRect  (tx, ty, 15, 10);
 		    c.font = "10px sans-serif"
-		    c.fillStyle = fColor;
-		    c.fillText(text, x0 + h/2, y0 + 2 * r - 2);
+		    c.fillStyle = "white";
+		    c.fillText(text, tx + 1, ty + 8);
 		}
     }
 		

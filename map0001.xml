@@ -1,26 +1,26 @@
 <map name="Dessau" description="Dessaw WW2 Map" rows="21" cols="32" image="map17_dessau.png">
 <hex row="2" col="1" terrain="0">
-	<unit id="1"></unit>
+	<unit id="1" player="0"></unit>
 </hex>
 <hex row="3" col="2" terrain="0">
-	<unit id="2"></unit>
+	<unit id="2" player="0"></unit>
 </hex>
 <hex row="3" col="4" terrain="0">
-	<unit id="3"></unit>
+	<unit id="3" player="0"></unit>
 </hex>
 <hex row="4" col="2" terrain="0">
-	<unit id="4"></unit>
+	<unit id="4" player="0"></unit>
 </hex>
 <hex row="3" col="14" terrain="0">
-	<unit id="5"></unit>
+	<unit id="5" player="1"></unit>
 </hex>
 <hex row="3" col="15" terrain="0">
-	<unit id="6"></unit>
+	<unit id="6" player="1"></unit>
 </hex>
 <hex row="4" col="14" terrain="0">
-	<unit id="7"></unit>
+	<unit id="7" player="1"></unit>
 </hex>
 <hex row="4" col="15" terrain="0">
-	<unit id="8"></unit>
+	<unit id="8" player="1"></unit>
 </hex>
 </map>
