@@ -150,6 +150,7 @@ function Map()
 			
 			for (var i = minRow; i <= maxRow; i++)
 			{
+				//TODO add terrain factor
 				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null))
 				{ 
 					this.map[i][col + colOff].isSelected = true; 
