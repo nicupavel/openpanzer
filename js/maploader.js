@@ -33,7 +33,7 @@ function MapLoader()
 		return map;
 	}
 	
-	// Private functions ?
+	// Private functions 
 	function parseMapHeader()
 	{
 		var mapHeader = xmlData.getElementsByTagName("map")[0];
@@ -73,13 +73,14 @@ function MapLoader()
 					if (hexNodes[i].childNodes[j].nodeName == "unit")
 					{
 						//create the unit object
-						var eqId = hexNodes[i].childNodes[j].getAttribute("id");
+						var unitId = hexNodes[i].childNodes[j].getAttribute("id");
 						var playerId = hexNodes[i].childNodes[j].getAttribute("player");
-						if (eqId >= 0 &&  playerId >= 0)
+						if (unitId >= 0 &&  playerId >= 0)
 						{
-							tmphex.newUnit(eqId);
-							tmphex.unit.setUnitToPlayer(playerId);
-							//tmphex.unit.dumpUnit();
+							var u = new Unit(unitId);
+							u.setUnitToPlayer(playerId);
+							map.addUnit(u);
+							tmphex.setUnit(u); //tmphex.unit.dumpUnit();
 							break;
 						}
 					}

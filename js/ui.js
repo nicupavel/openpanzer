@@ -2,14 +2,18 @@
 
 function UI()
 {
+	var turn = 0;
+	
 	var l = new MapLoader();
 	l.loadMap("map0001.xml");
 	var map = l.buildMap();
 	//map.dumpMap();
+	buildInterface();
 	var r = new Render(map);
-	r.drawHexes();
+	r.cacheImages(map.unitImagesList, function() { r.render(); });
 	var canvas = r.getHexesCanvas();
 	canvas.addEventListener("mousedown", handleMouseClick, false);
+	canvas.addEventListener("mousemove", handleMouseMove, false);
 
 function handleMouseClick(e) 
 {
@@ -36,14 +40,23 @@ function handleMouseClick(e)
 		if (map.currentHex != null)
 		{	
 			console.log("A unit is selected");
+			srcHex = map.currentHex;
 			//move to an allowed hex
-			if (hex.isSelected) 
+			if (hex.isSelected && !srcHex.unit.hasMoved) 
 			{
-				//TODO move function in map class
+				//TODO a move function in map class
 				//value copy 
-				hex.unit = map.currentHex.unit;
-				map.currentHex.delUnit();
+				hex.unit = srcHex.unit;
+				hex.unit.hasMoved = true;
+				srcHex.delUnit();
+			} else {		//attack an allowed hex
+				if (hex.isSelected && !srcHex.unit.hasFired && hex.unit != null)
+				{
+					//attack function
+					console.log("attacking: " + hex.unit);
+				}
 			}
+			
 			map.delCurrentHex();
 		}
 		else
@@ -52,11 +65,96 @@ function handleMouseClick(e)
 		}
 		map.delSelected();
 	}
-	
 
-	
 	//ToDo partial screen updates
-	r.drawHexes(); 
+	r.render(); 
+}
+
+function handleMouseMove(e) 
+{
+	var hex;
+	var minfo = getMouseInfo(canvas, e);
+	var cell = r.screenToCell(minfo.x, minfo.y);
+	var row = cell.row;
+	var col = cell.col;
+	
+	hex = map.map[row][col];
+	var text = hex.name + " (" + row + "," + col + ")" + " terrain: " + hex.terrain;
+	if (hex.unit != null)
+	{
+		text = text + " unit: " + hex.unit.unitData.name;
+		text = text + " player: " + hex.unit.belongsTo;
+	}
+	$('locmsg').innerHTML = text;
+				
+	
+}
+
+function buildInterface()
+{
+	var div1 = addTag('div');
+	var div2 = addTag('div');
+	var div3 = addTag('div');
+	var div4 = addTag('div');
+	div1.id = "statusmsg";
+	div1.className = "message";
+	div1.innerHTML = "Map: " + map.name + " turn: " + turn;
+		
+	div2.id = "locmsg"
+	div2.className = "message";
+	
+	div3.id = "endturn";
+	div3.className = "button";
+	div3.innerHTML = "end turn";
+	div3.onclick = function() { UI:button(div3.id); }
+	
+	div4.id = "info";
+	div4.className = "button";
+	div4.innerHTML = "info";
+	div4.onclick = function() { UI:button(div4.id); }
+	
+	$('menu').appendChild(div1);
+	$('menu').appendChild(div2);
+	$('menu').appendChild(div3);
+	$('menu').appendChild(div4);
+}
+
+function button(id)
+{
+	console.log("Clicked button: " + id);
+	switch(id) 
+	{
+		case 'endturn':
+		{
+			map.resetUnits();
+			map.delSelected();
+			map.delCurrentHex();
+			turn++;
+			$('statusmsg').innerHTML = "Map: " + map.name + " turn: " + turn;
+			r.render();
+			break;
+		}
+		
+		case 'info':
+		{
+			var text = "No unit selected";
+			if (map.currentHex != null && map.currentHex.unit != null)
+			{
+				var u = map.currentHex.unit;
+				
+				text = "Player: " + u.belongsTo;
+				text += " Ammo: " + u.ammo;
+				text += " Strength: " + u.strength;
+				text += " Fuel: " + u.fuel;
+				text += " Has moved: " + u.hasMoved;
+				text += " Has fired: " + u.hasFired;
+				text += " Has resupplied: " + u.hasRessuplied;
+			}
+			
+			alert(text);
+			break;
+		}
+	}
 }
 
 function getMouseInfo(canvas, e)

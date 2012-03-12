@@ -44,14 +44,16 @@ function Unit(unitDataId)
 	this.strength = 10;
 	
 	this.setUnitToPlayer = function(playerId) { this.belongsTo = playerId; }
-	this.getIcon = function() { var u = this.unitData; return u.icon; } //Why doesn't return this.unitData.icon work ?
+	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.dumpUnit = function() { console.log(this);	}
+	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
 };
 
 function Hex()
 {
 	this.unit = null;
 	this.terrain = terrainType.Clear;
+	this.belongsTo = -1; //TODO this has to be set in maploader
 	this.isSupply = false;
 	this.isDeployment = false;
 	this.isVictory1 = false;
@@ -71,8 +73,6 @@ function Hex()
 		this.isVictory2 = hex.isVictory2;
 		this.name = hex.name;
 	}
-	
-	this.newUnit = function(unitDataId) { this.unit = new Unit(unitDataId); }
 	this.setUnit = function(unit) { this.unit = unit; }
 	this.delUnit = function() {this.unit = null };
 	
@@ -86,9 +86,11 @@ function Map()
 	this.name = null;
 	this.description = null; 
 	this.terrainImage = null;
-	this.unitImagesList = [];
 	this.currentHex = null;
+	this.unitImagesList = [];
 	this.selectedHexes = [];
+	
+	unitList = [];
 	
 	this.allocMap = function()
 	{
@@ -103,6 +105,20 @@ function Map()
 		}
 	}
 	
+	this.resetUnits = function()
+	{
+		for (var i = 0; i < unitList.length; i++)
+		{
+			unitList[i].resetUnit();
+		}
+	}
+		
+	this.addUnit = function(unit)
+	{
+	
+		unitList.push(unit);
+	}
+		
 	this.setCurrentHex = function(row, col)
 	{
 		this.currentHex = this.map[row][col];
@@ -123,6 +139,7 @@ function Map()
 		this.selectedHexes.push(new Cell(row, col));
 		this.map[row][col].isSelected = true; 
 	}
+	
 	this.delSelected = function()
 	{
 		for (var i = 0; i < this.selectedHexes.length; i++)
@@ -198,6 +215,11 @@ function Map()
 		for (var i = 0; i < this.unitImagesList.length; i++)
 		{
 			console.log(this.unitImagesList[i]);
+		
+		}
+		for (var i = 0; i < this.unitImagesList.length; i++)
+		{
+			console.log(unitList[i]);
 		
 		}
 	}

@@ -2,25 +2,25 @@
 <hex row="2" col="1" terrain="0">
 	<unit id="1" player="0"></unit>
 </hex>
-<hex row="3" col="2" terrain="0">
+<hex row="3" col="2" terrain="4">
 	<unit id="2" player="0"></unit>
 </hex>
-<hex row="3" col="4" terrain="0">
+<hex row="3" col="4" terrain="4">
 	<unit id="3" player="0"></unit>
 </hex>
-<hex row="4" col="2" terrain="0">
+<hex row="4" col="2" terrain="4">
 	<unit id="4" player="0"></unit>
 </hex>
-<hex row="3" col="14" terrain="0">
+<hex row="3" col="14" terrain="4">
 	<unit id="5" player="1"></unit>
 </hex>
-<hex row="3" col="15" terrain="0">
+<hex row="3" col="15" terrain="4">
 	<unit id="6" player="1"></unit>
 </hex>
-<hex row="4" col="14" terrain="0">
+<hex row="4" col="14" terrain="4">
 	<unit id="7" player="1"></unit>
 </hex>
-<hex row="4" col="15" terrain="0">
+<hex row="4" col="15" terrain="4">
 	<unit id="8" player="1"></unit>
 </hex>
 </map>

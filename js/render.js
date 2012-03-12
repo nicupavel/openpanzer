@@ -12,16 +12,18 @@ function Render(mapObj)
 	var h = s/2;  //hexagon height
 	var r = s * 0.886025404; //maybe do it s/4 
 	
+	// Canvas offset from the browser window
+	var canvasOffsetX = 0;
+	var canvasOffsetY = 40;
+	// Where to start rendering inside the canvas
 	var renderOriginX = 0;
 	var renderOriginY = 0;
 	
-	
-	createLayers();
-	cacheImages(map.unitImagesList);
-	drawMapImage(map.terrainImage);
+	createLayers(); //Creates canvas layers
+	drawMapImage(map.terrainImage); //Draws the map background
 	
 		
-	this.drawHexes = function()
+	this.render = function()
 	{
 		var posx;
 		var posy;
@@ -53,7 +55,7 @@ function Render(mapObj)
 				//text = "(" + row + "," + col + ")";
 				// TODO implement styles
 				if (hex.isCurrent)
-				{
+				{	
 					this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image, 3, "round");
 				}
 				else 
@@ -136,11 +138,11 @@ function Render(mapObj)
 		var trow, tcol; //true map rows/cols
 		
 		//a graphical column in the grid not the array column
-		vcol = parseInt(x / (s + h)); 
+		vcol = parseInt((x - renderOriginX) / (s + h)); 
 		//real array column
 		tcol = vcol;
 		// a graphical row not the array row
-		vrow = parseInt(y / r); //Half hexes
+		vrow = parseInt((y - renderOriginY) / r); //Half hexes
 		
 		//shift to correct row index
 		//if (vcol & 1) { trow = parseInt(vrow/2) - 1 * (~vrow & 1); }
@@ -149,7 +151,7 @@ function Render(mapObj)
 		if (trow < 0) { trow = 0; }
 		
 		var cell = new Cell(trow, tcol);
-		console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + vcol + "]");
+		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + vcol + "]");
 		return cell;
 	}
 	
@@ -159,38 +161,58 @@ function Render(mapObj)
 	this.getHexH = function() { return h;}
 	this.getHexR = function() { return r;}
 	
+	//imgList a list of image file names, func a function to call upon cache completion
+	this.cacheImages = function (imgList, func)
+	{
+		var loaded = 0;
+		
+		for (var i = 0; i < imgList.length; i++)
+		{
+			imgCache[imgList[i]] = new Image();
+			imgCache[imgList[i]].onload = function() 
+			{
+				loaded++;  
+				if (loaded == imgList.length)
+				{
+					// TODO resource caching should be done elsewhere
+					//console.log("Loaded " +loaded+"/"+imgList.length + " done caching");
+					func();
+				}
+			}
+			imgCache[imgList[i]].src = imgList[i];
+		}
+			
+		
+	}
+	
 	// Private
 	function createLayers()
 	{
 		cm = document.createElement('canvas');
 		cm.id = "map";
-		cm.style.cssText = 'z-index: 0;position:absolute;left:0px;top:0px;';
+		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(cm);
 				
 		ch = document.createElement('canvas');
 		ch.id = "hexes";
-		ch.style.cssText = 'z-index: 1;position:absolute;left:0px;top:0px;';
+		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
 		
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
 	}
 	
-	function cacheImages(imgList)
-	{
-		for (var i = 0; i < imgList.length; i++)
-		{
-			imgCache[imgList[i]] = new Image();
-			imgCache[imgList[i]].src = imgList[i];
-		}
-	}
+	
 	
 	function drawMapImage(imgFile)
 	{
 		img = new Image();
-		img.src = imgFile;
-		c.canvas.width = cb.canvas.width = img.width;
-		c.canvas.height = cb.canvas.height = img.height;
-		cb.drawImage(img, renderOriginX, renderOriginY);
+		img.onload = function() 
+		{
+			c.canvas.width = cb.canvas.width = img.width;
+			c.canvas.height = cb.canvas.height = img.height;
+			cb.drawImage(img, renderOriginX, renderOriginY);
+		}
+		img.src = imgFile;		
 	}
 }
