@@ -1,3 +1,4 @@
+var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
 var terrainType = 
 {
 	Clear:0,
@@ -21,14 +22,29 @@ var terrainType =
 
 var unitData =
 {
-	id: -1,
-	type: unitType.none,
-	maxAmmo:0,
-	maxFuel:0,
-	icon:"none.png",
-	moveRadius:0,
-	attackRadius:0,
-	name:"noname",
+	airatk: 0, 
+    airdef: 0, 
+    ammo: 0, 
+    bombercode: 0, 
+    class: 0, 
+    closedef: 0, 
+    cost: 0, 
+    country: 0, 
+    fuel: 0, 
+    grounddef: 0, 
+    gunrange: 0, 
+    hardatk: 0, 
+    icon: "resources/units/images/none.png", 
+    id: -1, 
+    initiative: 0, 
+    movmethod: 0, 
+    movpoints: 0, 
+    name: "unknown", 
+    navalatk: 0, 
+    rangedefmod: 0, 
+    softatk: 0, 
+    spotrange: 0, 
+    target: 0
 };
 
 function Unit(unitDataId)
@@ -39,8 +55,8 @@ function Unit(unitDataId)
 	this.hasMoved = false;
 	this.hasFired = false;
 	this.hasRessuplied = false;
-	this.ammo = equipment[unitDataId].maxAmmo;
-	this.fuel = equipment[unitDataId].maxFuel;
+	this.ammo = equipment[unitDataId].ammo;
+	this.fuel = equipment[unitDataId].fuel;
 	this.strength = 10;
 	
 	this.setUnitToPlayer = function(playerId) { this.belongsTo = playerId; }

@@ -10,7 +10,7 @@ function UI()
 	//map.dumpMap();
 	buildInterface();
 	var r = new Render(map);
-	r.cacheImages(map.unitImagesList, function() { r.render(); });
+	r.cacheUnitImages(map.unitImagesList, function() { r.render(); });
 	var canvas = r.getHexesCanvas();
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
@@ -31,8 +31,8 @@ function handleMouseClick(e)
 		map.delCurrentHex();
 		map.setCurrentHex(row, col);
 		map.delSelected();
-		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.moveRadius); }
-		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.attackRadius); } }
+		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.movpoints); }
+		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange); } }
 	}	
 	else
 	{

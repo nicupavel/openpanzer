@@ -1,4 +1,3 @@
-#Creates a transparent image and saves it to disk. This works!
 import os, sys
 import Image
 

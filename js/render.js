@@ -62,7 +62,7 @@ function Render(mapObj)
 				{
 					if (hex.isSelected) 
 					{ 
-						this.drawHex(row, col, "rgba(100,180,0,0.3)", "yellow", fColor, text, image);
+						this.drawHex(row, col, "rgba(128,128,128,0.3)", "grey", fColor, text, image);
 					}
 					else 
 					{
@@ -112,7 +112,12 @@ function Render(mapObj)
 		
 		if (image) 
 		{
-			c.drawImage(image, x0, y0 + 20);
+			// TODO Units have 9 possible orientations
+			// 1 sprite is *usually* 80x50
+			orientation = 80 * 2;
+			imagew = 80;
+			imageh = 50;
+			c.drawImage(image, orientation , 0, imagew, imageh, x0 - 20, y0, imagew, imageh);
 		}
 		c.closePath();
 		c.stroke();
@@ -162,7 +167,9 @@ function Render(mapObj)
 	this.getHexR = function() { return r;}
 	
 	//imgList a list of image file names, func a function to call upon cache completion
-	this.cacheImages = function (imgList, func)
+	//Units are saved from Luiz Guzman SHPTool to a 1x9 sprites bmp and 
+	//converted to transparent png by convert.py
+	this.cacheUnitImages = function (imgList, func)
 	{
 		var loaded = 0;
 		
