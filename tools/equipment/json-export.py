@@ -1,11 +1,13 @@
 import csv
 import json
+import itertools
+from pprint import pprint
 
 f = open( 'Equip97_SEL_REPORT.csv', 'r' )
 o = open( 'equipment.js', 'w');
 out = ""
-# There are some spelling error on top of PG2Suite exported csv
-keys = ( "Code",
+
+unitkeys = [ "Code",
          "Denomination",
          "Class",
          "SoftAtk",
@@ -38,10 +40,17 @@ keys = ( "Code",
          "Icon",
          "atkMel",
          "movMel",
-         "dieMel" )
+         "dieMel" ]
 
-reader = csv.DictReader( f, delimiter=';', fieldnames = keys)
+unitdict = dict.fromkeys(unitkeys)
+eqdict = {}
 
-out = json.dumps([row for row in reader], sort_keys=True, indent=4)
-    
+#reader = csv.DictReader( f, delimiter=';', fieldnames = keys)
+
+for line in f:
+    unitvalues = line.split(';')
+    unitdict = dict(itertools.izip(unitkeys, unitvalues))
+    eqdict[unitdict["Code"]] = unitdict
+
+out = json.dumps(eqdict, sort_keys=True, indent=4)
 o.write(out)
