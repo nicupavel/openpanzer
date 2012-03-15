@@ -87,8 +87,8 @@ function handleMouseMove(e)
 	
 	if (hex.unit != null)
 	{
-		text = text + " unit: " + hex.unit.unitData.name;
-		text = text + " player: " + hex.unit.belongsTo;
+		text = text + " Unit: " + hex.unit.unitData.name;
+		text = text + " Player: " + hex.unit.belongsTo;
 	}
 	$('locmsg').innerHTML = text;
 				
