@@ -1,5 +1,12 @@
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
-var roadType = { none:0, north:1, northeast: 2, eastunused: 4, southeast:8, south: 16, southwest: 32, westunused: 64, northwest: 128 }
+
+//Bit masks. Hex with road value 136 means it has a road starting from mid of the hex
+//and going NW (128) and one starting from mid of the hex and going SE (8)
+var roadType = 
+{
+	none:0, north:1, northeast: 2, eastunused: 4, southeast:8, 
+	south: 16, southwest: 32, westunused: 64, northwest: 128 
+};
 
 var terrainType = 
 {

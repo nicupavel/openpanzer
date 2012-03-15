@@ -7,8 +7,9 @@ function Render(mapObj)
 	var cm; // The map canvas element
 	var c = null; //This is the context where the main drawing takes place
 	var cb = null;//This is the context where the map image is drawn.
-		
-	var s = 36;   //hexagon segment size   
+	
+	//TODO fix this on screentocell where calculation was made with r as h and viceversa
+	var s = 30;   //hexagon segment size   
 	var h = s/2;  //hexagon height
 	var r = s * 0.886025404; //maybe do it s/4 
 	
@@ -66,7 +67,7 @@ function Render(mapObj)
 					}
 					else 
 					{
-						this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image);
+						this.drawHex(row, col, null, "rgba(128,128,128,0.8)", fColor, text, image);
 					}
 				}
 			}
@@ -117,7 +118,7 @@ function Render(mapObj)
 			orientation = 80 * 2;
 			imagew = 80;
 			imageh = 50;
-			c.drawImage(image, orientation , 0, imagew, imageh, x0 - 20, y0, imagew, imageh);
+			c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
 		}
 		c.closePath();
 		c.stroke();
@@ -126,7 +127,7 @@ function Render(mapObj)
 		if (text)
 		{
 			var tx = x0 + h/2;
-			var ty = y0 + 2 * r - 14;
+			var ty = y0 + 2 * r - 12;
 			c.moveTo(tx, ty);
 			c.fillStyle = fColor;
 			c.fillRect  (tx, ty, 15, 10);
