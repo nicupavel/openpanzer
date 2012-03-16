@@ -1,4 +1,4 @@
-{
+var equipment = {
     "1": {
         "airatk": 8, 
         "airdef": 6, 
@@ -4830,7 +4830,7 @@
         "ammo": 7, 
         "bombercode": 0, 
         "class": 10, 
-B        "closedef": 0, 
+        "closedef": 0, 
         "cost": 40, 
         "country": 11, 
         "fuel": 0, 
