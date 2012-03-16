@@ -58,7 +58,7 @@ imgext = ".png"
 out = ""
 
 
-f = open( 'Equip97_SEL_REPORT.csv', 'r' )
+f = open( 'Equip97_REPORT.csv', 'r' )
 o = open( 'equipment.js', 'w');
 shp = open( '../icons/shp.list', 'w')
 
