@@ -5,7 +5,7 @@ function UI()
 	var turn = 0;
 	
 	var l = new MapLoader();
-	l.loadMap("map0001.xml");
+	l.loadMap("resources/scenarios/xml/caenuk.xml");
 	var map = l.buildMap();
 	//map.dumpMap();
 	buildInterface();
@@ -79,7 +79,7 @@ function handleMouseMove(e)
 	var col = cell.col;
 	
 	hex = map.map[row][col];
-	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ") ";
+	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ") " + hex.name;
 	if (hex.name !== null)
 	{
 	    text = text + hex.name;
@@ -103,7 +103,7 @@ function buildInterface()
 	var div4 = addTag('div');
 	div1.id = "statusmsg";
 	div1.className = "message";
-	div1.innerHTML = "Map: " + map.name + " turn: " + turn;
+	div1.innerHTML = " Turn: " + turn + "  " + map.description;
 		
 	div2.id = "locmsg"
 	div2.className = "message";
@@ -135,7 +135,7 @@ function button(id)
 			map.delSelected();
 			map.delCurrentHex();
 			turn++;
-			$('statusmsg').innerHTML = "Map: " + map.name + " turn: " + turn;
+			$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
 			r.render();
 			break;
 		}

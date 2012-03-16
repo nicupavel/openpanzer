@@ -67,6 +67,7 @@ function MapLoader()
 				var row = hexNodes[i].getAttribute("row");
 				var col = hexNodes[i].getAttribute("col");
 				tmphex.terrain = hexNodes[i].getAttribute("terrain");
+				tmphex.name = hexNodes[i].getAttribute("name");
 				//console.log("Hex at row:" + row + " col:" + col);
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
