@@ -72,8 +72,8 @@ def get_map_info(f):
     f.seek(pos)
     return mapinfo
 
-#for map in sys.argv[1:]:
-for scn in ["CAENUK.SCN"]:
+for scn in sys.argv[1:]:
+#for scn in ["CAENUK.SCN"]:
     print "Processing %s\n" % scn
     # the corresponding scenarion txt name
     tf = open(os.path.splitext(scn)[0] + ".TXT",'r')
