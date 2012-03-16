@@ -187,5 +187,7 @@ function gameStart()
 	</select> \
 	<br/> <input type=button value=\'Start\' onclick=\'javascript:e=document.getElementById("scnselect");ui = new UI("resources/scenarios/xml/"+e.options[e.selectedIndex].value);\'>'
 	*/
-	ui = new UI("resources/scenarios/xml/prok1.xml");
+	rng = Math.round((Math.random() * scenariolist.length) + 1)
+	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
+	ui = new UI(scenario);
 }
