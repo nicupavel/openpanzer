@@ -2,7 +2,6 @@ import os, sys
 from pprint import pprint
 from struct import *
 from lxml import etree as x
-
 # spaghetti !
 #file specs http://luis-guzman.com/links/PG2_FilesSpec.html#(MAP) file
 MAP_IMAGE_URL="resources/maps/images/"
@@ -22,6 +21,26 @@ def get_scn_hexes(f):
     data = f.read(10800) # 45x40x6 bytes
     f.seek(pos)
     return data
+
+# returns a list with x/y coords of units (65 bytes) in the scenario
+def get_scn_units(f):
+    units = {}
+    u_off_x  = 1 + 1 + 2 + 2 + 1 + 1 + 2 #offset in the 65 bytes struct to X coord
+    u_off_y  = u_off_x + 2    #offset in the 65 bytes struct to Y coord
+    u_off_id = u_off_y + 2 + 2 + 2 #offset in the 65 bytes struct to unit id
+    u_off_own = u_off_id + 6 * 2 + 1 + 1 + 2 # offset in the 65 bytes struct to player owning unit
+    pos = f.tell()
+    f.seek(22 + 388 + 10800 + 140)
+    while True:
+	u = f.read(65)
+	if not u: break
+	col = unpack('h', u[u_off_x:u_off_x + 2])[0]
+	row = unpack('h', u[u_off_y:u_off_y + 2])[0]
+	uid  = unpack('h', u[u_off_id:u_off_id + 2])[0]
+	owner = unpack('b', u[u_off_own:u_off_own + 1])[0]
+	units[(col,row)] = (uid, owner)
+    f.seek(pos)
+    return units
 
 # returns map name string UPPERCASE
 def get_scn_map_name(f):
@@ -79,6 +98,7 @@ for scn in ["CAENUK.SCN"]:
     # need to skip those rows,cols that aren't needed
     maphdata = get_map_hexes(mf)
     scnhdata = get_scn_hexes(sf)
+    units = get_scn_units(sf)
     mapoffset = 0
     scnoffset = 0
     while True:
@@ -89,7 +109,8 @@ for scn in ["CAENUK.SCN"]:
 	textpos = hs[4] - 1  #file index to array index
 	if textpos > 0:
 	    name = scntext[textpos].rstrip()
-	
+	#if hs[0] > 0:
+	#    print name, hs[0]
 	tmpnode = x.SubElement(xmlmap, "hex")
 	tmpnode.set("row", str(row))
 	tmpnode.set("col", str(col))
@@ -97,6 +118,10 @@ for scn in ["CAENUK.SCN"]:
 	tmpnode.set("road", str(road))
 	tmpnode.set("name", str(name))
 	
+	if (col,row) in units:
+	    utmpnode = x.SubElement(tmpnode,"unit")
+	    utmpnode.set("id",str(units[(col,row)][0]))
+	    utmpnode.set("owner", str(units[(col,row)][1]))
         col = col + 1
         mapoffset = mapoffset + 7
         scnoffset = scnoffset + 6
