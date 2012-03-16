@@ -10,7 +10,7 @@ infile = "test.bmp"
 #TODO parse shp files directly and work with palette
 for infile in sys.argv[1:]:
         f, e = os.path.splitext(infile)
-        outfile = f + ".png"
+        outfile = f.lower() + ".png"
         if infile != outfile:
                 simg = Image.open(infile).convert("RGBA").save(outfile,"PNG")
                 dimg = Image.open(outfile)
