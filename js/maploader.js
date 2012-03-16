@@ -75,7 +75,7 @@ function MapLoader()
 					{
 						//create the unit object
 						var unitId = hexNodes[i].childNodes[j].getAttribute("id");
-						var playerId = hexNodes[i].childNodes[j].getAttribute("player");
+						var playerId = hexNodes[i].childNodes[j].getAttribute("owner");
 						if (unitId >= 0 &&  playerId >= 0)
 						{
 							var u = new Unit(unitId);
