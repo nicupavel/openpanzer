@@ -1,11 +1,11 @@
 
 
-function UI()
+function UI(map)
 {
 	var turn = 0;
 	
 	var l = new MapLoader();
-	l.loadMap("resources/scenarios/xml/caenuk.xml");
+	l.loadMap(map);
 	var map = l.buildMap();
 	//map.dumpMap();
 	buildInterface();
@@ -178,5 +178,14 @@ function getMouseInfo(canvas, e)
 function gameStart()
 {
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
-	ui = new UI();
+	
+	/*
+	$('game').innerHTML = '<select id=scnselect> \
+	<option value=caenuk.xml>caenuk</option> \
+	<option value=cauldron.xml>cauldron</option> \
+	<option value=ciechan.xml>ciechan</option> \
+	</select> \
+	<br/> <input type=button value=\'Start\' onclick=\'javascript:e=document.getElementById("scnselect");ui = new UI("resources/scenarios/xml/"+e.options[e.selectedIndex].value);\'>'
+	*/
+	ui = new UI("resources/scenarios/xml/prok1.xml");
 }
