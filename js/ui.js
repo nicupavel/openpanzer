@@ -79,7 +79,7 @@ function handleMouseMove(e)
 	var col = cell.col;
 	
 	hex = map.map[row][col];
-	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ") " + hex.name;
+	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ") ";
 	if (hex.name !== null)
 	{
 	    text = text + hex.name;

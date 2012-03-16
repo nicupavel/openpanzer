@@ -1,6 +1,7 @@
 // Unit, Hex and Map classes
 function Unit(unitDataId)
 {
+	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
 	this.id = null;
 	this.owner = -1;
 	this.unitData = equipment[unitDataId];
