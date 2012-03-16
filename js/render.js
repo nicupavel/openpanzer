@@ -49,7 +49,7 @@ function Render(mapObj)
 				{ 
 					image = imgCache[hex.unit.getIcon()]; 
 					text = "" + hex.unit.strength;
-					if (hex.unit.belongsTo == 1) { fColor = "green"; }
+					if (hex.unit.owner == 1) { fColor = "green"; }
 				}
 				
 				

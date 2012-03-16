@@ -88,7 +88,7 @@ function handleMouseMove(e)
 	if (hex.unit != null)
 	{
 		text = text + " Unit: " + hex.unit.unitData.name;
-		text = text + " Player: " + hex.unit.belongsTo;
+		text = text + " Player: " + hex.unit.owner;
 	}
 	$('locmsg').innerHTML = text;
 				
@@ -147,7 +147,7 @@ function button(id)
 			{
 				var u = map.currentHex.unit;
 				
-				text = "Player: " + u.belongsTo;
+				text = "Player: " + u.owner;
 				text += " Ammo: " + u.ammo;
 				text += " Strength: " + u.strength;
 				text += " Fuel: " + u.fuel;

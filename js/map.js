@@ -2,7 +2,7 @@
 function Unit(unitDataId)
 {
 	this.id = null;
-	this.belongsTo = -1;
+	this.owner = -1;
 	this.unitData = equipment[unitDataId];
 	this.hasMoved = false;
 	this.hasFired = false;
@@ -11,7 +11,7 @@ function Unit(unitDataId)
 	this.fuel = equipment[unitDataId].fuel;
 	this.strength = 10;
 	
-	this.setUnitToPlayer = function(playerId) { this.belongsTo = playerId; }
+	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.dumpUnit = function() { console.log(this);	}
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
@@ -22,7 +22,7 @@ function Hex()
 	this.unit = null;
 	this.terrain = terrainType.Clear;
 	this.road = roadType.none;
-	this.belongsTo = -1; //TODO this has to be set in maploader
+	this.owner = -1; //TODO this has to be set in maploader
 	this.isSupply = false;
 	this.isDeployment = false;
 	this.isVictory1 = false;
