@@ -15,7 +15,7 @@ function Render(mapObj)
 	
 	// Canvas offset from the browser window
 	var canvasOffsetX = 0;
-	var canvasOffsetY = 40;
+	var canvasOffsetY = 30;
 	// Where to start rendering inside the canvas
 	var renderOriginX = 0;
 	var renderOriginY = 0;
@@ -200,12 +200,10 @@ function Render(mapObj)
 		cm.id = "map";
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(cm);
-				
 		ch = document.createElement('canvas');
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
-		
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
 	}
@@ -220,6 +218,11 @@ function Render(mapObj)
 			c.canvas.width = cb.canvas.width = img.width;
 			c.canvas.height = cb.canvas.height = img.height;
 			cb.drawImage(img, renderOriginX, renderOriginY);
+			canvasOffsetX = window.innerWidth/2 - img.width/2;
+			
+			// Center the map
+			cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+			ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		}
 		img.src = imgFile;		
 	}

@@ -95,33 +95,41 @@ function handleMouseMove(e)
 	
 }
 
+//TODO use style.js for buttons
 function buildInterface()
 {
-	var div1 = addTag('div');
-	var div2 = addTag('div');
-	var div3 = addTag('div');
-	var div4 = addTag('div');
-	div1.id = "statusmsg";
-	div1.className = "message";
-	div1.innerHTML = " Turn: " + turn + "  " + map.description;
+	//menu buttons div with id is the filename from resources/ui/menu/images
+	var menubuttons = [["buy","Requisition Units"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move"],["endturn","End turn"]];
+	
+	for (b in menubuttons) 
+	{
+		var div = addTag('menu','div');
+		var img = addTag(div, 'img');
 		
-	div2.id = "locmsg"
-	div2.className = "message";
+		var id = menubuttons[b][0];
+		var title = menubuttons[b][1];
+		div.id = id;
+		div.title = title;
+		div.className = "button";
+		img.id = id;
+		img.src = "resources/ui/menu/images/" + id + ".png";
+		
+		//js pass-by-ref evaluation and eventhandler ?
+		//can't use UI:button(id) will put the last id in menubuttons array
+		//can use an anonymous function or global evenhandler
+		div.onclick = function() { UI:button(this.id); }
+		div.onmouseover = function() { hoverin(this.firstChild); }
+		div.onmouseout = function() { hoverout(this.firstChild); }
+	}
 	
-	div3.id = "endturn";
-	div3.className = "button";
-	div3.innerHTML = "end turn";
-	div3.onclick = function() { UI:button(div3.id); }
-	
-	div4.id = "info";
-	div4.className = "button";
-	div4.innerHTML = "info";
-	div4.onclick = function() { UI:button(div4.id); }
-	
-	$('menu').appendChild(div1);
-	$('menu').appendChild(div2);
-	$('menu').appendChild(div3);
-	$('menu').appendChild(div4);
+	var sd = addTag('menu','div');
+	var ld = addTag('menu','div');
+	sd.id = "statusmsg";
+	sd.className = "message";
+	sd.innerHTML = " Turn: " + turn + "  " + map.description;
+	ld.id = "locmsg"
+	ld.className = "message";
+
 }
 
 function button(id)
@@ -129,6 +137,15 @@ function button(id)
 	console.log("Clicked button: " + id);
 	switch(id) 
 	{
+		case 'zoom':
+		{	
+			//TODO maybe use transform on canvas this doesn't work in Firefox
+			if ($('game').style.zoom === "100%" || $('game').style.zoom === '' )
+			{$('game').style.zoom = "30%" }
+			else {$('game').style.zoom = "100%" }
+			break;
+		}
+		
 		case 'endturn':
 		{
 			map.resetUnits();
@@ -140,7 +157,7 @@ function button(id)
 			break;
 		}
 		
-		case 'info':
+		case 'inspectunit':
 		{
 			var text = "No unit selected";
 			if (map.currentHex != null && map.currentHex.unit != null)
@@ -166,8 +183,7 @@ function getMouseInfo(canvas, e)
 {
 	var mx, my, rclick;
 	if (e.which) rclick = (e.which == 3);
-	else if (e.button) rclick = (e.button == 2);
-						
+	else if (e.button) rclick = (e.button == 2);				
 	mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
 	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
 	
@@ -189,6 +205,6 @@ function gameStart()
 	*/
 	rng = Math.round((Math.random() * scenariolist.length))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
-	console.log("Scenario:" + scenario);
+	console.log("Number: " + rng + "Scenario:" + scenario);
 	ui = new UI(scenario);
 }
