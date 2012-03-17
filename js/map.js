@@ -125,7 +125,8 @@ function Map()
 		this.map[row][col].setHex(hex);
 		if (hex.unit != null) { this.unitImagesList.push(hex.unit.getIcon()); }
 	}
-	
+	//TODO change to function to getHexesInRange() which should return an array of Cells 
+	//and use this array in selecting moving or attacking range for a unit
 	this.setHexRange = function(row, col, range)
 	{
 		console.log("unit range:" + range);
@@ -154,11 +155,13 @@ function Map()
 			for (var i = minRow; i <= maxRow; i++)
 			{
 				//TODO add terrain factor
-				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null))
+				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null)
+				    && (this.map[i][col + colOff].terrain < terrainType.Swamp))
 				{ 
 					this.setSelected(i, col + colOff);
 				}
-				if (((col - colOff) >= 0) && (this.map[i][col - colOff].unit === null)) 
+				if (((col - colOff) >= 0) && (this.map[i][col - colOff].unit === null)
+					&& this.map[i][col - colOff].terrain < terrainType.Swamp) 
 				{ 
 					this.setSelected(i, col - colOff);
 				}

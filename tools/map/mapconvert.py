@@ -23,6 +23,7 @@ def get_scn_hexes(f):
     return data
 
 # returns a list with x/y coords of units (65 bytes) in the scenario
+# TODO BUG we can have 2 units (air/ground) at the same x/y position !!!
 def get_scn_units(f):
     units = {}
     u_off_x  = 1 + 1 + 2 + 2 + 1 + 1 + 2 #offset in the 65 bytes struct to X coord

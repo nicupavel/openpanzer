@@ -54,7 +54,7 @@ function Render(mapObj)
 				
 				
 				//text = "(" + row + "," + col + ")";
-				// TODO implement styles
+				//TODO implement styles
 				if (hex.isCurrent)
 				{	
 					this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image, 3, "round");
@@ -63,7 +63,7 @@ function Render(mapObj)
 				{
 					if (hex.isSelected) 
 					{ 
-						this.drawHex(row, col, "rgba(128,128,128,0.3)", "grey", fColor, text, image);
+						this.drawHex(row, col, "rgba(128,128,128,0.5)", "rgba(128,128,128,0.2)", fColor, text, image);
 					}
 					else 
 					{
@@ -113,8 +113,8 @@ function Render(mapObj)
 		
 		if (image) 
 		{
-			// TODO Units have 9 possible orientations
-			// 1 sprite is *usually* 80x50
+			// TODO Units have 9 possible orientations (
+			// 1 sprite is ~80x50 (and are 9 sprites in 1 row)
 			orientation = 80 * 2;
 			imagew = 80;
 			imageh = 50;
