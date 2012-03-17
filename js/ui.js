@@ -79,16 +79,16 @@ function handleMouseMove(e)
 	var col = cell.col;
 	
 	hex = map.map[row][col];
-	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ") ";
+	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)
 	{
-	    text = text + hex.name;
+	    text = hex.name + " " + text;
 	}
 	
 	if (hex.unit != null)
 	{
-		text = text + " Unit: " + hex.unit.unitData.name;
-		text = text + " Player: " + hex.unit.owner;
+		text = " Unit: " + hex.unit.unitData.name + " " + text;
+		//text = text + " Player: " + hex.unit.owner;
 	}
 	$('locmsg').innerHTML = text;
 				
@@ -100,11 +100,20 @@ function buildInterface()
 {
 	//menu buttons div with id is the filename from resources/ui/menu/images
 	var menubuttons = [["buy","Requisition Units"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move"],["endturn","End turn"]];
+	var sd = addTag('menu','div');
+	sd.id = "statusmsg";
+	sd.className = "message";
+	sd.innerHTML = " Turn: " + turn + "  " + map.description;
 	
 	for (b in menubuttons) 
 	{
+		
+		
+		
+		
 		var div = addTag('menu','div');
 		var img = addTag(div, 'img');
+		
 		
 		var id = menubuttons[b][0];
 		var title = menubuttons[b][1];
@@ -122,14 +131,9 @@ function buildInterface()
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
 	
-	var sd = addTag('menu','div');
 	var ld = addTag('menu','div');
-	sd.id = "statusmsg";
-	sd.className = "message";
-	sd.innerHTML = " Turn: " + turn + "  " + map.description;
 	ld.id = "locmsg"
 	ld.className = "message";
-
 }
 
 function button(id)
