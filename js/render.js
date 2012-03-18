@@ -1,12 +1,15 @@
 function Render(mapObj)
 {
 	var imgCache = {};
+	var imgCursor;
 	var map = mapObj;
 	
 	var ch; // The hexes canvas element
 	var cm; // The map canvas element
+	var ca; // The animation/attack cursor canvas element
 	var c = null; //This is the context where the main drawing takes place
-	var cb = null;//This is the context where the map image is drawn.
+	var cb = null;//This is the context where the map image is drawn. Could be made a background of the main drawing
+	var a = null; //This is where the animation and attack cursor is drawn
 	
 	//TODO fix this on screentocell where calculation was made with r as h and viceversa
 	var s = 30;   //hexagon segment size   
@@ -20,6 +23,7 @@ function Render(mapObj)
 	var renderOriginX = 0;
 	var renderOriginY = 0;
 	
+	//The rendering style
 	this.style = new RenderStyle();
 	
 	createLayers(); //Creates canvas layers
@@ -119,7 +123,18 @@ function Render(mapObj)
 		    c.fillText(text, tx + 1, ty + 8);
 		}
     }
-		
+	
+	//Renders attack cursor 
+	//TODO This should actually set a CSS cursor property
+	//and build the cursor image (cursor, losses/kills, and flags) 
+	//on a temp canvas and use toDataURL() to set the CSS cursor
+	this.drawCursor = function(px, py)
+	{
+		//make it bigger for fast cursor movement
+		a.clearRect(px - imgCursor.width, py - imgCursor.height, imgCursor.width*10, imgCursor.height*10);
+		//a.clearRect(0, 0, a.canvas.width, a.canvas.height);
+		a.drawImage(imgCursor, px, py);
+	}
 	//Converts from screen x,y to row,col in map array
 	this.screenToCell = function(x, y)
 	{
@@ -146,6 +161,7 @@ function Render(mapObj)
 	
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
+	this.getCursorCanvas = function() { return ca; }
 	this.getHexS = function() { return s;}
 	this.getHexH = function() { return h;}
 	this.getHexR = function() { return r;}
@@ -156,7 +172,9 @@ function Render(mapObj)
 	this.cacheUnitImages = function (imgList, func)
 	{
 		var loaded = 0;
-		
+		//TODO this should be done in UI and passed to render 
+		imgCursor = new Image();
+		imgCursor.src = "resources/ui/cursors/attack.png";
 		for (var i = 0; i < imgList.length; i++)
 		{
 			imgCache[imgList[i]] = new Image();
@@ -179,16 +197,24 @@ function Render(mapObj)
 	// Private
 	function createLayers()
 	{
+		//Map image as background
 		cm = document.createElement('canvas');
 		cm.id = "map";
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(cm);
+		// Hexes/units/flags
 		ch = document.createElement('canvas');
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
+		// Animation and attack Cursor
+		ca = document.createElement('canvas');
+		ca.id = "cursor";
+		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+		document.getElementById("game").appendChild(ca);
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
+		a = ca.getContext('2d');
 	}
 	
 	
@@ -198,14 +224,15 @@ function Render(mapObj)
 		img = new Image();
 		img.onload = function() 
 		{
-			c.canvas.width = cb.canvas.width = img.width;
-			c.canvas.height = cb.canvas.height = img.height;
+			c.canvas.width = cb.canvas.width = a.canvas.width = img.width;
+			c.canvas.height = cb.canvas.height = a.canvas.height = img.height;
 			cb.drawImage(img, renderOriginX, renderOriginY);
 			canvasOffsetX = window.innerWidth/2 - img.width/2;
 			
-			// Center the map
+			// Center the canvases
 			cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 			ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+			ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		}
 		img.src = imgFile;		
 	}

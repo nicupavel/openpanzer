@@ -12,7 +12,7 @@ function UI(map)
 	
 	var r = new Render(map);
 	r.cacheUnitImages(map.unitImagesList, function() { r.render(); });
-	var canvas = r.getHexesCanvas();
+	var canvas = r.getCursorCanvas();
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 
@@ -33,7 +33,8 @@ function handleMouseClick(e)
 		map.setCurrentHex(row, col);
 		map.delSelected();
 		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.movpoints); }
-		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange); } }
+		//TODO Corect attack range added + 2 for testing
+		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange + 2); } }
 	}	
 	else
 	{
@@ -51,10 +52,12 @@ function handleMouseClick(e)
 				hex.unit.hasMoved = true;
 				srcHex.delUnit();
 			} else {		//attack an allowed hex
-				if (hex.isSelected && !srcHex.unit.hasFired && hex.unit != null)
+				//TODO add player ID
+				//if (hex.isSelected && !srcHex.unit.hasFired && hex.unit != null)
+				if (hex.isSelected && !srcHex.unit.hasFired)
 				{
 					//attack function
-					console.log("attacking: " + hex.unit);
+					console.log("attacking: " + row + "," +col);
 				}
 			}
 			
@@ -81,16 +84,9 @@ function handleMouseMove(e)
 	
 	hex = map.map[row][col];
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
-	if (hex.name !== null)
-	{
-	    text = hex.name + " " + text;
-	}
-	
-	if (hex.unit != null)
-	{
-		text = " Unit: " + hex.unit.unitData.name + " " + text;
-		//text = text + " Player: " + hex.unit.owner;
-	}
+	if (hex.name !== null)	{  text = hex.name + " " + text; }
+	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text;	}
+	if (map.currentHex != null) { r.drawCursor(minfo.x, minfo.y);}
 	$('locmsg').innerHTML = text;
 				
 	

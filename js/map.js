@@ -135,7 +135,6 @@ function Map()
 		var maxRow = row + range;
 		if (minRow < 0) { minRow = 0; }
 		if (maxRow > this.rows) { maxRow = this.rows; }
-		
 				
 		//the column
 		for (var i = minRow; i <= maxRow; i++)
