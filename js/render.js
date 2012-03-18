@@ -20,6 +20,8 @@ function Render(mapObj)
 	var renderOriginX = 0;
 	var renderOriginY = 0;
 	
+	this.style = new RenderStyle();
+	
 	createLayers(); //Creates canvas layers
 	drawMapImage(map.terrainImage); //Draws the map background
 	
@@ -31,7 +33,7 @@ function Render(mapObj)
 		var text;
 		var image;
 		var hex;
-		var fColor;
+		var textColor;
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		
@@ -42,42 +44,31 @@ function Render(mapObj)
 			{
 				image = null;
 				text = null;
-				fColor = "black";
+				textColor = "black";
 				hex = map.map[row][col];
 
 				if (hex.unit !== null) 
 				{ 
 					image = imgCache[hex.unit.getIcon()]; 
 					text = "" + hex.unit.strength;
-					if (hex.unit.owner == 1) { fColor = "green"; }
+					if (hex.unit.owner == 1) { textColor = "green"; }
 				}
-				
 				
 				//text = "(" + row + "," + col + ")";
-				//TODO implement styles
-				if (hex.isCurrent)
-				{	
-					this.drawHex(row, col, null, "rgba(255,255,255,0.8)", fColor, text, image, 3, "round");
-				}
+				//TODO read text color from a country list
+				if (hex.isCurrent) { this.drawHex(row, col, this.style.current, text, textColor, image); }
 				else 
 				{
-					if (hex.isSelected) 
-					{ 
-						this.drawHex(row, col, "rgba(128,128,128,0.5)", "rgba(128,128,128,0.2)", fColor, text, image);
-					}
-					else 
-					{
-						this.drawHex(row, col, null, "rgba(128,128,128,0.8)", fColor, text, image);
-					}
+					if (hex.isSelected) { this.drawHex(row, col, this.style.selected, text, textColor, image); }
+					else { this.drawHex(row, col, this.style.generic, text, textColor, image); }
 				}
 			}
 		}
 	}
 	
-	//tColor = tile fill color, sColor = lines stroke color, fColor = font Color
-	this.drawHex = function (row, col, tColor, sColor, fColor, text, image, lineWidth, lineJoin)
+	//TODO textColor should be read from a country colors list
+	this.drawHex = function (row, col, style, text, textColor, image )
 	{
-	
 		//flat-out hex layout
 		if (col & 1) // odd column
 		{
@@ -91,12 +82,9 @@ function Render(mapObj)
 			
 		}
 
-		if (lineWidth) { c.lineWidth = lineWidth; }
-		else { c.lineWidth = 1.0; }
-		if (lineJoin) { c.lineJoin = lineJoin; }
-		else { c.lineJoin = "miter"; }
-		
-		c.strokeStyle = sColor;
+		c.lineWidth = style.lineWidth; 
+		c.lineJoin = style.lineJoin; 
+		c.strokeStyle = style.lineColor;
 		c.beginPath();
 		c.moveTo(x0, y0);
 		c.lineTo(x0 + s, y0);
@@ -104,13 +92,8 @@ function Render(mapObj)
 		c.lineTo(x0 + s, y0 + 2 * r);
 		c.lineTo(x0, y0 + 2 *r);
 		c.lineTo(x0 - h, y0 + r);
-		
-		if (tColor)
-		{
-		    c.fillStyle = tColor;
-		    c.fill();
-		}
-		
+	    if ((c.fillStyle = style.fillColor) !== null) {  c.fill(); }
+				
 		if (image) 
 		{
 			// TODO Units have 9 possible orientations (
@@ -129,7 +112,7 @@ function Render(mapObj)
 			var tx = x0 + h/2;
 			var ty = y0 + 2 * r - 12;
 			c.moveTo(tx, ty);
-			c.fillStyle = fColor;
+			c.fillStyle = textColor;
 			c.fillRect  (tx, ty, 15, 10);
 		    c.font = "10px sans-serif"
 		    c.fillStyle = "white";

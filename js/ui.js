@@ -9,6 +9,7 @@ function UI(map)
 	var map = l.buildMap();
 	//map.dumpMap();
 	buildInterface();
+	
 	var r = new Render(map);
 	r.cacheUnitImages(map.unitImagesList, function() { r.render(); });
 	var canvas = r.getHexesCanvas();
@@ -107,13 +108,8 @@ function buildInterface()
 	
 	for (b in menubuttons) 
 	{
-		
-		
-		
-		
 		var div = addTag('menu','div');
 		var img = addTag(div, 'img');
-		
 		
 		var id = menubuttons[b][0];
 		var title = menubuttons[b][1];
@@ -141,6 +137,12 @@ function button(id)
 	console.log("Clicked button: " + id);
 	switch(id) 
 	{
+		case 'hex':
+		{
+			r.style.toggleHexes();
+			r.render();
+			break;
+		}
 		case 'zoom':
 		{	
 			//TODO maybe use transform on canvas this doesn't work in Firefox
@@ -207,8 +209,8 @@ function gameStart()
 	</select> \
 	<br/> <input type=button value=\'Start\' onclick=\'javascript:e=document.getElementById("scnselect");ui = new UI("resources/scenarios/xml/"+e.options[e.selectedIndex].value);\'>'
 	*/
-	rng = Math.round((Math.random() * scenariolist.length))
+	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
-	console.log("Number: " + rng + "Scenario:" + scenario);
+	console.log("Number: " + rng + " Scenario:" + scenario);
 	ui = new UI(scenario);
 }
