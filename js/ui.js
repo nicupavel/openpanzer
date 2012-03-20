@@ -162,12 +162,16 @@ function button(id)
 		{
 			var v = $('unit-info').style.visibility;
 			
-			if (map.currentHex != null && map.currentHex.unit != null) 
-			{ 
-				updateUnitInfoWindow(map.currentHex.unit);
+			if (v === "visible") { $('unit-info').style.visibility = "hidden"; }
+			else 
+			{
+				//Just to show some window with dummy data if user press with no unit selected
+				$('unit-info').style.visibility = "visible"; 
+				if (map.currentHex != null && map.currentHex.unit != null) 
+				{ 
+					updateUnitInfoWindow(map.currentHex.unit);
+				}
 			}
-			if (v === "visible" || v === '') { $('unit-info').style.visibility  = "visible";  }
-			else { $('unit-info').style.visibility = "hidden"; }
 			break;
 		}
 	}
