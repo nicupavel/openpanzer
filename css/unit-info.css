@@ -32,8 +32,8 @@
 	height:50px;
 	margin-top:50px;
 	margin-left:70px;
-	-webkit-animation:unitanim 3s steps(9,end) infinite;
-	-moz-animation:unitanim 3s steps(9,end) infinite;
+	-webkit-animation:unitanim 2s steps(9,end) infinite alternate;
+	-moz-animation:unitanim 2s steps(9,end) infinite alternate;
 	background:url('../resources/units/images/g87.png');
 	
 }
