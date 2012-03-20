@@ -27,40 +27,19 @@
 	margin-top:50px;
 	margin-left:70px;
 	-webkit-animation:unitanim 2s steps(9,end) infinite;
-	-moz-animation:unitanim 10s linear 0s infinite alternate;
+	-moz-animation:unitanim 2s steps(9,end) infinite;
 	background:url('../resources/units/images/g87.png');
 	
 }
+
 @-webkit-keyframes unitanim
 {
 	from {background-position:0px;}
 	to {background-position:-720px;}
 }
 
-@-webkit-keyframes unitanim-trans
-{
-0%   {background: 0px 0px;}
-11%  {background: 80px 0px;}
-22%  {background: 160px 0px;}
-33%  {background: 240px 0px;}
-44% {background: 320px 0px;}
-55% {background: 400px 0px;}
-66% {background: 480px 0px;}
-77% {background: 560px 0px;}
-88% {background: 640px 0px;}
-100% {background: 720px 0px;}
-}
-
 @-moz-keyframes unitanim
 {
-0%   {background: 0px 0px;}
-11%  {background: 80px 0px;}
-22%  {background: 160px 0px;}
-33%  {background: 240px 0px;}
-44% {background: 320px 0px;}
-55% {background: 400px 0px;}
-66% {background: 480px 0px;}
-77% {background: 560px 0px;}
-88% {background: 640px 0px;}
-100% {background: 720px 0px;}
+	from {background-position:0px;}
+	to {background-position:-720px;}
 }
