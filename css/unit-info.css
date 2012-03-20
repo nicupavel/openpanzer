@@ -1,21 +1,27 @@
 #unit-info
 {
-	
-	position: absolute;
-	width: 220px;
-	height: 380px;
+	position: fixed;
+	width: 215px;
+	height: 375px;
 	left:50%;
-	margin-left: -110px;
+	margin-left: -107.5px;
 	top:50%;
-	margin-top: -190px;
+	margin-top: -187.5px;
+	color: #f8e064;
+	font-weight:bold;
+	font-family: Arial;
+	font-size: 12px;
+	text-shadow: 0.1em 0.1em 0.2em black;
 	background-image: url('../resources/ui/menu/images/unit-info-bg.png');
+	z-index:100;
+	overflow-y: auto;
+	visibility: hidden;
+	overflow: hidden;
 }
 
 #unit-info #container
 {
 	position: relative;
-	display: block;
-	overflow: hidden;
 	border: 0px #fff solid;
 }
 
@@ -30,6 +36,109 @@
 	-moz-animation:unitanim 3s steps(9,end) infinite;
 	background:url('../resources/units/images/g87.png');
 	
+}
+#unit-info #container #unit-name
+{
+	border: 0px #fff solid;
+	position:absolute;
+	top:65px;
+	left:30px;
+	width:150px;
+	text-align: center;
+}
+
+#unit-info #container #fuel
+{
+	position:absolute;
+	top: 120px;
+	left:40px;
+}
+
+#unit-info #container #ammo
+{
+	position:absolute;
+	top: 120px;
+	left:160px;
+}
+#unit-info #container #gunrange
+{
+	position: absolute;
+	top: 155px;
+	left:40px;
+}
+#unit-info #container #ini
+{
+	position: absolute;
+	top: 155px;
+	left:80px;
+}
+#unit-info #container #spot
+{
+	position: absolute;
+	top: 155px;
+	left:120px;
+}
+#unit-info #container #str
+{
+	position: absolute;
+	top: 155px;
+	left:160px;
+}
+#unit-info #container #ahard
+{
+	position: absolute;
+	top: 210px;
+	left:40px;
+}
+#unit-info #container #asoft
+{
+	position: absolute;
+	top: 210px;
+	left:80px;
+}
+#unit-info #container #aair
+{
+	position: absolute;
+	top: 210px;
+	left:120px;
+}
+#unit-info #container #anaval
+{
+	position: absolute;
+	top: 210px;
+	left:160px;
+}
+#unit-info #container #dhard
+{
+	position: absolute;
+	top: 265px;
+	left:40px;
+}
+#unit-info #container #dair
+{
+	position: absolute;
+	top: 265px;
+	left:80px;
+}
+#unit-info #container #dclose
+{
+	position: absolute;
+	top: 265px;
+	left:120px;
+}
+#unit-info #container #drange
+{
+	position: absolute;
+	top: 265px;
+	left:160px;
+}
+#unit-info #container #iokbut
+{
+	position: absolute;
+	top: 285px;
+	left:180px;
+	min-width: 20px;
+	height:20px;
 }
 
 @-webkit-keyframes unitanim

@@ -1,5 +1,3 @@
-
-
 function UI(map)
 {
 	var turn = 0;
@@ -8,11 +6,12 @@ function UI(map)
 	l.loadMap(map);
 	var map = l.buildMap();
 	//map.dumpMap();
-	buildInterface();
+	buildMainMenu();
 	
 	var r = new Render(map);
 	r.cacheUnitImages(map.unitImagesList, function() { r.render(); });
 	var canvas = r.getCursorCanvas();
+	
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 
@@ -35,6 +34,7 @@ function handleMouseClick(e)
 		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.movpoints); }
 		//TODO Corect attack range added + 2 for testing
 		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange + 2); } }
+		if (minfo.rclick) { updateUnitInfoWindow(hex.unit);}
 	}	
 	else
 	{
@@ -92,8 +92,7 @@ function handleMouseMove(e)
 	
 }
 
-//TODO use style.js for buttons
-function buildInterface()
+function buildMainMenu()
 {
 	//menu buttons div with id is the filename from resources/ui/menu/images
 	var menubuttons = [["buy","Requisition Units"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move"],["endturn","End turn"]];
@@ -143,8 +142,8 @@ function button(id)
 		{	
 			//TODO maybe use transform on canvas this doesn't work in Firefox
 			if ($('game').style.zoom === "100%" || $('game').style.zoom === '' )
-			{$('game').style.zoom = "30%" }
-			else {$('game').style.zoom = "100%" }
+			{ $('game').style.zoom = "30%"; }
+			else { $('game').style.zoom = "100%"; }
 			break;
 		}
 		
@@ -161,21 +160,14 @@ function button(id)
 		
 		case 'inspectunit':
 		{
-			var text = "No unit selected";
-			if (map.currentHex != null && map.currentHex.unit != null)
-			{
-				var u = map.currentHex.unit;
-				
-				text = "Player: " + u.owner;
-				text += " Ammo: " + u.ammo;
-				text += " Strength: " + u.strength;
-				text += " Fuel: " + u.fuel;
-				text += " Has moved: " + u.hasMoved;
-				text += " Has fired: " + u.hasFired;
-				text += " Has resupplied: " + u.hasRessuplied;
-			}
+			var v = $('unit-info').style.visibility;
 			
-			alert(text);
+			if (map.currentHex != null && map.currentHex.unit != null) 
+			{ 
+				updateUnitInfoWindow(map.currentHex.unit);
+			}
+			if (v === "visible" || v === '') { $('unit-info').style.visibility  = "visible";  }
+			else { $('unit-info').style.visibility = "hidden"; }
 			break;
 		}
 	}
@@ -191,6 +183,28 @@ function getMouseInfo(canvas, e)
 	
 	var minfo =  new mouseInfo(mx, my, rclick);
 	return minfo;
+}
+function updateUnitInfoWindow(u)
+{
+	$('unit-info').style.visibility  = "visible";
+	
+	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
+	$('unit-name').innerHTML = u.unitData.name;
+	$('fuel').innerHTML = u.fuel;
+	$('ammo').innerHTML = u.ammo;
+	$('str').innerHTML = u.strength + "/10";
+	$('gunrange').innerHTML = u.unitData.gunrange;
+	$('ini').innerHTML = u.unitData.initiative;
+	$('spot').innerHTML = u.unitData.spotrange;
+	$('ahard').innerHTML = u.unitData.hardatk;
+	$('asoft').innerHTML = u.unitData.softatk;
+	$('aair').innerHTML = u.unitData.airatk;
+	$('anaval').innerHTML = u.unitData.navalatk;
+	$('dhard').innerHTML = u.unitData.grounddef;
+	$('dair').innerHTML = u.unitData.airdef;
+	$('dclose').innerHTML = u.unitData.closedef;
+	$('drange').innerHTML = u.unitData.rangedefmod;
+	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
 }
 }
 function gameStart()

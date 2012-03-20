@@ -17,8 +17,8 @@ function RenderStyle()
 		},
 	"normal": {
 		"fillColor": null,
-		"lineColor": "rgba(128,128,128,0.5)",
-		"lineWidth": 1,
+		"lineColor": "rgba(39,44,47,0.9)",
+		"lineWidth": 0.4,
 		"lineJoin": "miter",
 		},
 	"hidden": {
