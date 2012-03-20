@@ -8,8 +8,8 @@ function Render(mapObj)
 	var cm; // The map canvas element
 	var ca; // The animation/attack cursor canvas element
 	var c = null; //This is the context where the main drawing takes place
-	var cb = null;//This is the context where the map image is drawn. Could be made a background of the main drawing
-	var a = null; //This is where the animation and attack cursor is drawn
+	var cb = null;//This is the context where the map image is drawn. Can be made a background of the main drawing
+	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
 	
 	//TODO fix this on screentocell where calculation was made with r as h and viceversa
 	var s = 30;   //hexagon segment size   
@@ -128,12 +128,28 @@ function Render(mapObj)
 	//TODO This should actually set a CSS cursor property
 	//and build the cursor image (cursor, losses/kills, and flags) 
 	//on a temp canvas and use toDataURL() to set the CSS cursor
-	this.drawCursor = function(px, py)
+	this.drawCursor = function(minfo, cell)
 	{
-		//make it bigger for fast cursor movement
-		a.clearRect(px - imgCursor.width, py - imgCursor.height, imgCursor.width*10, imgCursor.height*10);
-		//a.clearRect(0, 0, a.canvas.width, a.canvas.height);
-		a.drawImage(imgCursor, px, py);
+		px = minfo.x;
+		py = minfo.y;
+		row = cell.row;
+		col = cell.col;
+		hex = map.map[row][col];
+		
+	
+		//TODO check row, cell if a cursor should be generated again	
+		ca.style.cursor = 'default';
+		if (hex.unit !== null && hex.unit.owner != map.currentHex.unit.owner)
+		{		
+			//a.clearRect(0, 0, a.canvas.width, a.canvas.height);
+			//a.drawImage(imgCursor, px, py);
+			//var cc = ca.toDataURL();
+			// make it bigger for fast cursor movement
+			//a.clearRect(px - imgCursor.width, py - imgCursor.height, imgCursor.width*10, imgCursor.height*10);
+			//ca.style.cursor = "url('"+cc+"'), auto";
+			ca.style.cursor = "url('resources/ui/cursors/attack.png'), auto";
+		}
+		
 	}
 	//Converts from screen x,y to row,col in map array
 	this.screenToCell = function(x, y)

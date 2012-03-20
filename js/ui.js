@@ -86,7 +86,7 @@ function handleMouseMove(e)
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
 	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text;	}
-	if (map.currentHex != null) { r.drawCursor(minfo.x, minfo.y);}
+	if (map.currentHex != null) { r.drawCursor(minfo, cell); }
 	$('locmsg').innerHTML = text;
 				
 	
