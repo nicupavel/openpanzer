@@ -292,7 +292,7 @@ function Render(mapObj)
 		c = ch.getContext('2d');
 		a = ca.getContext('2d');
 		bb = cbb.getContext('2d');
-		bb.canvas.width = bb.canvas.height = 54;
+		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the cursor
 	}
 	
 	

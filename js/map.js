@@ -139,7 +139,8 @@ function Map()
 		//the column
 		for (var i = minRow; i <= maxRow; i++)
 		{
-			if (i != row && (this.map[i][col].unit === null)) 
+			if ((i != row) && (this.map[i][col].unit === null)
+				&& (this.map[i][col].terrain < terrainType.Swamp)) 
 			{
 				this.setSelected(i, col);
 			}
