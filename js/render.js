@@ -2,14 +2,17 @@ function Render(mapObj)
 {
 	var imgCache = {};
 	var imgCursor;
+	var imgFlags;
 	var map = mapObj;
 	
 	var ch; // The hexes canvas element
 	var cm; // The map canvas element
-	var ca; // The animation/attack cursor canvas element
+	var ca; // The animation canvas element.Also used as cursor coords but c canvas can be used as well
+	var cbb; //A backbuffer canvas for dynamically creating images (as in cursor image)
 	var c = null; //This is the context where the main drawing takes place
 	var cb = null;//This is the context where the map image is drawn. Can be made a background of the main drawing
 	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
+	var bb = null; //Backbuffer context
 	
 	//TODO fix this on screentocell where calculation was made with r as h and viceversa
 	var s = 30;   //hexagon segment size   
@@ -37,7 +40,7 @@ function Render(mapObj)
 		var text;
 		var image;
 		var hex;
-		var textColor;
+		var textColor; //Actually the color of the unit strenth box
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		
@@ -118,9 +121,9 @@ function Render(mapObj)
 			c.moveTo(tx, ty);
 			c.fillStyle = textColor;
 			c.fillRect  (tx, ty, 15, 10);
-		    c.font = "10px sans-serif"
-		    c.fillStyle = "white";
-		    c.fillText(text, tx + 1, ty + 8);
+			c.font = "10px sans-serif";
+			c.fillStyle = "white";
+			c.fillText(text, tx + 1, ty + 8);
 		}
     }
 	
@@ -135,19 +138,33 @@ function Render(mapObj)
 		row = cell.row;
 		col = cell.col;
 		hex = map.map[row][col];
-		
+		flw = 20; //one flag width
+		flh = 14; //flag height
 	
 		//TODO check row, cell if a cursor should be generated again	
 		ca.style.cursor = 'default';
 		if (hex.unit !== null && hex.unit.owner != map.currentHex.unit.owner)
-		{		
-			//a.clearRect(0, 0, a.canvas.width, a.canvas.height);
-			//a.drawImage(imgCursor, px, py);
-			//var cc = ca.toDataURL();
-			// make it bigger for fast cursor movement
-			//a.clearRect(px - imgCursor.width, py - imgCursor.height, imgCursor.width*10, imgCursor.height*10);
-			//ca.style.cursor = "url('"+cc+"'), auto";
-			ca.style.cursor = "url('resources/ui/cursors/attack.png'), auto";
+		{	bbw = bb.canvas.width;
+			bbh = bb.canvas.height;
+			bb.clearRect(0, 0, bbw, bbh);
+			//TODO read country code from scenario and choose proper flag
+			bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
+			bb.drawImage(imgFlags, 0, 0, flw, flh, 0, 0, flw, flh)
+			bb.drawImage(imgFlags, flw, 0, flw, flh, bbw - flw, 0, flw, flh);
+			//estimated losses and kills
+			bb.font = "bold 12px sans-serif";
+			bb.fillStyle = "yellow";
+			//TODO guess the formula is a little more complicated ?
+			var kills = map.currentHex.unit.unitData.softatk - hex.unit.unitData.grounddef;
+			var losses = hex.unit.unitData.softatk - map.currentHex.unit.unitData.grounddef;
+			if (kills < 0) { kills = 0;}
+			if (losses < 0) { losses = 0;}
+			bb.fillText("" + losses, flw/2-2, flh + 10);
+			bb.fillText("" + kills, bbw - flw/2 - 2, flh + 10);
+			//c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
+			var cc = cbb.toDataURL();
+			//cursor data, hotspot x, hotspot y, fallback cursor image
+			ca.style.cursor = "url('"+cc+"') " + bbw/2 + " " + bbh/2 +", auto";
 		}
 		
 	}
@@ -188,9 +205,13 @@ function Render(mapObj)
 	this.cacheUnitImages = function (imgList, func)
 	{
 		var loaded = 0;
-		//TODO this should be done in UI and passed to render 
+		//TODO this should be done elsewhere
 		imgCursor = new Image();
 		imgCursor.src = "resources/ui/cursors/attack.png";
+		//TODO this should be done elsewhere
+		imgFlags = new Image();
+		imgFlags.src = "resources/ui/flags/flag_med.png";
+
 		for (var i = 0; i < imgList.length; i++)
 		{
 			imgCache[imgList[i]] = new Image();
@@ -223,14 +244,21 @@ function Render(mapObj)
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
-		// Animation and attack Cursor
+		// Animation and cursor
 		ca = document.createElement('canvas');
 		ca.id = "cursor";
 		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ca);
+		// backbuffer
+		cbb = document.createElement('canvas');
+		cbb.id = "backbuffer";
+		
+		
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
 		a = ca.getContext('2d');
+		bb = cbb.getContext('2d');
+		bb.canvas.width = bb.canvas.height = 50;
 	}
 	
 	
