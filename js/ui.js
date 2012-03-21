@@ -25,17 +25,41 @@ function handleMouseClick(e)
 	
 	hex = map.map[row][col];
 	
-	//Selected hex has a unit ?
+	//Clicked hex has a unit ?
 	if (hex.unit) 
 	{
-		map.delCurrentHex();
-		map.setCurrentHex(row, col);
-		map.delSelected();
-		//force a cursor redraw since we have a new unit selected
-		r.drawCursor(cell);
-		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.movpoints); }
-		//TODO Corect attack range added + 1 for testing
-		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange + 1); } }
+		if ((map.currentHex !== null) && (map.currentHex.unit.owner !== hex.unit.owner))
+		{	//attack an allowed hex
+			//TODO check unitAllowedAttackHexes (see map.js)
+			if (!map.currentHex.unit.hasFired)
+			{
+				//attack function
+				console.log("attacking: " + row + "," +col);
+				map.currentHex.unit.hasFired = true;
+				map.delSelected();
+				alert("Peace bro");
+			}
+		}	
+		else 
+		{
+			map.delCurrentHex();
+			map.setCurrentHex(row, col);
+			map.delSelected();
+		
+			if (!hex.unit.hasMoved) 
+			{ 
+				map.setHexRange(row, col, hex.unit.unitData.movpoints); 
+			}
+			else  
+			{ 
+				if (!hex.unit.hasFired) 
+				{ 
+					var gunrange = hex.unit.unitData.gunrange;
+					if (gunrange === 0) { gunrange = 1; }
+					map.setHexRange(row, col, gunrange); 
+				} 
+			}
+		}
 		if (minfo.rclick) { updateUnitInfoWindow(hex.unit);}
 	}	
 	else
@@ -51,16 +75,7 @@ function handleMouseClick(e)
 				hex.unit = srcHex.unit;
 				hex.unit.hasMoved = true;
 				srcHex.delUnit();
-			//TODO never reach here because of the outer if condition
-			} else {		//attack an allowed hex
-				//TODO add player ID
-				//if (hex.isSelected && !srcHex.unit.hasFired && hex.unit != null)
-				if (hex.isSelected && !srcHex.unit.hasFired)
-				{
-					//attack function
-					console.log("attacking: " + row + "," +col);
-				}
-			}			
+			} 		
 			map.delCurrentHex();
 		}
 		else
