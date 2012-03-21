@@ -31,9 +31,11 @@ function handleMouseClick(e)
 		map.delCurrentHex();
 		map.setCurrentHex(row, col);
 		map.delSelected();
+		//force a cursor redraw since we have a new unit selected
+		r.drawCursor(cell);
 		if (!hex.unit.hasMoved) { map.setHexRange(row, col, hex.unit.unitData.movpoints); }
-		//TODO Corect attack range added + 2 for testing
-		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange + 2); } }
+		//TODO Corect attack range added + 1 for testing
+		else  { if (!hex.unit.hasFired) { map.setHexRange(row, col, hex.unit.unitData.gunrange + 1); } }
 		if (minfo.rclick) { updateUnitInfoWindow(hex.unit);}
 	}	
 	else
@@ -41,16 +43,15 @@ function handleMouseClick(e)
 		//Do we already have a selected unit ?
 		if (map.currentHex != null)
 		{	
-			console.log("A unit is selected");
 			srcHex = map.currentHex;
 			//move to an allowed hex
 			if (hex.isSelected && !srcHex.unit.hasMoved) 
 			{
 				//TODO a move function in map class
-				//value copy 
 				hex.unit = srcHex.unit;
 				hex.unit.hasMoved = true;
 				srcHex.delUnit();
+			//TODO never reach here because of the outer if condition
 			} else {		//attack an allowed hex
 				//TODO add player ID
 				//if (hex.isSelected && !srcHex.unit.hasFired && hex.unit != null)
@@ -59,8 +60,7 @@ function handleMouseClick(e)
 					//attack function
 					console.log("attacking: " + row + "," +col);
 				}
-			}
-			
+			}			
 			map.delCurrentHex();
 		}
 		else
@@ -69,7 +69,6 @@ function handleMouseClick(e)
 		}
 		map.delSelected();
 	}
-
 	//ToDo partial screen updates
 	r.render(); 
 }
@@ -86,7 +85,7 @@ function handleMouseMove(e)
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
 	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text;	}
-	if (map.currentHex != null) { r.drawCursor(minfo, cell); }
+	if (map.currentHex != null) { r.drawCursor(cell); }
 	$('locmsg').innerHTML = text;
 				
 	

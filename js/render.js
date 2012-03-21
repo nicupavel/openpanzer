@@ -7,6 +7,7 @@ function Render(mapObj)
 	
 	var lastCursorCell = null; //Last cell for which the cursor was built
 	var lastCursorImage = null;//last cursor image
+	var lastCursorAttackingUnit = null; //last attacking unit for which a cursor was generated
 	
 	var ch; // The hexes canvas element
 	var cm; // The map canvas element
@@ -129,10 +130,8 @@ function Render(mapObj)
     }
 	
 	//Renders attack cursor 
-	this.drawCursor = function(minfo, cell)
+	this.drawCursor = function(cell)
 	{
-		var px = minfo.x;
-		var py = minfo.y;
 		var row = cell.row;
 		var col = cell.col;
 		var hex = map.map[row][col];
@@ -141,16 +140,23 @@ function Render(mapObj)
 		var bbw = bb.canvas.width;
 		var bbh = bb.canvas.height;
 		var redraw = false;
-
+		
+		if (lastCursorAttackingUnit !== map.currentHex.unit) 
+		{ 
+			redraw = true; //Redraw because a new unit has been selected
+		}
+		
 		if (hex.unit !== null && hex.unit.owner != map.currentHex.unit.owner)
 		{	
 			//check cell if a cursor should be generated again	
-			if ((lastCursorCell === null) || (lastCursorImage === null) ||
+			if ((redraw === true) || (lastCursorCell === null) || (lastCursorImage === null) ||
 				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
 			{ 
-				var atkunit =  map.currentHex.unit;
+				var atkunit = map.currentHex.unit;
 				var defunit = hex.unit;
-				redraw = true;
+				redraw = true; //Redraw because a mouse is over a new cell
+				lastCursorAttackingUnit = atkunit;
+
 				bb.clearRect(0, 0, bbw, bbh);
 				//TODO read country code from scenario and choose proper flag
 				bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
