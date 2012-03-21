@@ -148,29 +148,35 @@ function Render(mapObj)
 			if ((lastCursorCell === null) || (lastCursorImage === null) ||
 				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
 			{ 
+				var atkunit =  map.currentHex.unit;
+				var defunit = hex.unit;
 				redraw = true;
 				bb.clearRect(0, 0, bbw, bbh);
 				//TODO read country code from scenario and choose proper flag
 				bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
-				bb.drawImage(imgFlags, 0, 0, flw, flh, 0, 0, flw, flh)
-				bb.drawImage(imgFlags, flw, 0, flw, flh, bbw - flw, 0, flw, flh);
+				bb.drawImage(imgFlags, flw*atkunit.owner, 0, flw, flh, 0, 0, flw, flh)
+				bb.drawImage(imgFlags, flw*defunit.owner, 0, flw, flh, bbw - flw, 0, flw, flh);
 				//estimated losses and kills
-				bb.font = "bold 12px sans-serif";
+				bb.font = "12px monospace";
 				bb.fillStyle = "yellow";
 				bb.textBaseline = "top";
 				//TODO guess the formula is a little more complicated ?
-				var kills = map.currentHex.unit.unitData.softatk - hex.unit.unitData.grounddef;
-				var losses = hex.unit.unitData.softatk - map.currentHex.unit.unitData.grounddef;
+				var kills = atkunit.unitData.softatk - defunit.unitData.grounddef;
+				var losses = defunit.unitData.softatk - atkunit.unitData.grounddef;
 				if (kills < 0) { kills = 0;}
 				if (losses < 0) { losses = 0;}
 			
 				var tx = flw/2 - bb.measureText(losses).width/2;
 				var ty = flh;
+
+				bb.strokeText(losses, tx+1, ty+1);
 				bb.fillText(losses, tx, ty);
-				//bb.strokeText(losses, tx, ty);
+				
 				tx = bbw - flw/2 - bb.measureText(kills).width/2;
+
+				bb.strokeText(kills, tx+1, ty+1);
 				bb.fillText(kills, tx, ty);
-				//bb.strokeText(kills, tx, ty);
+				
 				//c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
 				lastCursorImage = cbb.toDataURL();
 				lastCursorCell = cell;
@@ -253,7 +259,7 @@ function Render(mapObj)
 		
 	}
 	
-	// Private
+	// "Private"
 	function createLayers()
 	{
 		//Map image as background
@@ -280,7 +286,7 @@ function Render(mapObj)
 		c = ch.getContext('2d');
 		a = ca.getContext('2d');
 		bb = cbb.getContext('2d');
-		bb.canvas.width = bb.canvas.height = 50;
+		bb.canvas.width = bb.canvas.height = 54;
 	}
 	
 	
