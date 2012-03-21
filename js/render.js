@@ -5,6 +5,9 @@ function Render(mapObj)
 	var imgFlags;
 	var map = mapObj;
 	
+	var lastCursorCell = null; //Last cell for which the cursor was built
+	var lastCursorImage = null;//last cursor image
+	
 	var ch; // The hexes canvas element
 	var cm; // The map canvas element
 	var ca; // The animation canvas element.Also used as cursor coords but c canvas can be used as well
@@ -60,8 +63,6 @@ function Render(mapObj)
 					text = "" + hex.unit.strength;
 					if (hex.unit.owner == 1) { textColor = "green"; }
 				}
-				
-				//text = "(" + row + "," + col + ")";
 				//TODO read text color from a country list
 				if (hex.isCurrent) { this.drawHex(row, col, this.style.current, text, textColor, image); }
 				else 
@@ -128,43 +129,64 @@ function Render(mapObj)
     }
 	
 	//Renders attack cursor 
-	//TODO This should actually set a CSS cursor property
-	//and build the cursor image (cursor, losses/kills, and flags) 
-	//on a temp canvas and use toDataURL() to set the CSS cursor
 	this.drawCursor = function(minfo, cell)
 	{
-		px = minfo.x;
-		py = minfo.y;
-		row = cell.row;
-		col = cell.col;
-		hex = map.map[row][col];
-		flw = 20; //one flag width
-		flh = 14; //flag height
-	
-		//TODO check row, cell if a cursor should be generated again	
-		ca.style.cursor = 'default';
+		var px = minfo.x;
+		var py = minfo.y;
+		var row = cell.row;
+		var col = cell.col;
+		var hex = map.map[row][col];
+		var flw = 20; //one flag width
+		var flh = 14; //flag height
+		var bbw = bb.canvas.width;
+		var bbh = bb.canvas.height;
+		var redraw = false;
+
 		if (hex.unit !== null && hex.unit.owner != map.currentHex.unit.owner)
-		{	bbw = bb.canvas.width;
-			bbh = bb.canvas.height;
-			bb.clearRect(0, 0, bbw, bbh);
-			//TODO read country code from scenario and choose proper flag
-			bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
-			bb.drawImage(imgFlags, 0, 0, flw, flh, 0, 0, flw, flh)
-			bb.drawImage(imgFlags, flw, 0, flw, flh, bbw - flw, 0, flw, flh);
-			//estimated losses and kills
-			bb.font = "bold 12px sans-serif";
-			bb.fillStyle = "yellow";
-			//TODO guess the formula is a little more complicated ?
-			var kills = map.currentHex.unit.unitData.softatk - hex.unit.unitData.grounddef;
-			var losses = hex.unit.unitData.softatk - map.currentHex.unit.unitData.grounddef;
-			if (kills < 0) { kills = 0;}
-			if (losses < 0) { losses = 0;}
-			bb.fillText("" + losses, flw/2-2, flh + 10);
-			bb.fillText("" + kills, bbw - flw/2 - 2, flh + 10);
-			//c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
-			var cc = cbb.toDataURL();
-			//cursor data, hotspot x, hotspot y, fallback cursor image
-			ca.style.cursor = "url('"+cc+"') " + bbw/2 + " " + bbh/2 +", auto";
+		{	
+			//check cell if a cursor should be generated again	
+			if ((lastCursorCell === null) || (lastCursorImage === null) ||
+				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
+			{ 
+				redraw = true;
+				bb.clearRect(0, 0, bbw, bbh);
+				//TODO read country code from scenario and choose proper flag
+				bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
+				bb.drawImage(imgFlags, 0, 0, flw, flh, 0, 0, flw, flh)
+				bb.drawImage(imgFlags, flw, 0, flw, flh, bbw - flw, 0, flw, flh);
+				//estimated losses and kills
+				bb.font = "bold 12px sans-serif";
+				bb.fillStyle = "yellow";
+				bb.textBaseline = "top";
+				//TODO guess the formula is a little more complicated ?
+				var kills = map.currentHex.unit.unitData.softatk - hex.unit.unitData.grounddef;
+				var losses = hex.unit.unitData.softatk - map.currentHex.unit.unitData.grounddef;
+				if (kills < 0) { kills = 0;}
+				if (losses < 0) { losses = 0;}
+			
+				var tx = flw/2 - bb.measureText(losses).width/2;
+				var ty = flh;
+				bb.fillText(losses, tx, ty);
+				//bb.strokeText(losses, tx, ty);
+				tx = bbw - flw/2 - bb.measureText(kills).width/2;
+				bb.fillText(kills, tx, ty);
+				//bb.strokeText(kills, tx, ty);
+				//c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
+				lastCursorImage = cbb.toDataURL();
+				lastCursorCell = cell;
+			}
+			
+			//only assign a new css cursor if needed (to reduce html element load)
+			if ((ca.style.cursor === 'default') || (ca.style.cursor === 'pointer')
+				|| (ca.style.cursor === 'auto') || (redraw === true))
+			{
+				//cursor data, hotspot x, hotspot y, fallback cursor image
+				ca.style.cursor = "url('" + lastCursorImage + "') " + bbw/2 + " " + bbh/2 +", auto";
+			}
+		}
+		else
+		{
+			ca.style.cursor = 'default';
 		}
 		
 	}
