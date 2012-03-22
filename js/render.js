@@ -18,19 +18,18 @@ function Render(mapObj)
 	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
 	var bb = null; //Backbuffer context
 	
-	var s = 30;      //hexagon segment size           |\
-	var h = s/2;     //hexagon height h = sin(30)*s  r| \ s
-	var r = s*0.886; //hexagon radius r = cos(30)*s   -h-
+	//Hex sizes compatible with PG2 sizes
+	var s = 30;  //hexagon segment size                    |\  
+	var h = s/2; //hexagon height h = sin(30)*s           r| \ s
+	var r = 25;  //hexagon radius r = cos(30)*s ~ s*0.833  -h-
 	
 	// Canvas offset from the browser window (leaves space for top menu)
 	var canvasOffsetX = 0;
 	var canvasOffsetY = 30;
 	// Where to start rendering respective to the canvas
 	// Since PG2 maps define even the half and "quarter" hexes that form at the edges we need to offset those
-	//var renderOriginX = - (s + h);
-	//var renderOriginY = - r;
-	var renderOriginX = 0;
-	var renderOriginY = 0;
+	var renderOffsetX = - (s + h);
+	var renderOffsetY = - r;
 	
 	//The rendering style
 	this.style = new RenderStyle();
@@ -83,13 +82,17 @@ function Render(mapObj)
 		//flat-out hex layout
 		if (col & 1) // odd column
 		{
-			y0 = renderOriginY + row * 2 * r + r;
-			x0 = renderOriginX + col * (s + h) + h;
+			//y0 =  row * 2 * r + r; //without PG2 Offset
+			//x0 =  col * (s + h) + h;
+			y0 =  row * 2 * r + r + renderOffsetY;
+			x0 =  col * (s + h) + h + renderOffsetX;
 		}
 		else
 		{
-			y0 = renderOriginY + row * 2 * r;
-			x0 = renderOriginX + col * (s + h) + h;
+			//y0 = renderOriginY + row * 2 * r;  //without PG2 Offset
+			//x0 = renderOriginX + col * (s + h) + h;
+			y0 = row * 2 * r  + renderOffsetY;
+			x0 = col * (s + h) + h + renderOffsetX;
 			
 		}
 		
@@ -101,14 +104,14 @@ function Render(mapObj)
 		c.lineTo(x0 + s, y0);
 		c.lineTo(x0 + s + h, y0 + r);
 		c.lineTo(x0 + s, y0 + 2 * r);
-		c.lineTo(x0, y0 + 2 *r);
+		c.lineTo(x0, y0 + 2 * r);
 		c.lineTo(x0 - h, y0 + r);
 	    if ((c.fillStyle = style.fillColor) !== null) {  c.fill(); }
 				
 		if (image) 
 		{
-			// TODO Units have 9 possible orientations (
-			// 1 sprite is ~80x50 (and are 9 sprites in 1 row)
+			// TODO Units have 9 possible orientations 
+			// (1 sprite is ~80x50 (and are 9 sprites in 1 row)
 			orientation = 80 * 2;
 			imagew = 80;
 			imageh = 50;
@@ -215,16 +218,17 @@ function Render(mapObj)
 		var trow, tcol; //true map rows/cols
 		
 		//a graphical column in the grid not the array column
-		vcol = parseInt((x - renderOriginX) / (s + h));
+		//vcol = parseInt((x - renderOffsetX) / (s + h)); //without PG2 offset
+		vcol = Math.round((x - renderOffsetX) / (s + h)) - 1;
 		//real array column
 		tcol = vcol;
-		
 		// a graphical row not the array row
-		vrow = parseInt((y - renderOriginY) / r); //Half hexes
-		//shift to correct row index
-		//if (vcol & 1) { trow = parseInt(vrow/2) - 1 * (~vrow & 1); }
-		//else { trow = parseInt(vrow/2) };
-		trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (vcol & 1);
+		//vrow = parseInt((y - renderOriginY) / r); //Half hexes //without PG2 offset
+		vrow = Math.round((y - renderOffsetY * (~vcol & 1)) / r); //Half hexes add r if col is odd
+		
+		//shift to correct row index	
+		//trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (vcol & 1); //without PG2 offset
+		trow = Math.round(vrow/2) - 1 * (vrow & 1);
 		if (trow < 0) { trow = 0; }
 		
 		var cell = new Cell(trow, tcol);
@@ -310,7 +314,8 @@ function Render(mapObj)
 		{
 			c.canvas.width = cb.canvas.width = a.canvas.width = img.width;
 			c.canvas.height = cb.canvas.height = a.canvas.height = img.height;
-			cb.drawImage(img, renderOriginX, renderOriginY);
+			
+			cb.drawImage(img, 0, 0);
 			canvasOffsetX = window.innerWidth/2 - img.width/2;
 			if (canvasOffsetX < 0) { canvasOffsetX = 0;}
 			console.log("Offset X:" + canvasOffsetX + " Offset Y:" + canvasOffsetY);

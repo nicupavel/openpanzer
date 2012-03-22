@@ -155,12 +155,12 @@ function Map()
 			for (var i = minRow; i <= maxRow; i++)
 			{
 				//TODO add terrain factor
-				if (((col + colOff) <= this.cols) && (this.map[i][col + colOff].unit === null)
+				if (((col + colOff) < this.cols) && (this.map[i][col + colOff].unit === null)
 				    && (this.map[i][col + colOff].terrain < terrainType.Swamp))
 				{ 
 					this.setSelected(i, col + colOff);
 				}
-				if (((col - colOff) >= 0) && (this.map[i][col - colOff].unit === null)
+				if (((col - colOff) > 0) && (this.map[i][col - colOff].unit === null)
 					&& this.map[i][col - colOff].terrain < terrainType.Swamp) 
 				{ 
 					this.setSelected(i, col - colOff);
