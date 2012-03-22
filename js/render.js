@@ -18,15 +18,17 @@ function Render(mapObj)
 	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
 	var bb = null; //Backbuffer context
 	
-	//TODO fix this on screentocell where calculation was made with r as h and viceversa
-	var s = 30;   //hexagon segment size   
-	var h = s/2;  //hexagon height
-	var r = s * 0.886025404; //maybe do it s/4 
+	var s = 30;      //hexagon segment size           |\
+	var h = s/2;     //hexagon height h = sin(30)*s  r| \ s
+	var r = s*0.886; //hexagon radius r = cos(30)*s   -h-
 	
-	// Canvas offset from the browser window
+	// Canvas offset from the browser window (leaves space for top menu)
 	var canvasOffsetX = 0;
 	var canvasOffsetY = 30;
-	// Where to start rendering inside the canvas
+	// Where to start rendering respective to the canvas
+	// Since PG2 maps define even the half and "quarter" hexes that form at the edges we need to offset those
+	//var renderOriginX = - (s + h);
+	//var renderOriginY = - r;
 	var renderOriginX = 0;
 	var renderOriginY = 0;
 	
@@ -90,7 +92,7 @@ function Render(mapObj)
 			x0 = renderOriginX + col * (s + h) + h;
 			
 		}
-
+		
 		c.lineWidth = style.lineWidth; 
 		c.lineJoin = style.lineJoin; 
 		c.strokeStyle = style.lineColor;
@@ -170,6 +172,7 @@ function Render(mapObj)
 				bb.fillStyle = "yellow";
 				bb.textBaseline = "top";
 				//TODO guess the formula is a little more complicated ?
+				//TODO create a gamerules class that deals with these
 				var kills = atkunit.unitData.softatk - defunit.unitData.grounddef;
 				var losses = defunit.unitData.softatk - atkunit.unitData.grounddef;
 				if (kills < 0) { kills = 0;}
@@ -212,12 +215,12 @@ function Render(mapObj)
 		var trow, tcol; //true map rows/cols
 		
 		//a graphical column in the grid not the array column
-		vcol = parseInt((x - renderOriginX) / (s + h)); 
+		vcol = parseInt((x - renderOriginX) / (s + h));
 		//real array column
 		tcol = vcol;
+		
 		// a graphical row not the array row
 		vrow = parseInt((y - renderOriginY) / r); //Half hexes
-		
 		//shift to correct row index
 		//if (vcol & 1) { trow = parseInt(vrow/2) - 1 * (~vrow & 1); }
 		//else { trow = parseInt(vrow/2) };
@@ -279,7 +282,7 @@ function Render(mapObj)
 		// Hexes/units/flags
 		ch = document.createElement('canvas');
 		ch.id = "hexes";
-		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX + 'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
 		// Animation and cursor
 		ca = document.createElement('canvas');
