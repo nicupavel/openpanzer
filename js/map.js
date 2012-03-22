@@ -172,9 +172,20 @@ function Map()
 	
 	this.dumpMap = function()
 	{
+		var line = "\t ";
+		var n = 0
+		for(var h = 0; h < this.cols; h++)
+		{
+			if (h % 10 == 0) { n = 0; }
+			
+			line = line + " " + n + " ";
+			n++;
+		}
+		console.log(line);
 		for(var i = 0; i < this.rows; i++)
 		{
-			var line = i + ":\t";
+			
+			line = i + ":\t";
 			for(var j = 0; j < this.cols; j++)
 			{
 				if (this.map[i][j] != null)
@@ -185,6 +196,7 @@ function Map()
 			}
 			console.log(line);
 		}
+		/*
 		for (var i = 0; i < this.unitImagesList.length; i++)
 		{
 			console.log(this.unitImagesList[i]);
@@ -195,5 +207,6 @@ function Map()
 			console.log(unitList[i]);
 		
 		}
+		*/
 	}
 }

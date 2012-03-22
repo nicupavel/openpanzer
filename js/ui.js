@@ -80,7 +80,7 @@ function handleMouseClick(e)
 		}
 		else
 		{
-			console.log("No unit selected");
+			console.log("No unit "+cell.row +","+cell.col);
 		}
 		map.delSelected();
 	}
@@ -229,16 +229,10 @@ function gameStart()
 {
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	
-	/*
-	$('game').innerHTML = '<select id=scnselect> \
-	<option value=caenuk.xml>caenuk</option> \
-	<option value=cauldron.xml>cauldron</option> \
-	<option value=ciechan.xml>ciechan</option> \
-	</select> \
-	<br/> <input type=button value=\'Start\' onclick=\'javascript:e=document.getElementById("scnselect");ui = new UI("resources/scenarios/xml/"+e.options[e.selectedIndex].value);\'>'
-	*/
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
+	
+	//scenario="resources/scenarios/xml/thermopy.xml";
 	ui = new UI(scenario);
 }

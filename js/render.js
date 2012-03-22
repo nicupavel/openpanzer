@@ -309,12 +309,14 @@ function Render(mapObj)
 			c.canvas.height = cb.canvas.height = a.canvas.height = img.height;
 			cb.drawImage(img, renderOriginX, renderOriginY);
 			canvasOffsetX = window.innerWidth/2 - img.width/2;
+			if (canvasOffsetX < 0) { canvasOffsetX = 0;}
+			console.log("Offset X:" + canvasOffsetX + " Offset Y:" + canvasOffsetY);
 			
 			// Center the canvases
 			cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 			ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 			ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		}
-		img.src = imgFile;		
+		img.src = imgFile;
 	}
 }
