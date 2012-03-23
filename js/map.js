@@ -137,7 +137,7 @@ function Map()
 		if (maxRow > this.rows) { maxRow = this.rows; }
 				
 		//the column
-		for (var i = minRow; i <= maxRow; i++)
+		for (var i = minRow; i < maxRow; i++)
 		{
 			if ((i != row) && (this.map[i][col].unit === null)
 				&& (this.map[i][col].terrain < terrainType.Swamp)) 
@@ -146,13 +146,13 @@ function Map()
 			}
 		}
 		//the rows around
-		for (var colOff = 1; colOff <= range; colOff++)
+		for (var colOff = 1; colOff < range; colOff++)
 		{
 			//rows have a ripple effect
 			if ((col + colOff) % 2 == 1) { if (maxRow > 0) { maxRow--; }}
 			else { if (minRow < this.rows) { minRow++; }}
 			
-			for (var i = minRow; i <= maxRow; i++)
+			for (var i = minRow; i < maxRow; i++)
 			{
 				//TODO add terrain factor
 				if (((col + colOff) < this.cols) && (this.map[i][col + colOff].unit === null)
