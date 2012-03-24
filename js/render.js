@@ -1,9 +1,11 @@
 function Render(mapObj)
 {
-	var imgCache = {};
+	var map = mapObj;
+	
+	var imgUnits = {};
 	var imgCursor;
 	var imgFlags;
-	var map = mapObj;
+	var imgCountryFlags;
 	
 	var lastCursorCell = null; //Last cell for which the cursor was built
 	var lastCursorImage = null;//last cursor image
@@ -36,8 +38,7 @@ function Render(mapObj)
 	
 	createLayers(); //Creates canvas layers
 	drawMapImage(map.terrainImage); //Draws the map background
-	
-		
+			
 	this.render = function()
 	{
 		var posx;
@@ -61,7 +62,7 @@ function Render(mapObj)
 
 				if (hex.unit !== null) 
 				{ 
-					image = imgCache[hex.unit.getIcon()]; 
+					image = imgUnits[hex.unit.getIcon()]; 
 					text = "" + hex.unit.strength;
 					if (hex.unit.owner == 1) { textColor = "green"; }
 				}
@@ -186,13 +187,9 @@ function Render(mapObj)
 
 				bb.strokeText(losses, tx+1, ty+1);
 				bb.fillText(losses, tx, ty);
-				
 				tx = bbw - flw/2 - bb.measureText(kills).width/2;
-
 				bb.strokeText(kills, tx+1, ty+1);
 				bb.fillText(kills, tx, ty);
-				
-				//c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
 				lastCursorImage = cbb.toDataURL();
 				lastCursorCell = cell;
 			}
@@ -236,44 +233,27 @@ function Render(mapObj)
 		return cell;
 	}
 	
+	//Caches images, func a function to call upon cache completion
+	this.cacheImages = function(func)
+	{
+		imgCursor = new Image();
+		imgCursor.src = "resources/ui/cursors/attack.png";
+		
+		imgFlags = new Image();
+		imgFlags.src = "resources/ui/flags/flag_med.png";
+		
+		imgCountryFlags = new Image();
+		imgCountryFlags.src = "resources/ui/flags/flag_big.png";
+		
+		cacheUnitImages(map.unitImagesList, func);
+	}
+	
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
 	this.getCursorCanvas = function() { return ca; }
 	this.getHexS = function() { return s;}
 	this.getHexH = function() { return h;}
 	this.getHexR = function() { return r;}
-	
-	//imgList a list of image file names, func a function to call upon cache completion
-	//Units are saved from Luiz Guzman SHPTool to a 1x9 sprites bmp and 
-	//converted to transparent png by convert.py
-	this.cacheUnitImages = function (imgList, func)
-	{
-		var loaded = 0;
-		//TODO this should be done elsewhere
-		imgCursor = new Image();
-		imgCursor.src = "resources/ui/cursors/attack.png";
-		//TODO this should be done elsewhere
-		imgFlags = new Image();
-		imgFlags.src = "resources/ui/flags/flag_med.png";
-
-		for (var i = 0; i < imgList.length; i++)
-		{
-			imgCache[imgList[i]] = new Image();
-			imgCache[imgList[i]].onload = function() 
-			{
-				loaded++;  
-				if (loaded == imgList.length)
-				{
-					// TODO resource caching should be done elsewhere
-					//console.log("Loaded " +loaded+"/"+imgList.length + " done caching");
-					func();
-				}
-			}
-			imgCache[imgList[i]].src = imgList[i];
-		}
-			
-		
-	}
 	
 	// "Private"
 	function createLayers()
@@ -305,8 +285,6 @@ function Render(mapObj)
 		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the cursor
 	}
 	
-	
-	
 	function drawMapImage(imgFile)
 	{
 		img = new Image();
@@ -326,5 +304,28 @@ function Render(mapObj)
 			ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		}
 		img.src = imgFile;
+	}
+	
+	//imgList a list of image file names, func a function to call upon cache completion
+	//Units are saved from Luiz Guzman SHPTool to a 1x9 sprites bmp and 
+	//converted to transparent png by convert.py
+	function cacheUnitImages(imgList, func)
+	{
+		var loaded = 0;
+		for (var i = 0; i < imgList.length; i++)
+		{
+			imgUnits[imgList[i]] = new Image();
+			imgUnits[imgList[i]].onload = function() 
+			{
+				loaded++;  
+				if (loaded == imgList.length)
+				{
+					// TODO resource caching should be done elsewhere
+					//console.log("Loaded " +loaded+"/"+imgList.length + " done caching");
+					func();
+				}
+			}
+			imgUnits[imgList[i]].src = imgList[i];
+		}	
 	}
 }

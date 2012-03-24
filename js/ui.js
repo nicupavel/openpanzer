@@ -5,11 +5,11 @@ function UI(map)
 	var l = new MapLoader();
 	l.loadMap(map);
 	var map = l.buildMap();
-	//map.dumpMap();
+	map.dumpMap();
 	buildMainMenu();
 	
 	var r = new Render(map);
-	r.cacheUnitImages(map.unitImagesList, function() { r.render(); });
+	r.cacheImages(function() { r.render(); });
 	var canvas = r.getCursorCanvas();
 	
 	canvas.addEventListener("mousedown", handleMouseClick, false);
@@ -235,6 +235,6 @@ function gameStart()
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
-	//scenario="resources/scenarios/xml/dessau.xml";
+	scenario="resources/scenarios/xml/caenuk.xml";
 	ui = new UI(scenario);
 }

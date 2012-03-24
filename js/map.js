@@ -1,10 +1,12 @@
 // Unit, Hex, Player and Map classes
 function Player(playerID)
 {
-	this.side = 0;
-	this.country = 0;
+	this.id = -1
+	this.side = -1;
+	this.country = -1;
 	this.prestigeGain = 0;
 	this.playedTurn = false;
+	this.getCountryName = function() { return countryNames[this.country]; }
 }
 
 function Unit(unitDataId)
@@ -69,6 +71,7 @@ function Map()
 	this.selectedHexes = [];
 	
 	unitList = [];
+	playerList = [];
 	
 	this.allocMap = function()
 	{
@@ -90,13 +93,22 @@ function Map()
 			unitList[i].resetUnit();
 		}
 	}
-		
+	
 	this.addUnit = function(unit)
 	{
-	
 		unitList.push(unit);
 	}
-		
+
+	this.addPlayer = function(player)
+	{
+		playerList.push(player);
+	}
+	
+	this.getPlayer = function(id)
+	{
+		return playerList[id];
+	}
+	
 	this.setCurrentHex = function(row, col)
 	{
 		this.currentHex = this.map[row][col];
@@ -203,6 +215,11 @@ function Map()
 				}
 			}
 			console.log(line);
+		}
+		
+		for (var i = 0; i < playerList.length; i++)
+		{
+			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side + " Country: " + playerList[i].getCountryName());
 		}
 		/*
 		for (var i = 0; i < this.unitImagesList.length; i++)

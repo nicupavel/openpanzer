@@ -29,6 +29,7 @@ function MapLoader()
 			return null;
 		}
 		map.allocMap();
+		loadPlayers();
 		loadHexes();
 		return map;
 	}
@@ -54,6 +55,22 @@ function MapLoader()
 			return false;
 		}
 		return false;
+	}
+	
+	function loadPlayers()
+	{
+		var playerNodes = xmlData.getElementsByTagName("player");
+		if (playerNodes)
+		{
+			for (var i = 0; i < playerNodes.length; i++)
+			{
+				var p = new Player();
+				p.id = playerNodes[i].getAttribute("id");
+				p.side = playerNodes[i].getAttribute("side");
+				p.country = playerNodes[i].getAttribute("country");
+				map.addPlayer(p);
+			}
+		}
 	}
 	
 	function loadHexes()
@@ -92,6 +109,7 @@ function MapLoader()
 		}
 	}
 	
+	//TODO when we parse all unit data from PG2 files
 	function parseUnit()
 	{
 	
