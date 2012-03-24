@@ -21,6 +21,7 @@ function Unit(unitDataId)
 	this.ammo = equipment[unitDataId].ammo;
 	this.fuel = equipment[unitDataId].fuel;
 	this.strength = 10;
+	this.player = null; //TODO player struct pointer
 	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }

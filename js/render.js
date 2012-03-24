@@ -142,7 +142,7 @@ function Render(mapObj)
 		var row = cell.row;
 		var col = cell.col;
 		var hex = map.map[row][col];
-		var flw = 20; //one flag width
+		var flw = 21; //one flag width
 		var flh = 14; //flag height
 		var bbw = bb.canvas.width;
 		var bbh = bb.canvas.height;
@@ -163,14 +163,17 @@ function Render(mapObj)
 			{ 
 				var atkunit = map.currentHex.unit;
 				var defunit = hex.unit;
+				var atkflag = map.getPlayer(atkunit.owner).country;
+				var defflag = map.getPlayer(defunit.owner).country;
+				
 				redraw = true; //Redraw because a mouse is over a new cell
 				lastCursorUnit = atkunit;
 
 				bb.clearRect(0, 0, bbw, bbh);
 				//TODO read country code from scenario and choose proper flag
 				bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
-				bb.drawImage(imgFlags, flw*atkunit.owner, 0, flw, flh, 0, 0, flw, flh)
-				bb.drawImage(imgFlags, flw*defunit.owner, 0, flw, flh, bbw - flw, 0, flw, flh);
+				bb.drawImage(imgFlags, flw*atkflag, 0, flw, flh, 0, 0, flw, flh)
+				bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 				//estimated losses and kills
 				bb.font = "12px monospace";
 				bb.fillStyle = "yellow";
