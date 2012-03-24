@@ -51,6 +51,16 @@ def get_scn_map_name(f):
     f.seek(pos)
     return data.upper().strip('\0')
 
+# return the player information for player number
+def get_scn_player_info(scnfile, pnr):
+    playerinfo = {}
+    pos = scnfile.tell()
+    scnfile.seek(22+97*pnr)
+    data = scnfile.read(97)
+    playerinfo['country'] = unpack('b', data[0])[0];
+    playerinfo['side'] = unpack('b', data[16])[0];
+    scnfile.seek(pos)
+    return playerinfo;
 
 # returns scenario description
 def get_scn_description(scnfile, text):
@@ -73,8 +83,8 @@ def get_map_info(f):
     f.seek(pos)
     return mapinfo
 
-for scn in sys.argv[1:]:
-#for scn in ["CAENUK.SCN"]:
+#for scn in sys.argv[1:]:
+for scn in ["CAENUK.SCN"]:
     print "Processing %s\n" % scn
     # the corresponding scenarion txt name
     tf = open(os.path.splitext(scn)[0] + ".TXT",'r')
@@ -94,6 +104,14 @@ for scn in sys.argv[1:]:
     xmlmap.set("cols", str(cols))
     xmlmap.set("image", MAP_IMAGE_URL + mapimgname)
     
+    for i in range(3):
+	playerinfo = get_scn_player_info(sf, i)
+	if (playerinfo['country'] != 0):
+	    tmpnode = x.SubElement(xmlmap,"player")
+	    tmpnode.set("id", str(i))
+	    tmpnode.set("country", str(playerinfo['country']-1))
+	    tmpnode.set("side", str(playerinfo['side']))
+
     col = row = 0
     # maps always define 45x40 hexes x 7 bytes first 2 being terrain and road
     # need to skip those rows,cols that aren't needed

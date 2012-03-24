@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='ASCII'?>
 <map name="CAENUK.SCN" description="Caen - Operation Goodwood" rows="29" cols="40" image="resources/maps/images/map_25.png">
+  <player id="0" country="22" side="1"/>
+  <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="9" road="0" name=""/>
   <hex row="0" col="1" terrain="9" road="0" name=""/>
   <hex row="0" col="2" terrain="9" road="0" name=""/>
