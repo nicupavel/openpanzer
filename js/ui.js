@@ -109,7 +109,9 @@ function handleMouseMove(e)
 function buildMainMenu()
 {
 	//menu buttons div with id is the filename from resources/ui/menu/images
-	var menubuttons = [["buy","Requisition Units"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move"],["endturn","End turn"]];
+	var menubuttons = [["buy","Requisition Units(TBD)"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],
+					   ["air","Toggle Air More On (TBD)"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
+					   ["endturn","End turn"]];
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";

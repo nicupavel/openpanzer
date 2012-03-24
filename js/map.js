@@ -1,4 +1,12 @@
-// Unit, Hex and Map classes
+// Unit, Hex, Player and Map classes
+function Player(playerID)
+{
+	this.side = 0;
+	this.country = 0;
+	this.prestigeGain = 0;
+	this.playedTurn = false;
+}
+
 function Unit(unitDataId)
 {
 	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }

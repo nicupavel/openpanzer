@@ -49,6 +49,36 @@ var unitData =
     target: 0
 };
 
+var countryNames = 
+[
+	"Austria",
+	"Belgium",
+	"Bulgaria",
+	"Czechoslovakia",
+	"Denmark",
+	"Finland",
+	"France",
+	"Germany",
+	"Greece",
+	"USA",
+	"Hungary",
+	"Turkey",
+	"Italy",
+	"Netherlands",
+	"Norway",
+	"Poland",
+	"Portugal",
+	"Romania",
+	"Spain",
+	"Russia",
+	"Sweden",
+	"Switzerland",
+	"United Kingdom",
+	"Yugoslavia",
+	"Nationalist",
+	"Republican"
+];
+
 function mouseInfo(x, y, rclick)
 {
 	this.x = x;
