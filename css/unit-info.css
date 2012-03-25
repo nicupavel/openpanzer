@@ -46,7 +46,16 @@
 	width:150px;
 	text-align: center;
 }
-
+#unit-info #container #unit-flag
+{
+	border: 0px #fff solid;
+	position:absolute;
+	top:90px;
+	left:77px;
+	width:60px;
+	height:34px;
+	background-image: url('../resources/ui/flags/flag_big_18.png');
+}
 #unit-info #container #fuel
 {
 	position:absolute;

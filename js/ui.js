@@ -209,6 +209,9 @@ function updateUnitInfoWindow(u)
 	$('unit-info').style.visibility  = "visible";
 	
 	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
+	//TODO read unit country from the scenario file
+	var flagidx = parseInt(map.getPlayer(u.owner).country) + 1;
+	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + flagidx +".png')";
 	$('unit-name').innerHTML = u.unitData.name;
 	$('fuel').innerHTML = u.fuel;
 	$('ammo').innerHTML = u.ammo;
