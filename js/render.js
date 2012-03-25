@@ -243,10 +243,10 @@ function Render(mapObj)
 		imgCursor.src = "resources/ui/cursors/attack.png";
 		
 		imgFlags = new Image();
-		imgFlags.src = "resources/ui/flags/flag_med.png";
+		imgFlags.src = "resources/ui/flags/flags_med.png";
 		
 		imgCountryFlags = new Image();
-		imgCountryFlags.src = "resources/ui/flags/flag_big.png";
+		imgCountryFlags.src = "resources/ui/flags/flags_big.png";
 		
 		cacheUnitImages(map.unitImagesList, func);
 	}
