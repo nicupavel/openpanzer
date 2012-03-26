@@ -156,7 +156,7 @@ for scn in ["CAENUK.SCN"]:
 	    utmpnode = x.SubElement(tmpnode,"unit")
 	    utmpnode.set("id",str(units[(col,row)][0]))
 	    utmpnode.set("owner", str(units[(col,row)][1]))
-	    if (units[(col,row)][2] != 0): utmpnode.set("flag", str(units[(col,row)][2] - 1)) #flags starts from 0 in js
+	    if (units[(col,row)][2] != 0): utmpnode.set("flag", str(units[(col,row)][2])) #flags png images start from 1 in js
 	    utmpnode.set("face", str(units[(col,row)][3]))
 	    if (units[(col,row)][4] != 0): utmpnode.set("transport", str(units[(col,row)][4]))
         col = col + 1
