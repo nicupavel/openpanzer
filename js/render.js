@@ -41,12 +41,10 @@ function Render(mapObj)
 			
 	this.render = function()
 	{
-		var posx;
-		var posy;
-		var text;
-		var image;
+		var x0;
+		var y0;
+		var style;
 		var hex;
-		var textColor; //Actually the color of the unit strenth box
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		
@@ -55,86 +53,35 @@ function Render(mapObj)
 			//we space the hexagons on each line next column being on the row below 
 			for (col = 0; col < map.cols; col++) 
 			{
-				image = null;
-				text = null;
-				textColor = "black";
 				hex = map.map[row][col];
-
-				if (hex.unit !== null) 
-				{ 
-					image = imgUnits[hex.unit.getIcon()]; 
-					text = "" + hex.unit.strength;
-					if (hex.unit.owner == 1) { textColor = "green"; }
+				style = this.style.generic;
+				//flat-out hex layout
+				if (col & 1) // odd column
+				{
+					//y0 =  row * 2 * r + r; //without PG2 Offset
+					//x0 =  col * (s + h) + h;
+					y0 =  row * 2 * r + r + renderOffsetY;
+					x0 =  col * (s + h) + h + renderOffsetX;
+				}
+				else
+				{
+					//y0 = renderOriginY + row * 2 * r;  //without PG2 Offset
+					//x0 = renderOriginX + col * (s + h) + h;
+					y0 = row * 2 * r  + renderOffsetY;
+					x0 = col * (s + h) + h + renderOffsetX;
 				}
 				//TODO read text color from a country list
-				if (hex.isCurrent) { this.drawHex(row, col, this.style.current, text, textColor, image); }
-				else 
-				{
-					if (hex.isSelected) { this.drawHex(row, col, this.style.selected, text, textColor, image); }
-					else { this.drawHex(row, col, this.style.generic, text, textColor, image); }
-				}
+				if (hex.isSelected) { style = this.style.selected; }
+				if (hex.isCurrent) { style = this.style.current; }
+				drawHexDecals(x0, y0, hex);
+				drawHexGrid(x0, y0, style);
+				if (hex.unit !== null) { drawHexUnit(x0, y0, hex.unit); }
+				
 			}
 		}
 	}
-	
-	//TODO textColor should be read from a country colors list
-	this.drawHex = function (row, col, style, text, textColor, image )
-	{
-		//flat-out hex layout
-		if (col & 1) // odd column
-		{
-			//y0 =  row * 2 * r + r; //without PG2 Offset
-			//x0 =  col * (s + h) + h;
-			y0 =  row * 2 * r + r + renderOffsetY;
-			x0 =  col * (s + h) + h + renderOffsetX;
-		}
-		else
-		{
-			//y0 = renderOriginY + row * 2 * r;  //without PG2 Offset
-			//x0 = renderOriginX + col * (s + h) + h;
-			y0 = row * 2 * r  + renderOffsetY;
-			x0 = col * (s + h) + h + renderOffsetX;
-			
-		}
 		
-		c.lineWidth = style.lineWidth; 
-		c.lineJoin = style.lineJoin; 
-		c.strokeStyle = style.lineColor;
-		c.beginPath();
-		c.moveTo(x0, y0);
-		c.lineTo(x0 + s, y0);
-		c.lineTo(x0 + s + h, y0 + r);
-		c.lineTo(x0 + s, y0 + 2 * r);
-		c.lineTo(x0, y0 + 2 * r);
-		c.lineTo(x0 - h, y0 + r);
-	    if ((c.fillStyle = style.fillColor) !== null) {  c.fill(); }
-				
-		if (image) 
-		{
-			// TODO Units have 9 possible orientations 
-			// (1 sprite is ~80x50 (and are 9 sprites in 1 row)
-			orientation = 80 * 2;
-			imagew = 80;
-			imageh = 50;
-			c.drawImage(image, orientation , 0, imagew, imageh, x0 - 25, y0, imagew, imageh);
-		}
-		c.closePath();
-		c.stroke();
-		
-		
-		if (text)
-		{
-			var tx = x0 + h/2;
-			var ty = y0 + 2 * r - 12;
-			c.moveTo(tx, ty);
-			c.fillStyle = textColor;
-			c.fillRect  (tx, ty, 15, 10);
-			c.font = "10px sans-serif";
-			c.fillStyle = "white";
-			c.fillText(text, tx + 1, ty + 8);
-		}
-    }
-	
+
 	//Renders attack cursor 
 	//TODO transport move cursor
 	this.drawCursor = function(cell)
@@ -331,4 +278,61 @@ function Render(mapObj)
 			imgUnits[imgList[i]].src = imgList[i];
 		}	
 	}
+	
+	function drawHexDecals(x0, y0, hex)
+	{
+		if (hex.flag !== -1) { console.log("Will draw flag:"+hex.flag); }
+		
+	}
+	
+	function drawHexUnit(x0, y0, unit)
+	{
+		image =  imgUnits[unit.getIcon()];
+		if (image) 
+		{
+			// TODO Units have 15 possible orientations 
+			// there are 9 sprites each 80x50 in 1 row. to get the rest of the orientations
+			// the sprite must be mirrored
+			facing = unit.facing;
+			if (facing > 8) { facing = facing - 7; } //TODO mirroring
+			imgidx = 80 * facing;
+			imagew = 80;
+			imageh = 50;
+			c.drawImage(image, imgidx , 0, imagew, imageh, x0 - 25, y0 - 10, imagew, imageh);
+		}
+		//Write unit strength in a box below unit
+		//TODO center by using measureText
+		var tx = x0 + h/2;
+		var ty = y0 + 2 * r - 12;
+		var textcolor = "black"
+		var side =  parseInt(map.getPlayer(unit.owner).side);
+		if (side === 1) { textcolor = "green"; }
+		c.moveTo(tx, ty);
+		c.fillStyle = textcolor;
+		c.fillRect  (tx, ty, 13, 10);
+		c.font = "10px sans-serif";
+		c.fillStyle = "white";
+		c.fillText("" + unit.strength, tx, ty + 8);
+		//TODO draw indicator for unit.hasFired
+		
+	}
+	
+	function drawHexGrid(x0, y0, style)
+	{
+		c.lineWidth = style.lineWidth; 
+		c.lineJoin = style.lineJoin; 
+		c.strokeStyle = style.lineColor;
+		c.beginPath();
+		c.moveTo(x0, y0);
+		c.lineTo(x0 + s, y0);
+		c.lineTo(x0 + s + h, y0 + r);
+		c.lineTo(x0 + s, y0 + 2 * r);
+		c.lineTo(x0, y0 + 2 * r);
+		c.lineTo(x0 - h, y0 + r);
+		if ((c.fillStyle = style.fillColor) !== null) {  c.fill(); }
+		c.closePath();
+		c.stroke();
+	}
+	
+	
 }

@@ -28,8 +28,8 @@ function Unit(unitDataId)
 	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
-	this.dumpUnit = function() { console.log(this);	}
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
+	this.log = function() { console.log(this); }
 };
 
 function Hex()
@@ -51,14 +51,18 @@ function Hex()
 	{ 
 		this.unit = hex.unit;
 		this.terrain = hex.terrain;
+		this.road = hex.road;
+		this.owner = hex.owner;
+		this.flag = hex.flag;
 		this.isSupply = hex.isSupply;
 		this.isDeployment = hex.isDeployment;
-		this.isVictory1 = hex.isVictory1;
-		this.isVictory2 = hex.isVictory2;
+		this.victoryOwner = hex.victoryOwner;
 		this.name = hex.name;
 	}
+	
 	this.setUnit = function(unit) { this.unit = unit; }
 	this.delUnit = function() {this.unit = null };
+	this.log = function() { console.log(this); }
 	
 };
 

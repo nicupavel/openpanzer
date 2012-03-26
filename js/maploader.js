@@ -104,7 +104,7 @@ function MapLoader()
 						if (u !== null)
 						{
 							map.addUnit(u);
-							tmphex.setUnit(u); //tmphex.unit.dumpUnit();
+							tmphex.setUnit(u); //tmphex.unit.log();
 						}
 					}
 				}

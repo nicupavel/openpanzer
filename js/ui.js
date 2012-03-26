@@ -186,6 +186,8 @@ function button(id)
 				if (map.currentHex != null && map.currentHex.unit != null) 
 				{ 
 					updateUnitInfoWindow(map.currentHex.unit);
+					map.currentHex.unit.log();
+					map.currentHex.log();
 				}
 			}
 			break;
