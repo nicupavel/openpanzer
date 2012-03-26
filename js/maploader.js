@@ -84,22 +84,27 @@ function MapLoader()
 				var row = hexNodes[i].getAttribute("row");
 				var col = hexNodes[i].getAttribute("col");
 				tmphex.terrain = hexNodes[i].getAttribute("terrain");
+				if (tmphex.terrain === null) { tmphex.terrain = 0; }
+				tmphex.road = hexNodes[i].getAttribute("road");
+				if (tmphex.road === null) { tmphex.road = 0; }
 				tmphex.name = hexNodes[i].getAttribute("name");
+				if (tmphex.name === null) { tmphex.name = ""; }
+				tmphex.flag = hexNodes[i].getAttribute("flag");
+				if (tmphex.flag === null) { tmphex.flag = -1; }
+				tmphex.owner = hexNodes[i].getAttribute("owner");
+				if (tmphex.owner === null) { tmphex.owner = -1; }
+				tmphex.victoryOwner = hexNodes[i].getAttribute("victory");
+				if (tmphex.victoryOwner === null) { tmphex.victoryOwner = -1; }
 				//console.log("Hex at row:" + row + " col:" + col);
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
 					if (hexNodes[i].childNodes[j].nodeName == "unit")
 					{
-						//create the unit object
-						var unitId = hexNodes[i].childNodes[j].getAttribute("id");
-						var playerId = hexNodes[i].childNodes[j].getAttribute("owner");
-						if (unitId >= 0 &&  playerId >= 0)
+						u = loadUnit(hexNodes[i].childNodes[j]);
+						if (u !== null)
 						{
-							var u = new Unit(unitId);
-							u.setUnitToPlayer(playerId);
 							map.addUnit(u);
 							tmphex.setUnit(u); //tmphex.unit.dumpUnit();
-							break;
 						}
 					}
 				}
@@ -109,10 +114,26 @@ function MapLoader()
 		}
 	}
 	
-	//TODO when we parse all unit data from PG2 files
-	function parseUnit()
+	function loadUnit(node, hex)
 	{
-	
+		//create the unit object
+		var unitId = node.getAttribute("id");
+		var playerId = node.getAttribute("owner");
+		if (unitId >= 0 &&  playerId >= 0)
+		{
+			var u = new Unit(unitId);
+			u.setUnitToPlayer(playerId);
+			var facing = node.getAttribute("face");
+			if (facing !== null) { u.facing = facing; }
+			var flag = node.getAttribute("flag");
+			if (flag !== null) { u.flag = flag; }
+			var transport = node.getAttribute("transport");
+			if (transport !== null) {u.transport = transport; }
+			
+			return u;
+		}
+		
+		return null;
 	}
 	
 }

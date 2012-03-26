@@ -20,8 +20,11 @@ function Unit(unitDataId)
 	this.hasRessuplied = false;
 	this.ammo = equipment[unitDataId].ammo;
 	this.fuel = equipment[unitDataId].fuel;
-	this.strength = 10;
+	this.strength = 10; //TODO read from scenario
 	this.player = null; //TODO player struct pointer
+	this.facing = 2; //default unit facing
+	this.flag = this.owner; //default flag
+	this.transport = -1 //equipment id of transport if any
 	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
@@ -34,11 +37,11 @@ function Hex()
 	this.unit = null;
 	this.terrain = terrainType.Clear;
 	this.road = roadType.none;
-	this.owner = -1; //TODO this has to be set in maploader
+	this.owner = -1;
+	this.flag = -1;
 	this.isSupply = false;
 	this.isDeployment = false;
-	this.isVictory1 = false;
-	this.isVictory2 = false;
+	this.victoryOwner = -1; //victory for which side
 	this.isSelected = false; //flag for rendering the hex with appropiate color
 	this.isCurrent = false;
 	this.name = null;
@@ -193,6 +196,7 @@ function Map()
 	
 	this.dumpMap = function()
 	{
+		/*
 		var line = "\t ";
 		var n = 0
 		for(var h = 0; h < this.cols; h++)
@@ -217,7 +221,7 @@ function Map()
 			}
 			console.log(line);
 		}
-		
+		*/
 		for (var i = 0; i < playerList.length; i++)
 		{
 			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side + " Country: " + playerList[i].getCountryName());
