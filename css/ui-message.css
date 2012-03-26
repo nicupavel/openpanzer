@@ -1,0 +1,42 @@
+#ui-message
+{
+	position: fixed;
+	width: 259px;
+	height: 152px;
+	left:50%;
+	margin-left: -129.5px;
+	top:50%;
+	margin-top: -76px;
+	color: #f8e064;
+	font-weight:bold;
+	font-family: Arial;
+	font-size: 12px;
+	text-shadow: 0.1em 0.1em 0.2em black;
+	background-image: url('../resources/ui/menu/images/ui-message.png');
+	z-index:99;
+	overflow-y: auto;
+	visibility: hidden;
+	overflow: hidden;
+}
+
+#ui-message #title
+{
+	border: 0px #fff solid;
+	position:absolute;
+	top:10px;
+	left:5px;
+	width:250px;
+	text-align: center;
+}
+
+#ui-message #message
+{
+	border: 0px #fff solid;
+	position:absolute;
+	top:40px;
+	left:5px;
+	width:250px;
+	text-align: center;
+	color: #fff;
+	font-weight:normal;
+}

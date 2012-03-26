@@ -29,6 +29,7 @@ function Unit(unitDataId)
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
+	this.getTransport = function() { if (transport !== -1) { return equipment[transport];} }
 	this.log = function() { console.log(this); }
 };
 

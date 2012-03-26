@@ -37,7 +37,7 @@ function handleMouseClick(e)
 				console.log("attacking: " + row + "," +col);
 				map.currentHex.unit.hasFired = true;
 				map.delSelected();
-				alert("Peace bro");
+				uiMessage("Attack results", "Not implemented");
 			}
 		}	
 		else 
@@ -113,7 +113,7 @@ function buildMainMenu()
 	//menu buttons div with id is the filename from resources/ui/menu/images
 	var menubuttons = [["buy","Requisition Units(TBD)"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],
 					   ["air","Toggle Air More On (TBD)"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
-					   ["endturn","End turn"]];
+					   ["endturn","End turn"], ["about", "About HTML5 Panzer General"]];
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
@@ -194,6 +194,12 @@ function button(id)
 			}
 			break;
 		}
+		
+		case 'about':
+		{
+			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> npavel@linuxconsulting.ro");
+			break;
+		}
 	}
 }
 
@@ -231,6 +237,15 @@ function updateUnitInfoWindow(u)
 	$('drange').innerHTML = u.unitData.rangedefmod;
 	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
 }
+
+function uiMessage(title, message)
+{
+	$('title').innerHTML = title;
+	$('message').innerHTML = message;
+	$('ui-message').style.visibility = "visible"
+	$('ui-message').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+}
+
 }
 function gameStart()
 {
