@@ -24,12 +24,16 @@ def get_scn_hexes(f):
 
 # returns a list with x/y coords of units (65 bytes) in the scenario
 # TODO BUG we can have 2 units (air/ground) at the same x/y position !!!
+# TODO parse nicer
 def get_scn_units(f):
     units = {}
     u_off_x  = 1 + 1 + 2 + 2 + 1 + 1 + 2 #offset in the 65 bytes struct to X coord
     u_off_y  = u_off_x + 2    #offset in the 65 bytes struct to Y coord
     u_off_id = u_off_y + 2 + 2 + 2 #offset in the 65 bytes struct to unit id
     u_off_own = u_off_id + 6 * 2 + 1 + 1 + 2 # offset in the 65 bytes struct to player owning unit
+    u_off_flag = u_off_own + 1 + 1
+    u_off_face = u_off_flag + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 5 + 1
+    u_off_transport = u_off_id + 2
     pos = f.tell()
     f.seek(22 + 388 + 10800 + 140)
     while True:
@@ -39,7 +43,10 @@ def get_scn_units(f):
 	row = unpack('h', u[u_off_y:u_off_y + 2])[0]
 	uid  = unpack('h', u[u_off_id:u_off_id + 2])[0]
 	owner = unpack('b', u[u_off_own:u_off_own + 1])[0]
-	units[(col,row)] = (uid, owner)
+	flag = unpack('b', u[u_off_flag:u_off_flag + 1])[0]
+	face = unpack('h', u[u_off_face:u_off_face + 2])[0]
+	transport = unpack('h', u[u_off_transport:u_off_transport + 2])[0]
+	units[(col,row)] = (uid, owner, flag, face, transport)
     f.seek(pos)
     return units
 
@@ -122,9 +129,14 @@ for scn in ["CAENUK.SCN"]:
     scnoffset = 0
     while True:
         hm = unpack('HHHc', maphdata[mapoffset:mapoffset + 7])
-        hs = unpack('bbbbH', scnhdata[scnoffset:scnoffset + 6])
+        hs = unpack('BBBBH', scnhdata[scnoffset:scnoffset + 6])
 	terrain,road =  hm[0:2]
 	name = ""
+	flag = hs[0] & 0x1f
+	hexowner = (hs[0] & 0xe0) >> 5
+	hexvictoryowner = -1
+	if (hs[2] & (1<<1)): hexvictoryowner = 0
+	if (hs[2] & (1<<4)): hexvictoryowner = 1
 	textpos = hs[4] - 1  #file index to array index
 	if textpos > 0:
 	    name = scntext[textpos].rstrip()
@@ -133,14 +145,20 @@ for scn in ["CAENUK.SCN"]:
 	tmpnode = x.SubElement(xmlmap, "hex")
 	tmpnode.set("row", str(row))
 	tmpnode.set("col", str(col))
-	tmpnode.set("terrain", str(terrain))
-	tmpnode.set("road", str(road))
-	tmpnode.set("name", str(name))
-	
+	# to reduce xml size only set attributes if different than a default value
+	if (terrain != 0): tmpnode.set("terrain", str(terrain))
+	if (road != 0): tmpnode.set("road", str(road))
+	if (name != ""): tmpnode.set("name", str(name))
+	if (flag != 0): tmpnode.set("flag", str(flag - 1)) #flags start from 0 in js
+	if (hexowner != 0): tmpnode.set("owner", str(hexowner - 1)) #owner starts from 0 in js
+	if (hexvictoryowner != -1): tmpnode.set("victory", str(hexvictoryowner))
 	if (col,row) in units:
 	    utmpnode = x.SubElement(tmpnode,"unit")
 	    utmpnode.set("id",str(units[(col,row)][0]))
 	    utmpnode.set("owner", str(units[(col,row)][1]))
+	    if (units[(col,row)][2] != 0): utmpnode.set("flag", str(units[(col,row)][2] - 1)) #flags starts from 0 in js
+	    utmpnode.set("face", str(units[(col,row)][3]))
+	    if (units[(col,row)][4] != 0): utmpnode.set("transport", str(units[(col,row)][4]))
         col = col + 1
         mapoffset = mapoffset + 7
         scnoffset = scnoffset + 6
