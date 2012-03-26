@@ -281,8 +281,24 @@ function Render(mapObj)
 	
 	function drawHexDecals(x0, y0, hex)
 	{
-		if (hex.flag !== -1) { console.log("Will draw flag:"+hex.flag); }
-		
+		if (hex.flag !== -1) 
+		{ 
+			var flw = 21; //one flag width
+			var flh = 14; //flag height
+			var tx = x0 +  s/2 - flw/2;
+			var ty = y0 + 2 * r - flh - 2;
+			var vfoff = 2 // victory flag rectangle offset
+			
+			if (hex.victoryOwner !== -1)
+			{
+				c.lineWidth = vfoff  
+				c.strokeStyle = "yellow";
+				c.strokeRect  (tx - vfoff/2, ty - vfoff/2, flw+vfoff, flh+vfoff);
+			}
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh)
+			
+		}
+		//TODO draw bridge/blown bridges decals
 	}
 	
 	function drawHexUnit(x0, y0, unit)

@@ -211,7 +211,6 @@ function updateUnitInfoWindow(u)
 	$('unit-info').style.visibility  = "visible";
 	
 	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
-//	var flagidx = parseInt(map.getPlayer(u.owner).country) + 1;
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
 	$('unit-name').innerHTML = u.unitData.name;
 	$('fuel').innerHTML = u.fuel;
