@@ -74,6 +74,8 @@ function handleMouseClick(e)
 				//TODO a move function in map class
 				hex.unit = srcHex.unit;
 				hex.unit.hasMoved = true;
+				hex.owner = srcHex.unit.owner;
+				hex.flag = map.getPlayer(srcHex.unit.owner).country;
 				srcHex.delUnit();
 			} 		
 			map.delCurrentHex();
@@ -238,6 +240,6 @@ function gameStart()
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
-	scenario="resources/scenarios/xml/caenuk.xml";
+	//scenario="resources/scenarios/xml/caenuk.xml";
 	ui = new UI(scenario);
 }

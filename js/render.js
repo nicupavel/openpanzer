@@ -82,17 +82,15 @@ function Render(mapObj)
 	}
 		
 
-	//Renders attack cursor 
-	//TODO transport move cursor
+	//Renders attack or transport move cursor 
 	this.drawCursor = function(cell)
 	{
 		var row = cell.row;
 		var col = cell.col;
 		var hex = map.map[row][col];
-		var flw = 21; //one flag width
-		var flh = 14; //flag height
-		var bbw = bb.canvas.width;
-		var bbh = bb.canvas.height;
+		var curw = bb.canvas.width; //cursor width
+		var curh = bb.canvas.height; //cursor height
+		
 		var redraw = false;
 		
 		if (lastCursorUnit !== map.currentHex.unit)
@@ -110,50 +108,23 @@ function Render(mapObj)
 			{ 
 				var atkunit = map.currentHex.unit;
 				var defunit = hex.unit;
-				var atkflag = map.getPlayer(atkunit.owner).country;
-				var defflag = map.getPlayer(defunit.owner).country;
 				
 				redraw = true; //Redraw because a mouse is over a new cell
 				lastCursorUnit = atkunit;
-
-				bb.clearRect(0, 0, bbw, bbh);
-				//TODO read country code from scenario and choose proper flag
-				bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
-				bb.drawImage(imgFlags, flw*atkflag, 0, flw, flh, 0, 0, flw, flh)
-				bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
-				//estimated losses and kills
-				bb.font = "12px monospace";
-				bb.fillStyle = "yellow";
-				bb.textBaseline = "top";
-				//TODO guess the formula is a little more complicated ?
-				//TODO create a gamerules class that deals with these
-				var kills = atkunit.unitData.softatk - defunit.unitData.grounddef;
-				var losses = defunit.unitData.softatk - atkunit.unitData.grounddef;
-				if (kills < 0) { kills = 0;}
-				if (losses < 0) { losses = 0;}
-			
-				var tx = flw/2 - bb.measureText(losses).width/2;
-				var ty = flh;
-
-				bb.strokeText(losses, tx+1, ty+1);
-				bb.fillText(losses, tx, ty);
-				tx = bbw - flw/2 - bb.measureText(kills).width/2;
-				bb.strokeText(kills, tx+1, ty+1);
-				bb.fillText(kills, tx, ty);
-				lastCursorImage = cbb.toDataURL();
+				lastCursorImage = generateAttackCursor(atkunit, defunit);
 				lastCursorCell = cell;
-			}
-			
+			}		
 			//only assign a new css cursor if needed (to reduce html element load)
 			if ((ca.style.cursor === 'default') || (ca.style.cursor === 'pointer')
 				|| (ca.style.cursor === 'auto') || (redraw === true))
 			{
 				//cursor data, hotspot x, hotspot y, fallback cursor image
-				ca.style.cursor = "url('" + lastCursorImage + "') " + bbw/2 + " " + bbh/2 +", auto";
+				ca.style.cursor = "url('" + lastCursorImage + "') " + curw/2 + " " + curh/2 +", auto";
 			}
 		}
 		else
 		{
+			//TODO transport cursor
 			ca.style.cursor = 'default';
 		}
 		
@@ -256,6 +227,42 @@ function Render(mapObj)
 		img.src = imgFile;
 	}
 	
+	//Generates an attack cursor on backbuffer canvas
+	function generateAttackCursor(atkunit, defunit)
+	{
+		var atkflag = map.getPlayer(atkunit.owner).country;
+		var defflag = map.getPlayer(defunit.owner).country;
+		var flw = 21; //one flag width
+		var flh = 14; //flag height
+		var bbw = bb.canvas.width;
+		var bbh = bb.canvas.height;
+			
+		bb.clearRect(0, 0, bbw, bbh);
+		bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
+		bb.drawImage(imgFlags, flw*atkflag, 0, flw, flh, 0, 0, flw, flh)
+		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
+		
+		//estimated losses and kills
+		bb.font = "12px monospace";
+		bb.fillStyle = "yellow";
+		bb.textBaseline = "top";
+		//TODO guess the formula is a little more complicated ?
+		//TODO create a gamerules class that deals with these
+		var kills = atkunit.unitData.softatk - defunit.unitData.grounddef;
+		var losses = defunit.unitData.softatk - atkunit.unitData.grounddef;
+		if (kills < 0) { kills = 0;}
+		if (losses < 0) { losses = 0;}	
+		var tx = flw/2 - bb.measureText(losses).width/2;
+		var ty = flh;
+		bb.strokeText(losses, tx+1, ty+1);
+		bb.fillText(losses, tx, ty);
+		tx = bbw - flw/2 - bb.measureText(kills).width/2;
+		bb.strokeText(kills, tx+1, ty+1);
+		bb.fillText(kills, tx, ty);
+		
+		return cbb.toDataURL(); //return canvas pixels encoded to base64
+	}
+	
 	//imgList a list of image file names, func a function to call upon cache completion
 	//Units are saved from Luiz Guzman SHPTool to a 1x9 sprites bmp and 
 	//converted to transparent png by convert.py
@@ -270,7 +277,6 @@ function Render(mapObj)
 				loaded++;  
 				if (loaded == imgList.length)
 				{
-					// TODO resource caching should be done elsewhere
 					//console.log("Loaded " +loaded+"/"+imgList.length + " done caching");
 					func();
 				}
@@ -303,7 +309,7 @@ function Render(mapObj)
 	
 	function drawHexUnit(x0, y0, unit)
 	{
-		image =  imgUnits[unit.getIcon()];
+		image = imgUnits[unit.getIcon()];
 		if (image) 
 		{
 			// TODO Units have 15 possible orientations 
@@ -349,6 +355,4 @@ function Render(mapObj)
 		c.closePath();
 		c.stroke();
 	}
-	
-	
 }
