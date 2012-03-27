@@ -159,14 +159,19 @@ function Map()
 	}
 	
 	//Simple increment/decrement
-	this.updateVictorySides = function(losingSide, gainingSide)
+	this.updateVictorySides = function(side, enemySide)
 	{
-		sidesVictoryHexes[losingSide]--;
-		sidesVictoryHexes[gainingSide]++;
+		//A side has ocuppied a victory hex that was marked as victory for it
+		sidesVictoryHexes[side]--;
+		sidesVictoryHexes[enemySide]++;
+		console.log("Updated side victory hexes Side: " + side + " : " + sidesVictoryHexes[side] + " Side: " + enemySide + " : " + sidesVictoryHexes[enemySide]);
 		
-		console.log("Updated side victory hexes Side: " + losingSide + " : " + sidesVictoryHexes[losingSide] + " Side: " + gainingSide + " : " + sidesVictoryHexes[gainingSide]);
-		
-		if (sidesVictoryHexes[losingSide] <= 0) { console.log("Side: " + gainingSide + "WINS !"); }
+		if (sidesVictoryHexes[side] <= 0) 
+		{ 
+			console.log("Side: " + side + " WINS !");
+			return true;
+		}
+		return false;
 	}
 	
 	//TODO change to function to getHexesInRange() which should return an array of Cells 

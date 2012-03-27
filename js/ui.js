@@ -15,6 +15,7 @@ function UI(map)
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 
+//TODO break up this mess
 function handleMouseClick(e) 
 {
 	var hex;
@@ -40,7 +41,7 @@ function handleMouseClick(e)
 				uiMessage("Attack results", "Not implemented");
 			}
 		}	
-		else 
+		else //Select the new unit
 		{
 			map.delCurrentHex();
 			map.setCurrentHex(row, col);
@@ -71,18 +72,20 @@ function handleMouseClick(e)
 			//move to an allowed hex
 			if (hex.isSelected && !srcHex.unit.hasMoved) 
 			{
-				//TODO a move function in map class
-				hex.unit = srcHex.unit;
-				hex.unit.hasMoved = true;
-				hex.owner = srcHex.unit.owner;
-				hex.flag = map.getPlayer(srcHex.unit.owner).country;
+				//TODO a move function in map class	
+				var player = map.getPlayer(srcHex.unit.owner)
+				var side = player.side;	
+				//Is a victory marked hex ?
 				if (hex.victorySide !== -1)
 				{
-					var side = hex.victorySide;
-					var nside = map.getPlayer(srcHex.unit.owner).side;
-					map.updateVictorySides(side, nside);
-					hex.victorySide = nside;
+					var enemyside = map.getPlayer(hex.owner).side;
+					var win = map.updateVictorySides(side, enemyside);
+					if (win) { UI:uiMessage("Victory","Side " + side + " wins by capturing all victory hexes"); }
 				}
+				srcHex.unit.hasMoved = true;
+				hex.flag = player.country;
+				hex.unit = srcHex.unit;
+				hex.owner = srcHex.unit.owner;
 				srcHex.delUnit();
 			} 		
 			map.delCurrentHex();
