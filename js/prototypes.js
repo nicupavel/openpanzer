@@ -79,6 +79,12 @@ var countryNames =
 	"Republican"
 ];
 
+var sidesName = 
+[
+	"Axis",
+	"Allies"
+];
+
 function mouseInfo(x, y, rclick)
 {
 	this.x = x;

@@ -80,10 +80,10 @@ function handleMouseClick(e)
 				{
 					var enemyside = map.getPlayer(hex.owner).side;
 					var win = map.updateVictorySides(side, enemyside);
-					if (win) { UI:uiMessage("Victory","Side " + side + " wins by capturing all victory hexes"); }
+					if (win) { UI:uiMessage("Victory","Side " + sidesName[side] + " wins by capturing all victory hexes"); }
 				}
 				srcHex.unit.hasMoved = true;
-				hex.flag = player.country;
+				if (hex.flag !== -1) { hex.flag = player.country; }
 				hex.unit = srcHex.unit;
 				hex.owner = srcHex.unit.owner;
 				srcHex.delUnit();
