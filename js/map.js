@@ -31,6 +31,7 @@ function Unit(unitDataId)
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
 	this.getTransport = function() { if (transport !== -1) { return equipment[transport];} }
 	this.log = function() { console.log(this); }
+	//TODO unit move, attack to take care of fuel, ammo and other properties
 };
 
 function Hex()
@@ -67,7 +68,6 @@ function Hex()
 	this.setUnit = function(unit) { this.unit = unit; }
 	this.delUnit = function() {this.unit = null };
 	this.log = function() { console.log(this); }
-	
 };
 
 function Map()
@@ -78,13 +78,15 @@ function Map()
 	this.name = null;
 	this.description = null; 
 	this.terrainImage = null;
-	this.currentHex = null;
+	this.currentHex = null; //holds the current mouse selected hex
 	this.unitImagesList = [];
 	this.selectedHexes = [];
 	
-	unitList = [];
-	playerList = [];
-	sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
+	var moveSelected = []; //selected hexes for current unit move destinations
+	var attackSelected = []; //selected hexes for current unit attack destinations
+	var unitList = []; //internal list of units
+	var playerList = []; // players list
+	var sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	
 	this.allocMap = function()
 	{
@@ -155,7 +157,7 @@ function Map()
 	
 	this.setHex = function(row, col, hex)
 	{
-		this.map[row][col].setHex(hex);
+		this.map[row][col].setHex(hex); //copy values
 		if (hex.unit != null) { this.unitImagesList.push(hex.unit.getIcon()); }
 		//Increment victorySides for each side
 		if (hex.victorySide !== -1) { sidesVictoryHexes[hex.victorySide]++; }
@@ -321,7 +323,6 @@ function Map()
 				cellList.push(cell);
 			}
 		}
-		
 		//the rows around
 		for (var colOff = 1; colOff < range; colOff++)
 		{
@@ -334,7 +335,6 @@ function Map()
 			{ 
 				if (minRow < maxrows) { minRow++; }
 			}
-			
 			for (var i = minRow; i < maxRow; i++)
 			{
 				if ((col + colOff) < maxcols) 
@@ -352,4 +352,4 @@ function Map()
 		return cellList;
 	}
 	
-}
+} // end Map class
