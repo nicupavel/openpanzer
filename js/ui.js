@@ -76,6 +76,13 @@ function handleMouseClick(e)
 				hex.unit.hasMoved = true;
 				hex.owner = srcHex.unit.owner;
 				hex.flag = map.getPlayer(srcHex.unit.owner).country;
+				if (hex.victorySide !== -1)
+				{
+					var side = hex.victorySide;
+					var nside = map.getPlayer(srcHex.unit.owner).side;
+					map.updateVictorySides(side, nside);
+					hex.victorySide = nside;
+				}
 				srcHex.delUnit();
 			} 		
 			map.delCurrentHex();
@@ -101,7 +108,7 @@ function handleMouseMove(e)
 	hex = map.map[row][col];
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text;	}
+	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text; }
 	if (map.currentHex != null) { r.drawCursor(cell); }
 	$('locmsg').innerHTML = text;
 				
@@ -255,6 +262,6 @@ function gameStart()
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
-	//scenario="resources/scenarios/xml/caenuk.xml";
+	scenario="resources/scenarios/xml/caenuk.xml";
 	ui = new UI(scenario);
 }

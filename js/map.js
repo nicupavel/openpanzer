@@ -42,7 +42,7 @@ function Hex()
 	this.flag = -1;
 	this.isSupply = false;
 	this.isDeployment = false;
-	this.victoryOwner = -1; //victory for which side
+	this.victorySide = -1; //victory for which side
 	this.isSelected = false; //flag for rendering the hex with appropiate color
 	this.isCurrent = false;
 	this.name = null;
@@ -57,7 +57,7 @@ function Hex()
 		this.flag = hex.flag;
 		this.isSupply = hex.isSupply;
 		this.isDeployment = hex.isDeployment;
-		this.victoryOwner = hex.victoryOwner;
+		this.victorySide = hex.victorySide;
 		this.name = hex.name;
 	}
 	
@@ -81,6 +81,7 @@ function Map()
 	
 	unitList = [];
 	playerList = [];
+	sidesVictoryHexes = [ 0, 0]; //Victory hexes for each side //TODO maybe 3 sides ?
 	
 	this.allocMap = function()
 	{
@@ -153,7 +154,21 @@ function Map()
 	{
 		this.map[row][col].setHex(hex);
 		if (hex.unit != null) { this.unitImagesList.push(hex.unit.getIcon()); }
+		//Increment victorySides for each side
+		if (hex.victorySide !== -1) { sidesVictoryHexes[hex.victorySide]++; }
 	}
+	
+	//Simple increment/decrement
+	this.updateVictorySides = function(losingSide, gainingSide)
+	{
+		sidesVictoryHexes[losingSide]--;
+		sidesVictoryHexes[gainingSide]++;
+		
+		console.log("Updated side victory hexes Side: " + losingSide + " : " + sidesVictoryHexes[losingSide] + " Side: " + gainingSide + " : " + sidesVictoryHexes[gainingSide]);
+		
+		if (sidesVictoryHexes[losingSide] <= 0) { console.log("Side: " + gainingSide + "WINS !"); }
+	}
+	
 	//TODO change to function to getHexesInRange() which should return an array of Cells 
 	//and use this array in selecting moving or attacking range for a unit
 	this.setHexRange = function(row, col, range)
@@ -231,6 +246,8 @@ function Map()
 		{
 			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side + " Country: " + playerList[i].getCountryName());
 		}
+		
+		console.log("Victory Hexes for Side 0: " + sidesVictoryHexes[0] + " Victory Hexes for Side 1: " + sidesVictoryHexes[1]);
 		/*
 		for (var i = 0; i < this.unitImagesList.length; i++)
 		{

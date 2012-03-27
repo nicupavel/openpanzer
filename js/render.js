@@ -296,7 +296,7 @@ function Render(mapObj)
 			
 			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh)
 			
-			if (hex.victoryOwner !== -1)
+			if (hex.victorySide !== -1)
 			{
 				c.beginPath();
 				c.lineWidth = 2;

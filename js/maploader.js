@@ -93,8 +93,8 @@ function MapLoader()
 				if (tmphex.flag === null) { tmphex.flag = -1; }
 				tmphex.owner = hexNodes[i].getAttribute("owner");
 				if (tmphex.owner === null) { tmphex.owner = -1; }
-				tmphex.victoryOwner = hexNodes[i].getAttribute("victory");
-				if (tmphex.victoryOwner === null) { tmphex.victoryOwner = -1; }
+				tmphex.victorySide = hexNodes[i].getAttribute("victory");
+				if (tmphex.victorySide === null) { tmphex.victorySide = -1; }
 				//console.log("Hex at row:" + row + " col:" + col);
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
