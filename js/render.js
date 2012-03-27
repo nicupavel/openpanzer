@@ -293,15 +293,23 @@ function Render(mapObj)
 			var flh = 14; //flag height
 			var tx = x0 +  s/2 - flw/2;
 			var ty = y0 + 2 * r - flh - 2;
-			var vfoff = 2 // victory flag rectangle offset
+			
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh)
 			
 			if (hex.victoryOwner !== -1)
 			{
-				c.lineWidth = vfoff  
-				c.strokeStyle = "yellow";
-				c.strokeRect  (tx - vfoff/2, ty - vfoff/2, flw+vfoff, flh+vfoff);
+				c.beginPath();
+				c.lineWidth = 2;
+				c.strokeStyle = "rgba(139,0,0,1)";
+				c.strokeRect  (tx-1, ty-1, flw+2, flh+2);
+				c.strokeStyle = "rgba(127,255,0,1)";
+				c.strokeRect  (tx-3, ty-3, flw+6, flh+6);
+				c.strokeStyle = "rgba(0,0,0,1)";
+				c.lineWidth = 1;
+				c.strokeRect  (tx-4, ty-4, flw+8, flh+8);
+				c.closePath();
 			}
-			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh)
+			
 			
 		}
 		//TODO draw bridge/blown bridges decals
