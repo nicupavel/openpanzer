@@ -43,9 +43,12 @@ function Hex()
 	this.isSupply = false;
 	this.isDeployment = false;
 	this.victorySide = -1; //victory for which side
+	this.name = null;
+	
 	this.isSelected = false; //flag for rendering the hex with appropiate color
 	this.isCurrent = false;
-	this.name = null;
+	this.isMoveSel = false;
+	this.isAtackSel = false;
 	
 	//Copy values
 	this.setHex = function(hex) 
@@ -81,7 +84,7 @@ function Map()
 	
 	unitList = [];
 	playerList = [];
-	sidesVictoryHexes = [ 0, 0]; //Victory hexes for each side //TODO maybe 3 sides ?
+	sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	
 	this.allocMap = function()
 	{
@@ -172,6 +175,37 @@ function Map()
 			return true;
 		}
 		return false;
+	}
+	
+	this.setMoveRange = function(row, col)
+	{
+		if (this.map[row][col].unit === null) {	return false; }
+		
+		var range = this.map[row][col].unit.unitData.movpoints;
+		var cellList = getCellsInRange(row, col, range, this.rows, this.cols);
+		
+		for (var i = 0; i < cellList.length; i++)
+		{
+			var cell = cellList[i];
+			this.map[cell.row][cell.col].isMoveSel = true;
+		}
+		
+		return true;
+	}
+	
+	this.setAttackRange = function(row,col)
+	{
+		if (this.map[row][col].unit === null) {	return false; }
+		
+		var range = this.map[row][col].unit.unitData.movpoints;
+		var cellList = getCellsInRange(row, col, range, this.rows, this.cols);
+		for (var i = 0; i < cellList.length; i++)
+		{
+			var cell = cellList[i];
+			this.map[cell.row][cell.col].isAttackSel = true;
+		}
+	
+		return true;
 	}
 	
 	//TODO change to function to getHexesInRange() which should return an array of Cells 
@@ -266,4 +300,56 @@ function Map()
 		}
 		*/
 	}
+	
+	//Private
+	function getCellsInRange(row, col, range, maxrows, maxcols)
+	{
+		console.log("cell range:" + range);
+		var cellList = [];
+		var cell = null;
+		var minRow = row - range;
+		var maxRow = row + range;
+		if (minRow < 0) { minRow = 0; }
+		if (maxRow > maxrows) { maxRow = maxrows; }
+				
+		//the column
+		for (var i = minRow; i < maxRow; i++)
+		{
+			if (i != row) 
+			{ 
+				cell = new Cell(i, col); 
+				cellList.push(cell);
+			}
+		}
+		
+		//the rows around
+		for (var colOff = 1; colOff < range; colOff++)
+		{
+			//rows have a ripple effect
+			if ((col + colOff) % 2 == 1) 
+			{ 
+				if (maxRow > 0) { maxRow--; }
+			}
+			else 
+			{ 
+				if (minRow < maxrows) { minRow++; }
+			}
+			
+			for (var i = minRow; i < maxRow; i++)
+			{
+				if ((col + colOff) < maxcols) 
+				{
+					cell = new Cell(i, col + colOff);
+					cellList.push(cell);
+				}
+				if ((col - colOff) > 0) 
+				{ 
+					cell = new Cell(i, col - colOff);
+					cellList.push(cell);
+				}
+			}
+		}
+		return cellList;
+	}
+	
 }
