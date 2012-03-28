@@ -12,6 +12,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 		return allowedCells;
 	}
 	var range = unit.unitData.movpoints;
+	console.log("move range: "+ range);
 	var cellList = getCellsInRange(row, col, range, mrows, mcols);
 	for (var i = 0; i < cellList.length; i++)
 	{
@@ -24,6 +25,42 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	return allowedCells;
 }
 
+GameRules.getAttackRange = function(map, row, col, mrows, mcols)
+{
+	var allowedCells = [];
+	var unit = map[row][col].unit;
+	
+	if (unit === null || unit.hasFired) 
+	{
+		return allowedCells;
+	}
+	//TODO weather ?
+	var range = unit.unitData.gunrange;
+	
+	if (range == 0)	range = 1;
+		
+	console.log("attack range: "+ range);
+	var cellList = getCellsInRange(row, col, range, mrows, mcols);
+	for (var i = 0; i < cellList.length; i++)
+	{
+		var cell = cellList[i];
+		if (canAttack(unit, map[cell.row][cell.col].unit))
+		{
+			allowedCells.push(cell);
+		}
+	}
+	return allowedCells;
+}
+
+function canAttack(unit, targetUnit)
+{
+	if (targetUnit === null)
+		return false;
+	if (unit.owner === targetUnit.owner)
+		return false;
+	
+	return true;
+}
 //Checks if a given unit can move into a hex
 //TODO return the cost of moving into a hex depending on terrain
 function canMoveInto(unit, hex)
@@ -94,6 +131,7 @@ function isGround(unit)
 }
 
 //Returns a list of cells that are in a certain range to another cell
+//TODO Fix this function to work when the cell is near the margins (selection is wrong)
 function getCellsInRange(row, col, range, mrows, mcols)
 {
 	var cellList = [];
@@ -102,9 +140,9 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	var maxRow = row + range;
 	if (minRow < 0) { minRow = 0; }
 	if (maxRow > mrows) { maxRow = mrows; }
-		
+	console.log("minRow:" + minRow + " maxRow:" + maxRow);	
 	//the column
-	for (var i = minRow; i < maxRow; i++)
+	for (var i = minRow; i <= maxRow; i++)
 	{
 		if (i != row) 
 		{ 
@@ -113,7 +151,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 		}
 	}
 	//the rows around
-	for (var colOff = 1; colOff < range; colOff++)
+	for (var colOff = 1; colOff <= range; colOff++)
 	{
 		//rows have a ripple effect
 		if ((col + colOff) % 2 == 1) 
@@ -124,7 +162,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 		{ 
 			if (minRow < mrows) { minRow++; }
 		}
-		for (var i = minRow; i < maxRow; i++)
+		for (var i = minRow; i <= maxRow; i++)
 		{
 			if ((col + colOff) < mcols) 
 			{

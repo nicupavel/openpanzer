@@ -71,7 +71,8 @@ function Render(mapObj)
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
 				//TODO read text color from a country list
-				if (hex.isSelected) { style = this.style.selected; }
+				if (hex.isMoveSel) { style = this.style.selected; }
+				if (hex.isAttackSel) { style = this.style.attack; }
 				if (hex.isCurrent) { style = this.style.current; }
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
@@ -99,8 +100,7 @@ function Render(mapObj)
 		}
 		
 		//Check if we should generate an attack cursor
-		if ((hex.unit !== null) && (hex.unit.owner != map.currentHex.unit.owner)
-			&& !map.currentHex.unit.hasFired)
+		if (hex.isAttackSel && !map.currentHex.unit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
 			if ((redraw === true) || (lastCursorCell === null) || (lastCursorImage === null) ||

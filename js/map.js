@@ -46,10 +46,9 @@ function Hex()
 	this.victorySide = -1; //victory for which side
 	this.name = null;
 	
-	this.isSelected = false; //flag for rendering the hex with appropiate color
 	this.isCurrent = false;
-	this.isMoveSel = false;
-	this.isAtackSel = false;
+	this.isMoveSel = false; //current unit can move to this hex
+	this.isAttackSel = false; //current unit can attack this hex
 	
 	//Copy values
 	this.setHex = function(hex) 
@@ -139,20 +138,36 @@ function Map()
 		}
 	}
 	
-	this.setSelected = function(row, col)
+	this.setMoveSel = function(row, col)
 	{
-		this.selectedHexes.push(new Cell(row, col));
-		this.map[row][col].isSelected = true; 
+		moveSelected.push(new Cell(row, col));
+		this.map[row][col].isMoveSel = true; 
 	}
 	
-	this.delSelected = function()
+	this.setAttackSel = function(row, col)
 	{
-		for (var i = 0; i < this.selectedHexes.length; i++)
+		attackSelected.push(new Cell(row, col));
+		this.map[row][col].isAttackSel = true; 
+	}
+	
+	this.delMoveSel = function()
+	{
+		for (var i = 0; i < moveSelected.length; i++)
 		{
-			var c = this.selectedHexes[i];
-			this.map[c.row][c.col].isSelected = false;
+			var c = moveSelected[i];
+			this.map[c.row][c.col].isMoveSel = false;
 		}
-		this.selectedHexes = [];
+		moveSelected = [];
+	}
+	
+	this.delAttackSel = function()
+	{
+		for (var i = 0; i < attackSelected.length; i++)
+		{
+			var c = attackSelected[i];
+			this.map[c.row][c.col].isAttackSel = false;
+		}
+		attackSelected = [];
 	}
 	
 	this.setHex = function(row, col, hex)
@@ -181,50 +196,27 @@ function Map()
 	
 	this.setMoveRange = function(row, col)
 	{
-		if (this.map[row][col].unit === null) {	return false; }
-		
-		var range = this.map[row][col].unit.unitData.movpoints;
-		var cellList = GameRules.getCellsInRange(row, col, range, this.rows, this.cols);
-		
-		for (var i = 0; i < cellList.length; i++)
-		{
-			var cell = cellList[i];
-			this.map[cell.row][cell.col].isMoveSel = true;
-		}
-		
-		return true;
-	}
-	
-	this.setAttackRange = function(row,col)
-	{
-		if (this.map[row][col].unit === null) {	return false; }
-		
-		var range = this.map[row][col].unit.unitData.movpoints;
-		var cellList = GameRules.getCellsInRange(row, col, range, this.rows, this.cols);
-		for (var i = 0; i < cellList.length; i++)
-		{
-			var cell = cellList[i];
-			this.map[cell.row][cell.col].isAttackSel = true;
-		}
-	
-		return true;
-	}
-	
-	//TODO change to function to getHexesInRange() which should return an array of Cells 
-	//and use this array in selecting moving or attacking range for a unit
-	this.setHexRange = function(row, col, range)
-	{
-		console.log("unit range:" + range);
+		this.delMoveSel();
 		var allowedCells = GameRules.getMoveRange(this.map, row, col, this.rows, this.cols);
 		
 		for (var i = 0; i < allowedCells.length; i++)
 		{
 			var cell = allowedCells[i];
-			this.setSelected(cell.row, cell.col);
-			
+			this.setMoveSel(cell.row, cell.col);
 		}
 	}
 	
+	this.setAttackRange = function(row,col)
+	{
+		this.delAttackSel();
+		var allowedCells = GameRules.getAttackRange(this.map, row, col, this.rows, this.cols);
+		for (var i = 0; i < allowedCells.length; i++)
+		{
+			var cell = allowedCells[i];
+			this.setAttackSel(cell.row, cell.col);
+		}
+	}
+
 	this.dumpMap = function()
 	{
 		/*

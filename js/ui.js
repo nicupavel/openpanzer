@@ -29,15 +29,14 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (hex.unit) 
 	{
-		if ((map.currentHex !== null) && (map.currentHex.unit.owner !== hex.unit.owner))
+		if ((map.currentHex !== null) && (hex.isAttackSel))
 		{	//attack an allowed hex
-			//TODO check unitAllowedAttackHexes (see map.js)
 			if (!map.currentHex.unit.hasFired)
 			{
 				//attack function
 				console.log("attacking: " + row + "," +col);
 				map.currentHex.unit.hasFired = true;
-				map.delSelected();
+				map.delAttackSel();
 				uiMessage("Attack results", "Not implemented");
 			}
 		}	
@@ -45,21 +44,14 @@ function handleMouseClick(e)
 		{
 			map.delCurrentHex();
 			map.setCurrentHex(row, col);
-			map.delSelected();
-		
+			map.delMoveSel();
+			map.delAttackSel();
+			
 			if (!hex.unit.hasMoved) 
-			{ 
-				map.setHexRange(row, col, hex.unit.unitData.movpoints); 
-			}
-			else  
-			{ 
-				if (!hex.unit.hasFired) 
-				{ 
-					var gunrange = hex.unit.unitData.gunrange;
-					if (gunrange === 0) { gunrange = 1; }
-					map.setHexRange(row, col, gunrange); 
-				} 
-			}
+				map.setMoveRange(row, col); 
+			
+			if (!hex.unit.hasFired) 
+				map.setAttackRange(row, col); 
 		}
 		if (minfo.rclick) { updateUnitInfoWindow(hex.unit);}
 	}	
@@ -70,7 +62,7 @@ function handleMouseClick(e)
 		{	
 			srcHex = map.currentHex;
 			//move to an allowed hex
-			if (hex.isSelected && !srcHex.unit.hasMoved) 
+			if (hex.isMoveSel && !srcHex.unit.hasMoved) 
 			{
 				//TODO a move function in map class	
 				var player = map.getPlayer(srcHex.unit.owner)
@@ -87,14 +79,16 @@ function handleMouseClick(e)
 				hex.unit = srcHex.unit;
 				hex.owner = srcHex.unit.owner;
 				srcHex.delUnit();
+				map.setAttackRange(row, col) //Put new attack range
 			} 		
 			map.delCurrentHex();
 		}
 		else
 		{
-			console.log("No unit "+cell.row +","+cell.col);
+			console.log("No unit at:" + cell.row + "," + cell.col);
 		}
-		map.delSelected();
+		map.delMoveSel();
+		map.delAttackSel();
 	}
 	//ToDo partial screen updates
 	r.render(); 
@@ -178,7 +172,8 @@ function button(id)
 		case 'endturn':
 		{
 			map.resetUnits();
-			map.delSelected();
+			map.delMoveSel();
+			map.delAttackSel();
 			map.delCurrentHex();
 			turn++;
 			$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
