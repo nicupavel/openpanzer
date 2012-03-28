@@ -184,7 +184,7 @@ function Map()
 		if (this.map[row][col].unit === null) {	return false; }
 		
 		var range = this.map[row][col].unit.unitData.movpoints;
-		var cellList = getCellsInRange(row, col, range, this.rows, this.cols);
+		var cellList = GameRules.getCellsInRange(row, col, range, this.rows, this.cols);
 		
 		for (var i = 0; i < cellList.length; i++)
 		{
@@ -200,7 +200,7 @@ function Map()
 		if (this.map[row][col].unit === null) {	return false; }
 		
 		var range = this.map[row][col].unit.unitData.movpoints;
-		var cellList = getCellsInRange(row, col, range, this.rows, this.cols);
+		var cellList = GameRules.getCellsInRange(row, col, range, this.rows, this.cols);
 		for (var i = 0; i < cellList.length; i++)
 		{
 			var cell = cellList[i];
@@ -215,44 +215,14 @@ function Map()
 	this.setHexRange = function(row, col, range)
 	{
 		console.log("unit range:" + range);
+		var allowedCells = GameRules.getMoveRange(this.map, row, col, this.rows, this.cols);
 		
-		var minRow = row - range;
-		var maxRow = row + range;
-		if (minRow < 0) { minRow = 0; }
-		if (maxRow > this.rows) { maxRow = this.rows; }
-				
-		//the column
-		for (var i = minRow; i < maxRow; i++)
+		for (var i = 0; i < allowedCells.length; i++)
 		{
-			if ((i != row) && (this.map[i][col].unit === null)
-				&& (this.map[i][col].terrain < terrainType.Swamp)) 
-			{
-				this.setSelected(i, col);
-			}
-		}
-		//the rows around
-		for (var colOff = 1; colOff < range; colOff++)
-		{
-			//rows have a ripple effect
-			if ((col + colOff) % 2 == 1) { if (maxRow > 0) { maxRow--; }}
-			else { if (minRow < this.rows) { minRow++; }}
+			var cell = allowedCells[i];
+			this.setSelected(cell.row, cell.col);
 			
-			for (var i = minRow; i < maxRow; i++)
-			{
-				//TODO add terrain factor
-				if (((col + colOff) < this.cols) && (this.map[i][col + colOff].unit === null)
-				    && (this.map[i][col + colOff].terrain < terrainType.Swamp))
-				{ 
-					this.setSelected(i, col + colOff);
-				}
-				if (((col - colOff) > 0) && (this.map[i][col - colOff].unit === null)
-					&& this.map[i][col - colOff].terrain < terrainType.Swamp) 
-				{ 
-					this.setSelected(i, col - colOff);
-				}
-			}
 		}
-	
 	}
 	
 	this.dumpMap = function()
@@ -304,52 +274,5 @@ function Map()
 	}
 	
 	//Private
-	function getCellsInRange(row, col, range, maxrows, maxcols)
-	{
-		console.log("cell range:" + range);
-		var cellList = [];
-		var cell = null;
-		var minRow = row - range;
-		var maxRow = row + range;
-		if (minRow < 0) { minRow = 0; }
-		if (maxRow > maxrows) { maxRow = maxrows; }
-				
-		//the column
-		for (var i = minRow; i < maxRow; i++)
-		{
-			if (i != row) 
-			{ 
-				cell = new Cell(i, col); 
-				cellList.push(cell);
-			}
-		}
-		//the rows around
-		for (var colOff = 1; colOff < range; colOff++)
-		{
-			//rows have a ripple effect
-			if ((col + colOff) % 2 == 1) 
-			{ 
-				if (maxRow > 0) { maxRow--; }
-			}
-			else 
-			{ 
-				if (minRow < maxrows) { minRow++; }
-			}
-			for (var i = minRow; i < maxRow; i++)
-			{
-				if ((col + colOff) < maxcols) 
-				{
-					cell = new Cell(i, col + colOff);
-					cellList.push(cell);
-				}
-				if ((col - colOff) > 0) 
-				{ 
-					cell = new Cell(i, col - colOff);
-					cellList.push(cell);
-				}
-			}
-		}
-		return cellList;
-	}
 	
 } // end Map class
