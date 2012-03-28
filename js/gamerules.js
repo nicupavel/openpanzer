@@ -52,6 +52,16 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 	return allowedCells;
 }
 
+//aUnit from position aUnitPos attacks tUnit from tUnitPos
+GameRules.calculateAttackResults = function(aUnit, aUnitPos, tUnit, tUnitPos)
+{
+	ar = aUnit.unitData.gunrange;
+	tr = tUnit.unitData.gunrange;
+	d = distance(aUnitPos.row, aUnitPos.col, tUnitPos.row, tUnitPos.col); //distance between units
+	//if distance between units > 1 means that target unit can fight back
+	
+}
+
 function canAttack(unit, targetUnit)
 {
 	if (targetUnit === null)
@@ -130,6 +140,28 @@ function isGround(unit)
 	}
 }
 
+//Returns the distance between 2 hexes
+//TODO replace with bitops
+function distance(x1, y1, x2, y2)
+{
+	var d = 0;
+	//shift the entire hexgrid to be arranged diagonally
+	if (y1 % 2)	{ x1 = x1 * 2 + 1;	}
+	else { 	x1 = x1 * 2; }
+	
+	if (y2 % 2) { x2 = x2 * 2 + 1;	}
+	else { x2 = x2 * 2; }
+	
+	var dx = Math.abs(x2-x1);
+	var dy = Math.abs(y2-y1);
+	console.log(dy + ":" + dx);
+	
+	if (dx > dy) { d = parseInt((dx - dy)/2) + dy; }
+	else { d = dy } 
+
+	return d;
+}
+
 //Returns a list of cells that are in a certain range to another cell
 //TODO Fix this function to work when the cell is near the margins (selection is wrong)
 function getCellsInRange(row, col, range, mrows, mcols)
@@ -140,7 +172,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	var maxRow = row + range;
 	if (minRow < 0) { minRow = 0; }
 	if (maxRow > mrows) { maxRow = mrows; }
-	console.log("minRow:" + minRow + " maxRow:" + maxRow);	
+
 	//the column
 	for (var i = minRow; i <= maxRow; i++)
 	{
