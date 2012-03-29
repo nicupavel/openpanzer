@@ -38,8 +38,7 @@ function handleMouseClick(e)
 				//attack function
 				console.log("attacking: " + row + "," +col);
 				atkunit.fire();
-				//TODO defunit doesn't always fireback
-				defunit.fire();
+				//TODO defunit should use ammo when defending
 				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
 				//TODO do this better
 				defunit.hit(cr.kills)
