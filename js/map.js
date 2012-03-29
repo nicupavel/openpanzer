@@ -25,13 +25,17 @@ function Unit(unitDataId)
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
 	this.transport = -1 //equipment id of transport if any
+	this.destroyed = false; //flag to signal if a unit is destroyed
+	
+	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true; console.log("hit with:" + losses);}
+	this.fire = function() {this.ammo--; this.hasFired = true;}
+	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true}
 	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
 	this.getTransport = function() { if (transport !== -1) { return equipment[transport];} }
 	this.log = function() { console.log(this); }
-	//TODO unit move, attack to take care of fuel, ammo and other properties
 };
 
 function Hex()
@@ -77,7 +81,7 @@ function Map()
 	this.name = null;
 	this.description = null; 
 	this.terrainImage = null;
-	this.currentHex = null; //holds the current mouse selected hex
+	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
 	this.unitImagesList = [];
 	this.selectedHexes = [];
 	
@@ -104,7 +108,7 @@ function Map()
 	{
 		for (var i = 0; i < unitList.length; i++)
 		{
-			unitList[i].resetUnit();
+			if (unitList[i] !== null) unitList[i].resetUnit();
 		}
 	}
 	
@@ -125,16 +129,18 @@ function Map()
 	
 	this.setCurrentHex = function(row, col)
 	{
-		this.currentHex = this.map[row][col];
-		this.currentHex.isCurrent= true;
+		this.currentHex.hex = this.map[row][col];
+		this.currentHex.hex.isCurrent= true;
+		this.currentHex.row = row;
+		this.currentHex.col = col;
 	}
 	
 	this.delCurrentHex = function()
 	{
-		if (this.currentHex !== null)
+		if (this.currentHex.hex !== null)
 		{
-			this.currentHex.isCurrent = false;
-			this.currentHex = null;
+			this.currentHex.hex.isCurrent = false;
+			this.currentHex.hex = null;
 		}
 	}
 	

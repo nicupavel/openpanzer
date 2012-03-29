@@ -53,13 +53,76 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 }
 
 //aUnit from position aUnitPos attacks tUnit from tUnitPos
-GameRules.calculateAttackResults = function(aUnit, aUnitPos, tUnit, tUnitPos)
+//TODO dig the actual formula (how many pages it is ?) 
+//prolly depends on: weather, terrain, adjacent units (arty), initiative, fuel, ammo
+//experience, ranged defense modified, entrechment, unit strength etc ...
+GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol)
 {
-	ar = aUnit.unitData.gunrange;
-	tr = tUnit.unitData.gunrange;
-	d = distance(aUnitPos.row, aUnitPos.col, tUnitPos.row, tUnitPos.col); //distance between units
-	//if distance between units > 1 means that target unit can fight back
+	var cr = new combatResults();
+
+	var d = distance(arow, acol, trow, tcol); //distance between units
+	var at = aUnit.unitData.target;
+	var tt = tUnit.unitData.target;
+	var aav = 0;
+	var adv = 0;
+	var tav = 0;
+	var tdv = 0;
+	//Attacking unit type
+	switch(at)
+	{
+		case targetType.air:
+		{
+			tav = tUnit.unitData.airatk;
+			tdv = tUnit.unitData.airdef;
+			break;
+		}
+		case targetType.soft:
+		{
+			tav = tUnit.unitData.softatk;
+			tdv = tUnit.unitData.grounddef;
+			break;
+		}
+		case targetType.hard:
+		{
+			tav = tUnit.unitData.hardatk;
+			tdv = tUnit.unitData.grounddef;
+			break;
+		}
+	}
 	
+	switch(tt)
+	{
+		case targetType.air:
+		{
+			
+			aav = aUnit.unitData.airatk;
+			adv = aUnit.unitData.airdef;
+			break;
+		}
+		case targetType.soft:
+		{
+			aav = aUnit.unitData.softatk;
+			adv = aUnit.unitData.grounddef;
+			break;
+		}
+		case targetType.hard:
+		{
+			aav = aUnit.unitData.hardatk;
+			adv = aUnit.unitData.grounddef;
+			break;
+		}
+	}
+	
+	cr.kills = aav - tdv;
+	if (cr.kills < 0 ) cr.kills = 0;
+	//if distance between units > 1 means that target unit can fight back //TODO check if always true
+	if (d <= 1)
+	{
+		cr.losses = tav - adv;
+		if (cr.losses < 0) cr.losses = 0;
+	}
+	
+	return cr;
 }
 
 function canAttack(unit, targetUnit)
@@ -154,7 +217,6 @@ function distance(x1, y1, x2, y2)
 	
 	var dx = Math.abs(x2-x1);
 	var dy = Math.abs(y2-y1);
-	console.log(dy + ":" + dx);
 	
 	if (dx > dy) { d = parseInt((dx - dy)/2) + dy; }
 	else { d = dy } 

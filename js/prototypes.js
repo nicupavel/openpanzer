@@ -85,6 +85,11 @@ var sidesName =
 	"Allies"
 ];
 
+var targetType = 
+{
+	soft:0,hard:1,air:2,sea:3
+};
+
 function mouseInfo(x, y, rclick)
 {
 	this.x = x;
@@ -97,4 +102,21 @@ function Cell(row, col)
 	//Where the hex is in the map array
 	this.row = row;
 	this.col = col;
+}
+
+function combatResults()
+{
+	this.kills = 0;
+	this.losses = 0;
+	this.atkSuppress = 0;
+	this.defSuppress = 0;
+	this.atkExpGained = 0;
+	this.defExpGained = 0;
+}
+
+function currentHexInfo()
+{
+	this.hex = null;
+	this.row = 0;
+	this.col = 0;
 }

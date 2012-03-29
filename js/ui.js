@@ -29,15 +29,24 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (hex.unit) 
 	{
-		if ((map.currentHex !== null) && (hex.isAttackSel))
+		if ((map.currentHex.hex !== null) && (hex.isAttackSel))
 		{	//attack an allowed hex
-			if (!map.currentHex.unit.hasFired)
+			var atkunit = map.currentHex.hex.unit;
+			var defunit = hex.unit;
+			if (!atkunit.hasFired)
 			{
 				//attack function
 				console.log("attacking: " + row + "," +col);
-				map.currentHex.unit.hasFired = true;
+				atkunit.fire();
+				//TODO defunit doesn't always fireback
+				defunit.fire();
+				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
+				//TODO do this better
+				defunit.hit(cr.kills)
+				atkunit.hit(cr.losses);
+				if(atkunit.destroyed) map.currentHex.hex.delUnit();
+				if (defunit.destroyed) hex.delUnit();
 				map.delAttackSel();
-				uiMessage("Attack results", "Not implemented");
 			}
 		}	
 		else //Select the new unit
@@ -58,9 +67,9 @@ function handleMouseClick(e)
 	else
 	{
 		//Do we already have a selected unit ?
-		if (map.currentHex != null)
+		if (map.currentHex.hex != null)
 		{	
-			srcHex = map.currentHex;
+			srcHex = map.currentHex.hex;
 			//move to an allowed hex
 			if (hex.isMoveSel && !srcHex.unit.hasMoved) 
 			{
@@ -106,10 +115,8 @@ function handleMouseMove(e)
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
 	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text; }
-	if (map.currentHex != null) { r.drawCursor(cell); }
+	if (map.currentHex.hex != null) { r.drawCursor(cell); }
 	$('locmsg').innerHTML = text;
-				
-	
 }
 
 function buildMainMenu()
@@ -190,11 +197,11 @@ function button(id)
 			{
 				//Just to show some window with dummy data if user press with no unit selected
 				$('unit-info').style.visibility = "visible"; 
-				if (map.currentHex != null && map.currentHex.unit != null) 
+				if (map.currentHex.hex != null && map.currentHex.hex.unit != null) 
 				{ 
-					updateUnitInfoWindow(map.currentHex.unit);
-					map.currentHex.unit.log();
-					map.currentHex.log();
+					updateUnitInfoWindow(map.currentHex.hex.unit);
+					map.currentHex.hex.unit.log();
+					map.currentHex.hex.log();
 				}
 			}
 			break;

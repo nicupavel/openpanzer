@@ -94,26 +94,28 @@ function Render(mapObj)
 		
 		var redraw = false;
 		
-		if (lastCursorUnit !== map.currentHex.unit)
+		if (lastCursorUnit !== map.currentHex.hex.unit)
 		{ 
 			redraw = true; //Redraw because a new unit has been selected
 		}
 		
 		//Check if we should generate an attack cursor
-		if (hex.isAttackSel && !map.currentHex.unit.hasFired)
+		if (hex.isAttackSel && !map.currentHex.hex.unit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
 			if ((redraw === true) || (lastCursorCell === null) || (lastCursorImage === null) ||
 				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
 			{ 
-				var atkunit = map.currentHex.unit;
-				var defunit = hex.unit;
-				
 				redraw = true; //Redraw because a mouse is over a new cell
+				var atkunit = map.currentHex.hex.unit;
+				var defunit = hex.unit;
 				lastCursorUnit = atkunit;
-				lastCursorImage = generateAttackCursor(atkunit, defunit);
 				lastCursorCell = cell;
-			}		
+				var atkflag = map.getPlayer(atkunit.owner).country;
+				var defflag = map.getPlayer(defunit.owner).country;
+				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
+				lastCursorImage = generateAttackCursor(cr.kills, cr.losses, atkflag, defflag);
+			}
 			//only assign a new css cursor if needed (to reduce html element load)
 			if ((ca.style.cursor === 'default') || (ca.style.cursor === 'pointer')
 				|| (ca.style.cursor === 'auto') || (redraw === true))
@@ -228,15 +230,13 @@ function Render(mapObj)
 	}
 	
 	//Generates an attack cursor on backbuffer canvas
-	function generateAttackCursor(atkunit, defunit)
+	function generateAttackCursor(kills, losses, atkflag, defflag)
 	{
-		var atkflag = map.getPlayer(atkunit.owner).country;
-		var defflag = map.getPlayer(defunit.owner).country;
 		var flw = 21; //one flag width
 		var flh = 14; //flag height
 		var bbw = bb.canvas.width;
 		var bbh = bb.canvas.height;
-			
+
 		bb.clearRect(0, 0, bbw, bbh);
 		bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
 		bb.drawImage(imgFlags, flw*atkflag, 0, flw, flh, 0, 0, flw, flh)
@@ -246,12 +246,7 @@ function Render(mapObj)
 		bb.font = "12px monospace";
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
-		//TODO guess the formula is a little more complicated ?
-		//TODO create a gamerules class that deals with these
-		var kills = atkunit.unitData.softatk - defunit.unitData.grounddef;
-		var losses = defunit.unitData.softatk - atkunit.unitData.grounddef;
-		if (kills < 0) { kills = 0;}
-		if (losses < 0) { losses = 0;}	
+		
 		var tx = flw/2 - bb.measureText(losses).width/2;
 		var ty = flh;
 		bb.strokeText(losses, tx+1, ty+1);
