@@ -327,17 +327,21 @@ function Render(mapObj)
 		}
 		//Write unit strength in a box below unit
 		//TODO center by using measureText
+		c.font = "10px sans-serif";
+		var text = "" + unit.strength;
+		var textcolor = "black"
+		var textSize = c.measureText(text).width;
 		var tx = x0 + h/2;
 		var ty = y0 + 2 * r - 12;
-		var textcolor = "black"
+		
 		var side =  parseInt(map.getPlayer(unit.owner).side);
 		if (side === 1) { textcolor = "green"; }
+		
 		c.moveTo(tx, ty);
 		c.fillStyle = textcolor;
-		c.fillRect  (tx, ty, 13, 10);
-		c.font = "10px sans-serif";
+		c.fillRect  (tx, ty, textSize + 2, 10);
 		c.fillStyle = "white";
-		c.fillText("" + unit.strength, tx, ty + 8);
+		c.fillText(text, tx, ty + 8);
 		//TODO draw indicator for unit.hasFired
 		
 	}

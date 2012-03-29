@@ -113,13 +113,13 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 		}
 	}
 	
-	cr.kills = aav - tdv;
-	if (cr.kills < 0 ) cr.kills = 0;
+	cr.kills = Math.round(aUnit.strength * (aav - tdv)/10);
+	if (cr.kills <= 0 ) cr.kills = 1;
 	//if distance between units > 1 means that target unit can fight back //TODO check if always true
 	if (d <= 1)
 	{
-		cr.losses = tav - adv;
-		if (cr.losses < 0) cr.losses = 0;
+		cr.losses = Math.round(tUnit.strength * (tav - adv)/10);
+		if (cr.losses <= 0) cr.losses = 1;
 	}
 	
 	return cr;
