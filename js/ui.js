@@ -266,6 +266,6 @@ function gameStart()
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
-	scenario="resources/scenarios/xml/dessau.xml";
+	//scenario="resources/scenarios/xml/dessau.xml";
 	ui = new UI(scenario);
 }
