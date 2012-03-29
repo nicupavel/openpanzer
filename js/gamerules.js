@@ -233,7 +233,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	var minRow = row - range;
 	var maxRow = row + range;
 	if (minRow < 0) { minRow = 0; }
-	if (maxRow > mrows) { maxRow = mrows; }
+	if (maxRow >= mrows) { maxRow = mrows-1; }
 
 	//the column
 	for (var i = minRow; i <= maxRow; i++)
