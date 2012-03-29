@@ -6,6 +6,7 @@ function Render(mapObj)
 	var imgCursor;
 	var imgFlags;
 	var imgCountryFlags;
+	var imgExplosions;
 	
 	var lastCursorCell = null; //Last cell for which the cursor was built
 	var lastCursorImage = null;//last cursor image
@@ -131,6 +132,37 @@ function Render(mapObj)
 		}
 		
 	}
+	
+	//draws an Animation
+	this.drawAnimation = function(row, col)
+	{
+		if (col & 1) // odd column
+		{
+			y0 =  row * 2 * r + 2*r+ renderOffsetY;
+			x0 =  col * (s + h) + h + s/2 + renderOffsetX;
+		}
+		else
+		{
+			y0 = row * 2 * r + r + renderOffsetY;
+			x0 = col * (s + h) + h + s/2 + renderOffsetX;
+		}
+		
+		y0 = y0 - imgExplosions.height;
+		x0 = x0 - imgExplosions.width/(12*2);
+		
+		var explosion = new Animation({
+			ctx:a, 
+			x:x0, 
+			y:y0, 
+			width:120, 
+			height:imgExplosions.height,  
+			frames:12, 
+			image:imgExplosions
+		});
+		
+		explosion.start();
+	}
+		
 	//Converts from screen x,y to row,col in map array
 	this.screenToCell = function(x, y)
 	{
@@ -165,8 +197,11 @@ function Render(mapObj)
 		imgFlags = new Image();
 		imgFlags.src = "resources/ui/flags/flags_med.png";
 		
-		imgCountryFlags = new Image();
-		imgCountryFlags.src = "resources/ui/flags/flags_big.png";
+		imgExplosions = new Image();
+		imgExplosions.src = "resources/animations/explosions.png";
+		
+		//imgCountryFlags = new Image();
+		//imgCountryFlags.src = "resources/ui/flags/flags_big.png";
 		
 		cacheUnitImages(map.unitImagesList, func);
 	}

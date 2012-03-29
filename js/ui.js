@@ -42,6 +42,7 @@ function handleMouseClick(e)
 				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
 				//TODO do this better
 				defunit.hit(cr.kills)
+				r.drawAnimation(row, col);
 				atkunit.hit(cr.losses);
 				if(atkunit.destroyed) map.currentHex.hex.delUnit();
 				if (defunit.destroyed) hex.delUnit();
