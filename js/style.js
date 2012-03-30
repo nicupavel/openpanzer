@@ -1,3 +1,12 @@
+/**
+ * Style - basic styles support for rendering on canvas
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
 
 function RenderStyle() 
 {

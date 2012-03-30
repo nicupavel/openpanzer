@@ -1,3 +1,13 @@
+/**
+ * Prototypes - Generic data structures
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
 
 //Bit masks. Hex with road value 136 means it has a road starting from mid of the hex

@@ -1,4 +1,13 @@
-//Animation.js animates a series of sprites
+/**
+ * Animation animates a series of sprites
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 //o = {ctx, x, y, width, height, frames, image}
 function Animation(o)
 {

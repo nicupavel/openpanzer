@@ -1,3 +1,13 @@
+/**
+ * Map - Provides map, unit and hex data structures
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 // Unit, Hex, Player and Map classes
 function Player(playerID)
 {

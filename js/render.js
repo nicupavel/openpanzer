@@ -1,3 +1,13 @@
+/**
+ * Render - draws the graphic elements on canvases
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 function Render(mapObj)
 {
 	var map = mapObj;

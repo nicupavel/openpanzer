@@ -1,3 +1,13 @@
+/**
+ * UI - handles mouse and dialog boxes
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 function UI(map)
 {
 	var turn = 0;

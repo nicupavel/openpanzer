@@ -1,3 +1,13 @@
+/**
+ * MapLoader - Loads XML scenarios as exported from mapconvert.py script
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 function MapLoader()
 {
 	var map = null;

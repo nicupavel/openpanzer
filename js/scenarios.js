@@ -1,3 +1,13 @@
+/**
+ * Scenarios - List of xml scenarios available
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 // Generated from scenario/xml folder
 var scenariolist = [
 "cauldron.xml",
@@ -56,5 +66,4 @@ var scenariolist = [
 "anzio3pl.xml",
 "arractuk.xml",
 "arract.xml",
-
 ]

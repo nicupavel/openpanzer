@@ -1,4 +1,13 @@
-//Game rules 
+/**
+ * GameRules - Provides basic rules for HTML5 PG2
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
 var GameRules = GameRules || {}; //Namespace emulation
 
 //returns a cell list with hexes that a unit @ row,col can move to
@@ -119,7 +128,7 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	if (d <= 1)
 	{
 		cr.losses = Math.round(tUnit.strength * (tav - adv)/10);
-		if (cr.losses <= 0) cr.losses = 1;
+		if (cr.losses < 0) cr.losses = 0;
 	}
 	
 	return cr;

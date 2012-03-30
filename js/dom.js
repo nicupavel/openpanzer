@@ -1,3 +1,12 @@
+/**
+ * DOM generic functions
+ *
+ * http://www.linuxconsulting.ro
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
 
 // Get the element with ID id
 function $(id)
