@@ -1,3 +1,5 @@
+#Copyright 2012 Nicu Pavel <npavel@mini-box.com>
+#Licensed under GPLv2
 #import csv
 import json
 import itertools
