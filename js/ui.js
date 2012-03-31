@@ -8,12 +8,12 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function UI(map)
+function UI(scenario)
 {
 	var turn = 0;
 	
 	var l = new MapLoader();
-	l.loadMap(map);
+	l.loadMap(scenario);
 	var map = l.buildMap();
 	map.dumpMap();
 	buildMainMenu();

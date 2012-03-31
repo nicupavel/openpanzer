@@ -15,7 +15,7 @@ function Render(mapObj)
 	var imgUnits = {};
 	var imgCursor;
 	var imgFlags;
-	var imgCountryFlags;
+	var imgMapBackground;
 	var imgExplosions;
 	
 	var lastCursorCell = null; //Last cell for which the cursor was built
@@ -48,8 +48,7 @@ function Render(mapObj)
 	this.style = new RenderStyle();
 	
 	createLayers(); //Creates canvas layers
-	drawMapImage(map.terrainImage); //Draws the map background
-			
+				
 	this.render = function()
 	{
 		var x0;
@@ -58,7 +57,7 @@ function Render(mapObj)
 		var hex;
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
-		
+
 		for (row = 0; row < map.rows; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
@@ -88,7 +87,6 @@ function Render(mapObj)
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
 				if (hex.unit !== null) { drawHexUnit(x0, y0, hex.unit); }
-				
 			}
 		}
 	}
@@ -198,6 +196,7 @@ function Render(mapObj)
 		return cell;
 	}
 	
+	//TODO create a resource caching class
 	//Caches images, func a function to call upon cache completion
 	this.cacheImages = function(func)
 	{
@@ -210,8 +209,9 @@ function Render(mapObj)
 		imgExplosions = new Image();
 		imgExplosions.src = "resources/animations/explosions.png";
 		
-		//imgCountryFlags = new Image();
-		//imgCountryFlags.src = "resources/ui/flags/flags_big.png";
+		imgMapBackground = new Image();
+		imgMapBackground.src = map.terrainImage;
+		imgMapBackground.onload = function() { setupLayers(); func(); }
 		
 		cacheUnitImages(map.unitImagesList, func);
 	}
@@ -222,7 +222,7 @@ function Render(mapObj)
 	this.getHexS = function() { return s;}
 	this.getHexH = function() { return h;}
 	this.getHexR = function() { return r;}
-	
+		
 	// "Private"
 	function createLayers()
 	{
@@ -236,42 +236,37 @@ function Render(mapObj)
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX + 'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
-		// Animation and cursor
+		// Animation and cursors
 		ca = document.createElement('canvas');
 		ca.id = "cursor";
 		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ca);
-		// backbuffer
+		// Backbuffer
 		cbb = document.createElement('canvas');
 		cbb.id = "backbuffer";
-		
 		
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
 		a = ca.getContext('2d');
 		bb = cbb.getContext('2d');
-		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the cursor
 	}
 	
-	function drawMapImage(imgFile)
+	//Draws map background image and sets canvases dimesions and position on screen
+	function setupLayers()
 	{
-		img = new Image();
-		img.onload = function() 
-		{
-			c.canvas.width = cb.canvas.width = a.canvas.width = img.width;
-			c.canvas.height = cb.canvas.height = a.canvas.height = img.height;
-			
-			cb.drawImage(img, 0, 0);
-			canvasOffsetX = window.innerWidth/2 - img.width/2;
-			if (canvasOffsetX < 0) { canvasOffsetX = 0;}
-			console.log("Offset X:" + canvasOffsetX + " Offset Y:" + canvasOffsetY);
-			
-			// Center the canvases
-			cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-			ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-			ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-		}
-		img.src = imgFile;
+		c.canvas.width = cb.canvas.width = a.canvas.width = imgMapBackground.width;
+		c.canvas.height = cb.canvas.height = a.canvas.height = imgMapBackground.height;
+		
+		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the attack cursor
+		
+		cb.drawImage(imgMapBackground, 0, 0);
+		canvasOffsetX = window.innerWidth/2 - imgMapBackground.width/2;
+		if (canvasOffsetX < 0) { canvasOffsetX = 0;}
+					
+		// Center the canvases
+		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+		ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 	}
 	
 	//Generates an attack cursor on backbuffer canvas
