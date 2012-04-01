@@ -11,7 +11,7 @@
 function UI(scenario)
 {
 	var turn = 0;
-	
+
 	var l = new MapLoader();
 	l.loadMap(scenario);
 	var map = l.buildMap();
@@ -22,6 +22,7 @@ function UI(scenario)
 	r.cacheImages(function() { r.render(); });
 	var canvas = r.getCursorCanvas();
 	
+	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 
@@ -219,7 +220,15 @@ function button(id)
 		
 		case 'about':
 		{
-			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> npavel@linuxconsulting.ro");
+			var scenselect = "<select name=scenario onchange='ui = new UI(this.options[this.selectedIndex].value)'>";
+			for (var i = 0; i < scenariolist.length; i++)
+			{
+				var value = "resources/scenarios/xml/" + scenariolist[i];
+				scenselect += "<option value=" + value + ">" + scenariolist[i] + "</option>";
+			}
+			scenselect +="</select>";
+			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> " +
+			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>" + scenselect);
 			break;
 		}
 	}
@@ -265,13 +274,13 @@ function uiMessage(title, message)
 	$('title').innerHTML = title;
 	$('message').innerHTML = message;
 	$('ui-message').style.visibility = "visible"
-	$('ui-message').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
 }
 
 }
 function gameStart()
 {
-	window.oncontextmenu = function() { return false; } //disable rightclick menu
+	
 	
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];

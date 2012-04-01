@@ -40,3 +40,16 @@
 	color: #fff;
 	font-weight:normal;
 }
+
+#ui-message #uiokbut
+{
+	border: 0px #fff solid;
+	position:absolute;
+	top:120px;
+	left:225px;
+	width:25px;
+	height: 30px;
+	text-align: center;
+	color: #fff;
+	font-weight:normal;
+}
