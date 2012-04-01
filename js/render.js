@@ -382,7 +382,18 @@ function Render(mapObj)
 		c.fillRect  (tx, ty, textSize + 2, 10);
 		c.fillStyle = "white";
 		c.fillText(text, tx, ty + 8);
-		//TODO draw indicator for unit.hasFired
+		//draw indicator for unit.hasFired
+		if (!unit.hasFired)
+		{
+			c.beginPath();
+			c.arc(tx-5, ty + 5, 3, 0, Math.PI*2, false);
+			c.fillStyle = "grey";
+			c.strokeStyle = "crimson";
+			c.lineWidth = 2;
+			c.fill();
+			c.stroke();
+			c.closePath();
+		}
 		
 	}
 	
