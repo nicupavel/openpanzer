@@ -220,15 +220,18 @@ function button(id)
 		
 		case 'about':
 		{
-			var scenselect = "<select name=scenario onchange='ui = new UI(this.options[this.selectedIndex].value)'>";
+			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> " +
+			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
+			
+			var scnSel = addTag('message', 'select');
+			scnSel.onchange = function(){ UI:newScenario(this.options[this.selectedIndex].value); }
+			
 			for (var i = 0; i < scenariolist.length; i++)
 			{
-				var value = "resources/scenarios/xml/" + scenariolist[i];
-				scenselect += "<option value=" + value + ">" + scenariolist[i] + "</option>";
+				var scnOpt = addTag(scnSel, 'option');
+				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i];
+				scnOpt.text =  scenariolist[i];
 			}
-			scenselect +="</select>";
-			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>" + scenselect);
 			break;
 		}
 	}
@@ -275,6 +278,16 @@ function uiMessage(title, message)
 	$('message').innerHTML = message;
 	$('ui-message').style.visibility = "visible"
 	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+}
+
+function newScenario(scenario)
+{
+	turn = 0;
+	l.loadMap(scenario);
+	map = l.buildMap();
+	map.dumpMap();
+	r.setNewMap(map);
+	r.cacheImages(function() { r.render(); });
 }
 
 }

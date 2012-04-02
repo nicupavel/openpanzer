@@ -216,12 +216,13 @@ function Render(mapObj)
 		cacheUnitImages(map.unitImagesList, func);
 	}
 	
+	//Returns canvases 
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
 	this.getCursorCanvas = function() { return ca; }
-	this.getHexS = function() { return s;}
-	this.getHexH = function() { return h;}
-	this.getHexR = function() { return r;}
+	//Sets a new map for rendering. Only used to dinamically change the map being rendered
+	this.setNewMap = function(mapObj) { map = mapObj; }
+	
 		
 	// "Private"
 	function createLayers()
