@@ -25,6 +25,8 @@ function UI(scenario)
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
+	
+	this.button = function(id) { UI:button(id); } //Hack to bring up the mainmenu //TODO remove this
 
 //TODO break up this mess
 function handleMouseClick(e) 
@@ -220,17 +222,17 @@ function button(id)
 		
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("HTML5 Panzer General version 1.0", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
-			scnSel.onchange = function(){ UI:newScenario(this.options[this.selectedIndex].value); }
+			scnSel.onchange = function(){ UI:newScenario(this.options[this.selectedIndex].value);}
 			
 			for (var i = 0; i < scenariolist.length; i++)
 			{
 				var scnOpt = addTag(scnSel, 'option');
-				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i];
-				scnOpt.text =  scenariolist[i];
+				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
+				scnOpt.text =  scenariolist[i][1];
 			}
 			break;
 		}
@@ -295,9 +297,11 @@ function newScenario(scenario)
 function gameStart()
 {
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
-	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
+	scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
 	//scenario="resources/scenarios/xml/dessau.xml";
 	ui = new UI(scenario);
+	//Bring up the "Main Menu"
+	ui.button('mainmenu');
 }
