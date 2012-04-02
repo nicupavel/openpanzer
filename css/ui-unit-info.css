@@ -12,7 +12,7 @@
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	background-image: url('../resources/ui/menu/images/unit-info-bg.png');
+	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-bg.png');
 	z-index:100;
 	overflow-y: auto;
 	visibility: hidden;

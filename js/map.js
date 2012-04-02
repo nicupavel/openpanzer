@@ -113,7 +113,7 @@ function Map()
 			}
 		}
 	}
-	
+	//TODO also check for destroyed and remove it from list
 	this.resetUnits = function()
 	{
 		for (var i = 0; i < unitList.length; i++)
@@ -121,21 +121,10 @@ function Map()
 			if (unitList[i] !== null) unitList[i].resetUnit();
 		}
 	}
-	
-	this.addUnit = function(unit)
-	{
-		unitList.push(unit);
-	}
-
-	this.addPlayer = function(player)
-	{
-		playerList.push(player);
-	}
-	
-	this.getPlayer = function(id)
-	{
-		return playerList[id];
-	}
+	this.addUnit = function(unit) {	unitList.push(unit); }
+	this.getUnits = function() { return unitList; }
+	this.addPlayer = function(player) {	playerList.push(player); }
+	this.getPlayer = function(id) {	return playerList[id];	}
 	
 	this.setCurrentHex = function(row, col)
 	{

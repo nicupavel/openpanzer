@@ -138,6 +138,7 @@ function buildMainMenu()
 	var menubuttons = [["buy","Requisition Units(TBD)"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],
 					   ["air","Toggle Air More On (TBD)"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
 					   ["endturn","End turn"], ["mainmenu", "Main Menu"]];
+					   
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
@@ -156,9 +157,6 @@ function buildMainMenu()
 		img.id = id;
 		img.src = "resources/ui/menu/images/" + id + ".png";
 		
-		//js pass-by-ref evaluation and eventhandler ?
-		//can't use UI:button(id) will put the last id in menubuttons array
-		//can use an anonymous function or global evenhandler
 		div.onclick = function() { UI:button(this.id); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() { hoverout(this.firstChild); }
@@ -219,7 +217,27 @@ function button(id)
 			}
 			break;
 		}
-		
+		case 'buy':
+		{
+			var v = $('equipment').style.visibility;
+			
+			if (v === "visible") { $('equipment').style.visibility = "hidden"; }
+			else 
+			{
+				$('equipment').style.visibility = "visible"; 
+				var unitList = map.getUnits();
+				for (var i = 0; i < unitList.length; i++)
+				{
+					var div = addTag('eqCurrentUnitList', 'div');
+					var img = addTag(div, 'img');
+					var txt = addTag(div, 'div');
+					div.className = "eqUnitBox";
+					img.src = unitList[i].unitData.icon;
+					txt.innerHTML = unitList[i].unitData.name;
+				}
+			}
+			break;
+		}	
 		case 'mainmenu':
 		{
 			uiMessage("HTML5 Panzer General version 1.0", "Copyright 2012 Nicu Pavel <br> " +

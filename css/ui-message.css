@@ -12,7 +12,7 @@
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	background-image: url('../resources/ui/menu/images/ui-message.png');
+	background-image: url('../resources/ui/dialogs/ui-message/images/ui-message.png');
 	z-index:99;
 	overflow-y: auto;
 	visibility: hidden;

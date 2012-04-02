@@ -1,0 +1,57 @@
+#equipment
+{
+	position: fixed;
+	width: 215px;
+	height: 375px;
+	left:50%;
+	margin-left: -107.5px;
+	top:50%;
+	margin-top: -187.5px;
+	color: #fff;
+	font-weight:bold;
+	font-family: Arial;
+	font-size: 12px;
+	text-shadow: 0.1em 0.1em 0.2em black;
+	/*background-image: url('../resources/ui/menu/images/unit-info-bg.png');*/
+	z-index:98;
+	overflow-y: auto;
+	visibility: hidden;
+	overflow: hidden;
+}
+
+#equipment #container
+{
+	position: relative;
+	border: 0px #fff solid;
+}
+
+#eqCurrentUnitList
+{
+	overflow: auto;
+	height: 375px;
+	width:120px;
+}
+
+.eqUnitBox
+{
+	border: 0px solid #fff;
+	width: 99px;
+	height: 76px;
+	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
+	background-repeat: no-repeat;
+	margin-bottom: 5px;
+	overflow-x: hidden;
+	position: relative;
+}
+.eqUnitBox img
+{
+	position: absolute;
+	clip:rect(0px, 80px, 50px, 0px);
+}
+.eqUnitBox div
+{
+	position: absolute;
+	top: 56px;
+	left: 5px;
+	width: 99px;
+}
