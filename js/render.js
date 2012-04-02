@@ -226,18 +226,20 @@ function Render(mapObj)
 	// "Private"
 	function createLayers()
 	{
+		//Check if the canvases already exists in the curent document to prevent 
+		//overlaying multiple rendering instances
 		//Map image as background
-		cm = document.createElement('canvas');
+		if ((cm = $('map')) === null) cm = document.createElement('canvas');
 		cm.id = "map";
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(cm);
 		// Hexes/units/flags
-		ch = document.createElement('canvas');
+		if ((ch = $('hexes')) === null) ch = document.createElement('canvas');
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX + 'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ch);
 		// Animation and cursors
-		ca = document.createElement('canvas');
+		if ((ca = $('cursor')) === null) ca = document.createElement('canvas');
 		ca.id = "cursor";
 		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		document.getElementById("game").appendChild(ca);

@@ -18,8 +18,8 @@ function $(id)
 //return pointer to the newly created tag
 function addTag(parent, tag)
 {
-	var t = document.createElement(tag);
 	var e;
+	var t = document.createElement(tag);
 	if (typeof(parent) === 'string') {	e = $(parent); }
 	else {e = parent;}
 	
