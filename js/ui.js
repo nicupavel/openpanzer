@@ -135,7 +135,7 @@ function buildMainMenu()
 	//menu buttons div with id is the filename from resources/ui/menu/images
 	var menubuttons = [["buy","Requisition Units(TBD)"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],
 					   ["air","Toggle Air More On (TBD)"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
-					   ["endturn","End turn"], ["about", "About HTML5 Panzer General"]];
+					   ["endturn","End turn"], ["mainmenu", "Main Menu"]];
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
@@ -218,7 +218,7 @@ function button(id)
 			break;
 		}
 		
-		case 'about':
+		case 'mainmenu':
 		{
 			uiMessage("HTML5 Panzer General", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
