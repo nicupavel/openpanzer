@@ -287,14 +287,13 @@ function newScenario(scenario)
 	map = l.buildMap();
 	map.dumpMap();
 	r.setNewMap(map);
+	$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
 	r.cacheImages(function() { r.render(); });
 }
 
 }
 function gameStart()
 {
-	
-	
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng];
 	console.log("Number: " + rng + " Scenario:" + scenario);
