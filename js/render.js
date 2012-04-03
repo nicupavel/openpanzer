@@ -164,7 +164,7 @@ function Render(mapObj)
 			y:y0, 
 			width:120, 
 			height:imgExplosions.height,  
-			frames:12, 
+			frames:11, //index from 0 
 			image:imgExplosions
 		});
 		
