@@ -11,7 +11,6 @@
 function UI(scenario)
 {
 	var turn = 0;
-
 	var l = new MapLoader();
 	l.loadMap(scenario);
 	var map = l.buildMap();
@@ -27,6 +26,11 @@ function UI(scenario)
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 	
 	this.button = function(id) { UI:button(id); } //Hack to bring up the mainmenu //TODO remove this
+	
+	//We don't want equipment menu to be built on page load
+	//but when user click the equipment button
+	var builtEquipment = false;
+	
 
 //TODO break up this mess
 function handleMouseClick(e) 
@@ -223,18 +227,13 @@ function button(id)
 			
 			if (v === "visible") { $('equipment').style.visibility = "hidden"; }
 			else 
-			{
-				$('equipment').style.visibility = "visible"; 
-				var unitList = map.getUnits();
-				for (var i = 0; i < unitList.length; i++)
-				{
-					var div = addTag('eqCurrentUnitList', 'div');
-					var img = addTag(div, 'img');
-					var txt = addTag(div, 'div');
-					div.className = "eqUnitBox";
-					img.src = unitList[i].unitData.icon;
-					txt.innerHTML = unitList[i].unitData.name;
+			{ 
+				if (!builtEquipment) 
+				{ 
+					buildEquipmentMenu()
+					builtEquipment = true;
 				}
+				$('equipment').style.visibility = "visible"; 
 			}
 			break;
 		}	
@@ -311,7 +310,34 @@ function newScenario(scenario)
 	r.cacheImages(function() { r.render(); });
 }
 
+function buildEquipmentMenu()
+{
+	//The actual units in the map
+	var unitList = map.getUnits();
+	for (var i = 0; i < unitList.length; i++)
+	{
+		var div = addTag('eqCurrentUnitList', 'div');
+		var img = addTag(div, 'img');
+		var txt = addTag(div, 'div');
+		div.className = "eqUnitBox";
+		img.src = unitList[i].unitData.icon;
+		txt.innerHTML = unitList[i].unitData.name;
+	}
+	//Units in equipment
+	for (var i = 1; i < 585; i++)
+	{
+		var div = addTag('eqUnitList', 'div');
+		var img = addTag(div, 'img');
+		var txt = addTag(div, 'div');
+		var u = equipment[i];
+		div.className = "eqUnitBox";
+		img.src = u.icon;
+		txt.innerHTML = u.name;
+	}
 }
+
+} //End of UI class
+
 function gameStart()
 {
 	rng = Math.round(Math.random() * (scenariolist.length - 1))

@@ -1,18 +1,19 @@
 #equipment
 {
 	position: fixed;
-	width: 215px;
-	height: 375px;
+	width: 640px;
+	height: 480px;
 	left:50%;
-	margin-left: -107.5px;
+	margin-left: -320px;
 	top:50%;
-	margin-top: -187.5px;
+	margin-top: -240px;
 	color: #fff;
 	font-weight:bold;
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	/*background-image: url('../resources/ui/menu/images/unit-info-bg.png');*/
+	background-image: url('../resources/ui/dialogs/equipment/images/eq-bg.png');
+	background-repeat: no-repeat;
 	z-index:98;
 	overflow-y: auto;
 	visibility: hidden;
@@ -27,9 +28,24 @@
 
 #eqCurrentUnitList
 {
+	position: absolute;
 	overflow: auto;
-	height: 375px;
+	height: 418px;
 	width:120px;
+	top: 28px;
+	left: 504px;
+}
+
+#eqUnitList
+{
+	border: 0px solid #fff;
+	position: absolute;
+	overflow: auto;
+	height: 280px;
+	width:250px;
+	top: 30px;
+	left: 53px;
+	float: right;
 }
 
 .eqUnitBox
@@ -40,8 +56,10 @@
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
 	background-repeat: no-repeat;
 	margin-bottom: 5px;
-	overflow-x: hidden;
+	margin-right: 5px;
+	overflow: hidden;
 	position: relative;
+	float: right;
 }
 .eqUnitBox img
 {
