@@ -4,7 +4,7 @@
 	width: 640px;
 	height: 480px;
 	left:50%;
-	margin-left: -320px;
+	margin-left: -400px;
 	top:50%;
 	margin-top: -240px;
 	color: #fff;
@@ -45,6 +45,18 @@
 	width:250px;
 	top: 30px;
 	left: 53px;
+	float: right;
+}
+
+#eqSelClass
+{
+	border: 0px solid #fff;
+	position: absolute;
+	overflow: auto;
+	height: 370px;
+	width:70px;
+	top: 105px;
+	left: 5px;
 	float: right;
 }
 

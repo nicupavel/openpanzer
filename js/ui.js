@@ -1,4 +1,4 @@
-/**
+/**`
  * UI - handles mouse and dialog boxes
  *
  * http://www.linuxconsulting.ro
@@ -16,6 +16,7 @@ function UI(scenario)
 	var map = l.buildMap();
 	map.dumpMap();
 	buildMainMenu();
+	buildEquipmentWindow();
 	
 	var r = new Render(map);
 	r.cacheImages(function() { r.render(); });
@@ -27,9 +28,9 @@ function UI(scenario)
 	
 	this.button = function(id) { UI:button(id); } //Hack to bring up the mainmenu //TODO remove this
 	
-	//We don't want equipment menu to be built on page load
-	//but when user click the equipment button
-	var builtEquipment = false;
+	//To which equipment class code each button refers in equipment window
+	var classDict =	{'but-aa': 9, 'but-at': 4, 'but-arty':8, 'but-inf':1,
+				     'but-rcn': 3, 'but-tank':2, 'but-af': 10, 'but-ab': 11};
 	
 
 //TODO break up this mess
@@ -228,12 +229,8 @@ function button(id)
 			if (v === "visible") { $('equipment').style.visibility = "hidden"; }
 			else 
 			{ 
-				if (!builtEquipment) 
-				{ 
-					buildEquipmentMenu()
-					builtEquipment = true;
-				}
 				$('equipment').style.visibility = "visible"; 
+				updateEquipmentWindow(2); //As default show tanks
 			}
 			break;
 		}	
@@ -267,9 +264,18 @@ function getMouseInfo(canvas, e)
 	var minfo =  new mouseInfo(mx, my, rclick);
 	return minfo;
 }
+
 function updateUnitInfoWindow(u)
 {
 	$('unit-info').style.visibility  = "visible";
+	
+	//Temp test call from equipment window
+	if (typeof (u.unitData) === 'undefined') 
+	{
+		u.unitData = u;
+		u.flag = u.country;
+		u.strength = 10;
+	}
 	
 	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
@@ -288,6 +294,7 @@ function updateUnitInfoWindow(u)
 	$('dair').innerHTML = u.unitData.airdef;
 	$('dclose').innerHTML = u.unitData.closedef;
 	$('drange').innerHTML = u.unitData.rangedefmod;
+
 	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
 }
 
@@ -310,8 +317,34 @@ function newScenario(scenario)
 	r.cacheImages(function() { r.render(); });
 }
 
-function buildEquipmentMenu()
+function buildEquipmentWindow()
 {
+	//Build the class selection buttons [button name, description, unit class id from equipment.js]
+	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
+					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],['but-af','Air Fighter', 10],
+					  ['but-ab','Air Bomber', 11]];
+					  
+	for (b in eqClassButtons)
+	{
+		var div = addTag('eqSelClass','div');
+		var img = addTag(div, 'img');
+		
+		var id = eqClassButtons[b][0];
+		div.id = id;
+		div.title = eqClassButtons[b][1];
+		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
+		img.id = id;
+		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
+		div.onclick = function() { UI:updateEquipmentWindow(this.eqclass); }
+	}
+}
+
+function updateEquipmentWindow(eqclass)
+{				 
+	//Remove older entries
+	$('eqCurrentUnitList').innerHTML = "";
+	$('eqUnitList').innerHTML = "";
+	
 	//The actual units in the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
@@ -324,15 +357,21 @@ function buildEquipmentMenu()
 		txt.innerHTML = unitList[i].unitData.name;
 	}
 	//Units in equipment
-	for (var i = 1; i < 585; i++)
+	for (var i in equipment)
 	{
-		var div = addTag('eqUnitList', 'div');
-		var img = addTag(div, 'img');
-		var txt = addTag(div, 'div');
 		var u = equipment[i];
-		div.className = "eqUnitBox";
-		img.src = u.icon;
-		txt.innerHTML = u.name;
+		if (u.class === eqclass)
+		{
+			var div = addTag('eqUnitList', 'div');
+			var img = addTag(div, 'img');
+			var txt = addTag(div, 'div');
+		
+			div.className = "eqUnitBox";
+			div.unitid = u.id;
+			div.onclick = function() { updateUnitInfoWindow(equipment[this.unitid]); };
+			img.src = u.icon;
+			txt.innerHTML = u.name;
+		}
 	}
 }
 
