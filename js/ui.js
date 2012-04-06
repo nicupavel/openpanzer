@@ -359,7 +359,7 @@ function updateEquipmentWindow(eqclass)
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		if (unitList[i].unitData.country = country)
+		if (unitList[i].unitData.country === country)
 		{
 			var div = addTag('eqCurrentUnitList', 'div');
 			var img = addTag(div, 'img');
@@ -368,12 +368,13 @@ function updateEquipmentWindow(eqclass)
 			img.src = unitList[i].unitData.icon;
 			txt.innerHTML = unitList[i].unitData.name;
 		}
+		
 	}
 	//Units in equipment
 	for (var i in equipment)
 	{
 		var u = equipment[i];
-		if (u.class === eqclass && u.country === country)
+		if ((u.class === eqclass) && (u.country === country))
 		{
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');

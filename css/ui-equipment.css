@@ -48,6 +48,18 @@
 	float: right;
 }
 
+#eqUnitTransport
+{
+	border: 0px solid #fff;
+	position: absolute;
+	overflow: auto;
+	height: 140px;
+	width:250px;
+	top: 330px;
+	left: 53px;
+	float: right;
+}
+
 #eqSelClass
 {
 	border: 0px solid #fff;
