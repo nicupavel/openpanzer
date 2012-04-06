@@ -60,6 +60,23 @@
 	float: right;
 }
 
+#eqSelCountry
+{
+	border: 0px solid #fff;
+	position: absolute;
+	overflow: hidden;
+	margin-top:3px;
+	margin-left:2px;
+	height: 40px;
+	width:21px;
+	top: 35px;
+	left: 15px;
+	background-image: url('../resources/ui/flags/flags_med.png');
+	background-repeat: no-repeat;
+	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
+	z-index:100;
+}
+
 .eqUnitBox
 {
 	border: 0px solid #fff;
@@ -75,8 +92,10 @@
 }
 .eqUnitBox img
 {
+	/*select the 4th image each 80px wide */
 	position: absolute;
-	clip:rect(0px, 80px, 50px, 0px);
+	left: -240px;
+	clip:rect(0px, 320px, 50px, 240px);
 }
 .eqUnitBox div
 {

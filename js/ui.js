@@ -26,12 +26,7 @@ function UI(scenario)
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 	
-	this.button = function(id) { UI:button(id); } //Hack to bring up the mainmenu //TODO remove this
-	
-	//To which equipment class code each button refers in equipment window
-	var classDict =	{'but-aa': 9, 'but-at': 4, 'but-arty':8, 'but-inf':1,
-				     'but-rcn': 3, 'but-tank':2, 'but-af': 10, 'but-ab': 11};
-	
+	this.mainMenuButton = function(id) { UI:mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 
 //TODO break up this mess
 function handleMouseClick(e) 
@@ -162,7 +157,7 @@ function buildMainMenu()
 		img.id = id;
 		img.src = "resources/ui/menu/images/" + id + ".png";
 		
-		div.onclick = function() { UI:button(this.id); }
+		div.onclick = function() { UI:mainMenuButton(this.id); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
@@ -172,7 +167,7 @@ function buildMainMenu()
 	ld.className = "message";
 }
 
-function button(id)
+function mainMenuButton(id)
 {
 	console.log("Clicked button: " + id);
 	switch(id) 
@@ -321,9 +316,21 @@ function buildEquipmentWindow()
 {
 	//Build the class selection buttons [button name, description, unit class id from equipment.js]
 	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
-					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],['but-af','Air Fighter', 10],
-					  ['but-ab','Air Bomber', 11]];
+					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
+					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 					  
+	//The default selected country in the div
+	$('eqSelCountry').country = 8;
+	$('eqSelCountry').onclick = function() 
+		{
+			var c = this.country; 
+			if (c >= 26) c = 0; 
+			this.country = ++c; 
+			var flagPos = -21 * (c - 1);
+			this.style.backgroundPosition = "" + flagPos +"px 0px";
+			updateEquipmentWindow(2);
+		};
+	
 	for (b in eqClassButtons)
 	{
 		var div = addTag('eqSelClass','div');
@@ -340,27 +347,33 @@ function buildEquipmentWindow()
 }
 
 function updateEquipmentWindow(eqclass)
-{				 
+{
 	//Remove older entries
 	$('eqCurrentUnitList').innerHTML = "";
 	$('eqUnitList').innerHTML = "";
+	
+	//The current selected coutry in the div
+	var country = $('eqSelCountry').country;
 	
 	//The actual units in the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		var div = addTag('eqCurrentUnitList', 'div');
-		var img = addTag(div, 'img');
-		var txt = addTag(div, 'div');
-		div.className = "eqUnitBox";
-		img.src = unitList[i].unitData.icon;
-		txt.innerHTML = unitList[i].unitData.name;
+		if (unitList[i].unitData.country = country)
+		{
+			var div = addTag('eqCurrentUnitList', 'div');
+			var img = addTag(div, 'img');
+			var txt = addTag(div, 'div');
+			div.className = "eqUnitBox";
+			img.src = unitList[i].unitData.icon;
+			txt.innerHTML = unitList[i].unitData.name;
+		}
 	}
 	//Units in equipment
 	for (var i in equipment)
 	{
 		var u = equipment[i];
-		if (u.class === eqclass)
+		if (u.class === eqclass && u.country === country)
 		{
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');
@@ -386,5 +399,5 @@ function gameStart()
 	//scenario="resources/scenarios/xml/dessau.xml";
 	ui = new UI(scenario);
 	//Bring up the "Main Menu"
-	ui.button('mainmenu');
+	ui.mainMenuButton('mainmenu');
 }
