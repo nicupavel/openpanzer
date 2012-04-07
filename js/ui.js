@@ -318,9 +318,11 @@ function buildEquipmentWindow()
 	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
 					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
-					  
+	
+	$('eqOkBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 	//The default selected country in the div
 	$('eqSelCountry').country = 8;
+	$('eqSelCountry').title = 'Click to change country';
 	$('eqSelCountry').onclick = function() 
 		{
 			var c = this.country; 
