@@ -39,7 +39,7 @@ function Unit(unitDataId)
 	
 	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true; console.log("hit with:" + losses);}
 	this.fire = function() {this.ammo--; this.hasFired = true;}
-	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true}
+	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true;}
 	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }

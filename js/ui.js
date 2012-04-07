@@ -96,7 +96,7 @@ function handleMouseClick(e)
 					var win = map.updateVictorySides(side, enemyside);
 					if (win) { UI:uiMessage("Victory","Side " + sidesName[side] + " wins by capturing all victory hexes"); }
 				}
-				srcHex.unit.hasMoved = true;
+				srcHex.unit.move(1); //TODO proper GameRules.distance
 				if (hex.flag !== -1) { hex.flag = player.country; }
 				hex.unit = srcHex.unit;
 				hex.owner = srcHex.unit.owner;
@@ -118,13 +118,12 @@ function handleMouseClick(e)
 
 function handleMouseMove(e) 
 {
-	var hex;
 	var minfo = getMouseInfo(canvas, e);
 	var cell = r.screenToCell(minfo.x, minfo.y);
 	var row = cell.row;
 	var col = cell.col;
 	
-	hex = map.map[row][col];
+	var hex = map.map[row][col];
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
 	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text; }
@@ -189,6 +188,7 @@ function mainMenuButton(id)
 		
 		case 'endturn':
 		{
+			//TODO Handle End Turn in Map Class or create a Game Class
 			map.resetUnits();
 			map.delMoveSel();
 			map.delAttackSel();
@@ -225,7 +225,7 @@ function mainMenuButton(id)
 			else 
 			{ 
 				$('equipment').style.visibility = "visible"; 
-				updateEquipmentWindow(2); //As default show tanks
+				updateEquipmentWindow(2); //By default show tanks
 			}
 			break;
 		}	
@@ -256,8 +256,7 @@ function getMouseInfo(canvas, e)
 	mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
 	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
 	
-	var minfo =  new mouseInfo(mx, my, rclick);
-	return minfo;
+	return new mouseInfo(mx, my, rclick);
 }
 
 function updateUnitInfoWindow(u)

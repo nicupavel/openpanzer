@@ -95,11 +95,6 @@ var sidesName =
 	"Allies"
 ];
 
-var targetType = 
-{
-	soft:0,hard:1,air:2,sea:3
-};
-
 function mouseInfo(x, y, rclick)
 {
 	this.x = x;

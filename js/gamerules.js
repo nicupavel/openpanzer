@@ -16,12 +16,12 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	var allowedCells = [];
 	var unit = map[row][col].unit;
 	
-	if (unit === null || unit.hasMoved) 
-	{
-		return allowedCells;
-	}
+	if (unit === null || unit.hasMoved) return allowedCells;
+	
 	var range = unit.unitData.movpoints;
-	console.log("move range: "+ range);
+	//if (range > unit.fuel) range = unit.fuel; //TODO check unit type if needs fuel to move
+	
+	console.log("move range: " + range);
 	var cellList = getCellsInRange(row, col, range, mrows, mcols);
 	for (var i = 0; i < cellList.length; i++)
 	{
@@ -39,13 +39,10 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 	var allowedCells = [];
 	var unit = map[row][col].unit;
 	
-	if (unit === null || unit.hasFired) 
-	{
-		return allowedCells;
-	}
+	if (unit === null || unit.hasFired || unit.ammo <= 0) return allowedCells; 
+	
 	//TODO weather ?
 	var range = unit.unitData.gunrange;
-	
 	if (range == 0)	range = 1;
 		
 	console.log("attack range: "+ range);
@@ -79,19 +76,19 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	//Attacking unit type
 	switch(at)
 	{
-		case targetType.air:
+		case unitType.air:
 		{
 			tav = tUnit.unitData.airatk;
 			tdv = tUnit.unitData.airdef;
 			break;
 		}
-		case targetType.soft:
+		case unitType.soft:
 		{
 			tav = tUnit.unitData.softatk;
 			tdv = tUnit.unitData.grounddef;
 			break;
 		}
-		case targetType.hard:
+		case unitType.hard:
 		{
 			tav = tUnit.unitData.hardatk;
 			tdv = tUnit.unitData.grounddef;
@@ -101,20 +98,20 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	
 	switch(tt)
 	{
-		case targetType.air:
+		case unitType.air:
 		{
 			
 			aav = aUnit.unitData.airatk;
 			adv = aUnit.unitData.airdef;
 			break;
 		}
-		case targetType.soft:
+		case unitType.soft:
 		{
 			aav = aUnit.unitData.softatk;
 			adv = aUnit.unitData.grounddef;
 			break;
 		}
-		case targetType.hard:
+		case unitType.hard:
 		{
 			aav = aUnit.unitData.hardatk;
 			adv = aUnit.unitData.grounddef;
@@ -136,23 +133,26 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 
 function canAttack(unit, targetUnit)
 {
+	if (unit.ammo === 0)
+		return false;
 	if (targetUnit === null)
 		return false;
 	if (unit.owner === targetUnit.owner)
 		return false;
-	
+	if (unit.unitData.airatk == 0 && isAir(targetUnit)) //TODO There is a special bit for this.
+		return false;
+		
 	return true;
 }
 //Checks if a given unit can move into a hex
 //TODO return the cost of moving into a hex depending on terrain
+//TODO Air units can move over ground units
 function canMoveInto(unit, hex)
 {
+	if (hex.unit !== null) 	return false;
+	
 	if (isGround(unit))
 	{
-		if (hex.unit !== null) 
-		{ 
-			return false 
-		};
 		if ((hex.terrain >= terrainType.Mountain) && 
 		   (hex.terrain != terrainType.Sand) && 
 		   (hex.terrain != terrainType.River) && 
@@ -170,18 +170,13 @@ function canMoveInto(unit, hex)
 	}
 	
 	if (isSea(unit))
-	{
-		if (hex.unit !== null) 
-		{ 
-			return false 
-		};
+	{	
 		if ((hex.terrain != terrainType.Ocean) && (hex.terrain != terrainType.Port))
 		{
 			return false;
 		}
 		return true;
 	}
-	
 	return false;
 }
 
@@ -213,7 +208,6 @@ function isGround(unit)
 }
 
 //Returns the distance between 2 hexes
-//TODO replace with bitops
 function distance(x1, y1, x2, y2)
 {
 	var d = 0;
@@ -239,6 +233,9 @@ function getCellsInRange(row, col, range, mrows, mcols)
 {
 	var cellList = [];
 	var cell = null;
+	
+	if ( range <= 0) return cellList;
+	
 	var minRow = row - range;
 	var maxRow = row + range;
 	if (minRow < 0) { minRow = 0; }

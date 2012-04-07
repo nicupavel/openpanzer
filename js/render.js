@@ -57,7 +57,6 @@ function Render(mapObj)
 		var hex;
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
-
 		for (row = 0; row < map.rows; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
@@ -80,7 +79,6 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
-				//TODO read text color from a country list
 				if (hex.isMoveSel) { style = this.style.selected; }
 				if (hex.isAttackSel) { style = this.style.attack; }
 				if (hex.isCurrent) { style = this.style.current; }
@@ -91,7 +89,6 @@ function Render(mapObj)
 		}
 	}
 		
-
 	//Renders attack or transport move cursor 
 	this.drawCursor = function(cell)
 	{
@@ -107,8 +104,9 @@ function Render(mapObj)
 		{ 
 			redraw = true; //Redraw because a new unit has been selected
 		}
+		//TODO Check if we should generate an TRANSPORT Cursor
 		
-		//Check if we should generate an attack cursor
+		//Check if we should generate an ATTACK cursor
 		if (hex.isAttackSel && !map.currentHex.hex.unit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
@@ -118,11 +116,11 @@ function Render(mapObj)
 				redraw = true; //Redraw because a mouse is over a new cell
 				var atkunit = map.currentHex.hex.unit;
 				var defunit = hex.unit;
-				lastCursorUnit = atkunit;
-				lastCursorCell = cell;
 				var atkflag = map.getPlayer(atkunit.owner).country;
 				var defflag = map.getPlayer(defunit.owner).country;
 				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
+				lastCursorUnit = atkunit;
+				lastCursorCell = cell;
 				lastCursorImage = generateAttackCursor(cr.kills, cr.losses, atkflag, defflag);
 			}
 			//only assign a new css cursor if needed (to reduce html element load)
@@ -135,10 +133,9 @@ function Render(mapObj)
 		}
 		else
 		{
-			//TODO transport cursor
+			//TODO PG2 default cursor
 			ca.style.cursor = 'default';
 		}
-		
 	}
 	
 	//draws an Animation
@@ -174,26 +171,23 @@ function Render(mapObj)
 	//Converts from screen x,y to row,col in map array
 	this.screenToCell = function(x, y)
 	{
-		var vrow, vcol; //virtual graphical rows/cols
+		var vrow; //virtual graphical rows
 		var trow, tcol; //true map rows/cols
+
+		//tcol = parseInt((x - renderOffsetX) / (s + h)); //without PG2 offset
+		tcol = Math.round((x - renderOffsetX) / (s + h)) - 1;
 		
-		//a graphical column in the grid not the array column
-		//vcol = parseInt((x - renderOffsetX) / (s + h)); //without PG2 offset
-		vcol = Math.round((x - renderOffsetX) / (s + h)) - 1;
-		//real array column
-		tcol = vcol;
 		// a graphical row not the array row
 		//vrow = parseInt((y - renderOriginY) / r); //Half hexes //without PG2 offset
-		vrow = Math.round((y - renderOffsetY * (~vcol & 1)) / r); //Half hexes add r if col is odd
+		vrow = Math.round((y - renderOffsetY * (~tcol & 1)) / r); //Half hexes add r if col is odd
 		
 		//shift to correct row index	
-		//trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (vcol & 1); //without PG2 offset
+		//trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (tcol & 1); //without PG2 offset
 		trow = Math.round(vrow/2) - 1 * (vrow & 1);
 		if (trow < 0) { trow = 0; }
 		
-		var cell = new Cell(trow, tcol);
-		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + vcol + "]");
-		return cell;
+		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + tcol + "]");
+		return new Cell(trow, tcol);
 	}
 	
 	//TODO create a resource caching class
@@ -397,7 +391,6 @@ function Render(mapObj)
 			c.stroke();
 			c.closePath();
 		}
-		
 	}
 	
 	function drawHexGrid(x0, y0, style)
