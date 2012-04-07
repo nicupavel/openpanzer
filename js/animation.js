@@ -22,7 +22,7 @@ function Animation(o)
 	{
 		o.ctx.clearRect(o.x, o.y, o.width, o.height);
 		if (count >= o.frames) { clearInterval(timer);  }
-		o.ctx.drawImage(o.image, o.width * count, 0, o.width, o.height, o.x, o.y, o.width, o.height)
+		o.ctx.drawImage(o.image, o.width * count, 0, o.width, o.height, o.x, o.y, o.width, o.height);
 		count++;
 	}
 }

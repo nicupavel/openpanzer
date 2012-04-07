@@ -391,7 +391,7 @@ function Render(mapObj)
 			c.beginPath();
 			c.arc(tx-5, ty + 5, 3, 0, Math.PI*2, false);
 			c.fillStyle = "grey";
-			c.strokeStyle = "#DC143C";
+			c.strokeStyle = "crimson";
 			c.lineWidth = 2;
 			c.fill();
 			c.stroke();

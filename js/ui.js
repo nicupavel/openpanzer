@@ -367,6 +367,13 @@ function updateEquipmentWindow(eqclass)
 			div.className = "eqUnitBox";
 			img.src = unitList[i].unitData.icon;
 			txt.innerHTML = unitList[i].unitData.name;
+			div.eqclass = unitList[i].unitData.class;
+			div.country = unitList[i].unitData.country;
+			div.onclick = function() 
+				{ 
+					$('eqSelCountry').country = this.country; 
+					UI:updateEquipmentWindow(this.eqclass);
+				}
 		}
 		
 	}
