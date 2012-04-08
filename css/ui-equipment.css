@@ -15,7 +15,6 @@
 	background-image: url('../resources/ui/dialogs/equipment/images/eq-bg.png');
 	background-repeat: no-repeat;
 	z-index:98;
-	overflow-y: auto;
 	visibility: hidden;
 	overflow: hidden;
 }
@@ -85,7 +84,6 @@
 
 #eqCurrentUnitList
 {
-	z-index:3;
 	border: 0px solid #fff;
 	position: fixed;
 	white-space: nowrap; /* only go to the right not below */
@@ -93,8 +91,7 @@
 	width: 800px;
 	margin-left: -400px;
 	left: 50%;
-	
-	height: 76px;
+	height: 78px;
 	padding-top: 5px;
 	top: 30px;
 	background: rgba(0,0,0,0.6);

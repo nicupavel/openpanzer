@@ -320,15 +320,19 @@ function buildEquipmentWindow()
 	
 	$('eqOkBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 	//The default selected country in the div
-	$('eqSelCountry').country = 8;
+	var c = parseInt(map.getPlayer(0).country); //Start from 1
+	var pos = -21 * c;
+	$('eqSelCountry').country = c + 1;
+	$('eqSelCountry').owner = 0;
+	$('eqSelCountry').style.backgroundPosition = "" + pos + "px 0px";
 	$('eqSelCountry').title = 'Click to change country';
 	$('eqSelCountry').onclick = function() 
 		{
 			var c = this.country; 
 			if (c >= 26) c = 0; 
-			this.country = ++c; 
-			var flagPos = -21 * (c - 1);
+			var flagPos = -21 * c;
 			this.style.backgroundPosition = "" + flagPos +"px 0px";
+			this.country = ++c; 
 			updateEquipmentWindow(2);
 		};
 	
@@ -355,11 +359,11 @@ function updateEquipmentWindow(eqclass)
 	
 	//The current selected coutry in the div
 	var country = $('eqSelCountry').country;
-	
 	//The actual units in the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
+		//TODO should list owners not countries
 		if (unitList[i].unitData.country === country)
 		{
 			var div = addTag('eqCurrentUnitList', 'div');
@@ -376,7 +380,6 @@ function updateEquipmentWindow(eqclass)
 					UI:updateEquipmentWindow(this.eqclass);
 				}
 		}
-		
 	}
 	//Units in equipment
 	for (var i in equipment)
