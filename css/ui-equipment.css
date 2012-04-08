@@ -17,6 +17,7 @@
 	z-index:98;
 	visibility: hidden;
 	overflow: hidden;
+	white-space: nowrap;
 }
 
 #eqUnitList
@@ -82,24 +83,36 @@
 	left: 215px;
 }
 
-#eqCurrentUnitList
+#container-unitlist
 {
 	border: 0px solid #fff;
 	position: fixed;
-	white-space: nowrap; /* only go to the right not below */
-	overflow: auto;	
 	width: 800px;
 	margin-left: -400px;
 	left: 50%;
-	height: 78px;
-	padding-top: 5px;
 	top: 30px;
-	background: rgba(0,0,0,0.6);
 	color: #fff;
 	font-weight:bold;
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
+	z-index: 98;
+}
+
+#hscroll-unitlist
+{
+	width:760px;
+	margin:0 auto;
+	overflow: auto;
+}
+
+#unitlist
+{
+	float:left;
+	padding-left: 5px;
+	background: rgba(0,0,0,0.6);
+	visibility: hidden;
+	margin-right: -9000px;
 }
 
 .eqUnitBox
@@ -109,23 +122,41 @@
 	height: 76px;
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
 	background-repeat: no-repeat;
-	margin-bottom: 5px;
+	margin-top: 5px;
 	margin-right: 5px;
 	overflow: hidden;
 	position: relative;
 	float: right;
 }
-.eqUnitBox img
+.eqUnitBox:hover
+{
+	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed.png');
+	background-repeat: no-repeat;
+}
+
+.eqUnitBox > img:first-child /*for the unit image*/
 {
 	/*select the 4th image each 80px wide */
 	position: absolute;
 	left: -240px;
 	clip:rect(0px, 320px, 50px, 240px);
 }
+
+.eqUnitBox img
+{
+	vertical-align:middle;
+}
+
 .eqUnitBox div
 {
+	border: 0px solid #fff;
 	position: absolute;
 	top: 56px;
 	left: 5px;
-	width: 99px;
+	width: 110px;
+	font-weight:normal;
+	font-family: Arial;
+	font-size: 10px;
+	text-shadow: none;
+	white-space: nowrap;
 }

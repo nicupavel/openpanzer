@@ -221,10 +221,15 @@ function mainMenuButton(id)
 		{
 			var v = $('equipment').style.visibility;
 			
-			if (v === "visible") { $('equipment').style.visibility = "hidden"; }
+			if (v === "visible") 
+			{ 
+				$('equipment').style.visibility = "hidden"; 
+				$('unitlist').style.visibility = "hidden"; 
+			}
 			else 
 			{ 
 				$('equipment').style.visibility = "visible"; 
+				$('unitlist').style.visibility = "visible"; 
 				updateEquipmentWindow(2); //By default show tanks
 			}
 			break;
@@ -270,7 +275,6 @@ function updateUnitInfoWindow(u)
 		u.flag = u.country;
 		u.strength = 10;
 	}
-	
 	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
 	$('unit-name').innerHTML = u.unitData.name;
@@ -318,7 +322,6 @@ function buildEquipmentWindow()
 					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 	
-	$('eqOkBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 	//The default selected country in the div
 	var c = parseInt(map.getPlayer(0).country); //Start from 1
 	var pos = -21 * c;
@@ -335,7 +338,7 @@ function buildEquipmentWindow()
 			this.country = ++c; 
 			updateEquipmentWindow(2);
 		};
-	
+	//Unit Class buttons	
 	for (b in eqClassButtons)
 	{
 		var div = addTag('eqSelClass','div');
@@ -349,24 +352,30 @@ function buildEquipmentWindow()
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() { UI:updateEquipmentWindow(this.eqclass); }
 	}
+	
+	$('eqOkBut').onclick = function() 
+		{ 
+			$('equipment').style.visibility = "hidden"; 
+			$('unitlist').style.visibility = "hidden"; 
+		}
 }
 
 function updateEquipmentWindow(eqclass)
 {
 	//Remove older entries
-	$('eqCurrentUnitList').innerHTML = "";
+	$('unitlist').innerHTML = "";
 	$('eqUnitList').innerHTML = "";
 	
 	//The current selected coutry in the div
 	var country = $('eqSelCountry').country;
-	//The actual units in the map
+	//The actual units on the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		//TODO should list owners not countries
+		//TODO should check owners not countries
 		if (unitList[i].unitData.country === country)
 		{
-			var div = addTag('eqCurrentUnitList', 'div');
+			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
@@ -390,12 +399,12 @@ function updateEquipmentWindow(eqclass)
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
-		
 			div.className = "eqUnitBox";
 			div.unitid = u.id;
 			div.onclick = function() { updateUnitInfoWindow(equipment[this.unitid]); };
 			img.src = u.icon;
-			txt.innerHTML = u.name;
+			txt.innerHTML = u.name + " - " + u.cost*12 + " ";
+			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 		}
 	}
 }
