@@ -224,12 +224,12 @@ function mainMenuButton(id)
 			if (v === "visible") 
 			{ 
 				$('equipment').style.visibility = "hidden"; 
-				$('unitlist').style.visibility = "hidden"; 
+				$('container-unitlist').style.visibility = "hidden"; 
 			}
 			else 
 			{ 
 				$('equipment').style.visibility = "visible"; 
-				$('unitlist').style.visibility = "visible"; 
+				$('container-unitlist').style.visibility = "visible"; 
 				updateEquipmentWindow(2); //By default show tanks
 			}
 			break;
@@ -356,7 +356,7 @@ function buildEquipmentWindow()
 	$('eqOkBut').onclick = function() 
 		{ 
 			$('equipment').style.visibility = "hidden"; 
-			$('unitlist').style.visibility = "hidden"; 
+			$('container-unitlist').style.visibility = "hidden"; 
 		}
 }
 
