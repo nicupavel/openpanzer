@@ -24,12 +24,12 @@
 {
 	border: 0px solid #fff;
 	position: absolute;
-	overflow: auto;
 	height: 320px;
 	width:250px;
 	top: 24px;
 	left: 30px;
 	float: right;
+	overflow: auto;
 }
 
 #eqUnitTransport
