@@ -268,7 +268,7 @@ function updateUnitInfoWindow(u)
 {
 	$('unit-info').style.visibility  = "visible";
 	
-	//Temp test call from equipment window
+	//Call from equipment window
 	if (typeof (u.unitData) === 'undefined') 
 	{
 		u.unitData = u;
