@@ -16,32 +16,27 @@
 	background-repeat: no-repeat;
 	z-index:98;
 	visibility: hidden;
-	overflow: hidden;
-	white-space: nowrap;
+	overflow: hidden;	
 }
 
 #eqUnitList
 {
 	border: 0px solid #fff;
+	/*Win 7 bug: specifying the position here leaves the scrolling bars on screen when div is hidden */
+	/*
 	position: absolute;
 	height: 320px;
 	width:250px;
 	top: 24px;
 	left: 30px;
-	float: right;
+	*/
+	height: 320px;
+	width:240px;
+	margin-top: 25px;
+	margin-left: 40px;
+	padding-left: 0px;
+	float: left;
 	overflow: auto;
-}
-
-#eqUnitTransport
-{
-	border: 0px solid #fff;
-	position: absolute;
-	overflow: auto;
-	height: 140px;
-	width:250px;
-	top: 370px;
-	left: 53px;
-	float: right;
 }
 
 #eqSelClass
@@ -50,7 +45,7 @@
 	position: absolute;
 	overflow: auto;
 	height: 340px;
-	width:60px;
+	width:47px;
 	top: 45px;
 	left: 8px;
 	float: right;
