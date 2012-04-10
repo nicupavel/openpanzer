@@ -35,7 +35,7 @@ function Render(mapObj)
 	var s = 30;  //hexagon segment size                    |\  
 	var h = s/2; //hexagon height h = sin(30)*s           r| \ s
 	var r = 25;  //hexagon radius r = cos(30)*s ~ s*0.833  -h-
-	
+		
 	// Canvas offset from the browser window (leaves space for top menu)
 	var canvasOffsetX = 0;
 	var canvasOffsetY = 30;
@@ -43,6 +43,11 @@ function Render(mapObj)
 	// Since PG2 maps define even the half and "quarter" hexes that form at the edges we need to offset those
 	var renderOffsetX = - (s + h);
 	var renderOffsetY = - r;
+	
+	//we slice the screen in columns of s + h size
+	var colSlice = s + h; 
+	//add an offset for better rounding of mouse position in a column
+	var mousePrecisionOffset = s/100;
 	
 	//The rendering style
 	this.style = new RenderStyle();
@@ -153,7 +158,7 @@ function Render(mapObj)
 		}
 		
 		y0 = y0 - imgExplosions.height;
-		x0 = x0 - imgExplosions.width/(12*2);
+		x0 = x0 - imgExplosions.width/(12 * 2); // mid of one of the 12 frames 
 		
 		var explosion = new Animation({
 			ctx:a, 
@@ -175,22 +180,21 @@ function Render(mapObj)
 		var trow, tcol; //true map rows/cols
 
 		//tcol = parseInt((x - renderOffsetX) / (s + h)); //without PG2 offset
-		tcol = Math.round((x - renderOffsetX) / (s + h)) - 1;
+		tcol = Math.round((x - renderOffsetX) / colSlice + mousePrecisionOffset) - 1; 
 		
-		// a graphical row not the array row
-		//vrow = parseInt((y - renderOriginY) / r); //Half hexes //without PG2 offset
-		vrow = Math.round((y - renderOffsetY * (~tcol & 1)) / r); //Half hexes add r if col is odd
+		//a graphical row (half hex) not the array row
+		//vrow = parseInt((y - renderOffsetY) / r); //Half hexes //without PG2 offset
+		vrow = (y - renderOffsetY * (~tcol & 1)) / r; //Half hexes add r if col is odd
 		
 		//shift to correct row index	
 		//trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (tcol & 1); //without PG2 offset
-		trow = Math.round(vrow/2) - 1 * (vrow & 1);
+		trow = Math.round(vrow/2 - 1 * (vrow & 1));
 		if (trow < 0) { trow = 0; }
 		
 		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + tcol + "]");
 		return new Cell(trow, tcol);
 	}
 	
-	//TODO create a resource caching class
 	//Caches images, func a function to call upon cache completion
 	this.cacheImages = function(func)
 	{
