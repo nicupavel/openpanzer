@@ -19,6 +19,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	if (unit === null || unit.hasMoved) return allowedCells;
 	
 	var range = unit.unitData.movpoints;
+	if (range == 0) range = 1; //TODO temporary for the towed units to move
 	//if (range > unit.fuel) range = unit.fuel; //TODO check unit type if needs fuel to move
 	
 	console.log("move range: " + range);
