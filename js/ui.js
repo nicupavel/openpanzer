@@ -28,7 +28,6 @@ function UI(scenario)
 	
 	this.mainMenuButton = function(id) { UI:mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 
-//TODO break up this mess
 function handleMouseClick(e) 
 {
 	var hex;
@@ -39,43 +38,35 @@ function handleMouseClick(e)
 	
 	hex = map.map[row][col];
 	
+	//Right click only to show unit info
+	if (minfo.rclick) 
+	{ 
+		if (hex.unit) updateUnitInfoWindow(hex.unit);
+		return true;
+	}
+	
 	//Clicked hex has a unit ?
 	if (hex.unit) 
 	{
 		if ((map.currentHex.hex !== null) && (hex.isAttackSel))
-		{	//attack an allowed hex
+		{	//attack an allowed hex unit
 			var atkunit = map.currentHex.hex.unit;
-			var defunit = hex.unit;
 			if (!atkunit.hasFired)
 			{
-				//attack function
-				console.log("attacking: " + row + "," +col);
-				atkunit.fire();
-				//TODO defunit should use ammo when defending
-				var cr = GameRules.calculateAttackResults(atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
-				//TODO do this better
-				defunit.hit(cr.kills)
-				r.drawAnimation(row, col);
-				atkunit.hit(cr.losses);
-				if(atkunit.destroyed) map.currentHex.hex.delUnit();
-				if (defunit.destroyed) hex.delUnit();
-				map.delAttackSel();
+				r.drawAnimation(row, col);		
+				map.attackUnit(atkunit, map.currentHex.row, map.currentHex.col, hex.unit, row, col);
 			}
 		}	
 		else //Select the new unit
 		{
-			map.delCurrentHex();
-			map.setCurrentHex(row, col);
-			map.delMoveSel();
-			map.delAttackSel();
-			
-			if (!hex.unit.hasMoved) 
-				map.setMoveRange(row, col); 
-			
-			if (!hex.unit.hasFired) 
-				map.setAttackRange(row, col); 
+			map.selectUnit(row, col);
 		}
-		if (minfo.rclick) { updateUnitInfoWindow(hex.unit);}
+		/*
+		var c  = parseInt(map.getPlayer(hex.unit.owner).country);
+		$('eqSelCountry').country = c + 1;
+		//TODO make unitList show strength/movement/attack status and update it on all actions
+		updateEquipmentWindow(hex.unit.unitData.class); 
+		*/
 	}	
 	else
 	{
@@ -86,22 +77,11 @@ function handleMouseClick(e)
 			//move to an allowed hex
 			if (hex.isMoveSel && !srcHex.unit.hasMoved) 
 			{
-				//TODO a move function in map class	
-				var player = map.getPlayer(srcHex.unit.owner)
-				var side = player.side;	
-				//Is a victory marked hex ?
-				if (hex.victorySide !== -1)
-				{
-					var enemyside = map.getPlayer(hex.owner).side;
-					var win = map.updateVictorySides(side, enemyside);
-					if (win) { UI:uiMessage("Victory","Side " + sidesName[side] + " wins by capturing all victory hexes"); }
+				var win = map.moveUnit(srcHex.unit, map.currentHex.row, map.currentHex.col, row, col);
+				if (win >= 0) 
+				{ 
+					UI:uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
 				}
-				srcHex.unit.move(1); //TODO proper GameRules.distance
-				if (hex.flag !== -1) { hex.flag = player.country; }
-				hex.unit = srcHex.unit;
-				hex.owner = srcHex.unit.owner;
-				srcHex.delUnit();
-				map.setAttackRange(row, col) //Put new attack range
 			} 		
 			map.delCurrentHex();
 		}
@@ -236,7 +216,7 @@ function mainMenuButton(id)
 		}	
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General version 1.0", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("HTML5 Panzer General version 1.1", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
@@ -368,6 +348,7 @@ function updateEquipmentWindow(eqclass)
 	
 	//The current selected coutry in the div
 	var country = $('eqSelCountry').country;
+	console.log("Country: " + country);
 	//The actual units on the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
@@ -390,6 +371,10 @@ function updateEquipmentWindow(eqclass)
 				}
 		}
 	}
+	
+	//Don't change the listing on dummy class
+	if (eqclass == 0) return;
+	
 	//Units in equipment
 	for (var i in equipment)
 	{

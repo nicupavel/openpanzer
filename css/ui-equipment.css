@@ -22,7 +22,7 @@
 #eqUnitList
 {
 	border: 0px solid #fff;
-	/*Win 7 bug: specifying the position here leaves the scrolling bars on screen when div is hidden */
+	/*Win 7 Chrome bug: specifying the position here leaves the scrolling bars on screen when div is hidden */
 	/*
 	position: absolute;
 	height: 320px;
@@ -30,9 +30,9 @@
 	top: 24px;
 	left: 30px;
 	*/
-	height: 320px;
+	height: 321px;
 	width:240px;
-	margin-top: 25px;
+	margin-top: 22px;
 	margin-left: 40px;
 	padding-left: 0px;
 	float: left;
@@ -76,7 +76,27 @@
 	width: 30px;
 	height: 30px;
 	top: 343px;
-	left: 215px;
+	left: 220px;
+}
+
+#eqUpgradeBut
+{
+	border: 0px solid #fff;
+	position:absolute;
+	width: 30px;
+	height: 30px;
+	top: 343px;
+	left: 180px;
+}
+
+#eqNewBut
+{
+	border: 0px solid #fff;
+	position:absolute;
+	width: 30px;
+	height: 30px;
+	top: 343px;
+	left: 140px;
 }
 
 #container-unitlist
@@ -97,7 +117,7 @@
 
 #hscroll-unitlist
 {
-	width:760px;
+	width:790px;
 	margin:0 auto;
 	overflow: auto;
 }
@@ -107,7 +127,7 @@
 	float:left;
 	padding-left: 5px;
 	background: rgba(0,0,0,0.6);
-	margin-right: -9000px;
+	margin-right: -20000px;
 }
 
 .eqUnitBox
@@ -137,7 +157,7 @@
 	clip:rect(0px, 320px, 50px, 240px);
 }
 
-.eqUnitBox img
+.eqUnitBox img /* other images like currency coin */
 {
 	vertical-align:middle;
 }

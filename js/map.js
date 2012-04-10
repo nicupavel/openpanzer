@@ -113,14 +113,27 @@ function Map()
 			}
 		}
 	}
-	//TODO also check for destroyed and remove it from list
+	//Checks for destroyed units and remove them from list
+	this.updateUnitList = function()
+	{
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i] !== null && unitList[i].destroyed) 
+				unitList.splice(i, 1);
+		}
+	}
+	
+	//Resets hasFired, hasMoved, hasRessuplied 
+	//TODO this should be a End Turn function
 	this.resetUnits = function()
 	{
 		for (var i = 0; i < unitList.length; i++)
 		{
-			if (unitList[i] !== null) unitList[i].resetUnit();
+			if (unitList[i] !== null) 
+				unitList[i].resetUnit();
 		}
 	}
+	
 	this.addUnit = function(unit) {	unitList.push(unit); }
 	this.getUnits = function() { return unitList; }
 	this.addPlayer = function(player) {	playerList.push(player); }
@@ -211,7 +224,7 @@ function Map()
 		}
 	}
 	
-	this.setAttackRange = function(row,col)
+	this.setAttackRange = function(row, col)
 	{
 		this.delAttackSel();
 		var allowedCells = GameRules.getAttackRange(this.map, row, col, this.rows, this.cols);
@@ -221,7 +234,71 @@ function Map()
 			this.setAttackSel(cell.row, cell.col);
 		}
 	}
-
+	
+	//atkunit from srow, scol attacks defunit from drow, dcol
+	this.attackUnit = function(atkunit, srow, scol, defunit, drow, dcol)
+	{
+		console.log("attacking: " + drow + "," +dcol);
+		//TODO defunit should use ammo when defending
+		atkunit.fire();
+		var cr = GameRules.calculateAttackResults(atkunit, srow, scol, defunit, drow, dcol);
+		//TODO do this better
+		defunit.hit(cr.kills)
+		atkunit.hit(cr.losses);
+		if (atkunit.destroyed) 
+			this.map[srow][scol].delUnit();
+			
+		if (defunit.destroyed) 
+			this.map[drow][dcol].delUnit();
+			
+		this.updateUnitList();
+		this.delAttackSel();
+	
+	}
+	
+	// moves a unit to a new hex returns side number if the move results in a win 
+	// -1 otherwise
+	this.moveUnit = function(unit, srow, scol, drow, dcol)
+	{
+		var srcHex = this.map[srow][scol];
+		var dstHex = this.map[drow][dcol];
+		var player = this.getPlayer(srcHex.unit.owner)
+		var side = player.side;	
+		var win = -1;
+		if (dstHex.flag !== -1) { dstHex.flag = player.country; }
+		
+		//Is a victory marked hex ?
+		if (dstHex.victorySide !== -1)
+		{
+			var enemyside = this.getPlayer(dstHex.owner).side;
+			if (this.updateVictorySides(side, enemyside))
+				win = side;
+		}
+		unit.move(1); //TODO proper GameRules.distance
+		dstHex.setUnit(unit);
+		dstHex.owner = unit.owner;
+		srcHex.delUnit();
+		this.setAttackRange(drow, dcol) //Put new attack range
+		
+		return win;
+	}
+	
+	// selects a new unit as the current unit
+	this.selectUnit = function(row, col)
+	{
+		var hex = this.map[row][col];
+		
+		this.delCurrentHex();
+		this.setCurrentHex(row, col);
+		this.delMoveSel();
+		this.delAttackSel();
+		
+		if (!hex.unit.hasMoved) 
+			this.setMoveRange(row, col); 
+		if (!hex.unit.hasFired) 
+			this.setAttackRange(row, col); 
+	}	
+	
 	this.dumpMap = function()
 	{
 		/*
