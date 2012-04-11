@@ -353,23 +353,34 @@ function Render(mapObj)
 				c.strokeRect  (tx-4, ty-4, flw+8, flh+8);
 				c.closePath();
 			}
-			
-			
 		}
 		//TODO draw bridge/blown bridges decals
 	}
 	
 	function drawHexZoomDecals(x0, y0, hex)
 	{
+		var flw = 21; //one flag width
+		var flh = 14; //flag height
+		
+		var tx = x0 +  s/2 - flw/2;
+		var ty = y0 +  r - flh - 2;
+		
+		var flag = -1;
+		var scale = 0;
+		
+		if (hex.unit !== null)
+		{
+			flag = map.getPlayer(hex.unit.owner).country;
+			scale = 1.4;
+		}
 		if (hex.flag !== -1 && hex.victorySide !== -1) 
 		{ 
-			var flw = 21; //one flag width
-			var flh = 14; //flag height
-			var tx = x0 +  s/2 - flw/2;
-			var ty = y0 +  r - flh - 2;
-			
-			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, 3*s, 3*s/(flw/flh));
+			flag = hex.flag;
+			scale = 3;
 		}
+		if (flag == -1) return;
+		
+		c.drawImage(imgFlags, flw * flag, 0, flw, flh, tx, ty, scale*s, scale*s/(flw/flh));
 	}
 	
 	function drawHexUnit(x0, y0, unit)
