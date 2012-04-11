@@ -11,9 +11,17 @@
 function UI(scenario)
 {
 	var turn = 0;
-	var l = new MapLoader();
-	l.loadMap(scenario);
-	var map = l.buildMap();
+	var map = null;
+	/*
+	map = GameState.restore();
+	console.log(map);
+	*/
+	if (map === null) 
+	{
+		var l = new MapLoader();
+		l.loadMap(scenario);
+		map = l.buildMap();
+	}
 	map.dumpMap();
 	buildMainMenu();
 	buildEquipmentWindow();
@@ -181,6 +189,7 @@ function mainMenuButton(id)
 			map.delMoveSel();
 			map.delAttackSel();
 			map.delCurrentHex();
+			GameState.save(map);
 			turn++;
 			$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
 			r.render();
@@ -295,12 +304,13 @@ function uiMessage(title, message)
 function newScenario(scenario)
 {
 	turn = 0;
+	GameState.clear();
 	l.loadMap(scenario);
 	map = l.buildMap();
 	map.dumpMap();
 	r.setNewMap(map);
-	$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
 	r.cacheImages(function() { r.render(); });
+	$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
 }
 
 function buildEquipmentWindow()

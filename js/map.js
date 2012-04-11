@@ -24,7 +24,7 @@ function Unit(unitDataId)
 	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
 	this.id = null;
 	this.owner = -1;
-	this.unitData = equipment[unitDataId];
+	this.unitData = equipment[unitDataId]; //TODO access thru a function to reduce the clutter on localStorage
 	this.hasMoved = false;
 	this.hasFired = false;
 	this.hasRessuplied = false;
