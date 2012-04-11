@@ -159,10 +159,18 @@ function mainMenuButton(id)
 		}
 		case 'zoom':
 		{	
-			//TODO maybe use transform on canvas this doesn't work in Firefox
+			var zoom = Math.min(window.innerWidth/canvas.width*100, window.innerHeight/canvas.height*100);
 			if ($('game').style.zoom === "100%" || $('game').style.zoom === '' )
-			{ $('game').style.zoom = "30%"; }
-			else { $('game').style.zoom = "100%"; }
+			{ 
+				$('game').style.zoom = zoom + "%"; 
+				r.isZoomed = true;
+			}
+			else 
+			{ 
+				$('game').style.zoom = "100%";
+				r.isZoomed = false;
+			}
+			r.render();
 			break;
 		}
 		

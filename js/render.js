@@ -52,6 +52,9 @@ function Render(mapObj)
 	//The rendering style
 	this.style = new RenderStyle();
 	
+	//Is canvas zoomed out
+	this.isZoomed = false;
+	
 	createLayers(); //Creates canvas layers
 				
 	this.render = function()
@@ -83,6 +86,11 @@ function Render(mapObj)
 					//x0 = renderOriginX + col * (s + h) + h;
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
+				}
+				if (this.isZoomed) 
+				{
+					drawHexZoomDecals(x0, y0, hex); 
+					continue;  
 				}
 				if (hex.isMoveSel) { style = this.style.selected; }
 				if (hex.isAttackSel) { style = this.style.attack; }
@@ -330,7 +338,7 @@ function Render(mapObj)
 			var tx = x0 +  s/2 - flw/2;
 			var ty = y0 + 2 * r - flh - 2;
 			
-			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh)
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh);
 			
 			if (hex.victorySide !== -1)
 			{
@@ -349,6 +357,19 @@ function Render(mapObj)
 			
 		}
 		//TODO draw bridge/blown bridges decals
+	}
+	
+	function drawHexZoomDecals(x0, y0, hex)
+	{
+		if (hex.flag !== -1 && hex.victorySide !== -1) 
+		{ 
+			var flw = 21; //one flag width
+			var flh = 14; //flag height
+			var tx = x0 +  s/2 - flw/2;
+			var ty = y0 +  r - flh - 2;
+			
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, 3*s, 3*s/(flw/flh));
+		}
 	}
 	
 	function drawHexUnit(x0, y0, unit)

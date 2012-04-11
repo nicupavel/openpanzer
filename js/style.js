@@ -12,38 +12,38 @@ function RenderStyle()
 {
 	var pg2hexstyle = 
 	{
-	"selected":{
+	"selected":{ //Move selected hexes
 		"fillColor": "rgba(128,128,128,0.5)",
 		"lineColor": "rgba(128,128,128,0.2)",
 		"lineWidth":  1,
 		"lineJoin":  "miter",
 		},
-	"attack":{
+	"attack":{ //Attack selected hexes
 		"fillColor": "rgba(128,128,128,0.5)",
 		"lineColor": "rgba(239,0,0,0.8)",
 		"lineWidth":  3,
 		"lineJoin":  "miter",
 		},
-	"current": {
+	"current": { //Current selected hex
 		"fillColor": null ,
 		"lineColor": "rgba(240,240,240,0.8)",
 		"lineWidth": 3,
 		"lineJoin": "round",
 		},
-	"normal": {
+	"normal": { //Normal drawing of hex grid
 		"fillColor": null,
 		"lineColor": "rgba(39,44,47,0.9)",
 		"lineWidth": 0.4,
 		"lineJoin": "miter",
 		},
-	"hidden": {
+	"hidden": { //Hidden drawin of hex grid
 		"fillColor": null,
 		"lineColor": "rgba(128,128,128,0.8)",
 		"lineWidth": 0.001,
 		"lineJoin": "miter",
 		}
 	}	
-	//How to draw selected, current(cursor selected) and generic hexes
+
 	var theme  = pg2hexstyle;;
 	var hexShown = true;
 	this.selected = theme.selected;
