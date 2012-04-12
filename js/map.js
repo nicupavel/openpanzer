@@ -9,13 +9,23 @@
  */
 
 // Unit, Hex, Player and Map classes
-function Player(playerID)
+function Player()
 {
-	this.id = playerID;
+	this.id = -1;
 	this.side = -1;
 	this.country = -1;
-	this.prestigeGain = 0;
+	this.prestige = 0;
 	this.playedTurn = false;
+	
+	//Copy values
+	this.copy = function(p)
+	{
+		this.id = p.id;
+		this.side = p.side;
+		this.country = p.country;
+		this.prestige = p.prestige;
+		this.playedTurn = p.playedTurn;
+	}
 	this.getCountryName = function() { return countryNames[this.country]; }
 }
 
@@ -38,7 +48,7 @@ function Unit(unitDataId)
 	this.destroyed = false; //flag to signal if a unit is destroyed
 	
 	//Copy values
-	this.setUnit = function(u) 
+	this.copy = function(u) 
 	{
 		this.id = u.id;
 		this.owner = u.owner;
@@ -83,7 +93,7 @@ function Hex()
 	this.isAttackSel = false; //current unit can attack this hex
 	
 	//Copy values
-	this.setHex = function(hex) 
+	this.copy = function(hex) 
 	{ 
 		this.unit = hex.unit;
 		this.terrain = hex.terrain;
@@ -213,7 +223,7 @@ function Map()
 	
 	this.setHex = function(row, col, hex)
 	{
-		this.map[row][col].setHex(hex); //copy values
+		this.map[row][col].copy(hex); //copy values
 		//Increment victorySides for each side
 		if (hex.victorySide !== -1) { sidesVictoryHexes[hex.victorySide]++; }
 	}

@@ -12,12 +12,12 @@ function UI(scenario)
 {
 	var turn = 0;
 	var map = null;
+	var l = new MapLoader();
 	
 	map = GameState.restore();
 		
 	if (map === null) 
 	{
-		var l = new MapLoader();
 		l.loadMap(scenario);
 		map = l.buildMap();
 	}
@@ -243,9 +243,7 @@ function mainMenuButton(id)
 				var scnOpt = addTag(scnSel, 'option');
 				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
 				scnOpt.text =  scenariolist[i][1];
-			}
-			
-			console.log(GameState.restore());
+			}		
 			break;
 		}
 	}

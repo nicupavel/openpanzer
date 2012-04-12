@@ -26,7 +26,6 @@ GameState.deleteItem = function(key)
 	localStorage.removeItem(key);
 }
 
-
 GameState.save = function(map)
 {
 	GameState.saveItem('openpanzer-map', map);
@@ -38,8 +37,9 @@ GameState.restore = function()
 	var map = new Map();
 	
 	var m = GameState.restoreItem('openpanzer-map');
-
 	var p = GameState.restoreItem('openpanzer-players');
+	
+	if ((m === null) || (p === null)) return null;
 	
 	map.rows = m.rows;
 	map.cols = m.cols;
@@ -54,20 +54,24 @@ GameState.restore = function()
 		for (c = 0; c < m.cols; c++)
 		{
 			var hex = m.map[r][c];
-			map.setHex(r, c, hex);
+			var tmphex = new Hex();
+			tmphex.copy(hex);
 			if (hex.unit !== null) 
 			{
 				u = new Unit(hex.unit.id);
-				u.setUnit(hex.unit);
+				u.copy(hex.unit);
+				tmphex.setUnit(u);
 				map.addUnit(u);
 			}
+			map.setHex(r, c, tmphex);
 		}
 	}
 	
 	for (i = 0; i < p.length; i++)
 	{
-		map.addPlayer(p[i]);
-		
+		player = new Player();
+		player.copy(p[i]);
+		map.addPlayer(player);
 	}
 	
 	return map;
