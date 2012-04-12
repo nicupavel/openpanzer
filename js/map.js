@@ -93,7 +93,6 @@ function Map()
 	this.terrainImage = null;
 	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
 	this.unitImagesList = [];
-	this.selectedHexes = [];
 	
 	var moveSelected = []; //selected hexes for current unit move destinations
 	var attackSelected = []; //selected hexes for current unit attack destinations
@@ -113,6 +112,7 @@ function Map()
 			}
 		}
 	}
+	
 	//Checks for destroyed units and remove them from list
 	this.updateUnitList = function()
 	{
