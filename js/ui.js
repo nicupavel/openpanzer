@@ -12,10 +12,9 @@ function UI(scenario)
 {
 	var turn = 0;
 	var map = null;
-	/*
+	
 	map = GameState.restore();
-	console.log(map);
-	*/
+		
 	if (map === null) 
 	{
 		var l = new MapLoader();
@@ -25,7 +24,7 @@ function UI(scenario)
 	map.dumpMap();
 	buildMainMenu();
 	buildEquipmentWindow();
-	
+
 	var r = new Render(map);
 	r.cacheImages(function() { r.render(); });
 	var canvas = r.getCursorCanvas();
@@ -245,6 +244,8 @@ function mainMenuButton(id)
 				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
 				scnOpt.text =  scenariolist[i][1];
 			}
+			
+			console.log(GameState.restore());
 			break;
 		}
 	}

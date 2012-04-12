@@ -11,7 +11,7 @@
 // Unit, Hex, Player and Map classes
 function Player(playerID)
 {
-	this.id = -1
+	this.id = playerID;
 	this.side = -1;
 	this.country = -1;
 	this.prestigeGain = 0;
@@ -22,9 +22,9 @@ function Player(playerID)
 function Unit(unitDataId)
 {
 	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
-	this.id = null;
-	this.owner = -1;
+	this.id = unitDataId;
 	this.unitData = equipment[unitDataId]; //TODO access thru a function to reduce the clutter on localStorage
+	this.owner = -1;
 	this.hasMoved = false;
 	this.hasFired = false;
 	this.hasRessuplied = false;
@@ -37,10 +37,28 @@ function Unit(unitDataId)
 	this.transport = -1 //equipment id of transport if any
 	this.destroyed = false; //flag to signal if a unit is destroyed
 	
+	//Copy values
+	this.setUnit = function(u) 
+	{
+		this.id = u.id;
+		this.owner = u.owner;
+		this.unitData = u.unitData;
+		this.hasMoved = u.hasMoved;
+		this.hasFired = u.hasFired;
+		this.hasRessuplied = u.hasRessuplied;
+		this.ammo = u.ammo;
+		this.fuel = u.fuel;
+		this.strength = u.strength;
+		this.player = u.player;
+		this.facing = u.facing;
+		this.flag = u.flag;
+		this.transport = u.transport;
+		this.destroyed = u.destroyed;
+	}
+	
 	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true; console.log("hit with:" + losses);}
 	this.fire = function() {this.ammo--; this.hasFired = true;}
 	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true;}
-	
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
@@ -134,10 +152,15 @@ function Map()
 		}
 	}
 	
-	this.addUnit = function(unit) {	unitList.push(unit); }
+	this.addUnit = function(unit) 
+	{
+		unitList.push(unit); 
+		this.unitImagesList.push(unit.getIcon());
+	}
 	this.getUnits = function() { return unitList; }
-	this.addPlayer = function(player) {	playerList.push(player); }
-	this.getPlayer = function(id) {	return playerList[id];	}
+	this.addPlayer = function(player) { playerList.push(player); }
+	this.getPlayer = function(id) { return playerList[id]; }
+	this.getPlayers = function() { return playerList; }
 	
 	this.setCurrentHex = function(row, col)
 	{
@@ -191,7 +214,6 @@ function Map()
 	this.setHex = function(row, col, hex)
 	{
 		this.map[row][col].setHex(hex); //copy values
-		if (hex.unit != null) { this.unitImagesList.push(hex.unit.getIcon()); }
 		//Increment victorySides for each side
 		if (hex.victorySide !== -1) { sidesVictoryHexes[hex.victorySide]++; }
 	}
