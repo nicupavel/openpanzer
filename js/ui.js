@@ -10,7 +10,6 @@
 
 function UI(scenario)
 {
-	var turn = 0;
 	var map = null;
 	var l = new MapLoader();
 	
@@ -128,7 +127,7 @@ function buildMainMenu()
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
-	sd.innerHTML = " Turn: " + turn + "  " + map.description;
+	sd.innerHTML = " Turn: " + map.turn + "  " + map.description;
 	
 	for (b in menubuttons) 
 	{
@@ -183,14 +182,9 @@ function mainMenuButton(id)
 		
 		case 'endturn':
 		{
-			//TODO Handle End Turn in Map Class or create a Game Class
-			map.resetUnits();
-			map.delMoveSel();
-			map.delAttackSel();
-			map.delCurrentHex();
+			map.endTurn();
 			GameState.save(map);
-			turn++;
-			$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
+			$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
 			r.render();
 			break;
 		}
@@ -232,7 +226,7 @@ function mainMenuButton(id)
 		}	
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General version 1.1", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("HTML5 Panzer General version 1.2", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
@@ -302,14 +296,13 @@ function uiMessage(title, message)
 
 function newScenario(scenario)
 {
-	turn = 0;
 	GameState.clear();
 	l.loadMap(scenario);
 	map = l.buildMap();
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); });
-	$('statusmsg').innerHTML = " Turn: " + turn + "  " + map.description;
+	$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
 }
 
 function buildEquipmentWindow()

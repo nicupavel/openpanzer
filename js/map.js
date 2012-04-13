@@ -17,7 +17,7 @@ function Player()
 	this.prestige = 0;
 	this.playedTurn = false;
 	
-	//Copy values
+	//Clone object
 	this.copy = function(p)
 	{
 		this.id = p.id;
@@ -47,7 +47,7 @@ function Unit(unitDataId)
 	this.transport = -1 //equipment id of transport if any
 	this.destroyed = false; //flag to signal if a unit is destroyed
 	
-	//Copy values
+	//Clone object
 	this.copy = function(u) 
 	{
 		this.id = u.id;
@@ -92,7 +92,7 @@ function Hex()
 	this.isMoveSel = false; //current unit can move to this hex
 	this.isAttackSel = false; //current unit can attack this hex
 	
-	//Copy values
+	//Clone object
 	this.copy = function(hex) 
 	{ 
 		this.unit = hex.unit;
@@ -119,14 +119,16 @@ function Map()
 	this.name = null;
 	this.description = null; 
 	this.terrainImage = null;
+	this.turn = 0;
 	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
-	this.unitImagesList = [];
+	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	
+	var unitImagesList = []; //a list of unit images used for caching
 	var moveSelected = []; //selected hexes for current unit move destinations
 	var attackSelected = []; //selected hexes for current unit attack destinations
 	var unitList = []; //internal list of units
 	var playerList = []; // players list
-	var sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
+	
 	
 	this.allocMap = function()
 	{
@@ -165,9 +167,11 @@ function Map()
 	this.addUnit = function(unit) 
 	{
 		unitList.push(unit); 
-		this.unitImagesList.push(unit.getIcon());
+		unitImagesList.push(unit.getIcon());
 	}
+	
 	this.getUnits = function() { return unitList; }
+	this.getUnitImagesList = function() { return unitImagesList; }
 	this.addPlayer = function(player) { playerList.push(player); }
 	this.getPlayer = function(id) { return playerList[id]; }
 	this.getPlayers = function() { return playerList; }
@@ -175,7 +179,7 @@ function Map()
 	this.setCurrentHex = function(row, col)
 	{
 		this.currentHex.hex = this.map[row][col];
-		this.currentHex.hex.isCurrent= true;
+		this.currentHex.hex.isCurrent = true;
 		this.currentHex.row = row;
 		this.currentHex.col = col;
 	}
@@ -225,18 +229,20 @@ function Map()
 	{
 		this.map[row][col].copy(hex); //copy values
 		//Increment victorySides for each side
-		if (hex.victorySide !== -1) { sidesVictoryHexes[hex.victorySide]++; }
+		if (hex.victorySide !== -1) { this.sidesVictoryHexes[hex.victorySide]++; }
 	}
 	
 	//Simple increment/decrement
 	this.updateVictorySides = function(side, enemySide)
 	{
 		//A side has ocuppied a victory hex that was marked as victory for it
-		sidesVictoryHexes[side]--;
-		sidesVictoryHexes[enemySide]++;
-		console.log("Updated side victory hexes Side: " + side + " : " + sidesVictoryHexes[side] + " Side: " + enemySide + " : " + sidesVictoryHexes[enemySide]);
+		this.sidesVictoryHexes[side]--;
+		this.sidesVictoryHexes[enemySide]++;
+		console.log("Updated side victory hexes Side: " + side + " : " 
+					+ this.sidesVictoryHexes[side] + " Side: " + enemySide 
+					+ " : " + this.sidesVictoryHexes[enemySide]);
 		
-		if (sidesVictoryHexes[side] <= 0) 
+		if (this.sidesVictoryHexes[side] <= 0) 
 		{ 
 			console.log("Side: " + side + " WINS !");
 			return true;
@@ -265,6 +271,16 @@ function Map()
 			var cell = allowedCells[i];
 			this.setAttackSel(cell.row, cell.col);
 		}
+	}
+	
+	this.endTurn = function()
+	{
+			//TODO create a Game Class
+			this.resetUnits();
+			this.delMoveSel();
+			this.delAttackSel();
+			this.delCurrentHex();
+			this.turn++;
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
@@ -330,6 +346,40 @@ function Map()
 		if (!hex.unit.hasFired) 
 			this.setAttackRange(row, col); 
 	}	
+	//Clone object / "copy constructor"
+	this.copy = function(m)
+	{
+		this.rows = m.rows;
+		this.cols = m.cols;
+		this.description = m.description;
+		this.terrainImage = m.terrainImage;
+		this.name = m.name;
+		this.turn = m.turn;
+	
+		this.allocMap();
+	
+		for (r = 0; r < m.rows; r++)
+		{
+			for (c = 0; c < m.cols; c++)
+			{
+				var h = m.map[r][c];
+				var hex = new Hex();
+				hex.copy(h);
+				if (h.unit !== null) 
+				{
+					u = new Unit(h.unit.id);
+					u.copy(h.unit);
+					hex.setUnit(u);
+					this.addUnit(u);
+				}
+				this.setHex(r, c, hex);
+			}
+		}
+		//update sideVictoryHexes with in progress values after setHex 
+		//calls setup the default map victory hex values
+		for (var i = 0; i < m.sidesVictoryHexes.length; i++)
+			this.sidesVictoryHexes[i] = m.sidesVictoryHexes[i];
+	}
 	
 	this.dumpMap = function()
 	{
@@ -361,17 +411,19 @@ function Map()
 		*/
 		for (var i = 0; i < playerList.length; i++)
 		{
-			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side + " Country: " + playerList[i].getCountryName());
+			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side 
+						+ " Country: " + playerList[i].getCountryName());
 		}
 		
-		console.log("Victory Hexes for Side 0: " + sidesVictoryHexes[0] + " Victory Hexes for Side 1: " + sidesVictoryHexes[1]);
+		console.log("Victory Hexes for Side 0: " +  this.sidesVictoryHexes[0] 
+					+ " Victory Hexes for Side 1: " + this.sidesVictoryHexes[1]);
 		/*
-		for (var i = 0; i < this.unitImagesList.length; i++)
+		for (var i = 0; i < unitImagesList.length; i++)
 		{
-			console.log(this.unitImagesList[i]);
+			console.log(unitImagesList[i]);
 		
 		}
-		for (var i = 0; i < this.unitImagesList.length; i++)
+		for (var i = 0; i < unitList.length; i++)
 		{
 			console.log(unitList[i]);
 		

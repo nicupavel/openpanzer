@@ -219,7 +219,7 @@ function Render(mapObj)
 		imgMapBackground.src = map.terrainImage;
 		imgMapBackground.onload = function() { setupLayers(); func(); }
 		
-		cacheUnitImages(map.unitImagesList, func);
+		cacheUnitImages(map.getUnitImagesList(), func);
 	}
 	
 	//Returns canvases 
