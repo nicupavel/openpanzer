@@ -70,9 +70,12 @@ function Unit(unitDataId)
 		this.destroyed = u.destroyed;
 	}
 	
-	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true; console.log("hit with:" + losses);}
+	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true;}
 	this.fire = function() {this.ammo--; this.hasFired = true;}
 	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true;}
+	this.resupply = function(ammo, fuel) {this.ammo += ammo; this.fuel += fuel;  this.hasMoved = this.hasFired = this.hasResupplied = true; console.log("From unit:" + this.ammo + " " + this.fuel); }
+	this.reinforce = function(str) { this.strength += str;  this.hasMoved = this.hasFired = this.hasReinforced = true; }
+	this.mount = function() { this.isMounted = true; }
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
 	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false; }
@@ -315,7 +318,7 @@ function Map()
 			if (this.updateVictorySides(side, enemyside))
 				win = side;
 		}
-		unit.move(1); //TODO proper GameRules.distance
+		unit.move(1); //TODO use GameRules.distance
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		srcHex.delUnit();
@@ -324,6 +327,23 @@ function Map()
 		return win;
 	}
 	
+	this.resupplyUnit = function(unit)
+	{
+		s = GameRules.getResupplyValue(unit);
+		unit.resupply(s.ammo, s.fuel);
+	}
+	
+	this.reinforceUnit = function(unit)
+	{
+		var str = GameRules.getReinforceValue(unit);
+		unit.reinforce(str);
+	}
+	
+	this.mountUnit = function(unit)
+	{
+		if (GameRules.canMount(unit))
+			unit.mount();
+	}
 	// selects a new unit as the current unit
 	this.selectUnit = function(row, col)
 	{

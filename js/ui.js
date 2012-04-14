@@ -245,14 +245,16 @@ function mainMenuButton(id)
 
 function updateUnitInfoWindow(u)
 {
-	$('unit-info').style.visibility  = "visible";
+	var eqUnit = false;
 	
+	$('unit-info').style.visibility  = "visible";
 	//Call from equipment window
 	if (typeof (u.unitData) === 'undefined') 
 	{
 		u.unitData = u;
 		u.flag = u.country;
 		u.strength = 10;
+		eqUnit = true;
 	}
 	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
@@ -277,45 +279,49 @@ function updateUnitInfoWindow(u)
 	$('iresupbut').className = "";
 	$('ireinfbut').className = "";
 	
+	if (eqUnit) return;
+	
 	if (GameRules.canMount(u))
 	{
 		$('imountbut').className = "enabled";
-		$('imountbut').onclick = function() {UI:unitInfoMenu('mount', u);}
+		$('imountbut').onclick = function() {UI:unitInfoButton('mount', u);}
 	}
 	
 	if (GameRules.canResupply(u))
 	{
 		$('iresupbut').className = "enabled";
-		$('iresupbut').onclick = function() {UI:unitInfoMenu('resupply', u);}
+		$('iresupbut').onclick = function() {UI:unitInfoButton('resupply', u);}
 	}
 
 	if (GameRules.canReinforce(u)) 
 	{
 		$('ireinfbut').className = "enabled";
-		$('ireinfbut').onclick = function() {UI:unitInfoMenu('reinforce', u);}
+		$('ireinfbut').onclick = function() {UI:unitInfoButton('reinforce', u);}
 	}
-	
-	console.log(u);
 }
 
-function unitInfoMenu(action, unit)
+function unitInfoButton(action, unit)
 {
 	switch (action)
 	{
 		case 'mount':
 		{
+			map.mountUnit(unit);
 			break;
 		}
 		case 'resupply':
 		{
+			map.resupplyUnit(unit);
 			break;
 		}
 		case 'reinforce':
 		{
+			map.reinforceUnit(unit);
 			break;
 		}
 	}
 	$('unit-info').style.visibility = "hidden";
+	r.render();
 }
 
 function buildEquipmentWindow()

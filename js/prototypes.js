@@ -125,3 +125,9 @@ function currentHexInfo()
 	this.row = 0;
 	this.col = 0;
 }
+
+function Supply(a, f)
+{
+	this.ammo = a;
+	this.fuel = f;
+}

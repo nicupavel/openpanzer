@@ -133,29 +133,25 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 }
 
 //TODO Terrain, Unit type and adjacent units 
-GameRules.getResupplyValue = function(map, unit, row, col)
+GameRules.getResupplyValue = function(unit)
 {
-	var ammo = 0;
-	var fuel = 0;
+	if (!canResupply(unit)) return 0, 0;
+	var ammo = unit.unitData.ammo - unit.ammo;
+	var fuel = unit.unitData.fuel - unit.fuel;
+	if (fuel < 0) fuel = 0; //TODO temp fix for leg/towed movement
 	
-	if (!canResupply(unit)) return 0,0;
-	ammo = unit.unitData.ammo - unit.ammo;
-	fuel = unit.unitData.fuel - unit.fuel;
-	
-	return ammo, fuel;
+	console.log(unit.unitData.ammo + " " + unit.ammo + " " + ammo + " " +  fuel);
+	return new Supply(ammo, fuel);
 }
 
 //TODO Terrain, Unit type and adjacent units 
-GameRules.getReinforcementValue = function(map, unit, row, col)
+GameRules.getReinforceValue = function(unit)
 {
-	var strength;
-	
 	if (!canReinforce(unit)) return 0;
-	strength = 10 - unit.strength;
+	var strength = 10 - unit.strength;
 	
 	return strength;
 }
-
 
 function canAttack(unit, targetUnit)
 {
