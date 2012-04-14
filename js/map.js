@@ -153,17 +153,6 @@ function Map()
 		}
 	}
 	
-	//Resets hasFired, hasMoved, hasRessuplied 
-	//TODO this should be a End Turn function
-	this.resetUnits = function()
-	{
-		for (var i = 0; i < unitList.length; i++)
-		{
-			if (unitList[i] !== null) 
-				unitList[i].resetUnit();
-		}
-	}
-	
 	this.addUnit = function(unit) 
 	{
 		unitList.push(unit); 
@@ -276,7 +265,7 @@ function Map()
 	this.endTurn = function()
 	{
 			//TODO create a Game Class
-			this.resetUnits();
+			resetUnits();
 			this.delMoveSel();
 			this.delAttackSel();
 			this.delCurrentHex();
@@ -432,5 +421,14 @@ function Map()
 	}
 	
 	//Private
+	//Resets hasFired, hasMoved, hasRessuplied 
+	function resetUnits()
+	{
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i] !== null) 
+				unitList[i].resetUnit();
+		}
+	}
 	
 } // end Map class
