@@ -132,6 +132,31 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	return cr;
 }
 
+//TODO Terrain, Unit type and adjacent units 
+GameRules.getResupplyValue = function(map, unit, row, col)
+{
+	var ammo = 0;
+	var fuel = 0;
+	
+	if (!canResupply(unit)) return 0,0;
+	ammo = unit.unitData.ammo - unit.ammo;
+	fuel = unit.unitData.fuel - unit.fuel;
+	
+	return ammo, fuel;
+}
+
+//TODO Terrain, Unit type and adjacent units 
+GameRules.getReinforcementValue = function(map, unit, row, col)
+{
+	var strength;
+	
+	if (!canReinforce(unit)) return 0;
+	strength = 10 - unit.strength;
+	
+	return strength;
+}
+
+
 function canAttack(unit, targetUnit)
 {
 	if (unit.ammo === 0)
@@ -180,6 +205,50 @@ function canMoveInto(unit, hex)
 	}
 	return false;
 }
+
+function canResupply(unit)
+{
+	if (unit.hasMoved)
+		return false;
+	if (unit.hasFired)
+		return false;
+	if (unit.hasResupplied)
+		return false;
+	if (unit.hasReinforced)
+		return false;
+	if ((unit.fuel == unit.unitData.fuel) &&
+		(unit.ammo == unit.unitData.ammo))
+		return false;
+		
+	return true;
+}
+GameRules.canResupply = function(unit) { return canResupply(unit);}
+
+function canReinforce(unit)
+{
+	if (unit.hasMoved)
+		return false;
+	if (unit.hasFired)
+		return false;
+	if (unit.hasResupplied)
+		return false;
+	if (unit.hasReinforced)
+		return false;
+	if (unit.strength >= 10)
+		return false;
+		
+	return true;
+}
+GameRules.canReinforce = function(unit) { return canReinforce(unit);}
+
+function canMount(unit)
+{
+	if (isGround(unit) && unit.transport !== -1)
+		return true;
+		
+	return false;
+}
+GameRules.canMount = function(unit) { return canMount(unit);}
 
 function isAir(unit)
 {

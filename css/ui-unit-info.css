@@ -25,7 +25,7 @@
 	border: 0px #fff solid;
 }
 
-#unit-info #container #unit-image
+#unit-image
 {	
 	border: 0px #fff solid;
 	width: 80px;
@@ -37,7 +37,7 @@
 	background:url('../resources/units/images/g87.png');
 	
 }
-#unit-info #container #unit-name
+#unit-name
 {
 	border: 0px #fff solid;
 	position:absolute;
@@ -46,7 +46,7 @@
 	width:150px;
 	text-align: center;
 }
-#unit-info #container #unit-flag
+#unit-flag
 {
 	border: 0px #fff solid;
 	position:absolute;
@@ -56,99 +56,133 @@
 	height:34px;
 	background-image: url('../resources/ui/flags/flag_big_18.png');
 }
-#unit-info #container #fuel
+#fuel
 {
 	position:absolute;
 	top: 120px;
 	left:40px;
 }
 
-#unit-info #container #ammo
+#ammo
 {
 	position:absolute;
 	top: 120px;
 	left:160px;
 }
-#unit-info #container #gunrange
+#gunrange
 {
 	position: absolute;
 	top: 155px;
 	left:40px;
 }
-#unit-info #container #ini
+#ini
 {
 	position: absolute;
 	top: 155px;
 	left:80px;
 }
-#unit-info #container #spot
+#spot
 {
 	position: absolute;
 	top: 155px;
 	left:120px;
 }
-#unit-info #container #str
+#str
 {
 	position: absolute;
 	top: 155px;
 	left:160px;
 }
-#unit-info #container #ahard
+#ahard
 {
 	position: absolute;
 	top: 210px;
 	left:40px;
 }
-#unit-info #container #asoft
+#asoft
 {
 	position: absolute;
 	top: 210px;
 	left:80px;
 }
-#unit-info #container #aair
+#aair
 {
 	position: absolute;
 	top: 210px;
 	left:120px;
 }
-#unit-info #container #anaval
+#anaval
 {
 	position: absolute;
 	top: 210px;
 	left:160px;
 }
-#unit-info #container #dhard
+#dhard
 {
 	position: absolute;
 	top: 265px;
 	left:40px;
 }
-#unit-info #container #dair
+#dair
 {
 	position: absolute;
 	top: 265px;
 	left:80px;
 }
-#unit-info #container #dclose
+#dclose
 {
 	position: absolute;
 	top: 265px;
 	left:120px;
 }
-#unit-info #container #drange
+#drange
 {
 	position: absolute;
 	top: 265px;
 	left:160px;
 }
-#unit-info #container #iokbut
+#iokbut
 {
+	border: 0px solid #fff;
 	position: absolute;
 	top: 285px;
 	left:180px;
 	min-width: 20px;
 	height:20px;
 }
+
+#ireinfbut
+{
+	border: 0px solid #fff;
+	position: absolute;
+	top: 285px;
+	left:112px;
+	min-width: 20px;
+	height:20px;
+}
+#ireinfbut.enabled { background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-reinforce.png');}
+
+#iresupbut
+{
+	border: 0px solid #fff;
+	position: absolute;
+	top: 285px;
+	left:80px;
+	min-width: 20px;
+	height:20px;
+}
+#iresupbut.enabled {	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-resupply.png');}
+
+#imountbut
+{
+	border: 0px solid #fff;
+	position: absolute;
+	top: 285px;
+	left:13px;
+	min-width: 20px;
+	height:20px;
+}
+#imountbut.enabled {	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-mount.png'); }
 
 @-webkit-keyframes unitanim
 {

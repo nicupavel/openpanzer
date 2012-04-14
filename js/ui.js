@@ -154,7 +154,6 @@ function buildMainMenu()
 
 function mainMenuButton(id)
 {
-	console.log("Clicked button: " + id);
 	switch(id) 
 	{
 		case 'hex':
@@ -193,7 +192,10 @@ function mainMenuButton(id)
 		{
 			var v = $('unit-info').style.visibility;
 			
-			if (v === "visible") { $('unit-info').style.visibility = "hidden"; }
+			if (v === "visible") 
+			{ 
+				$('unit-info').style.visibility = "hidden"; 
+			}
 			else 
 			{
 				//Just to show some window with dummy data if user press with no unit selected
@@ -201,8 +203,6 @@ function mainMenuButton(id)
 				if (map.currentHex.hex != null && map.currentHex.hex.unit != null) 
 				{ 
 					updateUnitInfoWindow(map.currentHex.hex.unit);
-					map.currentHex.hex.unit.log();
-					map.currentHex.hex.log();
 				}
 			}
 			break;
@@ -243,17 +243,6 @@ function mainMenuButton(id)
 	}
 }
 
-function getMouseInfo(canvas, e)
-{
-	var mx, my, rclick;
-	if (e.which) rclick = (e.which == 3);
-	else if (e.button) rclick = (e.button == 2);				
-	mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
-	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
-	
-	return new mouseInfo(mx, my, rclick);
-}
-
 function updateUnitInfoWindow(u)
 {
 	$('unit-info').style.visibility  = "visible";
@@ -284,25 +273,49 @@ function updateUnitInfoWindow(u)
 	$('drange').innerHTML = u.unitData.rangedefmod;
 
 	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
+	$('imountbut').className = "";
+	$('iresupbut').className = "";
+	$('ireinfbut').className = "";
+	
+	if (GameRules.canMount(u))
+	{
+		$('imountbut').className = "enabled";
+		$('imountbut').onclick = function() {UI:unitInfoMenu('mount', u);}
+	}
+	
+	if (GameRules.canResupply(u))
+	{
+		$('iresupbut').className = "enabled";
+		$('iresupbut').onclick = function() {UI:unitInfoMenu('resupply', u);}
+	}
+
+	if (GameRules.canReinforce(u)) 
+	{
+		$('ireinfbut').className = "enabled";
+		$('ireinfbut').onclick = function() {UI:unitInfoMenu('reinforce', u);}
+	}
+	
+	console.log(u);
 }
 
-function uiMessage(title, message)
+function unitInfoMenu(action, unit)
 {
-	$('title').innerHTML = title;
-	$('message').innerHTML = message;
-	$('ui-message').style.visibility = "visible"
-	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
-}
-
-function newScenario(scenario)
-{
-	GameState.clear();
-	l.loadMap(scenario);
-	map = l.buildMap();
-	map.dumpMap();
-	r.setNewMap(map);
-	r.cacheImages(function() { r.render(); });
-	$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
+	switch (action)
+	{
+		case 'mount':
+		{
+			break;
+		}
+		case 'resupply':
+		{
+			break;
+		}
+		case 'reinforce':
+		{
+			break;
+		}
+	}
+	$('unit-info').style.visibility = "hidden";
 }
 
 function buildEquipmentWindow()
@@ -402,6 +415,36 @@ function updateEquipmentWindow(eqclass)
 			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 		}
 	}
+}
+
+function uiMessage(title, message)
+{
+	$('title').innerHTML = title;
+	$('message').innerHTML = message;
+	$('ui-message').style.visibility = "visible"
+	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+}
+
+function newScenario(scenario)
+{
+	GameState.clear();
+	l.loadMap(scenario);
+	map = l.buildMap();
+	map.dumpMap();
+	r.setNewMap(map);
+	r.cacheImages(function() { r.render(); });
+	$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
+}
+
+function getMouseInfo(canvas, e)
+{
+	var mx, my, rclick;
+	if (e.which) rclick = (e.which == 3);
+	else if (e.button) rclick = (e.button == 2);				
+	mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
+	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
+	
+	return new mouseInfo(mx, my, rclick);
 }
 
 } //End of UI class

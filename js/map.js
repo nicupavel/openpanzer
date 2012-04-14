@@ -37,7 +37,9 @@ function Unit(unitDataId)
 	this.owner = -1;
 	this.hasMoved = false;
 	this.hasFired = false;
-	this.hasRessuplied = false;
+	this.hasResupplied = false;
+	this.hasReinforced = false;
+	this.isMounted = false;
 	this.ammo = equipment[unitDataId].ammo;
 	this.fuel = equipment[unitDataId].fuel;
 	this.strength = 10; //TODO read from scenario
@@ -55,7 +57,9 @@ function Unit(unitDataId)
 		this.unitData = u.unitData;
 		this.hasMoved = u.hasMoved;
 		this.hasFired = u.hasFired;
-		this.hasRessuplied = u.hasRessuplied;
+		this.hasResupplied = u.hasResupplied;
+		this.hasReinforced = u.hasReinforced;
+		this.isMounted = u.isMounted;
 		this.ammo = u.ammo;
 		this.fuel = u.fuel;
 		this.strength = u.strength;
@@ -71,7 +75,7 @@ function Unit(unitDataId)
 	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true;}
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData; return u.icon; }
-	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasRessuplied = false; }
+	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false; }
 	this.getTransport = function() { if (transport !== -1) { return equipment[transport];} }
 	this.log = function() { console.log(this); }
 };
