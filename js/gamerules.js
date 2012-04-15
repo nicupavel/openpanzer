@@ -18,7 +18,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	
 	if (unit === null || unit.hasMoved) return allowedCells;
 	
-	var range = unit.unitData.movpoints;
+	var range = unit.unitData().movpoints;
 	if (range == 0) range = 1; //TODO temporary for the towed units to move
 	//if (range > unit.fuel) range = unit.fuel; //TODO check unit type if needs fuel to move
 	
@@ -43,7 +43,7 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 	if (unit === null || unit.hasFired || unit.ammo <= 0) return allowedCells; 
 	
 	//TODO weather ?
-	var range = unit.unitData.gunrange;
+	var range = unit.unitData().gunrange;
 	if (range == 0)	range = 1;
 		
 	console.log("attack range: "+ range);
@@ -68,8 +68,8 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	var cr = new combatResults();
 
 	var d = distance(arow, acol, trow, tcol); //distance between units
-	var at = aUnit.unitData.target;
-	var tt = tUnit.unitData.target;
+	var at = aUnit.unitData().target;
+	var tt = tUnit.unitData().target;
 	var aav = 0;
 	var adv = 0;
 	var tav = 0;
@@ -79,20 +79,20 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	{
 		case unitType.air:
 		{
-			tav = tUnit.unitData.airatk;
-			tdv = tUnit.unitData.airdef;
+			tav = tUnit.unitData().airatk;
+			tdv = tUnit.unitData().airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			tav = tUnit.unitData.softatk;
-			tdv = tUnit.unitData.grounddef;
+			tav = tUnit.unitData().softatk;
+			tdv = tUnit.unitData().grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			tav = tUnit.unitData.hardatk;
-			tdv = tUnit.unitData.grounddef;
+			tav = tUnit.unitData().hardatk;
+			tdv = tUnit.unitData().grounddef;
 			break;
 		}
 	}
@@ -102,20 +102,20 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 		case unitType.air:
 		{
 			
-			aav = aUnit.unitData.airatk;
-			adv = aUnit.unitData.airdef;
+			aav = aUnit.unitData().airatk;
+			adv = aUnit.unitData().airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			aav = aUnit.unitData.softatk;
-			adv = aUnit.unitData.grounddef;
+			aav = aUnit.unitData().softatk;
+			adv = aUnit.unitData().grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			aav = aUnit.unitData.hardatk;
-			adv = aUnit.unitData.grounddef;
+			aav = aUnit.unitData().hardatk;
+			adv = aUnit.unitData().grounddef;
 			break;
 		}
 	}
@@ -136,11 +136,11 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 GameRules.getResupplyValue = function(unit)
 {
 	if (!canResupply(unit)) return 0, 0;
-	var ammo = unit.unitData.ammo - unit.ammo;
-	var fuel = unit.unitData.fuel - unit.fuel;
+	var ammo = unit.unitData().ammo - unit.ammo;
+	var fuel = unit.unitData().fuel - unit.fuel;
 	if (fuel < 0) fuel = 0; //TODO temp fix for leg/towed movement
 	
-	console.log(unit.unitData.ammo + " " + unit.ammo + " " + ammo + " " +  fuel);
+	console.log(unit.unitData().ammo + " " + unit.ammo + " " + ammo + " " +  fuel);
 	return new Supply(ammo, fuel);
 }
 
@@ -161,7 +161,7 @@ function canAttack(unit, targetUnit)
 		return false;
 	if (unit.owner === targetUnit.owner)
 		return false;
-	if (unit.unitData.airatk == 0 && isAir(targetUnit)) //TODO There is a special bit for this.
+	if (unit.unitData().airatk == 0 && isAir(targetUnit)) //TODO There is a special bit for this.
 		return false;
 		
 	return true;
@@ -212,8 +212,8 @@ function canResupply(unit)
 		return false;
 	if (unit.hasReinforced)
 		return false;
-	if ((unit.fuel == unit.unitData.fuel) &&
-		(unit.ammo == unit.unitData.ammo))
+	if ((unit.fuel == unit.unitData().fuel) &&
+		(unit.ammo == unit.unitData().ammo))
 		return false;
 		
 	return true;
@@ -239,7 +239,7 @@ GameRules.canReinforce = function(unit) { return canReinforce(unit);}
 
 function canMount(unit)
 {
-	if (isGround(unit) && unit.transport !== -1)
+	if (isGround(unit) && unit.transport !== null)
 		return true;
 		
 	return false;
@@ -248,14 +248,14 @@ GameRules.canMount = function(unit) { return canMount(unit);}
 
 function isAir(unit)
 {
-	if (unit.unitData.movmethod === 5) { return true; }
+	if (unit.unitData().movmethod === 5) { return true; }
 	return false;
 }
 
 function isSea(unit)
 {
-	if((unit.unitData.movmethod === 6) ||
-	   (unit.unitData.movmethod === 10))
+	if((unit.unitData().movmethod === 6) ||
+	   (unit.unitData().movmethod === 10))
 	{ 
 		return true; 
 	}
@@ -265,9 +265,9 @@ function isSea(unit)
 
 function isGround(unit)
 {
-	if ((unit.unitData.movmethod < 5) ||
-	    (unit.unitData.movmethod === 8) ||
-	    (unit.unitData.movmethod === 9))
+	if ((unit.unitData().movmethod < 5) ||
+	    (unit.unitData().movmethod === 8) ||
+	    (unit.unitData().movmethod === 9))
 	{
 		return true;
 	}

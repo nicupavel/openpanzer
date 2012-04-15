@@ -20,6 +20,7 @@ function Player()
 	//Clone object
 	this.copy = function(p)
 	{
+		if (p === null) return;
 		this.id = p.id;
 		this.side = p.side;
 		this.country = p.country;
@@ -29,11 +30,33 @@ function Player()
 	this.getCountryName = function() { return countryNames[this.country]; }
 }
 
+function Transport(unitDataId)
+{
+	this.id = unitDataId;
+	this.ammo = equipment[unitDataId].ammo;
+	this.fuel = equipment[unitDataId].fuel;
+	//This is only used when building image cache list in map.js
+	this.icon = equipment[unitDataId].icon;
+	
+	this.copy = function(t)
+	{
+		if (t === null) return;
+		this.id = t.id;
+		this.ammo = t.ammo;
+		this.fuel = t.fuel;
+	}
+	
+	this.resupply = function(ammo, fuel) 
+	{
+		this.ammo += ammo; 
+		this.fuel += fuel;  
+	}
+}
+
 function Unit(unitDataId)
 {
 	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
 	this.id = unitDataId;
-	this.unitData = equipment[unitDataId]; //TODO access thru a function to reduce the clutter on localStorage
 	this.owner = -1;
 	this.hasMoved = false;
 	this.hasFired = false;
@@ -42,19 +65,19 @@ function Unit(unitDataId)
 	this.isMounted = false;
 	this.ammo = equipment[unitDataId].ammo;
 	this.fuel = equipment[unitDataId].fuel;
-	this.strength = 10; //TODO read from scenario
-	this.player = null; //TODO player struct pointer
+	this.strength = 10;
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
-	this.transport = -1 //equipment id of transport if any
-	this.destroyed = false; //flag to signal if a unit is destroyed
+	this.destroyed = false; //flag to check if a unit is destroyed
+	this.player = null; //TODO player struct pointer
+	this.transport = null; //transport class pointer
 	
 	//Clone object
 	this.copy = function(u) 
 	{
+		if (u === null) return;
 		this.id = u.id;
 		this.owner = u.owner;
-		this.unitData = u.unitData;
 		this.hasMoved = u.hasMoved;
 		this.hasFired = u.hasFired;
 		this.hasResupplied = u.hasResupplied;
@@ -63,23 +86,78 @@ function Unit(unitDataId)
 		this.ammo = u.ammo;
 		this.fuel = u.fuel;
 		this.strength = u.strength;
-		this.player = u.player;
 		this.facing = u.facing;
 		this.flag = u.flag;
-		this.transport = u.transport;
 		this.destroyed = u.destroyed;
+		//Shallow copy 
+		this.player = u.player;
+		if (u.transport !== null)
+		{
+			this.transport = new Transport(u.transport.id);
+			this.transport.copy(u.transport);
+		}
 	}
 	
-	this.hit = function(losses) { this.strength -= losses; if (this.strength <= 0) this.destroyed = true;}
-	this.fire = function() {this.ammo--; this.hasFired = true;}
-	this.move = function(dist) {this.fuel -= dist; this.hasMoved = true;}
-	this.resupply = function(ammo, fuel) {this.ammo += ammo; this.fuel += fuel;  this.hasMoved = this.hasFired = this.hasResupplied = true; console.log("From unit:" + this.ammo + " " + this.fuel); }
-	this.reinforce = function(str) { this.strength += str;  this.hasMoved = this.hasFired = this.hasReinforced = true; }
+	this.unitData = function()
+	{
+		if ((this.isMounted) && (this.transport !== null))
+			return equipment[this.transport.id]; 
+		else
+			return equipment[this.id]; 
+	}
+	
+	this.hit = function(losses) 
+	{ 
+		this.strength -= losses; 
+		if (this.strength <= 0) this.destroyed = true;
+	}
+	
+	this.fire = function(isAttacking) 
+	{
+		this.ammo--; 
+		if (isAttacking)
+			this.hasFired = true;
+	}
+	this.move = function(dist) 
+	{
+		this.fuel -= dist; this.hasMoved = true;
+		if (this.isMounted) this.hasFired = true;
+	}
+	
+	this.resupply = function(ammo, fuel) 
+	{
+		if (this.isMounted)
+		{
+			this.transport.resupply(ammo, fuel);
+		} 
+		else 
+		{
+			this.ammo += ammo; 
+			this.fuel += fuel;  
+		}
+		this.hasMoved = this.hasFired = this.hasResupplied = true;
+	}
+	
+	this.reinforce = function(str) 
+	{ 
+		this.strength += str;  
+		this.hasMoved = this.hasFired = this.hasReinforced = true; 
+	}
+	
+	this.setTransport = function(id) 
+	{ 
+		//Create and set the transport properties to match it's unit
+		this.transport = new Transport(id);
+	}
+	
 	this.mount = function() { this.isMounted = true; }
+	this.unmount = function() {	this.isMounted = false;	}
 	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
-	this.getIcon = function() { var u = this.unitData; return u.icon; }
-	this.resetUnit = function() { this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false; }
-	this.getTransport = function() { if (transport !== -1) { return equipment[transport];} }
+	this.getIcon = function() { var u = this.unitData(); return u.icon; }
+	this.resetUnit = function() 
+	{ 
+		this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false; 
+	}
 	this.log = function() { console.log(this); }
 };
 
@@ -101,7 +179,8 @@ function Hex()
 	
 	//Clone object
 	this.copy = function(hex) 
-	{ 
+	{
+		if (hex === null) return;
 		this.unit = hex.unit;
 		this.terrain = hex.terrain;
 		this.road = hex.road;
@@ -130,7 +209,7 @@ function Map()
 	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
 	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	
-	var unitImagesList = []; //a list of unit images used for caching
+	var unitImagesList = {}; //a "hash" of unit images used for caching
 	var moveSelected = []; //selected hexes for current unit move destinations
 	var attackSelected = []; //selected hexes for current unit attack destinations
 	var unitList = []; //internal list of units
@@ -163,7 +242,13 @@ function Map()
 	this.addUnit = function(unit) 
 	{
 		unitList.push(unit); 
-		unitImagesList.push(unit.getIcon());
+		unitImagesList[unit.id] = unit.getIcon();
+		
+		if (unit.transport !== null)
+		{
+			unitImagesList[unit.transport.id] = unit.transport.icon;
+			console.log(unit.transport);
+		}
 	}
 	
 	this.getUnits = function() { return unitList; }
@@ -344,6 +429,11 @@ function Map()
 		if (GameRules.canMount(unit))
 			unit.mount();
 	}
+	this.unmountUnit = function(unit)
+	{
+		if (unit.isMounted)
+			unit.unmount();
+	}
 	// selects a new unit as the current unit
 	this.selectUnit = function(row, col)
 	{
@@ -362,6 +452,7 @@ function Map()
 	//Clone object / "copy constructor"
 	this.copy = function(m)
 	{
+		if (m === null) return;
 		this.rows = m.rows;
 		this.cols = m.cols;
 		this.description = m.description;

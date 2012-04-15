@@ -313,7 +313,7 @@ function Render(mapObj)
 	function cacheUnitImages(imgList, func)
 	{
 		var loaded = 0;
-		for (var i = 0; i < imgList.length; i++)
+		for (i in imgList)
 		{
 			imgUnits[imgList[i]] = new Image();
 			imgUnits[imgList[i]].onload = function() 

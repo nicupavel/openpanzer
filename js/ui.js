@@ -71,7 +71,7 @@ function handleMouseClick(e)
 		var c  = parseInt(map.getPlayer(hex.unit.owner).country);
 		$('eqSelCountry').country = c + 1;
 		//TODO make unitList show strength/movement/attack status and update it on all actions
-		updateEquipmentWindow(hex.unit.unitData.class); 
+		updateEquipmentWindow(hex.unit.unitData().class); 
 		*/
 	}	
 	else
@@ -112,7 +112,7 @@ function handleMouseMove(e)
 	var hex = map.map[row][col];
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData.name + " " + text; }
+	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData().name + " " + text; }
 	if (map.currentHex.hex != null) { r.drawCursor(cell); }
 	$('locmsg').innerHTML = text;
 }
@@ -226,7 +226,7 @@ function mainMenuButton(id)
 		}	
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General version 1.2", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("HTML5 Panzer General version 1.3", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
@@ -246,33 +246,36 @@ function mainMenuButton(id)
 function updateUnitInfoWindow(u)
 {
 	var eqUnit = false;
-	
+	var uinfo;
 	$('unit-info').style.visibility  = "visible";
+	
 	//Call from equipment window
 	if (typeof (u.unitData) === 'undefined') 
 	{
-		u.unitData = u;
+		uinfo = u;
 		u.flag = u.country;
 		u.strength = 10;
 		eqUnit = true;
 	}
-	$('unit-image').style.backgroundImage = "url(" + u.unitData.icon +")";
+	else {	uinfo = u.unitData(); }
+	
+	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
-	$('unit-name').innerHTML = u.unitData.name;
+	$('unit-name').innerHTML = uinfo.name;
 	$('fuel').innerHTML = u.fuel;
 	$('ammo').innerHTML = u.ammo;
 	$('str').innerHTML = u.strength + "/10";
-	$('gunrange').innerHTML = u.unitData.gunrange;
-	$('ini').innerHTML = u.unitData.initiative;
-	$('spot').innerHTML = u.unitData.spotrange;
-	$('ahard').innerHTML = u.unitData.hardatk;
-	$('asoft').innerHTML = u.unitData.softatk;
-	$('aair').innerHTML = u.unitData.airatk;
-	$('anaval').innerHTML = u.unitData.navalatk;
-	$('dhard').innerHTML = u.unitData.grounddef;
-	$('dair').innerHTML = u.unitData.airdef;
-	$('dclose').innerHTML = u.unitData.closedef;
-	$('drange').innerHTML = u.unitData.rangedefmod;
+	$('gunrange').innerHTML = uinfo.gunrange;
+	$('ini').innerHTML = uinfo.initiative;
+	$('spot').innerHTML = uinfo.spotrange;
+	$('ahard').innerHTML = uinfo.hardatk;
+	$('asoft').innerHTML = uinfo.softatk;
+	$('aair').innerHTML = uinfo.airatk;
+	$('anaval').innerHTML = uinfo.navalatk;
+	$('dhard').innerHTML = uinfo.grounddef;
+	$('dair').innerHTML = uinfo.airdef;
+	$('dclose').innerHTML = uinfo.closedef;
+	$('drange').innerHTML = uinfo.rangedefmod;
 
 	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
 	$('imountbut').className = "";
@@ -298,6 +301,8 @@ function updateUnitInfoWindow(u)
 		$('ireinfbut').className = "enabled";
 		$('ireinfbut').onclick = function() {UI:unitInfoButton('reinforce', u);}
 	}
+	
+	console.log(u);
 }
 
 function unitInfoButton(action, unit)
@@ -306,7 +311,14 @@ function unitInfoButton(action, unit)
 	{
 		case 'mount':
 		{
-			map.mountUnit(unit);
+			if (unit.isMounted)
+				map.unmountUnit(unit);
+			else
+				map.mountUnit(unit);
+			//TODO select new unit for new move range (needs row/col)
+			map.delCurrentHex();
+			map.delMoveSel();
+			map.delAttackSel();
 			break;
 		}
 		case 'resupply':
@@ -383,16 +395,16 @@ function updateEquipmentWindow(eqclass)
 	for (var i = 0; i < unitList.length; i++)
 	{
 		//TODO should check owners not countries
-		if (unitList[i].unitData.country === country)
+		if (unitList[i].unitData().country === country)
 		{
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
-			img.src = unitList[i].unitData.icon;
-			txt.innerHTML = unitList[i].unitData.name;
-			div.eqclass = unitList[i].unitData.class;
-			div.country = unitList[i].unitData.country;
+			img.src = unitList[i].unitData().icon;
+			txt.innerHTML = unitList[i].unitData().name;
+			div.eqclass = unitList[i].unitData().class;
+			div.country = unitList[i].unitData().country;
 			div.onclick = function() 
 				{ 
 					$('eqSelCountry').country = this.country; 

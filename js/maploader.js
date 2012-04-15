@@ -138,7 +138,7 @@ function MapLoader()
 			var flag = node.getAttribute("flag");
 			if (flag !== null) { u.flag = flag; }
 			var transport = node.getAttribute("transport");
-			if (transport !== null) {u.transport = transport; }
+			if (transport !== null) {u.setTransport(transport); }
 			
 			return u;
 		}
