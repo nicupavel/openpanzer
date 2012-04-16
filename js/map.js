@@ -368,8 +368,8 @@ function Map()
 	this.attackUnit = function(atkunit, srow, scol, defunit, drow, dcol)
 	{
 		console.log("attacking: " + drow + "," +dcol);
-		//TODO defunit should use ammo when defending
-		atkunit.fire();
+		atkunit.fire(true);
+		defunit.fire(false);
 		var cr = GameRules.calculateAttackResults(atkunit, srow, scol, defunit, drow, dcol);
 		//TODO do this better
 		defunit.hit(cr.kills)
