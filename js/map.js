@@ -251,8 +251,15 @@ function Map()
 	this.getUnits = function() { return unitList; }
 	this.getUnitImagesList = function() { return unitImagesList; }
 	this.addPlayer = function(player) { playerList.push(player); }
-	this.getPlayer = function(id) { return playerList[id]; }
 	this.getPlayers = function() { return playerList; }
+	this.getPlayer = function(id) 
+	{ 
+		if (id < playerList.length)
+			return playerList[id]; 
+		else
+			return playerList[0]; //TODO parse supporting countries from the scenario file
+	}
+	
 	
 	this.setCurrentHex = function(row, col)
 	{
