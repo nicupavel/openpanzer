@@ -387,15 +387,32 @@ function Render(mapObj)
 		image = imgUnits[unit.getIcon()];
 		if (image) 
 		{
+			//Offset the transparent regions of the unit sprite
+			var ix0 = x0 - 25;
+			var iy0 = y0 - 10;
 			// TODO Units have 15 possible orientations 
 			// there are 9 sprites each 80x50 in 1 row. to get the rest of the orientations
 			// the sprite must be mirrored
+			var mirror = false;
+			var imagew = 80;
+			var imageh = 50;
 			facing = unit.facing;
-			if (facing > 8) { facing = facing - 7; } //TODO mirroring
-			imgidx = 80 * facing;
-			imagew = 80;
-			imageh = 50;
-			c.drawImage(image, imgidx , 0, imagew, imageh, x0 - 25, y0 - 10, imagew, imageh);
+			if (facing > 8)
+			{
+				facing = 16 - facing; 
+				mirror = true;
+			}
+			var imgidx = imagew * facing;
+			if (mirror)
+			{
+				var flip = ix0 + imagew/2;
+				c.save();
+				c.translate(flip, 0);
+				c.scale(-1,1);
+				c.translate(-flip,0);
+			}
+			c.drawImage(image, imgidx , 0, imagew, imageh, ix0, iy0, imagew, imageh);
+			if (mirror) c.restore();
 		}
 		//Write unit strength in a box below unit
 		//TODO center by using measureText
