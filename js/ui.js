@@ -178,16 +178,6 @@ function mainMenuButton(id)
 			r.render();
 			break;
 		}
-		
-		case 'endturn':
-		{
-			map.endTurn();
-			GameState.save(map);
-			$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
-			r.render();
-			break;
-		}
-		
 		case 'inspectunit':
 		{
 			var v = $('unit-info').style.visibility;
@@ -223,7 +213,16 @@ function mainMenuButton(id)
 				updateEquipmentWindow(2); //By default show tanks
 			}
 			break;
-		}	
+		}
+		case 'endturn':
+		{
+			map.endTurn();
+			GameState.save(map);
+			$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
+			uiMessage(map.description + " scenario on turn " + map.turn, uiEndTurnInfo());
+			r.render();
+			break;
+		}
 		case 'mainmenu':
 		{
 			uiMessage("HTML5 Panzer General version 1.3", "Copyright 2012 Nicu Pavel <br> " +
@@ -441,6 +440,18 @@ function uiMessage(title, message)
 	$('message').innerHTML = message;
 	$('ui-message').style.visibility = "visible"
 	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+}
+
+function uiEndTurnInfo()
+{
+	var playerList = map.getPlayers();
+	var infoStr = "";
+	for (var i = 0; i < playerList.length; i++)
+	{
+		infoStr +=  playerList[i].getCountryName() + " player on " +  sidesName[playerList[i].side]
+					+ " side has " + map.sidesVictoryHexes[playerList[i].side] + " victory points to conquer <br/>";
+	}
+	return infoStr;	
 }
 
 function newScenario(scenario)

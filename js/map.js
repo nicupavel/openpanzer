@@ -245,10 +245,7 @@ function Map()
 		unitImagesList[unit.id] = unit.getIcon();
 		
 		if (unit.transport !== null)
-		{
 			unitImagesList[unit.transport.id] = unit.transport.icon;
-			console.log(unit.transport);
-		}
 	}
 	
 	this.getUnits = function() { return unitList; }
@@ -484,7 +481,7 @@ function Map()
 		for (var i = 0; i < m.sidesVictoryHexes.length; i++)
 			this.sidesVictoryHexes[i] = m.sidesVictoryHexes[i];
 	}
-	
+
 	this.dumpMap = function()
 	{
 		/*

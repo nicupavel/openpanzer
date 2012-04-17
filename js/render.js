@@ -413,7 +413,11 @@ function Render(mapObj)
 		c.moveTo(tx, ty);
 		c.fillStyle = textcolor;
 		c.fillRect  (tx, ty, textSize + 2, 10);
-		c.fillStyle = "white";
+		if (unit.hasMoved)
+			c.fillStyle = "2F4F4F"; //DarkSlateGrey
+		else
+			c.fillStyle = "white";
+			
 		c.fillText(text, tx, ty + 8);
 		//draw indicator for unit.hasFired
 		if (!unit.hasFired)
