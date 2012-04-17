@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 Panzer General</title>
+    <meta name="Author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
+    <meta name="description" content="HTML5 Panzer General 2 Clone"/>
+	<script src="js/scenarios.js"></script>
+	<script src="js/dom.js"></script>
+	<script src="js/style.js"></script>
+	<script src="js/animation.js"></script>
+	<script src="js/equipment.js"></script>
+	<script src="js/prototypes.js"></script>
+	<script src="js/gamerules.js"></script>
+	<script src="js/gamestate.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/maploader.js"></script>
+	<script src="js/render.js"></script>
+	<script src="js/ui.js"></script>
+	<link href="css/ui.css" rel="stylesheet" type="text/css">
+  </head>
+  <body onload="gameStart();" id="mainbody">
+	<div id="game"></div> <!-- Where the canvases are added -->
+	<div id="menu"></div> <!-- Where the menu is being built -->
+	<div id="unit-info">  <!-- Unit info dialog -->
+	    <div id="container">
+			<div id="unit-image"></div>
+			<div id="unit-name">HTML5 Panzer General</div>
+			<div id="unit-flag"></div>
+			<div id="fuel"></div>
+			<div id="ammo"></div>
+			<div id="gunrange"></div>
+			<div id="ini"></div>
+			<div id="spot"></div>
+			<div id="str"></div>
+			<div id="ahard"></div>
+			<div id="asoft"></div>
+			<div id="aair"></div>
+			<div id="anaval"></div>
+			<div id="dhard"></div>
+			<div id="dair"></div>
+			<div id="dclose"></div>
+			<div id="drange"></div>
+			<div id="iokbut"></div>
+			<div id="ireinfbut"></div>
+			<div id="iresupbut"></div>
+			<div id="imountbut"></div>
+		</div>
+	</div>
+	<div id="ui-message"> <!-- Message popup -->
+		<div id="title">title</div>
+		<div id="message">message</div>
+		<div id="uiokbut"></div>
+	</div>
+	<div id="container-unitlist"><div id="hscroll-unitlist">
+		<div id="unitlist"></div><!-- Current player units -->
+	</div></div>
+	<div id="equipment"><!-- Equipment Window -->
+		<div id="eqSelCountry"></div>
+		<div id="eqSelClass"></div>
+		<div id="eqUnitList"></div>
+		<div id="eqOkBut"></div>
+		<div id="eqUpgradeBut"></div>
+		<div id="eqNewBut"></div>
+	</div>
+  </body>
+</html>
