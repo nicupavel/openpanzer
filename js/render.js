@@ -313,17 +313,16 @@ function Render(mapObj)
 	function cacheUnitImages(imgList, func)
 	{
 		var loaded = 0;
+		var toLoad = Object.keys(imgList).length; //Size of the "hash"
+
 		for (i in imgList)
 		{
 			imgUnits[imgList[i]] = new Image();
 			imgUnits[imgList[i]].onload = function() 
 			{
 				loaded++;  
-				if (loaded == imgList.length)
-				{
-					//console.log("Loaded " +loaded+"/"+imgList.length + " done caching");
+				if (loaded === toLoad)
 					func();
-				}
 			}
 			imgUnits[imgList[i]].src = imgList[i];
 		}	

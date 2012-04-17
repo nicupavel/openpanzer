@@ -209,12 +209,11 @@ function Map()
 	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
 	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	
-	var unitImagesList = {}; //a "hash" of unit images used for caching
+	var unitImagesList = {}; //a "hash" of unique unit images used for caching
 	var moveSelected = []; //selected hexes for current unit move destinations
 	var attackSelected = []; //selected hexes for current unit attack destinations
 	var unitList = []; //internal list of units
 	var playerList = []; // players list
-	
 	
 	this.allocMap = function()
 	{

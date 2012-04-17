@@ -484,7 +484,7 @@ function gameStart()
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
 	console.log("Number: " + rng + " Scenario:" + scenario);
 	
-	scenario="resources/scenarios/xml/tutorial.xml";
+	//scenario="resources/scenarios/xml/tutorial.xml";
 	ui = new UI(scenario);
 	//Bring up the "Main Menu"
 	ui.mainMenuButton('mainmenu');
