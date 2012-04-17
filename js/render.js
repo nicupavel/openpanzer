@@ -390,11 +390,11 @@ function Render(mapObj)
 			//Offset the transparent regions of the unit sprite
 			var ix0 = x0 - 25;
 			var iy0 = y0 - 10;
-			// TODO Units have 15 possible orientations 
+			// Units have 15 possible orientations 
 			// there are 9 sprites each 80x50 in 1 row. to get the rest of the orientations
 			// the sprite must be mirrored
 			var mirror = false;
-			var imagew = 80;
+			var imagew = image.width/9; //Some images have bigger width
 			var imageh = 50;
 			facing = unit.facing;
 			if (facing > 8)
