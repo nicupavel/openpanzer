@@ -11,26 +11,67 @@
 var GameRules = GameRules || {}; //Namespace emulation
 
 //returns a cell list with hexes that a unit @ row,col can move to
+//Works by computing cost of ajacent hexes by range expanding from 0 to unit movpoints
+//cin is the cost of entering the current hex which is equal to  the cost of exiting from 
+//the hex with a range smaller by 1 than the current hex
+//cout cost of exiting a hex which is cin + terrain movement cost
+//each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
+//with the new cost
 GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 {
+	var r = 0;
 	var allowedCells = [];
 	var unit = map[row][col].unit;
 	
-	if (unit === null || unit.hasMoved) return allowedCells;
+	if (unit === null || unit.hasMoved) return [];
 	
 	var range = unit.unitData().movpoints;
+	console.log("move range:" + range);
+	var movmethod = unit.unitData().movmethod;
 	//if (range > unit.fuel) range = unit.fuel; //TODO check unit type if needs fuel to move
+	moveCost = movTable[movmethod];
+
+	var c = getCellsInRange(row, col, range, mrows, mcols);
+	startingCell = new Cell(row, col); //This is not added in cellList returned by getCellsInRange
+	c.push(startingCell);
 	
-	console.log("move range: " + range);
-	var cellList = getCellsInRange(row, col, range, mrows, mcols);
-	for (var i = 0; i < cellList.length; i++)
+	while (r <= range)
 	{
-		var cell = cellList[i];
-		if (canMoveInto(unit, map[cell.row][cell.col]))
+		for (i = 0; i < c.length; i++)
 		{
-			allowedCells.push(cell);
+			if (c[i].range == r)
+			{
+				//console.log("Range:" + c[i].range + " Row:"+ c[i].row + " Col:" + c[i].col);
+				for (j  = 0; j < c.length; j++)
+				{
+					if (c[j].range < r) continue; //Not always true, there might be a path to reach a hex by turning back
+					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
+					{
+						hex = map[c[j].row][c[j].col];
+						c[j].cost = moveCost[hex.terrain];
+						if (c[j].cin == 0) c[j].cin = c[i].cout;
+						if (c[j].cout == 0) c[j].cout = c[j].cin + c[j].cost;
+						if (c[j].cin > c[i].cout)
+						{
+							c[j].cin = c[i].cout;
+							c[j].cout = c[j].cin + c[j].cost;
+						}
+						if ((mi = canMoveInto(map, unit, c[j])) && (c[j].cout <= range)) c[j].allow = true;
+						//else console.log("Row:"+ c[j].row + " Col:" + c[j].col + " discarded for range:" + r + " with cout:" + c[j].cout + " can move into:" + mi);
+					}
+				}
+			}
 		}
+		r++;
 	}
+	
+	
+	for (var i = 0; i < c.length; i++)
+	{
+		if (c[i].allow == true)
+			allowedCells.push(c[i]);
+	}
+	
 	return allowedCells;
 }
 
@@ -166,22 +207,16 @@ function canAttack(unit, targetUnit)
 	return true;
 }
 //Checks if a given unit can move into a hex
-//TODO return the cost of moving into a hex depending on terrain
 //TODO Air units can move over ground units
-function canMoveInto(unit, hex)
+function canMoveInto(map, unit, cell)
 {
+	hex = map[cell.row][cell.col];
 	if (hex.unit !== null) 	return false;
+	return true;
 	
+	//TODO adjacently units zone of control ?
 	if (isGround(unit))
 	{
-		if ((hex.terrain >= terrainType.Mountain) && 
-		   (hex.terrain != terrainType.Sand) && 
-		   (hex.terrain != terrainType.River) && 
-		   (hex.terrain != terrainType.Rough))
-		{
-			return false;
-		}
-		//TODO adjacently units zone of control ?
 		return true;
 	}
 	
@@ -192,10 +227,6 @@ function canMoveInto(unit, hex)
 	
 	if (isSea(unit))
 	{	
-		if ((hex.terrain != terrainType.Ocean) && (hex.terrain != terrainType.Port))
-		{
-			return false;
-		}
 		return true;
 	}
 	return false;
@@ -292,8 +323,20 @@ function distance(x1, y1, x2, y2)
 	return d;
 }
 
+//Checks if 2 coordonates are adjacent
+function isAdjacent(x1, y1, x2, y2)
+{
+	if ((x1 - 1 + (y1 % 2) == x2) && (y1 - 1 == y2)) return true;
+	if ((x1 + (y1 % 2) == x2) && (y1 - 1 == y2)) return true;
+	if ((x1 - 1 == x2) && (y1 == y2)) return true;
+	if ((x1 + 1 == x2) && (y1 == y2)) return true;
+	if ((x1 - 1 + (y1 % 2) == x2) && (y1 + 1 == y2)) return true;
+	if ((x1 + (y1 % 2) == x2) && (y1 + 1 == y2)) return true;
+	
+	return false;
+}
+
 //Returns a list of cells that are in a certain range to another cell
-//TODO Fix this function to work when the cell is near the margins (selection is wrong)
 function getCellsInRange(row, col, range, mrows, mcols)
 {
 	var cellList = [];
@@ -312,6 +355,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 		if (i != row) 
 		{ 
 			cell = new Cell(i, col); 
+			cell.range = Math.abs(row - i);
 			cellList.push(cell);
 		}
 	}
@@ -332,15 +376,18 @@ function getCellsInRange(row, col, range, mrows, mcols)
 			if ((col + colOff) < mcols) 
 			{
 				cell = new Cell(i, col + colOff);
+				cell.range = colOff;
 				cellList.push(cell);
 			}
 			
 			if ((col - colOff) > 0) 
 			{ 
 				cell = new Cell(i, col - colOff);
+				cell.range = colOff;
 				cellList.push(cell);
 			}
 		}
 	}
 	return cellList;
 }
+
