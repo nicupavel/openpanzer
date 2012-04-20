@@ -2,6 +2,7 @@
  * GameRules - Provides basic rules for HTML5 PG2
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:
@@ -48,7 +49,11 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
 					{
 						hex = map[c[j].row][c[j].col];
-						c[j].cost = moveCost[hex.terrain];
+						if (hex.road > roadType.none) 
+							c[j].cost = moveCost[17]; //Road entry in movement table
+						else
+							c[j].cost = moveCost[hex.terrain];
+						
 						if (c[j].cin == 0) c[j].cin = c[i].cout;
 						if (c[j].cout == 0) c[j].cout = c[j].cin + c[j].cost;
 						if (c[j].cin > c[i].cout)
@@ -56,7 +61,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 							c[j].cin = c[i].cout;
 							c[j].cout = c[j].cin + c[j].cost;
 						}
-						if ((mi = canMoveInto(map, unit, c[j])) && (c[j].cout <= range)) c[j].allow = true;
+						if ((mi = canMoveInto(map, unit, c[j])) && (c[j].cout <= range)) c[j].allow = true; //TODO canMoveInto should be checked sooner
 						//else console.log("Row:"+ c[j].row + " Col:" + c[j].col + " discarded for range:" + r + " with cout:" + c[j].cout + " can move into:" + mi);
 					}
 				}

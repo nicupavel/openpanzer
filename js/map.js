@@ -406,7 +406,7 @@ function Map()
 			if (this.updateVictorySides(side, enemyside))
 				win = side;
 		}
-		unit.move(1); //TODO use GameRules.distance
+		unit.move(1); //TODO use GameRules.distance once we do the fuel using units and "leg" using units
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		srcHex.delUnit();
