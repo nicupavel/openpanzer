@@ -388,10 +388,11 @@ function Render(mapObj)
 		if (image) 
 		{
 			//Offset the transparent regions of the unit sprite
+			//TODO center to hex center (see battleships/destroyers)
 			var ix0 = x0 - 25;
 			var iy0 = y0 - 10;
 			// Units have 15 possible orientations 
-			// there are 9 sprites each 80x50 in 1 row. to get the rest of the orientations
+			// there are 9 sprites each ~80x50 in 1 row. to get the rest of the orientations
 			// the sprite must be mirrored
 			var mirror = false;
 			var imagew = image.width/9; //Some images have bigger width

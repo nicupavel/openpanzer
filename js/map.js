@@ -377,6 +377,9 @@ function Map()
 		//TODO do this better
 		defunit.hit(cr.kills)
 		atkunit.hit(cr.losses);
+		
+		atkunit.facing = GameRules.getDirection(srow, scol, drow, dcol);
+		defunit.facing = GameRules.getDirection(drow, dcol, srow, scol);
 		if (atkunit.destroyed) 
 			this.map[srow][scol].delUnit();
 			
@@ -409,6 +412,7 @@ function Map()
 		unit.move(1); //TODO use GameRules.distance once we do the fuel using units and "leg" using units
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
+		unit.facing = GameRules.getDirection(srow, scol, drow, dcol);
 		srcHex.delUnit();
 		this.setAttackRange(drow, dcol) //Put new attack range
 		

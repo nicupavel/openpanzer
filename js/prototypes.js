@@ -10,12 +10,19 @@
 
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
 
-//Bit masks. Hex with road value 136 means it has a road starting from mid of the hex
+//Power of 2 bit masks. Hex with road value 136 means it has a road starting from mid of the hex
 //and going NW (128) and one starting from mid of the hex and going SE (8)
 var roadType = 
 {
 	none:0, north:1, northeast: 2, eastunused: 4, southeast:8, 
 	south: 16, southwest: 32, westunused: 64, northwest: 128 
+};
+
+//Compass (used for unit facing) counter clockwise
+var direction = 
+{
+	S:0, SSE:1, SE:2, ESE:3, E:4, ENE:5, NE:6, NNE:7, N:8, NNW:9, NW:10, WNW:11,
+	W:12, WSW:13, SW:14, SSW:15
 };
 
 var terrainType = 

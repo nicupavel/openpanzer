@@ -112,7 +112,7 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 {
 	var cr = new combatResults();
 
-	var d = distance(arow, acol, trow, tcol); //distance between units
+	var d = GameRules.distance(arow, acol, trow, tcol); //distance between units
 	var at = aUnit.unitData().target;
 	var tt = tUnit.unitData().target;
 	var aav = 0;
@@ -308,8 +308,52 @@ function isGround(unit)
 	}
 }
 
-//Returns the distance between 2 hexes
-function distance(x1, y1, x2, y2)
+//Returns aproximate cardinal directions x row, y col
+GameRules.getDirection = function(x1, y1, x2, y2)
+{
+	
+	var dx = x1 - x2;
+	var dy = y1 - y2;
+	var delta = 0; //Gets added or substracted from a ordinal direction to get subdivisions
+	var r = 1; 
+	//Aproximate the 8 sub-ordinal directions
+	if (dx != 0) 
+		 r = Math.abs(dy / dx);
+	
+	if (r > 3) 
+		delta = 1;
+	if (r < 1)
+		delta = -1;
+
+	if (dx > 0)
+	{
+		if (dy > 0)
+			return direction.NW + delta; //+ 1 WNW, -1 NNW
+		if (dy < 0)
+			return direction.NE //+1 ENE, -1 NNE
+		if (dy == 0)
+			return direction.N;
+	}
+	if (dx < 0)
+	{
+		if (dy > 0)
+			return direction.SW; //+1 WSW, -1 SSW
+		if (dy < 0)
+			return direction.SE; //+1 ESE, -1 SSE
+		if (dy == 0)
+			return direction.S;
+	}	
+	if (dx == 0)
+	{
+		if (dy >= 0)
+			return direction.W;
+		if (dy < 0)
+			return direction.E;
+	}
+}
+
+//Returns the distance between 2 hexes x row, y col
+GameRules.distance = function(x1, y1, x2, y2)
 {
 	var d = 0;
 	//shift the entire hexgrid to be arranged diagonally
@@ -328,7 +372,7 @@ function distance(x1, y1, x2, y2)
 	return d;
 }
 
-//Checks if 2 coordonates are adjacent
+//Checks if 2 coordonates are adjacent x row, y col
 function isAdjacent(x1, y1, x2, y2)
 {
 	if ((x1 - 1 + (y1 % 2) == x2) && (y1 - 1 == y2)) return true;
