@@ -246,7 +246,7 @@ function mainMenuButton(id)
 function updateUnitInfoWindow(u)
 {
 	var eqUnit = false;
-	var uinfo;
+	var uinfo, ammo, fuel;
 	$('unit-info').style.visibility  = "visible";
 	
 	//Call from equipment window
@@ -256,14 +256,21 @@ function updateUnitInfoWindow(u)
 		u.flag = u.country;
 		u.strength = 10;
 		eqUnit = true;
+		ammo = u.ammo;
+		fuel = u.fuel;
 	}
-	else {	uinfo = u.unitData(); }
+	else 
+	{	
+		uinfo = u.unitData(); 
+		ammo = u.getAmmo();
+		fuel = u.getFuel();
+	}
 	
 	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
 	$('unit-name').innerHTML = uinfo.name;
-	$('fuel').innerHTML = u.fuel; //TODO need to show transport ammo/fuel if mounted handle this here or in unit class
-	$('ammo').innerHTML = u.ammo;
+	$('fuel').innerHTML = fuel;
+	$('ammo').innerHTML = ammo;
 	$('str').innerHTML = u.strength + "/10";
 	$('gunrange').innerHTML = uinfo.gunrange;
 	$('ini').innerHTML = uinfo.initiative;

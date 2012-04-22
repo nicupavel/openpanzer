@@ -18,6 +18,7 @@ var GameRules = GameRules || {}; //Namespace emulation
 //cout cost of exiting a hex which is cin + terrain movement cost
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
+//TODO stopmov, briges, zone of control
 GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 {
 	var r = 0;
@@ -27,13 +28,21 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	if (unit === null || unit.hasMoved) return [];
 	
 	var range = unit.unitData().movpoints;
-	console.log("move range:" + range);
 	var movmethod = unit.unitData().movmethod;
-	//if (range > unit.fuel) range = unit.fuel; //TODO check unit type if needs fuel to move
-	moveCost = movTable[movmethod];
-
+	var moveCost = movTable[movmethod];
+	
+	
+	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
+		range = unit.getFuel();
+	
+	//Towed units with no transport should be able to move at 1 range 
+	if ((movmethod === movMethod.towed) && (unit.transport === null) && (range === 0))
+		range = 1;	
+	
+	console.log("move range:" + range);
+	
 	var c = getCellsInRange(row, col, range, mrows, mcols);
-	startingCell = new Cell(row, col); //This is not added in cellList returned by getCellsInRange
+	startingCell = new Cell(row, col); //current unit cell is not added in cellList returned by getCellsInRange
 	c.push(startingCell);
 	
 	while (r <= range)
@@ -85,7 +94,7 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 	var allowedCells = [];
 	var unit = map[row][col].unit;
 	
-	if (unit === null || unit.hasFired || unit.ammo <= 0) return allowedCells; 
+	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
 	
 	//TODO weather ?
 	var range = unit.unitData().gunrange;
@@ -181,11 +190,10 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 GameRules.getResupplyValue = function(unit)
 {
 	if (!canResupply(unit)) return 0, 0;
-	var ammo = unit.unitData().ammo - unit.ammo;
-	var fuel = unit.unitData().fuel - unit.fuel;
-	if (fuel < 0) fuel = 0; //TODO temp fix for leg/towed movement
+	var ammo = unit.unitData().ammo - unit.getAmmo();
+	var fuel = unit.unitData().fuel - unit.getFuel();
+	if (fuel < 0) fuel = 0;
 	
-	console.log(unit.unitData().ammo + " " + unit.ammo + " " + ammo + " " +  fuel);
 	return new Supply(ammo, fuel);
 }
 
@@ -200,7 +208,7 @@ GameRules.getReinforceValue = function(unit)
 
 function canAttack(unit, targetUnit)
 {
-	if (unit.ammo === 0)
+	if (unit.getAmmo() <= 0)
 		return false;
 	if (targetUnit === null)
 		return false;
@@ -247,8 +255,8 @@ function canResupply(unit)
 		return false;
 	if (unit.hasReinforced)
 		return false;
-	if ((unit.fuel == unit.unitData().fuel) &&
-		(unit.ammo == unit.unitData().ammo))
+	if ((unit.getFuel() == unit.unitData().fuel) &&
+		(unit.getAmmo() == unit.unitData().ammo))
 		return false;
 		
 	return true;
@@ -310,6 +318,10 @@ function isGround(unit)
 
 GameRules.unitUsesFuel = function(unit)
 {
+	//TODO check: If fuel is defined as 0 in equipment then it means it doesn't use fuel ??
+	if (unit.unitData().fuel === 0)
+		return false;
+		
 	m = unit.unitData().movmethod;
 	if ((m == movMethod.leg) || 
 		(m == movMethod.towed) ||

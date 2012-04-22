@@ -127,6 +127,7 @@ function Render(mapObj)
 			if ((redraw === true) || (lastCursorCell === null) || (lastCursorImage === null) ||
 				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
 			{ 
+				//TODO check unit mounted/unmounted 
 				redraw = true; //Redraw because a mouse is over a new cell
 				var atkunit = map.currentHex.hex.unit;
 				var defunit = hex.unit;
@@ -395,6 +396,7 @@ function Render(mapObj)
 			// Units have 15 possible orientations 
 			// there are 9 sprites each ~80x50 in 1 row. to get the rest of the orientations
 			// the sprite must be mirrored
+			//TODO some unit sprites are exported badly from SHPTool (missing S orientation)
 			var mirror = false;
 			var imagew = image.width/9; //Some images have bigger width
 			var imageh = 50;

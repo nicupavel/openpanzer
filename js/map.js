@@ -52,6 +52,11 @@ function Transport(unitDataId)
 		this.ammo += ammo; 
 		this.fuel += fuel;  
 	}
+	
+	this.unitData = function()
+	{
+		return equipment[this.id]; 
+	}
 }
 
 function Unit(unitDataId)
@@ -64,14 +69,15 @@ function Unit(unitDataId)
 	this.hasResupplied = false;
 	this.hasReinforced = false;
 	this.isMounted = false;
-	this.ammo = equipment[unitDataId].ammo; //TODO getAmmo() to return ammo when unit is mounted
-	this.fuel = equipment[unitDataId].fuel; //TODO getFuel() to return fuel when unit is mounted
 	this.strength = 10;
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
 	this.destroyed = false; //flag to check if a unit is destroyed
 	this.player = null; //TODO player struct pointer
 	this.transport = null; //transport class pointer
+	//TODO ugly way because it needs to be saved in GameState
+	this.ammo = equipment[unitDataId].ammo; //holds the ammo of the unit but it's getter is getAmmo()
+	this.fuel = equipment[unitDataId].fuel; //holds the fuel of the unit but it's getter is getFuel()
 	
 	//Clone object
 	this.copy = function(u) 
@@ -107,6 +113,22 @@ function Unit(unitDataId)
 			return equipment[this.id]; 
 	}
 	
+	this.getAmmo = function()
+	{
+		if ((this.isMounted) && (this.transport !== null))
+			return this.transport.ammo;
+		else
+			return this.ammo;
+	}
+	
+	this.getFuel = function()
+	{
+		if ((this.isMounted) && (this.transport !== null))
+			return this.transport.fuel;
+		else
+			return this.fuel;
+	}
+	
 	this.hit = function(losses) 
 	{ 
 		this.strength -= losses; 
@@ -125,7 +147,8 @@ function Unit(unitDataId)
 		if (this.isMounted) 
 		{
 			this.hasFired = true;
-			this.transport.fuel -= dist;
+			if (GameRules.unitUsesFuel(this.transport))
+				this.transport.fuel -= dist;
 			return;
 		}
 		if (GameRules.unitUsesFuel(this))
