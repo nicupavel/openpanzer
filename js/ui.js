@@ -2,6 +2,7 @@
  * UI - handles mouse and dialog boxes
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:
@@ -261,7 +262,7 @@ function updateUnitInfoWindow(u)
 	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";
 	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
 	$('unit-name').innerHTML = uinfo.name;
-	$('fuel').innerHTML = u.fuel;
+	$('fuel').innerHTML = u.fuel; //TODO need to show transport ammo/fuel if mounted handle this here or in unit class
 	$('ammo').innerHTML = u.ammo;
 	$('str').innerHTML = u.strength + "/10";
 	$('gunrange').innerHTML = uinfo.gunrange;

@@ -2,6 +2,7 @@
  * MapLoader - Loads XML scenarios as exported from mapconvert.py script
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:

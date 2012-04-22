@@ -2,6 +2,7 @@
  * Render - draws the graphic elements on canvases
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:

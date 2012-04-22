@@ -308,6 +308,16 @@ function isGround(unit)
 	}
 }
 
+GameRules.unitUsesFuel = function(unit)
+{
+	m = unit.unitData().movmethod;
+	if ((m == movMethod.leg) || 
+		(m == movMethod.towed) ||
+		(m == movMethod.allTerrainLeg))
+			return false;
+	return true;
+}
+
 //Returns aproximate cardinal directions x row, y col
 GameRules.getDirection = function(x1, y1, x2, y2)
 {

@@ -2,6 +2,7 @@
  * Style - basic styles support for rendering on canvas
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:

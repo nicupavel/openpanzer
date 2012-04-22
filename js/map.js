@@ -2,6 +2,7 @@
  * Map - Provides map, unit and hex data structures
  *
  * http://www.linuxconsulting.ro
+ * http://openpanzer.net
  *
  * Copyright (c) 2012 Nicu Pavel
  * Licensed under the GPL license:
@@ -63,8 +64,8 @@ function Unit(unitDataId)
 	this.hasResupplied = false;
 	this.hasReinforced = false;
 	this.isMounted = false;
-	this.ammo = equipment[unitDataId].ammo;
-	this.fuel = equipment[unitDataId].fuel;
+	this.ammo = equipment[unitDataId].ammo; //TODO getAmmo() to return ammo when unit is mounted
+	this.fuel = equipment[unitDataId].fuel; //TODO getFuel() to return fuel when unit is mounted
 	this.strength = 10;
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
@@ -114,14 +115,22 @@ function Unit(unitDataId)
 	
 	this.fire = function(isAttacking) 
 	{
-		this.ammo--; 
+		this.ammo--; //TODO some transports can attack ?
 		if (isAttacking)
 			this.hasFired = true;
 	}
 	this.move = function(dist) 
 	{
-		this.fuel -= dist; this.hasMoved = true;
-		if (this.isMounted) this.hasFired = true;
+		this.hasMoved = true;
+		if (this.isMounted) 
+		{
+			this.hasFired = true;
+			this.transport.fuel -= dist;
+			return;
+		}
+		if (GameRules.unitUsesFuel(this))
+			this.fuel -= dist; //TODO check if fuel consumption is based on terrain cost or just distance
+		//TODO Fatigue for leg units ?
 	}
 	
 	this.resupply = function(ammo, fuel) 
@@ -170,7 +179,7 @@ function Hex()
 	this.flag = -1;
 	this.isSupply = false;
 	this.isDeployment = false;
-	this.victorySide = -1; //victory for which side
+	this.victorySide = -1; //hex is a victory point for side [0,1]
 	this.name = null;
 	
 	this.isCurrent = false;
@@ -380,6 +389,7 @@ function Map()
 		
 		atkunit.facing = GameRules.getDirection(srow, scol, drow, dcol);
 		defunit.facing = GameRules.getDirection(drow, dcol, srow, scol);
+		
 		if (atkunit.destroyed) 
 			this.map[srow][scol].delUnit();
 			
@@ -409,7 +419,7 @@ function Map()
 			if (this.updateVictorySides(side, enemyside))
 				win = side;
 		}
-		unit.move(1); //TODO use GameRules.distance once we do the fuel using units and "leg" using units
+		unit.move(GameRules.distance(srow, scol, drow, dcol));
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(srow, scol, drow, dcol);
