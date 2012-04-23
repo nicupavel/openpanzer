@@ -11,6 +11,13 @@
 
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
 
+var unitClass = {
+	none: 0, infantry: 1, tank: 2, recon: 3, antiTank: 4, flak: 5, fortification: 6,
+	groundTransport: 7, artillery: 8, airDefence: 9, fighter: 10, tacticalBomber: 11,
+	levelBomber: 12, airTransport: 13, submarine: 14, destroyer: 15, battleship: 16,
+	carrier: 17, navalTransport: 18, battleCruiser: 19, cruiser: 20, lightCruiser: 21
+};
+
 //Power of 2 bit masks. Hex with road value 136 means it has a road starting from mid of the hex
 //and going NW (128) and one starting from mid of the hex and going SE (8)
 var roadType = 

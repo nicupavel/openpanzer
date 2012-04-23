@@ -405,7 +405,7 @@ function Map()
 		console.log("attacking: " + drow + "," +dcol);
 		atkunit.fire(true);
 		defunit.fire(false);
-		var cr = GameRules.calculateAttackResults(atkunit, srow, scol, defunit, drow, dcol);
+		var cr = GameRules.calculateAttackResults(this.map, atkunit, srow, scol, defunit, drow, dcol);
 		//TODO do this better
 		defunit.hit(cr.kills)
 		atkunit.hit(cr.losses);

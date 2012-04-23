@@ -211,7 +211,7 @@ function mainMenuButton(id)
 			{ 
 				$('equipment').style.visibility = "visible"; 
 				$('container-unitlist').style.visibility = "visible"; 
-				updateEquipmentWindow(2); //By default show tanks
+				updateEquipmentWindow(unitClass.tank);
 			}
 			break;
 		}
@@ -364,7 +364,7 @@ function buildEquipmentWindow()
 			var flagPos = -21 * c;
 			this.style.backgroundPosition = "" + flagPos +"px 0px";
 			this.country = ++c; 
-			updateEquipmentWindow(2);
+			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
 	for (b in eqClassButtons)

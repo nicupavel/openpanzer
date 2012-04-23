@@ -117,13 +117,16 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 //TODO dig the actual formula (how many pages it is ?) 
 //prolly depends on: weather, terrain, adjacent units (arty), initiative, fuel, ammo
 //experience, ranged defense modified, entrechment, unit strength etc ...
-GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol)
+GameRules.calculateAttackResults = function(map, atkunit, arow, acol, defunit, trow, tcol)
 {
 	var cr = new combatResults();
 
 	var d = GameRules.distance(arow, acol, trow, tcol); //distance between units
-	var at = aUnit.unitData().target;
-	var tt = tUnit.unitData().target;
+	
+	aUD = atkunit.unitData();
+	tUD = defunit.unitData();
+	var at = aUD.target;
+	var tt = tUD.target;
 	var aav = 0;
 	var adv = 0;
 	var tav = 0;
@@ -133,53 +136,80 @@ GameRules.calculateAttackResults = function(aUnit, arow, acol, tUnit, trow, tcol
 	{
 		case unitType.air:
 		{
-			tav = tUnit.unitData().airatk;
-			tdv = tUnit.unitData().airdef;
+			tav = tUD.airatk;
+			tdv = tUD.airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			tav = tUnit.unitData().softatk;
-			tdv = tUnit.unitData().grounddef;
+			tav = tUD.softatk;
+			tdv = tUD.grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			tav = tUnit.unitData().hardatk;
-			tdv = tUnit.unitData().grounddef;
+			tav = tUD.hardatk;
+			tdv = tUD.grounddef;
 			break;
 		}
 	}
-	
+	//Target unit type
 	switch(tt)
 	{
 		case unitType.air:
 		{
 			
-			aav = aUnit.unitData().airatk;
-			adv = aUnit.unitData().airdef;
+			aav = aUD.airatk;
+			adv = aUD.airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			aav = aUnit.unitData().softatk;
-			adv = aUnit.unitData().grounddef;
+			aav = aUD.softatk;
+			adv = aUD.grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			aav = aUnit.unitData().hardatk;
-			adv = aUnit.unitData().grounddef;
+			aav = aUD.hardatk;
+			adv = aUD.grounddef;
 			break;
 		}
 	}
 	
-	cr.kills = Math.round(aUnit.strength * (aav - tdv)/10);
-	if (cr.kills <= 0 ) cr.kills = 1;
-	//if distance between units > 1 means that target unit can fight back //TODO check if always true
-	if (d <= 1)
+	//TODO Weather
+	//TODO Terrain checks
+	if (map[trow][tcol].terrain == terrainType.City)
+		tdv += 4;
+	
+	if (map[trow][tcol].terrain == terrainType.River)
+		tdv -= 4;
+	//TODO Entrenchment
+	//TODO Experience
+	//TODO Range defense modifier (check if always added)
+	if (d > 1) 
 	{
-		cr.losses = Math.round(tUnit.strength * (tav - adv)/10);
+		adv += aUD.rangedefmod;
+		tdv += tUD.rangedefmod;
+	}
+	else
+	{
+		adv += aUD.rangedefmod/2>>0;
+		tdv += tUD.rangedefmod/2>>0;
+	}
+	//TODO Initiative
+	if (aUD.initialive > tUD.initiative)
+		adv += 4;
+	
+	//console.log("Attacker attack value:" + aav + " defence value:" + adv);
+	//console.log("Defender attack value:" + tav + " defence value:" + tdv);
+	
+	cr.kills = Math.round(atkunit.strength * (aav - tdv)/10);
+	if (cr.kills <= 0 ) cr.kills = 1;
+	//if distance between units > 1 means that target unit can't fight back //TODO check if always true
+	if (d <= 1 && defunit.getAmmo() > 1)
+	{
+		cr.losses = Math.round(defunit.strength * (tav - adv)/10);
 		if (cr.losses < 0) cr.losses = 0;
 	}
 	
