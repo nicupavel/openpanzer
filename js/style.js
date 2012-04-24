@@ -20,7 +20,7 @@ function RenderStyle()
 		"lineJoin":  "miter",
 		},
 	"attack":{ //Attack selected hexes
-		"fillColor": "rgba(128,128,128,0.5)",
+		"fillColor": null,
 		"lineColor": "rgba(239,0,0,0.8)",
 		"lineWidth":  3,
 		"lineJoin":  "miter",
