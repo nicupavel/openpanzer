@@ -18,7 +18,7 @@ var GameRules = GameRules || {}; //Namespace emulation
 //cout cost of exiting a hex which is cin + terrain movement cost
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
-//TODO stopmov 254, briges, zone of control
+//TODO stopmov 254, bridges, zone of control
 GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 {
 	var r = 0;
@@ -27,16 +27,20 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	
 	if (unit === null || unit.hasMoved) return [];
 	
-	var range = unit.unitData().movpoints;
-	var movmethod = unit.unitData().movmethod;
+	var ud = unit.unitData();
+	var range = ud.movpoints;
+	var movmethod = ud.movmethod;
 	var moveCost = movTable[movmethod];
 	
 	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
 		range = unit.getFuel();
-	
-	//Towed units with no transport should be able to move at 1 range 
-	if ((movmethod === movMethod.towed) && (unit.transport === null) && (range === 0))
+		
+	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
+	if ((movmethod === movMethod.towed) && (unit.transport === null) 
+		&& (range === 0) && (ud.class != unitClass.fortification))
+	{
 		range = 1;	
+	}
 	
 	console.log("move range:" + range);
 	
@@ -330,14 +334,17 @@ GameRules.canMount = function(unit) { return canMount(unit);}
 
 function isAir(unit)
 {
-	if (unit.unitData().movmethod === 5) { return true; }
+	ud = unit.unitData();
+	if (ud.movmethod == movMethod.air) { return true; }
 	return false;
 }
 
 function isSea(unit)
 {
-	if((unit.unitData().movmethod === 6) ||
-	   (unit.unitData().movmethod === 10))
+	ud = unit.unitData();
+	if((ud.movmethod == movMethod.deepnaval) ||
+	   (ud.movmethod == movMethod.naval) || 
+	   (ud.movmethod == movMethod.costal))
 	{ 
 		return true; 
 	}
@@ -347,9 +354,11 @@ function isSea(unit)
 
 function isGround(unit)
 {
-	if ((unit.unitData().movmethod < 5) ||
-	    (unit.unitData().movmethod === 8) ||
-	    (unit.unitData().movmethod === 9))
+	ud = unit.unitData();
+	if ((ud.movmethod <  movMethod.air) ||
+	    (ud.movmethod == movMethod.allTerrainTracked) ||
+	    (ud.movmethod == movMethod.amphibious) ||
+		(ud.movmethod == movMethod.allTerrainLeg))
 	{
 		return true;
 	}

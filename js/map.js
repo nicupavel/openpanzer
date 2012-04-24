@@ -73,7 +73,7 @@ function Unit(unitDataId)
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
 	this.destroyed = false; //flag to check if a unit is destroyed
-	this.player = null; //TODO player struct pointer
+	this.player = null;
 	this.transport = null; //transport class pointer
 	//TODO ugly way because it needs to be saved in GameState
 	this.ammo = equipment[unitDataId].ammo; //holds the ammo of the unit but it's getter is getAmmo()
