@@ -23,6 +23,7 @@ function UI(scenario)
 	}
 	map.dumpMap();
 	buildMainMenu();
+	var countries = getCountries(map);
 	buildEquipmentWindow();
 
 	var r = new Render(map);
@@ -226,7 +227,7 @@ function mainMenuButton(id)
 		}
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General version 1.3", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("HTML5 Panzer General version 1.4", "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
@@ -351,19 +352,20 @@ function buildEquipmentWindow()
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 	
 	//The default selected country in the div
-	var c = parseInt(map.getPlayer(0).country); //Start from 1
-	var pos = -21 * c;
-	$('eqSelCountry').country = c + 1;
+	var c = 0;
+	var pos = -21 * countries[c];
+	$('eqSelCountry').country = c;
 	$('eqSelCountry').owner = 0;
 	$('eqSelCountry').style.backgroundPosition = "" + pos + "px 0px";
 	$('eqSelCountry').title = 'Click to change country';
 	$('eqSelCountry').onclick = function() 
 		{
 			var c = this.country; 
-			if (c >= 26) c = 0; 
-			var flagPos = -21 * c;
+			if (c >= countries.length - 1) c = 0; 
+			else c++;
+			var flagPos = -21 * countries[c];
 			this.style.backgroundPosition = "" + flagPos +"px 0px";
-			this.country = ++c; 
+			this.country = c; 
 			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
@@ -395,8 +397,9 @@ function updateEquipmentWindow(eqclass)
 	$('eqUnitList').innerHTML = "";
 	
 	//The current selected coutry in the div
-	var country = $('eqSelCountry').country;
-	console.log("Country: " + country);
+	var c = $('eqSelCountry').country;
+	var country = parseInt(countries[c]) + 1;
+	
 	//The actual units on the map
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
@@ -414,7 +417,6 @@ function updateEquipmentWindow(eqclass)
 			div.country = unitList[i].unitData().country;
 			div.onclick = function() 
 				{ 
-					$('eqSelCountry').country = this.country; 
 					UI:updateEquipmentWindow(this.eqclass);
 				}
 		}
@@ -482,6 +484,19 @@ function getMouseInfo(canvas, e)
 	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
 	
 	return new mouseInfo(mx, my, rclick);
+}
+
+function getCountries(map)
+{
+	var c = [];
+	if (map === null)
+		return [];
+	
+	p = map.getPlayers();
+	for (var i = 0; i < p.length; i++)
+		c.push(p[i].country);
+		
+	return c;
 }
 
 } //End of UI class
