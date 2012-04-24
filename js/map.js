@@ -96,8 +96,11 @@ function Unit(unitDataId)
 		this.facing = u.facing;
 		this.flag = u.flag;
 		this.destroyed = u.destroyed;
-		//Shallow copy 
-		this.player = u.player;
+		if (u.player !== null)
+		{
+			this.player = new Player();
+			this.player.copy(u.player);
+		}
 		if (u.transport !== null)
 		{
 			this.transport = new Transport(u.transport.id);
@@ -184,7 +187,6 @@ function Unit(unitDataId)
 	
 	this.mount = function() { this.isMounted = true; }
 	this.unmount = function() {	this.isMounted = false;	}
-	this.setUnitToPlayer = function(playerId) { this.owner = playerId; }
 	this.getIcon = function() { var u = this.unitData(); return u.icon; }
 	this.resetUnit = function() 
 	{ 
@@ -277,6 +279,9 @@ function Map()
 		
 		if (unit.transport !== null)
 			unitImagesList[unit.transport.id] = unit.transport.icon;
+		
+		//Sets the player struct
+		unit.player = this.getPlayer(unit.owner);
 	}
 	
 	this.getUnits = function() { return unitList; }
@@ -430,7 +435,7 @@ function Map()
 	{
 		var srcHex = this.map[srow][scol];
 		var dstHex = this.map[drow][dcol];
-		var player = this.getPlayer(srcHex.unit.owner)
+		var player = srcHex.unit.player;
 		var side = player.side;	
 		var win = -1;
 		if (dstHex.flag !== -1) { dstHex.flag = player.country; }

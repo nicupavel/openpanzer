@@ -131,8 +131,8 @@ function Render(mapObj)
 				redraw = true; //Redraw because a mouse is over a new cell
 				var atkunit = map.currentHex.hex.unit;
 				var defunit = hex.unit;
-				var atkflag = map.getPlayer(atkunit.owner).country;
-				var defflag = map.getPlayer(defunit.owner).country;
+				var atkflag = atkunit.player.country;
+				var defflag = defunit.player.country;
 				var cr = GameRules.calculateAttackResults(map.map, atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
 				lastCursorUnit = atkunit;
 				lastCursorCell = cell;
@@ -371,7 +371,7 @@ function Render(mapObj)
 		
 		if (hex.unit !== null)
 		{
-			flag = map.getPlayer(hex.unit.owner).country;
+			flag =hex.unit.player.country;
 			scale = 1.4;
 		}
 		if (hex.flag !== -1 && hex.victorySide !== -1) 
@@ -427,8 +427,8 @@ function Render(mapObj)
 		var tx = x0 + h/2;
 		var ty = y0 + 2 * r - 12;
 		
-		var side =  parseInt(map.getPlayer(unit.owner).side);
-		if (side === 1) { textcolor = "green"; }
+		var side = unit.player.side;
+		if (side == 1) { textcolor = "green"; }
 		
 		c.moveTo(tx, ty);
 		c.fillStyle = textcolor;

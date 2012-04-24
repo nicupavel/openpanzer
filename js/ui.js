@@ -69,7 +69,7 @@ function handleMouseClick(e)
 			map.selectUnit(row, col);
 		}
 		/*
-		var c  = parseInt(map.getPlayer(hex.unit.owner).country);
+		var c  = hex.unit.player.country;
 		$('eqSelCountry').country = c + 1;
 		//TODO make unitList show strength/movement/attack status and update it on all actions
 		updateEquipmentWindow(hex.unit.unitData().class); 

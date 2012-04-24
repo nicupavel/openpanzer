@@ -133,7 +133,7 @@ function MapLoader()
 		if (unitId >= 0 &&  playerId >= 0)
 		{
 			var u = new Unit(unitId);
-			u.setUnitToPlayer(playerId);
+			u.owner = playerId;
 			var facing = node.getAttribute("face");
 			if (facing !== null) { u.facing = facing; }
 			var flag = node.getAttribute("flag");

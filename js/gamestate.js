@@ -43,13 +43,15 @@ GameState.restore = function()
 	if ((m === null) || (p === null)) 
 		return null;
 		
-	map.copy(m);	
 	for (i = 0; i < p.length; i++)
 	{
 		player = new Player();
 		player.copy(p[i]);
 		map.addPlayer(player);
 	}	
+		
+	map.copy(m);	
+	
 	return map;
 }
 
