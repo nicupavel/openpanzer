@@ -18,7 +18,7 @@ var GameRules = GameRules || {}; //Namespace emulation
 //cout cost of exiting a hex which is cin + terrain movement cost
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
-//TODO stopmov, briges, zone of control
+//TODO stopmov 254, briges, zone of control
 GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 {
 	var r = 0;
@@ -30,7 +30,6 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	var range = unit.unitData().movpoints;
 	var movmethod = unit.unitData().movmethod;
 	var moveCost = movTable[movmethod];
-	
 	
 	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
 		range = unit.getFuel();
@@ -52,7 +51,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 			if (c[i].range == r)
 			{
 				//console.log("Range:" + c[i].range + " Row:"+ c[i].row + " Col:" + c[i].col);
-				for (j  = 0; j < c.length; j++)
+				for (j  = 0; j < c.length; j++) //Look up adjacent cells for c[i]
 				{
 					if (c[j].range < r) continue; //Not always true, there might be a path to reach a hex by turning back
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
@@ -63,22 +62,32 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 						else
 							c[j].cost = moveCost[hex.terrain];
 						
+						//enemy unit zone of control ?
+						if (hex.unit !== null && hex.unit.player.side !== unit.player.side)
+						{
+							c[j].cost = 254;
+							c[j].cin = range;
+						}
+						
 						if (c[j].cin == 0) c[j].cin = c[i].cout;
 						if (c[j].cout == 0) c[j].cout = c[j].cin + c[j].cost;
-						if (c[j].cin > c[i].cout)
+						if (c[j].cin > c[i].cout && c[j].cost < 254)
 						{
 							c[j].cin = c[i].cout;
 							c[j].cout = c[j].cin + c[j].cost;
 						}
-						if ((mi = canMoveInto(map, unit, c[j])) && (c[j].cout <= range)) c[j].allow = true; //TODO canMoveInto should be checked sooner
-						//else console.log("Row:"+ c[j].row + " Col:" + c[j].col + " discarded for range:" + r + " with cout:" + c[j].cout + " can move into:" + mi);
+						if ((canMoveInto(map, unit, c[j])) && 
+							((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin < range)))) 
+						{
+							c[j].allow = true;
+						}
+						//else console.log("Row:"+ c[j].row + " Col:" + c[j].col + " discarded for range:" + r + " with cout:" + c[j].cout);
 					}
 				}
 			}
 		}
 		r++;
 	}
-	
 	
 	for (var i = 0; i < c.length; i++)
 	{
@@ -435,6 +444,20 @@ function isAdjacent(x1, y1, x2, y2)
 	if ((x1 + (y1 % 2) == x2) && (y1 + 1 == y2)) return true;
 	
 	return false;
+}
+//returns a list of adjacent cells of a row,col
+function getAdjacent(x1, y1)
+{
+	var cellList=[];
+	
+	cellList.push(new Cell(x1 - 1 + (y1 % 2), y1 - 1));
+	cellList.push(new Cell(x1 + (y1 % 2), y1 - 1));
+	cellList.push(new Cell(x1 - 1, y1));
+	cellList.push(new Cell(x1 + 1, y1));
+	cellList.push(new Cell(x1 - 1 + (y1 % 2), y1 + 1));
+	cellList.push(new Cell(x1 + (y1 % 2), y1 + 1));	
+	
+	return cellList;
 }
 
 //Returns a list of cells that are in a certain range to another cell
