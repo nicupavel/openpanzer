@@ -205,7 +205,7 @@ function Hex()
 	this.isSupply = false;
 	this.isDeployment = false;
 	this.victorySide = -1; //hex is a victory point for side [0,1]
-	this.name = null;
+	this.name = "";
 	
 	this.isCurrent = false;
 	this.isMoveSel = false; //current unit can move to this hex
