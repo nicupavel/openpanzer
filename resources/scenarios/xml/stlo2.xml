@@ -150,8 +150,6 @@
   <hex row="3" col="24" terrain="9"/>
   <hex row="3" col="25" terrain="9"/>
   <hex row="3" col="26" terrain="9"/>
-  <hex row="3" col="27"/>
-  <hex row="3" col="28"/>
   <hex row="3" col="29" terrain="4" road="33"/>
   <hex row="3" col="30" terrain="1" road="130" name="Grandcamp les Bains" flag="9" owner="0"/>
   <hex row="3" col="31" terrain="4"/>
@@ -181,13 +179,8 @@
   <hex row="4" col="18" terrain="8"/>
   <hex row="4" col="19" terrain="4" road="17"/>
   <hex row="4" col="20" terrain="4"/>
-  <hex row="4" col="21"/>
-  <hex row="4" col="22"/>
   <hex row="4" col="23" terrain="15" name="Taute River"/>
-  <hex row="4" col="24"/>
-  <hex row="4" col="25"/>
   <hex row="4" col="26" terrain="9"/>
-  <hex row="4" col="27"/>
   <hex row="4" col="28" terrain="4" road="18"/>
   <hex row="4" col="29" terrain="4"/>
   <hex row="4" col="30" terrain="4"/>
@@ -198,7 +191,6 @@
   <hex row="4" col="35" road="17"/>
   <hex row="4" col="36" terrain="4" road="128"/>
   <hex row="5" col="0" terrain="9"/>
-  <hex row="5" col="1"/>
   <hex row="5" col="2" terrain="10"/>
   <hex row="5" col="3" terrain="4" road="2"/>
   <hex row="5" col="4" terrain="10" road="170"/>
@@ -222,7 +214,6 @@
   <hex row="5" col="22" terrain="15" name="Taute River"/>
   <hex row="5" col="23" terrain="2" road="18" flag="9" owner="0"/>
   <hex row="5" col="24" terrain="2" road="32"/>
-  <hex row="5" col="25"/>
   <hex row="5" col="26" terrain="15" name="Vire River"/>
   <hex row="5" col="27" terrain="15" name="Vire River"/>
   <hex row="5" col="28" terrain="4" road="25"/>
@@ -235,7 +226,6 @@
   <hex row="5" col="35" terrain="4" road="57"/>
   <hex row="5" col="36" terrain="4"/>
   <hex row="6" col="0" terrain="9"/>
-  <hex row="6" col="1"/>
   <hex row="6" col="2" terrain="4"/>
   <hex row="6" col="3" terrain="10"/>
   <hex row="6" col="4" terrain="10"/>
@@ -288,14 +278,12 @@
   <hex row="7" col="14" terrain="8"/>
   <hex row="7" col="15" terrain="8"/>
   <hex row="7" col="16" road="130"/>
-  <hex row="7" col="17"/>
   <hex row="7" col="18" road="130"/>
   <hex row="7" col="19" road="34"/>
   <hex row="7" col="20" terrain="1" road="162" name="Carentan" flag="9" owner="0" victory="0"/>
   <hex row="7" col="21" terrain="15" name="Taute River"/>
   <hex row="7" col="22" road="128"/>
   <hex row="7" col="23" road="17"/>
-  <hex row="7" col="24"/>
   <hex row="7" col="25" terrain="15" name="Vire River"/>
   <hex row="7" col="26" terrain="10" road="154" name="Vire River"/>
   <hex row="7" col="27" road="137"/>
@@ -328,15 +316,11 @@
   <hex row="8" col="13" terrain="8"/>
   <hex row="8" col="14" terrain="8"/>
   <hex row="8" col="15" terrain="8"/>
-  <hex row="8" col="16"/>
-  <hex row="8" col="17"/>
   <hex row="8" col="18" road="18"/>
-  <hex row="8" col="19"/>
   <hex row="8" col="20" terrain="15" name="Taute River"/>
   <hex row="8" col="21" terrain="15" name="Taute River"/>
   <hex row="8" col="22" terrain="4"/>
   <hex row="8" col="23" terrain="4" road="9"/>
-  <hex row="8" col="24"/>
   <hex row="8" col="25" terrain="15" name="Vire River"/>
   <hex row="8" col="26" road="1"/>
   <hex row="8" col="27" terrain="4"/>
@@ -385,7 +369,6 @@
   </hex>
   <hex row="9" col="18" road="33"/>
   <hex row="9" col="19" terrain="10"/>
-  <hex row="9" col="20"/>
   <hex row="9" col="21" terrain="15" name="Taute River"/>
   <hex row="9" col="22" terrain="4"/>
   <hex row="9" col="23" terrain="4"/>
@@ -405,7 +388,6 @@
   <hex row="10" col="0" terrain="9"/>
   <hex row="10" col="1" terrain="9"/>
   <hex row="10" col="2" terrain="9"/>
-  <hex row="10" col="3"/>
   <hex row="10" col="4" terrain="4"/>
   <hex row="10" col="5" terrain="10"/>
   <hex row="10" col="6" terrain="10"/>
@@ -563,7 +545,6 @@
   <hex row="13" col="1" terrain="9"/>
   <hex row="13" col="2" terrain="9"/>
   <hex row="13" col="3" terrain="9"/>
-  <hex row="13" col="4"/>
   <hex row="13" col="5" terrain="4"/>
   <hex row="13" col="6" terrain="4">
     <unit id="92" owner="1" flag="8" face="6" transport="158"/>
@@ -616,8 +597,6 @@
   <hex row="14" col="1" terrain="9"/>
   <hex row="14" col="2" terrain="9"/>
   <hex row="14" col="3" terrain="9"/>
-  <hex row="14" col="4"/>
-  <hex row="14" col="5"/>
   <hex row="14" col="6" terrain="4"/>
   <hex row="14" col="7" terrain="4"/>
   <hex row="14" col="8" terrain="4" road="144"/>
@@ -975,7 +954,6 @@
   <hex row="21" col="1" terrain="9"/>
   <hex row="21" col="2" terrain="9"/>
   <hex row="21" col="3" terrain="9"/>
-  <hex row="21" col="4"/>
   <hex row="21" col="5" terrain="4"/>
   <hex row="21" col="6" terrain="4" road="16"/>
   <hex row="21" col="7" terrain="4" road="34"/>
@@ -1012,7 +990,6 @@
   <hex row="22" col="1" terrain="9"/>
   <hex row="22" col="2" terrain="9"/>
   <hex row="22" col="3" terrain="9"/>
-  <hex row="22" col="4"/>
   <hex row="22" col="5" terrain="9"/>
   <hex row="22" col="6" terrain="10" road="19"/>
   <hex row="22" col="7" terrain="15"/>
@@ -1087,7 +1064,6 @@
   <hex row="24" col="2" terrain="9"/>
   <hex row="24" col="3" terrain="9"/>
   <hex row="24" col="4" terrain="9"/>
-  <hex row="24" col="5"/>
   <hex row="24" col="6" terrain="4" road="17"/>
   <hex row="24" col="7" terrain="4"/>
   <hex row="24" col="8" terrain="4" road="18"/>
@@ -1124,7 +1100,6 @@
   <hex row="25" col="2" terrain="9"/>
   <hex row="25" col="3" terrain="9"/>
   <hex row="25" col="4" terrain="9"/>
-  <hex row="25" col="5"/>
   <hex row="25" col="6" terrain="4" road="17"/>
   <hex row="25" col="7" terrain="4"/>
   <hex row="25" col="8" terrain="4" road="17"/>
@@ -1161,7 +1136,6 @@
   <hex row="26" col="2" terrain="9"/>
   <hex row="26" col="3" terrain="9"/>
   <hex row="26" col="4" terrain="9"/>
-  <hex row="26" col="5"/>
   <hex row="26" col="6" terrain="4" road="17"/>
   <hex row="26" col="7" terrain="4"/>
   <hex row="26" col="8" terrain="4" road="17"/>
@@ -1198,7 +1172,6 @@
   <hex row="27" col="2" terrain="9"/>
   <hex row="27" col="3" terrain="9"/>
   <hex row="27" col="4" terrain="9"/>
-  <hex row="27" col="5"/>
   <hex row="27" col="6" terrain="4" road="17"/>
   <hex row="27" col="7" terrain="4" road="18"/>
   <hex row="27" col="8" terrain="4" road="33" flag="7" owner="1" victory="1"/>

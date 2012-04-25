@@ -22,18 +22,11 @@
   <hex row="0" col="16" terrain="9"/>
   <hex row="0" col="17" terrain="9"/>
   <hex row="0" col="18" road="16"/>
-  <hex row="0" col="19"/>
-  <hex row="0" col="20"/>
   <hex row="0" col="21" terrain="16"/>
   <hex row="0" col="22" terrain="16"/>
   <hex row="0" col="23" terrain="16"/>
   <hex row="0" col="24" road="16"/>
-  <hex row="0" col="25"/>
-  <hex row="0" col="26"/>
-  <hex row="0" col="27"/>
-  <hex row="0" col="28"/>
   <hex row="0" col="29" road="16" name="TO ALBANO"/>
-  <hex row="0" col="30"/>
   <hex row="0" col="31" terrain="16"/>
   <hex row="0" col="32" terrain="16"/>
   <hex row="0" col="33" terrain="16"/>
@@ -41,12 +34,6 @@
   <hex row="0" col="35" terrain="6"/>
   <hex row="0" col="36" terrain="6"/>
   <hex row="0" col="37" terrain="16" road="8" name="TO ROME (RT 7)"/>
-  <hex row="0" col="38"/>
-  <hex row="0" col="39"/>
-  <hex row="0" col="40"/>
-  <hex row="0" col="41"/>
-  <hex row="0" col="42"/>
-  <hex row="0" col="43"/>
   <hex row="1" col="0" terrain="9"/>
   <hex row="1" col="1" terrain="9"/>
   <hex row="1" col="2" terrain="9"/>
@@ -117,10 +104,6 @@
   <hex row="1" col="39" road="144">
     <unit id="94" owner="3" flag="8" face="0" transport="157"/>
   </hex>
-  <hex row="1" col="40"/>
-  <hex row="1" col="41"/>
-  <hex row="1" col="42"/>
-  <hex row="1" col="43"/>
   <hex row="2" col="0" terrain="9"/>
   <hex row="2" col="1" terrain="9"/>
   <hex row="2" col="2" terrain="9"/>
@@ -177,22 +160,17 @@
   <hex row="2" col="31">
     <unit id="115" owner="1" flag="8" face="0" transport="157"/>
   </hex>
-  <hex row="2" col="32"/>
   <hex row="2" col="33" terrain="16"/>
   <hex row="2" col="34" terrain="6"/>
   <hex row="2" col="35" terrain="6" name="BUONRIPOSO RIDGE"/>
   <hex row="2" col="36" terrain="6" name="BUONRIPOSO RIDGE"/>
   <hex row="2" col="37" terrain="16"/>
-  <hex row="2" col="38"/>
   <hex row="2" col="39" road="17">
     <unit id="102" owner="3" flag="8" face="0"/>
   </hex>
-  <hex row="2" col="40"/>
   <hex row="2" col="41">
     <unit id="98" owner="3" flag="8" face="15" transport="156"/>
   </hex>
-  <hex row="2" col="42"/>
-  <hex row="2" col="43"/>
   <hex row="3" col="0" terrain="9"/>
   <hex row="3" col="1" terrain="9"/>
   <hex row="3" col="2" terrain="9"/>
@@ -257,8 +235,6 @@
   </hex>
   <hex row="3" col="38" terrain="16"/>
   <hex row="3" col="39" road="9"/>
-  <hex row="3" col="40"/>
-  <hex row="3" col="41"/>
   <hex row="3" col="42">
     <unit id="131" owner="3" flag="8" face="15"/>
   </hex>
@@ -279,7 +255,6 @@
   <hex row="4" col="13" terrain="9"/>
   <hex row="4" col="14" terrain="9"/>
   <hex row="4" col="15" terrain="9"/>
-  <hex row="4" col="16"/>
   <hex row="4" col="17" road="17">
     <unit id="115" owner="1" flag="8" face="0" transport="157"/>
   </hex>
@@ -294,11 +269,9 @@
   <hex row="4" col="24" terrain="16" road="18">
     <unit id="105" owner="1" flag="8" face="0"/>
   </hex>
-  <hex row="4" col="25"/>
   <hex row="4" col="26">
     <unit id="115" owner="1" flag="8" face="0" transport="157"/>
   </hex>
-  <hex row="4" col="27"/>
   <hex row="4" col="28" road="18"/>
   <hex row="4" col="29">
     <unit id="74" owner="3" flag="8" face="13"/>
@@ -341,7 +314,6 @@
   <hex row="5" col="13" terrain="9"/>
   <hex row="5" col="14" terrain="9"/>
   <hex row="5" col="15" terrain="9"/>
-  <hex row="5" col="16"/>
   <hex row="5" col="17" road="9"/>
   <hex row="5" col="18" terrain="6"/>
   <hex row="5" col="19" terrain="6"/>
@@ -352,8 +324,6 @@
   <hex row="5" col="24" road="17">
     <unit id="91" owner="1" flag="8" face="0"/>
   </hex>
-  <hex row="5" col="25"/>
-  <hex row="5" col="26"/>
   <hex row="5" col="27" road="18"/>
   <hex row="5" col="28" road="33">
     <unit id="105" owner="3" flag="8" face="13"/>
@@ -401,7 +371,6 @@
   <hex row="6" col="13" terrain="9"/>
   <hex row="6" col="14" terrain="9"/>
   <hex row="6" col="15" terrain="9"/>
-  <hex row="6" col="16"/>
   <hex row="6" col="17" terrain="1" name="ANDEA" flag="7" owner="1">
     <unit id="92" owner="1" flag="8" face="0" transport="157"/>
   </hex>
@@ -416,10 +385,7 @@
   <hex row="6" col="24" road="33">
     <unit id="88" owner="1" flag="8" face="0"/>
   </hex>
-  <hex row="6" col="25"/>
-  <hex row="6" col="26"/>
   <hex row="6" col="27" terrain="16" road="33"/>
-  <hex row="6" col="28"/>
   <hex row="6" col="29" terrain="16"/>
   <hex row="6" col="30" terrain="16">
     <unit id="119" owner="1" flag="8" face="0"/>
@@ -469,8 +435,6 @@
   <hex row="7" col="21" road="136"/>
   <hex row="7" col="22" terrain="6" name="VALLELATA RIDGE"/>
   <hex row="7" col="23" road="33"/>
-  <hex row="7" col="24"/>
-  <hex row="7" col="25"/>
   <hex row="7" col="26" terrain="16" road="18"/>
   <hex row="7" col="27" terrain="16"/>
   <hex row="7" col="28" terrain="16"/>
@@ -518,9 +482,6 @@
   <hex row="8" col="20" terrain="13" name="MOLETTA RIVER"/>
   <hex row="8" col="21" terrain="13" name="MOLETTA RIVER"/>
   <hex row="8" col="22" road="130"/>
-  <hex row="8" col="23"/>
-  <hex row="8" col="24"/>
-  <hex row="8" col="25"/>
   <hex row="8" col="26" terrain="16" road="17"/>
   <hex row="8" col="27" terrain="16"/>
   <hex row="8" col="28" terrain="16"/>
@@ -550,7 +511,6 @@
   <hex row="9" col="2" terrain="9"/>
   <hex row="9" col="3" terrain="9"/>
   <hex row="9" col="4" terrain="9"/>
-  <hex row="9" col="5"/>
   <hex row="9" col="6" terrain="16"/>
   <hex row="9" col="7" terrain="6"/>
   <hex row="9" col="8" terrain="6"/>
@@ -566,7 +526,6 @@
   <hex row="9" col="18" terrain="13" name="MOLETTA RIVER"/>
   <hex row="9" col="19" road="1"/>
   <hex row="9" col="20" road="144"/>
-  <hex row="9" col="21"/>
   <hex row="9" col="22" terrain="13" name="MOLETTA RIVER"/>
   <hex row="9" col="23" terrain="13" name="MOLETTA RIVER"/>
   <hex row="9" col="24" terrain="13" name="MOLETTA RIVER"/>
@@ -595,8 +554,6 @@
   <hex row="10" col="3" terrain="9"/>
   <hex row="10" col="4" terrain="9"/>
   <hex row="10" col="5" terrain="9"/>
-  <hex row="10" col="6"/>
-  <hex row="10" col="7"/>
   <hex row="10" col="8" terrain="6"/>
   <hex row="10" col="9" terrain="16" road="18"/>
   <hex row="10" col="10" terrain="16" road="35"/>
@@ -608,12 +565,8 @@
   <hex row="10" col="16" terrain="1" road="34" name="LA BANCH" flag="7" owner="1"/>
   <hex row="10" col="17" road="1"/>
   <hex row="10" col="18" road="128"/>
-  <hex row="10" col="19"/>
   <hex row="10" col="20" road="9"/>
   <hex row="10" col="21" road="144"/>
-  <hex row="10" col="22"/>
-  <hex row="10" col="23"/>
-  <hex row="10" col="24"/>
   <hex row="10" col="25" terrain="16"/>
   <hex row="10" col="26" terrain="16" road="17"/>
   <hex row="10" col="27" terrain="16"/>
@@ -645,7 +598,6 @@
   <hex row="11" col="5" terrain="9"/>
   <hex row="11" col="6" terrain="9"/>
   <hex row="11" col="7" terrain="9"/>
-  <hex row="11" col="8"/>
   <hex row="11" col="9" road="9"/>
   <hex row="11" col="10" terrain="16"/>
   <hex row="11" col="11" terrain="16"/>
@@ -655,13 +607,7 @@
   <hex row="11" col="15" terrain="16"/>
   <hex row="11" col="16" terrain="16"/>
   <hex row="11" col="17" terrain="16"/>
-  <hex row="11" col="18"/>
-  <hex row="11" col="19"/>
-  <hex row="11" col="20"/>
   <hex row="11" col="21" road="9"/>
-  <hex row="11" col="22"/>
-  <hex row="11" col="23"/>
-  <hex row="11" col="24"/>
   <hex row="11" col="25" terrain="16" road="18"/>
   <hex row="11" col="26" terrain="16" road="33"/>
   <hex row="11" col="27" terrain="6"/>
@@ -705,11 +651,8 @@
   </hex>
   <hex row="12" col="18" terrain="16"/>
   <hex row="12" col="19" terrain="16"/>
-  <hex row="12" col="20"/>
   <hex row="12" col="21" road="18"/>
   <hex row="12" col="22" road="176" name="THE FLYOVER"/>
-  <hex row="12" col="23"/>
-  <hex row="12" col="24"/>
   <hex row="12" col="25" terrain="16" road="33"/>
   <hex row="12" col="26" terrain="16"/>
   <hex row="12" col="27" terrain="6"/>
@@ -818,7 +761,6 @@
   <hex row="14" col="22" terrain="16"/>
   <hex row="14" col="23" terrain="16" road="9"/>
   <hex row="14" col="24" terrain="1" road="130" name="THE FACTORY" flag="7" owner="1"/>
-  <hex row="14" col="25"/>
   <hex row="14" col="26" terrain="16" road="136"/>
   <hex row="14" col="27" terrain="16" road="144"/>
   <hex row="14" col="28" terrain="16"/>
@@ -849,7 +791,6 @@
   <hex row="15" col="9" terrain="9"/>
   <hex row="15" col="10" terrain="9"/>
   <hex row="15" col="11" terrain="9"/>
-  <hex row="15" col="12"/>
   <hex row="15" col="13" road="9"/>
   <hex row="15" col="14" terrain="16"/>
   <hex row="15" col="15" terrain="16"/>
@@ -862,8 +803,6 @@
   <hex row="15" col="22" terrain="6" name="THE CAVES"/>
   <hex row="15" col="23" terrain="6"/>
   <hex row="15" col="24" terrain="16" road="144"/>
-  <hex row="15" col="25"/>
-  <hex row="15" col="26"/>
   <hex row="15" col="27" road="9"/>
   <hex row="15" col="28" terrain="16"/>
   <hex row="15" col="29" terrain="1" road="26" name="CONCA" flag="7" owner="1"/>
@@ -1271,7 +1210,6 @@
     <unit id="433" owner="2" flag="10" face="5"/>
   </hex>
   <hex row="22" col="21" terrain="9"/>
-  <hex row="22" col="22"/>
   <hex row="22" col="23" road="9">
     <unit id="413" owner="2" flag="10" face="6" transport="449"/>
   </hex>
@@ -1394,7 +1332,6 @@
     <unit id="427" owner="2" flag="10" face="0" transport="449"/>
   </hex>
   <hex row="24" col="24" road="17"/>
-  <hex row="24" col="25"/>
   <hex row="24" col="26" terrain="16"/>
   <hex row="24" col="27" terrain="16"/>
   <hex row="24" col="28" terrain="16">
@@ -1446,10 +1383,8 @@
   <hex row="25" col="22">
     <unit id="401" owner="2" flag="10" face="3"/>
   </hex>
-  <hex row="25" col="23"/>
   <hex row="25" col="24" road="9"/>
   <hex row="25" col="25" road="144"/>
-  <hex row="25" col="26"/>
   <hex row="25" col="27" terrain="16"/>
   <hex row="25" col="28" terrain="16"/>
   <hex row="25" col="29" terrain="16"/>
@@ -1493,7 +1428,6 @@
   <hex row="26" col="21" terrain="9"/>
   <hex row="26" col="22" terrain="13"/>
   <hex row="26" col="23" terrain="13"/>
-  <hex row="26" col="24"/>
   <hex row="26" col="25" road="9"/>
   <hex row="26" col="26" terrain="16"/>
   <hex row="26" col="27" terrain="16"/>
@@ -1534,13 +1468,9 @@
   <hex row="27" col="18" terrain="9"/>
   <hex row="27" col="19" terrain="9"/>
   <hex row="27" col="20" terrain="9"/>
-  <hex row="27" col="21" name="X-RAY BEACH"/>
-  <hex row="27" col="22"/>
-  <hex row="27" col="23"/>
   <hex row="27" col="24" terrain="13"/>
   <hex row="27" col="25" terrain="13"/>
   <hex row="27" col="26" terrain="16" road="144"/>
-  <hex row="27" col="27"/>
   <hex row="27" col="28" terrain="16"/>
   <hex row="27" col="29" terrain="16"/>
   <hex row="27" col="30" terrain="16" road="9"/>
@@ -1583,14 +1513,10 @@
   <hex row="28" col="21" name="X-RAY BEACH">
     <unit id="440" owner="2" flag="10" face="3"/>
   </hex>
-  <hex row="28" col="22"/>
   <hex row="28" col="23">
     <unit id="465" owner="2" flag="10" face="4"/>
   </hex>
-  <hex row="28" col="24"/>
-  <hex row="28" col="25"/>
   <hex row="28" col="26" terrain="1" road="17" name="FROSINONE"/>
-  <hex row="28" col="27"/>
   <hex row="28" col="28" terrain="16"/>
   <hex row="28" col="29" terrain="16"/>
   <hex row="28" col="30" terrain="16"/>
@@ -1635,15 +1561,12 @@
   <hex row="29" col="21" name="X-RAY BEACH">
     <unit id="399" owner="2" flag="10" face="3" transport="449"/>
   </hex>
-  <hex row="29" col="22"/>
   <hex row="29" col="23" terrain="2" road="48" name="NETTUNO AIRFIELD" flag="9" owner="2" victory="0"/>
   <hex row="29" col="24">
     <unit id="461" owner="2" flag="10" face="4"/>
   </hex>
-  <hex row="29" col="25"/>
   <hex row="29" col="26" road="17"/>
   <hex row="29" col="27" road="40"/>
-  <hex row="29" col="28"/>
   <hex row="29" col="29" road="34"/>
   <hex row="29" col="30" road="34"/>
   <hex row="29" col="31" terrain="16"/>
@@ -1691,7 +1614,6 @@
   <hex row="30" col="23" terrain="2" road="137" name="CONCA">
     <unit id="464" owner="2" flag="10" face="4"/>
   </hex>
-  <hex row="30" col="24"/>
   <hex row="30" col="25" terrain="1" road="34" name="NETTUNO"/>
   <hex row="30" col="26" terrain="1" road="43" name="NETTUNO" flag="7" owner="1"/>
   <hex row="30" col="27" road="136"/>
@@ -1730,8 +1652,6 @@
   <hex row="31" col="16" terrain="9"/>
   <hex row="31" col="17" terrain="9"/>
   <hex row="31" col="18" terrain="9"/>
-  <hex row="31" col="19"/>
-  <hex row="31" col="20" name="X-RAY BEACH"/>
   <hex row="31" col="21">
     <unit id="425" owner="2" flag="10" face="3" transport="449"/>
   </hex>
@@ -1744,7 +1664,6 @@
   <hex row="31" col="24" road="162">
     <unit id="454" owner="2" flag="10" face="4"/>
   </hex>
-  <hex row="31" col="25" name="BONGO SABOTINO"/>
   <hex row="31" col="26" terrain="1" name="NETTUNO"/>
   <hex row="31" col="27" terrain="16"/>
   <hex row="31" col="28" terrain="1" road="136" name="BONGO PIAVE" flag="7" owner="1"/>
@@ -1783,14 +1702,7 @@
   <hex row="32" col="17" terrain="9"/>
   <hex row="32" col="18" terrain="9"/>
   <hex row="32" col="19" terrain="15" name="MUSSOLINI CANAL"/>
-  <hex row="32" col="20"/>
-  <hex row="32" col="21"/>
-  <hex row="32" col="22"/>
   <hex row="32" col="23" road="17"/>
-  <hex row="32" col="24"/>
-  <hex row="32" col="25"/>
-  <hex row="32" col="26"/>
-  <hex row="32" col="27"/>
   <hex row="32" col="28" terrain="16"/>
   <hex row="32" col="29" terrain="16"/>
   <hex row="32" col="30" terrain="16" road="144"/>
@@ -1825,18 +1737,12 @@
   <hex row="33" col="15" terrain="9"/>
   <hex row="33" col="16" terrain="9"/>
   <hex row="33" col="17" terrain="9"/>
-  <hex row="33" col="18"/>
-  <hex row="33" col="19"/>
   <hex row="33" col="20" terrain="15" name="MUSSOLINI CANAL"/>
   <hex row="33" col="21" terrain="15" name="MUSSOLINI CANAL"/>
-  <hex row="33" col="22"/>
   <hex row="33" col="23" terrain="16" road="33"/>
-  <hex row="33" col="24"/>
   <hex row="33" col="25" terrain="1" name="BONGO SABOTINO" flag="7" owner="1"/>
   <hex row="33" col="26" terrain="1" name="BONGO SABOTINO"/>
   <hex row="33" col="27" terrain="15" name="RIVER ASTURA"/>
-  <hex row="33" col="28"/>
-  <hex row="33" col="29"/>
   <hex row="33" col="30" terrain="16" road="19"/>
   <hex row="33" col="31" terrain="16"/>
   <hex row="33" col="32" terrain="16" road="144"/>
@@ -1868,9 +1774,6 @@
   <hex row="34" col="14" terrain="9"/>
   <hex row="34" col="15" terrain="9"/>
   <hex row="34" col="16" terrain="9"/>
-  <hex row="34" col="17"/>
-  <hex row="34" col="18"/>
-  <hex row="34" col="19"/>
   <hex row="34" col="20" road="8"/>
   <hex row="34" col="21" terrain="10" road="178" name="MUSSOLINI CANAL"/>
   <hex row="34" col="22" terrain="16" road="34"/>
@@ -1878,7 +1781,6 @@
   <hex row="34" col="24" terrain="15" name="RIVER ASTURA"/>
   <hex row="34" col="25" terrain="1" road="32" name="BONGO SABOTINO"/>
   <hex row="34" col="26" terrain="15" name="RIVER ASTURA"/>
-  <hex row="34" col="27"/>
   <hex row="34" col="28" terrain="15" name="RIVER ASTURA"/>
   <hex row="34" col="29" terrain="15" name="RIVER ASTURA"/>
   <hex row="34" col="30" road="25"/>
@@ -1912,8 +1814,6 @@
   <hex row="35" col="14" terrain="9"/>
   <hex row="35" col="15" terrain="9"/>
   <hex row="35" col="16" terrain="9"/>
-  <hex row="35" col="17"/>
-  <hex row="35" col="18"/>
   <hex row="35" col="19" terrain="16" road="34"/>
   <hex row="35" col="20" terrain="16" road="34"/>
   <hex row="35" col="21" terrain="16" road="1"/>
@@ -1921,9 +1821,6 @@
   <hex row="35" col="23" terrain="10" road="50" name="MUSSOLINI CANAL"/>
   <hex row="35" col="24" terrain="1" road="34" name="BONGO SABOTINO" flag="7" owner="1"/>
   <hex row="35" col="25" terrain="15" name="MUSSOLINI CANAL"/>
-  <hex row="35" col="26" name="BONGO SABOTINO"/>
-  <hex row="35" col="27"/>
-  <hex row="35" col="28"/>
   <hex row="35" col="29" road="34"/>
   <hex row="35" col="30" terrain="10" road="51" name="RIVER ASTURA"/>
   <hex row="35" col="31" terrain="15" name="RIVER ASTURA"/>
@@ -1955,8 +1852,6 @@
   <hex row="36" col="13" terrain="9"/>
   <hex row="36" col="14" terrain="9"/>
   <hex row="36" col="15" terrain="9"/>
-  <hex row="36" col="16"/>
-  <hex row="36" col="17"/>
   <hex row="36" col="18" road="18"/>
   <hex row="36" col="19" terrain="16"/>
   <hex row="36" col="20" terrain="16"/>
@@ -2003,7 +1898,6 @@
   <hex row="37" col="13" terrain="9"/>
   <hex row="37" col="14" terrain="9"/>
   <hex row="37" col="15" terrain="10"/>
-  <hex row="37" col="16"/>
   <hex row="37" col="17" terrain="1" road="26" name="BONGO GRAPPA" flag="7" owner="1">
     <unit id="110" owner="3" flag="8" face="7" transport="156"/>
   </hex>
@@ -2046,23 +1940,18 @@
   <hex row="38" col="4" terrain="9"/>
   <hex row="38" col="5" terrain="9"/>
   <hex row="38" col="6" terrain="9"/>
-  <hex row="38" col="7"/>
   <hex row="38" col="8" terrain="16"/>
   <hex row="38" col="9" terrain="16"/>
   <hex row="38" col="10" terrain="16"/>
   <hex row="38" col="11" terrain="16"/>
   <hex row="38" col="12" terrain="9"/>
-  <hex row="38" col="13"/>
-  <hex row="38" col="14"/>
   <hex row="38" col="15" terrain="15"/>
-  <hex row="38" col="16"/>
   <hex row="38" col="17" road="1"/>
   <hex row="38" col="18" terrain="16" road="130"/>
   <hex row="38" col="19" terrain="16"/>
   <hex row="38" col="20" terrain="16" road="128"/>
   <hex row="38" col="21" terrain="6"/>
   <hex row="38" col="22" terrain="13"/>
-  <hex row="38" col="23"/>
   <hex row="38" col="24" terrain="16"/>
   <hex row="38" col="25" terrain="1" name="LATINA"/>
   <hex row="38" col="26" terrain="6" name="LATINA"/>

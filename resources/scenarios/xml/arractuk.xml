@@ -2,48 +2,12 @@
 <map name="ARRACTUK.SCN" description="Arracourt" rows="28" cols="41" image="resources/maps/images/map_19.png">
   <player id="0" country="22" side="1"/>
   <player id="1" country="7" side="0"/>
-  <hex row="0" col="0"/>
-  <hex row="0" col="1"/>
-  <hex row="0" col="2"/>
-  <hex row="0" col="3"/>
   <hex row="0" col="4" road="16"/>
   <hex row="0" col="5" terrain="15" name="Moselle River"/>
-  <hex row="0" col="6"/>
-  <hex row="0" col="7"/>
-  <hex row="0" col="8"/>
-  <hex row="0" col="9"/>
-  <hex row="0" col="10"/>
-  <hex row="0" col="11"/>
-  <hex row="0" col="12"/>
-  <hex row="0" col="13"/>
-  <hex row="0" col="14"/>
-  <hex row="0" col="15"/>
-  <hex row="0" col="16"/>
-  <hex row="0" col="17"/>
   <hex row="0" col="18" road="8"/>
   <hex row="0" col="19" road="144"/>
-  <hex row="0" col="20"/>
-  <hex row="0" col="21"/>
-  <hex row="0" col="22"/>
-  <hex row="0" col="23"/>
-  <hex row="0" col="24"/>
-  <hex row="0" col="25"/>
   <hex row="0" col="26" road="8"/>
   <hex row="0" col="27" road="144"/>
-  <hex row="0" col="28"/>
-  <hex row="0" col="29"/>
-  <hex row="0" col="30"/>
-  <hex row="0" col="31"/>
-  <hex row="0" col="32"/>
-  <hex row="0" col="33"/>
-  <hex row="0" col="34"/>
-  <hex row="0" col="35"/>
-  <hex row="0" col="36"/>
-  <hex row="0" col="37"/>
-  <hex row="0" col="38"/>
-  <hex row="0" col="39"/>
-  <hex row="0" col="40"/>
-  <hex row="1" col="0"/>
   <hex row="1" col="1" terrain="3"/>
   <hex row="1" col="2" terrain="3"/>
   <hex row="1" col="3" terrain="3"/>
@@ -52,88 +16,28 @@
     <unit id="427" owner="0" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="1" col="6" terrain="15" name="Moselle River"/>
-  <hex row="1" col="7"/>
-  <hex row="1" col="8"/>
-  <hex row="1" col="9"/>
-  <hex row="1" col="10"/>
   <hex row="1" col="11">
     <unit id="115" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="1" col="12"/>
-  <hex row="1" col="13"/>
-  <hex row="1" col="14"/>
-  <hex row="1" col="15"/>
-  <hex row="1" col="16"/>
-  <hex row="1" col="17"/>
-  <hex row="1" col="18"/>
   <hex row="1" col="19" road="9"/>
-  <hex row="1" col="20"/>
-  <hex row="1" col="21"/>
-  <hex row="1" col="22"/>
-  <hex row="1" col="23"/>
-  <hex row="1" col="24"/>
-  <hex row="1" col="25"/>
-  <hex row="1" col="26"/>
   <hex row="1" col="27" road="33"/>
-  <hex row="1" col="28"/>
-  <hex row="1" col="29"/>
-  <hex row="1" col="30"/>
-  <hex row="1" col="31"/>
-  <hex row="1" col="32"/>
-  <hex row="1" col="33"/>
-  <hex row="1" col="34"/>
-  <hex row="1" col="35"/>
-  <hex row="1" col="36"/>
-  <hex row="1" col="37"/>
-  <hex row="1" col="38"/>
   <hex row="1" col="39" terrain="3"/>
-  <hex row="1" col="40"/>
-  <hex row="2" col="0"/>
-  <hex row="2" col="1"/>
   <hex row="2" col="2" terrain="3"/>
   <hex row="2" col="3" terrain="3"/>
   <hex row="2" col="4" terrain="3"/>
   <hex row="2" col="5" road="17"/>
   <hex row="2" col="6" terrain="15" name="Moselle River"/>
-  <hex row="2" col="7"/>
-  <hex row="2" col="8"/>
-  <hex row="2" col="9"/>
-  <hex row="2" col="10"/>
   <hex row="2" col="11">
     <unit id="80" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="2" col="12"/>
-  <hex row="2" col="13"/>
-  <hex row="2" col="14"/>
-  <hex row="2" col="15"/>
-  <hex row="2" col="16"/>
-  <hex row="2" col="17"/>
-  <hex row="2" col="18"/>
-  <hex row="2" col="19"/>
   <hex row="2" col="20" road="144"/>
-  <hex row="2" col="21"/>
-  <hex row="2" col="22"/>
-  <hex row="2" col="23"/>
-  <hex row="2" col="24"/>
-  <hex row="2" col="25"/>
   <hex row="2" col="26" road="10"/>
   <hex row="2" col="27" road="144"/>
-  <hex row="2" col="28"/>
-  <hex row="2" col="29"/>
-  <hex row="2" col="30"/>
-  <hex row="2" col="31"/>
-  <hex row="2" col="32"/>
-  <hex row="2" col="33"/>
-  <hex row="2" col="34"/>
-  <hex row="2" col="35"/>
-  <hex row="2" col="36"/>
   <hex row="2" col="37" terrain="3"/>
   <hex row="2" col="38" terrain="3"/>
   <hex row="2" col="39" terrain="3"/>
   <hex row="2" col="40" terrain="3"/>
-  <hex row="3" col="0"/>
   <hex row="3" col="1" road="40"/>
-  <hex row="3" col="2"/>
   <hex row="3" col="3" road="40"/>
   <hex row="3" col="4">
     <unit id="402" owner="0" flag="10" face="4"/>
@@ -145,9 +49,7 @@
   <hex row="3" col="7" road="32">
     <unit id="427" owner="0" flag="10" face="4" transport="449"/>
   </hex>
-  <hex row="3" col="8"/>
   <hex row="3" col="9" road="40"/>
-  <hex row="3" col="10"/>
   <hex row="3" col="11" road="40">
     <unit id="152" owner="1" flag="8" face="12"/>
   </hex>
@@ -155,35 +57,14 @@
     <unit id="118" owner="1" flag="8" face="12"/>
   </hex>
   <hex row="3" col="13" road="40"/>
-  <hex row="3" col="14"/>
-  <hex row="3" col="15"/>
-  <hex row="3" col="16"/>
-  <hex row="3" col="17"/>
-  <hex row="3" col="18"/>
-  <hex row="3" col="19"/>
   <hex row="3" col="20" road="9"/>
   <hex row="3" col="21" road="136"/>
-  <hex row="3" col="22"/>
-  <hex row="3" col="23"/>
-  <hex row="3" col="24"/>
-  <hex row="3" col="25"/>
-  <hex row="3" col="26"/>
   <hex row="3" col="27" road="33"/>
-  <hex row="3" col="28"/>
-  <hex row="3" col="29"/>
-  <hex row="3" col="30"/>
-  <hex row="3" col="31"/>
-  <hex row="3" col="32"/>
-  <hex row="3" col="33"/>
-  <hex row="3" col="34"/>
   <hex row="3" col="35" terrain="3"/>
   <hex row="3" col="36" terrain="3"/>
   <hex row="3" col="37" terrain="3"/>
   <hex row="3" col="38" terrain="3"/>
-  <hex row="3" col="39"/>
-  <hex row="3" col="40"/>
   <hex row="4" col="0" road="2"/>
-  <hex row="4" col="1"/>
   <hex row="4" col="2" road="130" flag="22" owner="0" victory="0"/>
   <hex row="4" col="3" terrain="3"/>
   <hex row="4" col="4" terrain="3" road="130">
@@ -195,7 +76,6 @@
   <hex row="4" col="6" terrain="10" road="170" name="Moselle River"/>
   <hex row="4" col="7" road="130"/>
   <hex row="4" col="8" road="34"/>
-  <hex row="4" col="9"/>
   <hex row="4" col="10" road="130"/>
   <hex row="4" col="11">
     <unit id="115" owner="1" flag="8" face="12" transport="156"/>
@@ -203,35 +83,18 @@
   <hex row="4" col="12" terrain="1" road="130" name="Numeny" flag="7" owner="1">
     <unit id="92" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="4" col="13"/>
   <hex row="4" col="14" road="136"/>
   <hex row="4" col="15" road="146"/>
   <hex row="4" col="16" road="40"/>
   <hex row="4" col="17" road="136"/>
-  <hex row="4" col="18"/>
   <hex row="4" col="19" road="40"/>
-  <hex row="4" col="20"/>
-  <hex row="4" col="21"/>
   <hex row="4" col="22" road="144"/>
-  <hex row="4" col="23"/>
-  <hex row="4" col="24"/>
-  <hex row="4" col="25"/>
   <hex row="4" col="26" road="18"/>
-  <hex row="4" col="27"/>
-  <hex row="4" col="28"/>
-  <hex row="4" col="29"/>
-  <hex row="4" col="30"/>
-  <hex row="4" col="31"/>
-  <hex row="4" col="32"/>
-  <hex row="4" col="33"/>
   <hex row="4" col="34" terrain="3"/>
   <hex row="4" col="35" terrain="3"/>
   <hex row="4" col="36" terrain="3"/>
   <hex row="4" col="37" terrain="3"/>
   <hex row="4" col="38" terrain="3"/>
-  <hex row="4" col="39"/>
-  <hex row="4" col="40"/>
-  <hex row="5" col="0"/>
   <hex row="5" col="1">
     <unit id="427" owner="0" flag="10" face="4" transport="450"/>
   </hex>
@@ -247,44 +110,24 @@
   <hex row="5" col="7">
     <unit id="427" owner="0" flag="10" face="4" transport="449"/>
   </hex>
-  <hex row="5" col="8"/>
-  <hex row="5" col="9"/>
-  <hex row="5" col="10"/>
-  <hex row="5" col="11"/>
   <hex row="5" col="12">
     <unit id="111" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="5" col="13"/>
-  <hex row="5" col="14"/>
   <hex row="5" col="15" road="33"/>
-  <hex row="5" col="16"/>
-  <hex row="5" col="17"/>
   <hex row="5" col="18" road="130"/>
-  <hex row="5" col="19"/>
   <hex row="5" col="20" road="136"/>
   <hex row="5" col="21" road="130"/>
   <hex row="5" col="22" road="41"/>
   <hex row="5" col="23" road="136"/>
-  <hex row="5" col="24"/>
   <hex row="5" col="25" road="18"/>
   <hex row="5" col="26" road="33"/>
-  <hex row="5" col="27"/>
-  <hex row="5" col="28"/>
-  <hex row="5" col="29"/>
-  <hex row="5" col="30"/>
-  <hex row="5" col="31"/>
-  <hex row="5" col="32"/>
   <hex row="5" col="33" terrain="3"/>
   <hex row="5" col="34" terrain="3"/>
   <hex row="5" col="35" terrain="3"/>
   <hex row="5" col="36" terrain="3"/>
-  <hex row="5" col="37"/>
-  <hex row="5" col="38"/>
   <hex row="5" col="39" terrain="2" road="32">
     <unit id="161" owner="1" flag="8" face="12"/>
   </hex>
-  <hex row="5" col="40"/>
-  <hex row="6" col="0"/>
   <hex row="6" col="1" terrain="2" road="2" flag="22" owner="0">
     <unit id="415" owner="0" flag="10" face="4"/>
   </hex>
@@ -294,77 +137,42 @@
   <hex row="6" col="3">
     <unit id="422" owner="0" flag="10" face="4" transport="450"/>
   </hex>
-  <hex row="6" col="4"/>
   <hex row="6" col="5" terrain="1" road="17" name="Dieulouard" flag="22" owner="0">
     <unit id="422" owner="0" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="6" col="6" terrain="15" name="Moselle River"/>
   <hex row="6" col="7" terrain="15" name="Moselle River"/>
-  <hex row="6" col="8"/>
   <hex row="6" col="9" terrain="3"/>
   <hex row="6" col="10" terrain="3"/>
   <hex row="6" col="11" terrain="1" name="Serrieres" flag="7" owner="1"/>
-  <hex row="6" col="12"/>
-  <hex row="6" col="13"/>
   <hex row="6" col="14" road="10"/>
   <hex row="6" col="15" road="144"/>
-  <hex row="6" col="16"/>
-  <hex row="6" col="17"/>
-  <hex row="6" col="18"/>
-  <hex row="6" col="19"/>
-  <hex row="6" col="20"/>
-  <hex row="6" col="21"/>
-  <hex row="6" col="22"/>
-  <hex row="6" col="23"/>
   <hex row="6" col="24" road="136"/>
   <hex row="6" col="25" terrain="1" road="169" name="Chateau-Salins" flag="7" owner="1" victory="1"/>
-  <hex row="6" col="26"/>
   <hex row="6" col="27" terrain="3"/>
-  <hex row="6" col="28"/>
   <hex row="6" col="29" terrain="3"/>
-  <hex row="6" col="30"/>
   <hex row="6" col="31" terrain="3"/>
   <hex row="6" col="32" terrain="3"/>
   <hex row="6" col="33" terrain="3"/>
   <hex row="6" col="34" terrain="3"/>
-  <hex row="6" col="35"/>
-  <hex row="6" col="36"/>
   <hex row="6" col="37" terrain="1" road="50" name="Dieuze" flag="7" owner="1" victory="1">
     <unit id="115" owner="1" flag="8" face="12" transport="156"/>
   </hex>
   <hex row="6" col="38" terrain="2" road="34" flag="7" owner="1">
     <unit id="161" owner="1" flag="8" face="12"/>
   </hex>
-  <hex row="6" col="39"/>
-  <hex row="6" col="40"/>
-  <hex row="7" col="0"/>
   <hex row="7" col="1">
     <unit id="402" owner="0" flag="10" face="4"/>
   </hex>
   <hex row="7" col="2" terrain="2" owner="0">
     <unit id="390" owner="0" flag="23" face="4"/>
   </hex>
-  <hex row="7" col="3"/>
-  <hex row="7" col="4"/>
   <hex row="7" col="5" road="9"/>
-  <hex row="7" col="6"/>
   <hex row="7" col="7" terrain="15" name="Moselle River"/>
   <hex row="7" col="8" terrain="1" name="Millery" flag="7" owner="1"/>
-  <hex row="7" col="9"/>
-  <hex row="7" col="10"/>
   <hex row="7" col="11" terrain="3"/>
   <hex row="7" col="12" terrain="3"/>
-  <hex row="7" col="13"/>
-  <hex row="7" col="14"/>
   <hex row="7" col="15" road="33"/>
-  <hex row="7" col="16"/>
-  <hex row="7" col="17"/>
-  <hex row="7" col="18"/>
-  <hex row="7" col="19"/>
-  <hex row="7" col="20"/>
-  <hex row="7" col="21"/>
-  <hex row="7" col="22"/>
-  <hex row="7" col="23"/>
   <hex row="7" col="24" road="18"/>
   <hex row="7" col="25" terrain="5"/>
   <hex row="7" col="26" road="136"/>
@@ -372,10 +180,6 @@
   <hex row="7" col="28" terrain="3"/>
   <hex row="7" col="29" terrain="3"/>
   <hex row="7" col="30" terrain="3"/>
-  <hex row="7" col="31"/>
-  <hex row="7" col="32"/>
-  <hex row="7" col="33"/>
-  <hex row="7" col="34"/>
   <hex row="7" col="35" road="34"/>
   <hex row="7" col="36" road="34">
     <unit id="152" owner="1" flag="8" face="12"/>
@@ -383,62 +187,40 @@
   <hex row="7" col="37" road="9">
     <unit id="92" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="7" col="38"/>
-  <hex row="7" col="39"/>
-  <hex row="7" col="40"/>
-  <hex row="8" col="0"/>
   <hex row="8" col="1">
     <unit id="407" owner="0" flag="10" face="4"/>
   </hex>
   <hex row="8" col="2">
     <unit id="444" owner="0" flag="10" face="4"/>
   </hex>
-  <hex row="8" col="3"/>
-  <hex row="8" col="4"/>
   <hex row="8" col="5" terrain="5"/>
   <hex row="8" col="6" terrain="1" road="136" name="Morbache" flag="7" owner="1"/>
   <hex row="8" col="7" road="144"/>
   <hex row="8" col="8" terrain="15" name="Moselle River"/>
   <hex row="8" col="9" terrain="3"/>
-  <hex row="8" col="10"/>
   <hex row="8" col="11" terrain="5"/>
   <hex row="8" col="12" terrain="5"/>
   <hex row="8" col="13" terrain="5"/>
   <hex row="8" col="14" road="18"/>
-  <hex row="8" col="15"/>
   <hex row="8" col="16" terrain="3"/>
-  <hex row="8" col="17"/>
-  <hex row="8" col="18"/>
-  <hex row="8" col="19"/>
-  <hex row="8" col="20"/>
-  <hex row="8" col="21"/>
-  <hex row="8" col="22"/>
   <hex row="8" col="23" road="42"/>
   <hex row="8" col="24" road="33"/>
   <hex row="8" col="25" road="40"/>
   <hex row="8" col="26" terrain="5"/>
   <hex row="8" col="27" road="41"/>
-  <hex row="8" col="28"/>
   <hex row="8" col="29" road="34"/>
   <hex row="8" col="30" road="40"/>
   <hex row="8" col="31" road="130"/>
   <hex row="8" col="32" road="40"/>
   <hex row="8" col="33" road="130"/>
   <hex row="8" col="34" road="34"/>
-  <hex row="8" col="35"/>
   <hex row="8" col="36">
     <unit id="115" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="8" col="37"/>
   <hex row="8" col="38" road="144"/>
   <hex row="8" col="39">
     <unit id="161" owner="1" flag="8" face="0"/>
   </hex>
-  <hex row="8" col="40"/>
-  <hex row="9" col="0"/>
-  <hex row="9" col="1"/>
-  <hex row="9" col="2"/>
-  <hex row="9" col="3"/>
   <hex row="9" col="4" terrain="5"/>
   <hex row="9" col="5" terrain="5"/>
   <hex row="9" col="6" terrain="5"/>
@@ -446,81 +228,46 @@
   <hex row="9" col="8" terrain="15" name="Moselle River"/>
   <hex row="9" col="9" terrain="3"/>
   <hex row="9" col="10" terrain="3"/>
-  <hex row="9" col="11"/>
   <hex row="9" col="12" terrain="5"/>
   <hex row="9" col="13" road="18"/>
   <hex row="9" col="14" road="33"/>
-  <hex row="9" col="15"/>
   <hex row="9" col="16" terrain="3"/>
   <hex row="9" col="17" terrain="3"/>
-  <hex row="9" col="18"/>
   <hex row="9" col="19" road="40"/>
-  <hex row="9" col="20"/>
   <hex row="9" col="21" road="34"/>
   <hex row="9" col="22" road="34"/>
-  <hex row="9" col="23"/>
   <hex row="9" col="24" road="130"/>
-  <hex row="9" col="25"/>
   <hex row="9" col="26" terrain="1" road="154" name="Moyenvic" flag="7" owner="1" victory="1"/>
   <hex row="9" col="27" road="136"/>
   <hex row="9" col="28" road="130"/>
-  <hex row="9" col="29"/>
-  <hex row="9" col="30"/>
   <hex row="9" col="31" road="34"/>
   <hex row="9" col="32" terrain="1" road="32" name="Juvelize" flag="7" owner="1"/>
-  <hex row="9" col="33"/>
-  <hex row="9" col="34"/>
   <hex row="9" col="35" terrain="15" name="LAKE"/>
-  <hex row="9" col="36"/>
   <hex row="9" col="37" terrain="1" road="18" name="Gelucourt" flag="7" owner="1">
     <unit id="115" owner="1" flag="8" face="12" transport="156"/>
   </hex>
   <hex row="9" col="38" road="33"/>
-  <hex row="9" col="39"/>
-  <hex row="9" col="40"/>
-  <hex row="10" col="0"/>
-  <hex row="10" col="1"/>
-  <hex row="10" col="2"/>
-  <hex row="10" col="3"/>
-  <hex row="10" col="4"/>
   <hex row="10" col="5" terrain="3"/>
   <hex row="10" col="6" terrain="3"/>
   <hex row="10" col="7" road="17"/>
   <hex row="10" col="8" terrain="15" name="Moselle River"/>
   <hex row="10" col="9" terrain="13"/>
-  <hex row="10" col="10"/>
-  <hex row="10" col="11"/>
-  <hex row="10" col="12"/>
   <hex row="10" col="13" road="33"/>
-  <hex row="10" col="14"/>
-  <hex row="10" col="15"/>
   <hex row="10" col="16" terrain="3"/>
   <hex row="10" col="17" terrain="1" road="34" name="Champenoux" flag="7" owner="1"/>
   <hex row="10" col="18" road="34"/>
-  <hex row="10" col="19"/>
   <hex row="10" col="20" terrain="3" road="130"/>
   <hex row="10" col="21" terrain="3"/>
-  <hex row="10" col="22"/>
-  <hex row="10" col="23"/>
-  <hex row="10" col="24"/>
   <hex row="10" col="25" road="18"/>
   <hex row="10" col="26" road="33"/>
-  <hex row="10" col="27"/>
   <hex row="10" col="28" road="136"/>
   <hex row="10" col="29" road="130"/>
   <hex row="10" col="30" terrain="1" road="42" name="Lezey" flag="7" owner="1"/>
   <hex row="10" col="31" road="136"/>
-  <hex row="10" col="32"/>
-  <hex row="10" col="33"/>
-  <hex row="10" col="34"/>
   <hex row="10" col="35" terrain="15" name="LAKE"/>
-  <hex row="10" col="36"/>
   <hex row="10" col="37" road="9">
     <unit id="133" owner="1" flag="8" face="12"/>
   </hex>
-  <hex row="10" col="38"/>
-  <hex row="10" col="39"/>
-  <hex row="10" col="40"/>
   <hex row="11" col="0" terrain="15"/>
   <hex row="11" col="1" terrain="15"/>
   <hex row="11" col="2" terrain="15"/>
@@ -531,42 +278,21 @@
   <hex row="11" col="7" terrain="10" road="25"/>
   <hex row="11" col="8" terrain="15" name="Moselle River"/>
   <hex row="11" col="9" terrain="15" name="Moselle River"/>
-  <hex row="11" col="10"/>
-  <hex row="11" col="11"/>
   <hex row="11" col="12" road="18"/>
-  <hex row="11" col="13"/>
-  <hex row="11" col="14"/>
   <hex row="11" col="15" road="34"/>
   <hex row="11" col="16" road="34"/>
   <hex row="11" col="17" terrain="3"/>
-  <hex row="11" col="18"/>
-  <hex row="11" col="19"/>
   <hex row="11" col="20" terrain="3"/>
   <hex row="11" col="21" terrain="3"/>
   <hex row="11" col="22" terrain="3"/>
   <hex row="11" col="23" terrain="3"/>
-  <hex row="11" col="24"/>
   <hex row="11" col="25" road="17"/>
-  <hex row="11" col="26"/>
-  <hex row="11" col="27"/>
-  <hex row="11" col="28"/>
-  <hex row="11" col="29"/>
-  <hex row="11" col="30"/>
-  <hex row="11" col="31"/>
   <hex row="11" col="32" road="136"/>
   <hex row="11" col="33" road="136"/>
-  <hex row="11" col="34"/>
-  <hex row="11" col="35"/>
-  <hex row="11" col="36"/>
-  <hex row="11" col="37"/>
   <hex row="11" col="38" road="136">
     <unit id="92" owner="1" flag="8" face="12" transport="156"/>
   </hex>
   <hex row="11" col="39" road="144"/>
-  <hex row="11" col="40"/>
-  <hex row="12" col="0"/>
-  <hex row="12" col="1"/>
-  <hex row="12" col="2"/>
   <hex row="12" col="3" terrain="3"/>
   <hex row="12" col="4" terrain="3"/>
   <hex row="12" col="5" terrain="3"/>
@@ -576,37 +302,21 @@
     <unit id="116" owner="1" flag="8" face="12"/>
   </hex>
   <hex row="12" col="9" terrain="15" name="Moselle River"/>
-  <hex row="12" col="10"/>
-  <hex row="12" col="11"/>
   <hex row="12" col="12" road="17"/>
   <hex row="12" col="13" road="34"/>
   <hex row="12" col="14" road="34"/>
-  <hex row="12" col="15"/>
-  <hex row="12" col="16"/>
   <hex row="12" col="17" terrain="3"/>
   <hex row="12" col="18" terrain="3"/>
-  <hex row="12" col="19"/>
   <hex row="12" col="20" terrain="3"/>
-  <hex row="12" col="21"/>
   <hex row="12" col="22" terrain="3"/>
   <hex row="12" col="23" road="34"/>
   <hex row="12" col="24" road="40"/>
   <hex row="12" col="25" terrain="1" road="129" name="Arracourt" flag="7" owner="1" victory="1"/>
-  <hex row="12" col="26"/>
-  <hex row="12" col="27"/>
-  <hex row="12" col="28"/>
-  <hex row="12" col="29"/>
-  <hex row="12" col="30"/>
   <hex row="12" col="31" terrain="1" name="Ley" flag="7" owner="1"/>
-  <hex row="12" col="32"/>
   <hex row="12" col="33" terrain="1" name="Ommeray" flag="7" owner="1"/>
   <hex row="12" col="34" road="136"/>
   <hex row="12" col="35" road="136"/>
-  <hex row="12" col="36"/>
-  <hex row="12" col="37"/>
-  <hex row="12" col="38"/>
   <hex row="12" col="39" road="41"/>
-  <hex row="12" col="40"/>
   <hex row="13" col="0" road="8"/>
   <hex row="13" col="1" road="130">
     <unit id="430" owner="0" flag="10" face="4"/>
@@ -626,35 +336,13 @@
   <hex row="13" col="10" road="16"/>
   <hex row="13" col="11" road="34"/>
   <hex row="13" col="12" road="35"/>
-  <hex row="13" col="13"/>
-  <hex row="13" col="14"/>
-  <hex row="13" col="15"/>
-  <hex row="13" col="16"/>
-  <hex row="13" col="17"/>
-  <hex row="13" col="18"/>
-  <hex row="13" col="19"/>
-  <hex row="13" col="20"/>
-  <hex row="13" col="21"/>
   <hex row="13" col="22" road="18"/>
-  <hex row="13" col="23"/>
-  <hex row="13" col="24"/>
-  <hex row="13" col="25"/>
-  <hex row="13" col="26"/>
-  <hex row="13" col="27"/>
-  <hex row="13" col="28"/>
   <hex row="13" col="29" terrain="3"/>
-  <hex row="13" col="30"/>
-  <hex row="13" col="31"/>
-  <hex row="13" col="32"/>
-  <hex row="13" col="33"/>
-  <hex row="13" col="34"/>
   <hex row="13" col="35" terrain="3"/>
   <hex row="13" col="36" terrain="1" road="152" name="Bourdonnay" flag="7" owner="1" victory="1"/>
   <hex row="13" col="37" road="130"/>
   <hex row="13" col="38" road="34"/>
-  <hex row="13" col="39"/>
   <hex row="13" col="40" road="128"/>
-  <hex row="14" col="0"/>
   <hex row="14" col="1" terrain="3"/>
   <hex row="14" col="2" terrain="3"/>
   <hex row="14" col="3" terrain="5"/>
@@ -670,36 +358,16 @@
   </hex>
   <hex row="14" col="10" terrain="10" road="51" name="Moselle River"/>
   <hex row="14" col="11" terrain="15" name="Moselle River"/>
-  <hex row="14" col="12"/>
-  <hex row="14" col="13"/>
-  <hex row="14" col="14"/>
-  <hex row="14" col="15"/>
-  <hex row="14" col="16"/>
-  <hex row="14" col="17"/>
-  <hex row="14" col="18"/>
-  <hex row="14" col="19"/>
-  <hex row="14" col="20"/>
   <hex row="14" col="21" road="10"/>
   <hex row="14" col="22" road="33"/>
   <hex row="14" col="23" terrain="3"/>
   <hex row="14" col="24" terrain="3"/>
   <hex row="14" col="25" terrain="3"/>
-  <hex row="14" col="26"/>
   <hex row="14" col="27" terrain="15" name="LAKE"/>
   <hex row="14" col="28" terrain="1" name="Bures" flag="7" owner="1"/>
-  <hex row="14" col="29"/>
-  <hex row="14" col="30"/>
-  <hex row="14" col="31"/>
-  <hex row="14" col="32"/>
   <hex row="14" col="33" terrain="3"/>
-  <hex row="14" col="34"/>
   <hex row="14" col="35" road="18"/>
   <hex row="14" col="36" road="33"/>
-  <hex row="14" col="37"/>
-  <hex row="14" col="38"/>
-  <hex row="14" col="39"/>
-  <hex row="14" col="40"/>
-  <hex row="15" col="0"/>
   <hex row="15" col="1" terrain="3"/>
   <hex row="15" col="2" terrain="5"/>
   <hex row="15" col="3" terrain="5"/>
@@ -708,28 +376,13 @@
   <hex row="15" col="6" terrain="3"/>
   <hex row="15" col="7" road="17"/>
   <hex row="15" col="8" terrain="1" road="19" name="Nancy"/>
-  <hex row="15" col="9"/>
   <hex row="15" col="10" road="145"/>
   <hex row="15" col="11" terrain="15" name="Moselle River"/>
   <hex row="15" col="12" terrain="3"/>
   <hex row="15" col="13" terrain="15" name="Canal du Moselle-Rhin"/>
-  <hex row="15" col="14"/>
-  <hex row="15" col="15"/>
-  <hex row="15" col="16"/>
-  <hex row="15" col="17"/>
-  <hex row="15" col="18"/>
   <hex row="15" col="19" terrain="2" road="10" flag="7" owner="1"/>
   <hex row="15" col="20" terrain="2" road="48"/>
-  <hex row="15" col="21"/>
   <hex row="15" col="22" road="144"/>
-  <hex row="15" col="23"/>
-  <hex row="15" col="24"/>
-  <hex row="15" col="25"/>
-  <hex row="15" col="26"/>
-  <hex row="15" col="27"/>
-  <hex row="15" col="28"/>
-  <hex row="15" col="29"/>
-  <hex row="15" col="30"/>
   <hex row="15" col="31" terrain="1" road="8" name="Xures" flag="7" owner="1"/>
   <hex row="15" col="32" road="16"/>
   <hex row="15" col="33" terrain="1" road="40" name="Lagarde" flag="7" owner="1"/>
@@ -737,12 +390,6 @@
   <hex row="15" col="35" road="41"/>
   <hex row="15" col="36" road="16"/>
   <hex row="15" col="37" road="32"/>
-  <hex row="15" col="38"/>
-  <hex row="15" col="39"/>
-  <hex row="15" col="40"/>
-  <hex row="16" col="0"/>
-  <hex row="16" col="1"/>
-  <hex row="16" col="2"/>
   <hex row="16" col="3" terrain="3"/>
   <hex row="16" col="4" terrain="3"/>
   <hex row="16" col="5" terrain="3"/>
@@ -751,7 +398,6 @@
   <hex row="16" col="8" road="17">
     <unit id="116" owner="1" flag="8" face="12"/>
   </hex>
-  <hex row="16" col="9"/>
   <hex row="16" col="10" road="9"/>
   <hex row="16" col="11" terrain="10" road="152" name="Moselle River"/>
   <hex row="16" col="12" terrain="15" name="Canal du Moselle-Rhin"/>
@@ -762,17 +408,12 @@
     <unit id="116" owner="1" flag="8" face="12"/>
   </hex>
   <hex row="16" col="17" terrain="15" name="Canal du Moselle-Rhin"/>
-  <hex row="16" col="18"/>
   <hex row="16" col="19" terrain="15" name="Canal du Moselle-Rhin"/>
   <hex row="16" col="20" road="145"/>
   <hex row="16" col="21" road="40"/>
   <hex row="16" col="22" road="25"/>
   <hex row="16" col="23" road="144"/>
-  <hex row="16" col="24"/>
-  <hex row="16" col="25"/>
-  <hex row="16" col="26"/>
   <hex row="16" col="27" terrain="15" name="Canal du Moselle-Rhin"/>
-  <hex row="16" col="28"/>
   <hex row="16" col="29" terrain="15" name="Canal du Moselle-Rhin"/>
   <hex row="16" col="30" terrain="15" name="Canal du Moselle-Rhin"/>
   <hex row="16" col="31" terrain="15" name="Canal du Moselle-Rhin"/>
@@ -798,7 +439,6 @@
   <hex row="17" col="10" terrain="15" name="Moselle River"/>
   <hex row="17" col="11" road="1"/>
   <hex row="17" col="12" road="130"/>
-  <hex row="17" col="13"/>
   <hex row="17" col="14" terrain="1" road="136" name="St Nicholas-du-Pont" flag="7" owner="1"/>
   <hex row="17" col="15" road="136"/>
   <hex row="17" col="16" terrain="15" name="Canal du Moselle-Rhin"/>
@@ -826,15 +466,10 @@
   <hex row="17" col="34" road="33">
     <unit id="92" owner="1" flag="8" face="12" transport="156"/>
   </hex>
-  <hex row="17" col="35"/>
   <hex row="17" col="36" road="9"/>
   <hex row="17" col="37" road="130"/>
   <hex row="17" col="38" road="40"/>
   <hex row="17" col="39" road="136"/>
-  <hex row="17" col="40"/>
-  <hex row="18" col="0"/>
-  <hex row="18" col="1"/>
-  <hex row="18" col="2"/>
   <hex row="18" col="3" terrain="15"/>
   <hex row="18" col="4" terrain="15"/>
   <hex row="18" col="5" terrain="10" road="35"/>
@@ -842,24 +477,14 @@
   <hex row="18" col="7" road="2"/>
   <hex row="18" col="8" terrain="10" road="169" name="Moselle River"/>
   <hex row="18" col="9" road="144"/>
-  <hex row="18" col="10"/>
-  <hex row="18" col="11"/>
-  <hex row="18" col="12"/>
-  <hex row="18" col="13"/>
-  <hex row="18" col="14"/>
-  <hex row="18" col="15"/>
   <hex row="18" col="16" terrain="1" road="130" name="Dombasie" flag="7" owner="1"/>
-  <hex row="18" col="17"/>
   <hex row="18" col="18" road="130"/>
-  <hex row="18" col="19"/>
   <hex row="18" col="20" road="1"/>
-  <hex row="18" col="21"/>
   <hex row="18" col="22" road="9"/>
   <hex row="18" col="23" road="147"/>
   <hex row="18" col="24" road="160">
     <unit id="82" owner="1" flag="8" face="12"/>
   </hex>
-  <hex row="18" col="25"/>
   <hex row="18" col="26" terrain="3"/>
   <hex row="18" col="27" terrain="3"/>
   <hex row="18" col="28" terrain="3"/>
@@ -868,14 +493,7 @@
   <hex row="18" col="31" terrain="3"/>
   <hex row="18" col="32" terrain="3"/>
   <hex row="18" col="33" road="33"/>
-  <hex row="18" col="34"/>
-  <hex row="18" col="35"/>
-  <hex row="18" col="36"/>
-  <hex row="18" col="37"/>
-  <hex row="18" col="38"/>
-  <hex row="18" col="39"/>
   <hex row="18" col="40" road="128"/>
-  <hex row="19" col="0"/>
   <hex row="19" col="1" road="34"/>
   <hex row="19" col="2" road="40">
     <unit id="402" owner="0" flag="10" face="4"/>
@@ -891,39 +509,18 @@
   <hex row="19" col="7" terrain="15"/>
   <hex row="19" col="8" terrain="15" name="Moselle River"/>
   <hex row="19" col="9" road="25"/>
-  <hex row="19" col="10"/>
-  <hex row="19" col="11"/>
-  <hex row="19" col="12"/>
-  <hex row="19" col="13"/>
-  <hex row="19" col="14"/>
-  <hex row="19" col="15"/>
-  <hex row="19" col="16"/>
-  <hex row="19" col="17"/>
   <hex row="19" col="18" terrain="3"/>
   <hex row="19" col="19" terrain="3"/>
   <hex row="19" col="20" terrain="3"/>
   <hex row="19" col="21" terrain="3"/>
-  <hex row="19" col="22"/>
   <hex row="19" col="23" terrain="1" road="41" name="Luneville">
     <unit id="115" owner="1" flag="8" face="11" transport="156"/>
   </hex>
-  <hex row="19" col="24"/>
-  <hex row="19" col="25"/>
   <hex row="19" col="26" terrain="3"/>
-  <hex row="19" col="27"/>
   <hex row="19" col="28" terrain="3"/>
   <hex row="19" col="29" terrain="3"/>
   <hex row="19" col="30" terrain="3"/>
-  <hex row="19" col="31"/>
   <hex row="19" col="32" road="18"/>
-  <hex row="19" col="33"/>
-  <hex row="19" col="34"/>
-  <hex row="19" col="35"/>
-  <hex row="19" col="36"/>
-  <hex row="19" col="37"/>
-  <hex row="19" col="38"/>
-  <hex row="19" col="39"/>
-  <hex row="19" col="40"/>
   <hex row="20" col="0" road="2"/>
   <hex row="20" col="1" terrain="3"/>
   <hex row="20" col="2" terrain="3"/>
@@ -931,7 +528,6 @@
   <hex row="20" col="4">
     <unit id="430" owner="0" flag="10" face="4"/>
   </hex>
-  <hex row="20" col="5"/>
   <hex row="20" col="6" terrain="3">
     <unit id="427" owner="0" flag="10" face="4" transport="449"/>
   </hex>
@@ -939,13 +535,8 @@
   <hex row="20" col="8" terrain="15" name="Moselle River"/>
   <hex row="20" col="9" terrain="10" road="51" name="Moselle River"/>
   <hex row="20" col="10" road="160"/>
-  <hex row="20" col="11"/>
   <hex row="20" col="12" terrain="5"/>
   <hex row="20" col="13" terrain="5"/>
-  <hex row="20" col="14"/>
-  <hex row="20" col="15"/>
-  <hex row="20" col="16"/>
-  <hex row="20" col="17"/>
   <hex row="20" col="18" terrain="3"/>
   <hex row="20" col="19" terrain="3"/>
   <hex row="20" col="20" terrain="3"/>
@@ -958,31 +549,16 @@
     <unit id="92" owner="1" flag="8" face="12" transport="156"/>
   </hex>
   <hex row="20" col="25" road="136"/>
-  <hex row="20" col="26"/>
   <hex row="20" col="27" road="40"/>
   <hex row="20" col="28" terrain="3"/>
-  <hex row="20" col="29"/>
-  <hex row="20" col="30"/>
   <hex row="20" col="31" road="42"/>
   <hex row="20" col="32" road="33"/>
-  <hex row="20" col="33"/>
-  <hex row="20" col="34"/>
-  <hex row="20" col="35"/>
-  <hex row="20" col="36"/>
-  <hex row="20" col="37"/>
-  <hex row="20" col="38"/>
-  <hex row="20" col="39"/>
-  <hex row="20" col="40"/>
-  <hex row="21" col="0"/>
   <hex row="21" col="1" terrain="5"/>
   <hex row="21" col="2" terrain="5"/>
-  <hex row="21" col="3"/>
-  <hex row="21" col="4"/>
   <hex row="21" col="5" terrain="2" road="48"/>
   <hex row="21" col="6">
     <unit id="406" owner="0" flag="10" face="4"/>
   </hex>
-  <hex row="21" col="7"/>
   <hex row="21" col="8" terrain="1" road="10" name="Flavigny" flag="22" owner="0">
     <unit id="427" owner="0" flag="10" face="4" transport="449"/>
   </hex>
@@ -995,44 +571,26 @@
   <hex row="21" col="13" terrain="5"/>
   <hex row="21" col="14" terrain="5"/>
   <hex row="21" col="15" terrain="5"/>
-  <hex row="21" col="16"/>
   <hex row="21" col="17" terrain="5"/>
-  <hex row="21" col="18"/>
-  <hex row="21" col="19"/>
-  <hex row="21" col="20"/>
-  <hex row="21" col="21"/>
   <hex row="21" col="22" road="17"/>
   <hex row="21" col="23" terrain="3"/>
   <hex row="21" col="24" road="9"/>
   <hex row="21" col="25" road="136"/>
   <hex row="21" col="26" road="130"/>
-  <hex row="21" col="27"/>
   <hex row="21" col="28" road="136"/>
   <hex row="21" col="29" road="130"/>
   <hex row="21" col="30" road="34"/>
-  <hex row="21" col="31"/>
   <hex row="21" col="32" road="144"/>
   <hex row="21" col="33" road="40"/>
-  <hex row="21" col="34"/>
   <hex row="21" col="35" road="40"/>
-  <hex row="21" col="36"/>
-  <hex row="21" col="37"/>
-  <hex row="21" col="38"/>
-  <hex row="21" col="39"/>
-  <hex row="21" col="40"/>
-  <hex row="22" col="0"/>
   <hex row="22" col="1" terrain="5"/>
   <hex row="22" col="2" terrain="5"/>
-  <hex row="22" col="3"/>
   <hex row="22" col="4" terrain="2" road="10" flag="22" owner="0">
     <unit id="396" owner="0" flag="23" face="4"/>
   </hex>
   <hex row="22" col="5" terrain="2" road="129">
     <unit id="390" owner="0" flag="23" face="4"/>
   </hex>
-  <hex row="22" col="6"/>
-  <hex row="22" col="7"/>
-  <hex row="22" col="8"/>
   <hex row="22" col="9" terrain="3"/>
   <hex row="22" col="10" road="136"/>
   <hex row="22" col="11" road="136">
@@ -1045,40 +603,20 @@
   <hex row="22" col="16" terrain="5"/>
   <hex row="22" col="17" terrain="5"/>
   <hex row="22" col="18" terrain="5"/>
-  <hex row="22" col="19"/>
-  <hex row="22" col="20"/>
   <hex row="22" col="21" road="34"/>
   <hex row="22" col="22" road="33"/>
   <hex row="22" col="23" terrain="3"/>
   <hex row="22" col="24" terrain="3"/>
-  <hex row="22" col="25"/>
   <hex row="22" col="26" road="136"/>
   <hex row="22" col="27" road="136"/>
-  <hex row="22" col="28"/>
-  <hex row="22" col="29"/>
-  <hex row="22" col="30"/>
-  <hex row="22" col="31"/>
   <hex row="22" col="32" road="3"/>
-  <hex row="22" col="33"/>
   <hex row="22" col="34" road="130"/>
-  <hex row="22" col="35"/>
   <hex row="22" col="36" road="136"/>
   <hex row="22" col="37" road="136"/>
-  <hex row="22" col="38"/>
   <hex row="22" col="39" road="40"/>
-  <hex row="22" col="40"/>
-  <hex row="23" col="0"/>
-  <hex row="23" col="1"/>
-  <hex row="23" col="2"/>
-  <hex row="23" col="3"/>
-  <hex row="23" col="4"/>
-  <hex row="23" col="5"/>
-  <hex row="23" col="6"/>
-  <hex row="23" col="7"/>
   <hex row="23" col="8" terrain="3"/>
   <hex row="23" col="9" terrain="3"/>
   <hex row="23" col="10" terrain="3"/>
-  <hex row="23" col="11"/>
   <hex row="23" col="12" road="136">
     <unit id="430" owner="0" flag="10" face="4"/>
   </hex>
@@ -1087,44 +625,12 @@
   </hex>
   <hex row="23" col="14" terrain="15" name="Moselle River"/>
   <hex row="23" col="15" terrain="15" name="Moselle River"/>
-  <hex row="23" col="16"/>
-  <hex row="23" col="17"/>
-  <hex row="23" col="18"/>
   <hex row="23" col="19" road="34"/>
   <hex row="23" col="20" road="34"/>
-  <hex row="23" col="21"/>
-  <hex row="23" col="22"/>
-  <hex row="23" col="23"/>
-  <hex row="23" col="24"/>
-  <hex row="23" col="25"/>
-  <hex row="23" col="26"/>
-  <hex row="23" col="27"/>
   <hex row="23" col="28" road="136"/>
   <hex row="23" col="29" road="144"/>
-  <hex row="23" col="30"/>
-  <hex row="23" col="31"/>
-  <hex row="23" col="32"/>
-  <hex row="23" col="33"/>
-  <hex row="23" col="34"/>
-  <hex row="23" col="35"/>
-  <hex row="23" col="36"/>
-  <hex row="23" col="37"/>
   <hex row="23" col="38" road="130"/>
-  <hex row="23" col="39"/>
   <hex row="23" col="40" road="128"/>
-  <hex row="24" col="0"/>
-  <hex row="24" col="1"/>
-  <hex row="24" col="2"/>
-  <hex row="24" col="3"/>
-  <hex row="24" col="4"/>
-  <hex row="24" col="5"/>
-  <hex row="24" col="6"/>
-  <hex row="24" col="7"/>
-  <hex row="24" col="8"/>
-  <hex row="24" col="9"/>
-  <hex row="24" col="10"/>
-  <hex row="24" col="11"/>
-  <hex row="24" col="12"/>
   <hex row="24" col="13">
     <unit id="415" owner="0" flag="10" face="4"/>
   </hex>
@@ -1135,39 +641,11 @@
   <hex row="24" col="16" terrain="1" road="40" name="Lorey" flag="7" owner="1"/>
   <hex row="24" col="17" road="130"/>
   <hex row="24" col="18" road="34"/>
-  <hex row="24" col="19"/>
-  <hex row="24" col="20"/>
   <hex row="24" col="21" terrain="3"/>
-  <hex row="24" col="22"/>
-  <hex row="24" col="23"/>
   <hex row="24" col="24" terrain="1" name="Gerbeviller" flag="7" owner="1"/>
   <hex row="24" col="25" terrain="3"/>
   <hex row="24" col="26" terrain="3"/>
-  <hex row="24" col="27"/>
-  <hex row="24" col="28"/>
   <hex row="24" col="29" road="9"/>
-  <hex row="24" col="30"/>
-  <hex row="24" col="31"/>
-  <hex row="24" col="32"/>
-  <hex row="24" col="33"/>
-  <hex row="24" col="34"/>
-  <hex row="24" col="35"/>
-  <hex row="24" col="36"/>
-  <hex row="24" col="37"/>
-  <hex row="24" col="38"/>
-  <hex row="24" col="39"/>
-  <hex row="24" col="40"/>
-  <hex row="25" col="0"/>
-  <hex row="25" col="1"/>
-  <hex row="25" col="2"/>
-  <hex row="25" col="3"/>
-  <hex row="25" col="4"/>
-  <hex row="25" col="5"/>
-  <hex row="25" col="6"/>
-  <hex row="25" col="7"/>
-  <hex row="25" col="8"/>
-  <hex row="25" col="9"/>
-  <hex row="25" col="10"/>
   <hex row="25" col="11" terrain="3"/>
   <hex row="25" col="12">
     <unit id="402" owner="0" flag="10" face="4"/>
@@ -1180,112 +658,21 @@
   </hex>
   <hex row="25" col="15" terrain="15" name="Moselle River"/>
   <hex row="25" col="16" road="128"/>
-  <hex row="25" col="17"/>
-  <hex row="25" col="18"/>
-  <hex row="25" col="19"/>
-  <hex row="25" col="20"/>
   <hex row="25" col="21" terrain="3"/>
   <hex row="25" col="22" terrain="3"/>
-  <hex row="25" col="23"/>
   <hex row="25" col="24" terrain="3"/>
-  <hex row="25" col="25"/>
-  <hex row="25" col="26"/>
-  <hex row="25" col="27"/>
-  <hex row="25" col="28"/>
-  <hex row="25" col="29"/>
   <hex row="25" col="30" road="136"/>
   <hex row="25" col="31" road="136"/>
-  <hex row="25" col="32"/>
-  <hex row="25" col="33"/>
-  <hex row="25" col="34"/>
-  <hex row="25" col="35"/>
-  <hex row="25" col="36"/>
-  <hex row="25" col="37"/>
-  <hex row="25" col="38"/>
-  <hex row="25" col="39"/>
-  <hex row="25" col="40"/>
-  <hex row="26" col="0"/>
-  <hex row="26" col="1"/>
-  <hex row="26" col="2"/>
-  <hex row="26" col="3"/>
-  <hex row="26" col="4"/>
-  <hex row="26" col="5"/>
-  <hex row="26" col="6"/>
-  <hex row="26" col="7"/>
-  <hex row="26" col="8"/>
-  <hex row="26" col="9"/>
   <hex row="26" col="10" terrain="3"/>
   <hex row="26" col="11" terrain="3"/>
-  <hex row="26" col="12"/>
   <hex row="26" col="13" road="18" flag="22" owner="0"/>
   <hex row="26" col="14" road="33">
     <unit id="444" owner="0" flag="10" face="4"/>
   </hex>
   <hex row="26" col="15" terrain="15" name="Moselle River"/>
-  <hex row="26" col="16"/>
-  <hex row="26" col="17"/>
-  <hex row="26" col="18"/>
-  <hex row="26" col="19"/>
-  <hex row="26" col="20"/>
-  <hex row="26" col="21"/>
-  <hex row="26" col="22"/>
-  <hex row="26" col="23"/>
-  <hex row="26" col="24"/>
-  <hex row="26" col="25"/>
-  <hex row="26" col="26"/>
-  <hex row="26" col="27"/>
-  <hex row="26" col="28"/>
-  <hex row="26" col="29"/>
-  <hex row="26" col="30"/>
-  <hex row="26" col="31"/>
   <hex row="26" col="32" road="144"/>
-  <hex row="26" col="33"/>
-  <hex row="26" col="34"/>
-  <hex row="26" col="35"/>
-  <hex row="26" col="36"/>
-  <hex row="26" col="37"/>
-  <hex row="26" col="38"/>
-  <hex row="26" col="39"/>
-  <hex row="26" col="40"/>
-  <hex row="27" col="0"/>
-  <hex row="27" col="1"/>
-  <hex row="27" col="2"/>
-  <hex row="27" col="3"/>
-  <hex row="27" col="4"/>
-  <hex row="27" col="5"/>
-  <hex row="27" col="6"/>
-  <hex row="27" col="7"/>
-  <hex row="27" col="8"/>
-  <hex row="27" col="9"/>
   <hex row="27" col="10" terrain="3"/>
-  <hex row="27" col="11"/>
-  <hex row="27" col="12"/>
   <hex row="27" col="13" road="1"/>
-  <hex row="27" col="14"/>
   <hex row="27" col="15" terrain="15" name="Moselle River"/>
-  <hex row="27" col="16"/>
-  <hex row="27" col="17"/>
-  <hex row="27" col="18"/>
-  <hex row="27" col="19"/>
-  <hex row="27" col="20"/>
-  <hex row="27" col="21"/>
-  <hex row="27" col="22"/>
-  <hex row="27" col="23"/>
-  <hex row="27" col="24"/>
-  <hex row="27" col="25"/>
-  <hex row="27" col="26"/>
-  <hex row="27" col="27"/>
-  <hex row="27" col="28"/>
-  <hex row="27" col="29"/>
-  <hex row="27" col="30"/>
-  <hex row="27" col="31"/>
   <hex row="27" col="32" road="1"/>
-  <hex row="27" col="33"/>
-  <hex row="27" col="34"/>
-  <hex row="27" col="35"/>
-  <hex row="27" col="36"/>
-  <hex row="27" col="37"/>
-  <hex row="27" col="38"/>
-  <hex row="27" col="39"/>
-  <hex row="27" col="40"/>
 </map>

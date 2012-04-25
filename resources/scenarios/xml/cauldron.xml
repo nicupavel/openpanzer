@@ -1191,7 +1191,6 @@
   <hex row="25" col="40" terrain="7" road="130"/>
   <hex row="25" col="41" terrain="7"/>
   <hex row="25" col="42" terrain="1" road="131" name="Sidi Rezegi"/>
-  <hex row="25" col="43"/>
   <hex row="26" col="0" terrain="7"/>
   <hex row="26" col="1" terrain="7" road="17"/>
   <hex row="26" col="2" terrain="7"/>
@@ -1287,7 +1286,6 @@
   <hex row="27" col="40" terrain="7"/>
   <hex row="27" col="41" terrain="16"/>
   <hex row="27" col="42" terrain="7"/>
-  <hex row="27" col="43"/>
   <hex row="28" col="0" terrain="7" road="2"/>
   <hex row="28" col="1" terrain="7"/>
   <hex row="28" col="2" terrain="7" road="144"/>

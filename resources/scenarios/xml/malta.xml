@@ -263,16 +263,13 @@
   <hex row="7" col="5" terrain="9"/>
   <hex row="7" col="6" terrain="9"/>
   <hex row="7" col="7" terrain="9"/>
-  <hex row="7" col="8"/>
   <hex row="7" col="9" terrain="16"/>
   <hex row="7" col="10" terrain="16"/>
   <hex row="7" col="11" terrain="13"/>
   <hex row="7" col="12" terrain="9"/>
   <hex row="7" col="13" terrain="1" road="56" name="St Paul's Bay" flag="22" owner="1"/>
-  <hex row="7" col="14"/>
   <hex row="7" col="15" road="40"/>
   <hex row="7" col="16" terrain="9"/>
-  <hex row="7" col="17"/>
   <hex row="7" col="18" terrain="9"/>
   <hex row="7" col="19" terrain="9"/>
   <hex row="7" col="20" terrain="9"/>
@@ -297,7 +294,6 @@
   <hex row="8" col="6" terrain="9"/>
   <hex row="8" col="7" terrain="9"/>
   <hex row="8" col="8" terrain="9"/>
-  <hex row="8" col="9"/>
   <hex row="8" col="10" terrain="1" name="Mellieha" flag="22" owner="1"/>
   <hex row="8" col="11" road="34">
     <unit id="346" owner="1" flag="23" face="1"/>
@@ -310,7 +306,6 @@
   </hex>
   <hex row="8" col="16" road="136"/>
   <hex row="8" col="17" road="136"/>
-  <hex row="8" col="18"/>
   <hex row="8" col="19" terrain="1" road="40" name="Sliema" flag="22" owner="1"/>
   <hex row="8" col="20" terrain="9"/>
   <hex row="8" col="21" terrain="9"/>
@@ -344,7 +339,6 @@
   <hex row="9" col="14" terrain="13"/>
   <hex row="9" col="15" terrain="13"/>
   <hex row="9" col="16" terrain="16"/>
-  <hex row="9" col="17"/>
   <hex row="9" col="18" road="130"/>
   <hex row="9" col="19">
     <unit id="321" owner="1" flag="23" face="1"/>
@@ -376,7 +370,6 @@
   <hex row="10" col="9" terrain="16"/>
   <hex row="10" col="10" road="136"/>
   <hex row="10" col="11" road="136"/>
-  <hex row="10" col="12"/>
   <hex row="10" col="13" road="40"/>
   <hex row="10" col="14" terrain="1" road="136" name="Musta" flag="22" owner="1">
     <unit id="346" owner="1" flag="23" face="1"/>
@@ -384,14 +377,11 @@
   <hex row="10" col="15" terrain="13" road="146"/>
   <hex row="10" col="16" road="40"/>
   <hex row="10" col="17" terrain="1" road="168" name="Birkirkara" flag="22" owner="1"/>
-  <hex row="10" col="18"/>
   <hex row="10" col="19" road="50"/>
   <hex row="10" col="20" terrain="12" road="32" name="Vallena" flag="22" owner="1" victory="0">
     <unit id="346" owner="1" flag="23" face="1"/>
   </hex>
   <hex row="10" col="21" terrain="9"/>
-  <hex row="10" col="22"/>
-  <hex row="10" col="23"/>
   <hex row="10" col="24" terrain="9"/>
   <hex row="10" col="25" terrain="9"/>
   <hex row="10" col="26" terrain="9"/>
@@ -431,7 +421,6 @@
   <hex row="11" col="23" terrain="1" road="136" name="Zabbar" flag="22" owner="1">
     <unit id="346" owner="1" flag="23" face="1"/>
   </hex>
-  <hex row="11" col="24"/>
   <hex row="11" col="25" terrain="9">
     <unit id="214" owner="0" flag="13" face="8"/>
   </hex>
@@ -457,7 +446,6 @@
   <hex row="12" col="12" terrain="13"/>
   <hex row="12" col="13" terrain="1" road="2" name="Citta Vecchia Rabat" flag="22" owner="1"/>
   <hex row="12" col="14" road="35"/>
-  <hex row="12" col="15"/>
   <hex row="12" col="16" terrain="1" road="152" name="Zebbuj" flag="22" owner="1"/>
   <hex row="12" col="17" road="130">
     <unit id="346" owner="1" flag="23" face="1"/>
@@ -470,8 +458,6 @@
     <unit id="321" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="12" col="21" road="136"/>
-  <hex row="12" col="22"/>
-  <hex row="12" col="23"/>
   <hex row="12" col="24" road="128"/>
   <hex row="12" col="25" terrain="9">
     <unit id="214" owner="0" flag="13" face="8"/>
@@ -496,18 +482,13 @@
   <hex row="13" col="12" terrain="13"/>
   <hex row="13" col="13" terrain="16"/>
   <hex row="13" col="14" terrain="16"/>
-  <hex row="13" col="15"/>
   <hex row="13" col="16" road="17"/>
   <hex row="13" col="17" terrain="13"/>
   <hex row="13" col="18" terrain="13"/>
   <hex row="13" col="19" road="17"/>
-  <hex row="13" col="20"/>
-  <hex row="13" col="21"/>
   <hex row="13" col="22" terrain="1" road="144" name="Zeitjun" flag="22" owner="1">
     <unit id="346" owner="1" flag="23" face="1"/>
   </hex>
-  <hex row="13" col="23"/>
-  <hex row="13" col="24"/>
   <hex row="13" col="25" terrain="9">
     <unit id="214" owner="0" flag="13" face="8"/>
   </hex>
@@ -543,7 +524,6 @@
   <hex row="14" col="20">
     <unit id="321" owner="1" flag="23" face="1"/>
   </hex>
-  <hex row="14" col="21"/>
   <hex row="14" col="22" road="17"/>
   <hex row="14" col="23" terrain="9">
     <unit id="214" owner="0" flag="13" face="8"/>
@@ -577,10 +557,7 @@
   <hex row="15" col="13" terrain="9"/>
   <hex row="15" col="14" terrain="16"/>
   <hex row="15" col="15" terrain="16"/>
-  <hex row="15" col="16"/>
-  <hex row="15" col="17"/>
   <hex row="15" col="18" terrain="1" road="2" name="Zurrieq" flag="22" owner="1"/>
-  <hex row="15" col="19"/>
   <hex row="15" col="20" road="136">
     <unit id="346" owner="1" flag="23" face="1"/>
   </hex>
@@ -914,34 +891,19 @@
   <hex row="24" col="29" terrain="9"/>
   <hex row="24" col="30" terrain="9"/>
   <hex row="25" col="0" terrain="9"/>
-  <hex row="25" col="1"/>
   <hex row="25" col="2" terrain="9"/>
-  <hex row="25" col="3"/>
   <hex row="25" col="4" terrain="9"/>
-  <hex row="25" col="5"/>
   <hex row="25" col="6" terrain="9"/>
-  <hex row="25" col="7"/>
   <hex row="25" col="8" terrain="9"/>
-  <hex row="25" col="9"/>
   <hex row="25" col="10" terrain="9"/>
-  <hex row="25" col="11"/>
   <hex row="25" col="12" terrain="9"/>
-  <hex row="25" col="13"/>
   <hex row="25" col="14" terrain="9"/>
-  <hex row="25" col="15"/>
   <hex row="25" col="16" terrain="9"/>
-  <hex row="25" col="17"/>
   <hex row="25" col="18" terrain="9"/>
-  <hex row="25" col="19"/>
   <hex row="25" col="20" terrain="9"/>
-  <hex row="25" col="21"/>
   <hex row="25" col="22" terrain="9"/>
-  <hex row="25" col="23"/>
   <hex row="25" col="24" terrain="9"/>
-  <hex row="25" col="25"/>
   <hex row="25" col="26" terrain="9"/>
-  <hex row="25" col="27"/>
   <hex row="25" col="28" terrain="9"/>
-  <hex row="25" col="29"/>
   <hex row="25" col="30" terrain="9"/>
 </map>
