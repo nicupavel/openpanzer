@@ -93,9 +93,11 @@ for line in f:
 
 #pprint(eqdict)
 #pprint(eqcdict)
+o.write("var equipment = ");
 out = json.dumps(eqdict, sort_keys=True, indent=4)
 o.write(out)
 
+oc.write("var equipment_condensed = ");
 out = json.dumps(eqcdict, sort_keys=True, separators=(',',':'))
 oc.write(out)
 
