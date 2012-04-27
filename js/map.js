@@ -62,7 +62,7 @@ function Transport(unitDataId)
 function Unit(unitDataId)
 {
 	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
-	this.id = unitDataId;
+	this.id = unitDataId; //TODO this id should be a unique ID for the unit on this map
 	this.owner = -1;
 	this.hasMoved = false;
 	this.hasFired = false;

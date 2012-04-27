@@ -398,25 +398,35 @@ function updateEquipmentWindow(eqclass)
 	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
-	var country = parseInt(countries[c]) + 1;
+	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
 	
 	//The actual units on the map
+	var userUnitSelected = $('eqUserSel').userunit;
+	//console.log("User Selected Unit:" + userUnitSelected);
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
 		//TODO should check owners not countries
-		if (unitList[i].unitData().country === country)
+		var u = unitList[i];
+		var ud = u.unitData();
+		if (ud.country === country)
 		{
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
-			img.src = unitList[i].unitData().icon;
-			txt.innerHTML = unitList[i].unitData().name;
-			div.eqclass = unitList[i].unitData().class;
-			div.country = unitList[i].unitData().country;
+			
+			if (u.id == userUnitSelected)
+				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
+				
+			img.src = ud.icon;
+			txt.innerHTML = ud.name;
+			div.unitid = u.id;
+			div.eqclass = ud.class;
+			div.country = ud.country;
 			div.onclick = function() 
 				{ 
+					$('eqUserSel').userunit = this.unitid; //save selected player unit 
 					UI:updateEquipmentWindow(this.eqclass);
 				}
 		}
@@ -425,6 +435,8 @@ function updateEquipmentWindow(eqclass)
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
 	
+	var eqUnitSelected = $('eqUserSel').equnit;
+	//console.log("Selected unit:" + eqUnitSelected);
 	//Units in equipment
 	for (var i in equipment)
 	{
@@ -435,11 +447,21 @@ function updateEquipmentWindow(eqclass)
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
+			
+			if (u.id == eqUnitSelected)
+				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
+				
 			div.unitid = u.id;
-			div.onclick = function() { updateUnitInfoWindow(equipment[this.unitid]); };
 			img.src = u.icon;
 			txt.innerHTML = u.name + " - " + u.cost*12 + " ";
 			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
+			div.onclick = function() 
+				{ 
+					$('eqUserSel').equnit = this.unitid; //save the selected unit in the equipment list
+					updateUnitInfoWindow(equipment[this.unitid]); 
+					updateEquipmentWindow(eqclass);
+				};
+			
 		}
 	}
 }

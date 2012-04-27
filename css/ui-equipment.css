@@ -143,6 +143,7 @@
 	position: relative;
 	float: right;
 }
+
 .eqUnitBox:hover
 {
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed.png');
@@ -160,6 +161,11 @@
 .eqUnitBox img /* other images like currency coin */
 {
 	vertical-align:middle;
+}
+/* a eqUnitBox that has been clicked on has beed set a title */
+.eqUnitBox[title]
+{
+	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed-over.png');
 }
 
 .eqUnitBox div
