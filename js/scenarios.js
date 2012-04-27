@@ -6,7 +6,7 @@ var scenariolist = [
 ["anz4pv41.xml", "Anzio 4 Player Version 4.1"],
 ["anzio3pl.xml", "Anzio 3 Player Version 2.0"],
 ["arract.xml", "Arracourt"],
-["arractuk.xml", "Arracourt"],
+["arractuk.xml", "Arracourt UK"],
 ["caenuk.xml", "Caen - Operation Goodwood"],
 ["caenus.xml", "Caen - Charnwood - Oden Valley"],
 ["cauldron.xml", "Cauldron"],
