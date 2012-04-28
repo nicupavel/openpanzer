@@ -381,6 +381,8 @@ function buildEquipmentWindow()
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() { UI:updateEquipmentWindow(this.eqclass); }
+		div.onmouseover = function() { hoverin(this.firstChild); }
+		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
 	
 	$('eqOkBut').onclick = function() 

@@ -30,10 +30,12 @@ function addTag(parent, tag)
 
 function hoverin(e)
 {
-	e.src = "resources/ui/menu/images/" + e.id + "-over.png";
+	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
+	e.src = path + e.id + "-over.png";
 }
 
 function hoverout(e)
 {
-	e.src = "resources/ui/menu/images/" + e.id + ".png";
+	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
+	e.src = path + e.id + ".png";
 }

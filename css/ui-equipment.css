@@ -68,6 +68,11 @@
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
 	z-index:100;
 }
+#eqSelCountry:hover
+{
+	top:13px;
+	left:21px;
+}
 
 #eqOkBut
 {
