@@ -114,7 +114,7 @@ function handleMouseMove(e)
 	var hex = map.map[row][col];
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if (hex.unit != null)	{  text = " Unit: " + hex.unit.unitData().name + " " + text; }
+	if (hex.unit !== null)	{  text = " Unit: " + hex.unit.unitData().name + " " + text; }
 	if (map.currentHex.hex != null) { r.drawCursor(cell); }
 	$('locmsg').innerHTML = text;
 }
@@ -129,7 +129,7 @@ function buildMainMenu()
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
-	sd.innerHTML = " Turn: " + map.turn + "  " + map.description;
+	sd.innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 	
 	for (b in menubuttons) 
 	{
@@ -220,8 +220,8 @@ function mainMenuButton(id)
 		{
 			map.endTurn();
 			GameState.save(map);
-			$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
-			uiMessage(map.description + " scenario on turn " + map.turn, uiEndTurnInfo());
+			$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
+			uiMessage(map.description + " " + sidesName[map.currentSide] + " side turn " + map.turn, uiEndTurnInfo());
 			r.render();
 			break;
 		}
@@ -291,6 +291,7 @@ function updateUnitInfoWindow(u)
 	$('ireinfbut').className = "";
 	
 	if (eqUnit) return;
+	if (u.player.side != map.currentSide) return;
 	
 	if (GameRules.canMount(u))
 	{
@@ -496,7 +497,7 @@ function newScenario(scenario)
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); });
-	$('statusmsg').innerHTML = " Turn: " + map.turn + "  " + map.description;
+	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 }
 
 function getMouseInfo(canvas, e)

@@ -16,7 +16,7 @@ function Player()
 	this.side = -1;
 	this.country = -1;
 	this.prestige = 0;
-	this.playedTurn = false;
+	this.playedTurn = -1;
 	
 	//Clone object
 	this.copy = function(p)
@@ -242,6 +242,7 @@ function Map()
 	this.turn = 0;
 	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
 	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
+	this.currentSide = 0; //Which side is playing currently
 	
 	var unitImagesList = {}; //a "hash" of unique unit images used for caching
 	var moveSelected = []; //selected hexes for current unit move destinations
@@ -397,11 +398,22 @@ function Map()
 	this.endTurn = function()
 	{
 			//TODO create a Game Class
-			resetUnits();
 			this.delMoveSel();
 			this.delAttackSel();
 			this.delCurrentHex();
-			this.turn++;
+			var p = this.getPlayers();
+			for (var i = 0; i < p.length; i++)
+			{	
+				if (p[i].side == this.currentSide)
+					p[i].playedTurn = this.turn;
+			}
+			this.currentSide = ~this.currentSide & 1;
+			console.log("Side: " + this.currentSide);
+			if (this.currentSide == 0)
+			{
+				this.turn++;
+				resetUnits();
+			}
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
@@ -426,7 +438,6 @@ function Map()
 			
 		this.updateUnitList();
 		this.delAttackSel();
-	
 	}
 	
 	// moves a unit to a new hex returns side number if the move results in a win 
@@ -479,11 +490,15 @@ function Map()
 		if (unit.isMounted)
 			unit.unmount();
 	}
+	
 	// selects a new unit as the current unit
 	this.selectUnit = function(row, col)
 	{
 		var hex = this.map[row][col];
 		
+		if (hex.unit === null || hex.unit.player.side != this.currentSide)
+			return;
+
 		this.delCurrentHex();
 		this.setCurrentHex(row, col);
 		this.delMoveSel();
