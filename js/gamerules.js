@@ -54,7 +54,8 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 		{
 			if (c[i].range == r)
 			{
-				//console.log("Range:" + c[i].range + " Row:"+ c[i].row + " Col:" + c[i].col);
+				
+				//console.log("Checking for Row:"+ c[i].row + " Col:" + c[i].col + " range: " + c[i].range + " at range: " + r);
 				for (j  = 0; j < c.length; j++) //Look up adjacent cells for c[i]
 				{
 					if (c[j].range < r) continue; //Not always true, there might be a path to reach a hex by turning back
@@ -80,12 +81,13 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 							c[j].cin = c[i].cout;
 							c[j].cout = c[j].cin + c[j].cost;
 						}
+						//console.log("\t Hex at Row:" + c[j].row + " Col:" + c[j].col + " RANGE:" + c[j].range + " CIN:" + c[j].cin + " COUT:" + c[j].cout + " COST:" + c[j].cost);
 						if ((canMoveInto(map, unit, c[j])) && 
 							((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin < range)))) 
 						{
 							c[j].allow = true;
+							//console.log("\t\tSelected Hex at Row:" + c[j].row + " Col:" + c[j].col);
 						}
-						//else console.log("Row:"+ c[j].row + " Col:" + c[j].col + " discarded for range:" + r + " with cout:" + c[j].cout);
 					}
 				}
 			}
@@ -426,7 +428,7 @@ GameRules.getDirection = function(x1, y1, x2, y2)
 GameRules.distance = function(x1, y1, x2, y2)
 {
 	var d = 0;
-	//shift the entire hexgrid to be arranged diagonally
+	//shift the entire hexgrid coords to be arranged diagonally
 	if (y1 % 2)	{ x1 = x1 * 2 + 1;	}
 	else { 	x1 = x1 * 2; }
 	
@@ -490,8 +492,10 @@ function getCellsInRange(row, col, range, mrows, mcols)
 			cell = new Cell(i, col); 
 			cell.range = Math.abs(row - i);
 			cellList.push(cell);
+			//console.log("Added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
 		}
 	}
+	//console.log("Finished selecting column");
 	//the rows around
 	for (var colOff = 1; colOff <= range; colOff++)
 	{
@@ -509,15 +513,17 @@ function getCellsInRange(row, col, range, mrows, mcols)
 			if ((col + colOff) < mcols) 
 			{
 				cell = new Cell(i, col + colOff);
-				cell.range = colOff;
+				cell.range = GameRules.distance(row, col, i, col + colOff);
 				cellList.push(cell);
+				//console.log("R added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
 			}
 			
 			if ((col - colOff) > 0) 
 			{ 
 				cell = new Cell(i, col - colOff);
-				cell.range = colOff;
+				cell.range = GameRules.distance(row, col, i, col - colOff);
 				cellList.push(cell);
+				//console.log("L added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
 			}
 		}
 	}
