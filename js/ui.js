@@ -34,7 +34,7 @@ function UI(scenario)
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
 	
-	this.mainMenuButton = function(id) { UI:mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
+	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 
 function handleMouseClick(e) 
 {
@@ -88,7 +88,7 @@ function handleMouseClick(e)
 				var win = map.moveUnit(srcHex.unit, map.currentHex.row, map.currentHex.col, row, col);
 				if (win >= 0) 
 				{ 
-					UI:uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
+					uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
 				}
 			} 		
 			map.delCurrentHex();
@@ -144,7 +144,7 @@ function buildMainMenu()
 		img.id = id;
 		img.src = "resources/ui/menu/images/" + id + ".png";
 		
-		div.onclick = function() { UI:mainMenuButton(this.id); }
+		div.onclick = function() { mainMenuButton(this.id); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
@@ -231,7 +231,7 @@ function mainMenuButton(id)
 			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
-			scnSel.onchange = function(){ UI:newScenario(this.options[this.selectedIndex].value);}
+			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}
 			
 			for (var i = 0; i < scenariolist.length; i++)
 			{
@@ -295,19 +295,19 @@ function updateUnitInfoWindow(u)
 	if (GameRules.canMount(u))
 	{
 		$('imountbut').className = "enabled";
-		$('imountbut').onclick = function() {UI:unitInfoButton('mount', u);}
+		$('imountbut').onclick = function() {unitInfoButton('mount', u);}
 	}
 	
 	if (GameRules.canResupply(u))
 	{
 		$('iresupbut').className = "enabled";
-		$('iresupbut').onclick = function() {UI:unitInfoButton('resupply', u);}
+		$('iresupbut').onclick = function() {unitInfoButton('resupply', u);}
 	}
 
 	if (GameRules.canReinforce(u)) 
 	{
 		$('ireinfbut').className = "enabled";
-		$('ireinfbut').onclick = function() {UI:unitInfoButton('reinforce', u);}
+		$('ireinfbut').onclick = function() {unitInfoButton('reinforce', u);}
 	}
 	
 	console.log(u);
@@ -380,7 +380,7 @@ function buildEquipmentWindow()
 		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
-		div.onclick = function() { UI:updateEquipmentWindow(this.eqclass); }
+		div.onclick = function() { updateEquipmentWindow(this.eqclass); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
@@ -429,7 +429,7 @@ function updateEquipmentWindow(eqclass)
 			div.onclick = function() 
 				{ 
 					$('eqUserSel').userunit = this.unitid; //save selected player unit 
-					UI:updateEquipmentWindow(this.eqclass);
+					updateEquipmentWindow(this.eqclass);
 				}
 		}
 	}
@@ -461,7 +461,7 @@ function updateEquipmentWindow(eqclass)
 				{ 
 					$('eqUserSel').equnit = this.unitid; //save the selected unit in the equipment list
 					updateUnitInfoWindow(equipment[this.unitid]); 
-					updateEquipmentWindow(eqclass);
+					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 				};
 			
 		}
