@@ -481,18 +481,21 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	
 	var minRow = row - range;
 	var maxRow = row + range;
-	if (minRow < 0) { minRow = 0; }
-	if (maxRow >= mrows) { maxRow = mrows-1; }
+	//if (minRow < 0) { minRow = 0; }
+	//if (maxRow >= mrows) { maxRow = mrows-1; }
 
 	//the column
 	for (var i = minRow; i <= maxRow; i++)
 	{
 		if (i != row) 
 		{ 
-			cell = new Cell(i, col); 
-			cell.range = Math.abs(row - i);
-			cellList.push(cell);
-			//console.log("Added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
+			if (i >= 0 && col >= 0 && i < mrows && col < mcols)
+			{
+				cell = new Cell(i, col); 
+				cell.range = Math.abs(row - i);
+				cellList.push(cell);
+				//console.log("Added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
+			}
 		}
 	}
 	//console.log("Finished selecting column");
@@ -510,7 +513,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 		}
 		for (var i = minRow; i <= maxRow; i++)
 		{
-			if ((col + colOff) < mcols) 
+			if (i >= 0 && i < mrows && (col + colOff) < mcols) 
 			{
 				cell = new Cell(i, col + colOff);
 				cell.range = GameRules.distance(row, col, i, col + colOff);
@@ -518,7 +521,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 				//console.log("R added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
 			}
 			
-			if ((col - colOff) > 0) 
+			if (i >= 0 && i < mrows && (col - colOff) > 0) 
 			{ 
 				cell = new Cell(i, col - colOff);
 				cell.range = GameRules.distance(row, col, i, col - colOff);
