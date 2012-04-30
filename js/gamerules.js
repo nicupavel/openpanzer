@@ -407,16 +407,16 @@ GameRules.getDirection = function(x1, y1, x2, y2)
 		if (dy > 0)
 			return direction.NW + delta; //+ 1 WNW, -1 NNW
 		if (dy < 0)
-			return direction.NE //+1 ENE, -1 NNE
+			return direction.NE + delta;//+1 ENE, -1 NNE
 		if (dy == 0)
 			return direction.N;
 	}
 	if (dx < 0)
 	{
 		if (dy > 0)
-			return direction.SW; //+1 WSW, -1 SSW
+			return direction.SW + delta; //+1 WSW, -1 SSW
 		if (dy < 0)
-			return direction.SE; //+1 ESE, -1 SSE
+			return direction.SE + delta; //+1 ESE, -1 SSE
 		if (dy == 0)
 			return direction.S;
 	}	
