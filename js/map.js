@@ -487,7 +487,7 @@ function Map()
 	}
 	this.unmountUnit = function(unit)
 	{
-		if (unit.isMounted)
+		if (GameRules.canUnmount(unit))
 			unit.unmount();
 	}
 	
