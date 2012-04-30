@@ -124,8 +124,8 @@ function Render(mapObj)
 		if (hex.isAttackSel && !map.currentHex.hex.unit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
-			if ((redraw === true) || (lastCursorCell === null) || (lastCursorImage === null) ||
-				(lastCursorCell.row !== row) || (lastCursorCell.col !== col))
+			if ((redraw == true) || (lastCursorCell === null) || (lastCursorImage === null) ||
+				(lastCursorCell.row != row) || (lastCursorCell.col != col))
 			{ 
 				//TODO check unit mounted/unmounted 
 				redraw = true; //Redraw because a mouse is over a new cell
@@ -139,8 +139,8 @@ function Render(mapObj)
 				lastCursorImage = generateAttackCursor(cr.kills, cr.losses, atkflag, defflag);
 			}
 			//only assign a new css cursor if needed (to reduce html element load)
-			if ((ca.style.cursor === 'default') || (ca.style.cursor === 'pointer')
-				|| (ca.style.cursor === 'auto') || (redraw === true))
+			if ((ca.style.cursor == 'default') || (ca.style.cursor == 'pointer')
+				|| (ca.style.cursor == 'auto') || (redraw == true))
 			{
 				//cursor data, hotspot x, hotspot y, fallback cursor image
 				ca.style.cursor = "url('" + lastCursorImage + "') " + curw/2 + " " + curh/2 +", auto";
@@ -323,7 +323,7 @@ function Render(mapObj)
 			imgUnits[imgList[i]].onload = function() 
 			{
 				loaded++;  
-				if (loaded === toLoad)
+				if (loaded == toLoad)
 					func();
 			}
 			imgUnits[imgList[i]].src = imgList[i];
@@ -332,7 +332,7 @@ function Render(mapObj)
 	
 	function drawHexDecals(x0, y0, hex)
 	{
-		if (hex.flag !== -1) 
+		if (hex.flag != -1) 
 		{ 
 			var flw = 21; //one flag width
 			var flh = 14; //flag height
@@ -341,7 +341,7 @@ function Render(mapObj)
 			
 			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh);
 			
-			if (hex.victorySide !== -1)
+			if (hex.victorySide != -1)
 			{
 				c.beginPath();
 				c.lineWidth = 2;
@@ -374,7 +374,7 @@ function Render(mapObj)
 			flag =hex.unit.player.country;
 			scale = 1.4;
 		}
-		if (hex.flag !== -1 && hex.victorySide !== -1) 
+		if (hex.flag != -1 && hex.victorySide != -1) 
 		{ 
 			flag = hex.flag;
 			scale = 3;

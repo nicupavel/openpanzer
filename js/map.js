@@ -449,10 +449,10 @@ function Map()
 		var player = srcHex.unit.player;
 		var side = player.side;	
 		var win = -1;
-		if (dstHex.flag !== -1) { dstHex.flag = player.country; }
+		if (dstHex.flag != -1) { dstHex.flag = player.country; }
 		
 		//Is a victory marked hex ?
-		if (dstHex.victorySide !== -1)
+		if (dstHex.victorySide != -1)
 		{
 			var enemyside = this.getPlayer(dstHex.owner).side;
 			if (this.updateVictorySides(side, enemyside))

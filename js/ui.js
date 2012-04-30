@@ -184,7 +184,7 @@ function mainMenuButton(id)
 		{
 			var v = $('unit-info').style.visibility;
 			
-			if (v === "visible") 
+			if (v == "visible") 
 			{ 
 				$('unit-info').style.visibility = "hidden"; 
 			}
@@ -203,7 +203,7 @@ function mainMenuButton(id)
 		{
 			var v = $('equipment').style.visibility;
 			
-			if (v === "visible") 
+			if (v == "visible") 
 			{ 
 				$('equipment').style.visibility = "hidden"; 
 				$('container-unitlist').style.visibility = "hidden"; 
@@ -412,7 +412,7 @@ function updateEquipmentWindow(eqclass)
 		//TODO should check owners not countries
 		var u = unitList[i];
 		var ud = u.unitData();
-		if (ud.country === country)
+		if (ud.country == country)
 		{
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
@@ -444,7 +444,7 @@ function updateEquipmentWindow(eqclass)
 	for (var i in equipment)
 	{
 		var u = equipment[i];
-		if ((u.class === eqclass) && (u.country === country))
+		if ((u.class == eqclass) && (u.country == country))
 		{
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');

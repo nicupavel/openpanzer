@@ -36,8 +36,8 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 		range = unit.getFuel();
 		
 	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
-	if ((movmethod === movMethod.towed) && (unit.transport === null) 
-		&& (range === 0) && (ud.class != unitClass.fortification))
+	if ((movmethod == movMethod.towed) && (unit.transport === null) 
+		&& (range == 0) && (ud.class != unitClass.fortification))
 	{
 		range = 1;	
 	}
@@ -68,7 +68,7 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 							c[j].cost = moveCost[hex.terrain];
 						
 						//enemy unit zone of control ?
-						if (hex.unit !== null && hex.unit.player.side !== unit.player.side)
+						if (hex.unit !== null && hex.unit.player.side != unit.player.side)
 						{
 							c[j].cost = 254;
 							c[j].cin = range;
@@ -257,7 +257,7 @@ function canAttack(unit, targetUnit)
 		return false;
 	if (targetUnit === null)
 		return false;
-	if (unit.owner === targetUnit.owner)
+	if (unit.owner == targetUnit.owner)
 		return false;
 	if (unit.unitData().airatk == 0 && isAir(targetUnit)) //TODO There is a special bit for this.
 		return false;
@@ -369,7 +369,7 @@ function isGround(unit)
 GameRules.unitUsesFuel = function(unit)
 {
 	//TODO check: If fuel is defined as 0 in equipment then it means it doesn't use fuel ??
-	if (unit.unitData().fuel === 0)
+	if (unit.unitData().fuel == 0)
 		return false;
 		
 	m = unit.unitData().movmethod;
