@@ -9,3 +9,44 @@ By contributing code or content to the project, you agree for it to be distribut
 or whatever other open-source license the project maintainers choose in the future.
 
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+Source code structure description:
+.
+├── css                        - style sheets used for ui elements
+│   ├── ui.css                 - main window, main menu, generic dom elements
+│   ├── ui-equipment.css       - equipment window style and positioning
+│   ├── ui-message.css         - message windows style and positioning
+│   └── ui-unit-info.css       - unit information window style and positioning
+├── js
+│   ├── animation.js           - draws a series of sprites in a time interval
+│   ├── dom.js                 - generic function that deal with DOM
+│   ├── equipment-condensed.js - a condensed version of the unit properties
+│   ├── equipment.js           - developer version for unit properties
+│   ├── gamerules.js           - attack, move, resupply, reinforce, distance, direction rules
+│   ├── gamestate.js           - save/load game state to HTML 5 local storage
+│   ├── map.js                 - map, unit, player and hex objects
+│   ├── maploader.js           - loads scenarios and maps from a xml file
+│   ├── prototypes.js          - generic definitions
+│   ├── render.js              - canvas rendering functions
+│   ├── scenarios.js           - list of scenarios automatically generated
+│   ├── style.js               - canvas style for render.js
+│   └── ui.js                  - handles mouse and builds/updates other windows(equipment/unit info/etc)
+├── panzer.html                - html file with basic DOM structure for openpanzer
+├── resources
+│   ├── animations             - images with 1 row of sprites for animations
+│   ├── maps                   - big images for the map background
+│   ├── scenarios              - xml scenarios converted with tools/map/mapconvert.py script
+│   ├── ui
+│   │   ├── cursors            - mouse cursors used in game
+│   │   ├── dialogs
+│   │   │   ├── equipment      - images for equipment buttons/window 
+│   │   │   ├── ui-message     - images for message window
+│   │   │   └── unit-info      - images for unit info buttons/window
+│   │   ├── flags              - small (for cities) and big (for unit info) flags
+│   │   ├── menu               - images used on main window text bar or main menu
+│   │   ├── page               - images used outside main window (background, splash screens)
+│   └── units                  - 1x9 sprites that have show unit orientations for each unit defined in equipment.js 
+└── tools
+    ├── equipment              - converts PG2Suite exported equipment to js equipment
+    ├── icons                  - converts SHPTool exported bmp to transparent png
+    └── map                    - converts SCN,MAP,TXT files to XML files used by openpanzer
