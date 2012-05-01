@@ -10,6 +10,16 @@ or whatever other open-source license the project maintainers choose in the futu
 
 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
+Supported browsers:
+
+OpenPanzer respects latest W3.org HTML5, CSS3 specs and browser specific specs are kept to a minimum -> null.
+Base supported javascript engine is V8 open source engine. Code should be kept to basic features of ECMAScript 5.
+
+OpenPanzer works in recent Google Chrome, Mozilla Firefox, Safari and Opera. OpenPanzer works on Android and iOS devices
+but it's not designed with touch support in mind (ie: those nice attack cursors won't be available).
+
+Internet Explorer will proabably work with version 11 but extensive code changes for IE aren't a priority.
+
 Source code structure description:
 .
 ├── css                        - style sheets used for ui elements
@@ -50,3 +60,24 @@ Source code structure description:
     ├── equipment              - converts PG2Suite exported equipment to js equipment
     ├── icons                  - converts SHPTool exported bmp to transparent png
     └── map                    - converts SCN,MAP,TXT files to XML files used by openpanzer
+
+
+Development notes:
+
+OpenPanzer doesn't use any external javascript libraries (like jquery, node etc), and should be kept like this.
+Styling DOM elements should be done in their CSS files. Adding style for elements in the code shouldn't exist.
+All positioning of DOM elements should be done in CSS files. Bottom line: if something can be done in a css file 
+then there it should go not in the javascript code.
+Code additions should follow the coding style used so far (for object creation etc).
+
+Main testing is done on Google Chrome and Firefox under Linux.
+
+Running the code locally in Google Chrome requires --allow-file-access-from-files option when starting Google Chrome.
+
+Graphical assets and other resources:
+
+Unit images are taken from OpenGeneral: http://sourceforge.net/apps/mediawiki/opengeneral/index.php?title=Main_Page
+Map, menu, buttons are (for now) converted from original Panzer General 2.
+Scenarios and equipment are converted from original Panzer General 2.
+This game has been built around the specification of the original game compiled by Luis Guzman: http://luis-guzman.com/links/PG2_FilesSpec.htm
+Unit equipment is exported from PG2Suite: http://luis-guzman.com/PG2_Suite.html before being converted into a json format.
