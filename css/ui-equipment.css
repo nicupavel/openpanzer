@@ -108,8 +108,8 @@
 {
 	border: 0px solid #fff;
 	position: fixed;
-	width: 800px;
-	margin-left: -400px;
+	min-width: 840px;
+	margin-left: -420px;
 	left: 50%;
 	top: 30px;
 	color: #fff;
@@ -122,7 +122,7 @@
 
 #hscroll-unitlist
 {
-	width:790px;
+	min-width:835px;
 	margin:0 auto;
 	overflow: auto;
 }
