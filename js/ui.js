@@ -386,6 +386,9 @@ function buildEquipmentWindow()
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
 	
+	$('eqNewBut').title = "Buy unit as a new unit";
+	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
+	$('eqOkBut').title = "Close";
 	$('eqOkBut').onclick = function() 
 		{ 
 			$('equipment').style.visibility = "hidden"; 
