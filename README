@@ -32,7 +32,7 @@ Source code structure description:
 │   ├── dom.js                 - generic function that deal with DOM
 │   ├── equipment-condensed.js - a condensed version of the unit properties
 │   ├── equipment.js           - developer version for unit properties
-│   ├── gamerules.js           - attack, move, resupply, reinforce, distance, direction rules
+│   ├── gamerules.js           - attack, move, resupply, reinforce, distance rules
 │   ├── gamestate.js           - save/load game state to HTML 5 local storage
 │   ├── map.js                 - map, unit, player and hex objects
 │   ├── maploader.js           - loads scenarios and maps from a xml file
@@ -40,12 +40,12 @@ Source code structure description:
 │   ├── render.js              - canvas rendering functions
 │   ├── scenarios.js           - list of scenarios automatically generated
 │   ├── style.js               - canvas style for render.js
-│   └── ui.js                  - handles mouse and builds/updates other windows(equipment/unit info/etc)
+│   └── ui.js                  - handle mouse, builds/updates UI windows
 ├── panzer.html                - html file with basic DOM structure for openpanzer
 ├── resources
 │   ├── animations             - images with 1 row of sprites for animations
 │   ├── maps                   - big images for the map background
-│   ├── scenarios              - xml scenarios converted with tools/map/mapconvert.py script
+│   ├── scenarios              - xml scenarios converted with tools/map/mapconvert.py
 │   ├── ui
 │   │   ├── cursors            - mouse cursors used in game
 │   │   ├── dialogs
@@ -54,12 +54,12 @@ Source code structure description:
 │   │   │   └── unit-info      - images for unit info buttons/window
 │   │   ├── flags              - small (for cities) and big (for unit info) flags
 │   │   ├── menu               - images used on main window text bar or main menu
-│   │   ├── page               - images used outside main window (background, splash screens)
-│   └── units                  - 1x9 sprites that have show unit orientations for each unit defined in equipment.js 
+│   │   ├── page               - images used outside main window
+│   └── units                  - 1x9 sprites with unit orientations for each unit
 └── tools
     ├── equipment              - converts PG2Suite exported equipment to js equipment
     ├── icons                  - converts SHPTool exported bmp to transparent png
-    └── map                    - converts SCN,MAP,TXT files to XML files used by openpanzer
+    └── map                    - converts SCN,MAP,TXT files to openpanzer XML
 
 
 Development notes:
