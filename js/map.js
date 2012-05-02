@@ -31,9 +31,9 @@ function Player()
 	this.getCountryName = function() { return countryNames[this.country]; }
 }
 
-function Hex()
+function Hex(row, col)
 {
-	this.unit = null;
+	this.unit = null; //pointer to the unit on this hex
 	this.terrain = terrainType.Clear;
 	this.road = roadType.none;
 	this.owner = -1;
@@ -61,10 +61,24 @@ function Hex()
 		this.victorySide = hex.victorySide;
 		this.name = hex.name;
 	}
-	
-	this.setUnit = function(unit) { if (this.unit != null) console.log("Overwriting unit"); this.unit = unit; }
-	this.delUnit = function() {this.unit = null };
+	this.getPos = function() { return new Cell(r, c); }
+	this.setUnit = function(unit) 
+	{ 
+		if (this.unit != null) 
+			console.log("Overwriting unit"); 
+		unit.setHex(this);
+		this.unit = unit;
+	}
+	this.delUnit = function() 
+	{
+		this.unit.setHex(null); 
+		this.unit = null;
+	}
 	this.log = function() { console.log(this); }
+	
+	//private
+	var r = row;
+	var c = col;
 };
 
 function Map()
@@ -94,7 +108,7 @@ function Map()
 			this.map[i] = new Array(this.cols);
 			for(var j = 0; j < this.cols; j++)
 			{
-				this.map[i][j] = new Hex();
+				this.map[i][j] = new Hex(i, j);
 			}
 		}
 	}
@@ -132,7 +146,6 @@ function Map()
 		else
 			return playerList[0]; //TODO parse supporting countries from the scenario file
 	}
-	
 	
 	this.setCurrentHex = function(row, col)
 	{
@@ -253,24 +266,27 @@ function Map()
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
-	this.attackUnit = function(atkunit, srow, scol, defunit, drow, dcol)
+	this.attackUnit = function(atkunit, sorow, socol, defunit, dorow, docol)
 	{
-		console.log("attacking: " + drow + "," +dcol);
+		var a = atkunit.getPos();
+		var d = defunit.getPos();
+		
+		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		atkunit.fire(true);
 		defunit.fire(false);
-		var cr = GameRules.calculateAttackResults(this.map, atkunit, srow, scol, defunit, drow, dcol);
+		var cr = GameRules.calculateAttackResults(this.map, atkunit, a.row, a.col, defunit, d.row, d.col);
 		//TODO do this better
-		defunit.hit(cr.kills)
+		defunit.hit(cr.kills);
 		atkunit.hit(cr.losses);
 		
-		atkunit.facing = GameRules.getDirection(srow, scol, drow, dcol);
-		defunit.facing = GameRules.getDirection(drow, dcol, srow, scol);
+		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
+		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
 		
 		if (atkunit.destroyed) 
-			this.map[srow][scol].delUnit();
+			this.map[a.row][a.col].delUnit();
 			
 		if (defunit.destroyed) 
-			this.map[drow][dcol].delUnit();
+			this.map[d.row][d.col].delUnit();
 			
 		this.updateUnitList();
 		this.delAttackSel();
@@ -280,7 +296,8 @@ function Map()
 	// -1 otherwise
 	this.moveUnit = function(unit, srow, scol, drow, dcol)
 	{
-		var srcHex = this.map[srow][scol];
+		var s = unit.getPos();
+		var srcHex = this.map[s.row][s.col];
 		var dstHex = this.map[drow][dcol];
 		var player = srcHex.unit.player;
 		var side = player.side;	
@@ -294,11 +311,11 @@ function Map()
 			if (this.updateVictorySides(side, enemyside))
 				win = side;
 		}
-		unit.move(GameRules.distance(srow, scol, drow, dcol));
+		unit.move(GameRules.distance(s.row, s.col, drow, dcol));
+		srcHex.delUnit();
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
-		unit.facing = GameRules.getDirection(srow, scol, drow, dcol);
-		srcHex.delUnit();
+		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
 		this.setAttackRange(drow, dcol) //Put new attack range
 		
 		return win;
@@ -306,7 +323,7 @@ function Map()
 	
 	this.resupplyUnit = function(unit)
 	{
-		s = GameRules.getResupplyValue(unit);
+		var s = GameRules.getResupplyValue(unit);
 		unit.resupply(s.ammo, s.fuel);
 	}
 	
@@ -363,14 +380,14 @@ function Map()
 			for (c = 0; c < m.cols; c++)
 			{
 				var h = m.map[r][c];
-				var hex = new Hex();
+				var hex = new Hex(r, c);
 				hex.copy(h);
 				if (h.unit !== null) 
 				{
 					u = new Unit(h.unit.id);
 					u.copy(h.unit);
 					hex.setUnit(u);
-					this.addUnit(u);
+					this.addUnit(u); //TODO this will go into Map::setHex()
 				}
 				this.setHex(r, c, hex);
 			}

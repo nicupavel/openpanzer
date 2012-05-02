@@ -91,9 +91,9 @@ function MapLoader()
 		{
 			for (var i = 0; i < hexNodes.length; i++) 
 			{
-				var tmphex = new Hex();
 				var row = hexNodes[i].getAttribute("row");
 				var col = hexNodes[i].getAttribute("col");
+				var tmphex = new Hex(row, col);
 				tmphex.terrain = hexNodes[i].getAttribute("terrain");
 				if (tmphex.terrain === null) { tmphex.terrain = 0; }
 				tmphex.road = hexNodes[i].getAttribute("road");

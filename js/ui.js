@@ -11,7 +11,7 @@
 
 function UI(scenario)
 {
-	var map = null;
+	var map = new Map();
 	var l = new MapLoader();
 	
 	map = GameState.restore();
@@ -45,7 +45,6 @@ function handleMouseClick(e)
 	var col = cell.col;
 	
 	hex = map.map[row][col];
-	
 	//Right click only to show unit info
 	if (minfo.rclick) 
 	{ 
@@ -265,6 +264,7 @@ function updateUnitInfoWindow(u)
 		uinfo = u.unitData(); 
 		ammo = u.getAmmo();
 		fuel = u.getFuel();
+		console.log("Position:"+u.getPos());
 	}
 	
 	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";

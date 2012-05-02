@@ -108,6 +108,7 @@ function Unit(unitDataId)
 	
 	this.fire = function(isAttacking) 
 	{
+		//TODO should go below 0
 		this.ammo--; //TODO some transports can attack ?
 		if (isAttacking)
 			this.hasFired = true;
@@ -162,4 +163,10 @@ function Unit(unitDataId)
 		this.isMounted = false;
 	}
 	this.log = function() { console.log(this); }
+	this.setHex = function(h) { hex = h; }
+	this.getHex = function() { return hex; }
+	this.getPos = function() { return hex.getPos(); };
+	
+	//private 
+	var hex = null; //The hex that this unit is on
 };
