@@ -221,14 +221,14 @@ function mainMenuButton(id)
 			map.endTurn();
 			GameState.save(map);
 			$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
-			uiMessage(map.description + " " + sidesName[map.currentSide] + " side turn " + map.turn, uiEndTurnInfo());
+			uiMessage(sidesName[map.currentSide] + " Side Turn " + map.turn, uiEndTurnInfo());
 			r.render();
 			break;
 		}
 		case 'mainmenu':
 		{
 			uiMessage("HTML5 Panzer General version 1.4", "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br> Available scenarios:<br>");
+			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
 			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}

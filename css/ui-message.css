@@ -1,12 +1,12 @@
 #ui-message
 {
 	position: fixed;
-	width: 259px;
-	height: 152px;
+	width: 306px;
+	height: 201px;
 	left:50%;
-	margin-left: -129.5px;
+	margin-left: -153px;
 	top:50%;
-	margin-top: -76px;
+	margin-top: -100px;
 	color: #f8e064;
 	font-weight:bold;
 	font-family: Arial;
@@ -25,7 +25,7 @@
 	position:absolute;
 	top:10px;
 	left:5px;
-	width:250px;
+	width:305px;
 	text-align: center;
 }
 
@@ -35,18 +35,19 @@
 	position:absolute;
 	top:40px;
 	left:5px;
-	width:250px;
+	width:300px;
 	text-align: center;
 	color: #fff;
 	font-weight:normal;
+	height: 130px;
 }
 
 #ui-message #uiokbut
 {
 	border: 0px #fff solid;
 	position:absolute;
-	top:120px;
-	left:225px;
+	top:170px;
+	left:275px;
 	width:25px;
 	height: 30px;
 	text-align: center;
