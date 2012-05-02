@@ -190,7 +190,8 @@ function Unit(unitDataId)
 	this.getIcon = function() { var u = this.unitData(); return u.icon; }
 	this.resetUnit = function() 
 	{ 
-		this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false; 
+		this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false;
+		this.isMounted = false;
 	}
 	this.log = function() { console.log(this); }
 };
