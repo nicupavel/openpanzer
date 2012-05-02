@@ -49,7 +49,10 @@ def get_scn_units(f):
 	flag = unpack('b', u[u_off_flag:u_off_flag + 1])[0]
 	face = unpack('h', u[u_off_face:u_off_face + 2])[0]
 	transport = unpack('h', u[u_off_transport:u_off_transport + 2])[0]
-	units[(col,row)] = (uid, owner, flag, face, transport)
+	if (col,row) in units:
+	    units[(col,row)] += [(uid, owner, flag, face, transport)]
+	else:
+	    units[(col,row)] = [(uid, owner, flag, face, transport)]
     f.seek(pos)
     return units
 
@@ -174,12 +177,13 @@ for scn in sys.argv[1:]:
 	    if (hexowner != 0): tmpnode.set("owner", str(hexowner - 1)) #owner starts from 0 in js
 	    if (hexvictoryowner != -1): tmpnode.set("victory", str(hexvictoryowner))
 	    if (col,row) in units:
-		utmpnode = x.SubElement(tmpnode,"unit")
-		utmpnode.set("id",str(units[(col,row)][0]))
-		utmpnode.set("owner", str(units[(col,row)][1]))
-		if (units[(col,row)][2] != 0): utmpnode.set("flag", str(units[(col,row)][2])) #flags png images start from 1 in js
-		utmpnode.set("face", str(units[(col,row)][3]))
-		if (units[(col,row)][4] != 0): utmpnode.set("transport", str(units[(col,row)][4]))
+		for l in units[(col,row)]:
+		    utmpnode = x.SubElement(tmpnode,"unit")
+		    utmpnode.set("id",str(l[0]))
+		    utmpnode.set("owner", str(l[1]))
+		    if (l[2] != 0): utmpnode.set("flag", str(l[2])) #flags png images start from 1 in js
+		    utmpnode.set("face", str(l[3]))
+		    if (l[4] != 0): utmpnode.set("transport", str(l[4]))
         col = col + 1
         mapoffset = mapoffset + 7
         scnoffset = scnoffset + 6
