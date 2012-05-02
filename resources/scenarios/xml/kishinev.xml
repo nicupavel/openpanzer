@@ -1144,6 +1144,7 @@
   <hex row="30" col="30" road="34"/>
   <hex row="30" col="35" terrain="15"/>
   <hex row="30" col="37" terrain="2" road="10" flag="19" owner="1">
+    <unit id="535" owner="1" flag="20" face="11"/>
     <unit id="474" owner="1" flag="20" face="11" transport="529"/>
   </hex>
   <hex row="30" col="38" terrain="2" road="48">

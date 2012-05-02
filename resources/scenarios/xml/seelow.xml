@@ -281,6 +281,7 @@
   </hex>
   <hex row="8" col="16" terrain="3"/>
   <hex row="8" col="19" terrain="2" road="10" flag="7" owner="1">
+    <unit id="165" owner="1" flag="8" face="4"/>
     <unit id="69" owner="1" flag="8" face="4" transport="157"/>
   </hex>
   <hex row="8" col="20" terrain="2" road="48"/>

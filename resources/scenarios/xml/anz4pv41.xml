@@ -58,6 +58,7 @@
   <hex row="1" col="19" terrain="16"/>
   <hex row="1" col="20" terrain="16"/>
   <hex row="1" col="21" terrain="16">
+    <unit id="119" owner="1" flag="8" face="0"/>
     <unit id="169" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="1" col="22" terrain="16">
@@ -79,9 +80,11 @@
     <unit id="114" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="1" col="28">
+    <unit id="69" owner="1" flag="8" face="0" transport="157"/>
     <unit id="121" owner="1" flag="8" face="15"/>
   </hex>
   <hex row="1" col="29" road="17">
+    <unit id="115" owner="1" flag="8" face="15" transport="157"/>
     <unit id="94" owner="1" flag="8" face="0" transport="156"/>
   </hex>
   <hex row="1" col="30">
@@ -99,6 +102,7 @@
   <hex row="1" col="36" terrain="6" name="BUONRIPOSO RIDGE"/>
   <hex row="1" col="37" terrain="16"/>
   <hex row="1" col="38" road="136" flag="7" owner="1">
+    <unit id="121" owner="3" flag="8" face="0"/>
     <unit id="153" owner="3" flag="8" face="15"/>
   </hex>
   <hex row="1" col="39" road="144">
@@ -131,6 +135,7 @@
     <unit id="113" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="2" col="22" terrain="16">
+    <unit id="113" owner="1" flag="8" face="0" transport="157"/>
     <unit id="161" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="2" col="23" terrain="16">
@@ -152,6 +157,7 @@
     <unit id="114" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="2" col="29" road="25">
+    <unit id="99" owner="1" flag="8" face="0"/>
     <unit id="153" owner="3" flag="8" face="15"/>
   </hex>
   <hex row="2" col="30">
@@ -1082,6 +1088,7 @@
     <unit id="439" owner="2" flag="10" face="5"/>
   </hex>
   <hex row="20" col="19" terrain="9">
+    <unit id="358" owner="0" flag="23" face="5"/>
     <unit id="443" owner="2" flag="10" face="5"/>
   </hex>
   <hex row="20" col="20" terrain="9">
@@ -1094,6 +1101,7 @@
     <unit id="426" owner="2" flag="10" face="7" transport="449"/>
   </hex>
   <hex row="20" col="23" terrain="1" road="144" name="ANZIO">
+    <unit id="390" owner="0" flag="23" face="6"/>
     <unit id="421" owner="2" flag="10" face="5" transport="450"/>
   </hex>
   <hex row="20" col="24" terrain="16" road="18"/>
@@ -1145,10 +1153,12 @@
   </hex>
   <hex row="21" col="19" terrain="9"/>
   <hex row="21" col="20" terrain="9">
+    <unit id="438" owner="2" flag="10" face="5"/>
     <unit id="437" owner="2" flag="10" face="5"/>
   </hex>
   <hex row="21" col="21" terrain="9"/>
   <hex row="21" col="22">
+    <unit id="392" owner="0" flag="23" face="6"/>
     <unit id="401" owner="2" flag="10" face="5"/>
   </hex>
   <hex row="21" col="23" terrain="1" road="19" name="ANZIO">
@@ -1177,6 +1187,7 @@
   <hex row="21" col="40" terrain="6"/>
   <hex row="21" col="41" terrain="6"/>
   <hex row="21" col="42" terrain="16" road="25" flag="7" owner="3">
+    <unit id="69" owner="3" flag="8" face="0" transport="156"/>
     <unit id="115" owner="3" flag="8" face="14" transport="157"/>
   </hex>
   <hex row="21" col="43" terrain="16" road="128"/>

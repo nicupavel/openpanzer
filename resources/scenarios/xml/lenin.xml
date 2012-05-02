@@ -634,6 +634,7 @@
   <hex row="20" col="38" terrain="3"/>
   <hex row="20" col="39" terrain="3"/>
   <hex row="21" col="3" terrain="2" flag="7" owner="1">
+    <unit id="110" owner="1" flag="8" face="8"/>
     <unit id="171" owner="1" flag="8" face="6"/>
   </hex>
   <hex row="21" col="4" terrain="2">

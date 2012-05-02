@@ -452,6 +452,9 @@
     <unit id="336" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="12" col="29" terrain="1" road="168" name="Acroma" flag="22" owner="1" victory="0">
+    <unit id="336" owner="1" flag="23" face="13"/>
+    <unit id="343" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="551" owner="1" flag="23" face="0"/>
     <unit id="346" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="12" col="30" terrain="16"/>
@@ -562,6 +565,7 @@
   <hex row="15" col="27" terrain="7" road="33"/>
   <hex row="15" col="28" terrain="7" road="144"/>
   <hex row="15" col="29" terrain="2" road="34" flag="22" owner="1">
+    <unit id="336" owner="1" flag="23" face="12"/>
     <unit id="387" owner="1" flag="23" face="8"/>
   </hex>
   <hex row="15" col="30" terrain="2" road="32"/>

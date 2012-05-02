@@ -75,9 +75,11 @@
     <unit id="499" owner="0" flag="20" face="0" transport="528"/>
   </hex>
   <hex row="2" col="32" road="35">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="543" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="2" col="33" road="40">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="531" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="2" col="34" flag="19" owner="0" victory="1">
@@ -120,9 +122,11 @@
     <unit id="525" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="32" road="130">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="534" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="33">
+    <unit id="501" owner="0" flag="20" face="0" transport="528"/>
     <unit id="543" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="34" road="136">

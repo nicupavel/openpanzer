@@ -1220,6 +1220,7 @@
     <unit id="375" owner="1" flag="23" face="5"/>
   </hex>
   <hex row="28" col="22">
+    <unit id="328" owner="1" flag="23" face="5" transport="382"/>
     <unit id="390" owner="1" flag="23" face="6"/>
   </hex>
   <hex row="28" col="26" terrain="1" road="17" name="Tobacco Factory" flag="22" owner="1" victory="0">
@@ -1476,6 +1477,7 @@
   <hex row="34" col="20" road="8"/>
   <hex row="34" col="21" terrain="10" road="178" name="Sele River"/>
   <hex row="34" col="22" terrain="16" road="34">
+    <unit id="410" owner="1" flag="10" face="7" transport="449"/>
     <unit id="460" owner="1" flag="10" face="6"/>
   </hex>
   <hex row="34" col="23" terrain="15" name="Sele River"/>
@@ -1570,6 +1572,7 @@
   <hex row="36" col="21" terrain="16"/>
   <hex row="36" col="22" terrain="16" road="2"/>
   <hex row="36" col="23" terrain="16" road="1">
+    <unit id="410" owner="1" flag="10" face="4" transport="449"/>
     <unit id="454" owner="1" flag="10" face="6"/>
   </hex>
   <hex row="36" col="24" terrain="15" name="Calore River"/>

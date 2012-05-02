@@ -314,6 +314,11 @@
   </hex>
   <hex row="11" col="0" road="8"/>
   <hex row="11" col="1" road="136">
+    <unit id="151" owner="1" flag="8" face="3"/>
+    <unit id="105" owner="1" flag="8" face="0"/>
+    <unit id="152" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
     <unit id="92" owner="1" flag="8" face="0" transport="156"/>
   </hex>
   <hex row="11" col="4" terrain="16"/>
@@ -691,6 +696,12 @@
   <hex row="23" col="37" road="130"/>
   <hex row="23" col="38" road="40"/>
   <hex row="23" col="39" road="162">
+    <unit id="91" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="92" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="115" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0"/>
     <unit id="92" owner="1" flag="8" face="0" transport="158"/>
   </hex>
   <hex row="23" col="40" road="32"/>
@@ -782,6 +793,9 @@
   <hex row="26" col="33" terrain="10" name="Dnepr River"/>
   <hex row="26" col="34" road="2"/>
   <hex row="27" col="1" road="34">
+    <unit id="115" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0"/>
     <unit id="92" owner="1" flag="8" face="0" transport="158"/>
   </hex>
   <hex row="27" col="2" road="34"/>
@@ -965,6 +979,14 @@
   </hex>
   <hex row="34" col="19" road="2"/>
   <hex row="34" col="20" terrain="1" road="33" name="Daryevka" flag="7" owner="1">
+    <unit id="131" owner="1" flag="8" face="0"/>
+    <unit id="91" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="105" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0"/>
+    <unit id="92" owner="1" flag="8" face="0" transport="158"/>
+    <unit id="131" owner="1" flag="8" face="0"/>
+    <unit id="108" owner="1" flag="8" face="0" transport="156"/>
     <unit id="99" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="34" col="21" terrain="3"/>
@@ -975,6 +997,8 @@
   <hex row="34" col="27" terrain="3"/>
   <hex row="34" col="28" terrain="3"/>
   <hex row="34" col="34">
+    <unit id="152" owner="1" flag="8" face="0"/>
+    <unit id="108" owner="1" flag="8" face="0" transport="156"/>
     <unit id="92" owner="1" flag="8" face="0" transport="156"/>
   </hex>
   <hex row="34" col="38" terrain="8"/>

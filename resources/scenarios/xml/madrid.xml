@@ -399,6 +399,15 @@
   <hex row="17" col="2" terrain="10" name="Henares River"/>
   <hex row="17" col="3" terrain="1" road="27" name="Guadalajara"/>
   <hex row="17" col="4" terrain="1" road="178" name="Guadalajara" flag="25" owner="1" victory="0">
+    <unit id="284" owner="1" flag="26" face="5" transport="295"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
+    <unit id="288" owner="1" flag="26" face="0"/>
+    <unit id="290" owner="1" flag="26" face="0"/>
     <unit id="288" owner="1" flag="26" face="0"/>
   </hex>
   <hex row="17" col="8" terrain="16"/>

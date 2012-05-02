@@ -165,6 +165,7 @@
     <unit id="402" owner="0" flag="10" face="4"/>
   </hex>
   <hex row="7" col="2" terrain="2" owner="0">
+    <unit id="444" owner="0" flag="10" face="4"/>
     <unit id="461" owner="0" flag="10" face="4"/>
   </hex>
   <hex row="7" col="5" road="9"/>

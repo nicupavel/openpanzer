@@ -756,6 +756,8 @@
   <hex row="23" col="40" terrain="15" name="Meuse River"/>
   <hex row="24" col="1" terrain="10" name="Aisne River"/>
   <hex row="24" col="2" road="136">
+    <unit id="36" owner="1" flag="7" face="0"/>
+    <unit id="42" owner="1" flag="7" face="0"/>
     <unit id="30" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="24" col="3" road="136"/>
@@ -907,6 +909,11 @@
   <hex row="32" col="14" road="136"/>
   <hex row="32" col="15" road="130"/>
   <hex row="32" col="16" road="40">
+    <unit id="48" owner="1" flag="7" face="0"/>
+    <unit id="49" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="30" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="32" owner="1" flag="7" face="0" transport="56"/>
     <unit id="31" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="32" col="17" road="136"/>
@@ -926,18 +933,40 @@
     <unit id="39" owner="1" flag="7" face="0"/>
   </hex>
   <hex row="32" col="35">
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="32" owner="1" flag="7" face="0" transport="59"/>
+    <unit id="31" owner="1" flag="7" face="0" transport="59"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="32" owner="1" flag="7" face="0" transport="56"/>
     <unit id="31" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="32" col="36">
+    <unit id="36" owner="1" flag="7" face="0"/>
+    <unit id="42" owner="1" flag="7" face="0"/>
     <unit id="32" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="32" col="37">
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
     <unit id="32" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="33" col="18" road="130">
     <unit id="39" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="33" col="20" terrain="1" road="130" name="Vouziers" flag="6" owner="1">
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="31" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
+    <unit id="39" owner="1" flag="7" face="0"/>
     <unit id="30" owner="1" flag="7" face="0" transport="56"/>
   </hex>
   <hex row="33" col="21" terrain="10" name="Aisne River"/>

@@ -76,9 +76,11 @@
     <unit id="93" owner="0" flag="8" face="3" transport="158"/>
   </hex>
   <hex row="6" col="19">
+    <unit id="115" owner="0" flag="8" face="0"/>
     <unit id="173" owner="0" flag="8" face="0"/>
   </hex>
   <hex row="6" col="20">
+    <unit id="118" owner="0" flag="8" face="0"/>
     <unit id="159" owner="0" flag="8" face="0"/>
   </hex>
   <hex row="6" col="21" terrain="3"/>

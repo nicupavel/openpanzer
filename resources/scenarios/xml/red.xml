@@ -19,6 +19,11 @@
   <hex row="1" col="12" terrain="10" road="50" name="Bode River"/>
   <hex row="1" col="13" terrain="10" name="Bode River"/>
   <hex row="1" col="17" road="33">
+    <unit id="378" owner="1" flag="23" face="0"/>
+    <unit id="378" owner="1" flag="23" face="0"/>
+    <unit id="378" owner="1" flag="23" face="0"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="383"/>
+    <unit id="349" owner="1" flag="23" face="0"/>
     <unit id="333" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="1" col="25" terrain="1" name="Barby" flag="9" owner="1"/>
@@ -74,9 +79,11 @@
     <unit id="499" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="2" col="32" road="35">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="543" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="2" col="33" road="40">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="531" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="2" col="34" flag="19" owner="0" victory="1">
@@ -115,9 +122,11 @@
     <unit id="525" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="32" road="130">
+    <unit id="525" owner="0" flag="20" face="0"/>
     <unit id="534" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="33">
+    <unit id="501" owner="0" flag="20" face="0"/>
     <unit id="543" owner="0" flag="20" face="0"/>
   </hex>
   <hex row="3" col="34" road="136">

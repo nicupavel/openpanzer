@@ -3,6 +3,9 @@
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0">
+    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
     <unit id="328" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="0" col="2" road="16"/>
@@ -32,12 +35,14 @@
   <hex row="2" col="1" terrain="3" road="18"/>
   <hex row="2" col="2" road="41">
     <unit id="387" owner="1" flag="23" face="0"/>
+    <unit id="387" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="2" col="3" road="168"/>
   <hex row="2" col="5" road="41"/>
   <hex row="2" col="6" terrain="15" name="Thames River"/>
   <hex row="2" col="7" road="32"/>
   <hex row="2" col="9" terrain="2" road="32">
+    <unit id="395" owner="1" flag="23" face="0"/>
     <unit id="100" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="2" col="10" road="17"/>
@@ -61,6 +66,7 @@
   <hex row="3" col="6" terrain="10" road="170" name="Thames River"/>
   <hex row="3" col="7" road="138"/>
   <hex row="3" col="8" terrain="2" road="34" name="AIRFIELD" flag="22" owner="1">
+    <unit id="387" owner="1" flag="23" face="0"/>
     <unit id="321" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="3" col="9" road="40"/>
@@ -219,6 +225,7 @@
   </hex>
   <hex row="11" col="16" road="34"/>
   <hex row="11" col="17" terrain="2" road="32">
+    <unit id="385" owner="1" flag="23" face="0"/>
     <unit id="100" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="11" col="18" road="130"/>
@@ -246,6 +253,7 @@
   <hex row="12" col="14" terrain="10" road="43" name="Thames River"/>
   <hex row="12" col="15" road="136"/>
   <hex row="12" col="16" terrain="2" road="2" name="AIRFIELD" flag="22" owner="1">
+    <unit id="387" owner="1" flag="23" face="0"/>
     <unit id="321" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="12" col="17" road="40"/>
@@ -294,6 +302,7 @@
   </hex>
   <hex row="14" col="20" terrain="15" name="Thames River"/>
   <hex row="14" col="22" terrain="1" road="17" name="Walton upon Thames" flag="22" owner="1">
+    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
     <unit id="385" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="14" col="23" terrain="10" name="Island Barn Reservoir"/>
@@ -430,9 +439,11 @@
     <unit id="115" owner="0" flag="8" face="9" transport="157"/>
   </hex>
   <hex row="20" col="23" road="137">
+    <unit id="143" owner="0" flag="8" face="10"/>
     <unit id="159" owner="0" flag="8" face="10"/>
   </hex>
   <hex row="20" col="24" road="17">
+    <unit id="110" owner="0" flag="8" face="10" transport="157"/>
     <unit id="159" owner="0" flag="8" face="10"/>
   </hex>
   <hex row="20" col="25" road="34">
@@ -455,9 +466,11 @@
     <unit id="148" owner="0" flag="8" face="9"/>
   </hex>
   <hex row="21" col="21" terrain="2" road="2" flag="7" owner="0">
+    <unit id="148" owner="0" flag="8" face="9"/>
     <unit id="159" owner="0" flag="8" face="8"/>
   </hex>
   <hex row="21" col="22" terrain="2" road="33">
+    <unit id="93" owner="0" flag="8" face="9" transport="158"/>
     <unit id="169" owner="0" flag="8" face="8"/>
   </hex>
   <hex row="21" col="23">

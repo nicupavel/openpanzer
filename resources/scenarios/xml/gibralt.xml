@@ -52,6 +52,7 @@
   <hex row="2" col="20" terrain="10" name="Dulce River"/>
   <hex row="2" col="21" terrain="1" name="Algora" flag="7" owner="0" victory="1"/>
   <hex row="2" col="22" terrain="2" flag="7" owner="0">
+    <unit id="115" owner="0" flag="8" face="0" transport="157"/>
     <unit id="159" owner="0" flag="8" face="13"/>
   </hex>
   <hex row="2" col="23" road="34">

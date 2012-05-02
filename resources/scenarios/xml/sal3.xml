@@ -26,6 +26,12 @@
   <hex row="0" col="23" terrain="16"/>
   <hex row="0" col="24" road="16"/>
   <hex row="0" col="29" road="16">
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="114" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="114" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="118" owner="1" flag="8" face="0"/>
     <unit id="91" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="0" col="31" terrain="16"/>
@@ -54,6 +60,10 @@
   <hex row="1" col="16" terrain="9"/>
   <hex row="1" col="17" terrain="9"/>
   <hex row="1" col="18" road="17">
+    <unit id="153" owner="1" flag="8" face="0"/>
+    <unit id="92" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="118" owner="1" flag="8" face="0"/>
+    <unit id="111" owner="1" flag="8" face="0" transport="157"/>
     <unit id="98" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="1" col="19" terrain="16"/>
@@ -1025,6 +1035,16 @@
   <hex row="24" col="20" terrain="9"/>
   <hex row="24" col="21" terrain="9"/>
   <hex row="24" col="22" name="Beachhead Uncle Green" flag="22" owner="0" victory="1">
+    <unit id="346" owner="0" flag="23" face="0"/>
+    <unit id="346" owner="0" flag="23" face="0" transport="382"/>
+    <unit id="375" owner="0" flag="23" face="0"/>
+    <unit id="375" owner="0" flag="23" face="0"/>
+    <unit id="375" owner="0" flag="23" face="0"/>
+    <unit id="346" owner="0" flag="23" face="0" transport="383"/>
+    <unit id="332" owner="0" flag="23" face="0"/>
+    <unit id="346" owner="0" flag="23" face="0"/>
+    <unit id="346" owner="0" flag="23" face="0"/>
+    <unit id="328" owner="0" flag="23" face="0" transport="382"/>
     <unit id="375" owner="0" flag="23" face="0"/>
   </hex>
   <hex row="24" col="24" road="17">
@@ -1161,6 +1181,8 @@
   <hex row="27" col="19" terrain="9"/>
   <hex row="27" col="20" terrain="9"/>
   <hex row="27" col="21" name="Beachhead Roger Amber" flag="22" owner="0" victory="1">
+    <unit id="346" owner="0" flag="23" face="0"/>
+    <unit id="346" owner="0" flag="23" face="0"/>
     <unit id="375" owner="0" flag="23" face="0"/>
   </hex>
   <hex row="27" col="24" terrain="13"/>
@@ -1206,6 +1228,8 @@
   <hex row="28" col="19" terrain="9"/>
   <hex row="28" col="20" terrain="9"/>
   <hex row="28" col="21" name="Beachhead Roger Green" flag="22" owner="0" victory="1">
+    <unit id="346" owner="0" flag="23" face="0"/>
+    <unit id="328" owner="0" flag="23" face="0" transport="382"/>
     <unit id="416" owner="0" flag="10" face="0"/>
   </hex>
   <hex row="28" col="22">
@@ -1538,6 +1562,14 @@
     <unit id="410" owner="0" flag="10" face="0" transport="449"/>
   </hex>
   <hex row="36" col="16" name="Beachhead Red" flag="9" owner="0" victory="1">
+    <unit id="427" owner="0" flag="10" face="0"/>
+    <unit id="427" owner="0" flag="10" face="0" transport="449"/>
+    <unit id="427" owner="0" flag="10" face="0" transport="449"/>
+    <unit id="422" owner="0" flag="10" face="0" transport="449"/>
+    <unit id="410" owner="0" flag="10" face="0" transport="449"/>
+    <unit id="425" owner="0" flag="10" face="0"/>
+    <unit id="412" owner="0" flag="10" face="0" transport="449"/>
+    <unit id="422" owner="0" flag="10" face="0" transport="449"/>
     <unit id="443" owner="0" flag="10" face="0"/>
   </hex>
   <hex row="36" col="18" road="18"/>
@@ -1585,6 +1617,9 @@
   <hex row="37" col="14" terrain="9"/>
   <hex row="37" col="15" terrain="10" name="Solofrone River"/>
   <hex row="37" col="16" name="Beachhead Yellow/Green" flag="9" owner="0" victory="1">
+    <unit id="427" owner="0" flag="10" face="0"/>
+    <unit id="422" owner="0" flag="10" face="0"/>
+    <unit id="427" owner="0" flag="10" face="0" transport="449"/>
     <unit id="443" owner="0" flag="10" face="0"/>
   </hex>
   <hex row="37" col="17" terrain="1" road="26" name="Paestum" flag="7" owner="1">
@@ -1606,6 +1641,21 @@
   <hex row="37" col="29" terrain="16"/>
   <hex row="37" col="30" terrain="16"/>
   <hex row="37" col="31" terrain="6" road="17" flag="7" owner="1">
+    <unit id="115" owner="1" flag="8" face="0" transport="156"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="118" owner="1" flag="8" face="0"/>
+    <unit id="111" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="151" owner="1" flag="8" face="0"/>
+    <unit id="92" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="91" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="118" owner="1" flag="8" face="0"/>
+    <unit id="111" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="91" owner="1" flag="8" face="0"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="93" owner="1" flag="8" face="0" transport="157"/>
     <unit id="91" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="37" col="32" terrain="6"/>

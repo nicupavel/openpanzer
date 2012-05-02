@@ -389,6 +389,7 @@
   <hex row="13" col="31" terrain="10" name="Pola River"/>
   <hex row="13" col="32" terrain="10" road="154" name="Pola River"/>
   <hex row="13" col="33" terrain="2" road="138" flag="19" owner="1">
+    <unit id="532" owner="1" flag="20" face="12"/>
     <unit id="474" owner="1" flag="20" face="12"/>
   </hex>
   <hex row="13" col="34" terrain="2" road="176">
@@ -407,9 +408,11 @@
   <hex row="14" col="12" terrain="10" road="130" name="Perekhoda River"/>
   <hex row="14" col="13" terrain="3"/>
   <hex row="14" col="14" terrain="3" road="130">
+    <unit id="92" owner="0" flag="8" face="3" transport="158"/>
     <unit id="174" owner="0" flag="8" face="4"/>
   </hex>
   <hex row="14" col="16">
+    <unit id="115" owner="0" flag="8" face="3"/>
     <unit id="164" owner="0" flag="8" face="4"/>
   </hex>
   <hex row="14" col="17" terrain="10" name="Kholyn'ya River"/>
@@ -466,6 +469,7 @@
   <hex row="16" col="11" terrain="10" name="Perekhoda River"/>
   <hex row="16" col="13" terrain="3"/>
   <hex row="16" col="14" terrain="3">
+    <unit id="115" owner="0" flag="8" face="3"/>
     <unit id="164" owner="0" flag="8" face="4"/>
   </hex>
   <hex row="16" col="15" terrain="10" name="Kholyn'ya River"/>

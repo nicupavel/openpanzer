@@ -9,6 +9,9 @@
   <hex row="0" col="20" terrain="15" name="LAKE"/>
   <hex row="0" col="27" terrain="15" name="LAKE"/>
   <hex row="1" col="2" road="9">
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
+    <unit id="115" owner="1" flag="8" face="0" transport="157"/>
     <unit id="92" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="1" col="3" road="136"/>
@@ -181,9 +184,11 @@
     <unit id="97" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="8" col="20">
+    <unit id="82" owner="1" flag="8" face="0"/>
     <unit id="119" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="8" col="21" terrain="2" flag="5" owner="1">
+    <unit id="1" owner="1" flag="6" face="2" transport="20"/>
     <unit id="161" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="8" col="22" terrain="2"/>

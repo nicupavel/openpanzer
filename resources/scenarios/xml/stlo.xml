@@ -236,9 +236,11 @@
   <hex row="5" col="21" terrain="15" name="Taute River"/>
   <hex row="5" col="22" terrain="15" name="Taute River"/>
   <hex row="5" col="23" terrain="2" road="18" flag="9" owner="0">
+    <unit id="443" owner="0" flag="10" face="0"/>
     <unit id="461" owner="0" flag="10" face="0"/>
   </hex>
   <hex row="5" col="24" terrain="2" road="32">
+    <unit id="416" owner="0" flag="10" face="0"/>
     <unit id="471" owner="0" flag="10" face="0"/>
   </hex>
   <hex row="5" col="25">

@@ -386,6 +386,9 @@
   <hex row="8" col="43" terrain="3"/>
   <hex row="9" col="1" road="18"/>
   <hex row="9" col="2" terrain="1" road="168" name="Rehrbaon" flag="9" owner="1">
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
     <unit id="410" owner="1" flag="10" face="0" transport="449"/>
   </hex>
   <hex row="9" col="3" road="138"/>
@@ -725,6 +728,12 @@
   </hex>
   <hex row="18" col="0" road="2"/>
   <hex row="18" col="2" terrain="1" road="130" name="Fronmuh" flag="9" owner="1">
+    <unit id="444" owner="1" flag="10" face="0"/>
+    <unit id="444" owner="1" flag="10" face="0"/>
+    <unit id="444" owner="1" flag="10" face="0"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="450"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="450"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="450"/>
     <unit id="410" owner="1" flag="10" face="0" transport="450"/>
   </hex>
   <hex row="18" col="3" terrain="3"/>
@@ -1031,6 +1040,10 @@
   <hex row="27" col="5" road="19"/>
   <hex row="27" col="6" terrain="10" road="169"/>
   <hex row="27" col="7" terrain="1" road="154" name="Saverne" flag="9" owner="1" victory="0">
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
+    <unit id="427" owner="1" flag="10" face="0" transport="449"/>
+    <unit id="410" owner="1" flag="10" face="0" transport="449"/>
     <unit id="406" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="27" col="8" road="43"/>

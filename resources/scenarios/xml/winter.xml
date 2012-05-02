@@ -238,6 +238,7 @@
   <hex row="16" col="28" road="17"/>
   <hex row="17" col="1" terrain="2" flag="7" owner="0"/>
   <hex row="17" col="2" terrain="2">
+    <unit id="115" owner="0" flag="8" face="4"/>
     <unit id="159" owner="0" flag="8" face="4"/>
   </hex>
   <hex row="17" col="3" terrain="10"/>

@@ -58,6 +58,7 @@
   <hex row="1" col="19" terrain="16"/>
   <hex row="1" col="20" terrain="16"/>
   <hex row="1" col="21" terrain="16">
+    <unit id="119" owner="1" flag="8" face="0"/>
     <unit id="169" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="1" col="22" terrain="16">
@@ -133,6 +134,7 @@
     <unit id="113" owner="1" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="2" col="22" terrain="16">
+    <unit id="113" owner="1" flag="8" face="0" transport="157"/>
     <unit id="161" owner="1" flag="8" face="0"/>
   </hex>
   <hex row="2" col="23" terrain="16">

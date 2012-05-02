@@ -35,6 +35,7 @@
     <unit id="346" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="2" col="9" terrain="1" road="130" name="Lillehammer" flag="14" owner="1" victory="0">
+    <unit id="346" owner="1" flag="23" face="0"/>
     <unit id="387" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="2" col="10" terrain="1" road="40" name="Lillehammer"/>

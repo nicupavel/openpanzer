@@ -22,6 +22,7 @@
     <unit id="400" owner="1" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="1" col="2" terrain="2" road="48">
+    <unit id="458" owner="1" flag="10" face="4"/>
     <unit id="502" owner="1" flag="20" face="4"/>
   </hex>
   <hex row="1" col="8" road="9"/>
@@ -47,6 +48,8 @@
   <hex row="1" col="35" terrain="9"/>
   <hex row="1" col="36" terrain="9"/>
   <hex row="2" col="2" terrain="2" road="129">
+    <unit id="463" owner="1" flag="10" face="0"/>
+    <unit id="461" owner="1" flag="10" face="0"/>
     <unit id="403" owner="1" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="2" col="10" terrain="1" road="136" name="Rincon" flag="9" owner="1" victory="0">
@@ -303,9 +306,11 @@
     <unit id="108" owner="0" flag="8" face="11" transport="156"/>
   </hex>
   <hex row="11" col="25" terrain="9">
+    <unit id="114" owner="0" flag="8" face="11"/>
     <unit id="83" owner="0" flag="8" face="11"/>
   </hex>
   <hex row="11" col="26" terrain="9">
+    <unit id="108" owner="0" flag="8" face="11" transport="156"/>
     <unit id="231" owner="0" flag="13" face="11"/>
   </hex>
   <hex row="11" col="27" terrain="9"/>
@@ -453,6 +458,7 @@
     <unit id="427" owner="1" flag="10" face="2" transport="450"/>
   </hex>
   <hex row="15" col="14" terrain="2" road="34" flag="9" owner="1" victory="0">
+    <unit id="461" owner="1" flag="10" face="0"/>
     <unit id="400" owner="1" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="15" col="15" road="40"/>
@@ -793,6 +799,7 @@
     <unit id="400" owner="1" flag="10" face="4" transport="449"/>
   </hex>
   <hex row="25" col="2" terrain="2" road="48">
+    <unit id="458" owner="1" flag="10" face="4"/>
     <unit id="339" owner="1" flag="23" face="4"/>
   </hex>
   <hex row="25" col="4" terrain="3"/>

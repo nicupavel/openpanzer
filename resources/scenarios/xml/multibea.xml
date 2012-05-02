@@ -422,6 +422,7 @@
   <hex row="12" col="29" road="145"/>
   <hex row="12" col="30" terrain="15" name="Oder River"/>
   <hex row="12" col="35" terrain="2" road="10" flag="19" owner="3">
+    <unit id="531" owner="3" flag="20" face="12"/>
     <unit id="503" owner="3" face="12"/>
   </hex>
   <hex row="12" col="36" terrain="2" road="48" owner="3">

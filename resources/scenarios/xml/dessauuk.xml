@@ -169,6 +169,7 @@
   <hex row="7" col="23" road="40"/>
   <hex row="7" col="29" road="25"/>
   <hex row="7" col="31" terrain="2" road="48">
+    <unit id="167" owner="1" flag="8" face="12"/>
     <unit id="108" owner="1" flag="8" face="11" transport="156"/>
   </hex>
   <hex row="7" col="32" terrain="3"/>
@@ -195,9 +196,11 @@
   <hex row="8" col="25" road="136"/>
   <hex row="8" col="29" road="17"/>
   <hex row="8" col="30" terrain="2" road="138" flag="7" owner="1" victory="1">
+    <unit id="69" owner="1" flag="8" face="13" transport="157"/>
     <unit id="163" owner="1" flag="8" face="12"/>
   </hex>
   <hex row="8" col="31" terrain="2" road="129">
+    <unit id="166" owner="1" flag="8" face="12"/>
     <unit id="154" owner="1" flag="8" face="12"/>
   </hex>
   <hex row="8" col="33" terrain="3"/>

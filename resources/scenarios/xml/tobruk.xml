@@ -3,6 +3,9 @@
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0" terrain="9">
+    <unit id="143" owner="0" flag="8" face="0"/>
+    <unit id="115" owner="0" flag="8" face="0" transport="157"/>
+    <unit id="110" owner="0" flag="8" face="0" transport="157"/>
     <unit id="92" owner="0" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="0" col="1" terrain="9"/>
@@ -507,6 +510,7 @@
   </hex>
   <hex row="14" col="19" terrain="7" road="137"/>
   <hex row="14" col="20" terrain="2" road="130" flag="22" owner="1">
+    <unit id="385" owner="1" flag="23" face="12"/>
     <unit id="328" owner="1" flag="23" face="2" transport="382"/>
   </hex>
   <hex row="14" col="21" terrain="16"/>
@@ -629,6 +633,7 @@
     <unit id="215" owner="0" flag="13" face="11"/>
   </hex>
   <hex row="17" col="29" terrain="7" road="40">
+    <unit id="343" owner="1" flag="23" face="0" transport="382"/>
     <unit id="328" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="17" col="30" terrain="7"/>
@@ -783,6 +788,7 @@
   <hex row="22" col="24" terrain="7"/>
   <hex row="22" col="25" terrain="7"/>
   <hex row="22" col="26" terrain="2" road="10" flag="22" owner="1">
+    <unit id="389" owner="1" flag="23" face="0"/>
     <unit id="369" owner="1" flag="23" face="10"/>
   </hex>
   <hex row="22" col="27" terrain="2" road="137">

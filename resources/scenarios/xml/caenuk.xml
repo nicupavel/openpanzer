@@ -327,6 +327,7 @@
     <unit id="396" owner="0" flag="23" face="2"/>
   </hex>
   <hex row="8" col="25" terrain="2" road="32">
+    <unit id="328" owner="0" flag="23" face="2" transport="382"/>
     <unit id="395" owner="0" flag="23" face="2"/>
   </hex>
   <hex row="8" col="26" road="145"/>
@@ -365,6 +366,7 @@
   <hex row="9" col="21" terrain="13"/>
   <hex row="9" col="22" road="17"/>
   <hex row="9" col="24" terrain="2" road="2" flag="22" owner="0">
+    <unit id="367" owner="0" flag="23" face="2"/>
     <unit id="390" owner="0" flag="23" face="2"/>
   </hex>
   <hex row="9" col="25" road="18">

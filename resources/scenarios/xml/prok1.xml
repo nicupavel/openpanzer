@@ -252,6 +252,7 @@
   <hex row="15" col="30" terrain="10" name="Severskii Donets River"/>
   <hex row="15" col="31" terrain="10" name="Severskii Donets River"/>
   <hex row="15" col="34" terrain="2" road="2" flag="19" owner="1">
+    <unit id="501" owner="1" flag="20" face="0"/>
     <unit id="532" owner="1" flag="20" face="0"/>
   </hex>
   <hex row="15" col="37" road="34"/>

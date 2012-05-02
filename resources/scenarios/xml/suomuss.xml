@@ -524,6 +524,7 @@
   <hex row="24" col="23" road="40"/>
   <hex row="24" col="26" terrain="3"/>
   <hex row="24" col="27" terrain="2" flag="19" owner="1">
+    <unit id="538" owner="1" flag="20" face="12"/>
     <unit id="474" owner="1" flag="20" face="12"/>
   </hex>
   <hex row="24" col="28" terrain="2"/>
@@ -577,6 +578,7 @@
   <hex row="26" col="14" terrain="3"/>
   <hex row="26" col="15" terrain="3"/>
   <hex row="26" col="18" road="136">
+    <unit id="484" owner="1" flag="20" face="14" transport="528"/>
     <unit id="538" owner="1" flag="20" face="13"/>
   </hex>
   <hex row="26" col="19" road="138">

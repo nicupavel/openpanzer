@@ -4,6 +4,23 @@
   <player id="1" country="5" side="0"/>
   <player id="2" country="19" side="1"/>
   <hex row="0" col="0">
+    <unit id="153" owner="0" flag="8" face="0"/>
+    <unit id="108" owner="0" flag="8" face="0" transport="156"/>
+    <unit id="123" owner="0" flag="8" face="0"/>
+    <unit id="105" owner="0" flag="8" face="0"/>
+    <unit id="168" owner="0" flag="8" face="0"/>
+    <unit id="172" owner="0" flag="8" face="0"/>
+    <unit id="13" owner="1" flag="6" face="0" transport="19"/>
+    <unit id="12" owner="1" flag="6" face="0" transport="19"/>
+    <unit id="12" owner="1" flag="6" face="0" transport="19"/>
+    <unit id="7" owner="1" flag="6" face="0" transport="19"/>
+    <unit id="15" owner="1" flag="6" face="0"/>
+    <unit id="12" owner="1" flag="6" face="0" transport="19"/>
+    <unit id="525" owner="2" flag="20" face="0"/>
+    <unit id="525" owner="2" flag="20" face="0"/>
+    <unit id="501" owner="2" flag="20" face="0" transport="528"/>
+    <unit id="490" owner="2" flag="20" face="0"/>
+    <unit id="531" owner="2" flag="20" face="0"/>
     <unit id="543" owner="2" flag="20" face="0"/>
   </hex>
   <hex row="0" col="2" road="16"/>

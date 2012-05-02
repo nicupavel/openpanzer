@@ -38,6 +38,8 @@
   <hex row="0" col="39" terrain="15" name="Yser River"/>
   <hex row="1" col="0" terrain="9"/>
   <hex row="1" col="1" terrain="9">
+    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
     <unit id="328" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="1" col="2" terrain="9"/>
@@ -179,6 +181,7 @@
   <hex row="4" col="22" terrain="16" name="POLDER"/>
   <hex row="4" col="23" terrain="16" name="POLDER"/>
   <hex row="4" col="24" terrain="2" road="3" flag="22" owner="1">
+    <unit id="387" owner="1" flag="23" face="0"/>
     <unit id="321" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="4" col="25" terrain="16" name="POLDER"/>

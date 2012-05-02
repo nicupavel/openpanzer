@@ -193,10 +193,14 @@
     <unit id="347" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="4" col="14" name="Gold Beach" flag="22" owner="1" victory="0">
+    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0"/>
     <unit id="328" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="4" col="15" road="40"/>
   <hex row="4" col="16" name="Gold Beach" flag="22" owner="1" victory="0">
+    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0"/>
     <unit id="375" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="4" col="17" terrain="9">
@@ -208,6 +212,8 @@
   </hex>
   <hex row="4" col="20" terrain="9"/>
   <hex row="4" col="21" name="Juno Beach" flag="22" owner="1" victory="0">
+    <unit id="337" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
     <unit id="328" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="4" col="22" terrain="9"/>
@@ -254,6 +260,8 @@
   </hex>
   <hex row="5" col="21" road="184"/>
   <hex row="5" col="22" name="Juno Beach" flag="22" owner="1" victory="0">
+    <unit id="337" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
     <unit id="375" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="5" col="23" road="40">
@@ -309,6 +317,8 @@
     <unit id="347" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="6" col="27" name="Sword Beach" flag="22" owner="1" victory="0">
+    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
     <unit id="328" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="6" col="28" terrain="9"/>
@@ -349,6 +359,9 @@
   <hex row="7" col="26" terrain="1" road="152" name="Lion sur Mer" flag="7" owner="0"/>
   <hex row="7" col="27" road="136"/>
   <hex row="7" col="28" name="Sword Beach" flag="22" owner="1" victory="0">
+    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
     <unit id="375" owner="1" flag="23" face="0"/>
   </hex>
   <hex row="7" col="29" terrain="9"/>

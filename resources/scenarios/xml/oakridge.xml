@@ -22,9 +22,11 @@
   <hex row="1" col="9" terrain="5"/>
   <hex row="1" col="10" terrain="5"/>
   <hex row="1" col="11" terrain="2" road="10" flag="9" owner="1">
+    <unit id="465" owner="1" flag="10" face="0"/>
     <unit id="399" owner="1" flag="10" face="0" transport="449"/>
   </hex>
   <hex row="1" col="12" terrain="2" road="48">
+    <unit id="463" owner="1" flag="10" face="0"/>
     <unit id="424" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="1" col="13" terrain="5"/>
@@ -41,6 +43,7 @@
   <hex row="2" col="7" terrain="5"/>
   <hex row="2" col="8" terrain="5"/>
   <hex row="2" col="12" terrain="2" road="129">
+    <unit id="471" owner="1" flag="10" face="0"/>
     <unit id="403" owner="1" flag="10" face="0" transport="449"/>
   </hex>
   <hex row="2" col="13" terrain="5"/>
@@ -139,9 +142,11 @@
   <hex row="7" col="25" terrain="10" name="Holston River"/>
   <hex row="7" col="26" terrain="10" name="Holston River"/>
   <hex row="7" col="29" terrain="2" road="10" flag="9" owner="1">
+    <unit id="462" owner="1" flag="10" face="0"/>
     <unit id="402" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="7" col="30" terrain="2" road="48">
+    <unit id="467" owner="1" flag="10" face="0"/>
     <unit id="424" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="8" col="0" terrain="5"/>
@@ -206,9 +211,12 @@
     <unit id="430" owner="1" flag="10" face="14"/>
   </hex>
   <hex row="10" col="13" terrain="1" name="Research Facility" flag="9" owner="1" victory="0">
+    <unit id="462" owner="1" flag="10" face="0"/>
+    <unit id="400" owner="1" flag="10" face="0" transport="449"/>
     <unit id="425" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="10" col="14" terrain="1" road="2" name="Research Facility" flag="9" owner="1" victory="0">
+    <unit id="403" owner="1" flag="10" face="0" transport="449"/>
     <unit id="425" owner="1" flag="10" face="0"/>
   </hex>
   <hex row="10" col="15" terrain="10" name="Clinch River"/>
@@ -445,6 +453,7 @@
     <unit id="134" owner="0" flag="8" face="7"/>
   </hex>
   <hex row="18" col="13">
+    <unit id="214" owner="0" flag="13" face="7" transport="224"/>
     <unit id="233" owner="0" flag="13" face="7"/>
   </hex>
   <hex row="18" col="14">
@@ -500,9 +509,11 @@
     <unit id="76" owner="0" flag="8" face="7"/>
   </hex>
   <hex row="19" col="13" terrain="2" road="2" flag="7" owner="0">
+    <unit id="205" owner="0" flag="13" face="7" transport="224"/>
     <unit id="172" owner="0" flag="8" face="7"/>
   </hex>
   <hex row="19" col="14" terrain="2" road="32">
+    <unit id="223" owner="0" flag="13" face="7"/>
     <unit id="168" owner="0" flag="8" face="7"/>
   </hex>
   <hex row="19" col="15" terrain="5"/>
