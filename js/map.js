@@ -227,7 +227,7 @@ function Hex()
 		this.name = hex.name;
 	}
 	
-	this.setUnit = function(unit) { this.unit = unit; }
+	this.setUnit = function(unit) { if (this.unit != null) console.log("Overwriting unit"); this.unit = unit; }
 	this.delUnit = function() {this.unit = null };
 	this.log = function() { console.log(this); }
 };

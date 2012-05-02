@@ -296,18 +296,21 @@ function updateUnitInfoWindow(u)
 	if (GameRules.canMount(u))
 	{
 		$('imountbut').className = "enabled";
+		$('imountbut').title = "Mount this unit into a transport";
 		$('imountbut').onclick = function() {unitInfoButton('mount', u);}
 	}
 	
 	if (GameRules.canResupply(u))
 	{
 		$('iresupbut').className = "enabled";
+		$('iresupbut').title = "Resupply Ammo and Fuel for this unit";
 		$('iresupbut').onclick = function() {unitInfoButton('resupply', u);}
 	}
 
 	if (GameRules.canReinforce(u)) 
 	{
 		$('ireinfbut').className = "enabled";
+		$('ireinfbut').title = "Reinforce unit strength";
 		$('ireinfbut').onclick = function() {unitInfoButton('reinforce', u);}
 	}
 	
