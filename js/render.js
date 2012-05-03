@@ -319,6 +319,13 @@ function Render(mapObj)
 
 		for (i in imgList)
 		{
+			if (imgUnits[imgList[i]] != undefined )
+			{
+				//Already loaded
+				loaded++;
+				continue;
+			}
+			
 			imgUnits[imgList[i]] = new Image();
 			imgUnits[imgList[i]].onload = function() 
 			{
