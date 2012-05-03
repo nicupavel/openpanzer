@@ -245,7 +245,7 @@ function mainMenuButton(id)
 
 function updateUnitInfoWindow(u)
 {
-	var eqUnit = false;
+	var isEqUnit = false;
 	var uinfo, ammo, fuel;
 	$('unit-info').style.visibility  = "visible";
 	
@@ -255,7 +255,7 @@ function updateUnitInfoWindow(u)
 		uinfo = u;
 		u.flag = u.country;
 		u.strength = 10;
-		eqUnit = true;
+		isEqUnit = true;
 		ammo = u.ammo;
 		fuel = u.fuel;
 	}
@@ -289,7 +289,7 @@ function updateUnitInfoWindow(u)
 	$('iresupbut').className = "";
 	$('ireinfbut').className = "";
 	
-	if (eqUnit) return;
+	if (isEqUnit) return;
 	if (u.player.side != map.currentSide) return;
 	
 	if (GameRules.canMount(u))
@@ -384,8 +384,22 @@ function buildEquipmentWindow()
 		div.onmouseout = function() { hoverout(this.firstChild); }
 	}
 	
+	//Bottom buttons
 	$('eqNewBut').title = "Buy unit as a new unit";
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
+	$('eqUpgradeBut').onclick = function()
+		{
+			//TODO Test change it
+			var id = $('eqUserSel').userunit;
+			var eqid = $('eqUserSel').equnit;
+			if (id == undefined || eqid == undefined)
+				return;
+			console.log("Upgrading unit: " + id + " to equipment id:" + eqid);
+			map.upgradeUnit(id, eqid);
+			//Need to cache new image
+			r.cacheImages(function() { r.render(); });
+		}
+		
 	$('eqOkBut').title = "Close";
 	$('eqOkBut').onclick = function() 
 		{ 
@@ -455,14 +469,14 @@ function updateEquipmentWindow(eqclass)
 			if (u.id == eqUnitSelected)
 				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
 				
-			div.unitid = u.id;
+			div.equnitid = u.id;
 			img.src = u.icon;
 			txt.innerHTML = u.name + " - " + u.cost*12 + " ";
 			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 			div.onclick = function() 
 				{ 
-					$('eqUserSel').equnit = this.unitid; //save the selected unit in the equipment list
-					updateUnitInfoWindow(equipment[this.unitid]); 
+					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
+					updateUnitInfoWindow(equipment[this.equnitid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 				};
 			

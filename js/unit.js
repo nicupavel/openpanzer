@@ -73,7 +73,7 @@ function Unit(equipmentID)
 		}
 		if (u.transport !== null)
 		{
-			this.transport = new Transport(u.transport.id);
+			this.transport = new Transport(u.transport.eqid);
 			this.transport.copy(u.transport);
 		}
 	}

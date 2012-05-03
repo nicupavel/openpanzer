@@ -355,6 +355,15 @@ function Map()
 		//TODO select new unit for new move range (needs row/col)
 	}
 	
+	this.upgradeUnit = function(id, eqid)
+	{
+		if ((unit = findUnitById(id)) == null)
+			return;
+			
+		unit.eqid = eqid;
+		unitImagesList[unit.eqid] = unit.getIcon();
+	}
+	
 	// selects a new unit as the current unit
 	this.selectUnit = function(row, col)
 	{
@@ -459,6 +468,17 @@ function Map()
 	}
 	
 	//Private
+
+	//TODO UnitManager object
+	function findUnitById(id)
+	{
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i] !== null && unitList[i].id == id) 
+				return unitList[i];
+		}
+		return null;
+	}
 	//Checks for destroyed units and remove them from list
 	function updateUnitList()
 	{
