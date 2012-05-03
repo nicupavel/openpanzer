@@ -113,10 +113,7 @@ function MapLoader()
 					{
 						u = loadUnit(hexNodes[i].childNodes[j]);
 						if (u !== null)
-						{
-							map.addUnit(u);
-							tmphex.setUnit(u); //tmphex.unit.log();
-						}
+							tmphex.setUnit(u);
 					}
 				}
 				map.setHex(row, col, tmphex);

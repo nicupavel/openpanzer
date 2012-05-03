@@ -200,7 +200,10 @@ function Map()
 	{
 		this.map[row][col].copy(hex); //copy values
 		//Increment victorySides for each side
-		if (hex.victorySide !== -1) { this.sidesVictoryHexes[hex.victorySide]++; }
+		if (hex.victorySide != -1) 
+			this.sidesVictoryHexes[hex.victorySide]++; 
+		if (hex.unit !== null) 
+			this.addUnit(hex.unit);
 	}
 
 	//Simple increment/decrement
@@ -398,7 +401,6 @@ function Map()
 					u = new Unit(h.unit.id);
 					u.copy(h.unit);
 					hex.setUnit(u);
-					this.addUnit(u); //TODO this will go into Map::setHex()
 				}
 				this.setHex(r, c, hex);
 			}
