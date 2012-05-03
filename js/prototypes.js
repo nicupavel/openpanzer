@@ -178,3 +178,5 @@ function Supply(a, f)
 	this.ammo = a;
 	this.fuel = f;
 }
+
+var VERSION = "1.5";

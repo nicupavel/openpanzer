@@ -61,7 +61,7 @@ function handleMouseClick(e)
 			if (!atkunit.hasFired)
 			{
 				r.drawAnimation(row, col);		
-				map.attackUnit(atkunit, map.currentHex.row, map.currentHex.col, hex.unit, row, col);
+				map.attackUnit(atkunit, hex.unit);
 			}
 		}	
 		else //Select the new unit
@@ -84,7 +84,7 @@ function handleMouseClick(e)
 			//move to an allowed hex
 			if (hex.isMoveSel && !srcHex.unit.hasMoved) 
 			{
-				var win = map.moveUnit(srcHex.unit, map.currentHex.row, map.currentHex.col, row, col);
+				var win = map.moveUnit(srcHex.unit, row, col);
 				if (win >= 0) 
 				{ 
 					uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
@@ -226,7 +226,7 @@ function mainMenuButton(id)
 		}
 		case 'mainmenu':
 		{
-			uiMessage("HTML5 Panzer General version 1.4", "Copyright 2012 Nicu Pavel <br> " +
+			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
@@ -264,7 +264,6 @@ function updateUnitInfoWindow(u)
 		uinfo = u.unitData(); 
 		ammo = u.getAmmo();
 		fuel = u.getFuel();
-		console.log("Position:"+u.getPos());
 	}
 	
 	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";
@@ -300,14 +299,14 @@ function updateUnitInfoWindow(u)
 		$('imountbut').onclick = function() {unitInfoButton('mount', u);}
 	}
 	
-	if (GameRules.canResupply(u))
+	if (GameRules.canResupply(map.map, u))
 	{
 		$('iresupbut').className = "enabled";
 		$('iresupbut').title = "Resupply Ammo and Fuel for this unit";
 		$('iresupbut').onclick = function() {unitInfoButton('resupply', u);}
 	}
 
-	if (GameRules.canReinforce(u)) 
+	if (GameRules.canReinforce(map.map, u)) 
 	{
 		$('ireinfbut').className = "enabled";
 		$('ireinfbut').title = "Reinforce unit strength";

@@ -132,14 +132,14 @@ GameRules.getAttackRange = function(map, row, col, mrows, mcols)
 //TODO dig the actual formula (how many pages it is ?) 
 //prolly depends on: weather, terrain, adjacent units (arty), initiative, fuel, ammo
 //experience, ranged defense modified, entrechment, unit strength etc ...
-GameRules.calculateAttackResults = function(map, atkunit, arow, acol, defunit, trow, tcol)
+GameRules.calculateAttackResults = function(map, atkunit, defunit)
 {
+	var a = atkunit.getPos();
+	var t = defunit.getPos();
 	var cr = new combatResults();
-
-	var d = GameRules.distance(arow, acol, trow, tcol); //distance between units
-	
-	aUD = atkunit.unitData();
-	tUD = defunit.unitData();
+	var d = GameRules.distance(a.row, a.col, t.row, t.col); //distance between units
+	var aUD = atkunit.unitData();
+	var tUD = defunit.unitData();
 	var at = aUD.target;
 	var tt = tUD.target;
 	var aav = 0;
@@ -194,11 +194,12 @@ GameRules.calculateAttackResults = function(map, atkunit, arow, acol, defunit, t
 	
 	//TODO Weather
 	//TODO Terrain checks
-	if (map[trow][tcol].terrain == terrainType.City)
+	if (defunit.getHex().terrain == terrainType.City)
 		tdv += 4;
 	
-	if (map[trow][tcol].terrain == terrainType.River)
+	if (defunit.getHex().terrain == terrainType.River)
 		tdv -= 4;
+
 	//TODO Entrenchment
 	//TODO Experience
 	//TODO Range defense modifier (check if always added)
@@ -232,23 +233,86 @@ GameRules.calculateAttackResults = function(map, atkunit, arow, acol, defunit, t
 }
 
 //TODO Terrain, Unit type and adjacent units 
-GameRules.getResupplyValue = function(unit)
+GameRules.getResupplyValue = function(map, unit)
 {
-	if (!GameRules.canResupply(unit)) return 0, 0;
+	if (!GameRules.canResupply(map, unit)) return [0, 0]; //TODO redundant check made in UI
+	//get maximum resupply values
 	var ammo = unit.unitData().ammo - unit.getAmmo();
 	var fuel = unit.unitData().fuel - unit.getFuel();
+	
+	
+	//Air units get full resupply even if other units are adjacent
+	if (isAir(unit))
+		return new Supply(ammo, fuel);
+	
+	var p = unit.getPos();
+	var adj = getAdjacent(p.row, p.col);
+	var enemy = 0;
+	for (var h in adj)
+	{
+		var r = adj[h].row;
+		var c = adj[h].col;
+		//Enemy around ?
+		if (map[r][c].unit.player.side != unit.player.side)
+			enemy++;
+	}
+	
+	if (unit.getHex().terrain != terrainType.City)
+	{
+		ammo = ammo / 2;
+		fuel = fuel / 2;
+	}
+		
+	if (enemy > 0 && enemy <= 2)
+	{
+		ammo = ammo / 2;
+		fuel = fuel / 2;
+	}
+	
+	if (enemy > 2)
+	{
+		ammo = ammo / 4;
+		fuel = fuel / 4;
+	}
+	
 	if (fuel < 0) fuel = 0;
 	
-	return new Supply(ammo, fuel);
+	return new Supply(parseInt(ammo), parseInt(fuel));
 }
 
 //TODO Terrain, Unit type and adjacent units 
-GameRules.getReinforceValue = function(unit)
+GameRules.getReinforceValue = function(map, unit)
 {
-	if (!GameRules.canReinforce(unit)) return 0;
+	if (!GameRules.canReinforce(map, unit)) return 0;
 	var strength = 10 - unit.strength;
 	
-	return strength;
+	//Air units get full reinforcement even if other units are adjacent
+	if (isAir(unit))
+		return strength;
+	
+	var p = unit.getPos();
+	var adj = getAdjacent(p.row, p.col);
+	var enemy = 0;
+	for (var h in adj)
+	{
+		var r = adj[h].row;
+		var c = adj[h].col;
+		//Enemy around ?
+		if (map[r][c].unit != null && map[r][c].unit.player.side != unit.player.side)
+			enemy++;
+	}
+	
+	if (unit.getHex().terrain != terrainType.City)
+		strength = strength / 2;
+		
+	if (enemy > 0 && enemy <= 2)
+		strength = strength / 2;
+	
+	if (enemy > 2)
+		strength = strength / 4;
+	
+	
+	return parseInt(strength);
 }
 
 function canAttack(unit, targetUnit)
@@ -290,7 +354,7 @@ function canMoveInto(map, unit, cell)
 	return false;
 }
 
-GameRules.canResupply = function(unit)
+GameRules.canResupply = function(map, unit)
 {
 	if (unit.hasMoved)
 		return false;
@@ -303,11 +367,18 @@ GameRules.canResupply = function(unit)
 	if ((unit.getFuel() == unit.unitData().fuel) &&
 		(unit.getAmmo() == unit.unitData().ammo))
 		return false;
-		
-	return true;
+	
+	if (!isAir(unit))
+		return true;
+	//Air Unit
+	if (isAirfieldAroundUnit(map, unit))
+		return true;
+
+	//TODO Other rules ?
+	return false;
 }
 
-GameRules.canReinforce = function(unit)
+GameRules.canReinforce = function(map, unit)
 {
 	if (unit.hasMoved)
 		return false;
@@ -320,7 +391,41 @@ GameRules.canReinforce = function(unit)
 	if (unit.strength >= 10)
 		return false;
 		
-	return true;
+	if (!isAir(unit))
+		return true;
+	
+	//Air Unit
+	if (isAirfieldAroundUnit(map, unit))
+		return true;
+
+	//TODO Other rules ?
+	return false;
+}
+
+function isAirfieldAroundUnit(map, unit)
+{
+	var p = unit.getPos();
+	//Check if hex under unit is airfield (also for small 1 hex airfields)
+	if ((map[p.row][p.col].terrain == terrainType.Airfield) 
+		&& (map[p.row][p.col].flag == unit.player.country))
+	{
+		console.log("Airfield under");
+		return true;
+	}
+	//If not Check adjacent hexes
+	var adj = getAdjacent(p.row, p.col);
+	
+	for (var h in adj)
+	{
+		var r = adj[h].row;
+		var c = adj[h].col;
+		//Air units can resupply if adjacent to an Airfield hex with flag
+		if ((map[r][c].terrain == terrainType.Airfield) 
+			&& (map[r][c].flag == unit.player.country))
+			return true;
+	}
+	
+	return false;
 }
 
 GameRules.canMount = function(unit)

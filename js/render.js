@@ -133,7 +133,7 @@ function Render(mapObj)
 				var defunit = hex.unit;
 				var atkflag = atkunit.player.country;
 				var defflag = defunit.player.country;
-				var cr = GameRules.calculateAttackResults(map.map, atkunit, map.currentHex.row, map.currentHex.col, defunit, row, col);
+				var cr = GameRules.calculateAttackResults(map.map, atkunit, defunit);
 				lastCursorUnit = atkunit;
 				lastCursorCell = cell;
 				lastCursorImage = generateAttackCursor(cr.kills, cr.losses, atkflag, defflag);

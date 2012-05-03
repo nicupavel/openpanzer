@@ -202,7 +202,7 @@ function Map()
 		//Increment victorySides for each side
 		if (hex.victorySide !== -1) { this.sidesVictoryHexes[hex.victorySide]++; }
 	}
-	
+
 	//Simple increment/decrement
 	this.updateVictorySides = function(side, enemySide)
 	{
@@ -266,7 +266,7 @@ function Map()
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
-	this.attackUnit = function(atkunit, sorow, socol, defunit, dorow, docol)
+	this.attackUnit = function(atkunit, defunit)
 	{
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
@@ -274,7 +274,7 @@ function Map()
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		atkunit.fire(true);
 		defunit.fire(false);
-		var cr = GameRules.calculateAttackResults(this.map, atkunit, a.row, a.col, defunit, d.row, d.col);
+		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
 		//TODO do this better
 		defunit.hit(cr.kills);
 		atkunit.hit(cr.losses);
@@ -294,13 +294,13 @@ function Map()
 	
 	// moves a unit to a new hex returns side number if the move results in a win 
 	// -1 otherwise
-	this.moveUnit = function(unit, srow, scol, drow, dcol)
+	this.moveUnit = function(unit, drow, dcol)
 	{
 		var s = unit.getPos();
 		var srcHex = this.map[s.row][s.col];
 		var dstHex = this.map[drow][dcol];
 		var player = srcHex.unit.player;
-		var side = player.side;	
+		var side = player.side;
 		var win = -1;
 		if (dstHex.flag != -1) { dstHex.flag = player.country; }
 		
@@ -323,13 +323,13 @@ function Map()
 	
 	this.resupplyUnit = function(unit)
 	{
-		var s = GameRules.getResupplyValue(unit);
+		var s = GameRules.getResupplyValue(this.map, unit);
 		unit.resupply(s.ammo, s.fuel);
 	}
 	
 	this.reinforceUnit = function(unit)
 	{
-		var str = GameRules.getReinforceValue(unit);
+		var str = GameRules.getReinforceValue(this.map, unit);
 		unit.reinforce(str);
 	}
 	
