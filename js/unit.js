@@ -1,16 +1,16 @@
 
-function Transport(unitDataId)
+function Transport(equipmentID)
 {
-	this.id = unitDataId;
-	this.ammo = equipment[unitDataId].ammo;
-	this.fuel = equipment[unitDataId].fuel;
+	this.eqid = equipmentID; 
+	this.ammo = equipment[equipmentID].ammo;
+	this.fuel = equipment[equipmentID].fuel;
 	//This is only used when building image cache list in map.js
-	this.icon = equipment[unitDataId].icon;
+	this.icon = equipment[equipmentID].icon;
 	
 	this.copy = function(t)
 	{
 		if (t === null) return;
-		this.id = t.id;
+		this.eqid = t.eqid;
 		this.ammo = t.ammo;
 		this.fuel = t.fuel;
 	}
@@ -23,14 +23,15 @@ function Transport(unitDataId)
 	
 	this.unitData = function()
 	{
-		return equipment[this.id]; 
+		return equipment[this.eqid]; 
 	}
 }
 
-function Unit(unitDataId)
+function Unit(equipmentID)
 {
-	if (typeof equipment[unitDataId] === 'undefined') { unitDataId = 1; }
-	this.id = unitDataId; //TODO this id should be a unique ID for the unit on this map
+	if (typeof equipment[equipmentID] === 'undefined') { equipmentID = 1; }
+	this.id = -1;
+	this.eqid = equipmentID;
 	this.owner = -1;
 	this.hasMoved = false;
 	this.hasFired = false;
@@ -44,14 +45,15 @@ function Unit(unitDataId)
 	this.player = null;
 	this.transport = null; //transport class pointer
 	//TODO ugly way because it needs to be saved in GameState
-	this.ammo = equipment[unitDataId].ammo; //holds the ammo of the unit but it's getter is getAmmo()
-	this.fuel = equipment[unitDataId].fuel; //holds the fuel of the unit but it's getter is getFuel()
+	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
+	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
 	
 	//Clone object
 	this.copy = function(u) 
 	{
 		if (u === null) return;
 		this.id = u.id;
+		this.eqid = u.eqid;
 		this.owner = u.owner;
 		this.hasMoved = u.hasMoved;
 		this.hasFired = u.hasFired;
@@ -79,9 +81,9 @@ function Unit(unitDataId)
 	this.unitData = function()
 	{
 		if ((this.isMounted) && (this.transport !== null))
-			return equipment[this.transport.id]; 
+			return equipment[this.transport.eqid]; 
 		else
-			return equipment[this.id]; 
+			return equipment[this.eqid]; 
 	}
 	
 	this.getAmmo = function()

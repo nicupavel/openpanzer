@@ -98,7 +98,8 @@ function Map()
 	var moveSelected = []; //selected hexes for current unit move destinations
 	var attackSelected = []; //selected hexes for current unit attack destinations
 	var unitList = []; //internal list of units
-	var playerList = []; // players list
+	var playerList = []; //players list
+	var uniqueID = 0; //gets assigned as unique unit ID and incremented after each unit is added
 	
 	this.allocMap = function()
 	{
@@ -115,11 +116,15 @@ function Map()
 	
 	this.addUnit = function(unit) 
 	{
+		//Assign an unique id to the unit
+		unit.id = uniqueID;
+		uniqueID++;
+		
 		unitList.push(unit); 
-		unitImagesList[unit.id] = unit.getIcon();
+		unitImagesList[unit.eqid] = unit.getIcon();
 		
 		if (unit.transport !== null)
-			unitImagesList[unit.transport.id] = unit.transport.icon;
+			unitImagesList[unit.transport.eqid] = unit.transport.icon;
 		
 		//Sets the player struct
 		unit.player = this.getPlayer(unit.owner);
@@ -390,7 +395,7 @@ function Map()
 				hex.copy(h);
 				if (h.unit !== null) 
 				{
-					u = new Unit(h.unit.id);
+					u = new Unit(h.unit.eqid);
 					u.copy(h.unit);
 					hex.setUnit(u);
 				}
