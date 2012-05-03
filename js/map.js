@@ -325,23 +325,34 @@ function Map()
 	{
 		var s = GameRules.getResupplyValue(this.map, unit);
 		unit.resupply(s.ammo, s.fuel);
+		this.delAttackSel();
+		this.delMoveSel();
 	}
 	
 	this.reinforceUnit = function(unit)
 	{
 		var str = GameRules.getReinforceValue(this.map, unit);
 		unit.reinforce(str);
+		this.delAttackSel();
+		this.delMoveSel();
 	}
 	
 	this.mountUnit = function(unit)
 	{
-		if (GameRules.canMount(unit))
-			unit.mount();
+		unit.mount();
+		map.delCurrentHex();
+		map.delMoveSel();
+		map.delAttackSel();
+		//TODO select new unit for new move range (needs row/col)
 	}
+	
 	this.unmountUnit = function(unit)
 	{
-		if (GameRules.canUnmount(unit))
-			unit.unmount();
+		map.delCurrentHex();
+		map.delMoveSel();
+		map.delAttackSel();
+		unit.unmount();
+		//TODO select new unit for new move range (needs row/col)
 	}
 	
 	// selects a new unit as the current unit

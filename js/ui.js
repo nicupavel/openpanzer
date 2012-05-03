@@ -326,10 +326,6 @@ function unitInfoButton(action, unit)
 				map.unmountUnit(unit);
 			else
 				map.mountUnit(unit);
-			//TODO select new unit for new move range (needs row/col)
-			map.delCurrentHex();
-			map.delMoveSel();
-			map.delAttackSel();
 			break;
 		}
 		case 'resupply':
