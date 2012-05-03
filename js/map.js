@@ -113,16 +113,6 @@ function Map()
 		}
 	}
 	
-	//Checks for destroyed units and remove them from list
-	this.updateUnitList = function()
-	{
-		for (var i = 0; i < unitList.length; i++)
-		{
-			if (unitList[i] !== null && unitList[i].destroyed) 
-				unitList.splice(i, 1);
-		}
-	}
-	
 	this.addUnit = function(unit) 
 	{
 		unitList.push(unit); 
@@ -275,10 +265,12 @@ function Map()
 		var d = defunit.getPos();
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
-		atkunit.fire(true);
-		defunit.fire(false);
+		
 		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
 		//TODO do this better
+		atkunit.fire(true);
+		if (defunit.getAmmo() > 0) defunit.fire(false);
+		
 		defunit.hit(cr.kills);
 		atkunit.hit(cr.losses);
 		
@@ -291,7 +283,7 @@ function Map()
 		if (defunit.destroyed) 
 			this.map[d.row][d.col].delUnit();
 			
-		this.updateUnitList();
+		updateUnitList();
 		this.delAttackSel();
 	}
 	
@@ -343,17 +335,17 @@ function Map()
 	this.mountUnit = function(unit)
 	{
 		unit.mount();
-		map.delCurrentHex();
-		map.delMoveSel();
-		map.delAttackSel();
+		this.delCurrentHex();
+		this.delMoveSel();
+		this.delAttackSel();
 		//TODO select new unit for new move range (needs row/col)
 	}
 	
 	this.unmountUnit = function(unit)
 	{
-		map.delCurrentHex();
-		map.delMoveSel();
-		map.delAttackSel();
+		this.delCurrentHex();
+		this.delMoveSel();
+		this.delAttackSel();
 		unit.unmount();
 		//TODO select new unit for new move range (needs row/col)
 	}
@@ -462,6 +454,15 @@ function Map()
 	}
 	
 	//Private
+	//Checks for destroyed units and remove them from list
+	function updateUnitList()
+	{
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i] !== null && unitList[i].destroyed) 
+				unitList.splice(i, 1);
+		}
+	}
 	//Resets hasFired, hasMoved, hasRessuplied 
 	function resetUnits()
 	{

@@ -223,7 +223,7 @@ GameRules.calculateAttackResults = function(map, atkunit, defunit)
 	cr.kills = Math.round(atkunit.strength * (aav - tdv)/10);
 	if (cr.kills <= 0 ) cr.kills = 1;
 	//if distance between units > 1 means that target unit can't fight back //TODO check if always true
-	if (d <= 1 && defunit.getAmmo() > 1)
+	if (d <= 1 && defunit.getAmmo() > 0)
 	{
 		cr.losses = Math.round(defunit.strength * (tav - adv)/10);
 		if (cr.losses < 0) cr.losses = 0;
@@ -253,7 +253,7 @@ GameRules.getResupplyValue = function(map, unit)
 		var r = adj[h].row;
 		var c = adj[h].col;
 		//Enemy around ?
-		if (map[r][c].unit.player.side != unit.player.side)
+		if (map[r][c].unit != null && map[r][c].unit.player.side != unit.player.side)
 			enemy++;
 	}
 	
@@ -315,6 +315,7 @@ GameRules.getReinforceValue = function(map, unit)
 	return parseInt(strength);
 }
 
+//Checks if a unit can attack another unit
 function canAttack(unit, targetUnit)
 {
 	if (unit.getAmmo() <= 0)
