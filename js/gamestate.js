@@ -29,16 +29,16 @@ GameState.deleteItem = function(key)
 
 GameState.save = function(map)
 {
-	GameState.saveItem('openpanzer-map', map);
-	GameState.saveItem('openpanzer-players', map.getPlayers());
+	GameState.saveItem('openpanzer-map-'+VERSION, map);
+	GameState.saveItem('openpanzer-players-'+VERSION, map.getPlayers());
 }
 
 GameState.restore = function()
 {
 	var map = new Map();
 	
-	var m = GameState.restoreItem('openpanzer-map');
-	var p = GameState.restoreItem('openpanzer-players');
+	var m = GameState.restoreItem('openpanzer-map-'+VERSION);
+	var p = GameState.restoreItem('openpanzer-players-'+VERSION);
 	
 	if ((m === null) || (p === null)) 
 		return null;
@@ -57,6 +57,6 @@ GameState.restore = function()
 
 GameState.clear = function()
 {
-	GameState.deleteItem('openpanzer-map');
-	GameState.deleteItem('openpanzer-players');
+	GameState.deleteItem('openpanzer-map-'+VERSION);
+	GameState.deleteItem('openpanzer-players-'+VERSION);
 }
