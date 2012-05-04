@@ -253,7 +253,7 @@ GameRules.getResupplyValue = function(map, unit)
 		var r = adj[h].row;
 		var c = adj[h].col;
 		//Enemy around ?
-		if (map[r][c].unit != null && map[r][c].unit.player.side != unit.player.side)
+		if ((map[r][c].unit != null) && (map[r][c].unit.player.side != unit.player.side))
 			enemy++;
 	}
 	
@@ -298,7 +298,7 @@ GameRules.getReinforceValue = function(map, unit)
 		var r = adj[h].row;
 		var c = adj[h].col;
 		//Enemy around ?
-		if (map[r][c].unit != null && map[r][c].unit.player.side != unit.player.side)
+		if ((map[r][c].unit !== null) && (map[r][c].unit.player.side != unit.player.side))
 			enemy++;
 	}
 	
@@ -567,17 +567,18 @@ function isAdjacent(x1, y1, x2, y2)
 	
 	return false;
 }
-//returns a list of adjacent cells of a row,col
+//returns a list of adjacent cells of a row,col 
 function getAdjacent(x1, y1)
 {
 	var cellList=[];
 	
 	cellList.push(new Cell(x1 - 1 + (y1 % 2), y1 - 1));
-	cellList.push(new Cell(x1 + (y1 % 2), y1 - 1));
-	cellList.push(new Cell(x1 - 1, y1));
-	cellList.push(new Cell(x1 + 1, y1));
-	cellList.push(new Cell(x1 - 1 + (y1 % 2), y1 + 1));
-	cellList.push(new Cell(x1 + (y1 % 2), y1 + 1));	
+	cellList.push(new Cell(1 * x1 + (y1 % 2), y1 - 1));
+	cellList.push(new Cell(1 * x1 - 1, y1));
+	cellList.push(new Cell(1 * x1 + 1, y1));
+	cellList.push(new Cell(1 * x1 - 1 + (y1 % 2), 1 * y1 + 1));
+	cellList.push(new Cell(1 * x1 + (y1 % 2), 1 * y1 + 1));
+	console.log(cellList);
 	
 	return cellList;
 }
