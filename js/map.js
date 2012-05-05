@@ -51,8 +51,7 @@ function Hex(row, col)
 	this.copy = function(hex) 
 	{
 		if (hex === null) return;
-		this.setUnit(hex.unit);
-		this.setUnit(hex.airunit);
+		
 		this.terrain = hex.terrain;
 		this.road = hex.road;
 		this.owner = hex.owner;
@@ -61,11 +60,16 @@ function Hex(row, col)
 		this.isDeployment = hex.isDeployment;
 		this.victorySide = hex.victorySide;
 		this.name = hex.name;
+		
+		//Set units and their correct links to the new object
+		this.setUnit(hex.unit);
+		this.setUnit(hex.airunit);
 	}
 	this.getPos = function() { return new Cell(1 * r, 1 * c); }
 	this.setUnit = function(unit) 
 	{ 
-		if (unit === null)
+		//Will return if unit object is just a copy.
+		if (unit === null || unit.setHex == undefined)
 			return;
 		unit.setHex(this);
 		if (GameRules.isAir(unit))
@@ -75,7 +79,7 @@ function Hex(row, col)
 	}
 	this.delUnit = function(unit) 
 	{
-		if (unit === null)
+		if (unit === null || unit.setHex == undefined)
 			return;
 		unit.setHex(null);
 		//TODO revise this. check units id ?
@@ -423,10 +427,17 @@ function Map()
 				var h = m.map[r][c];
 				var hex = new Hex(r, c);
 				hex.copy(h);
+				
 				if (h.unit !== null) 
 				{
-					u = new Unit(h.unit.eqid);
-					u.copy(h.unit);
+					var u = new Unit(h.unit.eqid);
+					u.copy(h.unit);		
+					hex.setUnit(u);
+				}
+				if (h.airunit !== null) 
+				{
+					var u = new Unit(h.airunit.eqid);
+					u.copy(h.airunit);		
 					hex.setUnit(u);
 				}
 				this.setHex(r, c, hex);

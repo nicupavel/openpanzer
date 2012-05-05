@@ -61,11 +61,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
 					{
 						hex = map[c[j].row][c[j].col];
-						if (hex == undefined)
-						{
-							console.log(c[j].row);
-							console.log(c[j].col);
-						}
+						
 						if (hex.road > roadType.none) 
 							c[j].cost = moveCost[17]; //Road entry in movement table
 						else
@@ -412,10 +408,8 @@ function isAirfieldAroundUnit(map, unit)
 	//Check if hex under unit is airfield (also for small 1 hex airfields)
 	if ((map[p.row][p.col].terrain == terrainType.Airfield) 
 		&& (map[p.row][p.col].flag == unit.player.country))
-	{
-		console.log("Airfield under");
 		return true;
-	}
+	
 	//If not Check adjacent hexes
 	var adj = getAdjacent(p.row, p.col);
 	
@@ -582,8 +576,7 @@ function getAdjacent(x1, y1)
 	cellList.push(new Cell(1 * x1 + 1, y1));
 	cellList.push(new Cell(1 * x1 - 1 + (y1 % 2), 1 * y1 + 1));
 	cellList.push(new Cell(1 * x1 + (y1 % 2), 1 * y1 + 1));
-	console.log(cellList);
-	
+		
 	return cellList;
 }
 
