@@ -50,7 +50,7 @@ var terrainNames =
 var movMethod = 
 { 
 	tracked: 0, halfTracked: 1, wheeled: 2, leg: 3, towed: 4, air: 5,
-	deepnaval: 6, costal: 7, allTerainTracked: 8, amphibious: 9, naval: 10,
+	deepnaval: 6, costal: 7, allTerrainTracked: 8, amphibious: 9, naval: 10,
 	allTerrainLeg: 11
 }
 
