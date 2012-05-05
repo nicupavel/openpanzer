@@ -1,3 +1,13 @@
+/**
+ * Unit - Provides Unit and Transport objects
+ *
+ * http://www.linuxconsulting.ro
+ * http://openpanzer.net
+ *
+ * Copyright (c) 2012 Nicu Pavel
+ * Licensed under the GPL license:
+ * http://www.gnu.org/licenses/gpl.html
+ */
 
 function Transport(equipmentID)
 {

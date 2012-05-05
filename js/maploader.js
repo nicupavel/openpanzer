@@ -93,7 +93,7 @@ function MapLoader()
 			{
 				var row = hexNodes[i].getAttribute("row");
 				var col = hexNodes[i].getAttribute("col");
-				var tmphex = new Hex(row, col);
+				var tmphex = new Hex(row, col); //TODO revise this as it's not needed can use map.map[row][col] directly
 				tmphex.terrain = hexNodes[i].getAttribute("terrain");
 				if (tmphex.terrain === null) { tmphex.terrain = 0; }
 				tmphex.road = hexNodes[i].getAttribute("road");

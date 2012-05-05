@@ -1,5 +1,5 @@
 /**
- * Map - Provides map, unit and hex data structures
+ * Map - Provides map, player and hex objects
  *
  * http://www.linuxconsulting.ro
  * http://openpanzer.net
