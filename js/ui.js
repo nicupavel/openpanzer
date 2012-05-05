@@ -40,43 +40,107 @@ function UI(scenario)
 
 function handleMouseClick(e) 
 {
-	var hex;
 	var minfo = getMouseInfo(canvas, e);
 	var cell = r.screenToCell(minfo.x, minfo.y);
 	var row = cell.row;
 	var col = cell.col;
 	
-	hex = map.map[row][col];
-	unit = uiHexUnit(hex);
+	var hex = map.map[row][col];
+	if (hex == undefined)
+		console.log("Undefined hex:" + row + "," + col);
+	var clickedUnit = uiHexUnit(hex);
+	var attack = false;
+	var move = false;
 	
 	//Right click only to show unit info
 	if (minfo.rclick) 
 	{ 
-		if (unit) updateUnitInfoWindow(unit);
+		if (clickedUnit) updateUnitInfoWindow(clickedUnit);
 		return true;
 	}
-	
+
 	//Clicked hex has a unit ?
-	if (unit) 
+	if (clickedUnit) 
+	{
+		if (map.currentUnit !== null)
+		{
+			//attack an allowed hex unit
+			if (hex.isAttackSel && ! map.currentUnit.hasFired)
+			{
+				attack = true;
+			}
+			else
+			{
+				if (hex.isMoveSel && uiAirMode)
+				{
+					move = true;
+				}
+				else
+				{
+					map.selectUnit(clickedUnit, row, col);//Select the new unit
+				}
+			}
+		}	
+		else //No current unit
+		{
+			map.selectUnit(clickedUnit, row, col);//Select the new unit
+		}
+		
+		//var c  = hex.unit.player.country;
+		//$('eqSelCountry').country = c + 1;
+		//TODO make unitList show strength/movement/attack status and update it on all actions
+		//updateEquipmentWindow(hex.unit.unitData().class); 
+		
+	}	
+	else
+	{
+		//move to an allowed hex
+		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null) 
+		{
+			move = true;
+		}
+		else
+		{
+			map.delCurrentUnit();
+			console.log("No unit at:" + row + "," + col);
+		}
+	}
+	
+	if (attack)
+	{
+		r.drawAnimation(row, col);		
+		map.attackUnit(map.currentUnit, clickedUnit);
+		move = false; //Don't let 2 actions being performed on single click
+	}
+	
+	if (move)
+	{
+		var win = map.moveUnit(map.currentUnit, row, col);
+		if (win >= 0) 
+			uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
+	}
+	/*
+	//Clicked hex has a unit ?
+	if (clickedUnit) 
 	{
 		if ((map.currentUnit !== null) && (hex.isAttackSel))
 		{	//attack an allowed hex unit
 			if (!map.currentUnit.hasFired)
 			{
 				r.drawAnimation(row, col);		
-				map.attackUnit(map.currentUnit, unit);
+				map.attackUnit(map.currentUnit, clickedUnit);
 			}
 		}	
-		else //Select the new unit
+		else 
 		{
-			map.selectUnit(unit, row, col);
+			map.selectUnit(clickedUnit, row, col);//Select the new unit
 		}
-		/*
-		var c  = hex.unit.player.country;
-		$('eqSelCountry').country = c + 1;
+		
+		//var c  = hex.unit.player.country;
+		//$('eqSelCountry').country = c + 1;
 		//TODO make unitList show strength/movement/attack status and update it on all actions
-		updateEquipmentWindow(hex.unit.unitData().class); 
-		*/
+		//updateEquipmentWindow(hex.unit.unitData().class); 
+		
 	}	
 	else
 	{
@@ -88,9 +152,7 @@ function handleMouseClick(e)
 			{
 				var win = map.moveUnit(map.currentUnit, row, col);
 				if (win >= 0) 
-				{ 
 					uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
-				}
 			} 		
 		}
 		else
@@ -99,6 +161,7 @@ function handleMouseClick(e)
 			console.log("No unit at:" + cell.row + "," + cell.col);
 		}
 	}
+	*/
 	//ToDo partial screen updates
 	r.render(); 
 }
@@ -114,7 +177,7 @@ function handleMouseMove(e)
 	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
 	if (hex.unit !== null)	{  text = " Unit: " + hex.unit.unitData().name + " " + text; }
-	if (map.currentUnit != null) { r.drawCursor(cell); }
+	if (map.currentUnit != null) { r.drawCursor(cell, uiAirMode); }
 	$('locmsg').innerHTML = text;
 }
 

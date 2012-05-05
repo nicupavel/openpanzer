@@ -173,6 +173,8 @@ function Map()
 	this.delCurrentUnit = function()
 	{
 		this.currentUnit = null;
+		this.delMoveSel();
+		this.delAttackSel();
 	}
 	
 	this.setMoveSel = function(row, col)

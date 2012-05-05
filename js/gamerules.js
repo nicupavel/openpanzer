@@ -45,7 +45,19 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	console.log("move range:" + range);
 	
 	var c = getCellsInRange(row, col, range, mrows, mcols);
-	startingCell = new Cell(row, col); //current unit cell is not added in cellList returned by getCellsInRange
+	
+	//Don't calculate costs for air units
+	if (isAir(unit))
+	{
+		for (var i = 0; i < c.length; i++)
+		{
+			if (canMoveInto(map, unit, c[i]))
+				allowedCells.push(c[i]);
+		}
+		return allowedCells;
+	}
+	
+	var startingCell = new Cell(row, col); //current unit cell is not added in cellList returned by getCellsInRange
 	c.push(startingCell);
 	
 	while (r <= range)
@@ -67,8 +79,8 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 						else
 							c[j].cost = moveCost[hex.terrain];
 						
-						//enemy unit zone of control ?
-						if (hex.unit !== null && hex.unit.player.side != unit.player.side)
+						//enemy unit zone of control ? no ZOC for air units
+						if (isGround(unit) && hex.unit !== null && hex.unit.player.side != unit.player.side)
 						{
 							c[j].cost = 254;
 							c[j].cin = range;
@@ -122,7 +134,12 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 		if (canAttack(unit, map[cell.row][cell.col].unit))
 		{
 			allowedCells.push(cell);
+			continue; //don't push same cell twice below
 		}
+		
+		if (canAttack(unit, map[cell.row][cell.col].airunit))
+			allowedCells.push(cell);
+
 	}
 	return allowedCells;
 }
@@ -319,38 +336,32 @@ function canAttack(unit, targetUnit)
 {
 	if (unit.getAmmo() <= 0)
 		return false;
+	
 	if (targetUnit === null)
 		return false;
-	if (unit.owner == targetUnit.owner)
+	
+	if (!GameRules.isEnemy(unit, targetUnit))
 		return false;
-	if (unit.unitData().airatk == 0 && isAir(targetUnit)) //TODO There is a special bit for this.
+
+	if (isAir(targetUnit) && unit.unitData().airatk <= 0 ) //TODO There is a special bit for this.
 		return false;
 		
 	return true;
 }
 //Checks if a given unit can move into a hex
-//TODO Air units can move over ground units
 function canMoveInto(map, unit, cell)
 {
 	hex = map[cell.row][cell.col];
-	if (hex.unit !== null) 	return false;
-	return true;
-	
-	//TODO adjacently units zone of control ?
-	if (isGround(unit))
+
+	if (isGround(unit) || isSea(unit))
 	{
-		return true;
+		if (hex.unit === null) 	return true;	
 	}
-	
 	if (isAir(unit))
 	{
-		return true;
+		if (hex.airunit === null) return true;
 	}
 	
-	if (isSea(unit))
-	{	
-		return true;
-	}
 	return false;
 }
 
@@ -399,6 +410,16 @@ GameRules.canReinforce = function(map, unit)
 		return true;
 
 	//TODO Other rules ?
+	return false;
+}
+
+GameRules.isEnemy = function(unit, targetUnit)
+{
+	if (unit === null || targetUnit === null)
+		return false;
+	if (unit.player.side != targetUnit.player.side)
+		return true;
+	
 	return false;
 }
 
@@ -473,6 +494,7 @@ function isGround(unit)
 	{
 		return true;
 	}
+	return false;
 }
 
 GameRules.unitUsesFuel = function(unit)

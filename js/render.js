@@ -112,7 +112,7 @@ function Render(mapObj)
 	}
 		
 	//Renders attack or transport move cursor 
-	this.drawCursor = function(cell)
+	this.drawCursor = function(cell, airMode)
 	{
 		var row = cell.row;
 		var col = cell.col;
@@ -123,9 +123,8 @@ function Render(mapObj)
 		var redraw = false;
 		
 		if (lastCursorUnit !== map.currentUnit)
-		{ 
 			redraw = true; //Redraw because a new unit has been selected
-		}
+
 		//TODO Check if we should generate an TRANSPORT Cursor
 		
 		//Check if we should generate an ATTACK cursor
@@ -138,7 +137,18 @@ function Render(mapObj)
 				//TODO check unit mounted/unmounted 
 				redraw = true; //Redraw because a mouse is over a new cell
 				var atkunit = map.currentUnit;
-				var defunit = hex.unit;
+				var defunit = null;
+				
+				if (GameRules.isEnemy(atkunit, hex.airunit) && GameRules.isEnemy(atkunit, hex.unit))
+					if (airMode)
+						defunit = hex.airunit;
+					else
+						defunit = hex.unit;
+				if (GameRules.isEnemy(atkunit, hex.unit))
+					defunit = hex.unit;
+				if (GameRules.isEnemy(atkunit, hex.airunit))
+					defunit = hex.airunit;
+					
 				var atkflag = atkunit.player.country;
 				var defflag = defunit.player.country;
 				var cr = GameRules.calculateAttackResults(map.map, atkunit, defunit);
