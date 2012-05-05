@@ -14,6 +14,7 @@ function UI(scenario)
 	var map = new Map();
 	var l = new MapLoader();
 	var uiAirMode = false; //flag used to select between overlapping ground/air units
+	var countries = []; //array for countries in this scenario
 	map = GameState.restore();
 		
 	if (map === null) 
@@ -22,9 +23,6 @@ function UI(scenario)
 		map = l.buildMap();
 	}
 	map.dumpMap();
-	buildMainMenu();
-	var countries = getCountries(map);
-	buildEquipmentWindow();
 
 	var r = new Render(map);
 	r.cacheImages(function() { r.render(); });
@@ -33,6 +31,10 @@ function UI(scenario)
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	canvas.addEventListener("mousemove", handleMouseMove, false);
+	
+	countries = map.getCountries();
+	buildMainMenu();
+	buildEquipmentWindow();
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 
@@ -542,6 +544,7 @@ function newScenario(scenario)
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); });
+	countries = map.getCountries(); 
 	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 }
 
@@ -556,26 +559,13 @@ function getMouseInfo(canvas, e)
 	return new mouseInfo(mx, my, rclick);
 }
 
-function getCountries(map) //TODO move in Map object
-{
-	var c = [];
-	if (map === null)
-		return [];
-	
-	p = map.getPlayers();
-	for (var i = 0; i < p.length; i++)
-		c.push(p[i].country);
-		
-	return c;
-}
-
 } //End of UI class
 
 function gameStart()
 {
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
-	console.log("Number: " + rng + " Scenario:" + scenario);
+	//console.log("Number: " + rng + " Scenario:" + scenario);
 	
 	scenario="resources/scenarios/xml/tutorial.xml";
 	ui = new UI(scenario);

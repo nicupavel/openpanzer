@@ -152,6 +152,15 @@ function Map()
 			return playerList[0]; //TODO parse supporting countries from the scenario file
 	}
 	
+	this.getCountries = function()
+	{
+		var c = [];
+		p = this.getPlayers();
+		for (var i = 0; i < p.length; i++)
+			c.push(p[i].country);
+		return c;
+	}
+	
 	this.setCurrentUnit = function(unit)
 	{
 		this.currentUnit = unit;
