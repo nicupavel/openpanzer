@@ -166,13 +166,6 @@ function combatResults()
 	this.defExpGained = 0;
 }
 
-function currentHexInfo()
-{
-	this.hex = null;
-	this.row = 0;
-	this.col = 0;
-}
-
 function Supply(a, f)
 {
 	this.ammo = a;

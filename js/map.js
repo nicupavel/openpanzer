@@ -33,7 +33,8 @@ function Player()
 
 function Hex(row, col)
 {
-	this.unit = null; //pointer to the unit on this hex
+	this.unit = null; //pointer to the ground unit on this hex
+	this.airunit = null; //pointer to the air unit on this hex
 	this.terrain = terrainType.Clear;
 	this.road = roadType.none;
 	this.owner = -1;
@@ -42,8 +43,7 @@ function Hex(row, col)
 	this.isDeployment = false;
 	this.victorySide = -1; //hex is a victory point for side [0,1]
 	this.name = "";
-	
-	this.isCurrent = false;
+
 	this.isMoveSel = false; //current unit can move to this hex
 	this.isAttackSel = false; //current unit can attack this hex
 	
@@ -51,7 +51,8 @@ function Hex(row, col)
 	this.copy = function(hex) 
 	{
 		if (hex === null) return;
-		this.unit = hex.unit;
+		this.setUnit(hex.unit);
+		this.setUnit(hex.airunit);
 		this.terrain = hex.terrain;
 		this.road = hex.road;
 		this.owner = hex.owner;
@@ -61,18 +62,27 @@ function Hex(row, col)
 		this.victorySide = hex.victorySide;
 		this.name = hex.name;
 	}
-	this.getPos = function() { return new Cell(r, c); }
+	this.getPos = function() { return new Cell(1 * r, 1 * c); }
 	this.setUnit = function(unit) 
 	{ 
-		if (this.unit != null) 
-			console.log("Overwriting unit"); 
+		if (unit === null)
+			return;
 		unit.setHex(this);
-		this.unit = unit;
+		if (GameRules.isAir(unit))
+			this.airunit = unit;
+		else
+			this.unit = unit;
 	}
-	this.delUnit = function() 
+	this.delUnit = function(unit) 
 	{
-		this.unit.setHex(null); 
-		this.unit = null;
+		if (unit === null)
+			return;
+		unit.setHex(null);
+		//TODO revise this. check units id ?
+		if (GameRules.isAir(unit))
+			this.airunit = null;
+		else
+			this.unit = null;
 	}
 	this.log = function() { console.log(this); }
 	
@@ -90,7 +100,7 @@ function Map()
 	this.description = null; 
 	this.terrainImage = null;
 	this.turn = 0;
-	this.currentHex = new currentHexInfo(); //holds the current mouse selected hex and row, col pos //TODO find a better way
+	this.currentUnit = null;
 	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
 	this.currentSide = 0; //Which side is playing currently
 	
@@ -142,21 +152,14 @@ function Map()
 			return playerList[0]; //TODO parse supporting countries from the scenario file
 	}
 	
-	this.setCurrentHex = function(row, col)
+	this.setCurrentUnit = function(unit)
 	{
-		this.currentHex.hex = this.map[row][col];
-		this.currentHex.hex.isCurrent = true;
-		this.currentHex.row = row;
-		this.currentHex.col = col;
+		this.currentUnit = unit;
 	}
 	
-	this.delCurrentHex = function()
+	this.delCurrentUnit = function()
 	{
-		if (this.currentHex.hex !== null)
-		{
-			this.currentHex.hex.isCurrent = false;
-			this.currentHex.hex = null;
-		}
+		this.currentUnit = null;
 	}
 	
 	this.setMoveSel = function(row, col)
@@ -199,6 +202,8 @@ function Map()
 			this.sidesVictoryHexes[hex.victorySide]++; 
 		if (hex.unit !== null) 
 			this.addUnit(hex.unit);
+		if (hex.airunit !== null)
+			this.addUnit(hex.airunit);
 	}
 
 	//Simple increment/decrement
@@ -219,10 +224,12 @@ function Map()
 		return false;
 	}
 	
-	this.setMoveRange = function(row, col)
+	this.setMoveRange = function(unit)
 	{
 		this.delMoveSel();
-		var allowedCells = GameRules.getMoveRange(this.map, row, col, this.rows, this.cols);
+		
+		var p = unit.getPos();
+		var allowedCells = GameRules.getMoveRange(this.map, unit, p.row, p.col, this.rows, this.cols);
 		
 		for (var i = 0; i < allowedCells.length; i++)
 		{
@@ -231,10 +238,13 @@ function Map()
 		}
 	}
 	
-	this.setAttackRange = function(row, col)
+	this.setAttackRange = function(unit)
 	{
 		this.delAttackSel();
-		var allowedCells = GameRules.getAttackRange(this.map, row, col, this.rows, this.cols);
+		
+		var p = unit.getPos();
+		var allowedCells = GameRules.getAttackRange(this.map, unit, p.row, p.col, this.rows, this.cols);
+		
 		for (var i = 0; i < allowedCells.length; i++)
 		{
 			var cell = allowedCells[i];
@@ -247,7 +257,7 @@ function Map()
 			//TODO create a Game Class
 			this.delMoveSel();
 			this.delAttackSel();
-			this.delCurrentHex();
+			this.delCurrentUnit();
 			var p = this.getPlayers();
 			for (var i = 0; i < p.length; i++)
 			{	
@@ -283,10 +293,10 @@ function Map()
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
 		
 		if (atkunit.destroyed) 
-			this.map[a.row][a.col].delUnit();
+			this.map[a.row][a.col].delUnit(atkunit);
 			
 		if (defunit.destroyed) 
-			this.map[d.row][d.col].delUnit();
+			this.map[d.row][d.col].delUnit(defunit);
 			
 		updateUnitList();
 		this.delAttackSel();
@@ -299,7 +309,7 @@ function Map()
 		var s = unit.getPos();
 		var srcHex = this.map[s.row][s.col];
 		var dstHex = this.map[drow][dcol];
-		var player = srcHex.unit.player;
+		var player = unit.player;
 		var side = player.side;
 		var win = -1;
 		if (dstHex.flag != -1) { dstHex.flag = player.country; }
@@ -312,11 +322,11 @@ function Map()
 				win = side;
 		}
 		unit.move(GameRules.distance(s.row, s.col, drow, dcol));
-		srcHex.delUnit();
+		srcHex.delUnit(unit);
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
-		this.setAttackRange(drow, dcol) //Put new attack range
+		this.setAttackRange(unit) //Put new attack range
 		
 		return win;
 	}
@@ -340,7 +350,7 @@ function Map()
 	this.mountUnit = function(unit)
 	{
 		unit.mount();
-		this.delCurrentHex();
+		this.delCurrentUnit();
 		this.delMoveSel();
 		this.delAttackSel();
 		//TODO select new unit for new move range (needs row/col)
@@ -348,7 +358,7 @@ function Map()
 	
 	this.unmountUnit = function(unit)
 	{
-		this.delCurrentHex();
+		this.delCurrentUnit();
 		this.delMoveSel();
 		this.delAttackSel();
 		unit.unmount();
@@ -365,23 +375,26 @@ function Map()
 	}
 	
 	// selects a new unit as the current unit
-	this.selectUnit = function(row, col)
+	this.selectUnit = function(unit)
 	{
-		var hex = this.map[row][col];
-		
-		if (hex.unit === null || hex.unit.player.side != this.currentSide)
+		if (unit === null)
 			return;
-
-		this.delCurrentHex();
-		this.setCurrentHex(row, col);
+		
+		//Can't select units from oposing side
+		if (unit.player.side != this.currentSide)
+			return;
+			
+		this.delCurrentUnit();
 		this.delMoveSel();
 		this.delAttackSel();
-		
-		if (!hex.unit.hasMoved) 
-			this.setMoveRange(row, col); 
-		if (!hex.unit.hasFired) 
-			this.setAttackRange(row, col); 
+		this.setCurrentUnit(unit);
+				
+		if (!unit.hasMoved) 
+			this.setMoveRange(unit); 
+		if (!unit.hasFired) 
+			this.setAttackRange(unit); 
 	}	
+	
 	//Clone object / "copy constructor"
 	this.copy = function(m)
 	{

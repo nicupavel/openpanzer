@@ -64,7 +64,11 @@ function Render(mapObj)
 		var y0;
 		var style;
 		var hex;
+		var current = null;
 		
+		if (map.currentUnit !== null)
+			current = map.currentUnit.getPos();
+			
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		for (row = 0; row < map.rows; row++) 
 		{
@@ -93,12 +97,16 @@ function Render(mapObj)
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
 				}
-				if (hex.isMoveSel) { style = this.style.selected; }
-				if (hex.isAttackSel) { style = this.style.attack; }
-				if (hex.isCurrent) { style = this.style.current; }
+				if (hex.isMoveSel) 
+					style = this.style.selected;
+				if (hex.isAttackSel) 
+					style = this.style.attack;
+				if ((current !== null) && (row == current.row) && (col == current.col)) 
+					style = this.style.current;
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
 				if (hex.unit !== null) { drawHexUnit(x0, y0, hex.unit); }
+				if (hex.airunit !== null) { drawHexUnit(x0, y0, hex.airunit); }
 			}
 		}
 	}
@@ -114,14 +122,14 @@ function Render(mapObj)
 		
 		var redraw = false;
 		
-		if (lastCursorUnit !== map.currentHex.hex.unit)
+		if (lastCursorUnit !== map.currentUnit)
 		{ 
 			redraw = true; //Redraw because a new unit has been selected
 		}
 		//TODO Check if we should generate an TRANSPORT Cursor
 		
 		//Check if we should generate an ATTACK cursor
-		if (hex.isAttackSel && !map.currentHex.hex.unit.hasFired)
+		if (hex.isAttackSel && !map.currentUnit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
 			if ((redraw == true) || (lastCursorCell === null) || (lastCursorImage === null) ||
@@ -129,7 +137,7 @@ function Render(mapObj)
 			{ 
 				//TODO check unit mounted/unmounted 
 				redraw = true; //Redraw because a mouse is over a new cell
-				var atkunit = map.currentHex.hex.unit;
+				var atkunit = map.currentUnit;
 				var defunit = hex.unit;
 				var atkflag = atkunit.player.country;
 				var defflag = defunit.player.country;

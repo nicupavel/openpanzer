@@ -19,12 +19,12 @@ var GameRules = GameRules || {}; //Namespace emulation
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
 //TODO stopmov 254, bridges, zone of control
-GameRules.getMoveRange = function(map, row, col, mrows, mcols)
+GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 {
 	var r = 0;
+	var hex = null;
 	var allowedCells = [];
-	var unit = map[row][col].unit;
-	
+		
 	if (unit === null || unit.hasMoved) return [];
 	
 	var ud = unit.unitData();
@@ -54,7 +54,6 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 		{
 			if (c[i].range == r)
 			{
-				
 				//console.log("Checking for Row:"+ c[i].row + " Col:" + c[i].col + " range: " + c[i].range + " at range: " + r);
 				for (j  = 0; j < c.length; j++) //Look up adjacent cells for c[i]
 				{
@@ -62,6 +61,11 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
 					{
 						hex = map[c[j].row][c[j].col];
+						if (hex == undefined)
+						{
+							console.log(c[j].row);
+							console.log(c[j].col);
+						}
 						if (hex.road > roadType.none) 
 							c[j].cost = moveCost[17]; //Road entry in movement table
 						else
@@ -104,11 +108,10 @@ GameRules.getMoveRange = function(map, row, col, mrows, mcols)
 	return allowedCells;
 }
 
-GameRules.getAttackRange = function(map, row, col, mrows, mcols)
+GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 {
 	var allowedCells = [];
-	var unit = map[row][col].unit;
-	
+		
 	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
 	
 	//TODO weather ?
@@ -451,6 +454,7 @@ function isAir(unit)
 	if (ud.movmethod == movMethod.air) { return true; }
 	return false;
 }
+GameRules.isAir = function(unit) { return isAir(unit); }
 
 function isSea(unit)
 {
