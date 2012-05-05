@@ -335,6 +335,7 @@ function Map()
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
+		this.delMoveSel();
 		this.setAttackRange(unit) //Put new attack range
 		
 		return win;
@@ -359,19 +360,17 @@ function Map()
 	this.mountUnit = function(unit)
 	{
 		unit.mount();
-		this.delCurrentUnit();
 		this.delMoveSel();
 		this.delAttackSel();
-		//TODO select new unit for new move range (needs row/col)
+		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
 	this.unmountUnit = function(unit)
 	{
-		this.delCurrentUnit();
 		this.delMoveSel();
 		this.delAttackSel();
 		unit.unmount();
-		//TODO select new unit for new move range (needs row/col)
+		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
 	this.upgradeUnit = function(id, eqid)

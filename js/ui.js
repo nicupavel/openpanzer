@@ -47,7 +47,7 @@ function handleMouseClick(e)
 	var col = cell.col;
 	
 	hex = map.map[row][col];
-	unit = hexUnit(hex);
+	unit = uiHexUnit(hex);
 	
 	//Right click only to show unit info
 	if (minfo.rclick) 
@@ -92,14 +92,12 @@ function handleMouseClick(e)
 					uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
 				}
 			} 		
-			map.delCurrentUnit();
 		}
 		else
 		{
+			map.delCurrentUnit();
 			console.log("No unit at:" + cell.row + "," + cell.col);
 		}
-		map.delMoveSel();
-		map.delAttackSel();
 	}
 	//ToDo partial screen updates
 	r.render(); 
@@ -502,7 +500,7 @@ function uiMessage(title, message)
 
 //Returns air or ground unit on a hex depending on 
 //main menu Air mode button
-function hexUnit(hex)
+function uiHexUnit(hex)
 {
 	if (hex == undefined || hex == null)
 		return null;
