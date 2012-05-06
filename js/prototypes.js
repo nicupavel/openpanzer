@@ -172,4 +172,4 @@ function Supply(a, f)
 	this.fuel = f;
 }
 
-var VERSION = "1.5";
+var VERSION = "1.6";

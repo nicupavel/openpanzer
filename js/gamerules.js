@@ -57,9 +57,9 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		return allowedCells;
 	}
 	
-	var startingCell = new Cell(row, col); //current unit cell is not added in cellList returned by getCellsInRange
-	c.push(startingCell);
-	
+	//Add current unit cell as starting point for cost calculations
+	c.push(new Cell(row, col)); 
+
 	while (r <= range)
 	{
 		for (i = 0; i < c.length; i++)
@@ -128,6 +128,10 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 		
 	console.log("attack range: "+ range);
 	var cellList = getCellsInRange(row, col, range, mrows, mcols);
+	
+	//Air unit can attack the target under it
+	if (isAir(unit)) cellList.push(new Cell(row, col)); 
+	
 	for (var i = 0; i < cellList.length; i++)
 	{
 		var cell = cellList[i];
@@ -348,6 +352,8 @@ function canAttack(unit, targetUnit)
 		
 	return true;
 }
+GameRules.canAttack = function(unit, targetUnit) { return canAttack(unit, targetUnit); }
+
 //Checks if a given unit can move into a hex
 function canMoveInto(map, unit, cell)
 {
@@ -465,14 +471,22 @@ GameRules.canUnmount = function(unit)
 
 function isAir(unit)
 {
+	if (unit === null) 
+		return false;
+		
 	ud = unit.unitData();
-	if (ud.movmethod == movMethod.air) { return true; }
+	if (ud.movmethod == movMethod.air) 
+		return true; 
+		
 	return false;
 }
 GameRules.isAir = function(unit) { return isAir(unit); }
 
 function isSea(unit)
 {
+	if (unit === null)
+		return false;
+		
 	ud = unit.unitData();
 	if((ud.movmethod == movMethod.deepnaval) ||
 	   (ud.movmethod == movMethod.naval) || 
@@ -486,6 +500,9 @@ function isSea(unit)
 
 function isGround(unit)
 {
+	if (unit === null)
+		return false;
+		
 	ud = unit.unitData();
 	if ((ud.movmethod <  movMethod.air) ||
 	    (ud.movmethod == movMethod.allTerrainTracked) ||

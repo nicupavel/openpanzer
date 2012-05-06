@@ -135,20 +135,9 @@ function Render(mapObj)
 				(lastCursorCell.row != row) || (lastCursorCell.col != col))
 			{ 
 				//TODO check unit mounted/unmounted 
-				redraw = true; //Redraw because a mouse is over a new cell
+				redraw = true; //Force css cursor assignment
 				var atkunit = map.currentUnit;
-				var defunit = null;
-				
-				if (GameRules.isEnemy(atkunit, hex.airunit) && GameRules.isEnemy(atkunit, hex.unit))
-					if (airMode)
-						defunit = hex.airunit;
-					else
-						defunit = hex.unit;
-				if (GameRules.isEnemy(atkunit, hex.unit))
-					defunit = hex.unit;
-				if (GameRules.isEnemy(atkunit, hex.airunit))
-					defunit = hex.airunit;
-					
+				var defunit = hex.getAttackableUnit(atkunit, airMode);
 				var atkflag = atkunit.player.country;
 				var defflag = defunit.player.country;
 				var cr = GameRules.calculateAttackResults(map.map, atkunit, defunit);

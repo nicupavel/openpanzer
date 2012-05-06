@@ -15,6 +15,7 @@ function UI(scenario)
 	var l = new MapLoader();
 	var uiAirMode = false; //flag used to select between overlapping ground/air units
 	var countries = []; //array for countries in this scenario
+	var win = -1; //Neither side has won yet
 	map = GameState.restore();
 		
 	if (map === null) 
@@ -37,7 +38,8 @@ function UI(scenario)
 	buildEquipmentWindow();
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
-
+	//TODO select an owned unit by default so player can see which units are his easier
+	
 function handleMouseClick(e) 
 {
 	var minfo = getMouseInfo(canvas, e);
@@ -47,137 +49,89 @@ function handleMouseClick(e)
 	
 	var hex = map.map[row][col];
 	if (hex == undefined)
+	{
 		console.log("Undefined hex:" + row + "," + col);
-	var clickedUnit = uiHexUnit(hex);
-	var attack = false;
-	var move = false;
-	
-	//Right click only to show unit info
-	if (minfo.rclick) 
-	{ 
-		if (clickedUnit) updateUnitInfoWindow(clickedUnit);
 		return true;
 	}
-
+	
+	var clickedUnit = hex.getUnit(uiAirMode);
+	
+	//Right click to show unit info or clear current selection
+	if (minfo.rclick) 
+	{ 
+		if (clickedUnit) 
+			updateUnitInfoWindow(clickedUnit);
+		else 
+		{
+			map.delCurrentUnit();
+			r.render();
+		}
+		return true;
+	}
+	
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
+		if (GameRules.isAir(clickedUnit)) //If clicked unit is air select airmode automatically
+			uiAirMode = true;
+			
 		if (map.currentUnit !== null)
 		{
 			//attack an allowed hex unit
-			if (hex.isAttackSel && ! map.currentUnit.hasFired)
+			if (hex.isAttackSel && !map.currentUnit.hasFired)
 			{
-				attack = true;
+				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null)
+				{
+					r.drawAnimation(row, col);		
+					map.attackUnit(map.currentUnit, enemyUnit); //Only attack an enemy unit on that hex
+				}
 			}
 			else
 			{
-				if (hex.isMoveSel && uiAirMode)
-				{
-					move = true;
-				}
-				else
-				{
-					map.selectUnit(clickedUnit, row, col);//Select the new unit
-				}
+				if (hex.isMoveSel && uiAirMode) //Move unit over clickedUnit (isMoveSel true only for air units)
+					win = map.moveUnit(map.currentUnit, row, col);
+				else 
+					if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
+						map.selectUnit(hex.getUnit(!uiAirMode)); //try other unit on hex
 			}
 		}	
-		else //No current unit
+		else //No current unit select new one
 		{
-			map.selectUnit(clickedUnit, row, col);//Select the new unit
+			if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
+				map.selectUnit(hex.getUnit(!uiAirMode)); //try other unit on hex
 		}
 		
-		//var c  = hex.unit.player.country;
-		//$('eqSelCountry').country = c + 1;
 		//TODO make unitList show strength/movement/attack status and update it on all actions
-		//updateEquipmentWindow(hex.unit.unitData().class); 
-		
+		//var c  = clickedUnit.country;
+		//$('eqSelCountry').country = c + 1;
+		//updateEquipmentWindow(clickedUnit.unitData().class); 
 	}	
-	else
+	else //No unit on clicked hex
 	{
-		//move to an allowed hex
+		//move to an empty allowed hex
 		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null) 
-		{
-			move = true;
-		}
-		else
-		{
+			win = map.moveUnit(map.currentUnit, row, col);
+		else //remove current selection
 			map.delCurrentUnit();
-			console.log("No unit at:" + row + "," + col);
-		}
 	}
 	
-	if (attack)
-	{
-		r.drawAnimation(row, col);		
-		map.attackUnit(map.currentUnit, clickedUnit);
-		move = false; //Don't let 2 actions being performed on single click
-	}
-	
-	if (move)
-	{
-		var win = map.moveUnit(map.currentUnit, row, col);
-		if (win >= 0) 
-			uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
-	}
-	/*
-	//Clicked hex has a unit ?
-	if (clickedUnit) 
-	{
-		if ((map.currentUnit !== null) && (hex.isAttackSel))
-		{	//attack an allowed hex unit
-			if (!map.currentUnit.hasFired)
-			{
-				r.drawAnimation(row, col);		
-				map.attackUnit(map.currentUnit, clickedUnit);
-			}
-		}	
-		else 
-		{
-			map.selectUnit(clickedUnit, row, col);//Select the new unit
-		}
-		
-		//var c  = hex.unit.player.country;
-		//$('eqSelCountry').country = c + 1;
-		//TODO make unitList show strength/movement/attack status and update it on all actions
-		//updateEquipmentWindow(hex.unit.unitData().class); 
-		
-	}	
-	else
-	{
-		//Do we already have a selected unit ?
-		if (map.currentUnit != null)
-		{	
-			//move to an allowed hex
-			if (hex.isMoveSel && !map.currentUnit.hasMoved) 
-			{
-				var win = map.moveUnit(map.currentUnit, row, col);
-				if (win >= 0) 
-					uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
-			} 		
-		}
-		else
-		{
-			map.delCurrentUnit();
-			console.log("No unit at:" + cell.row + "," + cell.col);
-		}
-	}
-	*/
-	//ToDo partial screen updates
+	if (win >= 0) 
+		uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
+
+	//TODO partial screen updates (can update only attack or move selected hexes)
 	r.render(); 
 }
 
 function handleMouseMove(e) 
 {
 	var minfo = getMouseInfo(canvas, e);
-	var cell = r.screenToCell(minfo.x, minfo.y);
-	var row = cell.row;
-	var col = cell.col;
-	
-	var hex = map.map[row][col];
-	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
+	var c = r.screenToCell(minfo.x, minfo.y);
+	var unit = null;
+	var hex = map.map[c.row][c.col];
+	var text = terrainNames[hex.terrain] + " (" + c.row + "," + c.col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if (hex.unit !== null)	{  text = " Unit: " + hex.unit.unitData().name + " " + text; }
-	if (map.currentUnit != null) { r.drawCursor(cell, uiAirMode); }
+	if ((unit = hex.getUnit(uiAirMode)) !== null) {  text = " Unit: " + unit.unitData().name + " " + text; }
+	if (map.currentUnit != null) { r.drawCursor(c, uiAirMode); }
 	$('locmsg').innerHTML = text;
 }
 
@@ -561,29 +515,6 @@ function uiMessage(title, message)
 	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
 }
 
-//Returns air or ground unit on a hex depending on 
-//main menu Air mode button
-function uiHexUnit(hex)
-{
-	if (hex == undefined || hex == null)
-		return null;
-	if (hex.unit !== null && hex.airunit !== null)
-	{
-		if (uiAirMode)
-			return hex.airunit;
-		else
-			return hex.unit;
-	}
-	
-	if (hex.unit !== null)
-		return hex.unit;
-		
-	if (hex.airunit !== null)
-		return hex.airunit;
-	
-	return null;
-}
-
 function uiEndTurnInfo()
 {
 	var playerList = map.getPlayers();
@@ -606,6 +537,7 @@ function newScenario(scenario)
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); });
 	countries = map.getCountries(); 
+	win = -1;
 	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 }
 

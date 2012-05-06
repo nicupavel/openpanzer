@@ -65,7 +65,29 @@ function Hex(row, col)
 		this.setUnit(hex.unit);
 		this.setUnit(hex.airunit);
 	}
+	
 	this.getPos = function() { return new Cell(1 * r, 1 * c); }
+	
+	//Returns air or ground unit on a hex depending on UI airMode 
+	this.getUnit = function(airMode)
+	{
+		if (this.unit !== null && this.airunit !== null)
+		{
+			if (airMode)
+				return this.airunit;
+			else
+				return this.unit;
+		}
+	
+		if (this.unit !== null)
+			return this.unit;
+		
+		if (this.airunit !== null)
+			return this.airunit;
+	
+		return null;
+	}
+	
 	this.setUnit = function(unit) 
 	{ 
 		//Will return if unit object is just a copy.
@@ -77,6 +99,7 @@ function Hex(row, col)
 		else
 			this.unit = unit;
 	}
+	
 	this.delUnit = function(unit) 
 	{
 		if (unit === null || unit.setHex == undefined)
@@ -88,6 +111,28 @@ function Hex(row, col)
 		else
 			this.unit = null;
 	}
+	
+	//Returns the unit from this hex that can be attacked by atkunit
+	this.getAttackableUnit = function (atkunit, airMode)
+	{
+		if (GameRules.canAttack(atkunit, this.airunit) 
+			&& GameRules.canAttack(atkunit, this.unit))
+		{
+			if (airMode)
+				return this.airunit;
+			else
+				return this.unit;
+		}	
+	
+		if (GameRules.canAttack(atkunit, this.unit))
+			return this.unit;
+
+		if (GameRules.canAttack(atkunit, this.airunit))
+			return this.airunit;
+	
+		return null;
+	}
+
 	this.log = function() { console.log(this); }
 	
 	//private
@@ -177,18 +222,6 @@ function Map()
 		this.delAttackSel();
 	}
 	
-	this.setMoveSel = function(row, col)
-	{
-		moveSelected.push(new Cell(row, col));
-		this.map[row][col].isMoveSel = true; 
-	}
-	
-	this.setAttackSel = function(row, col)
-	{
-		attackSelected.push(new Cell(row, col));
-		this.map[row][col].isAttackSel = true; 
-	}
-	
 	this.delMoveSel = function()
 	{
 		for (var i = 0; i < moveSelected.length; i++)
@@ -244,12 +277,12 @@ function Map()
 		this.delMoveSel();
 		
 		var p = unit.getPos();
-		var allowedCells = GameRules.getMoveRange(this.map, unit, p.row, p.col, this.rows, this.cols);
+		var c = GameRules.getMoveRange(this.map, unit, p.row, p.col, this.rows, this.cols);
 		
-		for (var i = 0; i < allowedCells.length; i++)
+		for (var i = 0; i < c.length; i++)
 		{
-			var cell = allowedCells[i];
-			this.setMoveSel(cell.row, cell.col);
+			moveSelected.push(c[i]);
+			this.map[c[i].row][c[i].col].isMoveSel = true; 
 		}
 	}
 	
@@ -258,12 +291,12 @@ function Map()
 		this.delAttackSel();
 		
 		var p = unit.getPos();
-		var allowedCells = GameRules.getAttackRange(this.map, unit, p.row, p.col, this.rows, this.cols);
+		var c = GameRules.getAttackRange(this.map, unit, p.row, p.col, this.rows, this.cols);
 		
-		for (var i = 0; i < allowedCells.length; i++)
+		for (var i = 0; i < c.length; i++)
 		{
-			var cell = allowedCells[i];
-			this.setAttackSel(cell.row, cell.col);
+			attackSelected.push(c[i]);
+			this.map[c[i].row][c[i].col].isAttackSel = true; 
 		}
 	}
 	
@@ -392,11 +425,11 @@ function Map()
 	this.selectUnit = function(unit)
 	{
 		if (unit === null)
-			return;
+			return false;
 		
 		//Can't select units from oposing side
 		if (unit.player.side != this.currentSide)
-			return;
+			return false;
 			
 		this.delCurrentUnit();
 		this.delMoveSel();
@@ -407,6 +440,8 @@ function Map()
 			this.setMoveRange(unit); 
 		if (!unit.hasFired) 
 			this.setAttackRange(unit); 
+		
+		return true;
 	}	
 	
 	//Clone object / "copy constructor"
