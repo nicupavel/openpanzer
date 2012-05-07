@@ -451,10 +451,9 @@ function updateEquipmentWindow(eqclass)
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		//TODO should check owners not countries
 		var u = unitList[i];
 		var ud = u.unitData();
-		if (ud.country == country)
+		if (u.player.side == map.currentSide)
 		{
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
