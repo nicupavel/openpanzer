@@ -72,9 +72,11 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
-		if (GameRules.isAir(clickedUnit)) //If clicked unit is air select airmode automatically
-			uiAirMode = true;
-			
+		if (GameRules.isAir(clickedUnit)) 
+		{
+			uiAirMode = true; //If clicked unit is air select airmode automatically
+			hoverin($('air').firstChild); //Change air button to ON in UI
+		}
 		if (map.currentUnit !== null)
 		{
 			//attack an allowed hex unit
@@ -92,13 +94,13 @@ function handleMouseClick(e)
 					win = map.moveUnit(map.currentUnit, row, col);
 				else 
 					if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-						map.selectUnit(hex.getUnit(!uiAirMode)); //try other unit on hex
+						map.selectUnit(hex.getUnit(!uiAirMode)); //try the other unit on hex
 			}
 		}	
 		else //No current unit select new one
 		{
 			if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-				map.selectUnit(hex.getUnit(!uiAirMode)); //try other unit on hex
+				map.selectUnit(hex.getUnit(!uiAirMode)); //try the other unit on hex
 		}
 		
 		//TODO make unitList show strength/movement/attack status and update it on all actions
@@ -138,9 +140,9 @@ function handleMouseMove(e)
 function buildMainMenu()
 {
 	//menu buttons div with id is the filename from resources/ui/menu/images
-	var menubuttons = [["buy","Requisition Units(TBD)"],["inspectunit","Unit Info"],["hex","Toggle Showing of Hexes"],
-					   ["air","Toggle Air More On (TBD)"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
-					   ["endturn","End turn"], ["mainmenu", "Main Menu"]];
+	var menubuttons = [["buy","Upgrade/Buy Units"],["inspectunit","Inspect Unit"],["hex","Toggle Showing of Hexes"],
+					   ["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
+					   ["endturn","End Turn"], ["mainmenu", "Main Menu"]];
 					   
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
@@ -162,7 +164,7 @@ function buildMainMenu()
 		
 		div.onclick = function() { mainMenuButton(this.id); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
-		div.onmouseout = function() { hoverout(this.firstChild); }
+		div.onmouseout = function() { if (!uiAirMode || this.id != "air") hoverout(this.firstChild); }
 	}
 	
 	var ld = addTag('menu','div');
