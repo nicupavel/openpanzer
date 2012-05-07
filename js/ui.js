@@ -36,9 +36,10 @@ function UI(scenario)
 	countries = map.getCountries();
 	buildMainMenu();
 	buildEquipmentWindow();
+	selectStartingUnit();
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
-	//TODO select an owned unit by default so player can see which units are his easier
+	
 	
 function handleMouseClick(e) 
 {
@@ -246,6 +247,7 @@ function mainMenuButton(id)
 			GameState.save(map);
 			$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 			uiMessage(sidesName[map.currentSide] + " Side Turn " + map.turn, uiEndTurnInfo());
+			selectStartingUnit();
 			r.render();
 			break;
 		}
@@ -533,6 +535,17 @@ function uiEndTurnInfo()
 	return infoStr;	
 }
 
+//Selects the first unit that belongs to the currently playing side
+function selectStartingUnit()
+{
+	var unitList = map.getUnits();
+	for (var i = 0; i < unitList.length; i++)
+	{
+		if (unitList[i].player.side == map.currentSide)
+			map.selectUnit(unitList[i]);
+	}
+}
+
 function newScenario(scenario)
 {
 	//TODO add getCountries/build equipment windows calls to fix equipment window
@@ -544,6 +557,7 @@ function newScenario(scenario)
 	r.cacheImages(function() { r.render(); });
 	countries = map.getCountries(); 
 	win = -1;
+	selectStartingUnit();
 	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 }
 
