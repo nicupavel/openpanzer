@@ -460,7 +460,11 @@ function updateEquipmentWindow(eqclass)
 			div.className = "eqUnitBox";
 			
 			if (u.id == userUnitSelected)
-				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
+			{	
+				div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+				map.selectUnit(u); //select unit on map
+				r.render(); //refresh so the new selection appear
+			}
 				
 			img.src = ud.icon;
 			txt.innerHTML = ud.name;
