@@ -35,6 +35,7 @@ Source code structure description:
 │   ├── gamerules.js           - attack, move, resupply, reinforce, distance rules
 │   ├── gamestate.js           - save/load game state to HTML 5 local storage
 │   ├── map.js                 - map, unit, player and hex objects
+│   ├── unit.js                - unit and transport objects
 │   ├── maploader.js           - loads scenarios and maps from a xml file
 │   ├── prototypes.js          - generic definitions
 │   ├── render.js              - canvas rendering functions
