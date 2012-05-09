@@ -546,7 +546,10 @@ function selectStartingUnit()
 	for (var i = 0; i < unitList.length; i++)
 	{
 		if (unitList[i].player.side == map.currentSide)
+		{
 			map.selectUnit(unitList[i]);
+			break;
+		}
 	}
 }
 
