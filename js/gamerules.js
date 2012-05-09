@@ -335,9 +335,12 @@ GameRules.getReinforceValue = function(map, unit)
 	return parseInt(strength);
 }
 
-//Checks if a unit can attack another unit
+//Checks if a unit can attack another unit without considering range
 function canAttack(unit, targetUnit)
 {
+	if (unit === null)
+		return false;
+	
 	if (unit.getAmmo() <= 0)
 		return false;
 	
@@ -427,6 +430,47 @@ GameRules.isEnemy = function(unit, targetUnit)
 		return true;
 	
 	return false;
+}
+//Returns a list of units that can fire support when defunit is attacked by atkunit
+GameRules.getSupportFireUnits = function(map, atkunit, defunit)
+{
+	
+	var pa = atkunit.getPos();
+	var pd = defunit.getPos();
+	
+	//No support fire if attack is from range
+	if (GameRules.distance(pa.row, pa.col, pd.row, pd.col) > 1)
+		return [];
+	
+	var unitList = [];
+	var u = null;
+	var ud;
+	var adj = getAdjacent(pd.row, pd.col);
+	for (var h in adj)
+	{
+		var r = adj[h].row;
+		var c = adj[h].col;
+		
+		if (!isAir(atkunit)) //Ground attack
+		{
+			if ((u = map[r][c].getUnit(false)) === null)
+				continue;
+			ud = u.unitData();
+			if (ud.class == unitClass.artillery && canAttack(u, atkunit)) //TODO special bit for support fire
+				unitList.push(u);
+		}
+		else //Air Attack
+		{
+			if ((u = map[r][c].getUnit(true)) === null)
+				continue;
+			ud = u.unitData();
+			if ((ud.class == unitClass.flak || ud.class == unitClass.airDefence ||
+			     ud.class == unitClass.fighter) && canAttack(u, atkunit))
+				unitList.push(u);
+		}
+	}
+	
+	return unitList;
 }
 
 function isAirfieldAroundUnit(map, unit)

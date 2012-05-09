@@ -85,7 +85,9 @@ function handleMouseClick(e)
 			{
 				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null)
 				{
-					r.drawAnimation(row, col);		
+					r.drawAnimation(row, col);
+					var supportUnits = GameRules.getSupportFireUnits(map.map, map.currentUnit, enemyUnit);
+					console.log(supportUnits);
 					map.attackUnit(map.currentUnit, enemyUnit); //Only attack an enemy unit on that hex
 				}
 			}

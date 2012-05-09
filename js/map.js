@@ -324,12 +324,16 @@ function Map()
 	//atkunit from srow, scol attacks defunit from drow, dcol
 	this.attackUnit = function(atkunit, defunit)
 	{
+		if (atkunit === null || defunit === null)
+			return;
+		
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		
 		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
+
 		//TODO do this better
 		atkunit.fire(true);
 		if (defunit.getAmmo() > 0) defunit.fire(false);
