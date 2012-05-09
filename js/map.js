@@ -322,27 +322,31 @@ function Map()
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
-	this.attackUnit = function(atkunit, defunit)
+	this.attackUnit = function(atkunit, defunit, supportFire)
 	{
 		if (atkunit === null || defunit === null)
 			return;
 		
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
+		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		
-		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
-
-		//TODO do this better
-		atkunit.fire(true);
-		if (defunit.getAmmo() > 0) defunit.fire(false);
-		
-		defunit.hit(cr.kills);
-		atkunit.hit(cr.losses);
-		
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
+		
+		//TODO do this better
+		if (!supportFire) atkunit.fire(true);
+		else atkunit.fire(false);
+		
+		defunit.hit(cr.kills);
+		
+		if (cr.defcanfire && !supportFire) 
+		{
+			defunit.fire(false);
+			atkunit.hit(cr.losses);
+		}
 		
 		if (atkunit.destroyed) 
 			this.map[a.row][a.col].delUnit(atkunit);
@@ -351,7 +355,7 @@ function Map()
 			this.map[d.row][d.col].delUnit(defunit);
 			
 		updateUnitList();
-		this.delAttackSel();
+		if (!supportFire) this.delAttackSel();
 	}
 	
 	// moves a unit to a new hex returns side number if the move results in a win 

@@ -164,6 +164,7 @@ function combatResults()
 	this.defSuppress = 0;
 	this.atkExpGained = 0;
 	this.defExpGained = 0;
+	this.defcanfire = true;
 }
 
 function Supply(a, f)
