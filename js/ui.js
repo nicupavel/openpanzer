@@ -90,8 +90,17 @@ function handleMouseClick(e)
 					for (var u in supportUnits)
 						map.attackUnit(supportUnits[u], map.currentUnit, true);
 
-					map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-					r.drawAnimation(row, col);
+					if (map.currentUnit.destroyed) //TODO Do this better
+					{
+						map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
+						r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
+					}
+					else
+					{
+						map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
+						r.drawAnimation(row, col);
+					}
+					
 				}
 			}
 			else

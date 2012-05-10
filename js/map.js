@@ -329,6 +329,7 @@ function Map()
 		
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
+		var update = false; //Don't update unit list if not necessary
 		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
@@ -349,12 +350,19 @@ function Map()
 		}
 		
 		if (atkunit.destroyed) 
+		{
 			this.map[a.row][a.col].delUnit(atkunit);
+			update = true;
+		}
 			
-		if (defunit.destroyed) 
+		if (defunit.destroyed)
+		{
 			this.map[d.row][d.col].delUnit(defunit);
-			
-		updateUnitList();
+			update = true;
+		}	
+		
+		if (update) updateUnitList();
+		
 		if (!supportFire) this.delAttackSel();
 	}
 	
@@ -561,7 +569,7 @@ function Map()
 	{
 		for (var i = 0; i < unitList.length; i++)
 		{
-			if (unitList[i] !== null && unitList[i].destroyed) 
+			if (unitList[i] !== null && unitList[i].destroyed)
 				unitList.splice(i, 1);
 		}
 	}

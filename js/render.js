@@ -128,7 +128,7 @@ function Render(mapObj)
 		//TODO Check if we should generate an TRANSPORT Cursor
 		
 		//Check if we should generate an ATTACK cursor
-		if (hex.isAttackSel && !map.currentUnit.hasFired)
+		if (hex.isAttackSel && map.currentUnit !== null &&  !map.currentUnit.hasFired)
 		{	
 			//check cell if a cursor should be generated again	
 			if ((redraw == true) || (lastCursorCell === null) || (lastCursorImage === null) ||

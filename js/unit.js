@@ -176,7 +176,7 @@ function Unit(equipmentID)
 	this.log = function() { console.log(this); }
 	this.setHex = function(h) { hex = h; }
 	this.getHex = function() { return hex; }
-	this.getPos = function() { return hex.getPos(); };
+	this.getPos = function() { if (hex !== null) return hex.getPos(); };
 	
 	//private 
 	var hex = null; //The hex that this unit is on
