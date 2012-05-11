@@ -594,9 +594,9 @@ GameRules.getDirection = function(x1, y1, x2, y2)
 	
 	if (r > 3) 
 		delta = 1;
-	if (r < 1)
+	if (r < 0)
 		delta = -1;
-
+	//console.log("DX:" + dx + " DY:" + dy + " Ratio:" + r + " Delta:" + delta);
 	if (dx > 0)
 	{
 		if (dy > 0)
