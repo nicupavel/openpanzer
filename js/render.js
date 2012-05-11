@@ -17,7 +17,6 @@ function Render(mapObj)
 	var imgCursor;
 	var imgFlags;
 	var imgMapBackground;
-	var imgExplosions;
 	
 	var lastCursorCell = null; //Last cell for which the cursor was built
 	var lastCursorImage = null;//last cursor image
@@ -49,6 +48,9 @@ function Render(mapObj)
 	var colSlice = s + h; 
 	//add an offset for better rounding of mouse position in a column
 	var mousePrecisionOffset = s/100;
+	
+	//Animation Chain
+	var animationChain = new AnimationChain();
 	
 	//The rendering style
 	this.style = new RenderStyle();
@@ -160,9 +162,20 @@ function Render(mapObj)
 		}
 	}
 	
-	//draws an Animation
-	this.drawAnimation = function(row, col)
+	//Runs all animations in order that they were added and then delete all animations
+	this.runAnimation = function()
 	{
+		animationChain.start();
+	}
+	
+	//Adds an animation to the list
+	this.addAnimation = function(row, col, animationName)
+	{
+		if (! (animationName in animationsData))
+			return false;
+		
+		var anim = animationsData[animationName];
+		
 		if (col & 1) // odd column
 		{
 			y0 =  row * 2 * r + 2*r+ renderOffsetY;
@@ -174,20 +187,20 @@ function Render(mapObj)
 			x0 = col * (s + h) + h + s/2 + renderOffsetX;
 		}
 		
-		y0 = y0 - imgExplosions.height;
-		x0 = x0 - imgExplosions.width/(12 * 2); // mid of one of the 12 frames 
-		
-		var explosion = new Animation({
+		y0 = parseInt(y0 - anim.image.height);
+		x0 = parseInt(x0 - anim.image.width/(anim.frames * 2)); // mid of one of the frames 
+
+		animationChain.add({
 			ctx:a, 
 			x:x0, 
 			y:y0, 
-			width:120, 
-			height:imgExplosions.height,  
-			frames:11, //index from 0 
-			image:imgExplosions
+			width:anim.width, 
+			height:anim.image.height,  
+			frames:anim.frames - 1, //index from 0 
+			image: anim.image
 		});
 		
-		explosion.start();
+		return true;
 	}
 		
 	//Converts from screen x,y to row,col in map array
@@ -220,9 +233,6 @@ function Render(mapObj)
 		
 		imgFlags = new Image();
 		imgFlags.src = "resources/ui/flags/flags_med.png";
-		
-		imgExplosions = new Image();
-		imgExplosions.src = "resources/animations/explosions.png";
 		
 		imgMapBackground = new Image();
 		imgMapBackground.src = map.terrainImage;

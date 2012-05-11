@@ -11,7 +11,8 @@
 
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
 
-var unitClass = {
+var unitClass = 
+{
 	none: 0, infantry: 1, tank: 2, recon: 3, antiTank: 4, flak: 5, fortification: 6,
 	groundTransport: 7, artillery: 8, airDefence: 9, fighter: 10, tacticalBomber: 11,
 	levelBomber: 12, airTransport: 13, submarine: 14, destroyer: 15, battleship: 16,

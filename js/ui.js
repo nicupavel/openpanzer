@@ -86,10 +86,13 @@ function handleMouseClick(e)
 				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null)
 				{
 					var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
+					var c = map.currentUnit.getPos();
 					//Support Fire
 					for (var u in supportUnits)
+					{
+						r.addAnimation(c.row, c.col, "explosion"); //Hits by supporting units
 						map.attackUnit(supportUnits[u], map.currentUnit, true);
-
+					}
 					if (map.currentUnit.destroyed) //TODO Do this better
 					{
 						map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
@@ -98,9 +101,9 @@ function handleMouseClick(e)
 					else
 					{
 						map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-						r.drawAnimation(row, col);
+						r.addAnimation(row, col, "explosion"); //Hits to the unit being attacked
 					}
-					
+					r.runAnimation();
 				}
 			}
 			else
