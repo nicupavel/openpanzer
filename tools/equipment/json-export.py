@@ -56,8 +56,8 @@ unitdict = dict.fromkeys(unitkeys)
 eqdict = {}
 # final equipment dictionary using the hash of list as alternative to the above hash
 eqcdict = {}
-# List with SHP files that will need to be converted (will be used by convert.py script)
-shplist = []
+# Unique set with SHP files that will need to be converted (will be used by convert.py script)
+shplist = set()
 #from where the html code will load the images of the units
 imgpath = "resources/units/images/"
 imgext = ".png"
@@ -85,7 +85,7 @@ for line in f:
             elif k == "icon":
                 odict[k] = imgpath + v + imgext
                 olist.append(imgpath + v + imgext)
-                shplist.append(v + ".SHP")
+                shplist.add(v.upper() + ".bmp") #SHPTool exports filename as uppercase but extension lowercase
             else:
                 odict[k] = int(v)
                 olist.append(int(v))
