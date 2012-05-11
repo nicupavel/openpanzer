@@ -9,14 +9,32 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
+
+
+
 //o = {ctx, x, y, width, height, frames, image}
 function Animation(o)
 {
 	var timer;
 	var count = 0;
-	this.start = function(delay)
+	var animationTasks = [];
+	
+	this.add = function(o)
 	{
-		timer = setInterval(animate, 100);
+		animationTasks.push( function() {} );
+		
+	}
+	
+	this.start = function()
+	{
+		timer = setInterval(animate, 75);
+	}
+	
+	this.startChain = function()
+	{
+		var i = 0;
+		animationTasks[i++]();
+		if (i < animationTasks.length) setTimeout(arguments.callee, 100);
 	}
 	
 	function animate()
