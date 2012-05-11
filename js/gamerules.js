@@ -456,7 +456,10 @@ GameRules.getSupportFireUnits = function(unitList, atkunit, defunit)
 		u = unitList[i];
 		if (u.player.side != defunit.player.side)
 			continue;
-
+		
+		if (u.id == defunit.id)
+			continue; 
+			
 		var up = u.getPos();
 		var ud = u.unitData();
 		var range = ud.gunrange;
