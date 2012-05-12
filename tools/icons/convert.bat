@@ -1,1 +1,0 @@
-for %i in (*.bmp) do python convert.py "%i"
