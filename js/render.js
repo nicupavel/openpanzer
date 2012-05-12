@@ -35,7 +35,7 @@ function Render(mapObj)
 	var s = 30;  //hexagon segment size                    |\  
 	var h = s/2; //hexagon height h = sin(30)*s           r| \ s
 	var r = 25;  //hexagon radius r = cos(30)*s ~ s*0.833  -h-
-		
+
 	// Canvas offset from the browser window (leaves space for top menu)
 	var canvasOffsetX = 0;
 	var canvasOffsetY = 30;
@@ -48,6 +48,8 @@ function Render(mapObj)
 	var colSlice = s + h; 
 	//add an offset for better rounding of mouse position in a column
 	var mousePrecisionOffset = s/100;
+	//Unit strength text size (px)
+	var unitTextHeight = 10;
 	
 	//Animation Chain
 	var animationChain = new AnimationChain();
@@ -413,16 +415,14 @@ function Render(mapObj)
 		image = imgUnits[unit.getIcon()];
 		if (image) 
 		{
-			//Offset the transparent regions of the unit sprite
-			//TODO center to hex center (see battleships/destroyers)
-			var ix0 = x0 - 25;
-			var iy0 = y0 - 10;
-			// Units have 15 possible orientations 
-			// there are 9 sprites each ~80x50 in 1 row. to get the rest of the orientations
-			// the sprite must be mirrored
+			// Units have 15 possible orientations there are 9 sprites each ~80x50 in 1 row
+			// to get the rest of the orientations the sprite must be mirrored
 			var mirror = false;
 			var imagew = image.width/9; //Some images have bigger width
-			var imageh = 50;
+			var imageh = image.height;
+			//Offset the transparent regions of the unit sprite
+			var ix0 = parseInt(x0 - imagew/2 + s/2);
+			var iy0 = parseInt(y0 - imageh/2 + r - unitTextHeight);
 			facing = unit.facing;
 			if (facing > 8)
 			{
@@ -441,21 +441,21 @@ function Render(mapObj)
 			c.drawImage(image, imgidx , 0, imagew, imageh, ix0, iy0, imagew, imageh);
 			if (mirror) c.restore();
 		}
+
 		//Write unit strength in a box below unit
-		//TODO center by using measureText
-		c.font = "10px sans-serif";
+		c.font = unitTextHeight + "px sans-serif";
 		var text = "" + unit.strength;
 		var textcolor = "black"
 		var textSize = c.measureText(text).width;
-		var tx = x0 + h/2;
-		var ty = y0 + 2 * r - 12;
+		var tx = parseInt(x0 + h/2);
+		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing
 		
 		var side = unit.player.side;
 		if (side == 1) { textcolor = "green"; }
 		
 		c.moveTo(tx, ty);
 		c.fillStyle = textcolor;
-		c.fillRect  (tx, ty, textSize + 2, 10);
+		c.fillRect  (tx, ty, textSize + 2, unitTextHeight); 
 		if (unit.hasMoved)
 			c.fillStyle = "2F4F4F"; //DarkSlateGrey
 		else
