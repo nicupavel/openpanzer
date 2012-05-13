@@ -86,22 +86,30 @@ function handleMouseClick(e)
 				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null)
 				{
 					var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
-					var c = map.currentUnit.getPos();
+					var cpos = map.currentUnit.getPos();
+					var cclass = map.currentUnit.unitData().class;
+					var eclass = enemyUnit.unitData().class;
 					//Support Fire
 					for (var u in supportUnits)
 					{
-						r.addAnimation(c.row, c.col, "explosion"); //Hits by supporting units
+						var sp = supportUnits[u].getPos();
 						map.attackUnit(supportUnits[u], map.currentUnit, true);
+						r.addAnimation(sp.row, sp.col, "gun", supportUnits[u].facing ); //Hits by supporting units - usually guns
 					}
 					if (map.currentUnit.destroyed) //TODO Do this better
 					{
 						map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
 						r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
+						r.addAnimation(cpos.row, cpos.col, "explosion");
 					}
 					else
 					{
 						map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-						r.addAnimation(row, col, "explosion"); //Hits to the unit being attacked
+						r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], map.currentUnit.facing);
+						if (enemyUnit.destroyed)
+							r.addAnimation(row, col, "explosion");
+						else
+							r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
 					}
 					r.runAnimation();
 				}

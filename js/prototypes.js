@@ -137,6 +137,27 @@ var movTable =
 [1, 1, 1, 1, 2, 1, 1, 2, 2, 255, 254, 1, 1, 1, 255, 255, 1, 1], //All Terrain Leg (Mountain)
 ];
 
+//Lookup table used for rotation of animations for a certain direction
+//Our animations are by default facing North table gives the radians for rotate
+var directionToRadians = [
+	Math.PI, //S
+	5*Math.PI/6, //SSE
+	3*Math.PI/4, //SE
+	2*Math.PI/3, //ESE
+	Math.PI/2, //E
+	Math.PI/3, //ENE
+	Math.PI/4, //NE
+	Math.PI/6, //NNE
+	0, //N
+	11*Math.PI/6, //NNW
+	7*Math.PI/4,, //NW
+	5*Math.PI/3, //WNW
+	3*Math.PI/2, //W
+	4*Math.PI/3, //WSW
+	5*Math.PI/4, //SW
+	7*Math.PI/6, //SSW
+];
+
 function mouseInfo(x, y, rclick)
 {
 	this.x = x;

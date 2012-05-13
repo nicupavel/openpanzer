@@ -44,14 +44,14 @@ function AnimationChain()
 }
 
 
-//o = {ctx, x, y, width, height, frames, image}
+//o = {ctx, x, y, width, height, frames, image, rotate}
 //Animates a series of frames from image on ctx context at x,y position
 function Animation(o)
 {
 	var timer;
 	var count = 0;
 	
-	this.delay = 100;
+	this.delay = 150;
 	
 	this.start = function()
 	{
@@ -66,8 +66,13 @@ function Animation(o)
 	function animate()
 	{
 		o.ctx.clearRect(o.x, o.y, o.width, o.height);
+		
+		o.ctx.save();
+		o.ctx.translate(o.x + o.width/2, o.y + o.height/2);
+		o.ctx.rotate(o.rotate);
 		if (count >= o.frames) { clearInterval(timer);  }
-		o.ctx.drawImage(o.image, o.width * count, 0, o.width, o.height, o.x, o.y, o.width, o.height);
+		o.ctx.drawImage(o.image, o.width * count, 0, o.width, o.height, -o.width/2, -o.height/2, o.width, o.height);
+		o.ctx.restore();
 		count++;
 	}
 }
@@ -77,8 +82,37 @@ var animationsData =
 {
 //AnimationName:new animationSprite(path, totalFrames, frameWidth
 "explosion": new animationSprite("resources/animations/explosions.png", 12, 120),
+"gun": new animationSprite("resources/animations/fire-gun.png", 6, 150),
+"smallgun": new animationSprite("resources/animations/fire-smallgun.png", 8, 80),
 };
-//
+
+//Which attack animations belong to each unit class
+var attackAnimationByClass = 
+[
+"none", //None
+"smallgun", //infantry
+"gun", //tank
+"gun", //recon
+"gun", //antiTank
+"gun", //flak
+"smallgun", //fortification
+"smallgun", //groundTransport
+"gun", //artillery
+"gun", //airDefence
+"smallgun", //fighter
+"smallgun", //tacticalBomber
+"smallgun", //levelBomber
+"none", //airTransport
+"gun", //submarine
+"gun", //destroyer
+"gun", //battleship
+"none", //carrier
+"none", //navalTransport
+"gun", //battleCruiser
+"gun", //cruiser
+"gun", //lightCruiser
+];
+
 function animationSprite(path, totalFrames, frameWidth)
 {
 	this.image = new Image();

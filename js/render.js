@@ -105,7 +105,8 @@ function Render(mapObj)
 					style = this.style.selected;
 				if (hex.isAttackSel) 
 					style = this.style.attack;
-				if ((current !== null) && (row == current.row) && (col == current.col)) 
+				if ((current !== null) && (typeof current !== "undefined") 
+					&& (row == current.row) && (col == current.col)) 
 					style = this.style.current;
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
@@ -171,26 +172,29 @@ function Render(mapObj)
 	}
 	
 	//Adds an animation to the list
-	this.addAnimation = function(row, col, animationName)
+	this.addAnimation = function(row, col, animationName, facing)
 	{
 		if (! (animationName in animationsData))
 			return false;
 		
+		if (typeof facing === "undefined")
+			facing = direction.N;
+			
 		var anim = animationsData[animationName];
 		
 		if (col & 1) // odd column
 		{
-			y0 =  row * 2 * r + 2*r+ renderOffsetY;
-			x0 =  col * (s + h) + h + s/2 + renderOffsetX;
+			y0 =  row * 2 * r + r + renderOffsetY;
+			x0 =  col * (s + h) + h + renderOffsetX;
 		}
 		else
 		{
-			y0 = row * 2 * r + r + renderOffsetY;
-			x0 = col * (s + h) + h + s/2 + renderOffsetX;
+			y0 = row * 2 * r  + renderOffsetY;
+			x0 = col * (s + h) + h + renderOffsetX;
 		}
 		
-		y0 = parseInt(y0 - anim.image.height);
-		x0 = parseInt(x0 - anim.image.width/(anim.frames * 2)); // mid of one of the frames 
+		y0 = parseInt(y0 - anim.image.height/2 + r);
+		x0 = parseInt(x0 - anim.width/2 + s/2);
 
 		animationChain.add({
 			ctx:a, 
@@ -199,7 +203,8 @@ function Render(mapObj)
 			width:anim.width, 
 			height:anim.image.height,  
 			frames:anim.frames - 1, //index from 0 
-			image: anim.image
+			image: anim.image,
+			rotate: directionToRadians[facing]
 		});
 		
 		return true;
