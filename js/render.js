@@ -405,7 +405,7 @@ function Render(mapObj)
 		{
 			flag =hex.unit.player.country;
 			scale = 1.4;
-			if (!hex.unit.hasMoved)
+			if (hex.unit.hasMoved)
 				c.globalAlpha = 0.6;
 			
 		}
