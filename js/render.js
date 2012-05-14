@@ -400,10 +400,14 @@ function Render(mapObj)
 		var flag = -1;
 		var scale = 0;
 		
+		c.save();
 		if (hex.unit !== null)
 		{
 			flag =hex.unit.player.country;
 			scale = 1.4;
+			if (!hex.unit.hasMoved)
+				c.globalAlpha = 0.6;
+			
 		}
 		if (hex.flag != -1 && hex.victorySide != -1) 
 		{ 
@@ -413,6 +417,7 @@ function Render(mapObj)
 		if (flag == -1) return;
 		
 		c.drawImage(imgFlags, flw * flag, 0, flw, flh, tx, ty, scale*s, scale*s/(flw/flh));
+		c.restore();
 	}
 	
 	function drawHexUnit(x0, y0, unit)
