@@ -325,7 +325,7 @@ function Map()
 	this.attackUnit = function(atkunit, defunit, supportFire)
 	{
 		if (atkunit === null || defunit === null)
-			return;
+			return null;
 		
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
@@ -364,6 +364,8 @@ function Map()
 		if (update) updateUnitList();
 		
 		if (!supportFire) this.delAttackSel();
+		
+		return cr;
 	}
 	
 	// moves a unit to a new hex returns side number if the move results in a win 

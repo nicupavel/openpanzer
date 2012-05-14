@@ -83,18 +83,22 @@ function handleMouseClick(e)
 			//attack an allowed hex unit
 			if (hex.isAttackSel && !map.currentUnit.hasFired)
 			{
-				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null)
+				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null) //Select which unit to attack depending on uiAirMode
 				{
-					var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
 					var cpos = map.currentUnit.getPos();
 					var cclass = map.currentUnit.unitData().class;
 					var eclass = enemyUnit.unitData().class;
+
+					var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
 					//Support Fire
 					for (var u in supportUnits)
 					{
 						var sp = supportUnits[u].getPos();
-						map.attackUnit(supportUnits[u], map.currentUnit, true);
-						r.addAnimation(sp.row, sp.col, "gun", supportUnits[u].facing ); //Hits by supporting units - usually guns
+						var sclass = supportUnits[u].unitData().class;
+						if (map.currentUnit.destroyed)
+							break;
+ 						map.attackUnit(supportUnits[u], map.currentUnit, true);
+						r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
 					}
 					if (map.currentUnit.destroyed) //TODO Do this better
 					{
@@ -102,14 +106,23 @@ function handleMouseClick(e)
 						r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
 						r.addAnimation(cpos.row, cpos.col, "explosion");
 					}
-					else
+					else //Can we still attack ?
 					{
-						map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
+						var cr = map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
 						r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], map.currentUnit.facing);
+						
+						if (map.currentUnit.destroyed) //TODO Do this better
+						{
+							map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
+							r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
+							r.addAnimation(cpos.row, cpos.col, "explosion");
+						}
+						
 						if (enemyUnit.destroyed)
 							r.addAnimation(row, col, "explosion");
 						else
-							r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
+							if (cr.defcanfire)
+								r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
 					}
 					r.runAnimation();
 				}
