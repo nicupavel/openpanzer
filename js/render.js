@@ -49,14 +49,11 @@ function Render(mapObj)
 	//add an offset for better rounding of mouse position in a column
 	var mousePrecisionOffset = s/100;
 	//Unit strength text size (px)
-	var unitTextHeight = 10;
-	
+	var unitTextHeight = 10;	
 	//Animation Chain
 	var animationChain = new AnimationChain();
-	
 	//The rendering style
 	var styles = new RenderStyle();
-	
 	//Render Settings from UI
 	var uiSettings = null;
 	
@@ -86,15 +83,11 @@ function Render(mapObj)
 				//flat-out hex layout
 				if (col & 1) // odd column
 				{
-					//y0 =  row * 2 * r + r; //without PG2 Offset
-					//x0 =  col * (s + h) + h;
 					y0 =  row * 2 * r + r + renderOffsetY;
 					x0 =  col * (s + h) + h + renderOffsetX;
 				}
 				else
 				{
-					//y0 = renderOriginY + row * 2 * r;  //without PG2 Offset
-					//x0 = renderOriginX + col * (s + h) + h;
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
@@ -219,15 +212,10 @@ function Render(mapObj)
 		var vrow; //virtual graphical rows
 		var trow, tcol; //true map rows/cols
 
-		//tcol = parseInt((x - renderOffsetX) / (s + h)); //without PG2 offset
-		tcol = Math.round((x - renderOffsetX) / colSlice + mousePrecisionOffset) - 1; 
-		
+		tcol = Math.round((x - renderOffsetX) / colSlice + mousePrecisionOffset) - 1; 		
 		//a graphical row (half hex) not the array row
-		//vrow = parseInt((y - renderOffsetY) / r); //Half hexes //without PG2 offset
 		vrow = (y - renderOffsetY * (~tcol & 1)) / r; //Half hexes add r if col is odd
-		
 		//shift to correct row index	
-		//trow = parseInt(vrow/2) - 1 * (~vrow & 1) * (tcol & 1); //without PG2 offset
 		trow = Math.round(vrow/2 - 1 * (vrow & 1));
 		if (trow < 0) { trow = 0; }
 		
