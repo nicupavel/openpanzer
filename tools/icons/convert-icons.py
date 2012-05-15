@@ -40,7 +40,7 @@ if (USE_REPLACED_ICONS):
     replacedshp = []
 
     #What file holds the replacement information
-    fopenshp = open('OpenIcons.txt', 'r');
+    fopenshp = open('OpenGen2PG2.txt', 'r');
 
     # read the OpenIcons file into a dictionary for easy access
     openshp = {}
