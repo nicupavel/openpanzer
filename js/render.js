@@ -55,10 +55,10 @@ function Render(mapObj)
 	var animationChain = new AnimationChain();
 	
 	//The rendering style
-	this.style = new RenderStyle();
+	var styles = new RenderStyle();
 	
-	//Is canvas zoomed out
-	this.isZoomed = false;
+	//Render Settings from UI
+	var uiSettings = null;
 	
 	createLayers(); //Creates canvas layers
 				
@@ -72,7 +72,9 @@ function Render(mapObj)
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
-			
+		
+		styles.setHexGrid(uiSettings.hexGrid);
+		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		for (row = 0; row < map.rows; row++) 
 		{
@@ -80,7 +82,7 @@ function Render(mapObj)
 			for (col = 0; col < map.cols; col++) 
 			{
 				hex = map.map[row][col];
-				style = this.style.generic;
+				style = styles.generic;
 				//flat-out hex layout
 				if (col & 1) // odd column
 				{
@@ -96,28 +98,29 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
-				if (this.isZoomed) 
+				if (uiSettings.mapZoom) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
 				}
 				if (hex.isMoveSel) 
-					style = this.style.selected;
+					style = styles.selected;
 				if (hex.isAttackSel) 
-					style = this.style.attack;
+					style = styles.attack;
 				if ((current !== null) && (typeof current !== "undefined") 
 					&& (row == current.row) && (col == current.col)) 
-					style = this.style.current;
+					style = styles.current;
+					
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
-				if (hex.unit !== null) { drawHexUnit(x0, y0, hex.unit); }
-				if (hex.airunit !== null) { drawHexUnit(x0, y0, hex.airunit); }
+				drawHexUnit(x0, y0, hex.getUnit(uiSettings.airMode)); //Unit above depending on airMode
+				drawHexUnit(x0, y0, hex.getUnit(!uiSettings.airMode));
 			}
 		}
 	}
 		
 	//Renders attack or transport move cursor 
-	this.drawCursor = function(cell, airMode)
+	this.drawCursor = function(cell)
 	{
 		var row = cell.row;
 		var col = cell.col;
@@ -142,7 +145,7 @@ function Render(mapObj)
 				//TODO check unit mounted/unmounted 
 				redraw = true; //Force css cursor assignment
 				var atkunit = map.currentUnit;
-				var defunit = hex.getAttackableUnit(atkunit, airMode);
+				var defunit = hex.getAttackableUnit(atkunit, uiSettings.airMode);
 				var atkflag = atkunit.player.country;
 				var defflag = defunit.player.country;
 				var cr = GameRules.calculateAttackResults(map.map, atkunit, defunit);
@@ -252,6 +255,8 @@ function Render(mapObj)
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
 	this.getCursorCanvas = function() { return ca; }
+	//Sets the local uiSettings to UI uiSettings
+	this.setUISettings = function(obj) { uiSettings = obj; }
 	//Sets a new map for rendering. Only used to dinamically change the map being rendered
 	this.setNewMap = function(mapObj) { map = mapObj; }
 	
@@ -399,15 +404,21 @@ function Render(mapObj)
 		
 		var flag = -1;
 		var scale = 0;
+		var unit = null;
 		
 		c.save();
-		if (hex.unit !== null)
-		{
-			flag =hex.unit.player.country;
-			scale = 1.4;
-			if (hex.unit.hasMoved)
-				c.globalAlpha = 0.6;
+		//Only renders flag for air or ground units not both
+		if (uiSettings.airMode)
+			unit = hex.airunit;
+		else
+			unit = hex.unit;
 			
+		if (unit !== null)
+		{
+			flag = unit.player.country;
+			scale = 1.4;
+			if (unit.hasMoved)
+				c.globalAlpha = 0.6;
 		}
 		if (hex.flag != -1 && hex.victorySide != -1) 
 		{ 
@@ -422,6 +433,9 @@ function Render(mapObj)
 	
 	function drawHexUnit(x0, y0, unit)
 	{
+		if (unit === null)
+			return;
+			
 		image = imgUnits[unit.getIcon()];
 		if (image) 
 		{

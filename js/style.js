@@ -37,33 +37,27 @@ function RenderStyle()
 		"lineWidth": 0.4,
 		"lineJoin": "miter",
 		},
-	"hidden": { //Hidden drawin of hex grid
+	"hidden": { //Hidden drawing of hex grid
 		"fillColor": null,
 		"lineColor": "rgba(128,128,128,0.8)",
 		"lineWidth": 0.001,
 		"lineJoin": "miter",
 		}
 	}	
-
-	var theme  = pg2hexstyle;;
-	var hexShown = true;
+	var theme = pg2hexstyle;
 	this.selected = theme.selected;
 	this.current = theme.current;
 	this.generic = theme.normal;
 	this.attack = theme.attack;
 	
-	this.setTheme = function(theme)
+	this.setTheme = function(customTheme)
 	{
-		if (theme === null || typeof(customTheme) === "undefined") { theme = pg2hexstyle; }
-		this.selected = theme.selected;
-		this.current = theme.current;
-		this.generic = theme.normal;
-		this.attack = theme.attack;
+		if (customTheme === null || typeof(customTheme) === "undefined") { theme = pg2hexstyle; }
+		theme = customTheme;
 	}
 
-	this.toggleHexes = function() 
+	this.setHexGrid = function(hexShown) 
 	{ 
-		hexShown = !hexShown;
 		if (hexShown) { this.generic = theme.normal; }
 		else {this.generic = theme.hidden; }
 	}

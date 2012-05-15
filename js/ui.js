@@ -8,12 +8,16 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
-
 function UI(scenario)
 {
+	var uiSettings = 
+	{
+		airMode:false, //flag used to select between overlapping ground/air units
+		mapZoom:false, //flag used to draw map in zoomed mode or not
+		hexGrid:true // flag to notify render if it should draw or not hex grid
+	};
 	var map = new Map();
-	var l = new MapLoader();
-	var uiAirMode = false; //flag used to select between overlapping ground/air units
+	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
 	var win = -1; //Neither side has won yet
 	map = GameState.restore();
@@ -26,6 +30,7 @@ function UI(scenario)
 	map.dumpMap();
 
 	var r = new Render(map);
+	r.setUISettings(uiSettings);
 	r.cacheImages(function() { r.render(); });
 	var canvas = r.getCursorCanvas();
 	
@@ -55,7 +60,7 @@ function handleMouseClick(e)
 		return true;
 	}
 	
-	var clickedUnit = hex.getUnit(uiAirMode);
+	var clickedUnit = hex.getUnit(uiSettings.airMode);
 	
 	//Right click to show unit info or clear current selection
 	if (minfo.rclick) 
@@ -73,17 +78,12 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
-		if (GameRules.isAir(clickedUnit)) 
-		{
-			uiAirMode = true; //If clicked unit is air select airmode automatically
-			hoverin($('air').firstChild); //Change air button to ON in UI
-		}
 		if (map.currentUnit !== null)
 		{
 			//attack an allowed hex unit
 			if (hex.isAttackSel && !map.currentUnit.hasFired)
 			{
-				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiAirMode)) !== null) //Select which unit to attack depending on uiAirMode
+				if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 				{
 					var cpos = map.currentUnit.getPos();
 					var cclass = map.currentUnit.unitData().class;
@@ -103,7 +103,7 @@ function handleMouseClick(e)
 					if (map.currentUnit.destroyed) //TODO Do this better
 					{
 						map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-						r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
+						r.drawCursor(cell, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 						r.addAnimation(cpos.row, cpos.col, "explosion");
 					}
 					else //Can we still attack ?
@@ -114,7 +114,7 @@ function handleMouseClick(e)
 						if (map.currentUnit.destroyed) //TODO Do this better
 						{
 							map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-							r.drawCursor(cell, uiAirMode); //refresh cursor or it gets stuck in attack cursor
+							r.drawCursor(cell, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 							r.addAnimation(cpos.row, cpos.col, "explosion");
 						}
 						
@@ -129,17 +129,17 @@ function handleMouseClick(e)
 			}
 			else
 			{
-				if (hex.isMoveSel && uiAirMode) //Move unit over clickedUnit (isMoveSel true only for air units)
+				if (hex.isMoveSel && uiSettings.airMode) //Move unit over clickedUnit (isMoveSel true only for air units)
 					win = map.moveUnit(map.currentUnit, row, col);
 				else 
 					if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-						map.selectUnit(hex.getUnit(!uiAirMode)); //try the other unit on hex
+						map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
 			}
 		}	
 		else //No current unit select new one
 		{
 			if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-				map.selectUnit(hex.getUnit(!uiAirMode)); //try the other unit on hex
+				map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
 		}
 		
 		//TODO make unitList show strength/movement/attack status and update it on all actions
@@ -158,7 +158,19 @@ function handleMouseClick(e)
 	
 	if (win >= 0) 
 		uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
-
+	
+	//Set the airMode depending on current unit automatically
+	if (GameRules.isAir(map.currentUnit)) 
+	{
+			uiSettings.airMode = true; //If clicked unit is air select airmode automatically
+			hoverin($('air').firstChild); //Change air button to ON in UI
+	}
+	else
+	{
+			uiSettings.airMode = false; //If clicked unit is air select airmode automatically
+			hoverout($('air').firstChild); //Change air button to ON in UI
+	}
+	
 	//TODO partial screen updates (can update only attack or move selected hexes)
 	r.render(); 
 }
@@ -171,16 +183,16 @@ function handleMouseMove(e)
 	var hex = map.map[c.row][c.col];
 	var text = terrainNames[hex.terrain] + " (" + c.row + "," + c.col + ")";
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if ((unit = hex.getUnit(uiAirMode)) !== null) {  text = " Unit: " + unit.unitData().name + " " + text; }
-	if (map.currentUnit != null) { r.drawCursor(c, uiAirMode); }
+	if ((unit = hex.getUnit(uiSettings.airMode)) !== null) {  text = " Unit: " + unit.unitData().name + " " + text; }
+	if (map.currentUnit != null) { r.drawCursor(c); }
 	$('locmsg').innerHTML = text;
 }
 
 function buildMainMenu()
 {
 	//menu buttons div with id is the filename from resources/ui/menu/images
-	var menubuttons = [["buy","Upgrade/Buy Units"],["inspectunit","Inspect Unit"],["hex","Toggle Showing of Hexes"],
-					   ["air","Toggle Air More On"],["zoom","Zoom Map"],["undo","Undo Last Move(TBD)"],
+	var menubuttons = [["buy","Upgrade/Buy Units(WIP)"],["inspectunit","Inspect Unit"],["hex","Toggle Hex Grid"],
+					   ["air","Toggle Air More On"],["zoom","Strategic Map"],["undo","Undo Last Move(TBD)"],
 					   ["endturn","End Turn"], ["mainmenu", "Main Menu"]];
 					   
 	var sd = addTag('menu','div');
@@ -203,7 +215,17 @@ function buildMainMenu()
 		
 		div.onclick = function() { mainMenuButton(this.id); }
 		div.onmouseover = function() { hoverin(this.firstChild); }
-		div.onmouseout = function() { if (!uiAirMode || this.id != "air") hoverout(this.firstChild); }
+		//Keep selection for toggle buttons
+		div.onmouseout = function() 
+			{ 
+				if (uiSettings.airMode && this.id == "air") 
+					return;
+				if (uiSettings.mapZoom && this.id == "zoom") 
+					return;
+				if (uiSettings.hexGrid && this.id == "hex") 
+					return;	
+				hoverout(this.firstChild); 
+			}
 	}
 	
 	var ld = addTag('menu','div');
@@ -217,13 +239,13 @@ function mainMenuButton(id)
 	{
 		case 'air':
 		{
-			uiAirMode = !uiAirMode;
-			console.log("Air mode changed to:" + uiAirMode);
+			uiSettings.airMode = !uiSettings.airMode;
+			r.render();
 			break;
 		}
 		case 'hex':
 		{
-			r.style.toggleHexes();
+			uiSettings.hexGrid = !uiSettings.hexGrid;
 			r.render();
 			break;
 		}
@@ -233,12 +255,12 @@ function mainMenuButton(id)
 			if ($('game').style.zoom === "100%" || $('game').style.zoom === '' )
 			{ 
 				$('game').style.zoom = zoom + "%"; 
-				r.isZoomed = true;
+				uiSettings.mapZoom = true;
 			}
 			else 
 			{ 
 				$('game').style.zoom = "100%";
-				r.isZoomed = false;
+				uiSettings.mapZoom = false;
 			}
 			r.render();
 			break;
