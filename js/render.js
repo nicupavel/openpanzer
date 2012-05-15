@@ -113,8 +113,8 @@ function Render(mapObj)
 					
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
-				drawHexUnit(x0, y0, hex.getUnit(uiSettings.airMode)); //Unit above depending on airMode
-				drawHexUnit(x0, y0, hex.getUnit(!uiSettings.airMode));
+				drawHexUnit(x0, y0, hex.getUnit(!uiSettings.airMode)); //Unit below depending on airMode
+				drawHexUnit(x0, y0, hex.getUnit(uiSettings.airMode)); 
 			}
 		}
 	}
