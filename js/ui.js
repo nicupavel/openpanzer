@@ -129,7 +129,7 @@ function handleMouseClick(e)
 			}
 			else
 			{
-				if (hex.isMoveSel && uiSettings.airMode) //Move unit over clickedUnit (isMoveSel true only for air units)
+				if (hex.isMoveSel) //Move unit over/under clickedUnit
 					win = map.moveUnit(map.currentUnit, row, col);
 				else 
 					if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
