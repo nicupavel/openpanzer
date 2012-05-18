@@ -392,8 +392,13 @@ function Map()
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
+		
+		GameRules.getShortestPath(new Cell(s.row, s.col), new Cell(drow, dcol), moveSelected);
+		
 		this.delMoveSel();
 		this.setAttackRange(unit) //Put new attack range
+		
+		
 		
 		return win;
 	}

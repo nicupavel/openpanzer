@@ -170,12 +170,21 @@ function Cell(row, col)
 	//Where the hex is in the map array
 	this.row = row;
 	this.col = col;
-	//For the movement range
+	//For the movement range //TODO move this into an extendedCell object
 	this.range = 0; //the range that this cell is from a selected cell
 	this.cin = 0;   //the cost to enter the cell
 	this.cout = 0;  //the cost to exit the cell = cin + cell cost
 	this.cost = 0;  //terrain cost
 	this.allow = false; //if the movement is allowed on this cell after cost calculations
+}
+
+//an extended cell object used for shortest path calculations
+function pathCell(cell)
+{
+	this.row = cell.row;
+	this.col = cell.col;
+	this.prev = null;
+	this.dist = -1;
 }
 
 function combatResults()

@@ -148,6 +148,83 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 	return allowedCells;
 }
 
+GameRules.getShortestPath = function(startCell, endCell, cellList)
+{
+	var pCells = [];
+	var visitedCells = [];
+	
+	//add starting cell
+	var psCell = new pathCell(startCell);
+	psCell.dist = 0;
+	psCell.prev = psCell;
+	pCells.push(psCell);
+	var minDistCell = null;
+	var idx = -1;
+	
+	//add the rest of cells as pathCells into list
+	for (i = 0; i < cellList.length; i++)
+	{
+		var pc = new pathCell(cellList[i]);
+		pCells.push(pc);
+	}
+	
+	//console.log(pCells);
+	//console.log(minDistCell);
+	console.log("Looking for endpoint: ["+endCell.row+","+endCell.col+"]");
+	while (pCells.length > 0)
+	{
+		idx = 0;
+		minDistCell = pCells[0];
+		for (var i = 1; i < pCells.length; i++)
+		{
+			if (pCells[i].dist != -1 && pCells[i].dist <= minDistCell.dist)
+			{
+				//console.log("Found cell with dist: " + pCells[i].dist);
+				minDistCell = pCells[i];
+				idx = i;
+			}
+		}
+		
+		if (minDistCell.row == endCell.row && minDistCell.col == endCell.col)
+		{
+			var t = minDistCell;
+			console.log("Found shortest path from ["+ startCell.row +","+startCell.col+"] to "
+					+ "["+ t.row +","+t.col+"] Hops:" + t.dist);
+			console.log(t);
+			console.log(visitedCells);
+			//((t.cell.row != startCell.row) && (t.cell.col != startCell.col))
+			while(0)
+			{
+				console.log("["+t.row+","+t.col+"]");
+				if (t.prev === null) 
+					break;
+				t = t.prev;
+			}
+			break;
+		}
+
+		console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list");
+		visitedCells.push(pCells[idx]);
+		pCells.splice(idx, 1);
+		
+		for (var i = 0; i < pCells.length; i++)
+		{
+			if (isAdjacent(minDistCell.row, minDistCell.col, pCells[i].row, pCells[i].col))
+			{
+				console.log("Adjacent cell: [" + pCells[i].row + "," + pCells[i].col + "]");
+				if (pCells[i].dist == -1 || minDistCell.dist < pCells[i].dist)
+				{
+					pCells[i].dist = minDistCell.dist + 1;
+					pCells[i].prev = minDistCell;
+					//console.log("Changing on");
+					//console.log(pCells[i]);
+				}
+			}
+		}
+		
+	}
+}
+
 //aUnit from position aUnitPos attacks tUnit from tUnitPos
 //TODO dig the actual formula (how many pages it is ?) 
 //prolly depends on: weather, terrain, adjacent units (arty), initiative, fuel, ammo
