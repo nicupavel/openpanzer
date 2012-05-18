@@ -184,7 +184,7 @@ function pathCell(cell)
 	this.row = cell.row;
 	this.col = cell.col;
 	this.prev = null;
-	this.dist = -1;
+	this.dist = Infinity;
 }
 
 function combatResults()

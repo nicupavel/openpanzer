@@ -152,14 +152,15 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 {
 	var pCells = [];
 	var visitedCells = [];
-	
+	var shortestPath = [];
+	var minDistCell = null;
+	var idx = 0;
+
 	//add starting cell
 	var psCell = new pathCell(startCell);
 	psCell.dist = 0;
 	psCell.prev = psCell;
 	pCells.push(psCell);
-	var minDistCell = null;
-	var idx = -1;
 	
 	//add the rest of cells as pathCells into list
 	for (i = 0; i < cellList.length; i++)
@@ -168,8 +169,6 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		pCells.push(pc);
 	}
 	
-	//console.log(pCells);
-	//console.log(minDistCell);
 	console.log("Looking for endpoint: ["+endCell.row+","+endCell.col+"]");
 	while (pCells.length > 0)
 	{
@@ -177,11 +176,29 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		minDistCell = pCells[0];
 		for (var i = 1; i < pCells.length; i++)
 		{
-			if (pCells[i].dist != -1 && pCells[i].dist <= minDistCell.dist)
+			if (pCells[i].dist != Infinity && pCells[i].dist <= minDistCell.dist)
 			{
 				//console.log("Found cell with dist: " + pCells[i].dist);
 				minDistCell = pCells[i];
 				idx = i;
+			}
+		}
+		if (minDistCell.dist == Infinity)
+			return []; //No path
+			
+		console.log("Node: ["+minDistCell.row+","+minDistCell.col+"] Dist: " + minDistCell.dist);
+		for (var i = 0; i < pCells.length; i++)
+		{
+			if (isAdjacent(minDistCell.row, minDistCell.col, pCells[i].row, pCells[i].col))
+			{
+				//+1 is the cost since we don't consider terrain cost here.
+				if (pCells[i].dist == Infinity || (minDistCell.dist + 1) < pCells[i].dist)
+				{
+					pCells[i].dist = minDistCell.dist + 1;
+					pCells[i].prev = minDistCell;
+					console.log("\tAdjacent cell: [" + pCells[i].row + "," + pCells[i].col + "] Dist:"
+								+ pCells[i].dist + " Prev: [" + minDistCell.row + "," + minDistCell.col + "]");
+				}
 			}
 		}
 		
@@ -190,39 +207,23 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 			var t = minDistCell;
 			console.log("Found shortest path from ["+ startCell.row +","+startCell.col+"] to "
 					+ "["+ t.row +","+t.col+"] Hops:" + t.dist);
-			console.log(t);
-			console.log(visitedCells);
-			//((t.cell.row != startCell.row) && (t.cell.col != startCell.col))
-			while(0)
+			while( !((t.row == startCell.row) && (t.col == startCell.col)))
 			{
 				console.log("["+t.row+","+t.col+"]");
-				if (t.prev === null) 
-					break;
-				t = t.prev;
+				shortestPath.unshift(t);
+				if (t.prev !== null || typeof t !== undefined)
+					t = t.prev;
 			}
-			break;
+			return shortestPath;
 		}
 
-		console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list");
+		console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list Prev: [" 
+					+ minDistCell.prev.row + "," + minDistCell.prev.col + "]");
 		visitedCells.push(pCells[idx]);
 		pCells.splice(idx, 1);
-		
-		for (var i = 0; i < pCells.length; i++)
-		{
-			if (isAdjacent(minDistCell.row, minDistCell.col, pCells[i].row, pCells[i].col))
-			{
-				console.log("Adjacent cell: [" + pCells[i].row + "," + pCells[i].col + "]");
-				if (pCells[i].dist == -1 || minDistCell.dist < pCells[i].dist)
-				{
-					pCells[i].dist = minDistCell.dist + 1;
-					pCells[i].prev = minDistCell;
-					//console.log("Changing on");
-					//console.log(pCells[i]);
-				}
-			}
-		}
-		
 	}
+	
+	return [];
 }
 
 //aUnit from position aUnitPos attacks tUnit from tUnitPos
