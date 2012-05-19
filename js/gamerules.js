@@ -52,7 +52,10 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		for (var i = 0; i < c.length; i++)
 		{
 			if (canMoveInto(map, unit, c[i]))
+			{
+				c[i].canMove = true;
 				allowedCells.push(c[i]);
+			}
 		}
 		return allowedCells;
 	}
