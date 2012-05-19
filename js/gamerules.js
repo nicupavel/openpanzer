@@ -152,7 +152,7 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 GameRules.getShortestPath = function(startCell, endCell, cellList)
 {
 	var pCells = [];
-	var visitedCells = [];
+	var visitedCells = []; 
 	var shortestPath = [];
 	var minDistCell = null;
 	var idx = 0;
@@ -170,7 +170,7 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		pCells.push(pc);
 	}
 	
-	console.log("Looking for endpoint: ["+endCell.row+","+endCell.col+"]");
+	//console.log("Looking for endpoint: ["+endCell.row+","+endCell.col+"]");
 	while (pCells.length > 0)
 	{
 		idx = 0;
@@ -187,7 +187,7 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		if (minDistCell.dist == Infinity)
 			return []; //No path
 			
-		console.log("Node: ["+minDistCell.row+","+minDistCell.col+"] Dist: " + minDistCell.dist);
+		//console.log("Node: ["+minDistCell.row+","+minDistCell.col+"] Dist: " + minDistCell.dist);
 		for (var i = 0; i < pCells.length; i++)
 		{
 			if (isAdjacent(minDistCell.row, minDistCell.col, pCells[i].row, pCells[i].col))
@@ -197,8 +197,8 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 				{
 					pCells[i].dist = minDistCell.dist + 1;
 					pCells[i].prev = minDistCell;
-					console.log("\tAdjacent cell: [" + pCells[i].row + "," + pCells[i].col + "] Dist:"
-								+ pCells[i].dist + " Prev: [" + minDistCell.row + "," + minDistCell.col + "]");
+					//console.log("\tAdjacent cell: [" + pCells[i].row + "," + pCells[i].col + "] Dist:"
+					//			+ pCells[i].dist + " Prev: [" + minDistCell.row + "," + minDistCell.col + "]");
 				}
 			}
 		}
@@ -206,20 +206,20 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		if (minDistCell.row == endCell.row && minDistCell.col == endCell.col)
 		{
 			var t = minDistCell;
-			console.log("Found shortest path from ["+ startCell.row +","+startCell.col+"] to "
-					+ "["+ t.row +","+t.col+"] Hops:" + t.dist);
+			//console.log("Found shortest path from ["+ startCell.row +","+startCell.col+"] to "
+			//		+ "["+ t.row +","+t.col+"] Hops:" + t.dist);
 			while( !((t.row == startCell.row) && (t.col == startCell.col)))
 			{
-				console.log("["+t.row+","+t.col+"]");
-				shortestPath.unshift(t);
+				//console.log("["+t.row+","+t.col+"]");
+				shortestPath.unshift(t); //add on top
 				if (t.prev !== null || typeof t !== undefined)
 					t = t.prev;
 			}
 			return shortestPath;
 		}
 
-		console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list Prev: [" 
-					+ minDistCell.prev.row + "," + minDistCell.prev.col + "]");
+		//console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list Prev: [" 
+		//			+ minDistCell.prev.row + "," + minDistCell.prev.col + "]");
 		visitedCells.push(pCells[idx]);
 		pCells.splice(idx, 1);
 	}
