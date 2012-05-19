@@ -79,7 +79,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 						else
 							c[j].cost = moveCost[hex.terrain];
 						
-						//enemy unit zone of control ? no ZOC for air units
+						//enemy unit zone of control ? no ZOC for air units //TODO Set ZOC for adjancent hexes too
 						if (isGround(unit) && hex.unit !== null && hex.unit.player.side != unit.player.side)
 						{
 							c[j].cost = 254;
@@ -94,10 +94,17 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 							c[j].cout = c[j].cin + c[j].cost;
 						}
 						//console.log("\t Hex at Row:" + c[j].row + " Col:" + c[j].col + " RANGE:" + c[j].range + " CIN:" + c[j].cin + " COUT:" + c[j].cout + " COST:" + c[j].cost);
-						if ((canMoveInto(map, unit, c[j])) && 
-							((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin < range)))) 
+						if ((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin < range))) 
 						{
-							c[j].allow = true;
+							if (canMoveInto(map, unit, c[j])) 
+								c[j].canMove = true; //To allow unit to move in this hex
+							else
+								if (canPassInto(map, unit, c[j])) 
+									c[j].canPass = true; //To allow friendly units pass thru this hex
+								else
+									continue; //Skip don't add the cell as allowed
+							
+							allowedCells.push(c[j]);
 							//console.log("\t\tSelected Hex at Row:" + c[j].row + " Col:" + c[j].col);
 						}
 					}
@@ -105,12 +112,6 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 			}
 		}
 		r++;
-	}
-	
-	for (var i = 0; i < c.length; i++)
-	{
-		if (c[i].allow == true)
-			allowedCells.push(c[i]);
 	}
 	
 	return allowedCells;
@@ -455,6 +456,26 @@ function canMoveInto(map, unit, cell)
 		if (hex.airunit === null) return true;
 	}
 	
+	return false;
+
+}
+
+//Checks if a unit can pass thru a hex ocupied by a friendly unit
+function canPassInto(map, unit, cell)
+{
+	hex = map[cell.row][cell.col];
+	
+	if (isGround(unit) || isSea(unit))
+	{
+		if (hex.unit === null) 	return true;
+		if (hex.unit.player.side == unit.player.side) 	return true;	
+	}
+	if (isAir(unit))
+	{
+		if (hex.airunit === null) return true;
+		if (hex.airunit.player.side == unit.player.side) return true;
+	}
+
 	return false;
 }
 

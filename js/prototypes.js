@@ -175,7 +175,8 @@ function Cell(row, col)
 	this.cin = 0;   //the cost to enter the cell
 	this.cout = 0;  //the cost to exit the cell = cin + cell cost
 	this.cost = 0;  //terrain cost
-	this.allow = false; //if the movement is allowed on this cell after cost calculations
+	this.canMove = false; //if the movement is allowed on this cell after cost calculations
+	this.canPass = false; //if friendly units can pass thru this cell
 }
 
 //an extended cell object used for shortest path calculations

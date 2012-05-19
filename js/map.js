@@ -281,8 +281,8 @@ function Map()
 		
 		for (var i = 0; i < c.length; i++)
 		{
-			moveSelected.push(c[i]);
-			this.map[c[i].row][c[i].col].isMoveSel = true; 
+			moveSelected.push(c[i]); //Push both canPass and canMove for the shortestPath function
+			if (c[i].canMove) this.map[c[i].row][c[i].col].isMoveSel = true; //Only allow canMove destination hexes on map
 		}
 	}
 	
