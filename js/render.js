@@ -106,8 +106,8 @@ function Render(mapObj)
 					
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
-				drawHexUnit(x0, y0, hex.getUnit(!uiSettings.airMode)); //Unit below depending on airMode
-				drawHexUnit(x0, y0, hex.getUnit(uiSettings.airMode)); 
+				drawHexUnit(c, x0, y0, hex.getUnit(!uiSettings.airMode), false); //Unit below depending on airMode
+				drawHexUnit(c, x0, y0, hex.getUnit(uiSettings.airMode), true); 
 			}
 		}
 	}
@@ -419,7 +419,7 @@ function Render(mapObj)
 		c.restore();
 	}
 	
-	function drawHexUnit(x0, y0, unit)
+	function drawHexUnit(c, x0, y0, unit, drawIndicators)
 	{
 		if (unit === null)
 			return;
@@ -454,6 +454,8 @@ function Render(mapObj)
 			if (mirror) c.restore();
 		}
 
+		if (!drawIndicators) return;
+		
 		//Write unit strength in a box below unit
 		c.font = unitTextHeight + "px sans-serif";
 		var text = "" + unit.strength;
