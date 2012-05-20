@@ -80,7 +80,7 @@ function Render(mapObj)
 			{
 				hex = map.map[row][col];
 				style = styles.generic;
-				//flat-out hex layout
+				//flat-out hex layout //inline for performance gain
 				if (col & 1) // odd column
 				{
 					y0 =  row * 2 * r + r + renderOffsetY;
@@ -177,20 +177,9 @@ function Render(mapObj)
 			facing = direction.N;
 			
 		var anim = animationsData[animationName];
-		
-		if (col & 1) // odd column
-		{
-			y0 =  row * 2 * r + r + renderOffsetY;
-			x0 =  col * (s + h) + h + renderOffsetX;
-		}
-		else
-		{
-			y0 = row * 2 * r  + renderOffsetY;
-			x0 = col * (s + h) + h + renderOffsetX;
-		}
-		
-		y0 = parseInt(y0 - anim.image.height/2 + r);
-		x0 = parseInt(x0 - anim.width/2 + s/2);
+		var pos = cellToScreen(row, col);
+		var y0 = parseInt(pos.y - anim.image.height/2 + r);
+		var x0 = parseInt(pos.x - anim.width/2 + s/2);
 
 		animationChain.add({
 			ctx:a, 
@@ -221,6 +210,23 @@ function Render(mapObj)
 		
 		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + tcol + "]");
 		return new Cell(trow, tcol);
+	}
+	
+	//Returns the top corner position in screen coordinates 
+	function cellToScreen(row, col)
+	{
+		if (col & 1) // odd column
+		{
+			y0 =  row * 2 * r + r + renderOffsetY;
+			x0 =  col * (s + h) + h + renderOffsetX;
+		}
+		else
+		{
+			y0 = row * 2 * r  + renderOffsetY;
+			x0 = col * (s + h) + h + renderOffsetX;
+		}
+		
+		return new screenPos(x0, y0);
 	}
 	
 	//Caches images, func a function to call upon cache completion

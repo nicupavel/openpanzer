@@ -158,13 +158,6 @@ var directionToRadians = [
 	7*Math.PI/6, //SSW
 ];
 
-function mouseInfo(x, y, rclick)
-{
-	this.x = x;
-	this.y = y;
-	this.rclick = rclick;
-}
-
 function Cell(row, col)
 {
 	//Where the hex is in the map array
@@ -203,6 +196,19 @@ function Supply(a, f)
 {
 	this.ammo = a;
 	this.fuel = f;
+}
+
+function mouseInfo(x, y, rclick)
+{
+	this.x = x;
+	this.y = y;
+	this.rclick = rclick;
+}
+
+function screenPos(x, y)
+{
+	this.x = x;
+	this.y = y;
 }
 
 var VERSION = "1.7";
