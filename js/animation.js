@@ -66,7 +66,6 @@ function Animation(o)
 	function animate()
 	{
 		o.ctx.clearRect(o.x, o.y, o.width, o.height);
-		
 		o.ctx.save();
 		o.ctx.translate(o.x + o.width/2, o.y + o.height/2);
 		o.ctx.rotate(o.rotate);

@@ -211,13 +211,18 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 			var t = minDistCell;
 			//console.log("Found shortest path from ["+ startCell.row +","+startCell.col+"] to "
 			//		+ "["+ t.row +","+t.col+"] Hops:" + t.dist);
-			while( !((t.row == startCell.row) && (t.col == startCell.col)))
+			while(true)
 			{
 				//console.log("["+t.row+","+t.col+"]");
 				shortestPath.unshift(t); //add on top
+				if ((t.row == startCell.row) && (t.col == startCell.col))
+					break;
+					
 				if (t.prev !== null || typeof t !== undefined)
 					t = t.prev;
-			}
+				else
+					break;
+			}	
 			return shortestPath;
 		}
 

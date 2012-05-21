@@ -160,7 +160,8 @@ function handleMouseClick(e)
 				log += "[" + c[i].row + "," + c[i].col + "] ";
 			
 			console.log(log);
-			r.unitMoveAnimation(map.currentUnit, c);
+			
+			r.moveAnimation(map.currentUnit, c);
 			win = map.moveUnit(map.currentUnit, row, col);
 		}
 		else //remove current selection

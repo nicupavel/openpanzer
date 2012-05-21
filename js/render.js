@@ -56,7 +56,7 @@ function Render(mapObj)
 	var styles = new RenderStyle();
 	//Render Settings from UI
 	var uiSettings = null;
-	
+		
 	createLayers(); //Creates canvas layers
 				
 	this.render = function()
@@ -195,30 +195,57 @@ function Render(mapObj)
 		return true;
 	}
 	
-	//Animates the unit moving thru a list of cells
-	this.unitMoveAnimation = function(unit, cellList)
+	this.moveAnimation = function(unit, cellList)
 	{
 		if (unit === null) return;
+		var ma = new MoveAnimation(unit, cellList);
+		ma.movTimer = setInterval( function() { ma.start();}, 25);
+	}
+	
+	//Animates the unit moving thru a list of cells
+	function MoveAnimation (unit, cellList)
+	{
+		var animSteps = 7;
+		var movIndex = 0;
+		var movStep = 0;
 		
-		var animSteps = 10;
-		var cCell = unit.getPos();
-		var cPos = cellToScreen(cCell.row, cCell.col);
+		this.movTimer = null;
 		
-		
-		for (var i = 0; i < cellList.length ; i++)
+		this.start = function()
 		{
-			var dPos = cellToScreen(cellList[i].row, cellList[i].col);
-			var xstep = parseInt((dPos.x - cPos.x)/animSteps);
-			var ystep = parseInt((dPos.y - cPos.y)/animSteps);
-			unit.facing = GameRules.getDirection(cCell.row, cCell.col, cellList[i].row, cellList[i].col);
-			
-			for (var j = animSteps; j > 0; j--)
+			if (movIndex >= cellList.length - 1)
 			{
-				cPos.x += xstep;
-				cPos.y += ystep;
-				drawHexUnit(a, cPos.x, cPos.y, unit, false);
+				movStep = 0;
+				movIndex = 0;
+				clearInterval(this.movTimer);
+				console.log("Stopping animation for unit id:" + unit.id);
+				return;
+			}	
+		
+			if (movStep == 0)
+			{
+				cCell = cellList[movIndex];
+				dCell = cellList[movIndex + 1];
+			
+				cPos = cellToScreen(cCell.row, cCell.col);
+				dPos = cellToScreen(dCell.row, dCell.col);
+				
+				xstep = parseInt((dPos.x - cPos.x)/animSteps);
+				ystep = parseInt((dPos.y - cPos.y)/animSteps);
+			
+				unit.facing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col);
 			}
-			cPos = dPos;
+			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
+			cPos.x += xstep;
+			cPos.y += ystep;
+			drawHexUnit(a, cPos.x, cPos.y, unit, false);
+			movStep++;
+			
+			if (movStep >= animSteps) 
+			{
+				movIndex++;
+				movStep = 0;
+			}
 		}
 	}
 		
@@ -456,7 +483,7 @@ function Render(mapObj)
 	{
 		if (unit === null)
 			return;
-			
+
 		image = imgUnits[unit.getIcon()];
 		if (image) 
 		{
