@@ -194,6 +194,33 @@ function Render(mapObj)
 		
 		return true;
 	}
+	
+	//Animates the unit moving thru a list of cells
+	this.unitMoveAnimation = function(unit, cellList)
+	{
+		if (unit === null) return;
+		
+		var animSteps = 10;
+		var cCell = unit.getPos();
+		var cPos = cellToScreen(cCell.row, cCell.col);
+		
+		
+		for (var i = 0; i < cellList.length ; i++)
+		{
+			var dPos = cellToScreen(cellList[i].row, cellList[i].col);
+			var xstep = parseInt((dPos.x - cPos.x)/animSteps);
+			var ystep = parseInt((dPos.y - cPos.y)/animSteps);
+			unit.facing = GameRules.getDirection(cCell.row, cCell.col, cellList[i].row, cellList[i].col);
+			
+			for (var j = animSteps; j > 0; j--)
+			{
+				cPos.x += xstep;
+				cPos.y += ystep;
+				drawHexUnit(a, cPos.x, cPos.y, unit, false);
+			}
+			cPos = dPos;
+		}
+	}
 		
 	//Converts from screen x,y to row,col in map array
 	this.screenToCell = function(x, y)

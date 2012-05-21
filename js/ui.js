@@ -150,8 +150,19 @@ function handleMouseClick(e)
 	else //No unit on clicked hex
 	{
 		//move to an empty allowed hex
-		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null) 
+		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
+		{
+			var s = map.currentUnit.getPos();
+			var c = GameRules.getShortestPath(s, new Cell(row, col), map.getCurrentMoveRange());
+			
+			var log = "Shortest path from [" + s.row + "," + s.col + "] to [" + row + "," + col + "] is: ";
+			for (var i = 0; i < c.length; i++)
+				log += "[" + c[i].row + "," + c[i].col + "] ";
+			
+			console.log(log);
+			r.unitMoveAnimation(map.currentUnit, c);
 			win = map.moveUnit(map.currentUnit, row, col);
+		}
 		else //remove current selection
 			map.delCurrentUnit();
 	}

@@ -285,6 +285,11 @@ function Map()
 			if (c[i].canMove) this.map[c[i].row][c[i].col].isMoveSel = true; //Only allow canMove destination hexes on map
 		}
 	}
+
+	this.getCurrentMoveRange = function()
+	{
+		return moveSelected;
+	}
 	
 	this.setAttackRange = function(unit)
 	{
@@ -393,13 +398,6 @@ function Map()
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
 		
-		var c = GameRules.getShortestPath(new Cell(s.row, s.col), new Cell(drow, dcol), moveSelected);
-		
-		var log = "Shortest path from [" + s.row + "," + s.col + "] to [" + drow + "," + dcol + "] is: ";
-		for (var i = 0; i < c.length; i++)
-			log += "[" + c[i].row + "," + c[i].col + "] ";
-			
-		console.log(log);
 		this.delMoveSel();
 		this.setAttackRange(unit) //Put new attack range
 
