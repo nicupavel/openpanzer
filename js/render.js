@@ -243,9 +243,13 @@ function Render(mapObj)
 				
 				xstep = parseInt((dPos.x - cPos.x)/animSteps);
 				ystep = parseInt((dPos.y - cPos.y)/animSteps);
+				
+				actualFacing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col); 
 			
-				//unit.facing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col);
+				if (Math.abs(actualFacing - unit.facing) > 1) 
+					unit.facing = actualFacing;
 			}
+
 			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
 			cPos.x += xstep;
 			cPos.y += ystep;
