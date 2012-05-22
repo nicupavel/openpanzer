@@ -66,6 +66,7 @@ function Render(mapObj)
 		var style;
 		var hex;
 		var current = null;
+		var unit = null;
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
@@ -106,8 +107,15 @@ function Render(mapObj)
 					
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
-				drawHexUnit(c, x0, y0, hex.getUnit(!uiSettings.airMode), false); //Unit below depending on airMode
-				drawHexUnit(c, x0, y0, hex.getUnit(uiSettings.airMode), true); 
+
+				//Don't render unit if it has a move animation
+				unit = hex.getUnit(!uiSettings.airMode);
+				if (unit !== null && !unit.hasAnimation)
+					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode
+
+				unit = hex.getUnit(uiSettings.airMode);
+				if (unit !== null && !unit.hasAnimation)
+					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 			}
 		}
 	}
@@ -195,20 +203,22 @@ function Render(mapObj)
 		return true;
 	}
 	
+	//TODO stop another running animation 
 	this.moveAnimation = function(unit, cellList)
 	{
 		if (unit === null) return;
 		var ma = new MoveAnimation(unit, cellList);
-		ma.movTimer = setInterval( function() { ma.start();}, 25);
+		ma.movTimer = setInterval( function() { ma.start();}, 30);
 	}
 	
 	//Animates the unit moving thru a list of cells
 	function MoveAnimation (unit, cellList)
 	{
-		var animSteps = 7;
+		var animSteps = 5;
 		var movIndex = 0;
 		var movStep = 0;
 		
+		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
 		this.start = function()
@@ -218,9 +228,10 @@ function Render(mapObj)
 				movStep = 0;
 				movIndex = 0;
 				clearInterval(this.movTimer);
+				unit.hasAnimation = false;
 				console.log("Stopping animation for unit id:" + unit.id);
 				return;
-			}	
+			}
 		
 			if (movStep == 0)
 			{
@@ -233,7 +244,7 @@ function Render(mapObj)
 				xstep = parseInt((dPos.x - cPos.x)/animSteps);
 				ystep = parseInt((dPos.y - cPos.y)/animSteps);
 			
-				unit.facing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col);
+				//unit.facing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col);
 			}
 			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
 			cPos.x += xstep;

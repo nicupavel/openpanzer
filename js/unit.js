@@ -57,6 +57,7 @@ function Unit(equipmentID)
 	//TODO ugly way because it needs to be saved in GameState
 	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
 	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
+	this.hasAnimation = false; //flag if the unit has a move animation
 	
 	//Clone object
 	this.copy = function(u) 
