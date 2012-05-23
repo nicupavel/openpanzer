@@ -218,7 +218,7 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 				if ((t.row == startCell.row) && (t.col == startCell.col))
 					break;
 					
-				if (t.prev !== null || typeof t !== undefined)
+				if (t.prev !== null || typeof t !== "undefined")
 					t = t.prev;
 				else
 					break;

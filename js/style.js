@@ -52,7 +52,7 @@ function RenderStyle()
 	
 	this.setTheme = function(customTheme)
 	{
-		if (customTheme === null || typeof(customTheme) === "undefined") { theme = pg2hexstyle; }
+		if (customTheme === null || typeof customTheme === "undefined") { theme = pg2hexstyle; }
 		theme = customTheme;
 	}
 

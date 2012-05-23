@@ -39,7 +39,7 @@ function Transport(equipmentID)
 
 function Unit(equipmentID)
 {
-	if (typeof equipment[equipmentID] === 'undefined') { equipmentID = 1; }
+	if (typeof equipment[equipmentID] === "undefined") { equipmentID = 1; }
 	this.id = -1;
 	this.eqid = equipmentID;
 	this.owner = -1;

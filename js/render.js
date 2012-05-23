@@ -412,9 +412,9 @@ function Render(mapObj)
 
 		for (i in imgList)
 		{
-			if (imgUnits[imgList[i]] != undefined )
+			if (typeof imgUnits[imgList[i]] !== "undefined" )
 			{
-				//Already loaded
+				//console.log("Already loaded");
 				loaded++;
 				continue;
 			}

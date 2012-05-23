@@ -54,7 +54,7 @@ function handleMouseClick(e)
 	var col = cell.col;
 	
 	var hex = map.map[row][col];
-	if (hex == undefined)
+	if (typeof hex === "undefined")
 	{
 		console.log("Undefined hex:" + row + "," + col);
 		return true;
@@ -357,7 +357,7 @@ function updateUnitInfoWindow(u)
 	$('unit-info').style.visibility  = "visible";
 	
 	//Call from equipment window
-	if (typeof (u.unitData) === 'undefined') 
+	if (typeof u.unitData === "undefined") 
 	{
 		uinfo = u;
 		u.flag = u.country;
@@ -492,7 +492,7 @@ function buildEquipmentWindow()
 			//TODO Test change it
 			var id = $('eqUserSel').userunit;
 			var eqid = $('eqUserSel').equnit;
-			if (id == undefined || eqid == undefined)
+			if (typeof id === "undefined" || typeof eqid === "undefined")
 				return;
 			console.log("Upgrading unit: " + id + " to equipment id:" + eqid);
 			map.upgradeUnit(id, eqid);

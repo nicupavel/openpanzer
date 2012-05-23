@@ -91,7 +91,7 @@ function Hex(row, col)
 	this.setUnit = function(unit) 
 	{ 
 		//Will return if unit object is just a copy.
-		if (unit === null || unit.setHex == undefined)
+		if (unit === null || typeof unit.setHex === "undefined")
 			return;
 		unit.setHex(this);
 		if (GameRules.isAir(unit))
@@ -102,7 +102,7 @@ function Hex(row, col)
 	
 	this.delUnit = function(unit) 
 	{
-		if (unit === null || unit.setHex == undefined)
+		if (unit === null || typeof unit.setHex === "undefined")
 			return;
 		unit.setHex(null);
 		//TODO revise this. check units id ?
