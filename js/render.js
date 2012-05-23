@@ -74,6 +74,7 @@ function Render(mapObj)
 		styles.setHexGrid(uiSettings.hexGrid);
 		
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+		a.clearRect(0, 0, a.canvas.width, a.canvas.height);
 		for (row = 0; row < map.rows; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
