@@ -186,12 +186,14 @@
 
 @-webkit-keyframes unitanim
 {
-	from {background-position:0px;}
-	to {background-position:-720px;}
+	/*from {background-position:0px;}
+	to {background-position:-720px;}*/
+	from {background-position:0% 50%;}
+	to {background-position:112% 50%;}
 }
 
 @-moz-keyframes unitanim
 {
-	from {background-position:0px;}
-	to {background-position:-720px;}
+	from {background-position:0% 50%;}
+	to {background-position:112% 50%;}
 }
