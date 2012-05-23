@@ -82,40 +82,28 @@ function handleMouseClick(e)
 		{
 			//attack an allowed hex unit
 			if (hex.isAttackSel && !map.currentUnit.hasFired)
-			{
 				handleUnitAttack(row, col);
-			}
 			else
-			{
 				if (hex.isMoveSel) //Move unit over/under clickedUnit
-					win = handleUnitMove(row, col);
+					handleUnitMove(row, col);
 				else 
-					if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-						map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
-			}
+					handleUnitSelect(row, col);
 		}	
 		else //No current unit select new one
 		{
-			if (!map.selectUnit(clickedUnit)) //can fail if clickedUnit is on enemy side
-				map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
+			handleUnitSelect(row, col);
 		}
-		
-		//TODO make unitList show strength/movement/attack status and update it on all actions
-		//var c  = clickedUnit.country;
-		//$('eqSelCountry').country = c + 1;
-		//updateEquipmentWindow(clickedUnit.unitData().class); 
 	}	
 	else //No unit on clicked hex
 	{
 		//move to an empty allowed hex
 		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
-			win = handleUnitMove(row, col);
+			handleUnitMove(row, col);
 		else //remove current selection
 			map.delCurrentUnit();
 	}
-	
-	if (win >= 0) 
-		uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
+
+	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions
 	
 	//Set the airMode depending on current unit automatically
 	if (GameRules.isAir(map.currentUnit)) 
@@ -146,6 +134,21 @@ function handleMouseMove(e)
 	$('locmsg').innerHTML = text;
 }
 
+//handle the selection of a new unit
+function handleUnitSelect(row, col)
+{
+	var hex = map.map[row][col];
+	if (!map.selectUnit(hex.getUnit(uiSettings.airMode))) //can fail if clickedUnit is on enemy side
+		map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
+
+	if (map.currentUnit === null) 
+		return;
+	//Select unit on equipment window
+	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
+	if ($('equipment').style.visibility == "visible")
+		updateEquipmentWindow(map.currentUnit.unitData().class);	
+}
+
 //handle the move of currently selected unit to row,col destination
 function handleUnitMove(row, col)
 {
@@ -153,7 +156,9 @@ function handleUnitMove(row, col)
 	//TODO surprise contact
 	var c = GameRules.getShortestPath(s, new Cell(row, col), map.getCurrentMoveRange());
 	r.moveAnimation(map.currentUnit, c);
-	return map.moveUnit(map.currentUnit, row, col);
+	win = map.moveUnit(map.currentUnit, row, col);
+	if (win >= 0) 
+		uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
 }
 
 //handle attack performed by currently selected unit on row,col unit
