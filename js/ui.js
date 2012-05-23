@@ -453,20 +453,13 @@ function buildEquipmentWindow()
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 	
 	//The default selected country in the div
-	var c = 0;
-	var pos = -21 * countries[c];
-	$('eqSelCountry').country = c;
+	$('eqSelCountry').country = 0;
 	$('eqSelCountry').owner = 0;
-	$('eqSelCountry').style.backgroundPosition = "" + pos + "px 0px";
 	$('eqSelCountry').title = 'Click to change country';
 	$('eqSelCountry').onclick = function() 
 		{
-			var c = this.country; 
-			if (c >= countries.length - 1) c = 0; 
-			else c++;
-			var flagPos = -21 * countries[c];
-			this.style.backgroundPosition = "" + flagPos +"px 0px";
-			this.country = c; 
+			if (this.country >= countries.length - 1) this.country = 0; 
+			else this.country++;
 			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
@@ -519,6 +512,7 @@ function updateEquipmentWindow(eqclass)
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
+	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
 	
 	//The actual units on the map
 	var userUnitSelected = $('eqUserSel').userunit;
@@ -546,10 +540,14 @@ function updateEquipmentWindow(eqclass)
 			txt.innerHTML = ud.name;
 			div.unitid = u.id;
 			div.eqclass = ud.class;
-			div.country = ud.country;
+			div.country = u.player.country;
 			div.onclick = function() 
 				{ 
-					$('eqUserSel').userunit = this.unitid; //save selected player unit 
+					c = map.getCountries();
+					for (i = 0; i < c.length; i++)
+						if (c[i] == this.country) break;
+					$('eqSelCountry').country = i;	
+					$('eqUserSel').userunit = this.unitid; //save selected player unit
 					updateEquipmentWindow(this.eqclass);
 				}
 		}
