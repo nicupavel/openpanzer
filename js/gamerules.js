@@ -693,13 +693,9 @@ GameRules.unitUsesFuel = function(unit)
 //Returns aproximate cardinal directions x row, y col
 GameRules.getDirection = function(x1, y1, x2, y2)
 {
+	if (y1 & 1 && x1 == x2) x1++;
+	if (y2 & 1 && x1 == x2) x2++;
 	
-	if ((y1 - y2) % 2)
-		if (x2 >= x1)
-			x2++;
-		else
-			x2--;
-		
 	var dx = x1 - x2;
 	var dy = y1 - y2;
 	var delta = 0; //Gets added or substracted from a ordinal direction to get subdivisions
@@ -714,7 +710,7 @@ GameRules.getDirection = function(x1, y1, x2, y2)
 		delta = 1;
 	if (r < 0)
 		delta = -1;
-	console.log("DX:" + dx + " DY:" + dy + " Ratio:" + r + " Delta:" + delta);
+	//console.log("DX:" + dx + " DY:" + dy + " Ratio:" + r + " Delta:" + delta);
 	if (dx > 0)
 	{
 		if (dy > 0)
