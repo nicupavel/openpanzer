@@ -612,6 +612,16 @@ function uiEndTurnInfo()
 	return infoStr;	
 }
 
+function uiViewPort(x, y)
+{
+	var offsetX = x - (window.innerWidth + document.body.scrollLeft);
+	var offsetY = y - (window.innerHeight + document.body.scrollTop);
+	if (offsetX > 0) document.body.scrollLeft += offsetX;
+	if (offsetY > 0) document.body.scrollTop += offsetY;
+	
+	console.log("OffsetX: " + offsetX + " OffsetY:" + offsetY);
+}
+
 //Selects the first unit that belongs to the currently playing side
 function selectStartingUnit()
 {
