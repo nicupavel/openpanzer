@@ -155,6 +155,7 @@ function handleUnitMove(row, col)
 	var s = map.currentUnit.getPos();
 	//TODO surprise contact
 	var c = GameRules.getShortestPath(s, new Cell(row, col), map.getCurrentMoveRange());
+	soundData["infmove"].play();
 	r.moveAnimation(map.currentUnit, c);
 	win = map.moveUnit(map.currentUnit, row, col);
 	if (win >= 0) 
