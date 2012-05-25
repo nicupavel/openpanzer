@@ -146,7 +146,7 @@ function handleUnitSelect(row, col)
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
 	if ($('equipment').style.visibility == "visible")
-		updateEquipmentWindow(map.currentUnit.unitData().class);	
+		updateEquipmentWindow(map.currentUnit.unitData().uclass);	
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -168,15 +168,15 @@ function handleUnitAttack(row, col)
 	if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
 		var cpos = map.currentUnit.getPos();
-		var cclass = map.currentUnit.unitData().class;
-		var eclass = enemyUnit.unitData().class;
+		var cclass = map.currentUnit.unitData().uclass;
+		var eclass = enemyUnit.unitData().uclass;
 
 		var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
 		//Support Fire
 		for (var u in supportUnits)
 		{
 			var sp = supportUnits[u].getPos();
-			var sclass = supportUnits[u].unitData().class;
+			var sclass = supportUnits[u].unitData().uclass;
 			if (map.currentUnit.destroyed)
 				break;
  			map.attackUnit(supportUnits[u], map.currentUnit, true);
@@ -544,7 +544,7 @@ function updateEquipmentWindow(eqclass)
 			img.src = ud.icon;
 			txt.innerHTML = ud.name;
 			div.unitid = u.id;
-			div.eqclass = ud.class;
+			div.eqclass = ud.uclass;
 			div.country = u.player.country;
 			div.onclick = function() 
 				{ 
@@ -567,7 +567,7 @@ function updateEquipmentWindow(eqclass)
 	for (var i in equipment)
 	{
 		var u = equipment[i];
-		if ((u.class == eqclass) && (u.country == country))
+		if ((u.uclass == eqclass) && (u.country == country))
 		{
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');

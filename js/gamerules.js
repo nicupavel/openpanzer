@@ -37,7 +37,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		
 	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
 	if ((movmethod == movMethod.towed) && (unit.transport === null) 
-		&& (range == 0) && (ud.class != unitClass.fortification))
+		&& (range == 0) && (ud.uclass != unitClass.fortification))
 	{
 		range = 1;	
 	}
@@ -577,13 +577,13 @@ GameRules.getSupportFireUnits = function(unitList, atkunit, defunit)
 		
 		if (!isAir(atkunit)) //Ground attack
 		{
-			if (ud.class == unitClass.artillery && canAttack(u, atkunit)) //TODO special bit for support fire
+			if (ud.uclass == unitClass.artillery && canAttack(u, atkunit)) //TODO special bit for support fire
 				supportUnits.push(u);
 		}
 		else //Air Attack
 		{
-			if ((ud.class == unitClass.flak || ud.class == unitClass.airDefence ||
-			     ud.class == unitClass.fighter) && canAttack(u, atkunit))
+			if ((ud.uclass == unitClass.flak || ud.uclass == unitClass.airDefence ||
+			     ud.uclass == unitClass.fighter) && canAttack(u, atkunit))
 				supportUnits.push(u);
 		}
 	}
