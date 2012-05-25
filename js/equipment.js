@@ -5,7 +5,6 @@ var equipment = {
         "airdef": 6, 
         "ammo": 24, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 11, 
         "country": 6, 
@@ -23,14 +22,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "2": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 11, 
         "country": 6, 
@@ -48,14 +47,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "3": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 6, 
@@ -73,14 +72,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "4": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 18, 
         "country": 6, 
@@ -98,14 +97,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "5": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 2, 
         "cost": 23, 
         "country": 6, 
@@ -123,14 +122,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "6": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 21, 
         "country": 6, 
@@ -148,14 +147,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "7": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 27, 
         "country": 6, 
@@ -173,14 +172,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "8": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 6, 
@@ -198,14 +197,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "9": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 21, 
         "country": 6, 
@@ -223,14 +222,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "10": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 6, 
@@ -248,14 +247,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "11": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 6, 
@@ -273,14 +272,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "12": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 6, 
@@ -298,14 +297,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "13": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 6, 
@@ -323,14 +322,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "14": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 6, 
@@ -348,14 +347,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "15": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 16, 
         "country": 6, 
@@ -373,14 +372,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "16": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 24, 
         "country": 6, 
@@ -398,14 +397,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "17": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 24, 
         "country": 6, 
@@ -423,14 +422,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "18": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 28, 
         "country": 6, 
@@ -448,14 +447,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "19": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 6, 
@@ -473,14 +472,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "20": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 6, 
@@ -498,14 +497,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "21": {
         "airatk": 12, 
         "airdef": 12, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 6, 
@@ -523,14 +522,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "22": {
         "airatk": 6, 
         "airdef": 5, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 23, 
         "country": 6, 
@@ -548,14 +547,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "23": {
         "airatk": 8, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 28, 
         "country": 6, 
@@ -573,14 +572,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "24": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 35, 
         "country": 6, 
@@ -598,14 +597,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "25": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 6, 
@@ -623,14 +622,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "26": {
         "airatk": 12, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 21, 
         "country": 7, 
@@ -648,14 +647,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "27": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 10, 
         "country": 7, 
@@ -673,14 +672,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "28": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 17, 
         "country": 7, 
@@ -698,14 +697,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "29": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 25, 
         "country": 7, 
@@ -723,14 +722,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "30": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 20, 
         "country": 7, 
@@ -748,14 +747,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "31": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 7, 
@@ -773,14 +772,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "32": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 14, 
         "country": 7, 
@@ -798,14 +797,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "33": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 7, 
@@ -823,14 +822,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "34": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 7, 
@@ -848,14 +847,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "35": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 7, 
@@ -873,14 +872,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "36": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 7, 
@@ -898,14 +897,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "37": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 7, 
@@ -923,14 +922,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "38": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 7, 
@@ -948,14 +947,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "39": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 7, 
@@ -973,14 +972,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "40": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 7, 
@@ -998,14 +997,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "41": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 17, 
         "country": 7, 
@@ -1023,14 +1022,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "42": {
         "airatk": 2, 
         "airdef": 5, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 11, 
         "country": 7, 
@@ -1048,14 +1047,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "43": {
         "airatk": 9, 
         "airdef": 8, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 38, 
         "country": 7, 
@@ -1073,14 +1072,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "44": {
         "airatk": 8, 
         "airdef": 9, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 36, 
         "country": 7, 
@@ -1098,14 +1097,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "45": {
         "airatk": 6, 
         "airdef": 7, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 28, 
         "country": 7, 
@@ -1123,14 +1122,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "46": {
         "airatk": 6, 
         "airdef": 5, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 22, 
         "country": 7, 
@@ -1148,14 +1147,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "47": {
         "airatk": 4, 
         "airdef": 4, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 15, 
         "country": 7, 
@@ -1173,14 +1172,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "48": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 24, 
         "country": 7, 
@@ -1198,14 +1197,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "49": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 14, 
         "country": 7, 
@@ -1223,14 +1222,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "50": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 18, 
         "country": 7, 
@@ -1248,14 +1247,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "51": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 22, 
         "country": 7, 
@@ -1273,14 +1272,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "52": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 30, 
         "country": 7, 
@@ -1298,14 +1297,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "53": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 10, 
         "country": 7, 
@@ -1323,14 +1322,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "54": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 15, 
         "country": 7, 
@@ -1348,14 +1347,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "55": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 19, 
         "country": 7, 
@@ -1373,14 +1372,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "56": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 7, 
@@ -1398,14 +1397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "57": {
         "airatk": 6, 
         "airdef": 1, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 1, 
         "cost": 13, 
         "country": 7, 
@@ -1423,14 +1422,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "58": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 7, 
@@ -1448,14 +1447,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "59": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 7, 
@@ -1473,14 +1472,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "60": {
         "airatk": 12, 
         "airdef": 10, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 39, 
         "country": 7, 
@@ -1498,14 +1497,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "61": {
         "airatk": 8, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 33, 
         "country": 7, 
@@ -1523,14 +1522,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "62": {
         "airatk": 8, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 35, 
         "country": 7, 
@@ -1548,14 +1547,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "63": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 7, 
@@ -1573,14 +1572,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "64": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 8, 
         "country": 8, 
@@ -1598,14 +1597,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "65": {
         "airatk": 14, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 16, 
         "country": 8, 
@@ -1623,14 +1622,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "66": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 24, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 9, 
         "country": 8, 
@@ -1648,14 +1647,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "67": {
         "airatk": 8, 
         "airdef": 6, 
         "ammo": 24, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 11, 
         "country": 8, 
@@ -1673,14 +1672,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "68": {
         "airatk": 8, 
         "airdef": 10, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 19, 
         "country": 8, 
@@ -1698,14 +1697,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "69": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 22, 
         "country": 8, 
@@ -1723,14 +1722,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 13, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "70": {
         "airatk": 14, 
         "airdef": 12, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 28, 
         "country": 8, 
@@ -1748,14 +1747,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "71": {
         "airatk": 8, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 15, 
         "country": 8, 
@@ -1773,14 +1772,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "72": {
         "airatk": 9, 
         "airdef": 11, 
         "ammo": 23, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 21, 
         "country": 8, 
@@ -1798,14 +1797,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "73": {
         "airatk": 14, 
         "airdef": 9, 
         "ammo": 23, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 20, 
         "country": 8, 
@@ -1823,14 +1822,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "74": {
         "airatk": 9, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 14, 
         "country": 8, 
@@ -1848,14 +1847,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "75": {
         "airatk": 7, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 14, 
         "country": 8, 
@@ -1873,14 +1872,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "76": {
         "airatk": 14, 
         "airdef": 11, 
         "ammo": 19, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 1, 
         "cost": 23, 
         "country": 8, 
@@ -1898,14 +1897,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "77": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 8, 
@@ -1923,14 +1922,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "78": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 18, 
         "country": 8, 
@@ -1948,14 +1947,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "79": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 20, 
         "country": 8, 
@@ -1973,14 +1972,14 @@ var equipment = {
         "rangedefmod": 7, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "80": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 23, 
         "country": 8, 
@@ -1998,14 +1997,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "81": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 39, 
         "country": 8, 
@@ -2023,14 +2022,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "82": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 23, 
         "country": 8, 
@@ -2048,14 +2047,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "83": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 4, 
         "cost": 35, 
         "country": 8, 
@@ -2073,14 +2072,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "84": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 3, 
         "cost": 23, 
         "country": 8, 
@@ -2098,14 +2097,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "85": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 3, 
         "cost": 28, 
         "country": 8, 
@@ -2123,14 +2122,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "86": {
         "airatk": 0, 
         "airdef": 12, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 4, 
         "cost": 44, 
         "country": 8, 
@@ -2148,14 +2147,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "87": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 20, 
         "country": 8, 
@@ -2173,14 +2172,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "88": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 26, 
         "country": 8, 
@@ -2198,14 +2197,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "89": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 13, 
         "country": 8, 
@@ -2223,14 +2222,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "90": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 21, 
         "country": 8, 
@@ -2248,14 +2247,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "91": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 4, 
         "cost": 24, 
         "country": 8, 
@@ -2273,14 +2272,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "92": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 20, 
         "country": 8, 
@@ -2298,14 +2297,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "93": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 8, 
@@ -2323,14 +2322,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "94": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 32, 
         "country": 8, 
@@ -2348,14 +2347,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 21, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "95": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 14, 
         "country": 8, 
@@ -2373,14 +2372,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "96": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 33, 
         "country": 8, 
@@ -2398,14 +2397,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "97": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 31, 
         "country": 8, 
@@ -2423,14 +2422,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "98": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 8, 
@@ -2448,14 +2447,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "99": {
         "airatk": 1, 
         "airdef": 3, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 1, 
         "cost": 33, 
         "country": 8, 
@@ -2473,14 +2472,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 22, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "100": {
         "airatk": 12, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 15, 
         "country": 23, 
@@ -2498,14 +2497,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "101": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 31, 
         "country": 8, 
@@ -2523,14 +2522,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "102": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 32, 
         "country": 8, 
@@ -2548,14 +2547,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "103": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 19, 
         "country": 8, 
@@ -2573,14 +2572,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "104": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 4, 
         "cost": 22, 
         "country": 8, 
@@ -2598,14 +2597,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "105": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 24, 
         "country": 8, 
@@ -2623,14 +2622,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "106": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 8, 
@@ -2648,14 +2647,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "107": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 8, 
@@ -2673,14 +2672,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "108": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 8, 
@@ -2698,14 +2697,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "109": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 13, 
         "country": 8, 
@@ -2723,14 +2722,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 6, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "110": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 19, 
         "country": 8, 
@@ -2748,14 +2747,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "111": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 8, 
@@ -2773,14 +2772,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "112": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 8, 
         "country": 8, 
@@ -2798,14 +2797,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "113": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 8, 
@@ -2823,14 +2822,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "114": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 16, 
         "country": 8, 
@@ -2848,14 +2847,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "115": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 8, 
@@ -2873,14 +2872,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "116": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 8, 
@@ -2898,14 +2897,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "117": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 8, 
@@ -2923,14 +2922,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "118": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 14, 
         "country": 8, 
@@ -2948,14 +2947,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "119": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 0, 
         "cost": 22, 
         "country": 8, 
@@ -2973,14 +2972,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 11, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "120": {
         "airatk": 2, 
         "airdef": 5, 
         "ammo": 16, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 15, 
         "country": 8, 
@@ -2998,14 +2997,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "121": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 23, 
         "country": 8, 
@@ -3023,14 +3022,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 7, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "122": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 23, 
         "country": 8, 
@@ -3048,14 +3047,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 11, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "123": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 27, 
         "country": 8, 
@@ -3073,14 +3072,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 11, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "124": {
         "airatk": 6, 
         "airdef": 8, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 42, 
         "country": 8, 
@@ -3098,14 +3097,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "125": {
         "airatk": 8, 
         "airdef": 9, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 19, 
         "closedef": 0, 
         "cost": 36, 
         "country": 8, 
@@ -3123,14 +3122,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 19
     }, 
     "126": {
         "airatk": 5, 
         "airdef": 7, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 26, 
         "country": 8, 
@@ -3148,14 +3147,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "127": {
         "airatk": 4, 
         "airdef": 5, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 20, 
         "country": 8, 
@@ -3173,14 +3172,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "128": {
         "airatk": 5, 
         "airdef": 5, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 17, 
         "closedef": 0, 
         "cost": 44, 
         "country": 8, 
@@ -3198,14 +3197,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 1, 
-        "target": 3
+        "target": 3, 
+        "uclass": 17
     }, 
     "129": {
         "airatk": 3, 
         "airdef": 3, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 13, 
         "country": 8, 
@@ -3223,14 +3222,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "130": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 5, 
         "cost": 54, 
         "country": 8, 
@@ -3248,14 +3247,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 20, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "131": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 33, 
         "country": 8, 
@@ -3273,14 +3272,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "132": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 34, 
         "country": 8, 
@@ -3298,14 +3297,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "133": {
         "airatk": 1, 
         "airdef": 10, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 34, 
         "country": 8, 
@@ -3323,14 +3322,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "134": {
         "airatk": 1, 
         "airdef": 11, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 5, 
         "cost": 46, 
         "country": 8, 
@@ -3348,14 +3347,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "135": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 14, 
         "country": 8, 
@@ -3373,14 +3372,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "136": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 15, 
         "country": 8, 
@@ -3398,14 +3397,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "137": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 18, 
         "country": 8, 
@@ -3423,14 +3422,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "138": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 10, 
         "country": 8, 
@@ -3448,14 +3447,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "139": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 10, 
         "country": 8, 
@@ -3473,14 +3472,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "140": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 11, 
         "country": 8, 
@@ -3498,14 +3497,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "141": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 14, 
         "country": 8, 
@@ -3523,14 +3522,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "142": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 13, 
         "country": 8, 
@@ -3548,14 +3547,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "143": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 16, 
         "country": 8, 
@@ -3573,14 +3572,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "144": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 19, 
         "country": 8, 
@@ -3598,14 +3597,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "145": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 22, 
         "country": 8, 
@@ -3623,14 +3622,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "146": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 18, 
         "country": 8, 
@@ -3648,14 +3647,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "147": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 23, 
         "country": 8, 
@@ -3673,14 +3672,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "148": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 21, 
         "country": 8, 
@@ -3698,14 +3697,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "149": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 23, 
         "country": 8, 
@@ -3723,14 +3722,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "150": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 24, 
         "country": 8, 
@@ -3748,14 +3747,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "151": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 25, 
         "country": 8, 
@@ -3773,14 +3772,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "152": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 26, 
         "country": 8, 
@@ -3798,14 +3797,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "153": {
         "airatk": 1, 
         "airdef": 11, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 35, 
         "country": 8, 
@@ -3823,14 +3822,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "154": {
         "airatk": 1, 
         "airdef": 12, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 44, 
         "country": 8, 
@@ -3848,14 +3847,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "155": {
         "airatk": 1, 
         "airdef": 0, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 11, 
         "country": 8, 
@@ -3873,14 +3872,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "156": {
         "airatk": 1, 
         "airdef": 0, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 1, 
         "cost": 12, 
         "country": 8, 
@@ -3898,14 +3897,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 2, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "157": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 8, 
@@ -3923,14 +3922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "158": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 8, 
@@ -3948,14 +3947,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "159": {
         "airatk": 14, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 41, 
         "country": 8, 
@@ -3973,14 +3972,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "160": {
         "airatk": 14, 
         "airdef": 12, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 43, 
         "country": 8, 
@@ -3998,14 +3997,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "161": {
         "airatk": 16, 
         "airdef": 14, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 48, 
         "country": 8, 
@@ -4023,14 +4022,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "162": {
         "airatk": 8, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 32, 
         "country": 8, 
@@ -4048,14 +4047,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "163": {
         "airatk": 25, 
         "airdef": 17, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 65, 
         "country": 8, 
@@ -4073,14 +4072,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "164": {
         "airatk": 17, 
         "airdef": 14, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 50, 
         "country": 8, 
@@ -4098,14 +4097,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "165": {
         "airatk": 19, 
         "airdef": 14, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 53, 
         "country": 8, 
@@ -4123,14 +4122,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "166": {
         "airatk": 27, 
         "airdef": 16, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 67, 
         "country": 8, 
@@ -4148,14 +4147,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "167": {
         "airatk": 22, 
         "airdef": 8, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 55, 
         "country": 8, 
@@ -4173,14 +4172,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "168": {
         "airatk": 25, 
         "airdef": 17, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 66, 
         "country": 8, 
@@ -4198,14 +4197,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "169": {
         "airatk": 6, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 36, 
         "country": 8, 
@@ -4223,14 +4222,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "170": {
         "airatk": 13, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 48, 
         "country": 8, 
@@ -4248,14 +4247,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "171": {
         "airatk": 14, 
         "airdef": 15, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 53, 
         "country": 8, 
@@ -4273,14 +4272,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "172": {
         "airatk": 5, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 45, 
         "country": 8, 
@@ -4298,14 +4297,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "173": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 35, 
         "country": 8, 
@@ -4323,14 +4322,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "174": {
         "airatk": 4, 
         "airdef": 5, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 40, 
         "country": 8, 
@@ -4348,14 +4347,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "175": {
         "airatk": 4, 
         "airdef": 5, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 41, 
         "country": 8, 
@@ -4373,14 +4372,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "176": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 8, 
@@ -4398,14 +4397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "177": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 11, 
@@ -4423,14 +4422,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "178": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 20, 
         "country": 11, 
@@ -4448,14 +4447,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "179": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 21, 
         "country": 11, 
@@ -4473,14 +4472,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "180": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 11, 
@@ -4498,14 +4497,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "181": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 21, 
         "country": 11, 
@@ -4523,14 +4522,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "182": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 11, 
@@ -4548,14 +4547,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "183": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 11, 
@@ -4573,14 +4572,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "184": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 11, 
@@ -4598,14 +4597,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "185": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 11, 
@@ -4623,14 +4622,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "186": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 14, 
         "country": 11, 
@@ -4648,14 +4647,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "187": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 17, 
         "country": 11, 
@@ -4673,14 +4672,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "188": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 26, 
         "country": 11, 
@@ -4698,14 +4697,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "189": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 16, 
         "country": 11, 
@@ -4723,14 +4722,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "190": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 15, 
         "country": 11, 
@@ -4748,14 +4747,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "191": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 16, 
         "country": 11, 
@@ -4773,14 +4772,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "192": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 11, 
@@ -4798,14 +4797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "193": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 11, 
@@ -4823,14 +4822,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "194": {
         "airatk": 14, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 11, 
@@ -4848,14 +4847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "195": {
         "airatk": 19, 
         "airdef": 14, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 53, 
         "country": 11, 
@@ -4873,14 +4872,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "196": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 35, 
         "country": 11, 
@@ -4898,14 +4897,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "197": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 11, 
@@ -4923,14 +4922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "198": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 10, 
         "country": 13, 
@@ -4948,14 +4947,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "199": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 12, 
         "country": 13, 
@@ -4973,14 +4972,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "200": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 12, 
         "country": 13, 
@@ -4998,14 +4997,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "201": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 13, 
@@ -5023,14 +5022,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "202": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 24, 
         "country": 13, 
@@ -5048,14 +5047,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "203": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 29, 
         "country": 13, 
@@ -5073,14 +5072,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "204": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 16, 
         "country": 13, 
@@ -5098,14 +5097,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 12, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "205": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 22, 
         "country": 13, 
@@ -5123,14 +5122,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "206": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 13, 
         "country": 13, 
@@ -5148,14 +5147,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 9, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "207": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 17, 
         "country": 13, 
@@ -5173,14 +5172,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 5, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "208": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 1, 
         "cost": 24, 
         "country": 13, 
@@ -5198,14 +5197,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "209": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 13, 
@@ -5223,14 +5222,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "210": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 13, 
@@ -5248,14 +5247,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "211": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 13, 
@@ -5273,14 +5272,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "212": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 13, 
         "country": 13, 
@@ -5298,14 +5297,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "213": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 16, 
         "country": 13, 
@@ -5323,14 +5322,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "214": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 10, 
         "country": 13, 
@@ -5348,14 +5347,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "215": {
         "airatk": 1, 
         "airdef": 7, 
         "ammo": 15, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 13, 
         "country": 13, 
@@ -5373,14 +5372,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "216": {
         "airatk": 8, 
         "airdef": 8, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 36, 
         "country": 13, 
@@ -5398,14 +5397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "217": {
         "airatk": 6, 
         "airdef": 7, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 28, 
         "country": 13, 
@@ -5423,14 +5422,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "218": {
         "airatk": 4, 
         "airdef": 5, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 21, 
         "country": 13, 
@@ -5448,14 +5447,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "219": {
         "airatk": 0, 
         "airdef": 3, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 13, 
         "country": 13, 
@@ -5473,14 +5472,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "220": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 17, 
         "country": 13, 
@@ -5498,14 +5497,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "221": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 17, 
         "country": 13, 
@@ -5523,14 +5522,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "222": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 20, 
         "country": 13, 
@@ -5548,14 +5547,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "223": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 28, 
         "country": 13, 
@@ -5573,14 +5572,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "224": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 13, 
@@ -5598,14 +5597,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "225": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 13, 
@@ -5623,14 +5622,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "226": {
         "airatk": 15, 
         "airdef": 14, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 47, 
         "country": 13, 
@@ -5648,14 +5647,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "227": {
         "airatk": 10, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 34, 
         "country": 13, 
@@ -5673,14 +5672,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "228": {
         "airatk": 12, 
         "airdef": 10, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 13, 
@@ -5698,14 +5697,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "229": {
         "airatk": 15, 
         "airdef": 13, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 45, 
         "country": 13, 
@@ -5723,14 +5722,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "230": {
         "airatk": 8, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 31, 
         "country": 13, 
@@ -5748,14 +5747,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "231": {
         "airatk": 14, 
         "airdef": 13, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 46, 
         "country": 13, 
@@ -5773,14 +5772,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "232": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 31, 
         "country": 13, 
@@ -5798,14 +5797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "233": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 35, 
         "country": 13, 
@@ -5823,14 +5822,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "234": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 13, 
@@ -5848,14 +5847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "235": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 9, 
         "country": 25, 
@@ -5873,14 +5872,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "236": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 11, 
         "country": 25, 
@@ -5898,14 +5897,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "237": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 18, 
         "country": 25, 
@@ -5923,14 +5922,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "238": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 13, 
         "country": 25, 
@@ -5948,14 +5947,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "239": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 25, 
         "country": 25, 
@@ -5973,14 +5972,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "240": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 21, 
         "country": 25, 
@@ -5998,14 +5997,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 13, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "241": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 12, 
         "country": 25, 
@@ -6023,14 +6022,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 7, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "242": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 25, 
@@ -6048,14 +6047,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "243": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 25, 
@@ -6073,14 +6072,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "244": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 25, 
@@ -6098,14 +6097,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "245": {
         "airatk": 0, 
         "airdef": 3, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 5, 
         "country": 25, 
@@ -6123,14 +6122,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "246": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 6, 
         "country": 25, 
@@ -6148,14 +6147,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "247": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 12, 
         "country": 25, 
@@ -6173,14 +6172,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "248": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 12, 
         "country": 25, 
@@ -6198,14 +6197,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "249": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 23, 
         "country": 25, 
@@ -6223,14 +6222,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "250": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 25, 
@@ -6248,14 +6247,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "251": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 25, 
@@ -6273,14 +6272,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "252": {
         "airatk": 14, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 25, 
@@ -6298,14 +6297,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "253": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 25, 
@@ -6323,14 +6322,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "254": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 13, 
         "country": 15, 
@@ -6348,14 +6347,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "255": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 15, 
@@ -6373,14 +6372,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "256": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 15, 
@@ -6398,14 +6397,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "257": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 15, 
@@ -6423,14 +6422,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "258": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 10, 
         "country": 15, 
@@ -6448,14 +6447,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "259": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 15, 
@@ -6473,14 +6472,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "260": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 21, 
         "country": 16, 
@@ -6498,14 +6497,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "261": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 12, 
         "country": 16, 
@@ -6523,14 +6522,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "262": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 21, 
         "country": 16, 
@@ -6548,14 +6547,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "263": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 21, 
         "country": 16, 
@@ -6573,14 +6572,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 16, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "264": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 13, 
         "country": 16, 
@@ -6598,14 +6597,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 9, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "265": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 16, 
@@ -6623,14 +6622,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "266": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 16, 
@@ -6648,14 +6647,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "267": {
         "airatk": 0, 
         "airdef": 5, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 8, 
         "country": 16, 
@@ -6673,14 +6672,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "268": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 16, 
@@ -6698,14 +6697,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "269": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 17, 
         "country": 16, 
@@ -6723,14 +6722,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "270": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 16, 
@@ -6748,14 +6747,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "271": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 16, 
@@ -6773,14 +6772,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "272": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 16, 
         "country": 16, 
@@ -6798,14 +6797,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "273": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 14, 
         "country": 16, 
@@ -6823,14 +6822,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "274": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 18, 
         "country": 16, 
@@ -6848,14 +6847,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "275": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 22, 
         "country": 16, 
@@ -6873,14 +6872,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "276": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 12, 
         "country": 16, 
@@ -6898,14 +6897,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "277": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 8, 
         "country": 16, 
@@ -6923,14 +6922,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "278": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 16, 
@@ -6948,14 +6947,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "279": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 16, 
@@ -6973,14 +6972,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "280": {
         "airatk": 6, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 28, 
         "country": 16, 
@@ -6998,14 +6997,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "281": {
         "airatk": 3, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 31, 
         "country": 16, 
@@ -7023,14 +7022,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "282": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 16, 
@@ -7048,14 +7047,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "283": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 13, 
         "country": 26, 
@@ -7073,14 +7072,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "284": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 24, 
         "country": 26, 
@@ -7098,14 +7097,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "285": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 14, 
         "country": 26, 
@@ -7123,14 +7122,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 9, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "286": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 26, 
@@ -7148,14 +7147,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "287": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 26, 
@@ -7173,14 +7172,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "288": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 26, 
@@ -7198,14 +7197,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "289": {
         "airatk": 0, 
         "airdef": 3, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 5, 
         "country": 26, 
@@ -7223,14 +7222,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "290": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 6, 
         "country": 26, 
@@ -7248,14 +7247,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "291": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 15, 
         "country": 26, 
@@ -7273,14 +7272,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 1, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "292": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 17, 
         "country": 26, 
@@ -7298,14 +7297,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "293": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 15, 
         "country": 26, 
@@ -7323,14 +7322,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "294": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 26, 
@@ -7348,14 +7347,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "295": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 26, 
@@ -7373,14 +7372,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "296": {
         "airatk": 8, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 29, 
         "country": 26, 
@@ -7398,14 +7397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "297": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 26, 
@@ -7423,14 +7422,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "298": {
         "airatk": 9, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 12, 
         "country": 18, 
@@ -7448,14 +7447,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "299": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 19, 
         "country": 18, 
@@ -7473,14 +7472,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "300": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 13, 
         "country": 18, 
@@ -7498,14 +7497,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "301": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 20, 
         "country": 18, 
@@ -7523,14 +7522,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "302": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 1, 
         "cost": 23, 
         "country": 18, 
@@ -7548,14 +7547,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "303": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 18, 
         "country": 18, 
@@ -7573,14 +7572,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 12, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "304": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 13, 
         "country": 18, 
@@ -7598,14 +7597,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 9, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "305": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 18, 
@@ -7623,14 +7622,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "306": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 18, 
@@ -7648,14 +7647,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "307": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 18, 
@@ -7673,14 +7672,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "308": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 10, 
         "country": 18, 
@@ -7698,14 +7697,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "309": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 23, 
         "country": 18, 
@@ -7723,14 +7722,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "310": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 29, 
         "country": 18, 
@@ -7748,14 +7747,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "311": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 14, 
         "country": 18, 
@@ -7773,14 +7772,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "312": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 13, 
         "country": 18, 
@@ -7798,14 +7797,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "313": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 18, 
@@ -7823,14 +7822,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "314": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 18, 
@@ -7848,14 +7847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "315": {
         "airatk": 14, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 18, 
@@ -7873,14 +7872,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "316": {
         "airatk": 6, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 26, 
         "country": 18, 
@@ -7898,14 +7897,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "317": {
         "airatk": 5, 
         "airdef": 5, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 24, 
         "country": 18, 
@@ -7923,14 +7922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "318": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 29, 
         "country": 18, 
@@ -7948,14 +7947,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "319": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 18, 
@@ -7973,14 +7972,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "320": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 10, 
         "country": 23, 
@@ -7998,14 +7997,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "321": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 16, 
         "country": 23, 
@@ -8023,14 +8022,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "322": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 21, 
         "country": 23, 
@@ -8048,14 +8047,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "323": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 20, 
         "country": 23, 
@@ -8073,14 +8072,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "324": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8098,14 +8097,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "325": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 23, 
@@ -8123,14 +8122,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "326": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 27, 
         "country": 23, 
@@ -8148,14 +8147,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "327": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 23, 
         "country": 23, 
@@ -8173,14 +8172,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "328": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 17, 
         "country": 23, 
@@ -8198,14 +8197,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 13, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "329": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 23, 
@@ -8223,14 +8222,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 12, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "330": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 23, 
         "country": 23, 
@@ -8248,14 +8247,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 17, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "331": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 27, 
         "country": 23, 
@@ -8273,14 +8272,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "332": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 1, 
         "cost": 25, 
         "country": 23, 
@@ -8298,14 +8297,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "333": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 1, 
         "cost": 28, 
         "country": 23, 
@@ -8323,14 +8322,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 16, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "334": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 23, 
@@ -8348,14 +8347,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "335": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 23, 
@@ -8373,14 +8372,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "336": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8398,14 +8397,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "337": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8423,14 +8422,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "338": {
         "airatk": 2, 
         "airdef": 10, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 20, 
         "country": 23, 
@@ -8448,14 +8447,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "339": {
         "airatk": 1, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 19, 
         "country": 23, 
@@ -8473,14 +8472,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "340": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 23, 
@@ -8498,14 +8497,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "341": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 16, 
         "country": 23, 
@@ -8523,14 +8522,14 @@ var equipment = {
         "rangedefmod": 10, 
         "softatk": 8, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "342": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 8, 
         "country": 23, 
@@ -8548,14 +8547,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "343": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8573,14 +8572,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "344": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8598,14 +8597,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "345": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 17, 
         "country": 23, 
@@ -8623,14 +8622,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "346": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 23, 
@@ -8648,14 +8647,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "347": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 23, 
@@ -8673,14 +8672,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "348": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 20, 
         "country": 23, 
@@ -8698,14 +8697,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "349": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 23, 
         "country": 23, 
@@ -8723,14 +8722,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "350": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 24, 
         "country": 23, 
@@ -8748,14 +8747,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 11, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "351": {
         "airatk": 1, 
         "airdef": 7, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 17, 
         "country": 23, 
@@ -8773,14 +8772,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 5, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "352": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 13, 
         "country": 23, 
@@ -8798,14 +8797,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "353": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 13, 
         "country": 23, 
@@ -8823,14 +8822,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "354": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 12, 
         "country": 23, 
@@ -8848,14 +8847,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "355": {
         "airatk": 1, 
         "airdef": 7, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 2, 
         "cost": 19, 
         "country": 23, 
@@ -8873,14 +8872,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 5, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "356": {
         "airatk": 10, 
         "airdef": 10, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 41, 
         "country": 23, 
@@ -8898,14 +8897,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "357": {
         "airatk": 8, 
         "airdef": 9, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 19, 
         "closedef": 0, 
         "cost": 35, 
         "country": 23, 
@@ -8923,14 +8922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 19
     }, 
     "358": {
         "airatk": 6, 
         "airdef": 8, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 29, 
         "country": 23, 
@@ -8948,14 +8947,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "359": {
         "airatk": 4, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 23, 
         "country": 23, 
@@ -8973,14 +8972,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "360": {
         "airatk": 6, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 17, 
         "closedef": 0, 
         "cost": 48, 
         "country": 23, 
@@ -8998,14 +8997,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 1, 
-        "target": 3
+        "target": 3, 
+        "uclass": 17
     }, 
     "361": {
         "airatk": 3, 
         "airdef": 4, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 16, 
         "country": 23, 
@@ -9023,14 +9022,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "362": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 42, 
         "country": 23, 
@@ -9048,14 +9047,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "363": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 32, 
         "country": 23, 
@@ -9073,14 +9072,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "364": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 22, 
         "country": 23, 
@@ -9098,14 +9097,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "365": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 27, 
         "country": 23, 
@@ -9123,14 +9122,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "366": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 29, 
         "country": 23, 
@@ -9148,14 +9147,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "367": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 24, 
         "country": 23, 
@@ -9173,14 +9172,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "368": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 27, 
         "country": 23, 
@@ -9198,14 +9197,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "369": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 13, 
         "country": 23, 
@@ -9223,14 +9222,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "370": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 15, 
         "country": 23, 
@@ -9248,14 +9247,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "371": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 16, 
         "country": 23, 
@@ -9273,14 +9272,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "372": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 20, 
         "country": 23, 
@@ -9298,14 +9297,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "373": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 20, 
         "country": 23, 
@@ -9323,14 +9322,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 10, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "374": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 17, 
         "country": 23, 
@@ -9348,14 +9347,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "375": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 24, 
         "country": 23, 
@@ -9373,14 +9372,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "376": {
         "airatk": 1, 
         "airdef": 9, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 21, 
         "country": 23, 
@@ -9398,14 +9397,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "377": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 22, 
         "country": 23, 
@@ -9423,14 +9422,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "378": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 32, 
         "country": 23, 
@@ -9448,14 +9447,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "379": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 22, 
         "country": 23, 
@@ -9473,14 +9472,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "380": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 30, 
         "country": 23, 
@@ -9498,14 +9497,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "381": {
         "airatk": 0, 
         "airdef": 5, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 9, 
         "country": 23, 
@@ -9523,14 +9522,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "382": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 23, 
@@ -9548,14 +9547,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "383": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 12, 
         "country": 23, 
@@ -9573,14 +9572,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 2, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "384": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 4, 
@@ -9598,14 +9597,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "385": {
         "airatk": 10, 
         "airdef": 10, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 35, 
         "country": 23, 
@@ -9623,14 +9622,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "386": {
         "airatk": 6, 
         "airdef": 1, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 1, 
         "cost": 12, 
         "country": 20, 
@@ -9648,14 +9647,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 2, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "387": {
         "airatk": 12, 
         "airdef": 10, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 23, 
@@ -9673,14 +9672,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "388": {
         "airatk": 16, 
         "airdef": 14, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 49, 
         "country": 23, 
@@ -9698,14 +9697,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "389": {
         "airatk": 14, 
         "airdef": 12, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 43, 
         "country": 23, 
@@ -9723,14 +9722,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "390": {
         "airatk": 18, 
         "airdef": 16, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 54, 
         "country": 23, 
@@ -9748,14 +9747,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "391": {
         "airatk": 21, 
         "airdef": 18, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 60, 
         "country": 23, 
@@ -9773,14 +9772,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "392": {
         "airatk": 5, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 41, 
         "country": 23, 
@@ -9798,14 +9797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "393": {
         "airatk": 5, 
         "airdef": 8, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 33, 
         "country": 23, 
@@ -9823,14 +9822,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "394": {
         "airatk": 5, 
         "airdef": 10, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 39, 
         "country": 23, 
@@ -9848,14 +9847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "395": {
         "airatk": 5, 
         "airdef": 14, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 47, 
         "country": 23, 
@@ -9873,14 +9872,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "396": {
         "airatk": 14, 
         "airdef": 15, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 52, 
         "country": 23, 
@@ -9898,14 +9897,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "397": {
         "airatk": 10, 
         "airdef": 12, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 43, 
         "country": 23, 
@@ -9923,14 +9922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "398": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 23, 
@@ -9948,14 +9947,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "399": {
         "airatk": 9, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 20, 
         "country": 10, 
@@ -9973,14 +9972,14 @@ var equipment = {
         "rangedefmod": 7, 
         "softatk": 8, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "400": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 25, 
         "country": 10, 
@@ -9998,14 +9997,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 13, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "401": {
         "airatk": 11, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 17, 
         "country": 10, 
@@ -10023,14 +10022,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "402": {
         "airatk": 12, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 19, 
         "country": 10, 
@@ -10048,14 +10047,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }, 
     "403": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 16, 
         "country": 10, 
@@ -10073,14 +10072,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "404": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 12, 
         "country": 10, 
@@ -10098,14 +10097,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "405": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 10, 
@@ -10123,14 +10122,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "406": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 22, 
         "country": 10, 
@@ -10148,14 +10147,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "407": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 22, 
         "country": 10, 
@@ -10173,14 +10172,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "408": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 14, 
         "country": 10, 
@@ -10198,14 +10197,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "409": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 27, 
         "country": 10, 
@@ -10223,14 +10222,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "410": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 20, 
         "country": 10, 
@@ -10248,14 +10247,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 16, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "411": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 27, 
         "country": 10, 
@@ -10273,14 +10272,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 20, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "412": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 10, 
@@ -10298,14 +10297,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 12, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "413": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 31, 
         "country": 10, 
@@ -10323,14 +10322,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 21, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "414": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 32, 
         "country": 10, 
@@ -10348,14 +10347,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "415": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 4, 
         "cost": 29, 
         "country": 10, 
@@ -10373,14 +10372,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "416": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 10, 
@@ -10398,14 +10397,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "417": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 1, 
         "cost": 19, 
         "country": 10, 
@@ -10423,14 +10422,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "418": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 36, 
         "country": 10, 
@@ -10448,14 +10447,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 21, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 8
     }, 
     "419": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 10, 
@@ -10473,14 +10472,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "420": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 10, 
@@ -10498,14 +10497,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "421": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 19, 
         "country": 10, 
@@ -10523,14 +10522,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "422": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 10, 
@@ -10548,14 +10547,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "423": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 10, 
@@ -10573,14 +10572,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "424": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 10, 
@@ -10598,14 +10597,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "425": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 16, 
         "country": 10, 
@@ -10623,14 +10622,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "426": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 18, 
         "country": 10, 
@@ -10648,14 +10647,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "427": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 12, 
         "country": 10, 
@@ -10673,14 +10672,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "428": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 10, 
@@ -10698,14 +10697,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "429": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 3, 
         "cost": 25, 
         "country": 10, 
@@ -10723,14 +10722,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 11, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "430": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 16, 
         "country": 10, 
@@ -10748,14 +10747,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "431": {
         "airatk": 1, 
         "airdef": 5, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 0, 
         "cost": 9, 
         "country": 10, 
@@ -10773,14 +10772,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "432": {
         "airatk": 11, 
         "airdef": 11, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 43, 
         "country": 10, 
@@ -10798,14 +10797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "433": {
         "airatk": 9, 
         "airdef": 10, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 32, 
         "country": 10, 
@@ -10823,14 +10822,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "434": {
         "airatk": 6, 
         "airdef": 7, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 23, 
         "country": 10, 
@@ -10848,14 +10847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "435": {
         "airatk": 7, 
         "airdef": 7, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 17, 
         "closedef": 0, 
         "cost": 55, 
         "country": 10, 
@@ -10873,14 +10872,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 1, 
-        "target": 3
+        "target": 3, 
+        "uclass": 17
     }, 
     "436": {
         "airatk": 6, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 17, 
         "closedef": 0, 
         "cost": 49, 
         "country": 10, 
@@ -10898,14 +10897,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 1, 
-        "target": 3
+        "target": 3, 
+        "uclass": 17
     }, 
     "437": {
         "airatk": 3, 
         "airdef": 5, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 15, 
         "country": 10, 
@@ -10923,14 +10922,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "438": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 17, 
         "country": 10, 
@@ -10948,14 +10947,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "439": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 18, 
         "country": 10, 
@@ -10973,14 +10972,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "440": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 19, 
         "country": 10, 
@@ -10998,14 +10997,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "441": {
         "airatk": 2, 
         "airdef": 11, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 41, 
         "country": 10, 
@@ -11023,14 +11022,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "442": {
         "airatk": 1, 
         "airdef": 12, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 47, 
         "country": 10, 
@@ -11048,14 +11047,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 16, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "443": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 23, 
         "country": 10, 
@@ -11073,14 +11072,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "444": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 27, 
         "country": 10, 
@@ -11098,14 +11097,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "445": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 23, 
         "country": 10, 
@@ -11123,14 +11122,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "446": {
         "airatk": 2, 
         "airdef": 10, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 33, 
         "country": 10, 
@@ -11148,14 +11147,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "447": {
         "airatk": 2, 
         "airdef": 9, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 28, 
         "country": 10, 
@@ -11173,14 +11172,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 13, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "448": {
         "airatk": 12, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 4, 
@@ -11198,14 +11197,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "449": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 10, 
@@ -11223,14 +11222,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "450": {
         "airatk": 6, 
         "airdef": 1, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 1, 
         "cost": 12, 
         "country": 10, 
@@ -11248,14 +11247,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 2, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 7
     }, 
     "451": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 6, 
@@ -11273,14 +11272,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "452": {
         "airatk": 14, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 47, 
         "country": 10, 
@@ -11298,14 +11297,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "453": {
         "airatk": 15, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 48, 
         "country": 10, 
@@ -11323,14 +11322,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "454": {
         "airatk": 16, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 50, 
         "country": 10, 
@@ -11348,14 +11347,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "455": {
         "airatk": 18, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 53, 
         "country": 10, 
@@ -11373,14 +11372,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "456": {
         "airatk": 11, 
         "airdef": 11, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 10, 
@@ -11398,14 +11397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "457": {
         "airatk": 15, 
         "airdef": 14, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 49, 
         "country": 10, 
@@ -11423,14 +11422,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "458": {
         "airatk": 16, 
         "airdef": 15, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 52, 
         "country": 10, 
@@ -11448,14 +11447,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "459": {
         "airatk": 19, 
         "airdef": 16, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 57, 
         "country": 10, 
@@ -11473,14 +11472,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "460": {
         "airatk": 18, 
         "airdef": 15, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 53, 
         "country": 10, 
@@ -11498,14 +11497,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "461": {
         "airatk": 19, 
         "airdef": 17, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 57, 
         "country": 10, 
@@ -11523,14 +11522,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "462": {
         "airatk": 22, 
         "airdef": 18, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 62, 
         "country": 10, 
@@ -11548,14 +11547,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "463": {
         "airatk": 24, 
         "airdef": 19, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 67, 
         "country": 10, 
@@ -11573,14 +11572,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "464": {
         "airatk": 10, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 54, 
         "country": 10, 
@@ -11598,14 +11597,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "465": {
         "airatk": 12, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 64, 
         "country": 10, 
@@ -11623,14 +11622,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 14, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "466": {
         "airatk": 8, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 44, 
         "country": 10, 
@@ -11648,14 +11647,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "467": {
         "airatk": 8, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 59, 
         "country": 10, 
@@ -11673,14 +11672,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 17, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "468": {
         "airatk": 10, 
         "airdef": 12, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 51, 
         "country": 10, 
@@ -11698,14 +11697,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "469": {
         "airatk": 10, 
         "airdef": 9, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 52, 
         "country": 10, 
@@ -11723,14 +11722,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 14, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "470": {
         "airatk": 11, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 53, 
         "country": 10, 
@@ -11748,14 +11747,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 14, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "471": {
         "airatk": 12, 
         "airdef": 13, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 63, 
         "country": 10, 
@@ -11773,14 +11772,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 16, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "472": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 10, 
@@ -11798,14 +11797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "473": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 13, 
         "country": 20, 
@@ -11823,14 +11822,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "474": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 10, 
         "country": 20, 
@@ -11848,14 +11847,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "475": {
         "airatk": 9, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 18, 
         "country": 20, 
@@ -11873,14 +11872,14 @@ var equipment = {
         "rangedefmod": 7, 
         "softatk": 8, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "476": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 11, 
         "country": 20, 
@@ -11898,14 +11897,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "477": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 17, 
         "country": 20, 
@@ -11923,14 +11922,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "478": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 35, 
         "country": 20, 
@@ -11948,14 +11947,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 15, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "479": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 36, 
         "country": 20, 
@@ -11973,14 +11972,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 17, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "480": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 32, 
         "country": 20, 
@@ -11998,14 +11997,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "481": {
         "airatk": 0, 
         "airdef": 13, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 35, 
         "country": 20, 
@@ -12023,14 +12022,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 18, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "482": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 21, 
         "country": 20, 
@@ -12048,14 +12047,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 11, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "483": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 28, 
         "country": 20, 
@@ -12073,14 +12072,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "484": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 22, 
         "country": 20, 
@@ -12098,14 +12097,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 17, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "485": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 26, 
         "country": 20, 
@@ -12123,14 +12122,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "486": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 20, 
@@ -12148,14 +12147,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 12, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "487": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 19, 
         "country": 4, 
@@ -12173,14 +12172,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "488": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 12, 
         "country": 4, 
@@ -12198,14 +12197,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "489": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 11, 
         "country": 20, 
@@ -12223,14 +12222,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 5, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "490": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 17, 
         "country": 20, 
@@ -12248,14 +12247,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 8, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "491": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 25, 
         "country": 20, 
@@ -12273,14 +12272,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 17, 
         "spotrange": 1, 
-        "target": 1
+        "target": 1, 
+        "uclass": 4
     }, 
     "492": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 16, 
         "country": 4, 
@@ -12298,14 +12297,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "493": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 4, 
@@ -12323,14 +12322,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "494": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 20, 
@@ -12348,14 +12347,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "495": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 20, 
@@ -12373,14 +12372,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "496": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 20, 
@@ -12398,14 +12397,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 5, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "497": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 18, 
         "country": 20, 
@@ -12423,14 +12422,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "498": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 8, 
         "country": 20, 
@@ -12448,14 +12447,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "499": {
         "airatk": 1, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 20, 
@@ -12473,14 +12472,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "500": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 20, 
@@ -12498,14 +12497,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 7, 
         "spotrange": 3, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "501": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 15, 
         "country": 20, 
@@ -12523,14 +12522,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "502": {
         "airatk": 0, 
         "airdef": 5, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 9, 
         "country": 20, 
@@ -12548,14 +12547,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "503": {
         "airatk": 1, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 20, 
@@ -12573,14 +12572,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 7, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "504": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 10, 
         "country": 20, 
@@ -12598,14 +12597,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "505": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 20, 
@@ -12623,14 +12622,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 1, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "506": {
         "airatk": 1, 
         "airdef": 6, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 12, 
         "country": 20, 
@@ -12648,14 +12647,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "507": {
         "airatk": 7, 
         "airdef": 8, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 16, 
         "closedef": 0, 
         "cost": 44, 
         "country": 20, 
@@ -12673,14 +12672,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 16
     }, 
     "508": {
         "airatk": 8, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 20, 
         "closedef": 0, 
         "cost": 28, 
         "country": 20, 
@@ -12698,14 +12697,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 20
     }, 
     "509": {
         "airatk": 4, 
         "airdef": 4, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 21, 
         "closedef": 0, 
         "cost": 20, 
         "country": 20, 
@@ -12723,14 +12722,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 21
     }, 
     "510": {
         "airatk": 4, 
         "airdef": 3, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 15, 
         "country": 20, 
@@ -12748,14 +12747,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "511": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 11, 
         "country": 20, 
@@ -12773,14 +12772,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "512": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 13, 
         "country": 20, 
@@ -12798,14 +12797,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "513": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 41, 
         "country": 20, 
@@ -12823,14 +12822,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 16, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "514": {
         "airatk": 1, 
         "airdef": 14, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 47, 
         "country": 20, 
@@ -12848,14 +12847,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 17, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "515": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 29, 
         "country": 20, 
@@ -12873,14 +12872,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "516": {
         "airatk": 0, 
         "airdef": 13, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 29, 
         "country": 20, 
@@ -12898,14 +12897,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "517": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 13, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 32, 
         "country": 20, 
@@ -12923,14 +12922,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "518": {
         "airatk": 0, 
         "airdef": 14, 
         "ammo": 3, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 35, 
         "country": 20, 
@@ -12948,14 +12947,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "519": {
         "airatk": 0, 
         "airdef": 12, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 33, 
         "country": 20, 
@@ -12973,14 +12972,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 14, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "520": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 13, 
         "country": 20, 
@@ -12998,14 +12997,14 @@ var equipment = {
         "rangedefmod": 3, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "521": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 23, 
         "country": 20, 
@@ -13023,14 +13022,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "522": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 24, 
         "country": 20, 
@@ -13048,14 +13047,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "523": {
         "airatk": 0, 
         "airdef": 11, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 3, 
         "cost": 25, 
         "country": 20, 
@@ -13073,14 +13072,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "524": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 30, 
         "country": 20, 
@@ -13098,14 +13097,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 12, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "525": {
         "airatk": 0, 
         "airdef": 10, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 31, 
         "country": 20, 
@@ -13123,14 +13122,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 14, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "526": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 25, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 16, 
         "country": 20, 
@@ -13148,14 +13147,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "527": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 15, 
         "country": 20, 
@@ -13173,14 +13172,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "528": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 20, 
@@ -13198,14 +13197,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "529": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 2, 
         "country": 20, 
@@ -13223,14 +13222,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "530": {
         "airatk": 10, 
         "airdef": 12, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 20, 
@@ -13248,14 +13247,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "531": {
         "airatk": 13, 
         "airdef": 14, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 44, 
         "country": 20, 
@@ -13273,14 +13272,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "532": {
         "airatk": 10, 
         "airdef": 12, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 20, 
@@ -13298,14 +13297,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "533": {
         "airatk": 16, 
         "airdef": 14, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 49, 
         "country": 20, 
@@ -13323,14 +13322,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "534": {
         "airatk": 20, 
         "airdef": 16, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 57, 
         "country": 20, 
@@ -13348,14 +13347,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "535": {
         "airatk": 10, 
         "airdef": 8, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 32, 
         "country": 20, 
@@ -13373,14 +13372,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 2, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "536": {
         "airatk": 10, 
         "airdef": 10, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 35, 
         "country": 20, 
@@ -13398,14 +13397,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "537": {
         "airatk": 10, 
         "airdef": 12, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 38, 
         "country": 20, 
@@ -13423,14 +13422,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "538": {
         "airatk": 8, 
         "airdef": 7, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 29, 
         "country": 20, 
@@ -13448,14 +13447,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "539": {
         "airatk": 11, 
         "airdef": 13, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 20, 
@@ -13473,14 +13472,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "540": {
         "airatk": 11, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 43, 
         "country": 20, 
@@ -13498,14 +13497,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "541": {
         "airatk": 13, 
         "airdef": 15, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 59, 
         "country": 20, 
@@ -13523,14 +13522,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 8, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "542": {
         "airatk": 6, 
         "airdef": 10, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 44, 
         "country": 20, 
@@ -13548,14 +13547,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "543": {
         "airatk": 6, 
         "airdef": 12, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 11, 
         "closedef": 0, 
         "cost": 50, 
         "country": 20, 
@@ -13573,14 +13572,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 11
     }, 
     "544": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 20, 
@@ -13598,14 +13597,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "545": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 7, 
@@ -13623,14 +13622,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "546": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 8, 
@@ -13648,14 +13647,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "547": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 13, 
@@ -13673,14 +13672,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "548": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 23, 
@@ -13698,14 +13697,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "549": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 10, 
@@ -13723,14 +13722,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "550": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 20, 
@@ -13748,14 +13747,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "551": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 8, 
         "country": 23, 
@@ -13773,14 +13772,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 3, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "552": {
         "airatk": 4, 
         "airdef": 4, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 15, 
         "closedef": 3, 
         "cost": 15, 
         "country": 13, 
@@ -13798,14 +13797,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 15
     }, 
     "553": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 11, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 15, 
         "country": 8, 
@@ -13823,14 +13822,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "554": {
         "airatk": 6, 
         "airdef": 6, 
         "ammo": 20, 
         "bombercode": 0, 
-        "class": 17, 
         "closedef": 0, 
         "cost": 48, 
         "country": 13, 
@@ -13848,14 +13847,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 1, 
-        "target": 3
+        "target": 3, 
+        "uclass": 17
     }, 
     "555": {
         "airatk": 14, 
         "airdef": 10, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 10, 
         "closedef": 0, 
         "cost": 40, 
         "country": 8, 
@@ -13873,14 +13872,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 1, 
         "spotrange": 2, 
-        "target": 2
+        "target": 2, 
+        "uclass": 10
     }, 
     "556": {
         "airatk": 7, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 8, 
         "country": 4, 
@@ -13898,14 +13897,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 3, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "557": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 4, 
         "closedef": 0, 
         "cost": 11, 
         "country": 4, 
@@ -13923,14 +13922,14 @@ var equipment = {
         "rangedefmod": 9, 
         "softatk": 4, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 4
     }, 
     "558": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 19, 
         "country": 4, 
@@ -13948,14 +13947,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 15, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "559": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 27, 
         "country": 4, 
@@ -13973,14 +13972,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 19, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "560": {
         "airatk": 0, 
         "airdef": 6, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 8, 
         "closedef": 0, 
         "cost": 15, 
         "country": 4, 
@@ -13998,14 +13997,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 11, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 8
     }, 
     "561": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 17, 
         "country": 4, 
@@ -14023,14 +14022,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "562": {
         "airatk": 2, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 6, 
         "closedef": 3, 
         "cost": 15, 
         "country": 4, 
@@ -14048,14 +14047,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 6
     }, 
     "563": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 7, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 11, 
         "country": 4, 
@@ -14073,14 +14072,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "564": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 13, 
         "country": 4, 
@@ -14098,14 +14097,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "565": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 9, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 14, 
         "country": 4, 
@@ -14123,14 +14122,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 5, 
         "spotrange": 2, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "566": {
         "airatk": 0, 
         "airdef": 0, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 7, 
         "closedef": 0, 
         "cost": 4, 
         "country": 4, 
@@ -14148,14 +14147,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 0
+        "target": 0, 
+        "uclass": 7
     }, 
     "567": {
         "airatk": 0, 
         "airdef": 9, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 1, 
         "closedef": 0, 
         "cost": 14, 
         "country": 10, 
@@ -14173,14 +14172,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 6, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 1
     }, 
     "568": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 11, 
@@ -14198,14 +14197,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "569": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 25, 
@@ -14223,14 +14222,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "570": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 15, 
@@ -14248,14 +14247,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "571": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 16, 
@@ -14273,14 +14272,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "572": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 26, 
@@ -14298,14 +14297,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "573": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 0, 
         "bombercode": 0, 
-        "class": 18, 
         "closedef": 0, 
         "cost": 14, 
         "country": 18, 
@@ -14323,14 +14322,14 @@ var equipment = {
         "rangedefmod": 2, 
         "softatk": 0, 
         "spotrange": 2, 
-        "target": 3
+        "target": 3, 
+        "uclass": 18
     }, 
     "574": {
         "airatk": 0, 
         "airdef": 4, 
         "ammo": 4, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 12, 
         "country": 4, 
@@ -14348,14 +14347,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "575": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 1, 
         "bombercode": 0, 
-        "class": 13, 
         "closedef": 0, 
         "cost": 16, 
         "country": 15, 
@@ -14373,14 +14372,14 @@ var equipment = {
         "rangedefmod": 1, 
         "softatk": 0, 
         "spotrange": 1, 
-        "target": 2
+        "target": 2, 
+        "uclass": 13
     }, 
     "576": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 4, 
@@ -14398,14 +14397,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "577": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 25, 
@@ -14423,14 +14422,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "578": {
         "airatk": 2, 
         "airdef": 5, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 11, 
         "country": 15, 
@@ -14448,14 +14447,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 3, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "579": {
         "airatk": 2, 
         "airdef": 5, 
         "ammo": 5, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 10, 
         "country": 16, 
@@ -14473,14 +14472,14 @@ var equipment = {
         "rangedefmod": 4, 
         "softatk": 1, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "580": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 13, 
         "country": 18, 
@@ -14498,14 +14497,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "581": {
         "airatk": 2, 
         "airdef": 6, 
         "ammo": 8, 
         "bombercode": 0, 
-        "class": 3, 
         "closedef": 1, 
         "cost": 14, 
         "country": 18, 
@@ -14523,14 +14522,14 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 2, 
         "spotrange": 4, 
-        "target": 1
+        "target": 1, 
+        "uclass": 3
     }, 
     "582": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 12, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 15, 
         "country": 7, 
@@ -14548,14 +14547,14 @@ var equipment = {
         "rangedefmod": 8, 
         "softatk": 9, 
         "spotrange": 2, 
-        "target": 0
+        "target": 0, 
+        "uclass": 9
     }, 
     "583": {
         "airatk": 0, 
         "airdef": 7, 
         "ammo": 14, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 1, 
         "cost": 13, 
         "country": 7, 
@@ -14573,14 +14572,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "584": {
         "airatk": 0, 
         "airdef": 8, 
         "ammo": 10, 
         "bombercode": 0, 
-        "class": 2, 
         "closedef": 2, 
         "cost": 13, 
         "country": 8, 
@@ -14598,14 +14597,14 @@ var equipment = {
         "rangedefmod": 5, 
         "softatk": 4, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 2
     }, 
     "585": {
         "airatk": 10, 
         "airdef": 6, 
         "ammo": 6, 
         "bombercode": 0, 
-        "class": 9, 
         "closedef": 0, 
         "cost": 34, 
         "country": 8, 
@@ -14623,6 +14622,7 @@ var equipment = {
         "rangedefmod": 6, 
         "softatk": 13, 
         "spotrange": 3, 
-        "target": 1
+        "target": 1, 
+        "uclass": 9
     }
 }
