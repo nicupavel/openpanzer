@@ -108,14 +108,14 @@ function Render(mapObj)
 					
 				drawHexDecals(x0, y0, hex);
 				drawHexGrid(x0, y0, style);
-
-				//Don't render unit if it has a move animation
+				
+				//Don't render unit if it has a move animation or it's not spotted
 				unit = hex.getUnit(!uiSettings.airMode);
-				if (unit !== null && !unit.hasAnimation)
+				if (hex.isSpotted(map.currentSide) && unit !== null && !unit.hasAnimation)
 					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode
 
 				unit = hex.getUnit(uiSettings.airMode);
-				if (unit !== null && !unit.hasAnimation)
+				if (hex.isSpotted(map.currentSide) && unit !== null && !unit.hasAnimation)
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 			}
 		}

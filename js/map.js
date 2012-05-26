@@ -353,6 +353,7 @@ function Map()
 			}
 	}
 	
+	//TODO when unit fires it should be spotted for the current turn
 	//atkunit from srow, scol attacks defunit from drow, dcol
 	this.attackUnit = function(atkunit, defunit, supportFire)
 	{
