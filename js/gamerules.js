@@ -19,6 +19,7 @@ var GameRules = GameRules || {}; //Namespace emulation
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
 //TODO stopmov 254, bridges, zone of control
+//TODO row,col can be read from unit
 GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 {
 	var r = 0;
@@ -31,6 +32,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	var range = ud.movpoints;
 	var movmethod = ud.movmethod;
 	var moveCost = movTable[movmethod];
+	var enemySide = ~unit.player.side & 1;
 	
 	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
 		range = unit.getFuel();
@@ -42,7 +44,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		range = 1;	
 	}
 	
-	console.log("move range:" + range);
+	//console.log("move range:" + range);
 	
 	var c = getCellsInRange(row, col, range, mrows, mcols);
 	
@@ -82,22 +84,19 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 						else
 							c[j].cost = moveCost[hex.terrain];
 						
-						//enemy unit zone of control ? no ZOC for air units //TODO Set ZOC for adjancent hexes too
-						if (isGround(unit) && hex.unit !== null && hex.unit.player.side != unit.player.side)
-						{
-							c[j].cost = 254;
-							c[j].cin = range;
-						}
+						//enemy unit zone of control ? no ZOC for air units 
+						if (hex.isZOC(enemySide))
+							c[j].cost = 254; //stop movement
 						
 						if (c[j].cin == 0) c[j].cin = c[i].cout;
 						if (c[j].cout == 0) c[j].cout = c[j].cin + c[j].cost;
-						if (c[j].cin > c[i].cout && c[j].cost < 254)
+						if (c[j].cin > c[i].cout && c[j].cost <= 254) //Is reachable from another path
 						{
 							c[j].cin = c[i].cout;
 							c[j].cout = c[j].cin + c[j].cost;
 						}
 						//console.log("\t Hex at Row:" + c[j].row + " Col:" + c[j].col + " RANGE:" + c[j].range + " CIN:" + c[j].cin + " COUT:" + c[j].cout + " COST:" + c[j].cost);
-						if ((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin < range))) 
+						if ((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin <= range))) 
 						{
 							if (canMoveInto(map, unit, c[j])) 
 								c[j].canMove = true; //To allow unit to move in this hex
@@ -119,7 +118,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	
 	return allowedCells;
 }
-
+//TODO row,col can be read from unit
 GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 {
 	var allowedCells = [];
@@ -130,7 +129,7 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 	var range = unit.unitData().gunrange;
 	if (range == 0)	range = 1;
 		
-	console.log("attack range: "+ range);
+	//console.log("attack range: "+ range);
 	var cellList = getCellsInRange(row, col, range, mrows, mcols);
 	
 	//Air unit can attack the target under it
@@ -150,6 +149,44 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 
 	}
 	return allowedCells;
+}
+
+//set zone of control on unit adjacent hexes
+GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
+{
+	if (!unit || isAir(unit)) return;
+	
+	var p = unit.getPos();
+	var side = unit.player.side;
+	var r, c;
+	var adj =  getAdjacent(p.row, p.col);
+
+	for (var i in adj)
+	{
+		if ((r = adj[i].row) > mrows) continue;
+		if ((c = adj[i].col) > mcols) continue;
+		//console.log("zoc [" + r + "][" + c +"] set to:" + on + " for side: " + side);
+		map[r][c].setZOC(side, on);
+	}
+}
+
+GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
+{
+	if (!unit) return;
+	
+	var p = unit.getPos();
+	var side = unit.player.side;
+	var range = unit.unitData().spotrange;
+	var r, c;
+	var cells = getCellsInRange(p.row, p.col, range, mrows, mcols);
+	
+	for (var i in cells)
+	{
+		r = cells[i].row;
+		c = cells[i].col;
+		//console.log("spot [" + r + "][" + c +"] set to:" + on + " for side: " + side);
+		map[r][c].setSpotted(side, on);
+	}
 }
 
 GameRules.getShortestPath = function(startCell, endCell, cellList)
@@ -365,7 +402,7 @@ GameRules.getResupplyValue = function(map, unit)
 	{
 		var r = adj[h].row;
 		var c = adj[h].col;
-		//Enemy around ?
+		//Enemy around ? Check only for ground units
 		if ((map[r][c].unit != null) && (map[r][c].unit.player.side != unit.player.side))
 			enemy++;
 	}
@@ -410,7 +447,7 @@ GameRules.getReinforceValue = function(map, unit)
 	{
 		var r = adj[h].row;
 		var c = adj[h].col;
-		//Enemy around ?
+		//Enemy around ? Check only for ground units
 		if ((map[r][c].unit !== null) && (map[r][c].unit.player.side != unit.player.side))
 			enemy++;
 	}

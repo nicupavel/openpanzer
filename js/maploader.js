@@ -53,7 +53,7 @@ function MapLoader()
 		{
 			var rows = mapHeader.getAttribute("rows");
 			var cols = mapHeader.getAttribute("cols");
-			console.log("Rows: " + rows + " Cols: " + cols);
+			//console.log("Rows: " + rows + " Cols: " + cols);
 			if (rows > 0 && rows < 99 && cols > 0 && cols < 99)
 			{
 				map.rows = rows;

@@ -230,7 +230,7 @@ function Render(mapObj)
 				movIndex = 0;
 				clearInterval(this.movTimer);
 				unit.hasAnimation = false;
-				console.log("Stopping animation for unit id:" + unit.id);
+				//console.log("Stopping animation for unit id:" + unit.id);
 				return;
 			}
 		

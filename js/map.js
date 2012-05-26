@@ -40,10 +40,10 @@ function Hex(row, col)
 	this.owner = -1;
 	this.flag = -1;
 	this.isSupply = false;
-	this.isDeployment = false;
+	this.isDeployment = -1; //deployment hex for played id
 	this.victorySide = -1; //hex is a victory point for side [0,1]
 	this.name = "";
-
+	
 	this.isMoveSel = false; //current unit can move to this hex
 	this.isAttackSel = false; //current unit can attack this hex
 	
@@ -65,6 +65,11 @@ function Hex(row, col)
 		this.setUnit(hex.unit);
 		this.setUnit(hex.airunit);
 	}
+	
+	this.isZOC = function(side)	{ return isHexPropSet(zocList, side); }
+	this.isSpotted = function(side)	{ return isHexPropSet(spotList, side); }
+	this.setZOC = function(side, on) { return setHexPropList(zocList, side, on); }
+	this.setSpotted = function(side, on) {	return setHexPropList(spotList, side, on); }
 	
 	this.getPos = function() { return new Cell(1 * r, 1 * c); }
 	
@@ -138,6 +143,26 @@ function Hex(row, col)
 	//private
 	var r = row;
 	var c = col;
+	var zocList = [0, 0]; //Hex is in a unit zone of control from side 0 or 1
+	var spotList = [0, 0]; //Hex is spoted by a unit from side 0 or 1
+	
+	//sets one of the properties list for side on/off 
+	function setHexPropList(propList, side, on)
+	{
+		if (side < propList.length)
+			if (on)
+				propList[side]++;
+			else
+				propList[side]--;
+	}
+	//checks if a property is true or false
+	function isHexPropSet(propList, side)
+	{
+		if (side < propList.length)
+			if (propList[side] > 0)
+				return true;
+		return false;
+	}
 };
 
 function Map()
@@ -187,6 +212,8 @@ function Map()
 		
 		//Sets the player struct
 		unit.player = this.getPlayer(unit.owner);
+		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols);
+		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols);
 	}
 	
 	this.getUnits = function() { return unitList; }
@@ -356,12 +383,16 @@ function Map()
 		
 		if (atkunit.destroyed) 
 		{
+			GameRules.setZOCRange(this.map, atkunit, false, this.rows, this.cols); //remove old ZOC
+			GameRules.setSpotRange(this.map, atkunit, false, this.rows, this.cols); //remove old spotting range
 			this.map[a.row][a.col].delUnit(atkunit);
 			update = true;
 		}
 			
 		if (defunit.destroyed)
 		{
+			GameRules.setZOCRange(this.map, defunit, false, this.rows, this.cols); //remove old ZOC
+			GameRules.setSpotRange(this.map, defunit, false, this.rows, this.cols); //remove old spotting range
 			this.map[d.row][d.col].delUnit(defunit);
 			update = true;
 		}	
@@ -393,10 +424,14 @@ function Map()
 				win = side;
 		}
 		unit.move(GameRules.distance(s.row, s.col, drow, dcol));
+		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
+		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
 		srcHex.delUnit(unit);
 		dstHex.setUnit(unit);
 		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
+		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
+		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
 		
 		this.delMoveSel();
 		this.setAttackRange(unit) //Put new attack range
