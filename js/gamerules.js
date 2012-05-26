@@ -168,8 +168,11 @@ GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
 
 	for (var i in adj)
 	{
-		if ((r = adj[i].row) > mrows) continue;
-		if ((c = adj[i].col) > mcols) continue;
+		r = adj[i].row;
+		c = adj[i].col;
+		if (r >= mrows || r < 0) continue;
+		if (c >= mcols || c < 0) continue;
+		
 		//console.log("zoc [" + r + "][" + c +"] set to:" + on + " for side: " + side);
 		map[r][c].setZOC(side, on);
 	}
