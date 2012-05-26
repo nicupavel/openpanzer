@@ -345,7 +345,7 @@ function Map()
 					p[i].playedTurn = this.turn;
 			}
 			this.currentSide = ~this.currentSide & 1;
-			console.log("Side: " + this.currentSide);
+			console.log("Playing Side: " + sidesName[this.currentSide]);
 			if (this.currentSide == 0)
 			{
 				this.turn++;

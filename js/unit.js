@@ -48,6 +48,7 @@ function Unit(equipmentID)
 	this.hasResupplied = false;
 	this.hasReinforced = false;
 	this.isMounted = false;
+	this.tempSpotted = false;
 	this.strength = 10;
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
@@ -121,9 +122,11 @@ function Unit(equipmentID)
 	
 	this.fire = function(isAttacking) 
 	{
+		//Unit is shown on map when fires even if it's on a non spotted hex (support fire)
+		this.tempSpotted = true;
 		this.ammo--; //TODO some transports can attack ?
 		if (isAttacking)
-			this.hasFired = true;
+			this.hasFired = true; //Support and Defence fire don't block this unit for attacking
 	}
 	this.move = function(dist) 
 	{
@@ -173,6 +176,7 @@ function Unit(equipmentID)
 	{ 
 		this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false;
 		this.isMounted = false;
+		this.tempSpotted = false;
 	}
 	this.log = function() { console.log(this); }
 	this.setHex = function(h) { hex = h; }

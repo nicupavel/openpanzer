@@ -111,11 +111,13 @@ function Render(mapObj)
 				
 				//Don't render unit if it has a move animation or it's not spotted
 				unit = hex.getUnit(!uiSettings.airMode);
-				if (hex.isSpotted(map.currentSide) && unit !== null && !unit.hasAnimation)
+				if (unit !== null && !unit.hasAnimation
+						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode
 
 				unit = hex.getUnit(uiSettings.airMode);
-				if (hex.isSpotted(map.currentSide) && unit !== null && !unit.hasAnimation)
+				if (unit !== null && !unit.hasAnimation 
+						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 			}
 		}
