@@ -126,6 +126,7 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
 	
 	//TODO weather ?
+	var side = unit.player.side;
 	var range = unit.unitData().gunrange;
 	if (range == 0)	range = 1;
 		
@@ -138,13 +139,17 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 	for (var i = 0; i < cellList.length; i++)
 	{
 		var cell = cellList[i];
-		if (canAttack(unit, map[cell.row][cell.col].unit))
+		var hex = map[cell.row][cell.col];
+		
+		if (!hex.isSpotted(side))
+			continue;			
+		if (canAttack(unit, hex.unit)) //Can attack the ground unit on this hex?
 		{
 			allowedCells.push(cell);
 			continue; //don't push same cell twice below
 		}
 		
-		if (canAttack(unit, map[cell.row][cell.col].airunit))
+		if (canAttack(unit, hex.airunit)) //Can attack the air unit on this hex ?
 			allowedCells.push(cell);
 
 	}
