@@ -179,6 +179,8 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 	var range = unit.unitData().spotrange;
 	var r, c;
 	var cells = getCellsInRange(p.row, p.col, range, mrows, mcols);
+	//Add current unit cell too as spotted
+	cells.push(new Cell(p.row, p.col)); 
 	
 	for (var i in cells)
 	{
