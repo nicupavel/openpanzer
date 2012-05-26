@@ -211,4 +211,4 @@ function screenPos(x, y)
 	this.y = y;
 }
 
-var VERSION = "1.7";
+var VERSION = "1.8";
