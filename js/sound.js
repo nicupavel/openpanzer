@@ -50,5 +50,14 @@
 	} catch (e) {
 		console.log("No Audio() support in this browser");
 	}
-	this.play = function()	{ if (sound) return sound.play(); }
+	
+	this.play = function()	
+	{ 
+		if (sound)
+		{	
+			sound.currentTime = 0; //restart if already playing
+			return sound.play(); 
+		}
+	}
  }
+ 
