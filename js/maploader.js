@@ -89,35 +89,42 @@ function MapLoader()
 		var hexNodes = xmlData.getElementsByTagName("hex");
 		if (hexNodes) 
 		{
+			var hex = null;
+			var row, col, v;
 			for (var i = 0; i < hexNodes.length; i++) 
 			{
-				var row = hexNodes[i].getAttribute("row");
-				var col = hexNodes[i].getAttribute("col");
-				var tmphex = map.map[row][col];
-				tmphex.terrain = hexNodes[i].getAttribute("terrain");
-				if (tmphex.terrain === null) { tmphex.terrain = 0; }
-				tmphex.road = hexNodes[i].getAttribute("road");
-				if (tmphex.road === null) { tmphex.road = 0; }
-				tmphex.name = hexNodes[i].getAttribute("name");
-				if (tmphex.name === null) { tmphex.name = ""; }
-				tmphex.flag = hexNodes[i].getAttribute("flag");
-				if (tmphex.flag === null) { tmphex.flag = -1; }
-				tmphex.owner = hexNodes[i].getAttribute("owner");
-				if (tmphex.owner === null) { tmphex.owner = -1; }
-				tmphex.victorySide = hexNodes[i].getAttribute("victory");
-				if (tmphex.victorySide === null) { tmphex.victorySide = -1; }
-				//console.log("Hex at row:" + row + " col:" + col);
+				row = hexNodes[i].getAttribute("row");
+				col = hexNodes[i].getAttribute("col");
+				hex = map.map[row][col];
+				if (!hex || typeof hex === "undefined")
+				{
+					console.log("Invalid Hex at row:" + row + " col:" + col);
+					continue;
+				}
+				
+				if ((v = hexNodes[i].getAttribute("terrain")) !== null)
+					hex.terrain = v;
+				if ((v = hexNodes[i].getAttribute("road")) !== null)
+					hex.road = v;
+				if ((v = hexNodes[i].getAttribute("name")) !== null)
+					hex.name = v;
+				if ((v = hexNodes[i].getAttribute("flag")) !== null)
+					hex.flag = v;
+				if ((v = hexNodes[i].getAttribute("owner")) !== null)
+					hex.owner = v;
+				if ((v = hexNodes[i].getAttribute("victory")) !== null)
+					hex.victorySide = v;
+				
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
 					if (hexNodes[i].childNodes[j].nodeName == "unit")
 					{
 						u = loadUnit(hexNodes[i].childNodes[j]);
 						if (u !== null)
-							tmphex.setUnit(u);
+							hex.setUnit(u);
 					}
 				}
 				map.setHex(row, col);
-				//delete tmphex;
 			}
 		}
 	}
