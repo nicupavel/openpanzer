@@ -10,6 +10,7 @@
  */
 
 //Hex, Player and Map classes
+//Player Object Constructor
 function Player()
 {
 	this.id = -1;
@@ -17,22 +18,23 @@ function Player()
 	this.country = -1;
 	this.prestige = 0;
 	this.playedTurn = -1;
-	
-	//Clone object
-	this.copy = function(p)
-	{
-		if (p === null) return;
-		this.id = p.id;
-		this.side = p.side;
-		this.country = p.country;
-		this.prestige = p.prestige;
-		this.playedTurn = p.playedTurn;
-	}
-	this.getCountryName = function() { return countryNames[this.country]; }
 }
+//Player Object Public Methods
+Player.prototype.copy = function(p)
+{
+	if (p === null) return;
+	this.id = p.id;
+	this.side = p.side;
+	this.country = p.country;
+	this.prestige = p.prestige;
+	this.playedTurn = p.playedTurn;
+}
+Player.prototype.getCountryName = function() { return countryNames[this.country]; }
 
+//Hex Object Constructor
 function Hex(row, col)
 {
+	//Public Properties
 	this.unit = null; //pointer to the ground unit on this hex
 	this.airunit = null; //pointer to the air unit on this hex
 	this.terrain = terrainType.Clear;
@@ -42,105 +44,18 @@ function Hex(row, col)
 	this.isSupply = false;
 	this.isDeployment = -1; //deployment hex for played id
 	this.victorySide = -1; //hex is a victory point for side [0,1]
-	this.name = "";
-	
+	this.name = "";	
 	this.isMoveSel = false; //current unit can move to this hex
 	this.isAttackSel = false; //current unit can attack this hex
-	
-	//Clone object
-	this.copy = function(hex) 
-	{
-		if (hex === null) return;
-		
-		this.terrain = hex.terrain;
-		this.road = hex.road;
-		this.owner = hex.owner;
-		this.flag = hex.flag;
-		this.isSupply = hex.isSupply;
-		this.isDeployment = hex.isDeployment;
-		this.victorySide = hex.victorySide;
-		this.name = hex.name;
-		
-		//Set units and their correct links to the new object
-		this.setUnit(hex.unit);
-		this.setUnit(hex.airunit);
-	}
-	
-	this.isZOC = function(side)	{ return isHexPropSet(zocList, side); }
-	this.isSpotted = function(side)	{ return isHexPropSet(spotList, side); }
+
+	//Privileged Methods that access private properties/methods
+	this.isZOC = function(side) { return isHexPropSet(zocList, side); }
+	this.isSpotted = function(side) { return isHexPropSet(spotList, side); }
 	this.setZOC = function(side, on) { return setHexPropList(zocList, side, on); }
 	this.setSpotted = function(side, on) {	return setHexPropList(spotList, side, on); }
-	
 	this.getPos = function() { return new Cell(1 * r, 1 * c); }
 	
-	//Returns air or ground unit on a hex depending on UI airMode 
-	this.getUnit = function(airMode)
-	{
-		if (this.unit !== null && this.airunit !== null)
-		{
-			if (airMode)
-				return this.airunit;
-			else
-				return this.unit;
-		}
-	
-		if (this.unit !== null)
-			return this.unit;
-		
-		if (this.airunit !== null)
-			return this.airunit;
-	
-		return null;
-	}
-	
-	this.setUnit = function(unit) 
-	{ 
-		//Will return if unit object is just a copy.
-		if (unit === null || typeof unit.setHex === "undefined")
-			return;
-		unit.setHex(this);
-		if (GameRules.isAir(unit))
-			this.airunit = unit;
-		else
-			this.unit = unit;
-	}
-	
-	this.delUnit = function(unit) 
-	{
-		if (unit === null || typeof unit.setHex === "undefined")
-			return;
-		unit.setHex(null);
-		//TODO revise this. check units id ?
-		if (GameRules.isAir(unit))
-			this.airunit = null;
-		else
-			this.unit = null;
-	}
-	
-	//Returns the unit from this hex that can be attacked by atkunit
-	this.getAttackableUnit = function (atkunit, airMode)
-	{
-		if (GameRules.canAttack(atkunit, this.airunit) 
-			&& GameRules.canAttack(atkunit, this.unit))
-		{
-			if (airMode)
-				return this.airunit;
-			else
-				return this.unit;
-		}	
-	
-		if (GameRules.canAttack(atkunit, this.unit))
-			return this.unit;
-
-		if (GameRules.canAttack(atkunit, this.airunit))
-			return this.airunit;
-	
-		return null;
-	}
-
-	this.log = function() { console.log(this); }
-	
-	//private
+	//Private Methods and Properties
 	var r = row;
 	var c = col;
 	var zocList = [0, 0]; //Hex is in a unit zone of control from side 0 or 1
@@ -165,6 +80,93 @@ function Hex(row, col)
 	}
 };
 
+//Hex Object Public Methods
+//Clone Hex object
+Hex.prototype.copy = function(hex) 
+{
+	if (hex === null) return;
+	
+	this.terrain = hex.terrain;
+	this.road = hex.road;
+	this.owner = hex.owner;
+	this.flag = hex.flag;
+	this.isSupply = hex.isSupply;
+	this.isDeployment = hex.isDeployment;
+	this.victorySide = hex.victorySide;
+	this.name = hex.name;	
+	//Set units and their correct links to the new object
+	this.setUnit(hex.unit);
+	this.setUnit(hex.airunit);
+}
+
+//Returns air or ground unit on a hex depending on UI airMode 
+Hex.prototype.getUnit = function(airMode)
+{
+	if (this.unit !== null && this.airunit !== null)
+	{
+		if (airMode)
+			return this.airunit;
+		else
+			return this.unit;
+	}
+
+	if (this.unit !== null)
+		return this.unit;
+	
+	if (this.airunit !== null)
+		return this.airunit;
+
+	return null;
+}
+
+Hex.prototype.setUnit = function(unit) 
+{ 
+	//Will return if unit object is just a copy.
+	if (unit === null || typeof unit.setHex === "undefined")
+		return;
+	unit.setHex(this);
+	if (GameRules.isAir(unit))
+		this.airunit = unit;
+	else
+		this.unit = unit;
+}
+
+Hex.prototype.delUnit = function(unit) 
+{
+	if (unit === null || typeof unit.setHex === "undefined")
+		return;
+	unit.setHex(null);
+	//TODO revise this. check units id ?
+	if (GameRules.isAir(unit))
+		this.airunit = null;
+	else
+		this.unit = null;
+}
+
+//Returns the unit from this hex that can be attacked by atkunit
+Hex.prototype.getAttackableUnit = function (atkunit, airMode)
+{
+	if (GameRules.canAttack(atkunit, this.airunit) 
+		&& GameRules.canAttack(atkunit, this.unit))
+	{
+		if (airMode)
+			return this.airunit;
+		else
+			return this.unit;
+	}	
+
+	if (GameRules.canAttack(atkunit, this.unit))
+		return this.unit;
+
+	if (GameRules.canAttack(atkunit, this.airunit))
+		return this.airunit;
+
+	return null;
+}
+
+Hex.prototype.log = function() { console.log(this); }
+
+//Map Object Constructor
 function Map()
 {
 	this.rows = 0;
@@ -582,6 +584,7 @@ function Map()
 		
 		console.log("Victory Hexes for Side 0: " +  this.sidesVictoryHexes[0] 
 					+ " Victory Hexes for Side 1: " + this.sidesVictoryHexes[1]);
+		console.log(this);
 		/*
 		for (var i = 0; i < unitImagesList.length; i++)
 		{
