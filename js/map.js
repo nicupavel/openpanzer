@@ -273,7 +273,10 @@ function Map()
 	
 	this.setHex = function(row, col, hex)
 	{
-		this.map[row][col].copy(hex); //copy values
+		if (!hex || typeof hex === "undefined")
+			hex = this.map[row][col]; //in-place
+		else
+			this.map[row][col].copy(hex); //copy values from the hex argument
 		//Increment victorySides for each side
 		if (hex.victorySide != -1) 
 			this.sidesVictoryHexes[hex.victorySide]++; 
@@ -355,7 +358,6 @@ function Map()
 			}
 	}
 	
-	//TODO when unit fires it should be spotted for the current turn
 	//atkunit from srow, scol attacks defunit from drow, dcol
 	this.attackUnit = function(atkunit, defunit, supportFire)
 	{
@@ -407,8 +409,7 @@ function Map()
 		return cr;
 	}
 	
-	// moves a unit to a new hex returns side number if the move results in a win 
-	// -1 otherwise
+	// moves a unit to a new hex returns side number if the move results in a win -1 otherwise
 	this.moveUnit = function(unit, drow, dcol)
 	{
 		var s = unit.getPos();
@@ -524,7 +525,7 @@ function Map()
 			for (c = 0; c < m.cols; c++)
 			{
 				var h = m.map[r][c];
-				var hex = new Hex(r, c);
+				var hex = this.map[r][c];
 				hex.copy(h);
 				
 				if (h.unit !== null) 
@@ -539,7 +540,7 @@ function Map()
 					u.copy(h.airunit);		
 					hex.setUnit(u);
 				}
-				this.setHex(r, c, hex);
+				this.setHex(r, c);
 			}
 		}
 		//update sideVictoryHexes with in progress values after setHex 
@@ -584,7 +585,6 @@ function Map()
 		
 		console.log("Victory Hexes for Side 0: " +  this.sidesVictoryHexes[0] 
 					+ " Victory Hexes for Side 1: " + this.sidesVictoryHexes[1]);
-		console.log(this);
 		/*
 		for (var i = 0; i < unitImagesList.length; i++)
 		{
