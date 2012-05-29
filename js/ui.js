@@ -192,7 +192,7 @@ function handleUnitAttack(row, col)
 		if (map.currentUnit.destroyed) //TODO Do this better
 		{
 			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-			r.drawCursor(cell, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+			r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 			r.addAnimation(cpos.row, cpos.col, "explosion");
 		}
 		else //Can we still attack ?
