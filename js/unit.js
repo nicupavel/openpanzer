@@ -94,6 +94,9 @@ Unit.prototype.copy = function(u)
 	this.facing = u.facing;
 	this.flag = u.flag;
 	this.destroyed = u.destroyed;
+	this.hits = u.hits;
+	this.experience = u.experience;
+	this.entrenchment = u.entrenchment;
 	if (u.player !== null)
 	{
 		this.player = new Player();
