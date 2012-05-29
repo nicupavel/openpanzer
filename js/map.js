@@ -354,7 +354,7 @@ function Map()
 			if (this.currentSide == 0)
 			{
 				this.turn++;
-				resetUnits();
+				unitsEndTurn();
 			}
 	}
 	
@@ -621,12 +621,12 @@ function Map()
 		}
 	}
 	//Resets hasFired, hasMoved, hasRessuplied 
-	function resetUnits()
+	function unitsEndTurn()
 	{
 		for (var i = 0; i < unitList.length; i++)
 		{
 			if (unitList[i] !== null) 
-				unitList[i].resetUnit();
+				unitList[i].unitEndTurn();
 		}
 	}
 	

@@ -63,6 +63,9 @@ function Unit(equipmentID)
 	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
 	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
 	this.hasAnimation = false; //flag if the unit has a move animation
+	this.hits = 0; //the number of hits unit received this turn
+	this.experience = 0; //combat experience
+	this.entrenchment = 0; //level of entrenchment this unit has
 	
 	//Privileged Methods that access private properties/methods
 	this.setHex = function(h) { hex = h; }
@@ -129,7 +132,8 @@ Unit.prototype.getFuel = function()
 
 Unit.prototype.hit = function(losses) 
 { 
-	this.strength -= losses; 
+	this.strength -= losses;
+	this.hits++;
 	if (this.strength <= 0) this.destroyed = true;
 }
 
@@ -145,6 +149,7 @@ Unit.prototype.fire = function(isAttacking)
 Unit.prototype.move = function(dist) 
 {
 	this.hasMoved = true;
+	this.entrenchment = 0;
 	if (this.isMounted) 
 	{
 		this.hasFired = true;
@@ -186,10 +191,12 @@ Unit.prototype.setTransport = function(id)
 Unit.prototype.mount = function() { this.isMounted = true; }
 Unit.prototype.unmount = function() { this.isMounted = false;	}
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
-Unit.prototype.resetUnit = function() 
-{ 
+Unit.prototype.unitEndTurn = function()
+{
+	if (!this.hasMoved) this.entrenchment++;
 	this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false;
 	this.isMounted = false;
 	this.tempSpotted = false;
+	this.hits = 0;
 }
 Unit.prototype.log = function() { console.log(this); }
