@@ -62,9 +62,9 @@
 	{ 
 		if (sound)
 		{	
-			if (sound.hasOwnProperty('currentTime'))
-				sound.currentTime = 0; //restart if already playing
-			return sound.play(); 
+            //requires audio to be preloaded
+            try { sound.currentTime = 0; } catch(e) {}; //restart if already playing
+            return sound.play(); 
 		}
 	}
  }
