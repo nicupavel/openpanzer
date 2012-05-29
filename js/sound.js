@@ -12,12 +12,20 @@
  
  var soundData = 
  {
-	"track": new soundSprite("resources/sounds/track.wav"),
-	"htrack": new soundSprite("resources/sounds/htrack.wav"),
-	"leg": new soundSprite("resources/sounds/leg.wav"),
-	"air": new soundSprite("resources/sounds/air.wav"),
-	"naval": new soundSprite("resources/sounds/naval.wav"),
-	//"wheel": new soundSprite("resources/sounds/wheel.wav"), //Not used
+	//move sounds
+	"track": new soundSprite("resources/sounds/move/track.wav"),
+	"htrack": new soundSprite("resources/sounds/move/htrack.wav"),
+	"leg": new soundSprite("resources/sounds/move/leg.wav"),
+	"air": new soundSprite("resources/sounds/move/air.wav"),
+	"naval": new soundSprite("resources/sounds/move/naval.wav"),
+	//"wheel": new soundSprite("resources/sounds/move/wheel.wav"), //Not used
+	//attack sounds
+	"gun": new soundSprite("resources/sounds/fire/gun.wav"),
+	"smallgun": new soundSprite("resources/sounds/fire/smallgun.wav"),
+	//explosion sounds
+	"explosion": new soundSprite("resources/sounds/fire/explosion.wav"),
+	//dummy sound
+	"dummy": new soundSprite("")
  }
  
  var moveSoundByMoveMethod = 
@@ -36,10 +44,9 @@
 	"leg"		//allTerrainLeg
  ];
  
- //TODO needs to be in sync with animationChain
- var attackSoundByClass = [];
- var destroyedSoundByClass = [];
- 
+ //TODO preloading
+ //TODO stop method (pause/currentTime = 0)
+ //TODO check error in .currentTime member thrown on some browsers
  function soundSprite(path)
  {
 	var sound;

@@ -186,7 +186,6 @@ function Render(mapObj)
 		
 		if (typeof facing === "undefined")
 			facing = direction.N;
-			
 		var anim = animationsData[animationName];
 		var pos = cellToScreen(row, col);
 		var y0 = parseInt(pos.y - anim.image.height/2 + r);
@@ -196,11 +195,8 @@ function Render(mapObj)
 			ctx:a, 
 			x:x0, 
 			y:y0, 
-			width:anim.width, 
-			height:anim.image.height,  
-			frames:anim.frames - 1, //index from 0 
-			image: anim.image,
-			rotate: directionToRadians[facing]
+			rotate: directionToRadians[facing],
+			sprite: anim
 		});
 		
 		return true;

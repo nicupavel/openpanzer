@@ -44,7 +44,7 @@ function AnimationChain()
 }
 
 
-//o = {ctx, x, y, width, height, frames, image, rotate}
+//o = {ctx, x, y, rotate, animationSprite}
 //Animates a series of frames from image on ctx context at x,y position
 function Animation(o)
 {
@@ -55,22 +55,25 @@ function Animation(o)
 	
 	this.start = function()
 	{
+		o.sprite.sound.play(); //Play the associated sound
 		timer = setInterval(animate, this.delay);
 	}
 	
 	this.getDuration = function()
 	{
-		return this.delay * o.frames;
+		return this.delay * o.sprite.frames;
 	}
-	
+
 	function animate()
 	{
-		o.ctx.clearRect(o.x, o.y, o.width, o.height);
+		o.ctx.clearRect(o.x, o.y, o.sprite.width, o.sprite.image.height);
 		o.ctx.save();
-		o.ctx.translate(o.x + o.width/2, o.y + o.height/2);
+		o.ctx.translate(o.x + o.sprite.width/2, o.y + o.sprite.image.height/2);
 		o.ctx.rotate(o.rotate);
-		if (count >= o.frames) { clearInterval(timer);  }
-		o.ctx.drawImage(o.image, o.width * count, 0, o.width, o.height, -o.width/2, -o.height/2, o.width, o.height);
+		if (count >= o.sprite.frames) { clearInterval(timer);  }
+		o.ctx.drawImage(o.sprite.image, o.sprite.width * count, 0, o.sprite.width, 
+						o.sprite.image.height, -o.sprite.width/2, -o.sprite.image.height/2, 
+						o.sprite.width, o.sprite.image.height);
 		o.ctx.restore();
 		count++;
 	}
@@ -79,10 +82,10 @@ function Animation(o)
 //List of all existing animations
 var animationsData = 
 {
-//AnimationName:new animationSprite(path, totalFrames, frameWidth
-"explosion": new animationSprite("resources/animations/explosions.png", 12, 120),
-"gun": new animationSprite("resources/animations/fire-gun.png", 6, 150),
-"smallgun": new animationSprite("resources/animations/fire-smallgun.png", 8, 80),
+	//AnimationName: new animationSprite(path, totalFrames, frameWidth, soundSpriteName)
+	"explosion": new animationSprite("resources/animations/explosions.png", 12, 120, "explosion" ),
+	"gun": new animationSprite("resources/animations/fire-gun.png", 6, 150, "gun"),
+	"smallgun": new animationSprite("resources/animations/fire-smallgun.png", 8, 80, "smallgun"),
 };
 
 //Which attack animations belong to each unit class
@@ -112,10 +115,15 @@ var attackAnimationByClass =
 "gun", //lightCruiser
 ];
 
-function animationSprite(path, totalFrames, frameWidth)
+//TODO preloading
+function animationSprite(imagePath, totalFrames, frameWidth, soundSpriteName)
 {
 	this.image = new Image();
-	this.image.src = path;
+	this.image.src = imagePath;
 	this.width  = frameWidth;
-	this.frames = totalFrames;
+	this.frames = totalFrames - 1; //index from 0
+	if (soundSpriteName && typeof soundSpriteName !== "undefined")
+		this.sound = soundData[soundSpriteName];
+	else
+		this.sound = soundData["dummy"];
 }
