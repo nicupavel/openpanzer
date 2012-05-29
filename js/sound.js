@@ -62,7 +62,8 @@
 	{ 
 		if (sound)
 		{	
-			sound.currentTime = 0; //restart if already playing
+			if (sound.hasOwnProperty('currentTime'))
+				sound.currentTime = 0; //restart if already playing
 			return sound.play(); 
 		}
 	}
