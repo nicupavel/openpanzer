@@ -28,6 +28,12 @@ function addTag(parent, tag)
 	return t;
 }
 
+//Taken from http://modernizr.github.com/Modernizr/touch.html
+function hasTouch()
+{
+	return "ontouchstart" in window;
+}
+
 function hoverin(e)
 {
 	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
@@ -39,3 +45,4 @@ function hoverout(e)
 	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
 	e.src = path + e.id + ".png";
 }
+

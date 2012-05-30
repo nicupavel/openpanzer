@@ -36,7 +36,7 @@ function UI(scenario)
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	canvas.addEventListener("mousedown", handleMouseClick, false);
-	canvas.addEventListener("mousemove", handleMouseMove, false);
+	if (!hasTouch()) canvas.addEventListener("mousemove", handleMouseMove, false);
 	
 	countries = map.getCountries();
 	buildMainMenu();
