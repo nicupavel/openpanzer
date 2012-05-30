@@ -114,6 +114,8 @@ function MapLoader()
 					hex.owner = v;
 				if ((v = hexNodes[i].getAttribute("victory")) !== null)
 					hex.victorySide = v;
+				if ((v = hexNodes[i].getAttribute("deploy")) !== null)
+					hex.isDeployment = v;
 				
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
@@ -134,16 +136,23 @@ function MapLoader()
 		//create the unit object
 		var unitId = node.getAttribute("id");
 		var playerId = node.getAttribute("owner");
+		var u = null;
+		var facing, flag, transport, experience, entrenchment;
+		
 		if (unitId >= 0 &&  playerId >= 0)
 		{
-			var u = new Unit(unitId);
+			u = new Unit(unitId);
 			u.owner = playerId;
-			var facing = node.getAttribute("face");
-			if (facing !== null) { u.facing = facing; }
-			var flag = node.getAttribute("flag");
-			if (flag !== null) { u.flag = flag; }
-			var transport = node.getAttribute("transport");
-			if (transport !== null) {u.setTransport(transport); }
+			if ((facing = node.getAttribute("face")) !== null)
+				u.facing = facing;
+			if ((flag = node.getAttribute("flag")) !== null)
+				u.flag = flag;
+			if ((transport = node.getAttribute("transport")) !== null)
+				u.setTransport(transport);
+			if ((experience = node.getAttribute("exp")) !== null)
+				u.experience = experience;
+			if ((entrenchment = node.getAttribute("ent")) !== null)
+				u.entrenchment = entrenchment;
 			
 			return u;
 		}
