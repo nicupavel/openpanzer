@@ -137,6 +137,7 @@ Unit.prototype.hit = function(losses)
 { 
 	this.strength -= losses;
 	this.hits++;
+	if (this.entrenchment > 0) this.entrenchment--;
 	if (this.strength <= 0) this.destroyed = true;
 }
 

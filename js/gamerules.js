@@ -296,6 +296,10 @@ GameRules.calculateAttackResults = function(map, atkunit, defunit)
 	var tUD = defunit.unitData();
 	var at = aUD.target;
 	var tt = tUD.target;
+	var aTerrain = atkunit.getHex().terrain;
+	var tTerrain = defunit.getHex().terrain;
+	var aExpBars = parseInt(atkunit.experience / 100);
+	var tExpBars = parseInt(defunit.experience / 100);
 	var aav = 0;
 	var adv = 0;
 	var tav = 0;
@@ -348,14 +352,32 @@ GameRules.calculateAttackResults = function(map, atkunit, defunit)
 	
 	//TODO Weather
 	//TODO Terrain checks
-	if (defunit.getHex().terrain == terrainType.City)
+	if (tTerrain == terrainType.City)
 		tdv += 4;
-	
-	if (defunit.getHex().terrain == terrainType.River)
+	if (tTerrain == terrainType.River)
 		tdv -= 4;
+	if (aTerrain == terrainType.River)
+		aav -= 4;
 
 	//TODO Entrenchment
+	//Add 2*entrechment for infantry in city, forest, mountain if attacked by tank, recon, at
+	if (tUD.class == unitClass.infantry 
+	    && (tTerrain == terrainType.City || tTerrain == terrainType.Forest || tTerrain == terrainType.Mountain)
+	    && (aUD.uclass == unitClass.tank || aUD.uclass == unitClass.recon || aUD.uclass == unitClass.antiTank))
+		tdv += 2 * defunit.entrenchment;
+	else
+		tdv += 1 * defunit.entrenchment;
+		
 	//TODO Experience
+	aav += aExpBars;
+	adv += aExpBars;
+	tav += tExpBars;
+	tdv += tExpBars;
+	
+	//TODO Received attacks this turn
+	adv -= atkunit.hits;
+	tdv -= defunit.hits;
+	
 	//TODO Range defense modifier (check if always added)
 	if (d > 1) 
 	{
