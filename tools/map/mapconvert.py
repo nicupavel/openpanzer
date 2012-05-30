@@ -26,7 +26,6 @@ def get_scn_hexes(f):
     return data
 
 # returns a list with x/y coords of units (65 bytes) in the scenario
-# TODO BUG we can have 2 units (air/ground) at the same x/y position !!!
 # TODO parse nicer
 def get_scn_units(f):
     units = {}
@@ -37,6 +36,8 @@ def get_scn_units(f):
     u_off_flag = u_off_own + 1 + 1
     u_off_face = u_off_flag + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 5 + 1
     u_off_transport = u_off_id + 2
+    u_off_experience = u_off_transport + 2 + 2 + 2
+    u_off_entrenchment = u_off_flag + 6 * 1
     pos = f.tell()
     f.seek(22 + 388 + 10800 + 140)
     while True:
@@ -49,10 +50,12 @@ def get_scn_units(f):
 	flag = unpack('b', u[u_off_flag:u_off_flag + 1])[0]
 	face = unpack('h', u[u_off_face:u_off_face + 2])[0]
 	transport = unpack('h', u[u_off_transport:u_off_transport + 2])[0]
+	experience = unpack('h', u[u_off_experience:u_off_experience + 2])[0]
+	entrenchment = unpack('b', u[u_off_entrenchment:u_off_entrenchment + 1])[0]
 	if (col,row) in units:
-	    units[(col,row)] += [(uid, owner, flag, face, transport)]
+	    units[(col,row)] += [(uid, owner, flag, face, transport, experience, entrenchment)]
 	else:
-	    units[(col,row)] = [(uid, owner, flag, face, transport)]
+	    units[(col,row)] = [(uid, owner, flag, face, transport, experience, entrenchment)]
     f.seek(pos)
     return units
 
@@ -150,7 +153,7 @@ for scn in sys.argv[1:]:
     while True:
 	terrain = road = flag = hexowner = 0;
 	name = "";
-	hexvictoryowner = -1;
+	hexvictoryowner = deploy = -1;
 	
         hm = unpack('HHHc', maphdata[mapoffset:mapoffset + 7])
         hs = unpack('BBBBH', scnhdata[scnoffset:scnoffset + 6])
@@ -159,6 +162,12 @@ for scn in sys.argv[1:]:
 	hexowner = (hs[0] & 0xe0) >> 5
 	if (hs[2] & (1<<1)): hexvictoryowner = 0
 	if (hs[2] & (1<<4)): hexvictoryowner = 1
+	
+	if (hs[3] & (1 << 2)): deploy = 0
+	if (hs[3] & (1 << 3)): deploy = 1
+	if (hs[3] & (1 << 4)): deploy = 2
+	if (hs[3] & (1 << 5)): deploy = 3
+	
 	textpos = hs[4] - 1  #file index to array index
 	if textpos > 0:
 	    name = scntext[textpos].rstrip()
@@ -176,6 +185,7 @@ for scn in sys.argv[1:]:
 	    if (flag != 0): tmpnode.set("flag", str(flag - 1)) #flags start from 0 in js
 	    if (hexowner != 0): tmpnode.set("owner", str(hexowner - 1)) #owner starts from 0 in js
 	    if (hexvictoryowner != -1): tmpnode.set("victory", str(hexvictoryowner))
+	    if (deploy != -1): tmpnode.set("deploy", str(deploy))
 	    if (col,row) in units:
 		for l in units[(col,row)]:
 		    utmpnode = x.SubElement(tmpnode,"unit")
@@ -184,6 +194,8 @@ for scn in sys.argv[1:]:
 		    if (l[2] != 0): utmpnode.set("flag", str(l[2])) #flags png images start from 1 in js
 		    utmpnode.set("face", str(l[3]))
 		    if (l[4] != 0): utmpnode.set("transport", str(l[4]))
+		    if (l[5] != 0): utmpnode.set("exp", str(l[5]))
+		    if (l[6] != 0): utmpnode.set("ent", str(l[6]))
         col = col + 1
         mapoffset = mapoffset + 7
         scnoffset = scnoffset + 6
