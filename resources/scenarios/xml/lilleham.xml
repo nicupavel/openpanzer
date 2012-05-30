@@ -32,11 +32,11 @@
   <hex row="1" col="37" terrain="3"/>
   <hex row="2" col="7" road="17"/>
   <hex row="2" col="8" road="136">
-    <unit id="346" owner="1" flag="23" face="0"/>
+    <unit id="346" owner="1" flag="23" face="0" exp="200"/>
   </hex>
   <hex row="2" col="9" terrain="1" road="130" name="Lillehammer" flag="14" owner="1" victory="0">
-    <unit id="346" owner="1" flag="23" face="0"/>
-    <unit id="387" owner="1" flag="23" face="0"/>
+    <unit id="346" owner="1" flag="23" face="0" exp="200"/>
+    <unit id="387" owner="1" flag="23" face="0" exp="200"/>
   </hex>
   <hex row="2" col="10" terrain="1" road="40" name="Lillehammer"/>
   <hex row="2" col="11" terrain="1" road="130" name="Lillehammer"/>
@@ -86,7 +86,7 @@
   <hex row="4" col="9" terrain="15" name="Mjosa Lake"/>
   <hex row="4" col="10" terrain="15" name="Mjosa Lake"/>
   <hex row="4" col="14" terrain="2" road="2" flag="14" owner="1" victory="0">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="200" ent="5"/>
   </hex>
   <hex row="4" col="19" terrain="6"/>
   <hex row="4" col="20" terrain="6"/>
@@ -206,7 +206,7 @@
   <hex row="9" col="2" terrain="3"/>
   <hex row="9" col="3" terrain="3"/>
   <hex row="9" col="6" terrain="1" road="9" name="Biri" flag="14" owner="1">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="200" ent="5"/>
   </hex>
   <hex row="9" col="7" road="136"/>
   <hex row="9" col="8" terrain="15" name="Mjosa Lake"/>
@@ -302,7 +302,7 @@
   <hex row="12" col="36" road="144"/>
   <hex row="12" col="37" terrain="15"/>
   <hex row="13" col="4" terrain="2" road="2" flag="14" owner="1" victory="0">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="200" ent="5"/>
   </hex>
   <hex row="13" col="9" road="33"/>
   <hex row="13" col="10" terrain="15" name="Mjosa Lake"/>
@@ -380,7 +380,7 @@
   <hex row="16" col="1" terrain="6"/>
   <hex row="16" col="3" terrain="6"/>
   <hex row="16" col="5" road="18">
-    <unit id="255" owner="1" flag="15" face="0"/>
+    <unit id="255" owner="1" flag="15" face="0" exp="200" ent="3"/>
   </hex>
   <hex row="16" col="6" road="33"/>
   <hex row="16" col="7" terrain="15" name="Mjosa Lake"/>
@@ -406,7 +406,7 @@
   <hex row="17" col="1" terrain="6"/>
   <hex row="17" col="2" terrain="3"/>
   <hex row="17" col="5" terrain="1" road="33" name="Gjevik" flag="14" owner="1">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="200" ent="5"/>
   </hex>
   <hex row="17" col="6" terrain="15" name="Mjosa Lake"/>
   <hex row="17" col="7" terrain="15" name="Mjosa Lake"/>
@@ -434,7 +434,7 @@
   <hex row="18" col="2" terrain="6"/>
   <hex row="18" col="3" terrain="6"/>
   <hex row="18" col="4" terrain="1" road="10" name="Gjevik">
-    <unit id="258" owner="1" flag="15" face="15"/>
+    <unit id="258" owner="1" flag="15" face="15" exp="200" ent="5"/>
   </hex>
   <hex row="18" col="5" terrain="10" road="136"/>
   <hex row="18" col="6" terrain="15"/>
@@ -452,14 +452,14 @@
   <hex row="18" col="19" terrain="15" name="Mjosa Lake"/>
   <hex row="18" col="21" terrain="1" road="3" name="Hamar"/>
   <hex row="18" col="22" terrain="1" road="168" name="Hamar" flag="14" owner="1" victory="0">
-    <unit id="255" owner="1" flag="15" face="0"/>
+    <unit id="255" owner="1" flag="15" face="0" exp="200" ent="5"/>
   </hex>
   <hex row="18" col="23" road="146">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="200" ent="5"/>
   </hex>
   <hex row="18" col="24" road="40"/>
   <hex row="18" col="25" road="152">
-    <unit id="258" owner="1" flag="15" face="0"/>
+    <unit id="258" owner="1" flag="15" face="0" exp="200" ent="5"/>
   </hex>
   <hex row="18" col="26" terrain="15"/>
   <hex row="18" col="27" road="40"/>
@@ -500,11 +500,11 @@
   <hex row="19" col="28" road="130"/>
   <hex row="19" col="30" road="136"/>
   <hex row="19" col="31" road="130">
-    <unit id="258" owner="1" flag="15" face="15"/>
+    <unit id="258" owner="1" flag="15" face="15" exp="200" ent="5"/>
   </hex>
   <hex row="19" col="32" road="42"/>
   <hex row="19" col="33" terrain="1" road="129" name="Elverum" flag="14" owner="1">
-    <unit id="258" owner="1" flag="15" face="1"/>
+    <unit id="258" owner="1" flag="15" face="1" exp="100" ent="8"/>
   </hex>
   <hex row="19" col="35" terrain="15"/>
   <hex row="20" col="0" terrain="6"/>
@@ -566,14 +566,14 @@
   <hex row="22" col="17" terrain="15" name="Mjosa Lake"/>
   <hex row="22" col="18" terrain="15" name="Mjosa Lake"/>
   <hex row="22" col="19" terrain="15" name="Mjosa Lake"/>
-  <hex row="22" col="23" road="9">
-    <unit id="115" owner="0" flag="8" face="9"/>
+  <hex row="22" col="23" road="9" deploy="0">
+    <unit id="115" owner="0" flag="8" face="9" ent="1"/>
   </hex>
-  <hex row="22" col="24" road="17">
-    <unit id="115" owner="0" flag="8" face="9"/>
+  <hex row="22" col="24" road="17" deploy="0">
+    <unit id="115" owner="0" flag="8" face="9" exp="200" ent="1"/>
   </hex>
-  <hex row="22" col="25">
-    <unit id="115" owner="0" flag="8" face="9"/>
+  <hex row="22" col="25" deploy="0">
+    <unit id="115" owner="0" flag="8" face="9" exp="200" ent="1"/>
   </hex>
   <hex row="22" col="27" terrain="6"/>
   <hex row="22" col="28" terrain="6"/>
@@ -592,8 +592,8 @@
   <hex row="23" col="7" terrain="15"/>
   <hex row="23" col="8" terrain="15"/>
   <hex row="23" col="9" road="17"/>
-  <hex row="23" col="11" terrain="1" name="Kapp">
-    <unit id="115" owner="0" flag="8" face="9"/>
+  <hex row="23" col="11" terrain="1" name="Kapp" deploy="0">
+    <unit id="115" owner="0" flag="8" face="9" exp="100" ent="3"/>
   </hex>
   <hex row="23" col="13" terrain="15" name="Mjosa Lake"/>
   <hex row="23" col="14" terrain="15" name="Mjosa Lake"/>
@@ -602,11 +602,11 @@
   <hex row="23" col="17" terrain="15" name="Mjosa Lake"/>
   <hex row="23" col="18" terrain="15" name="Mjosa Lake"/>
   <hex row="23" col="19" terrain="15" name="Mjosa Lake"/>
-  <hex row="23" col="23">
-    <unit id="138" owner="0" flag="8" face="9"/>
+  <hex row="23" col="23" deploy="0">
+    <unit id="138" owner="0" flag="8" face="9" exp="200" ent="1"/>
   </hex>
-  <hex row="23" col="24" road="145">
-    <unit id="92" owner="0" flag="8" face="9" transport="158"/>
+  <hex row="23" col="24" road="145" deploy="0">
+    <unit id="92" owner="0" flag="8" face="9" transport="158" exp="200" ent="1"/>
   </hex>
   <hex row="23" col="27" terrain="3"/>
   <hex row="23" col="28" terrain="6"/>
@@ -620,11 +620,11 @@
   <hex row="24" col="7" terrain="15"/>
   <hex row="24" col="8" terrain="15"/>
   <hex row="24" col="9" road="33"/>
-  <hex row="24" col="10" terrain="1" name="Kapp" flag="7" owner="0">
-    <unit id="115" owner="0" flag="8" face="9"/>
+  <hex row="24" col="10" terrain="1" name="Kapp" flag="7" owner="0" deploy="0">
+    <unit id="115" owner="0" flag="8" face="9" exp="100" ent="3"/>
   </hex>
-  <hex row="24" col="11" terrain="1" name="Kapp">
-    <unit id="92" owner="0" flag="8" face="9" transport="157"/>
+  <hex row="24" col="11" terrain="1" name="Kapp" deploy="0">
+    <unit id="92" owner="0" flag="8" face="9" transport="157" exp="200" ent="3"/>
   </hex>
   <hex row="24" col="14" terrain="15" name="Mjosa Lake"/>
   <hex row="24" col="15" terrain="15" name="Mjosa Lake"/>
@@ -632,8 +632,8 @@
   <hex row="24" col="17" terrain="15" name="Mjosa Lake"/>
   <hex row="24" col="18" terrain="15" name="Mjosa Lake"/>
   <hex row="24" col="19" terrain="15" name="Mjosa Lake"/>
-  <hex row="24" col="24" road="17">
-    <unit id="111" owner="0" flag="8" face="9"/>
+  <hex row="24" col="24" road="17" deploy="0">
+    <unit id="111" owner="0" flag="8" face="9" exp="200" ent="1"/>
   </hex>
   <hex row="24" col="28" terrain="3"/>
   <hex row="24" col="31" terrain="6"/>
@@ -650,13 +650,13 @@
   <hex row="25" col="18" terrain="15" name="Mjosa Lake"/>
   <hex row="25" col="19" terrain="15" name="Mjosa Lake"/>
   <hex row="25" col="20" terrain="15" name="Mjosa Lake"/>
-  <hex row="25" col="24" road="25">
-    <unit id="108" owner="0" flag="8" face="9" transport="157"/>
+  <hex row="25" col="24" road="25" deploy="0">
+    <unit id="108" owner="0" flag="8" face="9" transport="157" exp="200" ent="1"/>
   </hex>
-  <hex row="25" col="25" terrain="2" road="138" flag="7" owner="0">
-    <unit id="173" owner="0" flag="8" face="8"/>
+  <hex row="25" col="25" terrain="2" road="138" flag="7" owner="0" deploy="0">
+    <unit id="173" owner="0" flag="8" face="8" exp="100"/>
   </hex>
-  <hex row="25" col="26" terrain="2" road="48"/>
+  <hex row="25" col="26" terrain="2" road="48" deploy="0"/>
   <hex row="25" col="29" terrain="6"/>
   <hex row="25" col="30" terrain="6"/>
   <hex row="25" col="31" terrain="6"/>
@@ -673,9 +673,9 @@
   <hex row="26" col="19" terrain="15" name="Mjosa Lake"/>
   <hex row="26" col="20" terrain="15" name="Mjosa Lake"/>
   <hex row="26" col="21" terrain="15" name="Mjosa Lake"/>
-  <hex row="26" col="24" road="17"/>
-  <hex row="26" col="26" terrain="2" road="129">
-    <unit id="159" owner="0" face="8"/>
+  <hex row="26" col="24" road="17" deploy="0"/>
+  <hex row="26" col="26" terrain="2" road="129" deploy="0">
+    <unit id="159" owner="0" face="8" exp="200"/>
   </hex>
   <hex row="26" col="27" terrain="6"/>
   <hex row="26" col="28" terrain="6"/>
@@ -698,8 +698,8 @@
   <hex row="27" col="21" terrain="15" name="Mjosa Lake"/>
   <hex row="27" col="22" terrain="15" name="Mjosa Lake"/>
   <hex row="27" col="23" terrain="15" name="Mjosa Lake"/>
-  <hex row="27" col="24" road="9"/>
-  <hex row="27" col="25" road="136"/>
+  <hex row="27" col="24" road="9" deploy="0"/>
+  <hex row="27" col="25" road="136" deploy="0"/>
   <hex row="27" col="28" terrain="6"/>
   <hex row="27" col="29" terrain="6"/>
   <hex row="27" col="30" terrain="6"/>
@@ -722,8 +722,8 @@
   <hex row="28" col="22" terrain="15" name="Mjosa Lake"/>
   <hex row="28" col="23" terrain="15" name="Mjosa Lake"/>
   <hex row="28" col="24" terrain="15" name="Mjosa Lake"/>
-  <hex row="28" col="26" road="136"/>
-  <hex row="28" col="27" road="144"/>
+  <hex row="28" col="26" road="136" deploy="0"/>
+  <hex row="28" col="27" road="144" deploy="0"/>
   <hex row="28" col="28" terrain="6"/>
   <hex row="28" col="29" terrain="6"/>
   <hex row="28" col="30" terrain="6"/>

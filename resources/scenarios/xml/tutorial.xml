@@ -49,7 +49,7 @@
   <hex row="2" col="20" terrain="10" name="Dulce River">
     <unit id="117" owner="0" flag="8" face="13"/>
   </hex>
-  <hex row="2" col="21" terrain="1" name="Algora" flag="12" owner="0" victory="1">
+  <hex row="2" col="21" terrain="1" name="Algora" flag="12" owner="0" victory="1" deploy="0">
     <unit id="92" owner="0" flag="8" face="14" transport="157"/>
   </hex>
   <hex row="2" col="22" terrain="2"/>
@@ -75,13 +75,13 @@
   <hex row="3" col="17" terrain="6"/>
   <hex row="3" col="18" terrain="10" name="Dulce River"/>
   <hex row="3" col="19" road="34"/>
-  <hex row="3" col="20" road="40">
+  <hex row="3" col="20" road="40" deploy="0">
     <unit id="115" owner="0" flag="8" face="13" transport="157"/>
   </hex>
-  <hex row="3" col="21" road="130">
+  <hex row="3" col="21" road="130" deploy="0">
     <unit id="110" owner="0" flag="8" face="15" transport="157"/>
   </hex>
-  <hex row="3" col="22" road="34">
+  <hex row="3" col="22" road="34" deploy="0">
     <unit id="206" owner="0" flag="13" face="14" transport="225"/>
   </hex>
   <hex row="3" col="23" terrain="6"/>
@@ -101,13 +101,13 @@
   <hex row="4" col="16" terrain="6"/>
   <hex row="4" col="17" terrain="6"/>
   <hex row="4" col="18" terrain="6" road="18">
-    <unit id="290" owner="1" flag="26" face="5"/>
+    <unit id="290" owner="1" flag="26" face="5" ent="2"/>
   </hex>
   <hex row="4" col="19">
     <unit id="290" owner="1" flag="26" face="5"/>
   </hex>
   <hex row="4" col="21" terrain="3"/>
-  <hex row="4" col="22" terrain="6">
+  <hex row="4" col="22" terrain="6" deploy="0">
     <unit id="115" owner="0" flag="8" face="0" transport="157"/>
   </hex>
   <hex row="4" col="23" terrain="6"/>
@@ -128,10 +128,10 @@
   <hex row="5" col="16" terrain="6"/>
   <hex row="5" col="17" terrain="10" name="Badiel River"/>
   <hex row="5" col="18" terrain="1" road="17" name="Almadrones" flag="25" owner="1" victory="0">
-    <unit id="285" owner="1" flag="26" face="5"/>
+    <unit id="285" owner="1" flag="26" face="5" ent="8"/>
   </hex>
   <hex row="5" col="21">
-    <unit id="290" owner="1" flag="26" face="5"/>
+    <unit id="290" owner="1" flag="26" face="5" ent="2"/>
   </hex>
   <hex row="5" col="22" terrain="3"/>
   <hex row="5" col="24" terrain="6"/>

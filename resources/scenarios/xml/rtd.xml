@@ -38,9 +38,9 @@
   <hex row="0" col="39" terrain="15" name="Yser River"/>
   <hex row="1" col="0" terrain="9"/>
   <hex row="1" col="1" terrain="9">
-    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
-    <unit id="346" owner="1" flag="23" face="0" transport="382"/>
-    <unit id="328" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="382" exp="200"/>
+    <unit id="346" owner="1" flag="23" face="0" transport="382" exp="200"/>
+    <unit id="328" owner="1" flag="23" face="0" transport="382" exp="200"/>
   </hex>
   <hex row="1" col="2" terrain="9"/>
   <hex row="1" col="3" terrain="9"/>
@@ -126,16 +126,16 @@
   <hex row="3" col="9" terrain="16" name="POLDER"/>
   <hex row="3" col="11" terrain="16" name="POLDER"/>
   <hex row="3" col="13" terrain="1" name="Mardick" flag="22" owner="1">
-    <unit id="27" owner="1" flag="7" face="13"/>
+    <unit id="27" owner="1" flag="7" face="13" ent="3"/>
   </hex>
   <hex row="3" col="15" terrain="16" name="POLDER">
-    <unit id="34" owner="1" flag="6" face="0"/>
+    <unit id="34" owner="1" flag="6" face="0" exp="100" ent="8"/>
   </hex>
   <hex row="3" col="17" terrain="1" road="58" name="Dunkirk">
-    <unit id="320" owner="1" flag="23" face="0" transport="382"/>
+    <unit id="320" owner="1" flag="23" face="0" transport="382" ent="3"/>
   </hex>
   <hex row="3" col="18" terrain="1" road="40" name="Dunkirk" flag="22" owner="1" victory="0">
-    <unit id="338" owner="1" flag="23" face="0"/>
+    <unit id="338" owner="1" flag="23" face="0" exp="200" ent="5"/>
   </hex>
   <hex row="3" col="19" terrain="10" road="136"/>
   <hex row="3" col="20" terrain="15"/>
@@ -181,7 +181,7 @@
   <hex row="4" col="22" terrain="16" name="POLDER"/>
   <hex row="4" col="23" terrain="16" name="POLDER"/>
   <hex row="4" col="24" terrain="2" road="3" flag="22" owner="1">
-    <unit id="387" owner="1" flag="23" face="0"/>
+    <unit id="387" owner="1" flag="23" face="0" exp="100" ent="3"/>
     <unit id="321" owner="1" flag="23" face="0" transport="382"/>
   </hex>
   <hex row="4" col="25" terrain="16" name="POLDER"/>
@@ -203,7 +203,7 @@
   <hex row="5" col="6" terrain="15" name="Aq River"/>
   <hex row="5" col="7" terrain="10" road="34" name="Aq River"/>
   <hex row="5" col="8" terrain="3" road="40">
-    <unit id="31" owner="1" flag="7" face="13" transport="59"/>
+    <unit id="31" owner="1" flag="7" face="13" transport="59" ent="5"/>
   </hex>
   <hex row="5" col="9" terrain="16" road="138" name="POLDER"/>
   <hex row="5" col="10" terrain="13" road="34"/>
@@ -217,7 +217,7 @@
   <hex row="5" col="18" terrain="15"/>
   <hex row="5" col="19" terrain="15"/>
   <hex row="5" col="20" terrain="16" road="144" name="POLDER">
-    <unit id="34" owner="1" flag="7" face="0"/>
+    <unit id="34" owner="1" flag="7" face="0" exp="100" ent="8"/>
   </hex>
   <hex row="5" col="21" terrain="16" name="POLDER"/>
   <hex row="5" col="22" terrain="16" name="POLDER"/>
@@ -234,11 +234,11 @@
   <hex row="6" col="1" road="34"/>
   <hex row="6" col="2" road="34"/>
   <hex row="6" col="4" terrain="16" road="130" name="POLDER">
-    <unit id="141" owner="0" flag="8" face="4"/>
+    <unit id="141" owner="0" flag="8" face="4" exp="100" ent="2"/>
   </hex>
   <hex row="6" col="5" terrain="15" name="Aq River"/>
   <hex row="6" col="6" terrain="1" road="146" name="Gravelines" flag="22" owner="1">
-    <unit id="39" owner="1" flag="7" face="13"/>
+    <unit id="39" owner="1" flag="7" face="13" exp="100" ent="8"/>
   </hex>
   <hex row="6" col="7" terrain="15" name="Aq River"/>
   <hex row="6" col="8" terrain="16" name="POLDER"/>
@@ -252,7 +252,7 @@
   <hex row="6" col="16" terrain="16" name="POLDER"/>
   <hex row="6" col="17" terrain="16" name="POLDER"/>
   <hex row="6" col="18" terrain="16" road="144" name="POLDER">
-    <unit id="34" owner="1" flag="7" face="0"/>
+    <unit id="34" owner="1" flag="7" face="0" ent="8"/>
   </hex>
   <hex row="6" col="19" terrain="15" name="Aq Canal"/>
   <hex row="6" col="20" terrain="10" road="17" name="Aq Canal"/>
@@ -284,7 +284,7 @@
   <hex row="7" col="17" terrain="15" name="Aq Canal"/>
   <hex row="7" col="18" terrain="10" road="17" name="Aq Canal"/>
   <hex row="7" col="20" terrain="1" road="25" name="Bergues" flag="22" owner="1" victory="0">
-    <unit id="354" owner="1" flag="23" face="0"/>
+    <unit id="354" owner="1" flag="23" face="0" exp="200" ent="3"/>
   </hex>
   <hex row="7" col="21" road="136"/>
   <hex row="7" col="32" road="136"/>
@@ -298,11 +298,11 @@
   <hex row="8" col="4" terrain="16" name="POLDER"/>
   <hex row="8" col="5" terrain="16" road="18" name="POLDER"/>
   <hex row="8" col="6" terrain="16" road="41" name="POLDER">
-    <unit id="142" owner="0" flag="8" face="5"/>
+    <unit id="142" owner="0" flag="8" face="5" exp="200" ent="2"/>
   </hex>
   <hex row="8" col="7" terrain="10" road="130" name="Aq River"/>
   <hex row="8" col="8" road="34">
-    <unit id="39" owner="1" flag="7" face="13"/>
+    <unit id="39" owner="1" flag="7" face="13" exp="100" ent="5"/>
   </hex>
   <hex row="8" col="9" terrain="15"/>
   <hex row="8" col="10" terrain="10" road="17"/>
@@ -324,14 +324,14 @@
   <hex row="9" col="3" terrain="16" name="POLDER"/>
   <hex row="9" col="4" terrain="16" name="POLDER"/>
   <hex row="9" col="5" terrain="16" road="17" name="POLDER">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="200" ent="2"/>
   </hex>
   <hex row="9" col="6" terrain="13"/>
   <hex row="9" col="7" terrain="16" name="POLDER"/>
   <hex row="9" col="8" terrain="15" name="Aq River"/>
   <hex row="9" col="9" terrain="16" name="POLDER"/>
   <hex row="9" col="10" terrain="16" road="17" name="POLDER">
-    <unit id="32" owner="1" flag="7" face="13" transport="59"/>
+    <unit id="32" owner="1" flag="7" face="13" transport="59" ent="3"/>
   </hex>
   <hex row="9" col="11" terrain="16" name="POLDER"/>
   <hex row="9" col="12" terrain="16" name="POLDER"/>
@@ -359,7 +359,7 @@
   <hex row="10" col="7" terrain="16" name="POLDER"/>
   <hex row="10" col="8" terrain="15" name="Aq River"/>
   <hex row="10" col="9" terrain="1" road="42" name="St. Pierre Brouck" flag="22" owner="1">
-    <unit id="39" owner="1" flag="7" face="13"/>
+    <unit id="39" owner="1" flag="7" face="13" ent="8"/>
   </hex>
   <hex row="10" col="10" terrain="16" road="33" name="POLDER"/>
   <hex row="10" col="11" terrain="16" name="POLDER"/>
@@ -383,7 +383,7 @@
   <hex row="11" col="5" terrain="16" road="17" name="POLDER"/>
   <hex row="11" col="6" terrain="13"/>
   <hex row="11" col="7" terrain="16" road="34" name="POLDER">
-    <unit id="111" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="111" owner="0" flag="8" face="5" transport="157" exp="200" ent="2"/>
   </hex>
   <hex row="11" col="8" terrain="10" road="34" name="Aq River"/>
   <hex row="11" col="9" terrain="16" name="POLDER"/>
@@ -415,7 +415,7 @@
   <hex row="12" col="12" road="138"/>
   <hex row="12" col="13" road="136"/>
   <hex row="12" col="14">
-    <unit id="35" owner="1" flag="7" face="13"/>
+    <unit id="35" owner="1" flag="7" face="13" exp="100" ent="8"/>
   </hex>
   <hex row="12" col="15" terrain="13" name="Yser River"/>
   <hex row="12" col="17" terrain="13" name="Yser River"/>
@@ -496,10 +496,10 @@
   <hex row="15" col="8" terrain="16" road="144" name="POLDER"/>
   <hex row="15" col="9" terrain="10" road="34" name="Aq Canal"/>
   <hex row="15" col="10" terrain="1" road="34" name="Watten" flag="7" owner="0">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
   <hex row="15" col="16">
-    <unit id="35" owner="1" flag="7" face="13"/>
+    <unit id="35" owner="1" flag="7" face="13" exp="100" ent="8"/>
   </hex>
   <hex row="15" col="17" road="34"/>
   <hex row="15" col="18" terrain="1" road="169" name="Arneke" flag="22" owner="1"/>
@@ -516,11 +516,11 @@
   <hex row="15" col="38" terrain="16" road="40"/>
   <hex row="15" col="39" terrain="13" road="130"/>
   <hex row="15" col="40" terrain="1" road="48" name="DG4" flag="22" owner="1" victory="0">
-    <unit id="39" owner="1" flag="7" face="0" transport="57"/>
+    <unit id="39" owner="1" flag="7" face="0" transport="57" exp="200" ent="5"/>
   </hex>
   <hex row="15" col="41" terrain="13"/>
   <hex row="15" col="42">
-    <unit id="30" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="30" owner="1" flag="7" face="0" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="16" col="1" terrain="13"/>
   <hex row="16" col="2" terrain="13"/>
@@ -534,11 +534,11 @@
   <hex row="16" col="15" road="130"/>
   <hex row="16" col="16" road="34"/>
   <hex row="16" col="17">
-    <unit id="346" owner="1" flag="23" face="14" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="14" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="16" col="20" terrain="5" road="136"/>
   <hex row="16" col="21" terrain="1" road="170" name="Cassel" flag="22" owner="1" victory="0">
-    <unit id="354" owner="1" flag="23" face="0"/>
+    <unit id="354" owner="1" flag="23" face="0" exp="200" ent="3"/>
   </hex>
   <hex row="16" col="22" terrain="5" road="33"/>
   <hex row="16" col="23" road="40"/>
@@ -556,23 +556,23 @@
   <hex row="16" col="38" terrain="16"/>
   <hex row="16" col="39" terrain="13"/>
   <hex row="16" col="40" terrain="16" road="17">
-    <unit id="39" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="0" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="16" col="41" terrain="13"/>
   <hex row="16" col="42" terrain="13"/>
   <hex row="16" col="43" terrain="13"/>
   <hex row="17" col="0" terrain="13"/>
-  <hex row="17" col="2">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="17" col="2" deploy="0">
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
-  <hex row="17" col="3">
-    <unit id="118" owner="0" flag="8" face="5"/>
+  <hex row="17" col="3" deploy="0">
+    <unit id="118" owner="0" flag="8" face="5" exp="100" ent="1"/>
   </hex>
   <hex row="17" col="9" terrain="16" road="9" name="POLDER"/>
   <hex row="17" col="10" terrain="15" name="Aq Canal"/>
   <hex row="17" col="11" terrain="10" road="35" name="Aq Canal"/>
   <hex row="17" col="12" terrain="1" road="34" name="St. Momelin" flag="7" owner="0">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
   <hex row="17" col="15" terrain="16"/>
   <hex row="17" col="20" terrain="5" road="18"/>
@@ -595,11 +595,11 @@
   <hex row="17" col="39" road="2"/>
   <hex row="17" col="40" terrain="13" road="49"/>
   <hex row="17" col="41" terrain="13"/>
-  <hex row="18" col="2">
-    <unit id="93" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="18" col="2" deploy="0">
+    <unit id="93" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
-  <hex row="18" col="3">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="18" col="3" deploy="0">
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="18" col="10" terrain="16" road="146" name="POLDER"/>
   <hex row="18" col="11" terrain="15" name="Aq Canal"/>
@@ -612,7 +612,7 @@
   <hex row="18" col="18" terrain="16"/>
   <hex row="18" col="20" road="17"/>
   <hex row="18" col="21">
-    <unit id="329" owner="1" flag="23" face="14" transport="382"/>
+    <unit id="329" owner="1" flag="23" face="14" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="18" col="22" road="9"/>
   <hex row="18" col="23" road="136"/>
@@ -629,18 +629,18 @@
   <hex row="18" col="40" road="17"/>
   <hex row="18" col="42" terrain="13"/>
   <hex row="18" col="43" terrain="13"/>
-  <hex row="19" col="1" flag="7" owner="0" victory="1">
+  <hex row="19" col="1" flag="7" owner="0" victory="1" deploy="0">
     <unit id="173" owner="0" flag="8" face="5"/>
   </hex>
   <hex row="19" col="2">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
-  <hex row="19" col="3" terrain="2" road="48">
-    <unit id="111" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="19" col="3" terrain="2" road="48" deploy="0">
+    <unit id="111" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="19" col="10" terrain="16" road="9" name="POLDER"/>
   <hex row="19" col="11" terrain="1" road="144" name="St. Omer" flag="7" owner="0">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
   <hex row="19" col="12" terrain="15" name="Aq Canal"/>
   <hex row="19" col="13" terrain="15" name="Aq Canal"/>
@@ -650,7 +650,7 @@
   <hex row="19" col="17" terrain="16"/>
   <hex row="19" col="18" terrain="16"/>
   <hex row="19" col="19" terrain="16" road="34">
-    <unit id="346" owner="1" flag="23" face="15" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="15" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="19" col="20" road="33"/>
   <hex row="19" col="24" terrain="16" road="136"/>
@@ -664,11 +664,11 @@
   <hex row="19" col="32" terrain="16"/>
   <hex row="19" col="34" terrain="16"/>
   <hex row="19" col="40" road="17"/>
-  <hex row="20" col="2" terrain="2" road="10" flag="7" owner="0">
-    <unit id="159" owner="0" flag="8" face="5"/>
+  <hex row="20" col="2" terrain="2" road="10" flag="7" owner="0" deploy="0">
+    <unit id="159" owner="0" flag="8" face="5" exp="100"/>
   </hex>
-  <hex row="20" col="3" terrain="2" road="129">
-    <unit id="142" owner="0" flag="8" face="5"/>
+  <hex row="20" col="3" terrain="2" road="129" deploy="0">
+    <unit id="142" owner="0" flag="8" face="5" exp="200" ent="1"/>
   </hex>
   <hex row="20" col="11" terrain="16" road="17" name="POLDER"/>
   <hex row="20" col="12" terrain="16" name="POLDER"/>
@@ -679,7 +679,7 @@
   <hex row="20" col="17" terrain="16" road="34"/>
   <hex row="20" col="18" terrain="16" road="34"/>
   <hex row="20" col="21">
-    <unit id="346" owner="1" flag="23" face="14" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="14" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="20" col="24" terrain="16"/>
   <hex row="20" col="25" terrain="16"/>
@@ -689,32 +689,32 @@
   <hex row="20" col="29" terrain="16"/>
   <hex row="20" col="30" terrain="16"/>
   <hex row="20" col="40" road="17"/>
-  <hex row="21" col="2">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="21" col="2" deploy="0">
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
-  <hex row="21" col="3">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="21" col="3" deploy="0">
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="21" col="11" terrain="16" road="9" name="POLDER"/>
   <hex row="21" col="12" terrain="16" name="POLDER"/>
   <hex row="21" col="13" terrain="15" name="Aq Canal"/>
   <hex row="21" col="15" road="34">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="21" col="16" road="34"/>
   <hex row="21" col="24" terrain="16">
-    <unit id="346" owner="1" flag="23" face="14" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="14" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="21" col="25" terrain="16"/>
   <hex row="21" col="26" terrain="16"/>
   <hex row="21" col="27" terrain="16"/>
   <hex row="21" col="28" terrain="3" road="152">
-    <unit id="39" owner="1" flag="7" face="14" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="14" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="21" col="29" terrain="16" road="136"/>
   <hex row="21" col="40" road="17"/>
-  <hex row="22" col="3">
-    <unit id="111" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="22" col="3" deploy="0">
+    <unit id="111" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="22" col="5" terrain="10"/>
   <hex row="22" col="9" terrain="10"/>
@@ -728,7 +728,7 @@
   <hex row="22" col="27" terrain="16"/>
   <hex row="22" col="28" terrain="16" road="17"/>
   <hex row="22" col="30" road="136">
-    <unit id="32" owner="1" flag="7" face="0" transport="56"/>
+    <unit id="32" owner="1" flag="7" face="0" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="22" col="31" road="136"/>
   <hex row="22" col="33" road="40"/>
@@ -741,8 +741,8 @@
   <hex row="23" col="12" road="11"/>
   <hex row="23" col="13" road="145"/>
   <hex row="23" col="14" terrain="15" name="Aq Canal"/>
-  <hex row="23" col="18">
-    <unit id="141" owner="0" flag="8" face="5"/>
+  <hex row="23" col="18" deploy="0">
+    <unit id="141" owner="0" flag="8" face="5" exp="100"/>
   </hex>
   <hex row="23" col="23" terrain="16"/>
   <hex row="23" col="24" terrain="16"/>
@@ -751,14 +751,14 @@
   <hex row="23" col="27" terrain="16"/>
   <hex row="23" col="28" terrain="16" road="17"/>
   <hex row="23" col="32" road="130">
-    <unit id="32" owner="1" flag="7" face="13" transport="56"/>
+    <unit id="32" owner="1" flag="7" face="13" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="23" col="34" road="136"/>
   <hex row="23" col="35" road="136">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" ent="3"/>
   </hex>
   <hex row="23" col="37" terrain="2" road="42" flag="6" owner="1">
-    <unit id="61" owner="1" flag="7" face="14"/>
+    <unit id="61" owner="1" flag="7" face="14" exp="100"/>
   </hex>
   <hex row="23" col="38" terrain="2" road="48"/>
   <hex row="23" col="39" road="16"/>
@@ -768,14 +768,14 @@
   <hex row="24" col="14" terrain="15" name="Aq Canal"/>
   <hex row="24" col="15" terrain="15" name="Aq Canal"/>
   <hex row="24" col="16" road="16"/>
-  <hex row="24" col="17" terrain="1" road="32" name="Blaringhem" flag="7" owner="0">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="24" col="17" terrain="1" road="32" name="Blaringhem" flag="7" owner="0" deploy="0">
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
-  <hex row="24" col="18">
-    <unit id="118" owner="0" flag="8" face="5"/>
+  <hex row="24" col="18" deploy="0">
+    <unit id="118" owner="0" flag="8" face="5" exp="100" ent="1"/>
   </hex>
-  <hex row="24" col="19">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="24" col="19" deploy="0">
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="24" col="23" terrain="16"/>
   <hex row="24" col="24" terrain="16"/>
@@ -783,17 +783,17 @@
   <hex row="24" col="26" terrain="16"/>
   <hex row="24" col="27" terrain="16"/>
   <hex row="24" col="28" terrain="16" road="17">
-    <unit id="36" owner="1" flag="7" face="14"/>
+    <unit id="36" owner="1" flag="7" face="14" exp="200" ent="5"/>
   </hex>
   <hex row="24" col="31">
-    <unit id="39" owner="1" flag="7" face="13" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="13" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="24" col="36" road="146">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" ent="3"/>
   </hex>
   <hex row="24" col="37" road="16"/>
   <hex row="24" col="38" terrain="2" road="129">
-    <unit id="60" owner="1" flag="7" face="14"/>
+    <unit id="60" owner="1" flag="7" face="14" exp="100"/>
   </hex>
   <hex row="24" col="39" terrain="10" road="19" name="Lys Canal"/>
   <hex row="24" col="40" road="33"/>
@@ -811,13 +811,13 @@
   <hex row="25" col="27" terrain="3"/>
   <hex row="25" col="28" road="17"/>
   <hex row="25" col="34">
-    <unit id="32" owner="1" flag="7" face="13" transport="56"/>
+    <unit id="32" owner="1" flag="7" face="13" transport="56" exp="200" ent="1"/>
   </hex>
   <hex row="25" col="35">
-    <unit id="39" owner="1" flag="7" face="13" transport="56"/>
+    <unit id="39" owner="1" flag="7" face="13" transport="56" exp="200" ent="3"/>
   </hex>
   <hex row="25" col="36" road="9">
-    <unit id="329" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="329" owner="1" flag="23" face="13" transport="382" ent="1"/>
   </hex>
   <hex row="25" col="37" terrain="10" road="153" name="Lys Canal"/>
   <hex row="25" col="38" terrain="10" name="Lys Canal"/>
@@ -828,8 +828,8 @@
   <hex row="26" col="16" road="137"/>
   <hex row="26" col="17" terrain="13" road="144"/>
   <hex row="26" col="18" terrain="15" name="Aq Canal"/>
-  <hex row="26" col="20">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="26" col="20" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="26" col="21" terrain="10" name="Lys Canal"/>
   <hex row="26" col="22" terrain="13" name="Lys Canal"/>
@@ -840,10 +840,10 @@
   <hex row="26" col="27" terrain="10" name="Lys Canal"/>
   <hex row="26" col="28" road="17"/>
   <hex row="26" col="30">
-    <unit id="36" owner="1" flag="7" face="13"/>
+    <unit id="36" owner="1" flag="7" face="13" exp="200" ent="5"/>
   </hex>
   <hex row="26" col="33">
-    <unit id="36" owner="1" flag="7" face="13"/>
+    <unit id="36" owner="1" flag="7" face="13" exp="200" ent="3"/>
   </hex>
   <hex row="26" col="35" terrain="10" name="Lys Canal"/>
   <hex row="26" col="36" terrain="10" name="Lys Canal"/>
@@ -859,8 +859,8 @@
   <hex row="27" col="18" terrain="15" name="Aq Canal"/>
   <hex row="27" col="19" terrain="10" name="Lys Canal"/>
   <hex row="27" col="20" terrain="10" name="Lys Canal"/>
-  <hex row="27" col="21">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="27" col="21" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="27" col="22" terrain="3"/>
   <hex row="27" col="23" terrain="8"/>
@@ -869,7 +869,7 @@
   <hex row="27" col="26" terrain="3"/>
   <hex row="27" col="27" terrain="10" name="Lys Canal"/>
   <hex row="27" col="28" terrain="1" road="25" name="Merville" flag="22" owner="1">
-    <unit id="329" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="329" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="27" col="29" road="160"/>
   <hex row="27" col="31" terrain="10" name="Lys Canal"/>
@@ -878,14 +878,14 @@
   <hex row="27" col="34" terrain="10" name="Lys Canal"/>
   <hex row="27" col="36" terrain="10" name="Lys Canal"/>
   <hex row="27" col="37" road="34">
-    <unit id="369" owner="1" flag="23" face="0"/>
+    <unit id="369" owner="1" flag="23" face="0" exp="200" ent="1"/>
   </hex>
   <hex row="27" col="38" road="33"/>
   <hex row="28" col="3" terrain="13"/>
   <hex row="28" col="11" terrain="13" name="Lys River"/>
   <hex row="28" col="12" terrain="13" name="Lys River"/>
-  <hex row="28" col="17" terrain="1" road="17" name="Aire" flag="7" owner="0">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="28" col="17" terrain="1" road="17" name="Aire" flag="7" owner="0" deploy="0">
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
   <hex row="28" col="18" terrain="15" name="Aq Canal"/>
   <hex row="28" col="19" terrain="15" name="Aq Canal"/>
@@ -894,11 +894,11 @@
   <hex row="28" col="23" terrain="1" road="48" name="St. Venant" flag="22" owner="1"/>
   <hex row="28" col="24" terrain="13"/>
   <hex row="28" col="25">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="28" col="26" terrain="10" name="Lys Canal"/>
   <hex row="28" col="27" road="42">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="28" col="28" terrain="10" road="51" name="Lys Canal"/>
   <hex row="28" col="29" terrain="10" name="Lys Canal"/>
@@ -914,15 +914,15 @@
   <hex row="29" col="17" road="9"/>
   <hex row="29" col="20" terrain="15" name="Aq Canal"/>
   <hex row="29" col="21" terrain="10" road="51" name="Aq Canal"/>
-  <hex row="29" col="22" road="34">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="29" col="22" road="34" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="29" col="23" road="9"/>
   <hex row="29" col="25" road="34"/>
   <hex row="29" col="26" road="34"/>
   <hex row="29" col="28" road="137"/>
   <hex row="29" col="29" terrain="1" road="136" name="Lestrem" flag="22" owner="1">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="29" col="30" terrain="10" name="Lys Canal"/>
   <hex row="29" col="31" road="34"/>
@@ -936,8 +936,8 @@
   <hex row="30" col="8" terrain="13" name="Lys River"/>
   <hex row="30" col="18" road="136"/>
   <hex row="30" col="19" road="138"/>
-  <hex row="30" col="20" road="34">
-    <unit id="141" owner="0" flag="8" face="5"/>
+  <hex row="30" col="20" road="34" deploy="0">
+    <unit id="141" owner="0" flag="8" face="5" exp="200" ent="1"/>
   </hex>
   <hex row="30" col="21" road="1"/>
   <hex row="30" col="22" terrain="15" name="Aq Canal"/>
@@ -952,11 +952,11 @@
   <hex row="31" col="6" terrain="13" name="Lys River"/>
   <hex row="31" col="20" road="136"/>
   <hex row="31" col="21" road="136"/>
-  <hex row="31" col="22">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="31" col="22" deploy="0">
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
-  <hex row="31" col="23" road="34">
-    <unit id="142" owner="0" flag="8" face="5"/>
+  <hex row="31" col="23" road="34" deploy="0">
+    <unit id="142" owner="0" flag="8" face="5" exp="100"/>
   </hex>
   <hex row="31" col="24" terrain="10" road="51" name="Aq Canal"/>
   <hex row="31" col="25" terrain="15" name="Aq Canal"/>
@@ -966,7 +966,7 @@
   <hex row="31" col="29" terrain="15" name="Aq Canal"/>
   <hex row="31" col="30" road="1"/>
   <hex row="31" col="31">
-    <unit id="328" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="328" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="31" col="32" terrain="10" name="Lys Canal"/>
   <hex row="31" col="35" road="17"/>
@@ -974,39 +974,39 @@
   <hex row="32" col="6" terrain="13" name="Lys River"/>
   <hex row="32" col="22" road="138"/>
   <hex row="32" col="23" road="136"/>
-  <hex row="32" col="24" road="1">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="32" col="24" road="1" deploy="0">
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="32" col="26" terrain="15" name="Aq Canal"/>
   <hex row="32" col="27" terrain="15" name="Aq Canal"/>
-  <hex row="32" col="28" road="8">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="32" col="28" road="8" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
   <hex row="32" col="29" terrain="10" road="170" name="Aq Canal"/>
   <hex row="32" col="30" road="32">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="32" col="31" terrain="10" name="Lys Canal"/>
   <hex row="32" col="32" terrain="10" name="Lys Canal"/>
   <hex row="32" col="35" road="9"/>
-  <hex row="33" col="19" terrain="2" road="48"/>
+  <hex row="33" col="19" terrain="2" road="48" deploy="0"/>
   <hex row="33" col="24" road="136"/>
   <hex row="33" col="25" road="136"/>
-  <hex row="33" col="26">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="33" col="26" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
-  <hex row="33" col="27">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="33" col="27" deploy="0">
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="100" ent="1"/>
   </hex>
-  <hex row="33" col="28" terrain="1" road="2" name="Hinges" flag="7" owner="0">
-    <unit id="108" owner="0" flag="8" face="5" transport="157"/>
+  <hex row="33" col="28" terrain="1" road="2" name="Hinges" flag="7" owner="0" deploy="0">
+    <unit id="108" owner="0" flag="8" face="5" transport="157" exp="100" ent="3"/>
   </hex>
   <hex row="33" col="29" terrain="15" name="Aq Canal"/>
   <hex row="33" col="30" road="128"/>
   <hex row="33" col="31" terrain="10" name="Lys Canal"/>
   <hex row="33" col="36" road="144"/>
-  <hex row="34" col="18" terrain="2" road="10" flag="7" owner="0"/>
-  <hex row="34" col="19" terrain="2" road="129"/>
+  <hex row="34" col="18" terrain="2" road="10" flag="7" owner="0" deploy="0"/>
+  <hex row="34" col="19" terrain="2" road="129" deploy="0"/>
   <hex row="34" col="26" road="136"/>
   <hex row="34" col="27" road="136"/>
   <hex row="34" col="28" terrain="15" name="Aq Canal"/>
@@ -1014,67 +1014,67 @@
   <hex row="34" col="30" terrain="15" name="Aq Canal"/>
   <hex row="34" col="31" terrain="15" name="Aq Canal"/>
   <hex row="34" col="32">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="34" col="36" road="17">
-    <unit id="329" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="329" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="35" col="21" terrain="3"/>
   <hex row="35" col="28" road="136">
-    <unit id="141" owner="0" flag="8" face="5"/>
+    <unit id="141" owner="0" flag="8" face="5" exp="200" ent="1"/>
   </hex>
   <hex row="35" col="29" terrain="1" road="136" name="Bethune" flag="7" owner="0">
-    <unit id="142" owner="0" flag="8" face="5"/>
+    <unit id="142" owner="0" flag="8" face="5" exp="200" ent="2"/>
   </hex>
   <hex row="35" col="30">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="35" col="32" terrain="15" name="Aq Canal"/>
   <hex row="35" col="33">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="35" col="34">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="35" col="35" terrain="15" name="Aq Canal"/>
   <hex row="35" col="36" terrain="1" road="17" name="La Bassee" flag="22" owner="1">
-    <unit id="346" owner="1" flag="23" face="13" transport="382"/>
+    <unit id="346" owner="1" flag="23" face="13" transport="382" exp="200" ent="5"/>
   </hex>
   <hex row="35" col="37" terrain="15" name="Aq Canal"/>
   <hex row="35" col="38" terrain="3"/>
   <hex row="35" col="39" terrain="8"/>
   <hex row="35" col="40" terrain="8"/>
   <hex row="36" col="30" road="136">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="36" col="31" road="136"/>
   <hex row="36" col="32" terrain="15" name="Aq Canal"/>
   <hex row="36" col="33" terrain="15" name="Aq Canal"/>
   <hex row="36" col="34" terrain="15" name="Aq Canal"/>
   <hex row="36" col="35" road="42">
-    <unit id="136" owner="0" flag="8" face="5"/>
+    <unit id="136" owner="0" flag="8" face="5" exp="200" ent="1"/>
   </hex>
   <hex row="36" col="36" terrain="10" road="57" name="Aq Canal"/>
   <hex row="36" col="37" road="128">
-    <unit id="115" owner="0" flag="8" face="5"/>
+    <unit id="115" owner="0" flag="8" face="5" exp="100" ent="1"/>
   </hex>
   <hex row="36" col="38" terrain="15" name="Aq Canal"/>
   <hex row="36" col="40" terrain="8"/>
   <hex row="37" col="32" road="136">
-    <unit id="115" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="115" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="37" col="33" road="130"/>
   <hex row="37" col="34" road="34">
-    <unit id="92" owner="0" flag="8" face="5" transport="157"/>
+    <unit id="92" owner="0" flag="8" face="5" transport="157" exp="200" ent="1"/>
   </hex>
   <hex row="37" col="35">
-    <unit id="92" owner="0" flag="8" face="6" transport="158"/>
+    <unit id="92" owner="0" flag="8" face="6" transport="158" exp="100" ent="1"/>
   </hex>
   <hex row="37" col="36" road="145">
-    <unit id="115" owner="0" flag="8" face="5"/>
+    <unit id="115" owner="0" flag="8" face="5" exp="100" ent="1"/>
   </hex>
   <hex row="37" col="37">
-    <unit id="115" owner="0" flag="8" face="5"/>
+    <unit id="115" owner="0" flag="8" face="5" exp="100" ent="1"/>
   </hex>
   <hex row="38" col="36" road="1"/>
 </map>

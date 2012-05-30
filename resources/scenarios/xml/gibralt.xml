@@ -32,7 +32,7 @@
   <hex row="1" col="19" terrain="3"/>
   <hex row="1" col="20" terrain="10" name="Dulce River"/>
   <hex row="1" col="21" terrain="2" flag="12" owner="1">
-    <unit id="169" owner="0" flag="8" face="14"/>
+    <unit id="169" owner="0" flag="8" face="14" exp="200"/>
   </hex>
   <hex row="1" col="22" terrain="2"/>
   <hex row="1" col="25" road="33"/>
@@ -50,16 +50,16 @@
   <hex row="2" col="17" terrain="10" name="Dulce River"/>
   <hex row="2" col="19" terrain="10" name="Dulce River"/>
   <hex row="2" col="20" terrain="10" name="Dulce River"/>
-  <hex row="2" col="21" terrain="1" name="Algora" flag="7" owner="0" victory="1"/>
+  <hex row="2" col="21" terrain="1" name="Algora" flag="7" owner="0" victory="1" deploy="0"/>
   <hex row="2" col="22" terrain="2" flag="7" owner="0">
-    <unit id="115" owner="0" flag="8" face="0" transport="157"/>
-    <unit id="159" owner="0" flag="8" face="13"/>
+    <unit id="115" owner="0" flag="8" face="0" transport="157" exp="200" ent="1"/>
+    <unit id="159" owner="0" flag="8" face="13" exp="200"/>
   </hex>
-  <hex row="2" col="23" road="34">
-    <unit id="143" owner="0" flag="8" face="13"/>
+  <hex row="2" col="23" road="34" deploy="0">
+    <unit id="143" owner="0" flag="8" face="13" exp="200"/>
   </hex>
   <hex row="2" col="24" road="34">
-    <unit id="148" owner="0" flag="8" face="14"/>
+    <unit id="148" owner="0" flag="8" face="14" exp="200"/>
   </hex>
   <hex row="2" col="25" terrain="6"/>
   <hex row="2" col="26" terrain="6"/>
@@ -79,14 +79,14 @@
   <hex row="3" col="17" terrain="6"/>
   <hex row="3" col="18" terrain="10" name="Dulce River"/>
   <hex row="3" col="19" road="34"/>
-  <hex row="3" col="20" road="40">
+  <hex row="3" col="20" road="40" deploy="0">
     <unit id="115" owner="0" flag="8" face="0"/>
   </hex>
-  <hex row="3" col="21" road="130">
-    <unit id="115" owner="0" flag="8" face="0"/>
+  <hex row="3" col="21" road="130" deploy="0">
+    <unit id="115" owner="0" flag="8" face="0" exp="100" ent="1"/>
   </hex>
   <hex row="3" col="22" road="34">
-    <unit id="92" owner="0" flag="8" face="13" transport="157"/>
+    <unit id="92" owner="0" flag="8" face="13" transport="157" exp="100"/>
   </hex>
   <hex row="3" col="23" terrain="6"/>
   <hex row="3" col="24" terrain="6"/>
@@ -106,8 +106,8 @@
   <hex row="4" col="17" terrain="6"/>
   <hex row="4" col="18" terrain="6" road="18"/>
   <hex row="4" col="21" terrain="3"/>
-  <hex row="4" col="22" terrain="6">
-    <unit id="115" owner="0" flag="8" face="0"/>
+  <hex row="4" col="22" terrain="6" deploy="0">
+    <unit id="115" owner="0" flag="8" face="0" exp="100" ent="2"/>
   </hex>
   <hex row="4" col="23" terrain="6"/>
   <hex row="4" col="24" terrain="6"/>
@@ -127,7 +127,7 @@
   <hex row="5" col="16" terrain="6"/>
   <hex row="5" col="17" terrain="10" name="Badiel River"/>
   <hex row="5" col="18" terrain="1" road="17" name="Almadrones" flag="24" owner="2" victory="0">
-    <unit id="246" owner="2" flag="25" face="6"/>
+    <unit id="246" owner="2" flag="25" face="6" exp="200" ent="5"/>
   </hex>
   <hex row="5" col="22" terrain="3"/>
   <hex row="5" col="24" terrain="6"/>
@@ -168,7 +168,7 @@
   <hex row="7" col="17" road="34"/>
   <hex row="7" col="18" road="33"/>
   <hex row="7" col="19" terrain="1" road="17" name="Alaminos" flag="24" owner="2">
-    <unit id="246" owner="2" flag="25" face="6"/>
+    <unit id="246" owner="2" flag="25" face="6" exp="200" ent="5"/>
   </hex>
   <hex row="7" col="22" terrain="3"/>
   <hex row="7" col="23" terrain="10" name="Tajuna River"/>
@@ -187,11 +187,11 @@
   <hex row="8" col="14" road="34"/>
   <hex row="8" col="15" terrain="6"/>
   <hex row="8" col="16" terrain="6" road="130">
-    <unit id="240" owner="2" flag="25" face="6" transport="250"/>
+    <unit id="240" owner="2" flag="25" face="6" transport="250" exp="200" ent="3"/>
   </hex>
   <hex row="8" col="17" terrain="6"/>
   <hex row="8" col="18" terrain="1" name="Hontanares" flag="24" owner="2">
-    <unit id="246" owner="2" flag="25" face="6"/>
+    <unit id="246" owner="2" flag="25" face="6" exp="200" ent="5"/>
   </hex>
   <hex row="8" col="19" road="9"/>
   <hex row="8" col="20" road="16"/>
@@ -226,7 +226,7 @@
   <hex row="10" col="4" terrain="10" name="Sorbe River"/>
   <hex row="10" col="5" terrain="10" name="Henares River"/>
   <hex row="10" col="6" terrain="1" road="18" name="Torre del Burgo" flag="24" owner="2" victory="0">
-    <unit id="346" owner="2" flag="23" face="6" transport="382"/>
+    <unit id="346" owner="2" flag="23" face="6" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="10" col="7" terrain="16" road="1"/>
   <hex row="10" col="8" terrain="16"/>
@@ -243,10 +243,10 @@
   <hex row="10" col="19" terrain="15"/>
   <hex row="10" col="20" terrain="3" road="1"/>
   <hex row="10" col="22" road="144">
-    <unit id="212" owner="1" flag="13" face="11" transport="224"/>
+    <unit id="212" owner="1" flag="13" face="11" transport="224" exp="200" ent="1"/>
   </hex>
   <hex row="10" col="23" terrain="1" name="Cienfuentes" flag="12" owner="1">
-    <unit id="206" owner="1" flag="13" face="11" transport="225"/>
+    <unit id="206" owner="1" flag="13" face="11" transport="225" exp="100" ent="3"/>
   </hex>
   <hex row="10" col="25" terrain="3"/>
   <hex row="10" col="26" terrain="3"/>
@@ -270,10 +270,10 @@
   <hex row="11" col="20" terrain="3"/>
   <hex row="11" col="21" terrain="3"/>
   <hex row="11" col="22" road="9">
-    <unit id="211" owner="1" flag="13" face="11"/>
+    <unit id="211" owner="1" flag="13" face="11" exp="100" ent="1"/>
   </hex>
   <hex row="11" col="23" road="144">
-    <unit id="211" owner="1" flag="13" face="11"/>
+    <unit id="211" owner="1" flag="13" face="11" exp="100" ent="1"/>
   </hex>
   <hex row="12" col="3" terrain="10" name="Sorbe River"/>
   <hex row="12" col="4" terrain="10" name="Henares River"/>
@@ -281,7 +281,7 @@
   <hex row="12" col="6" terrain="6"/>
   <hex row="12" col="7" terrain="16" road="18"/>
   <hex row="12" col="8" terrain="1" road="42" name="Torija" flag="24" owner="2" victory="0">
-    <unit id="346" owner="2" flag="23" face="6" transport="382"/>
+    <unit id="346" owner="2" flag="23" face="6" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="12" col="9" terrain="16" road="130"/>
   <hex row="12" col="10" road="34"/>
@@ -296,13 +296,13 @@
   <hex row="12" col="21" terrain="3"/>
   <hex row="12" col="23" road="33"/>
   <hex row="12" col="24">
-    <unit id="230" owner="1" flag="13" face="11"/>
+    <unit id="230" owner="1" flag="13" face="11" exp="100"/>
   </hex>
   <hex row="13" col="3" terrain="10" name="Sorbe River"/>
   <hex row="13" col="4" terrain="10" name="Henares River"/>
   <hex row="13" col="5" road="17"/>
   <hex row="13" col="6" terrain="16">
-    <unit id="328" owner="2" flag="23" face="6" transport="382"/>
+    <unit id="328" owner="2" flag="23" face="6" transport="382" exp="200" ent="2"/>
   </hex>
   <hex row="13" col="7" terrain="16" road="33"/>
   <hex row="13" col="8" terrain="16"/>
@@ -318,7 +318,7 @@
   <hex row="13" col="21" terrain="3"/>
   <hex row="13" col="22" road="18"/>
   <hex row="13" col="24">
-    <unit id="233" owner="1" flag="13" face="11"/>
+    <unit id="233" owner="1" flag="13" face="11" exp="100"/>
   </hex>
   <hex row="13" col="25" terrain="10"/>
   <hex row="14" col="3" terrain="10" name="Sorbe River"/>
@@ -339,10 +339,10 @@
   <hex row="14" col="19" terrain="6"/>
   <hex row="14" col="20" terrain="10"/>
   <hex row="14" col="21" road="16">
-    <unit id="214" owner="1" flag="13" face="11" transport="224"/>
+    <unit id="214" owner="1" flag="13" face="11" transport="224" exp="100" ent="1"/>
   </hex>
   <hex row="14" col="22" road="17">
-    <unit id="204" owner="1" flag="13" face="11" transport="224"/>
+    <unit id="204" owner="1" flag="13" face="11" transport="224" exp="100"/>
   </hex>
   <hex row="14" col="23" terrain="10"/>
   <hex row="14" col="24" terrain="10"/>
@@ -368,7 +368,7 @@
   <hex row="15" col="20" terrain="15"/>
   <hex row="15" col="21" terrain="10" road="35" name="Tajo River"/>
   <hex row="15" col="22" road="33">
-    <unit id="214" owner="1" flag="13" face="11" transport="224"/>
+    <unit id="214" owner="1" flag="13" face="11" transport="224" exp="100" ent="1"/>
   </hex>
   <hex row="15" col="23" terrain="10"/>
   <hex row="15" col="24" terrain="10"/>
@@ -398,7 +398,7 @@
   <hex row="17" col="2" terrain="10" name="Henares River"/>
   <hex row="17" col="3" terrain="1" road="27" name="Guadalajara"/>
   <hex row="17" col="4" terrain="1" road="178" name="Guadalajara" flag="24" owner="2" victory="0">
-    <unit id="346" owner="2" flag="23" face="6" transport="382"/>
+    <unit id="346" owner="2" flag="23" face="6" transport="382" exp="200" ent="3"/>
   </hex>
   <hex row="17" col="8" terrain="16"/>
   <hex row="17" col="9" terrain="10" name="Ungria River"/>
@@ -420,10 +420,10 @@
   <hex row="18" col="3" road="17"/>
   <hex row="18" col="4" terrain="1" road="129" name="Guadalajara"/>
   <hex row="18" col="6">
-    <unit id="377" owner="2" flag="23" face="6"/>
+    <unit id="377" owner="2" flag="23" face="6" exp="200"/>
   </hex>
   <hex row="18" col="7" terrain="2" owner="1">
-    <unit id="252" owner="2" flag="25" face="6"/>
+    <unit id="252" owner="2" flag="25" face="6" exp="200"/>
   </hex>
   <hex row="18" col="9" terrain="15" name="Ungria River"/>
   <hex row="18" col="10" terrain="15" name="Tajuna River"/>
@@ -442,7 +442,7 @@
   <hex row="19" col="4" terrain="3"/>
   <hex row="19" col="5" terrain="3"/>
   <hex row="19" col="6" terrain="2" flag="24" owner="2">
-    <unit id="387" owner="2" flag="23" face="6"/>
+    <unit id="387" owner="2" flag="23" face="6" exp="200"/>
   </hex>
   <hex row="19" col="8" terrain="15" name="Ungria River"/>
   <hex row="19" col="9" terrain="15" name="Tajuna River"/>
