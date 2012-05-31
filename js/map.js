@@ -367,7 +367,7 @@ function Map()
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
 		var update = false; //Don't update unit list if not necessary
-		var cr = GameRules.calculateAttackResults(this.map, atkunit, defunit);
+		var cr = GameRules.calculateAttackResults(atkunit, defunit);
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		

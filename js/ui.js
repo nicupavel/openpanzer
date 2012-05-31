@@ -14,7 +14,8 @@ function UI(scenario)
 	{
 		airMode:false, //flag used to select between overlapping ground/air units
 		mapZoom:false, //flag used to draw map in zoomed mode or not
-		hexGrid:true // flag to notify render if it should draw or not hex grid
+		hexGrid:true, // flag to notify render if it should draw or not hex grid
+		hasTouch: hasTouch(),
 	};
 	var map = new Map();
 	var l = new MapLoader();	
@@ -36,7 +37,7 @@ function UI(scenario)
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	canvas.addEventListener("mousedown", handleMouseClick, false);
-	if (!hasTouch()) canvas.addEventListener("mousemove", handleMouseMove, false);
+	if (!uiSettings.hasTouch) canvas.addEventListener("mousemove", handleMouseMove, false);
 	
 	countries = map.getCountries();
 	buildMainMenu();

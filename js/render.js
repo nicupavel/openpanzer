@@ -14,7 +14,7 @@ function Render(mapObj)
 	var map = mapObj;
 	
 	var imgUnits = {};
-	var imgCursor;
+	var imgAttackCursor;
 	var imgFlags;
 	var imgMapBackground;
 	
@@ -119,6 +119,18 @@ function Render(mapObj)
 				if (unit !== null && !unit.hasAnimation 
 						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
+					
+				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
+				{	
+					var tmpImage = new Image();
+					var atkunit = map.currentUnit;
+					var defunit = hex.getAttackableUnit(atkunit, uiSettings.airMode)
+					var imgCombatResults = generateAttackCursor(atkunit, defunit);
+					var localx = x0 - s/2;
+					var localy = y0;
+					tmpImage.src = imgCombatResults;
+					c.drawImage(tmpImage, localx, localy);
+				}
 			}
 		}
 	}
@@ -150,12 +162,9 @@ function Render(mapObj)
 				redraw = true; //Force css cursor assignment
 				var atkunit = map.currentUnit;
 				var defunit = hex.getAttackableUnit(atkunit, uiSettings.airMode);
-				var atkflag = atkunit.player.country;
-				var defflag = defunit.player.country;
-				var cr = GameRules.calculateAttackResults(map.map, atkunit, defunit);
 				lastCursorUnit = atkunit;
 				lastCursorCell = cell;
-				lastCursorImage = generateAttackCursor(cr.kills, cr.losses, atkflag, defflag);
+				lastCursorImage = generateAttackCursor(atkunit, defunit);
 			}
 			//only assign a new css cursor if needed (to reduce html element load)
 			if ((ca.style.cursor == 'default') || (ca.style.cursor == 'pointer')
@@ -300,8 +309,8 @@ function Render(mapObj)
 	//Caches images, func a function to call upon cache completion
 	this.cacheImages = function(func)
 	{
-		imgCursor = new Image();
-		imgCursor.src = "resources/ui/cursors/attack.png";
+		imgAttackCursor = new Image();
+		imgAttackCursor.src = "resources/ui/cursors/attack.png";
 		
 		imgFlags = new Image();
 		imgFlags.src = "resources/ui/flags/flags_med.png";
@@ -372,15 +381,23 @@ function Render(mapObj)
 	}
 	
 	//Generates an attack cursor on backbuffer canvas
-	function generateAttackCursor(kills, losses, atkflag, defflag)
+	function generateAttackCursor(atkunit, defunit)
 	{
+		
 		var flw = 21; //one flag width
 		var flh = 14; //flag height
 		var bbw = bb.canvas.width;
 		var bbh = bb.canvas.height;
 
+		if (!atkunit || !defunit)
+			return null;
+		
+		var atkflag = atkunit.player.country;
+		var defflag = defunit.player.country;
+		var cr = GameRules.calculateAttackResults(atkunit, defunit);
+		
 		bb.clearRect(0, 0, bbw, bbh);
-		bb.drawImage(imgCursor, bbw/2 - imgCursor.width/2, bbh/2 - imgCursor.height/2);
+		bb.drawImage(imgAttackCursor, bbw/2 - imgAttackCursor.width/2, bbh/2 - imgAttackCursor.height/2);
 		bb.drawImage(imgFlags, flw*atkflag, 0, flw, flh, 0, 0, flw, flh)
 		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 		
@@ -389,13 +406,13 @@ function Render(mapObj)
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
 		
-		var tx = flw/2 - bb.measureText(losses).width/2;
+		var tx = flw/2 - bb.measureText(cr.losses).width/2;
 		var ty = flh;
-		bb.strokeText(losses, tx+1, ty+1);
-		bb.fillText(losses, tx, ty);
-		tx = bbw - flw/2 - bb.measureText(kills).width/2;
-		bb.strokeText(kills, tx+1, ty+1);
-		bb.fillText(kills, tx, ty);
+		bb.strokeText(cr.losses, tx+1, ty+1);
+		bb.fillText(cr.losses, tx, ty);
+		tx = bbw - flw/2 - bb.measureText(cr.kills).width/2;
+		bb.strokeText(cr.kills, tx+1, ty+1);
+		bb.fillText(cr.kills, tx, ty);
 		
 		return cbb.toDataURL(); //return canvas pixels encoded to base64
 	}

@@ -282,11 +282,10 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 	return [];
 }
 
-//aUnit from position aUnitPos attacks tUnit from tUnitPos
 //TODO dig the actual formula (how many pages it is ?) 
 //prolly depends on: weather, terrain, adjacent units (arty), initiative, fuel, ammo
 //experience, ranged defense modified, entrechment, unit strength etc ...
-GameRules.calculateAttackResults = function(map, atkunit, defunit)
+GameRules.calculateAttackResults = function(atkunit, defunit)
 {
 	var a = atkunit.getPos();
 	var t = defunit.getPos();
