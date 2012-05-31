@@ -360,7 +360,7 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 
 	//TODO Entrenchment
 	//Add 2*entrechment for infantry in city, forest, mountain if attacked by tank, recon, at
-	if (tUD.class == unitClass.infantry 
+	if (tUD.uclass == unitClass.infantry 
 	    && (tTerrain == terrainType.City || tTerrain == terrainType.Forest || tTerrain == terrainType.Mountain)
 	    && (aUD.uclass == unitClass.tank || aUD.uclass == unitClass.recon || aUD.uclass == unitClass.antiTank))
 		tdv += 2 * defunit.entrenchment;
