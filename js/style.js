@@ -15,7 +15,7 @@ function RenderStyle()
 	{
 	"selected":{ //Move selected hexes
 		"fillColor": "rgba(128,128,128,0.5)",
-		"lineColor": "rgba(128,128,128,0.2)",
+		"lineColor": "rgba(0,0,0,0.4)",
 		"lineWidth":  1,
 		"lineJoin":  "miter",
 		},
