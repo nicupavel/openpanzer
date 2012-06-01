@@ -402,7 +402,7 @@ function Render(mapObj)
 		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 		
 		//estimated losses and kills
-		bb.font = "12px monospace";
+		bb.font = "12px sans-serif";
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
 		
