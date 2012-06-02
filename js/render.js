@@ -93,7 +93,7 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
-				if (uiSettings.mapZoom) 
+				if (uiSettings.mapZoom && hex.isSpotted(map.currentSide)) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
