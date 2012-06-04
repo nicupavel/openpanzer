@@ -104,6 +104,7 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
+				//TODO check viewport so we don't render what it's not on visible screen
 				if (uiSettings.mapZoom && hex.isSpotted(map.currentSide)) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
@@ -116,8 +117,7 @@ function Render(mapObj)
 					drawHex(c, x0, y0, hexstyle.attack);
 				if ((current !== null) && (typeof current !== "undefined") 
 					&& (row == current.row) && (col == current.col))
-					drawHex(c, x0, y0, hexstyle.current);	
-
+					drawHex(c, x0, y0, hexstyle.current);
 				if (drawHexGrid)
 					drawHex(cb, x0, y0, hexstyle.generic);
 								
@@ -546,8 +546,8 @@ function Render(mapObj)
 			var imagew = image.width/9; //Some images have bigger width
 			var imageh = image.height;
 			//Offset the transparent regions of the unit sprite
-			var ix0 = parseInt(x0 - imagew/2 + s/2);
-			var iy0 = parseInt(y0 - imageh/2 + r - unitTextHeight);
+			var ix0 = (x0 - imagew/2 + s/2) >> 0;
+			var iy0 = (y0 - imageh/2 + r - unitTextHeight) >> 0;
 			facing = unit.facing;
 			if (facing > 8)
 			{
@@ -566,25 +566,21 @@ function Render(mapObj)
 			c.drawImage(image, imgidx , 0, imagew, imageh, ix0, iy0, imagew, imageh);
 			if (mirror) c.restore();
 		}
-
+			
 		if (!drawIndicators) return;
 		
 		//Write unit strength in a box below unit
 		c.font = unitTextHeight + "px sans-serif";
 		var text = "" + unit.strength;
-		var textcolor = "black"
-		var textSize = c.measureText(text).width;
-		var tx = parseInt(x0 + h/2);
+		var tx = (x0 + h/2) >> 0;
 		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing
-		
 		var side = unit.player.side;
-		if (side == 1) { textcolor = "green"; }
+		c.fillStyle = "black";
+		if (side == 1) { c.fillStyle = "green"; }
+		c.fillRect(tx, ty, 14, unitTextHeight); //14 size of box = c.measureText(text).width + 2
 		
-		c.moveTo(tx, ty);
-		c.fillStyle = textcolor;
-		c.fillRect  (tx, ty, textSize + 2, unitTextHeight); 
 		if (unit.hasMoved)
-			c.fillStyle = "2F4F4F"; //DarkSlateGrey
+			c.fillStyle = "696969"; //DarkGrey
 		else
 			c.fillStyle = "white";
 			
@@ -607,7 +603,6 @@ function Render(mapObj)
 		ctx.lineTo(x0 + s, y0 + 2 * r);
 		ctx.lineTo(x0, y0 + 2 * r);
 		ctx.lineTo(x0 - h, y0 + r);
-		ctx.lineTo(x0, y0);
 		if (style.fillColor !== null) 
 		{
 			ctx.fillStyle = style.fillColor;
