@@ -46,7 +46,6 @@ function UI(scenario)
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 	
-	
 function handleMouseClick(e) 
 {
 	var minfo = getMouseInfo(canvas, e);

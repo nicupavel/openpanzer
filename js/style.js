@@ -8,57 +8,34 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
-
-function RenderStyle() 
+var hexstyle = 
 {
-	var pg2hexstyle = 
-	{
-	"selected":{ //Move selected hexes
+	"move": //Move selected hexes
+	{ 
 		"fillColor": "rgba(128,128,128,0.5)",
 		"lineColor": "rgba(0,0,0,0.4)",
 		"lineWidth":  1,
 		"lineJoin":  "miter",
-		},
-	"attack":{ //Attack selected hexes
+	},
+	"attack":  //Attack selected hexes
+	{
 		"fillColor": null,
 		"lineColor": "rgba(239,0,0,0.8)",
 		"lineWidth":  3,
 		"lineJoin":  "miter",
-		},
-	"current": { //Current selected hex
+	},
+	"current": //Current selected hex
+	{ 
 		"fillColor": null ,
 		"lineColor": "rgba(240,240,240,0.8)",
 		"lineWidth": 3,
 		"lineJoin": "round",
-		},
-	"normal": { //Normal drawing of hex grid
+	},
+	"generic": //Generic hex grid
+	{ 
 		"fillColor": null,
 		"lineColor": "rgba(39,44,47,0.9)",
 		"lineWidth": 0.4,
 		"lineJoin": "miter",
-		},
-	"hidden": { //Hidden drawing of hex grid
-		"fillColor": null,
-		"lineColor": "rgba(128,128,128,0.8)",
-		"lineWidth": 0.001,
-		"lineJoin": "miter",
-		}
-	}	
-	var theme = pg2hexstyle;
-	this.selected = theme.selected;
-	this.current = theme.current;
-	this.generic = theme.normal;
-	this.attack = theme.attack;
-	
-	this.setTheme = function(customTheme)
-	{
-		if (customTheme === null || typeof customTheme === "undefined") { theme = pg2hexstyle; }
-		theme = customTheme;
-	}
-
-	this.setHexGrid = function(hexShown) 
-	{ 
-		if (hexShown) { this.generic = theme.normal; }
-		else {this.generic = theme.hidden; }
-	}
-}
+	},
+};

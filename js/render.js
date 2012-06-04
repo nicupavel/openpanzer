@@ -17,7 +17,9 @@ function Render(mapObj)
 	var imgAttackCursor;
 	var imgFlags;
 	var imgMapBackground;
-	
+	var imgUnitFire;
+		
+	var drawnHexGrid = false; //Force first time rendering of hex grid but prevent redraw if no changes
 	var lastCursorCell = null; //Last cell for which the cursor was built
 	var lastCursorImage = null;//last cursor image
 	var lastCursorUnit = null; //last unit for which a cursor was generated
@@ -26,8 +28,8 @@ function Render(mapObj)
 	var cm; // The map canvas element
 	var ca; // The animation canvas element.Also used as cursor coords but c canvas can be used as well
 	var cbb; //A backbuffer canvas for dynamically creating images (as in cursor image)
-	var c = null; //This is the context where the main drawing takes place
-	var cb = null;//This is the context where the map image is drawn. Can be made a background of the main drawing
+	var c = null; //This is the context where the main drawing takes place (units, move and attack selection)
+	var cb = null;//This is the context where the map image and hex grid is drawn.
 	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
 	var bb = null; //Backbuffer context
 	
@@ -52,8 +54,7 @@ function Render(mapObj)
 	var unitTextHeight = 10;	
 	//Animation Chain
 	var animationChain = new AnimationChain();
-	//The rendering style
-	var styles = new RenderStyle();
+
 	//Render Settings from UI
 	var uiSettings = null;
 		
@@ -61,18 +62,28 @@ function Render(mapObj)
 				
 	this.render = function()
 	{
+		console.time("render timer");
 		var x0;
 		var y0;
-		var style;
 		var hex;
 		var current = null;
 		var unit = null;
+		var drawHexGrid = false;
+		
+		if (uiSettings.hexGrid != drawnHexGrid)
+		{
+			if (uiSettings.hexGrid)
+				drawHexGrid = true;
+			else
+				drawHexGrid = false;
+			
+			drawnHexGrid = uiSettings.hexGrid;
+			cb.clearRect(0, 0, cb.canvas.width, cb.canvas.height);
+		}
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
-		
-		styles.setHexGrid(uiSettings.hexGrid);
-		
+
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		a.clearRect(0, 0, a.canvas.width, a.canvas.height);
 		for (row = 0; row < map.rows; row++) 
@@ -81,7 +92,7 @@ function Render(mapObj)
 			for (col = 0; col < map.cols; col++) 
 			{
 				hex = map.map[row][col];
-				style = styles.generic;
+
 				//flat-out hex layout //inline for performance gain
 				if (col & 1) // odd column
 				{
@@ -98,16 +109,19 @@ function Render(mapObj)
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
 				}
+
 				if (hex.isMoveSel) 
-					style = styles.selected;
+					drawHex(c, x0, y0, hexstyle.move);
 				if (hex.isAttackSel) 
-					style = styles.attack;
+					drawHex(c, x0, y0, hexstyle.attack);
 				if ((current !== null) && (typeof current !== "undefined") 
-					&& (row == current.row) && (col == current.col)) 
-					style = styles.current;
-					
+					&& (row == current.row) && (col == current.col))
+					drawHex(c, x0, y0, hexstyle.current);	
+
+				if (drawHexGrid)
+					drawHex(cb, x0, y0, hexstyle.generic);
+								
 				drawHexDecals(x0, y0, hex);
-				drawHexGrid(x0, y0, style);
 				
 				//Don't render unit if it has a move animation or it's not spotted
 				unit = hex.getUnit(!uiSettings.airMode);
@@ -119,7 +133,7 @@ function Render(mapObj)
 				if (unit !== null && !unit.hasAnimation 
 						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
-					
+
 				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
 				{	
 					var tmpImage = new Image();
@@ -131,8 +145,9 @@ function Render(mapObj)
 					tmpImage.src = imgCombatResults;
 					c.drawImage(tmpImage, localx, localy);
 				}
-			}
+			}	
 		}
+		console.timeEnd("render timer");
 	}
 		
 	//Renders attack or transport move cursor 
@@ -315,6 +330,9 @@ function Render(mapObj)
 		imgFlags = new Image();
 		imgFlags.src = "resources/ui/flags/flags_med.png";
 		
+		imgUnitFire = new Image();
+		imgUnitFire.src = "resources/ui/indicators/unit-fire.png";
+		
 		imgMapBackground = new Image();
 		imgMapBackground.src = map.terrainImage;
 		imgMapBackground.onload = function() { setupLayers(); func(); }
@@ -370,7 +388,6 @@ function Render(mapObj)
 		
 		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the attack cursor
 		
-		cb.drawImage(imgMapBackground, 0, 0);
 		canvasOffsetX = window.innerWidth/2 - imgMapBackground.width/2;
 		if (canvasOffsetX < 0) { canvasOffsetX = 0;}
 					
@@ -378,8 +395,12 @@ function Render(mapObj)
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		ca.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
+		
+		//Add map image as background
+		//cb.drawImage(imgMapBackground, 0, 0);
+		cm.style.cssText += "background-image:url('" + imgMapBackground.src + "');";
 	}
-	
+
 	//Generates an attack cursor on backbuffer canvas
 	function generateAttackCursor(atkunit, defunit)
 	{
@@ -567,38 +588,31 @@ function Render(mapObj)
 			c.fillStyle = "white";
 			
 		c.fillText(text, tx, ty + 8);
+
 		//draw indicator for unit.hasFired
-		if (!unit.hasFired)
-		{
-			c.beginPath();
-			c.arc(tx-5, ty + 5, 3, 0, Math.PI*2, false);
-			c.fillStyle = "grey";
-			c.strokeStyle = "crimson";
-			c.lineWidth = 2;
-			c.fill();
-			c.stroke();
-			c.closePath();
-		}
+		if (!unit.hasFired && side == map.currentSide)
+			c.drawImage(imgUnitFire, x0 - 1, y0 + 2 * r - unitTextHeight);
 	}
 	
-	function drawHexGrid(x0, y0, style)
+	function drawHex(ctx, x0, y0, style)
 	{
-		c.lineWidth = style.lineWidth; 
-		c.lineJoin = style.lineJoin; 
-		c.strokeStyle = style.lineColor;
-		c.beginPath();
-		c.moveTo(x0, y0);
-		c.lineTo(x0 + s, y0);
-		c.lineTo(x0 + s + h, y0 + r);
-		c.lineTo(x0 + s, y0 + 2 * r);
-		c.lineTo(x0, y0 + 2 * r);
-		c.lineTo(x0 - h, y0 + r);
+		ctx.lineWidth = style.lineWidth; 
+		ctx.lineJoin = style.lineJoin; 
+		ctx.strokeStyle = style.lineColor;
+		ctx.beginPath();
+		ctx.moveTo(x0, y0);
+		ctx.lineTo(x0 + s, y0);
+		ctx.lineTo(x0 + s + h, y0 + r);
+		ctx.lineTo(x0 + s, y0 + 2 * r);
+		ctx.lineTo(x0, y0 + 2 * r);
+		ctx.lineTo(x0 - h, y0 + r);
+		ctx.lineTo(x0, y0);
 		if (style.fillColor !== null) 
 		{
-			c.fillStyle = style.fillColor;
-			c.fill();
+			ctx.fillStyle = style.fillColor;
+			ctx.fill();
 		}
-		c.closePath();
-		c.stroke();
+		ctx.closePath();
+		ctx.stroke();
 	}
 }
