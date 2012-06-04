@@ -136,14 +136,12 @@ function Render(mapObj)
 
 				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
 				{	
-					var tmpImage = new Image();
 					var atkunit = map.currentUnit;
 					var defunit = hex.getAttackableUnit(atkunit, uiSettings.airMode)
-					var imgCombatResults = generateAttackCursor(atkunit, defunit);
+					var ctx = generateAttackCursor(atkunit, defunit, false);
 					var localx = x0 - s/2;
 					var localy = y0;
-					tmpImage.src = imgCombatResults;
-					c.drawImage(tmpImage, localx, localy);
+					c.drawImage(ctx, localx, localy);
 				}
 			}	
 		}
@@ -179,7 +177,7 @@ function Render(mapObj)
 				var defunit = hex.getAttackableUnit(atkunit, uiSettings.airMode);
 				lastCursorUnit = atkunit;
 				lastCursorCell = cell;
-				lastCursorImage = generateAttackCursor(atkunit, defunit);
+				lastCursorImage = generateAttackCursor(atkunit, defunit, true);
 			}
 			//only assign a new css cursor if needed (to reduce html element load)
 			if ((ca.style.cursor == 'default') || (ca.style.cursor == 'pointer')
@@ -402,7 +400,7 @@ function Render(mapObj)
 	}
 
 	//Generates an attack cursor on backbuffer canvas
-	function generateAttackCursor(atkunit, defunit)
+	function generateAttackCursor(atkunit, defunit, asDataURL)
 	{
 		
 		var flw = 21; //one flag width
@@ -435,7 +433,10 @@ function Render(mapObj)
 		bb.strokeText(cr.kills, tx+1, ty+1);
 		bb.fillText(cr.kills, tx, ty);
 		
-		return cbb.toDataURL(); //return canvas pixels encoded to base64
+		if (asDataURL)
+			return cbb.toDataURL(); //return canvas pixels encoded to base64
+		else
+			return cbb;	//return the canvas
 	}
 	
 	//imgList a list of image file names, func a function to call upon cache completion
