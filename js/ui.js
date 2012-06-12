@@ -572,6 +572,8 @@ function updateEquipmentWindow(eqclass)
 				div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 				map.selectUnit(u); //select unit on map
 				r.render(); //refresh so the new selection appear
+				//bring the unit box into view by scrolling
+				$('hscroll-unitlist').scrollLeft =  $('unitlist').offsetWidth;
 			}
 				
 			img.src = ud.icon;

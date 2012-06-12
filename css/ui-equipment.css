@@ -31,9 +31,9 @@
 	left: 30px;
 	*/
 	height: 321px;
-	width:240px;
+	width:225px;
 	margin-top: 20px;
-	margin-left: 40px;
+	margin-left: 55px;
 	padding-left: 0px;
 	float: left;
 	overflow: auto;
@@ -146,7 +146,7 @@
 	margin-right: 5px;
 	overflow: hidden;
 	position: relative;
-	float: right;
+	float: left;
 }
 
 .eqUnitBox:hover
