@@ -225,10 +225,9 @@ function uiAnimationFinished(animationCBData)
 {
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{
-		if (animationCBData.units[i].destroyed)
-			continue;
-		
+		if (animationCBData.units[i].destroyed)	continue;
 		var loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
+		if (loss == 0) continue;
 		var cell = animationCBData.units[i].getPos();
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		var cdiv = addTag('mainbody', 'div');		
