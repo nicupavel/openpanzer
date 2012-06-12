@@ -225,13 +225,16 @@ function uiAnimationFinished(animationCBData)
 {
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{
+		if (animationCBData.units[i].destroyed)
+			continue;
+		
 		var loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
 		var cell = animationCBData.units[i].getPos();
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		var cdiv = addTag('mainbody', 'div');		
 		var ldiv = addTag(cdiv, 'div');
 		cdiv.style.cssText = "position:absolute; top:"+ pos.y + "px; left:" + pos.x + "px";
-		//CSS AnimationEvent callback to delete the created divs
+		//CSS AnimationEvent callback to delete the created parent div
 		ldiv.addEventListener("animationend", function() { delTag(this.parentNode); }, false); //mozilla
 		ldiv.addEventListener("webkitAnimationEnd", function() { delTag(this.parentNode); }, false); //webkit
 		ldiv.className = "combat-loss";
