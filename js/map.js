@@ -55,11 +55,9 @@ function Hex(row, col)
 	this.isSpotted = function(side) { return isHexPropSet(spotList, side); }
 	this.setZOC = function(side, on) { return setHexPropList(zocList, side, on); }
 	this.setSpotted = function(side, on) {	return setHexPropList(spotList, side, on); }
-	this.getPos = function() { return new Cell(1 * r, 1 * c); }
+	this.getPos = function() { return new Cell(1 * row, 1 * col); }
 	
 	//Private Methods and Properties
-	var r = row;
-	var c = col;
 	var zocList = [0, 0]; //Hex is in a unit zone of control from side 0 or 1
 	var spotList = [0, 0]; //Hex is spoted by a unit from side 0 or 1
 	
