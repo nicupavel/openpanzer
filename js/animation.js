@@ -26,18 +26,21 @@ function AnimationChain()
 		i = 0;
 	}
 	
-	this.start = function()
+	this.start = function(animationCBData)
 	{	
 		var obj = this; //save this pointer as it gets overwritten by window. context
 
 		if (i < animationTasks.length)
 		{
 			animationTasks[i].start();
-			setTimeout(function() { obj.start(); }, animationTasks[i].getDuration() + 100);
+			setTimeout(function() { obj.start(animationCBData); }, animationTasks[i].getDuration() + 100);
 			i++;
 		}
 		else
 		{
+
+			if (animationCBData !== null && typeof animationCBData !== "undefined")
+				animationCBData.cbfunc(animationCBData);
 			setTimeout(function() {	obj.clear(); }, 100);
 		}
 	}	

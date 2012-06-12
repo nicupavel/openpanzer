@@ -28,6 +28,13 @@ function addTag(parent, tag)
 	return t;
 }
 
+//remove a DOM tag
+function delTag(tag)
+{
+	if (tag && tag.parentNode)
+		tag.parentNode.removeChild(tag);
+}
+
 //Taken from http://modernizr.github.com/Modernizr/touch.html
 function hasTouch()
 {

@@ -195,9 +195,9 @@ function Render(mapObj)
 	}
 	
 	//Runs all animations in order that they were added and then delete all animations
-	this.runAnimation = function()
+	this.runAnimation = function(animationCBData)
 	{
-		animationChain.start();
+		animationChain.start(animationCBData);
 	}
 	
 	//Adds an animation to the list
@@ -302,8 +302,9 @@ function Render(mapObj)
 		return new Cell(trow, tcol);
 	}
 	
-	//Returns the top corner position in screen coordinates 
-	function cellToScreen(row, col)
+	//Returns the top corner position of a hex in screen coordinates relative to canvas
+	//if absolute is set canvas offsets are added to positions
+	function cellToScreen(row, col, absolute)
 	{
 		if (col & 1) // odd column
 		{
@@ -316,8 +317,15 @@ function Render(mapObj)
 			x0 = col * (s + h) + h + renderOffsetX;
 		}
 		
+		if (absolute)
+		{ 
+			x0 += canvasOffsetX;
+			y0 += canvasOffsetY;
+		}
+		
 		return new screenPos(x0, y0);
 	}
+	this.cellToScreen = function(row, col, absolute) { return cellToScreen(row, col, absolute); }
 	
 	//Caches images, func a function to call upon cache completion
 	this.cacheImages = function(func)

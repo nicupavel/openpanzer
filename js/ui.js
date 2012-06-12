@@ -15,8 +15,10 @@ function UI(scenario)
 		airMode:false, //flag used to select between overlapping ground/air units
 		mapZoom:false, //flag used to draw map in zoomed mode or not
 		hexGrid:true, // flag to notify render if it should draw or not hex grid
+		deployMode:false, //used for unit deployment
 		hasTouch: hasTouch(),
 	};
+	
 	var map = new Map();
 	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
@@ -60,8 +62,7 @@ function handleMouseClick(e)
 		return true;
 	}
 	
-	var clickedUnit = hex.getUnit(uiSettings.airMode);
-	
+	var clickedUnit = hex.getUnit(uiSettings.airMode);	
 	//Right click to show unit info or clear current selection
 	if (minfo.rclick) 
 	{ 
@@ -73,8 +74,7 @@ function handleMouseClick(e)
 			r.render();
 		}
 		return true;
-	}
-	
+	}	
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
@@ -103,8 +103,7 @@ function handleMouseClick(e)
 			map.delCurrentUnit();
 	}
 
-	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions
-	
+	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
 	//Set the airMode depending on current unit automatically
 	if (GameRules.isAir(map.currentUnit)) 
 	{
@@ -172,24 +171,30 @@ function handleUnitMove(row, col)
 function handleUnitAttack(row, col)
 {
 	var hex = map.map[row][col];
-	if ((enemyUnit = hex.getAttackableUnit(map.currentUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
+	var attackingUnit = map.currentUnit;
+	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
-		var cpos = map.currentUnit.getPos();
-		var cclass = map.currentUnit.unitData().uclass;
+		var cpos = attackingUnit.getPos();
+		var cclass = attackingUnit.unitData().uclass;
 		var eclass = enemyUnit.unitData().uclass;
-
-		var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), map.currentUnit, enemyUnit);
+		var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), attackingUnit, enemyUnit);
+		var animationCBData = 
+		{
+			units: [attackingUnit, enemyUnit],
+			oldstr: [attackingUnit.strength, enemyUnit.strength],
+			cbfunc: uiAnimationFinished,
+		}
 		//Support Fire
 		for (var u in supportUnits)
 		{
 			var sp = supportUnits[u].getPos();
 			var sclass = supportUnits[u].unitData().uclass;
-			if (map.currentUnit.destroyed)
+			if (attackingUnit.destroyed)
 				break;
- 			map.attackUnit(supportUnits[u], map.currentUnit, true);
+ 			map.attackUnit(supportUnits[u], attackingUnit, true);
 			r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
 		}
-		if (map.currentUnit.destroyed) //TODO Do this better
+		if (attackingUnit.destroyed) //TODO Do this better
 		{
 			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
 			r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
@@ -197,9 +202,9 @@ function handleUnitAttack(row, col)
 		}
 		else //Can we still attack ?
 		{
-			var cr = map.attackUnit(map.currentUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-			r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], map.currentUnit.facing);
-			if (map.currentUnit.destroyed) //TODO Do this better
+			var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
+			r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
+			if (attackingUnit.destroyed) //TODO Do this better
 			{
 				map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
 				r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
@@ -211,7 +216,26 @@ function handleUnitAttack(row, col)
 				if (cr.defcanfire)
 					r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
 		}
-		r.runAnimation();
+		r.runAnimation(animationCBData);
+	}
+}
+
+//Called when attack animation finishes 
+function uiAnimationFinished(animationCBData)
+{
+	for (var i = 0; i < animationCBData.units.length; i++)
+	{
+		var loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
+		var cell = animationCBData.units[i].getPos();
+		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		var cdiv = addTag('mainbody', 'div');		
+		var ldiv = addTag(cdiv, 'div');
+		cdiv.style.cssText = "position:absolute; top:"+ pos.y + "px; left:" + pos.x + "px";
+		//CSS AnimationEvent callback to delete the created divs
+		ldiv.addEventListener("animationend", function() { delTag(this.parentNode); }, false); //mozilla
+		ldiv.addEventListener("webkitAnimationEnd", function() { delTag(this.parentNode); }, false); //webkit
+		ldiv.className = "combat-loss";
+		ldiv.innerHTML = loss;
 	}
 }
 
@@ -619,7 +643,7 @@ function uiEndTurnInfo()
 	return infoStr;	
 }
 
-function uiViewPort(x, y)
+function uiSetViewPort(x, y)
 {
 	var offsetX = x - (window.innerWidth + document.body.scrollLeft);
 	var offsetY = y - (window.innerHeight + document.body.scrollTop);

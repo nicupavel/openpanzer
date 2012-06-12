@@ -1,0 +1,45 @@
+.combat-loss
+{	
+	position: absolute;
+	z-index: 100;
+	border: 0px #fff solid;
+	margin-left: 10px;
+	width: 20px;
+	height: 20px;
+	font-family: sans-serif;
+	font-size: 15px;
+	font-color:red;
+	font-weight: bold;
+	text-shadow: 0 0 0.2em #fff;
+	-webkit-animation:jump 2s linear 1 normal;
+	-moz-animation:jump 2s linear 1 normal;
+	
+}
+
+@-webkit-keyframes jump
+{
+    from, to  
+	{
+		bottom:0;
+		-webkit-animation-timing-function: ease-out;
+    }
+    50% 
+	{
+		bottom: 40px;
+		-webkit-animation-timing-function: ease-in;
+    }
+}
+
+@-moz-keyframes jump
+{
+    from, to  
+	{
+		bottom:0;
+		-moz-animation-timing-function: ease-out;
+    }
+    50% 
+	{
+		bottom: 40px;
+		-moz-animation-timing-function: ease-in;
+    }
+}
