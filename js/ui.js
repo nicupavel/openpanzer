@@ -34,7 +34,8 @@ function UI(scenario)
 
 	var r = new Render(map);
 	r.setUISettings(uiSettings);
-	r.cacheImages(function() { r.render(); });
+	//redraw screen and center unit on screen when images have finished loading
+	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
 	var canvas = r.getCursorCanvas();
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
@@ -44,7 +45,7 @@ function UI(scenario)
 	countries = map.getCountries();
 	buildMainMenu();
 	buildEquipmentWindow();
-	selectStartingUnit();
+	selectStartingUnit(); //select the first available unit for the current side
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 	
@@ -150,7 +151,7 @@ function handleUnitSelect(row, col)
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
 	if ($('equipment').style.visibility == "visible")
-		updateEquipmentWindow(map.currentUnit.unitData().uclass);	
+		updateEquipmentWindow(map.currentUnit.unitData().uclass);
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -572,8 +573,10 @@ function updateEquipmentWindow(eqclass)
 				div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 				map.selectUnit(u); //select unit on map
 				r.render(); //refresh so the new selection appear
-				//bring the unit box into view by scrolling
-				$('hscroll-unitlist').scrollLeft =  $('unitlist').offsetWidth;
+				//bring the unit box into unit list view by scrolling
+				$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth;
+				//bring the unit into map view
+				uiSetUnitOnViewPort(u);
 			}
 				
 			img.src = ud.icon;
@@ -614,7 +617,7 @@ function updateEquipmentWindow(eqclass)
 				
 			div.equnitid = u.id;
 			img.src = u.icon;
-			txt.innerHTML = u.name + " - " + u.cost*12 + " ";
+			txt.innerHTML = u.name + " - " + u.cost * 12 + " ";
 			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 			div.onclick = function() 
 				{ 
@@ -647,14 +650,16 @@ function uiEndTurnInfo()
 	return infoStr;	
 }
 
-function uiSetViewPort(x, y)
+
+function uiSetUnitOnViewPort(unit)
 {
-	var offsetX = x - (window.innerWidth + document.body.scrollLeft);
-	var offsetY = y - (window.innerHeight + document.body.scrollTop);
-	if (offsetX > 0) document.body.scrollLeft += offsetX;
-	if (offsetY > 0) document.body.scrollTop += offsetY;
-	
-	console.log("OffsetX: " + offsetX + " OffsetY:" + offsetY);
+	if (!unit) return;
+	var cell = unit.getPos();
+	if (!cell || typeof cell === "undefined") return;
+	var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+	document.body.scrollLeft = pos.x - window.innerWidth/2;
+	document.body.scrollTop = pos.y - window.innerHeight/2;
+	console.log(pos);
 }
 
 //Selects the first unit that belongs to the currently playing side
@@ -679,7 +684,7 @@ function newScenario(scenario)
 	map = l.buildMap();
 	map.dumpMap();
 	r.setNewMap(map);
-	r.cacheImages(function() { r.render(); });
+	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
 	countries = map.getCountries(); 
 	win = -1;
 	selectStartingUnit();
