@@ -38,4 +38,11 @@ var hexstyle =
 		"lineWidth": 0.4,
 		"lineJoin": "miter",
 	},
+	"deploy": //deployment hexes
+	{ 
+		"fillColor": "rgba(128,128,128,0.8)",
+		"lineColor": "rgba(0,0,0,0.4)",
+		"lineWidth":  1,
+		"lineJoin":  "miter",
+	},
 };

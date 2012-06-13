@@ -63,7 +63,14 @@ function handleMouseClick(e)
 		return true;
 	}
 	
-	var clickedUnit = hex.getUnit(uiSettings.airMode);	
+	if (uiSettings.deployMode)
+	{
+		//On deploy mode you can only select units
+		handleUnitSelect(row, col);
+		return true;
+	}
+	
+	var clickedUnit = hex.getUnit(uiSettings.airMode);
 	//Right click to show unit info or clear current selection
 	if (minfo.rclick) 
 	{ 
@@ -346,13 +353,17 @@ function mainMenuButton(id)
 			{ 
 				$('equipment').style.visibility = "hidden"; 
 				$('container-unitlist').style.visibility = "hidden"; 
+				uiSettings.deployMode = false;
+				
 			}
 			else 
 			{ 
 				$('equipment').style.visibility = "visible"; 
 				$('container-unitlist').style.visibility = "visible"; 
+				uiSettings.deployMode = true;
 				updateEquipmentWindow(unitClass.tank);
 			}
+			r.render();
 			break;
 		}
 		case 'endturn':
@@ -535,11 +546,7 @@ function buildEquipmentWindow()
 		}
 		
 	$('eqOkBut').title = "Close";
-	$('eqOkBut').onclick = function() 
-		{ 
-			$('equipment').style.visibility = "hidden"; 
-			$('container-unitlist').style.visibility = "hidden"; 
-		}
+	$('eqOkBut').onclick = function() { mainMenuButton("buy"); }
 }
 
 function updateEquipmentWindow(eqclass)

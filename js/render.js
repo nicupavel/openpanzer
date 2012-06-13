@@ -104,20 +104,27 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
-				//TODO check viewport so we don't render what it's not on visible screen
+				
+				if (uiSettings.deployMode && hex.isDeployment > -1)
+					if (map.getPlayer(hex.isDeployment).side == map.currentSide)
+						drawHex(c, x0, y0, hexstyle.deploy);
+					
 				if (uiSettings.mapZoom && hex.isSpotted(map.currentSide)) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
 				}
-
-				if (hex.isMoveSel) 
+				
+				if (hex.isMoveSel  && !uiSettings.deployMode) 
 					drawHex(c, x0, y0, hexstyle.move);
-				if (hex.isAttackSel) 
+				
+				if (hex.isAttackSel && !uiSettings.deployMode) 
 					drawHex(c, x0, y0, hexstyle.attack);
+				
 				if ((current !== null) && (typeof current !== "undefined") 
 					&& (row == current.row) && (col == current.col))
 					drawHex(c, x0, y0, hexstyle.current);
+				
 				if (drawHexGrid)
 					drawHex(cb, x0, y0, hexstyle.generic);
 								
