@@ -659,7 +659,6 @@ function uiSetUnitOnViewPort(unit)
 	var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 	document.body.scrollLeft = pos.x - window.innerWidth/2;
 	document.body.scrollTop = pos.y - window.innerHeight/2;
-	console.log(pos);
 }
 
 //Selects the first unit that belongs to the currently playing side
