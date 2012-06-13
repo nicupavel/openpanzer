@@ -109,7 +109,7 @@ function Render(mapObj)
 					if (map.getPlayer(hex.isDeployment).side == map.currentSide)
 						drawHex(c, x0, y0, hexstyle.deploy);
 					
-				if (uiSettings.mapZoom && hex.isSpotted(map.currentSide)) 
+				if (uiSettings.mapZoom) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
@@ -523,18 +523,22 @@ function Render(mapObj)
 		var unit = null;
 		
 		c.save();
-		//Only renders flag for air or ground units not both
-		if (uiSettings.airMode)
-			unit = hex.airunit;
-		else
-			unit = hex.unit;
-			
-		if (unit !== null)
+		//Only renders flag for air or ground units not both if they are spotted
+		if (hex.isSpotted(map.currentSide))
 		{
-			flag = unit.player.country;
-			scale = 1.4;
-			if (unit.hasMoved)
-				c.globalAlpha = 0.6;
+			if (uiSettings.airMode)
+				unit = hex.airunit;
+			else
+				unit = hex.unit;
+		
+			
+			if (unit !== null)
+			{
+				flag = unit.player.country;
+				scale = 1.4;
+				if (unit.hasMoved)
+					c.globalAlpha = 0.6;
+			}
 		}
 		if (hex.flag != -1 && hex.victorySide != -1) 
 		{ 
