@@ -515,7 +515,7 @@ function Render(mapObj)
 		var flw = 21; //one flag width
 		var flh = 14; //flag height
 		
-		var tx = x0 +  s/2 - flw/2;
+		var tx = x0 +  (s - h)/2 - flw/2;
 		var ty = y0 +  r - flh - 2;
 		
 		var flag = -1;
