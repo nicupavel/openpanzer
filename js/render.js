@@ -106,7 +106,7 @@ function Render(mapObj)
 				}
 				
 				if (uiSettings.deployMode && hex.isDeployment > -1)
-					if (map.getPlayer(hex.isDeployment).side == map.currentSide)
+					if (map.getPlayer(hex.isDeployment).side == map.currentPlayer.side)
 						drawHex(c, x0, y0, hexstyle.deploy);
 					
 				if (uiSettings.mapZoom) 
@@ -133,12 +133,12 @@ function Render(mapObj)
 				//Don't render unit if it has a move animation or it's not spotted
 				unit = hex.getUnit(!uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation
-						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
+						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode
 
 				unit = hex.getUnit(uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation 
-						&& (hex.isSpotted(map.currentSide) || unit.tempSpotted))
+						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 
 				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
@@ -524,7 +524,7 @@ function Render(mapObj)
 		
 		c.save();
 		//Only renders flag for air or ground units not both if they are spotted
-		if (hex.isSpotted(map.currentSide))
+		if (hex.isSpotted(map.currentPlayer.side))
 		{
 			if (uiSettings.airMode)
 				unit = hex.airunit;
@@ -606,7 +606,7 @@ function Render(mapObj)
 		c.fillText(text, tx, ty + 8);
 
 		//draw indicator for unit.hasFired
-		if (!unit.hasFired && side == map.currentSide)
+		if (!unit.hasFired && side == map.currentPlayer.side)
 			c.drawImage(imgUnitFire, x0 - 1, y0 + 2 * r - unitTextHeight);
 	}
 	

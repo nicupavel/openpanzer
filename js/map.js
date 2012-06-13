@@ -178,7 +178,7 @@ function Map()
 	this.turn = 0;
 	this.currentUnit = null;
 	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
-	this.currentSide = 0; //Which side is playing currently
+	this.currentPlayer = null; //Which player is currently playing
 	
 	var unitImagesList = {}; //a "hash" of unique unit images used for caching
 	var moveSelected = []; //selected hexes for current unit move destinations
@@ -220,8 +220,14 @@ function Map()
 	
 	this.getUnits = function() { return unitList; }
 	this.getUnitImagesList = function() { return unitImagesList; }
-	this.addPlayer = function(player) { playerList.push(player); }
 	this.getPlayers = function() { return playerList; }
+	
+	this.addPlayer = function(player) 
+	{ 
+		playerList.push(player); 
+		if  (this.currentPlayer === null) this.currentPlayer = playerList[0];
+	}
+	
 	this.getPlayer = function(id) 
 	{ 
 		if (id < playerList.length)
@@ -233,16 +239,13 @@ function Map()
 	this.getCountries = function()
 	{
 		var c = [];
-		p = this.getPlayers();
+		var p = this.getPlayers();
 		for (var i = 0; i < p.length; i++)
 			c.push(p[i].country);
 		return c;
 	}
 	
-	this.setCurrentUnit = function(unit)
-	{
-		this.currentUnit = unit;
-	}
+	this.setCurrentUnit = function(unit) { this.currentUnit = unit; }
 	
 	this.delCurrentUnit = function()
 	{
@@ -318,10 +321,7 @@ function Map()
 		}
 	}
 
-	this.getCurrentMoveRange = function()
-	{
-		return moveSelected;
-	}
+	this.getCurrentMoveRange = function() {	return moveSelected; }
 	
 	this.setAttackRange = function(unit)
 	{
@@ -343,15 +343,20 @@ function Map()
 			this.delMoveSel();
 			this.delAttackSel();
 			this.delCurrentUnit();
+			this.currentPlayer.playedTurn = this.turn;
 			var p = this.getPlayers();
 			for (var i = 0; i < p.length; i++)
 			{	
-				if (p[i].side == this.currentSide)
-					p[i].playedTurn = this.turn;
+				if (p[i].id == this.currentPlayer.id)
+				{
+					if ((i + 1) < p.length)
+						this.currentPlayer = p[i + 1];
+					else
+						this.currentPlayer = p[0];
+					break;
+				}
 			}
-			this.currentSide = ~this.currentSide & 1;
-			console.log("Playing Side: " + sidesName[this.currentSide]);
-			if (this.currentSide == 0)
+			if (this.currentPlayer.id == 0)
 			{
 				this.turn++;
 				unitsEndTurn();
@@ -490,8 +495,8 @@ function Map()
 		if (unit === null)
 			return false;
 		
-		//Can't select units from oposing side
-		if (unit.player.side != this.currentSide)
+		//Can't select units from other players
+		if (unit.player.id != this.currentPlayer.id)
 			return false;
 			
 		this.delCurrentUnit();

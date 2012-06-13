@@ -43,6 +43,7 @@ function UI(scenario)
 	if (!uiSettings.hasTouch) canvas.addEventListener("mousemove", handleMouseMove, false);
 	
 	countries = map.getCountries();
+	console.log(countries);
 	buildMainMenu();
 	buildEquipmentWindow();
 	selectStartingUnit(); //select the first available unit for the current side
@@ -259,7 +260,7 @@ function buildMainMenu()
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
-	sd.innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
+	sd.innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
 	
 	for (b in menubuttons) 
 	{
@@ -338,10 +339,7 @@ function mainMenuButton(id)
 			{
 				//Just to show some window with dummy data if user press with no unit selected
 				$('unit-info').style.visibility = "visible"; 
-				if (map.currentUnit != null) 
-				{ 
-					updateUnitInfoWindow(map.currentUnit);
-				}
+				if (map.currentUnit != null) updateUnitInfoWindow(map.currentUnit);
 			}
 			break;
 		}
@@ -370,8 +368,8 @@ function mainMenuButton(id)
 		{
 			map.endTurn();
 			GameState.save(map);
-			$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
-			uiMessage(sidesName[map.currentSide] + " Side Turn " + map.turn, uiEndTurnInfo());
+			$('statusmsg').innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
+			uiMessage(sidesName[map.currentPlayer.side] + " Side Turn " + map.turn, uiEndTurnInfo());
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			selectStartingUnit();
 			r.render();
@@ -443,7 +441,7 @@ function updateUnitInfoWindow(u)
 	$('ireinfbut').className = "";
 	
 	if (isEqUnit) return;
-	if (u.player.side != map.currentSide) return;
+	if (u.player.side != map.currentPlayer.side) return;
 	
 	if (GameRules.canMount(u))
 	{
@@ -569,7 +567,7 @@ function updateEquipmentWindow(eqclass)
 	{
 		var u = unitList[i];
 		var ud = u.unitData();
-		if (u.player.side == map.currentSide)
+		if (u.player.side == map.currentPlayer.side)
 		{
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
@@ -675,7 +673,7 @@ function selectStartingUnit()
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		if (unitList[i].player.side == map.currentSide)
+		if (unitList[i].player.side == map.currentPlayer.side)
 		{
 			map.selectUnit(unitList[i]);
 			$('eqUserSel').userunit = unitList[i].id; //save selected player unit
@@ -697,7 +695,7 @@ function newScenario(scenario)
 	countries = map.getCountries();
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	selectStartingUnit();
-	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
+	$('statusmsg').innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
 }
 
 function getMouseInfo(canvas, e)
