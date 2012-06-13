@@ -372,6 +372,7 @@ function mainMenuButton(id)
 			GameState.save(map);
 			$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 			uiMessage(sidesName[map.currentSide] + " Side Turn " + map.turn, uiEndTurnInfo());
+			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			selectStartingUnit();
 			r.render();
 			break;
@@ -677,6 +678,7 @@ function selectStartingUnit()
 		if (unitList[i].player.side == map.currentSide)
 		{
 			map.selectUnit(unitList[i]);
+			$('eqUserSel').userunit = unitList[i].id; //save selected player unit
 			break;
 		}
 	}
@@ -684,7 +686,6 @@ function selectStartingUnit()
 
 function newScenario(scenario)
 {
-	//TODO add getCountries/build equipment windows calls to fix equipment window
 	GameState.clear();
 	l.loadMap(scenario);
 	map = l.buildMap();
@@ -693,6 +694,8 @@ function newScenario(scenario)
 	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
 	countries = map.getCountries(); 
 	win = -1;
+	countries = map.getCountries();
+	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	selectStartingUnit();
 	$('statusmsg').innerHTML = sidesName[map.currentSide] + " side Turn: " + map.turn + "  " + map.description;
 }
