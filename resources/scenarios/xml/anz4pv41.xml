@@ -3,6 +3,7 @@
   <player id="0" country="22" side="1"/>
   <player id="1" country="7" side="0"/>
   <player id="2" country="9" side="1"/>
+  <player id="3" country="7" side="0"/>
   <hex row="0" col="0" terrain="9"/>
   <hex row="0" col="1" terrain="9"/>
   <hex row="0" col="2" terrain="9"/>

@@ -3,6 +3,7 @@
   <player id="0" country="7" side="0"/>
   <player id="1" country="5" side="0"/>
   <player id="2" country="19" side="1"/>
+  <player id="3" country="9" side="1"/>
   <hex row="0" col="0">
     <unit id="153" owner="0" flag="8" face="0" exp="300"/>
     <unit id="108" owner="0" flag="8" face="0" transport="156" exp="300"/>
