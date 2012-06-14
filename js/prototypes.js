@@ -112,7 +112,7 @@ var countryNames =
 	"Republican"
 ];
 
-var sidesName = 
+var sideNames = 
 [
 	"Axis",
 	"Allies"

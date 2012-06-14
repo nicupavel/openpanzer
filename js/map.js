@@ -30,6 +30,7 @@ Player.prototype.copy = function(p)
 	this.playedTurn = p.playedTurn;
 }
 Player.prototype.getCountryName = function() { return countryNames[this.country]; }
+Player.prototype.getSideName = function() { return sideNames[this.side]; }
 
 //Hex Object Constructor
 function Hex(row, col)
@@ -236,12 +237,13 @@ function Map()
 			return playerList[0]; //TODO parse supporting countries from the scenario file
 	}
 	
-	this.getCountries = function()
+	this.getCountriesBySide = function(side) //returns and array of countries playing on a side
 	{
 		var c = [];
 		var p = this.getPlayers();
 		for (var i = 0; i < p.length; i++)
-			c.push(p[i].country);
+			if (p[i].side == side)
+				c.push(p[i].country);
 		return c;
 	}
 	

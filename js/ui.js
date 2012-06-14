@@ -42,8 +42,7 @@ function UI(scenario)
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	if (!uiSettings.hasTouch) canvas.addEventListener("mousemove", handleMouseMove, false);
 	
-	countries = map.getCountries();
-	console.log(countries);
+	countries = map.getCountriesBySide(map.currentPlayer.side);
 	buildMainMenu();
 	buildEquipmentWindow();
 	selectStartingUnit(); //select the first available unit for the current side
@@ -173,7 +172,7 @@ function handleUnitMove(row, col)
 	r.moveAnimation(map.currentUnit, c);
 	win = map.moveUnit(map.currentUnit, row, col);
 	if (win >= 0) 
-		uiMessage("Victory","Side " + sidesName[win] + " wins by capturing all victory hexes"); 
+		uiMessage("Victory","Side " + sideNames[win] + " wins by capturing all victory hexes"); 
 }
 
 //handle attack performed by currently selected unit on row,col unit
@@ -260,7 +259,7 @@ function buildMainMenu()
 	var sd = addTag('menu','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
-	sd.innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
+	sd.innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
 	
 	for (b in menubuttons) 
 	{
@@ -368,10 +367,14 @@ function mainMenuButton(id)
 		{
 			map.endTurn();
 			GameState.save(map);
-			$('statusmsg').innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
-			uiMessage(sidesName[map.currentPlayer.side] + " Side Turn " + map.turn, uiEndTurnInfo());
+			countries = map.getCountriesBySide(map.currentPlayer.side);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			selectStartingUnit();
+			
+			$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
+			uiMessage(map.currentPlayer.getCountryName() + " player on " 
+				+ map.currentPlayer.getSideName() +" side  Turn " + map.turn, uiEndTurnInfo());
+			
 			r.render();
 			break;
 		}
@@ -592,10 +595,10 @@ function updateEquipmentWindow(eqclass)
 			div.country = u.player.country;
 			div.onclick = function() 
 				{ 
-					c = map.getCountries();
+					c = map.getCountriesBySide(map.currentPlayer.side);
 					for (i = 0; i < c.length; i++)
 						if (c[i] == this.country) break;
-					$('eqSelCountry').country = i;	
+					$('eqSelCountry').country = i;
 					$('eqUserSel').userunit = this.unitid; //save selected player unit
 					updateEquipmentWindow(this.eqclass);
 				}
@@ -650,8 +653,8 @@ function uiEndTurnInfo()
 	var infoStr = "";
 	for (var i = 0; i < playerList.length; i++)
 	{
-		infoStr +=  playerList[i].getCountryName() + " player on " +  sidesName[playerList[i].side]
-					+ " side has " + map.sidesVictoryHexes[playerList[i].side] + " victory points to conquer <br/>";
+		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
+			+ " side has " + map.sidesVictoryHexes[playerList[i].side] + " victory points to conquer <br/>";
 	}
 	return infoStr;	
 }
@@ -690,12 +693,11 @@ function newScenario(scenario)
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
-	countries = map.getCountries(); 
 	win = -1;
-	countries = map.getCountries();
+	countries = map.getCountriesBySide(map.currentPlayer.side);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	selectStartingUnit();
-	$('statusmsg').innerHTML = sidesName[map.currentPlayer.side] + " side Turn: " + map.turn + "  " + map.description;
+	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
 }
 
 function getMouseInfo(canvas, e)
