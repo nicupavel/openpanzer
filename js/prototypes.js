@@ -81,7 +81,7 @@ var unitData =
     "spotrange": 0, 
     "target": 0
 };
-
+//TODO [0] should be NoCountry
 var countryNames = 
 [
 	"Austria",
@@ -211,4 +211,4 @@ function screenPos(x, y)
 	this.y = y;
 }
 
-var VERSION = "1.8";
+var VERSION = "1.9";
