@@ -134,7 +134,7 @@ for scn in sys.argv[1:]:
     xmlmap.set("cols", str(cols))
     xmlmap.set("image", MAP_IMAGE_URL + mapimgname)
     
-    for i in range(3):
+    for i in range(4):
 	playerinfo = get_scn_player_info(sf, i)
 	if (playerinfo['country'] != 0):
 	    tmpnode = x.SubElement(xmlmap,"player")
