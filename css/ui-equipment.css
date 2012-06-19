@@ -103,6 +103,23 @@
 	top: 343px;
 	left: 140px;
 }
+#currentPrestige
+{
+	border: 0px solid #fff;
+	position:absolute;
+	width: 90px;
+	height: 30px;
+	top: 350px;
+	left: 60px;
+	font-weight:bold;
+	font-family: Arial;
+	font-size: 14px;
+}
+#currentPrestige img
+{
+	margin-left: 5px;
+	vertical-align:middle;
+}
 
 #container-unitlist
 {
@@ -165,6 +182,7 @@
 
 .eqUnitBox img /* other images like currency coin */
 {
+	margin-left: 2px;
 	vertical-align:middle;
 }
 /* a eqUnitBox that has been clicked on has beed set a title */

@@ -211,4 +211,5 @@ function screenPos(x, y)
 	this.y = y;
 }
 
+var CURRENCY_MULTIPLIER = 12;
 var VERSION = "1.9";

@@ -16,8 +16,9 @@ function Player()
 	this.id = -1;
 	this.side = -1;
 	this.country = -1;
-	this.prestige = 0;
+	this.prestige = 300;
 	this.playedTurn = -1;
+	this.deploymentList = [];
 }
 //Player Object Public Methods
 Player.prototype.copy = function(p)
@@ -28,9 +29,26 @@ Player.prototype.copy = function(p)
 	this.country = p.country;
 	this.prestige = p.prestige;
 	this.playedTurn = p.playedTurn;
+	this.deploymentList = [];
+	if (p.deploymentList)
+		for (var i = 0; i < p.deploymentList.length; i++)
+			this.deploymentList.push(p.deploymentList[i]);
 }
 Player.prototype.getCountryName = function() { return countryNames[this.country]; }
 Player.prototype.getSideName = function() { return sideNames[this.side]; }
+Player.prototype.buyUnit = function(unitid, transportid)
+{
+	var unitCost = equipment[unitid].cost * CURRENCY_MULTIPLIER;
+	if (transportid != 0 && typeof transportid !== "undefined")
+		unitCost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+		
+	if (unitCost > this.prestige) return false;
+	
+	this.deploymentList.push([unitid, transportid]);
+	this.prestige -= unitCost;
+
+	return true;
+}
 
 //Hex Object Constructor
 function Hex(row, col)
@@ -489,6 +507,36 @@ function Map()
 			
 		unit.eqid = eqid;
 		unitImagesList[unit.eqid] = unit.getIcon();
+	}
+	
+	this.deployPlayerUnit = function(player, deployid, row, col)
+	{
+		if (!player) 
+			return false;
+		if (deployid < 0 || deployid >= player.deploymentList.length)
+			return false;
+		
+		var u = new Unit(player.deploymentList[deployid][0]);
+		var transportid = player.deploymentList[deployid][1];
+		if (transportid != 0 && typeof transportid !== "undefined")
+			u.setTransport(transportid);
+		u.owner = player.id;
+		u.flag = player.country * 1 + 1 ; //TODO fix this
+		u.player = player;
+		
+		var hex = this.map[row][col];
+		
+		if (GameRules.isAir(u) && hex.airunit !== null)
+			return false;
+		if (!GameRules.isAir(u) && hex.unit !== null)
+			return false;
+			
+		hex.setUnit(u);
+		this.addUnit(u);
+		//remove unit from deployment list as it has been deployed
+		player.deploymentList.splice(deployid);
+		
+		return true;
 	}
 	
 	// selects a new unit as the current unit

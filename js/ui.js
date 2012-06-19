@@ -63,13 +63,6 @@ function handleMouseClick(e)
 		return true;
 	}
 	
-	if (uiSettings.deployMode)
-	{
-		//On deploy mode you can only select units
-		handleUnitSelect(row, col);
-		return true;
-	}
-	
 	var clickedUnit = hex.getUnit(uiSettings.airMode);
 	//Right click to show unit info or clear current selection
 	if (minfo.rclick) 
@@ -86,7 +79,7 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
-		if (map.currentUnit !== null)
+		if (map.currentUnit !== null && !uiSettings.deployMode )
 		{
 			//attack an allowed hex unit
 			if (hex.isAttackSel && !map.currentUnit.hasFired)
@@ -104,11 +97,14 @@ function handleMouseClick(e)
 	}	
 	else //No unit on clicked hex
 	{
-		//move to an empty allowed hex
-		if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
-			handleUnitMove(row, col);
-		else //remove current selection
-			map.delCurrentUnit();
+		if (uiSettings.deployMode && hex.isDeployment == map.currentPlayer.id)
+			handleUnitDeployment(row, col);
+		else
+			//move to an empty allowed hex
+			if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
+				handleUnitMove(row, col);
+			else //remove current selection
+				map.delCurrentUnit();
 	}
 
 	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
@@ -146,6 +142,17 @@ function handleMouseMove(e)
 	$('locmsg').innerHTML = text;
 }
 
+//handle unit deployment
+function handleUnitDeployment(row, col)
+{
+	var deployUnit = $('eqUserSel').deployunit; //TODO make this into a UI member
+	var ret = map.deployPlayerUnit(map.currentPlayer, deployUnit, row, col);
+	if (ret)
+		r.cacheImages(function() { r.render(); updateEquipmentWindow(map.currentUnit.unitData().uclass); });
+	else 
+		console.log("Can't deploy unit in that location");
+	
+}
 //handle the selection of a new unit
 function handleUnitSelect(row, col)
 {
@@ -357,7 +364,6 @@ function mainMenuButton(id)
 			{ 
 				$('equipment').style.visibility = "visible"; 
 				$('container-unitlist').style.visibility = "visible"; 
-				uiSettings.deployMode = true;
 				updateEquipmentWindow(unitClass.tank);
 			}
 			r.render();
@@ -444,7 +450,7 @@ function updateUnitInfoWindow(u)
 	$('ireinfbut').className = "";
 	
 	if (isEqUnit) return;
-	if (u.player.side != map.currentPlayer.side) return;
+	if (u.player.id != map.currentPlayer.id) return;
 	
 	if (GameRules.canMount(u))
 	{
@@ -533,10 +539,22 @@ function buildEquipmentWindow()
 	
 	//Bottom buttons
 	$('eqNewBut').title = "Buy unit as a new unit";
+	$('eqNewBut').onclick = function()
+		{
+				var eqid = $('eqUserSel').equnit;
+				if (typeof eqid === "undefined")
+					return;
+				var ret = map.currentPlayer.buyUnit(eqid, 0); //TODO transport
+				if (ret)
+					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqid);
+				else
+					console.log("Can't buy a new unit");
+				updateEquipmentWindow(equipment[eqid].uclass);
+		}
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
 	$('eqUpgradeBut').onclick = function()
 		{
-			//TODO Test change it
+			//TODO prestige cost of upgrade
 			var id = $('eqUserSel').userunit;
 			var eqid = $('eqUserSel').equnit;
 			if (typeof id === "undefined" || typeof eqid === "undefined")
@@ -551,60 +569,99 @@ function buildEquipmentWindow()
 	$('eqOkBut').onclick = function() { mainMenuButton("buy"); }
 }
 
+//TODO function too large break it
 function updateEquipmentWindow(eqclass)
 {
+	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	//Remove older entries
 	$('unitlist').innerHTML = "";
 	$('eqUnitList').innerHTML = "";
+	$('currentPrestige').innerHTML = map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
 	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
-	
-	//The actual units on the map
-	var userUnitSelected = $('eqUserSel').userunit;
-	//console.log("User Selected Unit:" + userUnitSelected);
-	var unitList = map.getUnits();
-	for (var i = 0; i < unitList.length; i++)
+
+	if (map.currentPlayer.deploymentList.length > 0)
 	{
-		var u = unitList[i];
-		var ud = u.unitData();
-		if (u.player.side == map.currentPlayer.side)
+		//The units that current player hasn't deployed yet
+		var deployUnitSelected = $('eqUserSel').deployunit;
+		var deployList = map.currentPlayer.deploymentList;
+		uiSettings.deployMode = true;
+		
+		for (var i = 0; i < deployList.length; i++)
 		{
+			var ud = equipment[deployList[i][0]];
 			var div = addTag('unitlist', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
-			
-			if (u.id == userUnitSelected)
-			{	
-				div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
-				map.selectUnit(u); //select unit on map
-				r.render(); //refresh so the new selection appear
-				//bring the unit box into unit list view by scrolling
-				$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth;
-				//bring the unit into map view
-				uiSetUnitOnViewPort(u);
-			}
-				
 			img.src = ud.icon;
 			txt.innerHTML = ud.name;
-			div.unitid = u.id;
+			div.unitid = i;
 			div.eqclass = ud.uclass;
-			div.country = u.player.country;
+			div.country = map.currentPlayer.country;
+			if (i == deployUnitSelected)
+			{	
+					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+			}
+			
 			div.onclick = function() 
-				{ 
-					c = map.getCountriesBySide(map.currentPlayer.side);
-					for (i = 0; i < c.length; i++)
-						if (c[i] == this.country) break;
-					$('eqSelCountry').country = i;
-					$('eqUserSel').userunit = this.unitid; //save selected player unit
-					updateEquipmentWindow(this.eqclass);
-				}
+					{ 
+						$('eqUserSel').deployunit = this.unitid; //save selected player unit
+						updateEquipmentWindow(this.eqclass); //make selection appear
+						r.render(); //make the deployment mode appear
+					}
 		}
 	}
-	
+	else
+	{
+		//The actual units on the map
+		var userUnitSelected = $('eqUserSel').userunit;
+		//console.log("User Selected Unit:" + userUnitSelected);
+		var unitList = map.getUnits(); 
+		uiSettings.deployMode = false;
+		
+		for (var i = 0; i < unitList.length; i++)
+		{
+			var u = unitList[i];
+			var ud = u.unitData();
+			if (u.player.id == map.currentPlayer.id)
+			{
+				var div = addTag('unitlist', 'div');
+				var img = addTag(div, 'img');
+				var txt = addTag(div, 'div');
+				div.className = "eqUnitBox";
+				
+				if (u.id == userUnitSelected)
+				{	
+					div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+					map.selectUnit(u); //select unit on map
+					r.render(); //refresh so the new selection appear
+					//bring the unit box into unit list view by scrolling
+					$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth;
+					//bring the unit into map view
+					uiSetUnitOnViewPort(u);
+				}
+					
+				img.src = ud.icon;
+				txt.innerHTML = ud.name;
+				div.unitid = u.id;
+				div.eqclass = ud.uclass;
+				div.country = u.player.country;
+				div.onclick = function() 
+					{ 
+						c = map.getCountriesBySide(map.currentPlayer.side);
+						for (i = 0; i < c.length; i++)
+							if (c[i] == this.country) break;
+						$('eqSelCountry').country = i;
+						$('eqUserSel').userunit = this.unitid; //save selected player unit
+						updateEquipmentWindow(this.eqclass);
+					}
+			}
+		}
+	}
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
 	
@@ -626,8 +683,8 @@ function updateEquipmentWindow(eqclass)
 				
 			div.equnitid = u.id;
 			img.src = u.icon;
-			txt.innerHTML = u.name + " - " + u.cost * 12 + " ";
-			txt.innerHTML += "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
+			txt.innerHTML = u.name + " - " + u.cost * CURRENCY_MULTIPLIER;
+			txt.innerHTML += currencyIcon;
 			div.onclick = function() 
 				{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
@@ -676,7 +733,7 @@ function selectStartingUnit()
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{
-		if (unitList[i].player.side == map.currentPlayer.side)
+		if (unitList[i].player.id == map.currentPlayer.id)
 		{
 			map.selectUnit(unitList[i]);
 			$('eqUserSel').userunit = unitList[i].id; //save selected player unit
