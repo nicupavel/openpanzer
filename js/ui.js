@@ -97,8 +97,8 @@ function handleMouseClick(e)
 	}	
 	else //No unit on clicked hex
 	{
-		if (uiSettings.deployMode && hex.isDeployment == map.currentPlayer.id)
-			handleUnitDeployment(row, col);
+		if (uiSettings.deployMode && map.getPlayer(hex.isDeployment).side == map.currentPlayer.side)
+			handleUnitDeployment(row, col); //Allow deployment on deployment hexes if on same side
 		else
 			//move to an empty allowed hex
 			if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
