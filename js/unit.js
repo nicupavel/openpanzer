@@ -165,7 +165,16 @@ Unit.prototype.move = function(dist)
 		this.fuel -= dist; //TODO check if fuel consumption is based on terrain cost or just distance
 	//TODO Fatigue for leg units ?
 }
-
+Unit.prototype.upgrade = function(upgradeid) //TODO add transportid to upgrade transport
+{
+	if (equipment[this.eqid].uclass != equipment[upgradeid].uclass)
+		return false;
+	this.eqid = upgradeid;
+	this.entrenchment = 0;
+	this.hasMoved = this.hasFired = this.hasResupplied = true;
+	
+	return true;
+}
 Unit.prototype.resupply = function(ammo, fuel) 
 {
 	if (this.isMounted)

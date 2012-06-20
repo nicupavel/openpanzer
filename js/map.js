@@ -50,6 +50,20 @@ Player.prototype.buyUnit = function(unitid, transportid)
 	return true;
 }
 
+Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for upgrade
+{
+	var ocost = equipment[unit.eqid].cost * CURRENCY_MULTIPLIER;
+	var ncost = equipment[upgradeid].cost * CURRENCY_MULTIPLIER;
+	
+	if (ncost - ocost > this.prestige)
+		return false;	
+	if (!unit.upgrade(upgradeid))
+		return false;
+	this.prestige -= (ncost - ocost);
+		
+	return true;
+}
+
 //Hex Object Constructor
 function Hex(row, col)
 {
@@ -500,13 +514,17 @@ function Map()
 		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
-	this.upgradeUnit = function(id, eqid)
+	this.upgradeUnit = function(id, upgradeid)
 	{
+		var unit = null;
 		if ((unit = findUnitById(id)) == null)
-			return;
-			
-		unit.eqid = eqid;
+			return false;
+		var p = unit.player;
+		if (!p.upgradeUnit(unit, upgradeid))
+			return false;
 		unitImagesList[unit.eqid] = unit.getIcon();
+
+		return true;
 	}
 	
 	this.deployPlayerUnit = function(player, deployid, row, col)

@@ -554,15 +554,17 @@ function buildEquipmentWindow()
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
 	$('eqUpgradeBut').onclick = function()
 		{
-			//TODO prestige cost of upgrade
 			var id = $('eqUserSel').userunit;
 			var eqid = $('eqUserSel').equnit;
+			
 			if (typeof id === "undefined" || typeof eqid === "undefined")
 				return;
 			console.log("Upgrading unit: " + id + " to equipment id:" + eqid);
-			map.upgradeUnit(id, eqid);
-			//Need to cache new image
-			r.cacheImages(function() { r.render(); });
+			if (map.upgradeUnit(id, eqid))
+			{
+				r.cacheImages(function() { r.render(); }); //Need to cache new image
+				updateEquipmentWindow(equipment[eqid].uclass);
+			}
 		}
 		
 	$('eqOkBut').title = "Close";
