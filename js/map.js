@@ -463,7 +463,12 @@ function Map()
 		var player = unit.player;
 		var side = player.side;
 		var win = -1;
-		if (dstHex.flag != -1) { dstHex.flag = player.country; }
+		
+		if (dstHex.flag != -1) 
+		{ 
+			dstHex.flag = player.country; 
+			player.prestige += prestigeGains["flagCapture"];
+		}
 		
 		//Is a victory marked hex ?
 		if (dstHex.victorySide != -1)
@@ -471,7 +476,9 @@ function Map()
 			var enemyside = this.getPlayer(dstHex.owner).side;
 			if (this.updateVictorySides(side, enemyside))
 				win = side;
+			player.prestige += prestigeGains["objectiveCapture"];
 		}
+		
 		unit.move(GameRules.distance(s.row, s.col, drow, dcol));
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
