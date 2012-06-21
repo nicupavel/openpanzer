@@ -139,7 +139,8 @@ var movTable =
 
 //Lookup table used for rotation of animations for a certain direction
 //Our animations are by default facing North table gives the radians for rotate
-var directionToRadians = [
+var directionToRadians = 
+[
 	Math.PI, //S
 	5*Math.PI/6, //SSE
 	3*Math.PI/4, //SE
@@ -158,6 +159,13 @@ var directionToRadians = [
 	7*Math.PI/6, //SSW
 ];
 
+//Define prestige gains on different situations
+var prestigeGains = 
+{
+	endTurn: 50,
+	flagCapture: 20,
+	objectiveCapture: 50,
+};
 function Cell(row, col)
 {
 	//Where the hex is in the map array

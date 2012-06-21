@@ -64,6 +64,12 @@ Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for
 	return true;
 }
 
+Player.prototype.endTurn = function(turn)
+{
+	this.playedTurn = turn;
+	this.prestige += prestigeGains["endTurn"];
+}
+
 //Hex Object Constructor
 function Hex(row, col)
 {
@@ -377,7 +383,7 @@ function Map()
 			this.delMoveSel();
 			this.delAttackSel();
 			this.delCurrentUnit();
-			this.currentPlayer.playedTurn = this.turn;
+			this.currentPlayer.endTurn(this.turn);
 			var p = this.getPlayers();
 			for (var i = 0; i < p.length; i++)
 			{	
