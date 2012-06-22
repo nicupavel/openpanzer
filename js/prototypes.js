@@ -162,7 +162,7 @@ var directionToRadians =
 //Define prestige gains on different situations
 var prestigeGains = 
 {
-	endTurn: 50,
+	endTurn: 30,
 	flagCapture: 20,
 	objectiveCapture: 50,
 };

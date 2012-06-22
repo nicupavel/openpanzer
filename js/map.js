@@ -52,7 +52,7 @@ Player.prototype.buyUnit = function(unitid, transportid)
 
 Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for upgrade
 {
-	var ocost = equipment[unit.eqid].cost * CURRENCY_MULTIPLIER;
+	var ocost = unit.unitData().cost * CURRENCY_MULTIPLIER;
 	var ncost = equipment[upgradeid].cost * CURRENCY_MULTIPLIER;
 	
 	if (ncost - ocost > this.prestige)
@@ -61,6 +61,21 @@ Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for
 		return false;
 	this.prestige -= (ncost - ocost);
 		
+	return true;
+}
+
+Player.prototype.reinforceUnit = function(unit, strength)
+{
+	var costPerStrength = parseInt((unit.unitData().cost * CURRENCY_MULTIPLIER) / 10);
+	var maxStrength = parseInt(this.prestige / costPerStrength);
+	
+	if (maxStrength < 1)
+		return false;
+	if (maxStrength >= strength)
+		maxStrength = strength;
+	this.prestige -= maxStrength * costPerStrength;
+	unit.reinforce(maxStrength);
+	
 	return true;
 }
 
@@ -448,7 +463,6 @@ function Map()
 		}	
 		
 		if (update) updateUnitList();
-		
 		if (!supportFire) this.delAttackSel();
 		
 		return cr;
@@ -498,7 +512,7 @@ function Map()
 	this.resupplyUnit = function(unit)
 	{
 		var s = GameRules.getResupplyValue(this.map, unit);
-		unit.resupply(s.ammo, s.fuel);
+		unit.resupply(s.ammo, s.fuel); //Supply doesn't cost prestige
 		this.delAttackSel();
 		this.delMoveSel();
 	}
@@ -506,9 +520,13 @@ function Map()
 	this.reinforceUnit = function(unit)
 	{
 		var str = GameRules.getReinforceValue(this.map, unit);
-		unit.reinforce(str);
+		var p = unit.player;
+		if (!p.reinforceUnit(unit, str))
+			return false;
+			
 		this.delAttackSel();
 		this.delMoveSel();
+		return true;
 	}
 	
 	this.mountUnit = function(unit)
