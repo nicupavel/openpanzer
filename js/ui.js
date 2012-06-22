@@ -220,17 +220,18 @@ function handleUnitAttack(row, col)
 		{
 			var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
 			r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
+			if (enemyUnit.destroyed)
+				r.addAnimation(row, col, "explosion");
+			else
+				if (cr.defcanfire)
+					r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
+			
 			if (attackingUnit.destroyed) //TODO Do this better
 			{
 				map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
 				r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 				r.addAnimation(cpos.row, cpos.col, "explosion");
 			}
-			if (enemyUnit.destroyed)
-				r.addAnimation(row, col, "explosion");
-			else
-				if (cr.defcanfire)
-					r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
 		}
 		r.runAnimation(animationCBData);
 	}
