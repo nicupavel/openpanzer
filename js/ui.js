@@ -575,6 +575,9 @@ function buildEquipmentWindow()
 //TODO function too large break it
 function updateEquipmentWindow(eqclass)
 {
+	if ($('equipment').style.visibility !== "visible") 
+		return;
+		
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	//Remove older entries
 	$('unitlist').innerHTML = "";
