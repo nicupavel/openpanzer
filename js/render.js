@@ -115,7 +115,7 @@ function Render(mapObj)
 					continue;  
 				}
 				
-				if (hex.isMoveSel  && !uiSettings.deployMode) 
+				if (hex.isMoveSel && !uiSettings.deployMode) 
 					drawHex(c, x0, y0, hexstyle.move);
 				
 				if (hex.isAttackSel && !uiSettings.deployMode) 
@@ -133,12 +133,14 @@ function Render(mapObj)
 				//Don't render unit if it has a move animation or it's not spotted
 				unit = hex.getUnit(!uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation
-						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted))
-					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode
+						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
+								|| unit.player.side == map.currentPlayer.side))
+					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode without strength box
 
 				unit = hex.getUnit(uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation 
-						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted))
+						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
+								|| unit.player.side == map.currentPlayer.side))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 
 				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
