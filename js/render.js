@@ -219,8 +219,8 @@ function Render(mapObj)
 			facing = direction.N;
 		var anim = animationsData[animationName];
 		var pos = cellToScreen(row, col);
-		var y0 = parseInt(pos.y - anim.image.height/2 + r);
-		var x0 = parseInt(pos.x - anim.width/2 + s/2);
+		var y0 = (pos.y - anim.image.height/2 + r) >> 0;
+		var x0 = (pos.x - anim.width/2 + s/2) >> 0;
 
 		animationChain.add({
 			ctx:a, 
@@ -271,8 +271,8 @@ function Render(mapObj)
 				cPos = cellToScreen(cCell.row, cCell.col);
 				dPos = cellToScreen(dCell.row, dCell.col);
 				
-				xstep = parseInt((dPos.x - cPos.x)/animSteps);
-				ystep = parseInt((dPos.y - cPos.y)/animSteps);
+				xstep = ((dPos.x - cPos.x)/animSteps) >> 0;
+				ystep = ((dPos.y - cPos.y)/animSteps) >> 0;
 				
 				actualFacing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col); 
 			

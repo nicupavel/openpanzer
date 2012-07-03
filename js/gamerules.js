@@ -297,8 +297,8 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	var tt = tUD.target;
 	var aTerrain = atkunit.getHex().terrain;
 	var tTerrain = defunit.getHex().terrain;
-	var aExpBars = parseInt(atkunit.experience / 100);
-	var tExpBars = parseInt(defunit.experience / 100);
+	var aExpBars = (atkunit.experience / 100) >> 0;
+	var tExpBars = (defunit.experience / 100) >> 0;
 	var aav = 0;
 	var adv = 0;
 	var tav = 0;
@@ -464,7 +464,7 @@ GameRules.getResupplyValue = function(map, unit)
 	
 	if (fuel < 0) fuel = 0;
 	
-	return new Supply(parseInt(ammo), parseInt(fuel));
+	return new Supply((ammo) >> 0, (fuel) >> 0);
 }
 
 //TODO Terrain, Unit type and adjacent units 
@@ -499,7 +499,7 @@ GameRules.getReinforceValue = function(map, unit)
 		strength = strength / 4;
 	
 	
-	return parseInt(strength);
+	return (strength) >> 0;
 }
 
 //Checks if a unit can attack another unit without considering range
@@ -826,7 +826,7 @@ GameRules.distance = function(x1, y1, x2, y2)
 	var dx = Math.abs(x2-x1);
 	var dy = Math.abs(y2-y1);
 	
-	if (dx > dy) { d = parseInt((dx - dy)/2) + dy; }
+	if (dx > dy) { d = ((dx - dy)/2) >> 0 + dy; }
 	else { d = dy } 
 
 	return d;
