@@ -66,8 +66,8 @@ Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for
 
 Player.prototype.reinforceUnit = function(unit, strength)
 {
-	var costPerStrength = parseInt((unit.unitData().cost * CURRENCY_MULTIPLIER) / 10);
-	var maxStrength = parseInt(this.prestige / costPerStrength);
+	var costPerStrength = ((unit.unitData().cost * CURRENCY_MULTIPLIER) / 10) >> 0;
+	var maxStrength = (this.prestige / costPerStrength) >> 0;
 	
 	if (maxStrength < 1)
 		return false;
