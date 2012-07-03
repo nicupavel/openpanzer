@@ -434,6 +434,9 @@ function Map()
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
 		
+		atkunit.experience += cr.atkExpGained;
+		defunit.experience += cr.defExpGained;
+		
 		//TODO do this better
 		if (!supportFire) atkunit.fire(true);
 		else atkunit.fire(false);

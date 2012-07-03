@@ -408,7 +408,13 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	{
 		cr.losses = Math.round(defunit.strength * (tav - adv)/10);
 		if (cr.losses < 0) cr.losses = 0;
+		
 	}
+	//Experience
+	cr.atkExpGained = (((tav + 6 - adv) * defunit.strength / 10 + (tdv + 6 - aav)) * cr.kills) >> 0;
+	cr.defExpGained = (2 * cr.losses) >> 0;
+	//console.log("Attacked experience gained: " + cr.atkExpGained);
+	//console.log("Defender experience gained: " + cr.defExpGained);
 	
 	return cr;
 }
