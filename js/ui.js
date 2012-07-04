@@ -695,10 +695,11 @@ function updateEquipmentWindow(eqclass)
 			div.onclick = function() 
 				{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
+					$('eqUserSel').eqoffset  = $('eqUnitList').scrollTop; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.equnitid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
+					$('eqUnitList').scrollTop = $('eqUserSel').eqoffset; //scroll to the selected unit
 				};
-			
 		}
 	}
 }
