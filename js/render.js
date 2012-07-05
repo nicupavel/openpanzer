@@ -600,10 +600,13 @@ function Render(mapObj)
 		if (side == 1) { c.fillStyle = "green"; }
 		c.fillRect(tx, ty, 14, unitTextHeight); //14 size of box = c.measureText(text).width + 2
 		
-		if (unit.hasMoved)
-			c.fillStyle = "696969"; //DarkGrey
+		if (unit.player != map.currentPlayer && unit.player.side == map.currentPlayer.side)
+			c.fillStyle = "696969";
 		else
 			c.fillStyle = "white";
+		
+		if (unit.hasMoved && unit.player == map.currentPlayer)
+			c.fillStyle = "b22222"; //FireBrick
 			
 		c.fillText(text, tx, ty + 8);
 
