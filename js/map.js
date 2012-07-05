@@ -481,14 +481,14 @@ function Map()
 		var side = player.side;
 		var win = -1;
 		
-		if (dstHex.flag != -1) 
+		if (dstHex.flag != -1 && GameRules.canCapture(unit)) 
 		{ 
 			dstHex.flag = player.country; 
 			player.prestige += prestigeGains["flagCapture"];
 		}
 		
 		//Is a victory marked hex ?
-		if (dstHex.victorySide != -1)
+		if (dstHex.victorySide != -1 && GameRules.canCapture(unit))
 		{
 			var enemyside = this.getPlayer(dstHex.owner).side;
 			if (this.updateVictorySides(side, enemyside))

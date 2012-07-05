@@ -617,6 +617,21 @@ GameRules.canReinforce = function(map, unit)
 	return false;
 }
 
+//Air units and mounted artillery can't capture cities
+GameRules.canCapture = function(unit)
+{
+	var uc = unit.unitData().uclass;
+
+	if (isAir(unit))
+		return false;
+
+	if (unit.isMounted && (uc == unitClass.antiTank || uc == unitClass.flak 
+		|| uc == unitClass.artillery || uc == unitClass.airDefence))
+		return false;
+
+	return true;
+}
+
 GameRules.isEnemy = function(unit, targetUnit)
 {
 	if (unit === null || targetUnit === null)
