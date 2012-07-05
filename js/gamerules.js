@@ -295,14 +295,18 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	var tUD = defunit.unitData();
 	var at = aUD.target;
 	var tt = tUD.target;
-	var aTerrain = atkunit.getHex().terrain;
-	var tTerrain = defunit.getHex().terrain;
+	var aH = atkunit.getHex();
+	var tH = defunit.getHex();
+	var aTerrain = aH.terrain;
+	var tTerrain = tH.terrain;
 	var aExpBars = (atkunit.experience / 100) >> 0;
 	var tExpBars = (defunit.experience / 100) >> 0;
 	var aav = 0;
 	var adv = 0;
 	var tav = 0;
 	var tdv = 0;
+	var closeCombat = isCloseCombat(atkunit, defunit);
+	
 	//Attacking unit type
 	switch(at)
 	{
@@ -315,7 +319,10 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 		case unitType.soft:
 		{
 			tav = tUD.softatk;
-			tdv = tUD.grounddef;
+			if (closeCombat) 
+				tdv = tUD.closedef;
+			else 
+				tdv = tUD.grounddef;
 			break;
 		}
 		case unitType.hard:
@@ -338,7 +345,10 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 		case unitType.soft:
 		{
 			aav = aUD.softatk;
-			adv = aUD.grounddef;
+			if (closeCombat)
+				adv = aUD.closedef;
+			else
+				adv = aUD.grounddef;
 			break;
 		}
 		case unitType.hard:
@@ -353,13 +363,13 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	//TODO Terrain checks
 	if (tTerrain == terrainType.City)
 		tdv += 4;
-	if (tTerrain == terrainType.River)
+	if (tTerrain == terrainType.River && tH.road != roadType.none)
 		tdv -= 4;
-	if (aTerrain == terrainType.River)
+	if (aTerrain == terrainType.River && aH.road != roadType.none)
 		aav -= 4;
 
 	//TODO Entrenchment
-	//Add 2*entrechment for infantry in city, forest, mountain if attacked by tank, recon, at
+	//Add 2*entrechment for infantry in city, forest, mountain if attacked by tank, recon, AT
 	if (tUD.uclass == unitClass.infantry 
 	    && (tTerrain == terrainType.City || tTerrain == terrainType.Forest || tTerrain == terrainType.Mountain)
 	    && (aUD.uclass == unitClass.tank || aUD.uclass == unitClass.recon || aUD.uclass == unitClass.antiTank))
@@ -747,6 +757,21 @@ function isGround(unit)
 	{
 		return true;
 	}
+	return false;
+}
+
+function isCloseCombat(atkunit, defunit)
+{
+	if (!atkunit || !defunit) return false;
+
+	if (atkunit.unitData().uclass == unitClass.infantry)
+	{
+		var t = defunit.getHex().terrain;
+		if (t == terrainType.City || t  == terrainType.Forest || t  == terrainType.Mountain
+		    || t  == terrainType.Fortification)
+			return true;
+	}
+
 	return false;
 }
 
