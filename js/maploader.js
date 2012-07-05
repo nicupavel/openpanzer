@@ -103,19 +103,19 @@ function MapLoader()
 				}
 				
 				if ((v = hexNodes[i].getAttribute("terrain")) !== null)
-					hex.terrain = v;
+					hex.terrain = v >> 0;
 				if ((v = hexNodes[i].getAttribute("road")) !== null)
-					hex.road = v;
+					hex.road = v >> 0;
 				if ((v = hexNodes[i].getAttribute("name")) !== null)
 					hex.name = v;
 				if ((v = hexNodes[i].getAttribute("flag")) !== null)
-					hex.flag = v;
+					hex.flag = v >> 0;
 				if ((v = hexNodes[i].getAttribute("owner")) !== null)
-					hex.owner = v;
+					hex.owner = v >> 0;
 				if ((v = hexNodes[i].getAttribute("victory")) !== null)
-					hex.victorySide = v;
+					hex.victorySide = v >> 0;
 				if ((v = hexNodes[i].getAttribute("deploy")) !== null)
-					hex.isDeployment = v;
+					hex.isDeployment = v >> 0;
 				
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
@@ -139,20 +139,20 @@ function MapLoader()
 		var u = null;
 		var facing, flag, transport, experience, entrenchment;
 		
-		if (unitId >= 0 &&  playerId >= 0)
+		if (unitId >= 0 && playerId >= 0)
 		{
 			u = new Unit(unitId);
-			u.owner = playerId;
+			u.owner = playerId >> 0;
 			if ((facing = node.getAttribute("face")) !== null)
-				u.facing = facing;
+				u.facing = facing >> 0;
 			if ((flag = node.getAttribute("flag")) !== null)
-				u.flag = flag;
+				u.flag = flag >> 0;
 			if ((transport = node.getAttribute("transport")) !== null)
 				u.setTransport(transport);
 			if ((experience = node.getAttribute("exp")) !== null)
-				u.experience = experience;
+				u.experience = experience >> 0;
 			if ((entrenchment = node.getAttribute("ent")) !== null)
-				u.entrenchment = entrenchment;
+				u.entrenchment = entrenchment >> 0;
 			
 			return u;
 		}
