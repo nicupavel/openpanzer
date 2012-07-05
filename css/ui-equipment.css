@@ -174,7 +174,7 @@
 
 .eqUnitBox > img:first-child /*for the unit image*/
 {
-	/*select the 4th image each 80px wide */
+	/*select the 4th image each ~80px wide */
 	position: absolute;
 	left: -240px;
 	clip:rect(0px, 320px, 50px, 240px);
@@ -185,7 +185,7 @@
 	margin-left: 2px;
 	vertical-align:middle;
 }
-/* a eqUnitBox that has been clicked on has beed set a title */
+/* a eqUnitBox that has been clicked on has been set a title */
 .eqUnitBox[title]
 {
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed-over.png');
