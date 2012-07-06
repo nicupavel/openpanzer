@@ -438,7 +438,7 @@ function Render(mapObj)
 		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 		
 		//estimated losses and kills
-		bb.font = "12px sans-serif";
+		bb.font = "12px unitInfo,sans-serif";
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
 		
@@ -591,7 +591,7 @@ function Render(mapObj)
 		if (!drawIndicators) return;
 		
 		//Write unit strength in a box below unit
-		c.font = unitTextHeight + "px sans-serif";
+		c.font = unitTextHeight + "px unitInfo,sans-serif;";
 		var text = "" + unit.strength;
 		var tx = (x0 + h/2) >> 0;
 		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing

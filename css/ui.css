@@ -1,1 +1,82 @@
-@import url("ui-unit-info.css");@import url("ui-message.css");@import url("ui-equipment.css");@import url("ui-combat-info.css");body,html { 	margin:0; 	padding:0; 	border:0; 	height:100%; 	overflow-y:auto; 	background:black;	background-image: url('../resources/ui/page/images/mainbg.png');}#game{	margin-right: auto;	margin-left: auto;}#menu {	position:fixed; 	float:left; 	min-width: 840px;	margin-left: -420px;	left: 50%;	border:0px solid #000; 	font-weight:bold; 	color:white; 	background-color:black;	opacity: 0.6; /* Use a background with rgba so buttons won't inherit opacity */	z-index:3;}.message{	float:left; 	border: 0px solid #fff;	min-width: 290px;	margin: 5px 5px 0px 5px;	height:20px;	color: #f8e064;	font-family: Arial;	font-size: 14px;	font-weight: normal;	text-shadow: 0.1em 0.1em 0.2em black;}.message#locmsg{	text-align: right;}.button{	float:left; 	margin: 3px 3px 0px 0px;	cursor: pointer;	border:0px solid #fff;	opacity: 1;	z-index:4;}.button img{ display:block;}select {	background: transparent;	background-color: grey;	padding: 1px;	font-size: 12px;	color:  white;	border: 1px solid  #ccc;}option{	background-color: grey;}
+@import url("fonts.css");
+@import url("ui-unit-info.css");
+@import url("ui-message.css");
+@import url("ui-equipment.css");
+@import url("ui-combat-info.css");
+
+body,html 
+{ 
+	margin:0; 
+	padding:0; 
+	border:0; 
+	height:100%; 
+	overflow-y:auto; 
+	background:black;
+	background-image: url('../resources/ui/page/images/mainbg.png');
+}
+#game
+{
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#menu 
+{
+	position:fixed; 
+	float:left; 
+	min-width: 840px;
+	margin-left: -420px;
+	left: 50%;
+	border:0px solid #000; 
+	font-weight:bold; 
+	color:white; 
+	background-color:black;
+	opacity: 0.6; /* Use a background with rgba so buttons won't inherit opacity */
+	z-index:3;
+}
+
+.message
+{
+	float:left; 
+	border: 0px solid #fff;
+	min-width: 290px;
+	margin: 5px 5px 0px 5px;
+	height:20px;
+	color: #f8e064;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: normal;
+	text-shadow: 0.1em 0.1em 0.2em black;
+}
+.message#locmsg
+{
+	text-align: right;
+}
+
+.button
+{
+	float:left; 
+	margin: 3px 3px 0px 0px;
+	cursor: pointer;
+	border:0px solid #fff;
+	opacity: 1;
+	z-index:4;
+}
+
+.button img{ display:block;}
+
+select 
+{
+	background: transparent;
+	background-color: grey;
+	padding: 1px;
+	font-size: 12px;
+	color:  white;
+	border: 1px solid  #ccc;
+}
+
+option
+{
+	background-color: grey;
+}
+
