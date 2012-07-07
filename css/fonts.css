@@ -1,5 +1,27 @@
+/* Fonts are taken from dafont.com free and GPL fonts */
+/* It's a good idea to convert from TTF to OTF to reduce size except the case
+   where TTF front contains outlines which aren't rendered when using OTF*/
 @font-face 
 {
 	font-family: unitInfo;
-	src: url('../resources/fonts/andina.otf') format('opentype');
+	src: url('../resources/fonts/m04.ttf') format('truetype'); /* Good 8px Outlined font */
+	/*src: url('../resources/fonts/SG05.ttf') format('truetype');  */ /* Good outlined 10px font could be used */
+	/*src: url('../resources/fonts/Gold Box.ttf') format('truetype'); /* Good bold and small font looks good */
+	/*src: url('../resources/fonts/SMW Text 2 NC.ttf') format('truetype');*/ /* Good bold 10px font looks good */
+	/*src: url('../resources/fonts/V5Prn___.ttf') format('truetype'); */ /*Good bold font */
+	/*src: url('../resources/fonts/andina.otf') format('opentype');*/ /* Too thin but otherwise good */
+	/* src: url('../resources/fonts/ADDLG___.TTF') format('truetype'); */ /* Interesting BIG numbers*/
+	/* src: url('../resources/fonts/BMarmy.TTF') format('truetype'); */ /* Bold font but 1 digit looks bad */
+	/* src: url('../resources/fonts/BMSTA___.TTF') format('truetype');*/ /* Interesting digits are inside a rouded rectangle */
+	/* src: url('../resources/fonts/m04b.TTF') format('truetype'); */ /*Above font without outline */
+	/*src: url('../resources/fonts/m41.TTF') format('truetype'); */ /* Interesting 8px bold font */
+	/*src: url('../resources/fonts/m42.TTF') format('truetype'); */ /* Interesting 8px bold font */	
+	/*src: url('../resources/fonts/MASSIA__.TTF') format('truetype'); */ /* Big bold 10px font */
+	/*src: url('../resources/fonts/MASSIV__.TTF') format('truetype'); */ /* Big bold 10px font looks bad */
+	/*src: url('../resources/fonts/Ponderosa.ttf') format('truetype');  */ /* Big bold 10px font but too much spacing between glyps*/
+	/*src: url('../resources/fonts/Retroville NC.ttf') format('truetype'); */ /* 10px font but glyphs curves are too thin */
+	/*src: url('../resources/fonts/SMW Text NC.ttf') format('truetype'); */ /* Courier like font too thin */
+
 }
+
+
