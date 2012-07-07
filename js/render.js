@@ -51,7 +51,7 @@ function Render(mapObj)
 	//add an offset for better rounding of mouse position in a column
 	var mousePrecisionOffset = s/100;
 	//Unit strength text size (px)
-	var unitTextHeight = 10;	
+	var unitTextHeight = 8;	
 	//Animation Chain
 	var animationChain = new AnimationChain();
 
@@ -84,6 +84,9 @@ function Render(mapObj)
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
 
+		//TODO performance consider clearing and render only visible view port
+		//TODO performance consider clearing using putImageData with an empty image 
+		//than using clearRect seems faster at least on ball-bounce test
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		a.clearRect(0, 0, a.canvas.width, a.canvas.height);
 		for (row = 0; row < map.rows; row++) 
@@ -241,6 +244,8 @@ function Render(mapObj)
 		ma.movTimer = setInterval( function() { ma.start();}, 30);
 	}
 	
+	//TODO performance consider animate the sprite with CSS since doesn't
+	//seem to get slower when canvas is zoomed on an iPad/Android
 	//Animates the unit moving thru a list of cells
 	function MoveAnimation (unit, cellList)
 	{
@@ -438,7 +443,7 @@ function Render(mapObj)
 		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 		
 		//estimated losses and kills
-		bb.font = "12px unitInfo,sans-serif";
+		bb.font = unitTextHeight + "px unitInfo, sans-serif";
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
 		
@@ -589,16 +594,21 @@ function Render(mapObj)
 		}
 			
 		if (!drawIndicators) return;
+		//TODO performance, consider caching glyphs digits and use drawImage/putImageData
+		//Currently fillText and fillRect doubles the rendering time
 		
 		//Write unit strength in a box below unit
-		c.font = unitTextHeight + "px unitInfo,sans-serif;";
+		c.font = unitTextHeight + "px unitInfo, sans-serif";
 		var text = "" + unit.strength;
 		var tx = (x0 + h/2) >> 0;
 		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing
 		var side = unit.player.side;
+		var boxWidth = 18;  // c.measureText(text).width + 2 too slow
+		if (unit.strength < 10) boxWidth = 9;
+		
 		c.fillStyle = "black";
 		if (side == 1) { c.fillStyle = "green"; }
-		c.fillRect(tx, ty, 14, unitTextHeight); //14 size of box = c.measureText(text).width + 2
+		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
 		
 		if (unit.player != map.currentPlayer && unit.player.side == map.currentPlayer.side)
 			c.fillStyle = "696969";
