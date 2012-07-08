@@ -284,124 +284,156 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 
 GameRules.calculateAttackResults = function(atkunit, defunit)
 {
-	var a = atkunit.getPos();
-	var t = defunit.getPos();
-	var aUD = atkunit.unitData();
-	var tUD = defunit.unitData();
-	var at = aUD.target;
-	var tt = tUD.target;
-	var aH = atkunit.getHex();
-	var tH = defunit.getHex();
-	var aTerrain = aH.terrain;
-	var tTerrain = tH.terrain;
+	var aPos = atkunit.getPos();
+	var dPos = defunit.getPos();
+	
+	var aData = atkunit.unitData();
+	var dData = defunit.unitData();
+	
+	var aType = aData.target;
+	var dType = dData.target;
+	
+	var aHex = atkunit.getHex();
+	var dHex = defunit.getHex();
+	
 	var aExpBars = (atkunit.experience / 100) >> 0;
-	var tExpBars = (defunit.experience / 100) >> 0;
-	var aav = 0;
-	var adv = 0;
-	var tav = 0;
-	var tdv = 0;
-	var d = GameRules.distance(a.row, a.col, t.row, t.col); //distance between units
+	var dExpBars = (defunit.experience / 100) >> 0;
+	
+	var aav = 0; //Attacker attack value
+	var adv = 0; //Attacker defense value
+	var dav = 0; //Defender attack value
+	var ddv = 0; //Defender defense value
+	
 	var cr = new combatResults();
-	var closeCombat = isCloseCombatTerrain(tTerrain);
+	var d = GameRules.distance(aPos.row, aPos.col, dPos.row, dPos.col); //distance between units
+
+	var aTerrain = aHex.terrain;
+	var dTerrain = dHex.terrain;
+	
+	if (isAir(atkunit))	aTerrain == terrainType.Clear;
+	if (isAir(defunit))	dTerrain == terrainType.Clear;	
+	
 	//Attacking unit type
-	switch(at)
+	switch(aType)
 	{
 		case unitType.air:
 		{
-			tav = tUD.airatk;
-			tdv = tUD.airdef;
+			dav = dData.airatk;
+			ddv = dData.airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			tav = tUD.softatk;
-			tdv = tUD.grounddef;
+			dav = dData.softatk;
+			ddv = dData.grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			tav = tUD.hardatk;
-			tdv = tUD.grounddef;
+			dav = dData.hardatk;
+			ddv = dData.grounddef;
 			break;
 		}
 	}
 	//Defending unit type
-	switch(tt)
+	switch(dType)
 	{
 		case unitType.air:
 		{
-			aav = aUD.airatk;
-			adv = aUD.airdef;
+			aav = aData.airatk;
+			adv = aData.airdef;
 			break;
 		}
 		case unitType.soft:
 		{
-			aav = aUD.softatk;
-			adv = aUD.grounddef;
+			aav = aData.softatk;
+			adv = aData.grounddef;
 			break;
 		}
 		case unitType.hard:
 		{
-			aav = aUD.hardatk;
-			adv = aUD.grounddef;
+			aav = aData.hardatk;
+			adv = aData.grounddef;
 			break;
 		}
 	}
 	
-	//TODO Close Combat defender use close combat except when it's infantry which makes attacker use CD
-	if (closeCombat && tUD.uclass == unitClass.infantry)
-		adv = aUD.closedef;
-	if (closeCombat && aUD.class == unitClass.infantry)
-		tdv = tUD.closedef;
-	if (closeCombat && tUD.uclass != unitClass.infantry)
+	//TODO Close Combat defender use Close Defense except when it's infantry which makes attacker use CD
+	//Bigger losses when fighting in cities
+	if (isCloseCombatTerrain(dTerrain))
 	{
-		tdv = tUD.closedef;
+		if (dData.uclass == unitClass.infantry)
+		{
+			adv = aData.closedef;
+		}
+		else
+		{
+			ddv = dData.closedef;
+			aav += 4;
+		}
+		
+		if (aData.uclass == unitClass.infantry)
+			ddv = dData.closedef;
+		else
+			dav += 4;
+	}
+	//TODO Unit types
+	if (dData.uclass == unitClass.artillery)
+		adv += 3;
+		
+	//TODO Weather
+	
+	//TODO Terrain checks
+	if (dTerrain == terrainType.City)
+		ddv += 4;
+	if ((dTerrain == terrainType.River || dTerrain == terrainType.Stream) && dHex.road != roadType.none)
+	{	
+		ddv -= 4;
 		aav += 4;
 	}
+	if ((aTerrain == terrainType.River || aTerrain == terrainType.Stream) && aHex.road != roadType.none)
+	{
+		adv -= 4;
+		dav += 4;
+	}
 
-	//TODO Weather
-	//TODO Terrain checks
-	if (tTerrain == terrainType.City)
-		tdv += 4;
-	if (tTerrain == terrainType.River && tH.road != roadType.none)
-		tdv -= 4;
-	if (aTerrain == terrainType.River && aH.road != roadType.none)
-		aav -= 4;
-	
 	//TODO Entrenchment
-	//Add 2*entrechment for infantry in city, forest, mountain if not attacked by infantry
-	if (tUD.uclass == unitClass.infantry && closeCombat && aUD.uclass != unitClass.infantry)
-		tdv += 2 * defunit.entrenchment;
-	else
-		tdv += 1 * defunit.entrenchment;
+	adv += atkunit.entrenchment;
+	ddv += defunit.entrenchment;
+	//Add entrechment twice for infantry in city, forest, mountain if not attacked by infantry/arty/air/naval
+	if (dData.uclass == unitClass.infantry && isCloseCombatTerrain(dTerrain))
+		if (aData.uclass > unitClass.infantry && aData.uclass < unitClass.groundTransport)
+			ddv += defunit.entrenchment;
+	
 		
+	
 	//TODO Experience
 	aav += aExpBars;
 	adv += aExpBars;
-	tav += tExpBars;
-	tdv += tExpBars;
+	dav += dExpBars;
+	ddv += dExpBars;
 
 	//TODO Received attacks this turn
 	adv -= atkunit.hits;
-	tdv -= defunit.hits;
+	ddv -= defunit.hits;
 	
-	//TODO Range defense modifier (check if always added)
+	//TODO Range defense modifier AntiTank doesn't get it
 	if (d > 1) 
 	{
-		adv += aUD.rangedefmod;
-		tdv += tUD.rangedefmod;
+		adv += aData.rangedefmod;
+		ddv += dData.rangedefmod;
 	}
 	else
 	{
-		adv += (aUD.rangedefmod / 2) >> 0;
-		tdv += (tUD.rangedefmod / 2) >> 0;
+		adv += aData.rangedefmod >> 1;
+		ddv += dData.rangedefmod >> 1;
 	}
 	//TODO Initiative
-	if (aUD.initialive > tUD.initiative)
+	if (aData.initialive > dData.initiative)
 		adv += 4;
 	
 	//console.log("Attacker attack value:" + aav + " defence value:" + adv);
-	//console.log("Defender attack value:" + tav + " defence value:" + tdv);
+	//console.log("Defender attack value:" + dav + " defence value:" + ddv);
 	//We consider that attacking unit can fire because otherwise won't have targets selected in UI
 	//Check if defending unit can fire back
 	//Can't fire back when attacked from range
@@ -410,21 +442,35 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	if (!canAttack(defunit, atkunit)) 
 		cr.defcanfire = false;
 	
-	cr.kills = Math.round(atkunit.strength * (aav - tdv)/10);
-	if (cr.kills <= 0 ) cr.kills = 1;
+	cr.kills = getCombatKills(aav, ddv, atkunit, defunit);
+	
 	if (cr.defcanfire)
-	{
-		cr.losses = Math.round(defunit.strength * (tav - adv)/10);
-		if (cr.losses < 0) cr.losses = 0;
-		
-	}
+			cr.losses = getCombatKills(dav, adv, defunit, atkunit);
+	
 	//Experience
-	cr.atkExpGained = (((tav + 6 - adv) * defunit.strength / 10 + (tdv + 6 - aav)) * cr.kills) >> 0;
+	cr.atkExpGained = (((dav + 6 - adv) * defunit.strength / 10 + (ddv + 6 - aav)) * cr.kills) >> 0;
 	cr.defExpGained = (2 * cr.losses) >> 0;
 	//console.log("Attacked experience gained: " + cr.atkExpGained);
 	//console.log("Defender experience gained: " + cr.defExpGained);
 
 	return cr;
+}
+
+function getCombatKills(atkval, defval, atkunit, defunit)
+{
+	var atkclass = atkunit.unitData().uclass;
+	var kF = atkval - defval;
+	if (kF > 4) kF = 4 + (2 * kF - 8) / 5; //PG2 formula
+	kF += 6;
+	
+	if (atkclass == unitClass.artillery || atkclass == unitClass.levelBomber || atkclass == unitClass.fortification
+		|| (isSea(atkunit) && !isSea(defunit)))
+		kF -= 3;
+	
+	if (kF < 1) kF = 1;
+	if (kF > 19) kF = 19;
+	
+	return ((5 * kF * atkunit.strength + 50)/100) >> 0;
 }
 
 //TODO Terrain, Unit type and adjacent units 
