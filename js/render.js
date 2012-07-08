@@ -603,7 +603,7 @@ function Render(mapObj)
 		var tx = (x0 + h/2) >> 0;
 		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing
 		var side = unit.player.side;
-		var boxWidth = 18;  // c.measureText(text).width + 2 too slow
+		var boxWidth = 17;  // c.measureText(text).width + 2 too slow
 		if (unit.strength < 10) boxWidth = 9;
 		
 		c.fillStyle = "black";
