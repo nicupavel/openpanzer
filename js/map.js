@@ -198,22 +198,18 @@ Hex.prototype.delUnit = function(unit)
 }
 
 //Returns the unit from this hex that can be attacked by atkunit
-Hex.prototype.getAttackableUnit = function (atkunit, airMode)
+Hex.prototype.getAttackableUnit = function(atkunit, airMode)
 {
-	if (GameRules.canAttack(atkunit, this.airunit) 
-		&& GameRules.canAttack(atkunit, this.unit))
-	{
-		if (airMode)
-			return this.airunit;
-		else
-			return this.unit;
-	}	
+	var s = atkunit.player.side;
+	var u = this.getUnit(airMode);
 
-	if (GameRules.canAttack(atkunit, this.unit))
-		return this.unit;
+	if (u && (this.isSpotted(s) || u.tempSpotted) && GameRules.canAttack(atkunit, u))
+		return u;
 
-	if (GameRules.canAttack(atkunit, this.airunit))
-		return this.airunit;
+	u = this.getUnit(!airMode);
+
+	if (u && (this.isSpotted(s) || u.tempSpotted) && GameRules.canAttack(atkunit, u))
+		return u;
 
 	return null;
 }
@@ -381,9 +377,7 @@ function Map()
 	this.setAttackRange = function(unit)
 	{
 		this.delAttackSel();
-		
-		var p = unit.getPos();
-		var c = GameRules.getAttackRange(this.map, unit, p.row, p.col, this.rows, this.cols);
+		var c = GameRules.getAttackRange(this.map, unit, this.rows, this.cols);
 		
 		for (var i = 0; i < c.length; i++)
 		{

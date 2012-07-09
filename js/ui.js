@@ -125,6 +125,7 @@ function handleMouseClick(e)
 	r.render(); 
 }
 
+//TODO bug shouldn't display units that aren't spotted
 function handleMouseMove(e) 
 {
 	var unit, text, hex;
@@ -191,6 +192,7 @@ function handleUnitAttack(row, col)
 	var attackingUnit = map.currentUnit;
 	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
+		console.log(enemyUnit);
 		var cpos = attackingUnit.getPos();
 		var cclass = attackingUnit.unitData().uclass;
 		var eclass = enemyUnit.unitData().uclass;

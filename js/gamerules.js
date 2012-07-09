@@ -106,7 +106,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 								else
 									continue; //Skip don't add the cell as allowed
 							
-							allowedCells.push(c[j]);
+							allowedCells.push(c[j]); //TODO bug same cell is added multiple times
 							//console.log("\t\tSelected Hex at Row:" + c[j].row + " Col:" + c[j].col);
 						}
 					}
@@ -118,12 +118,13 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	
 	return allowedCells;
 }
-//TODO row,col can be read from unit
-GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
+
+GameRules.getAttackRange = function(map, unit, rows, cols)
 {
 	var allowedCells = [];
-		
+
 	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
+	var p = unit.getPos();
 	
 	//TODO weather ?
 	var side = unit.player.side;
@@ -131,27 +132,24 @@ GameRules.getAttackRange = function(map, unit, row, col, mrows, mcols)
 	if (range == 0)	range = 1;
 		
 	//console.log("attack range: "+ range);
-	var cellList = getCellsInRange(row, col, range, mrows, mcols);
+	var cellList = getCellsInRange(p.row, p.col, range, rows, cols);
 	
-	//Air unit can attack the target under it
-	if (isAir(unit)) cellList.push(new Cell(row, col)); 
+	//can attack the target under/above for airdefense/airplane
+	cellList.push(new Cell(p.row, p.col)); 
 	
 	for (var i = 0; i < cellList.length; i++)
 	{
 		var cell = cellList[i];
 		var hex = map[cell.row][cell.col];
-		
-		if (!hex.isSpotted(side))
-			continue;			
-		if (canAttack(unit, hex.unit)) //Can attack the ground unit on this hex?
+
+		if (hex.getAttackableUnit(unit, 0)) //Can attack the ground unit on this hex?
 		{
 			allowedCells.push(cell);
 			continue; //don't push same cell twice below
 		}
-		
-		if (canAttack(unit, hex.airunit)) //Can attack the air unit on this hex ?
-			allowedCells.push(cell);
 
+		if (hex.getAttackableUnit(unit, 1)) //Can attack the air unit on this hex ?
+			allowedCells.push(cell);
 	}
 	return allowedCells;
 }
