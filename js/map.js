@@ -465,9 +465,14 @@ function Map()
 			update = true;
 		}	
 		
-		if (update) updateUnitList();
-		if (!supportFire) this.delAttackSel();
+		if (!supportFire)
+		{
+			this.delAttackSel(); //delete attack selected hexes since unit has fired
+			if (!atkunit.destroyed && !atkunit.hasMoved)
+				this.setMoveRange(atkunit); //refresh move range if unit has detroyed another unit
+		}
 		
+		if (update) updateUnitList();
 		return cr;
 	}
 	

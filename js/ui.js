@@ -184,6 +184,7 @@ function handleUnitMove(row, col)
 }
 
 //handle attack performed by currently selected unit on row,col unit
+//TODO most of the code here pertaining to support fire should be moved to map object
 function handleUnitAttack(row, col)
 {
 	var hex = map.map[row][col];
