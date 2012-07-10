@@ -100,14 +100,8 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 						{
 							if (canMoveInto(map, unit, c[j])) 
 								c[j].canMove = true; //To allow unit to move in this hex
-							else
-								if (canPassInto(map, unit, c[j])) 
-									c[j].canPass = true; //To allow friendly units pass thru this hex
-								else
-									continue; //Skip don't add the cell as allowed
-							
-							allowedCells.push(c[j]); //TODO bug same cell is added multiple times
-							//console.log("\t\tSelected Hex at Row:" + c[j].row + " Col:" + c[j].col);
+							if (canPassInto(map, unit, c[j])) 
+								c[j].canPass = true; //To allow friendly units pass thru this hex
 						}
 					}
 				}
@@ -115,7 +109,11 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		}
 		r++;
 	}
-	
+
+	for (i = 0; i < c.length; i++)
+		if (c[i].canPass || c[i].canMove)
+			allowedCells.push(c[i]);
+
 	return allowedCells;
 }
 
