@@ -50,7 +50,6 @@ function Unit(equipmentID)
 	this.hasMoved = false;
 	this.hasFired = false;
 	this.hasResupplied = false;
-	this.hasReinforced = false;
 	this.isMounted = false;
 	this.tempSpotted = false;
 	this.strength = 10;
@@ -86,7 +85,6 @@ Unit.prototype.copy = function(u)
 	this.hasMoved = u.hasMoved;
 	this.hasFired = u.hasFired;
 	this.hasResupplied = u.hasResupplied;
-	this.hasReinforced = u.hasReinforced;
 	this.isMounted = u.isMounted;
 	this.ammo = u.ammo;
 	this.fuel = u.fuel;
@@ -192,7 +190,7 @@ Unit.prototype.resupply = function(ammo, fuel)
 Unit.prototype.reinforce = function(str) 
 { 
 	this.strength += str;  
-	this.hasMoved = this.hasFired = this.hasReinforced = true; 
+	this.hasMoved = this.hasFired = this.hasRessuplied = true; 
 }
 
 Unit.prototype.setTransport = function(id) 
@@ -207,7 +205,7 @@ Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
 {
 	if (!this.hasMoved) this.entrenchment++;
-	this.hasMoved = this.hasFired = this.hasResupplied = this.hasReinforced = false;
+	this.hasMoved = this.hasFired = this.hasResupplied = false;
 	this.isMounted = false;
 	this.tempSpotted = false;
 	this.hits = 0;

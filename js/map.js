@@ -95,7 +95,6 @@ function Hex(row, col)
 	this.road = roadType.none;
 	this.owner = -1;
 	this.flag = -1;
-	this.isSupply = false;
 	this.isDeployment = -1; //deployment hex for played id
 	this.victorySide = -1; //hex is a victory point for side [0,1]
 	this.name = "";	

@@ -619,8 +619,6 @@ GameRules.canResupply = function(map, unit)
 		return false;
 	if (unit.hasResupplied)
 		return false;
-	if (unit.hasReinforced)
-		return false;
 	if ((unit.getFuel() == unit.unitData().fuel) &&
 		(unit.getAmmo() == unit.unitData().ammo))
 		return false;
@@ -642,8 +640,6 @@ GameRules.canReinforce = function(map, unit)
 	if (unit.hasFired)
 		return false;
 	if (unit.hasResupplied)
-		return false;
-	if (unit.hasReinforced)
 		return false;
 	if (unit.strength >= 10)
 		return false;
