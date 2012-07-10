@@ -125,22 +125,28 @@ function handleMouseClick(e)
 	r.render(); 
 }
 
-//TODO bug shouldn't display units that aren't spotted
 function handleMouseMove(e) 
 {
 	var unit, text, hex;
 	var minfo = getMouseInfo(canvas, e);
 	var c = r.screenToCell(minfo.x, minfo.y);
-	
+
 	if (map.currentUnit != null) { r.drawCursor(c); }
-	
+
 	hex = map.map[c.row][c.col];
 	if (!hex || typeof hex === "undefined")
 		return;
 
 	text = terrainNames[hex.terrain] + " (" + c.row + "," + c.col + ")";
+
 	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	if ((unit = hex.getUnit(uiSettings.airMode)) !== null) {  text = " Unit: " + unit.unitData().name + " " + text; }
+	
+	if ((unit = hex.getUnit(uiSettings.airMode)) !== null 
+		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
+			|| unit.player.side == map.currentPlayer.side)) 
+	{
+		text = " Unit: " + unit.unitData().name + " " + text; 
+	}
 	$('locmsg').innerHTML = text;
 }
 
