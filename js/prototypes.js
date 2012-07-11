@@ -55,32 +55,6 @@ var movMethod =
 	allTerrainLeg: 11
 }
 
-var unitData =
-{
-    "airatk": 0, 
-    "airdef": 0, 
-    "ammo": 0, 
-    "bombercode": 0, 
-    "class": 0, 
-    "closedef": 0, 
-    "cost": 0, 
-    "country": 0, 
-    "fuel": 0, 
-    "grounddef": 0, 
-    "gunrange": 0, 
-    "hardatk": 0, 
-    "icon": "resources/units/images/none.png", 
-    "id": -1, 
-    "initiative": 0, 
-    "movmethod": 0, 
-    "movpoints": 0, 
-    "name": "unknown", 
-    "navalatk": 0, 
-    "rangedefmod": 0, 
-    "softatk": 0, 
-    "spotrange": 0, 
-    "target": 0
-};
 //TODO [0] should be NoCountry
 var countryNames = 
 [
@@ -168,10 +142,13 @@ var prestigeGains =
 };
 function Cell(row, col)
 {
-	//Where the hex is in the map array
 	this.row = row;
 	this.col = col;
-	//For the movement range //TODO move this into an extendedCell object
+}
+//used for movement and attack range cells
+function extendedCell(row, col)
+{
+	Cell.call(this, row, col);
 	this.range = 0; //the range that this cell is from a selected cell
 	this.cin = 0;   //the cost to enter the cell
 	this.cout = 0;  //the cost to exit the cell = cin + cell cost
@@ -179,15 +156,18 @@ function Cell(row, col)
 	this.canMove = false; //if the movement is allowed on this cell after cost calculations
 	this.canPass = false; //if friendly units can pass thru this cell
 }
+extendedCell.prototype = new Cell();
 
-//an extended cell object used for shortest path calculations
+//used for shortest path calculations
 function pathCell(cell)
 {
+	Cell.call(this, cell.row, cell.col);
 	this.row = cell.row;
 	this.col = cell.col;
 	this.prev = null;
 	this.dist = Infinity;
 }
+pathCell.prototype = new Cell();
 
 function combatResults()
 {

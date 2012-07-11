@@ -60,7 +60,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	}
 	
 	//Add current unit cell as starting point for cost calculations
-	c.push(new Cell(p.row, p.col)); 
+	c.push(new extendedCell(p.row, p.col)); 
 
 	while (r <= range)
 	{
@@ -205,14 +205,14 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 	psCell.dist = 0;
 	psCell.prev = psCell;
 	pCells.push(psCell);
-	
+
 	//add the rest of cells as pathCells into list
-	for (i = 0; i < cellList.length; i++)
+	for (var i = 0; i < cellList.length; i++)
 	{
 		var pc = new pathCell(cellList[i]);
 		pCells.push(pc);
 	}
-	
+
 	//console.log("Looking for endpoint: ["+endCell.row+","+endCell.col+"]");
 	while (pCells.length > 0)
 	{
@@ -943,7 +943,7 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	for (var i = minRow; i <= maxRow; i++)
 	{
 		if (i < 0 || i >= mrows || i == row) continue;
-		cell = new Cell(i, col); 
+		cell = new extendedCell(i, col); 
 		cell.range = Math.abs(row - i);
 		cellList.push(cell);
 		//console.log("Added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
@@ -966,14 +966,14 @@ function getCellsInRange(row, col, range, mrows, mcols)
 			if (i < 0 || i >= mrows) continue;
 			if ((col + colOff) < mcols)
 			{
-				cell = new Cell(i, col + colOff);
+				cell = new extendedCell(i, col + colOff);
 				cell.range = GameRules.distance(row, col, i, col + colOff);
 				cellList.push(cell);
 				//console.log("R added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
 			}
 			if ((col - colOff) > 0)
 			{ 
-				cell = new Cell(i, col - colOff);
+				cell = new extendedCell(i, col - colOff);
 				cell.range = GameRules.distance(row, col, i, col - colOff);
 				cellList.push(cell);
 				//console.log("L added cell at Row:" + cell.row + " Col:" + cell.col + " Range: " + cell.range);
