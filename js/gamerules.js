@@ -18,9 +18,7 @@ var GameRules = GameRules || {}; //Namespace emulation
 //cout cost of exiting a hex which is cin + terrain movement cost
 //each time a hex with cout smaller that adjacent hexes cout the adjacent hexes are updated 
 //with the new cost
-//TODO stopmov 254, bridges, zone of control
-//TODO row,col can be read from unit
-GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
+GameRules.getMoveRange = function(map, unit, rows, cols)
 {
 	var r = 0;
 	var hex = null;
@@ -28,6 +26,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 		
 	if (unit === null || unit.hasMoved) return [];
 	
+	var p = unit.getPos();
 	var ud = unit.unitData();
 	var range = ud.movpoints;
 	var movmethod = ud.movmethod;
@@ -43,10 +42,8 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	{
 		range = 1;	
 	}
-	
 	//console.log("move range:" + range);
-	
-	var c = getCellsInRange(row, col, range, mrows, mcols);
+	var c = getCellsInRange(p.row, p.col, range, rows, cols);
 	
 	//Don't calculate costs for air units
 	if (isAir(unit))
@@ -63,7 +60,7 @@ GameRules.getMoveRange = function(map, unit, row, col, mrows, mcols)
 	}
 	
 	//Add current unit cell as starting point for cost calculations
-	c.push(new Cell(row, col)); 
+	c.push(new Cell(p.row, p.col)); 
 
 	while (r <= range)
 	{

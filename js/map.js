@@ -360,10 +360,8 @@ function Map()
 	this.setMoveRange = function(unit)
 	{
 		this.delMoveSel();
-		
-		var p = unit.getPos();
-		var c = GameRules.getMoveRange(this.map, unit, p.row, p.col, this.rows, this.cols);
-		
+		var c = GameRules.getMoveRange(this.map, unit, this.rows, this.cols);
+
 		for (var i = 0; i < c.length; i++)
 		{
 			moveSelected.push(c[i]); //Push both canPass and canMove for the shortestPath function
