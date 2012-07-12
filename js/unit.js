@@ -12,11 +12,10 @@
 //Transport Object Constructor
 function Transport(equipmentID)
 {
-	this.eqid = equipmentID; 
+	this.eqid = equipmentID;
 	this.ammo = equipment[equipmentID].ammo;
 	this.fuel = equipment[equipmentID].fuel;
-	//This is only used when building image cache list in map.js
-	this.icon = equipment[equipmentID].icon;
+	this.icon = equipment[equipmentID].icon; //This is only used when building image cache list in map.js
 }
 
 //Transport Object Public Methods
@@ -27,18 +26,7 @@ Transport.prototype.copy = function(t)
 	this.ammo = t.ammo;
 	this.fuel = t.fuel;
 }
-
-Transport.prototype.resupply = function(ammo, fuel) 
-{
-	this.ammo += ammo; 
-	this.fuel += fuel;  
-}
-
-Transport.prototype.unitData = function()
-{
-	return equipment[this.eqid]; 
-}
-
+Transport.prototype.unitData = function() { return equipment[this.eqid]; }
 //Unit Object Constructor
 function Unit(equipmentID)
 {
@@ -58,7 +46,7 @@ function Unit(equipmentID)
 	this.destroyed = false; //flag to check if a unit is destroyed
 	this.player = null;
 	this.transport = null; //transport class pointer
-	//TODO ugly way because it needs to be saved in GameState
+	this.moveLeft = equipment[equipmentID].movpoints; //for phased/recon movement
 	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
 	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
 	this.hasAnimation = false; //flag if the unit has a move animation
@@ -81,11 +69,10 @@ Unit.prototype.copy = function(u)
 	if (u === null) return;
 	this.id = u.id;
 	this.eqid = u.eqid;
-	this.owner = u.owner;
-	this.hasMoved = u.hasMoved;
-	this.hasFired = u.hasFired;
+	this.owner = u.owner;	this.hasMoved = u.hasMoved;	this.hasFired = u.hasFired;
 	this.hasResupplied = u.hasResupplied;
 	this.isMounted = u.isMounted;
+	this.moveLeft = u.moveLeft;
 	this.ammo = u.ammo;
 	this.fuel = u.fuel;
 	this.strength = u.strength;
@@ -113,6 +100,15 @@ Unit.prototype.unitData = function()
 		return equipment[this.transport.eqid]; 
 	else
 		return equipment[this.eqid]; 
+}
+
+Unit.prototype.getMovesLeft = function()
+{
+	//There is no point saving moveLeft in transport object since they consume all points when moving
+	if ((this.isMounted) && (this.transport !== null))
+		return equipment[this.transport.eqid].movpoints
+	else
+		return this.moveLeft;
 }
 
 Unit.prototype.getAmmo = function()
@@ -150,18 +146,25 @@ Unit.prototype.fire = function(isAttacking)
 
 Unit.prototype.move = function(dist) 
 {
-	this.hasMoved = true;
 	this.entrenchment = 0;
-	if (this.isMounted) 
+	if (this.isMounted && (this.transport !== null)) 
 	{
-		this.hasFired = true;
+		this.hasFired = true; //can't fire after being moved in transport
 		if (GameRules.unitUsesFuel(this.transport))
 			this.transport.fuel -= dist;
-		return;
+		this.moveLeft = 0;
 	}
-	if (GameRules.unitUsesFuel(this))
-		this.fuel -= dist; //TODO check if fuel consumption is based on terrain cost or just distance
-	//TODO Fatigue for leg units ?
+	else
+	{
+		if (GameRules.unitUsesFuel(this))
+			this.fuel -= dist; //TODO check if fuel consumption is based on terrain cost or just distance
+		//Recon units can move multiple times
+		if (this.unitData().uclass != unitClass.recon)
+			this.moveLeft = 0;
+		else
+			this.moveLeft -= dist;
+	}
+	if (this.moveLeft <= 0) this.hasMoved = true;
 }
 Unit.prototype.upgrade = function(upgradeid) //TODO add transportid to upgrade transport
 {
@@ -177,19 +180,20 @@ Unit.prototype.resupply = function(ammo, fuel)
 {
 	if (this.isMounted)
 	{
-		this.transport.resupply(ammo, fuel);
+		this.transport.ammo += ammo;
+		this.transport.fuel += fuel;
 	} 
 	else 
 	{
-		this.ammo += ammo; 
-		this.fuel += fuel;  
+		this.ammo += ammo;
+		this.fuel += fuel;
 	}
 	this.hasMoved = this.hasFired = this.hasResupplied = true;
 }
 
 Unit.prototype.reinforce = function(str) 
 { 
-	this.strength += str;  
+	this.strength += str; 
 	this.hasMoved = this.hasFired = this.hasRessuplied = true; 
 }
 
@@ -204,10 +208,10 @@ Unit.prototype.unmount = function() { this.isMounted = false;	}
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
 {
-	if (!this.hasMoved) this.entrenchment++;
+	if (!this.hasMoved && this.moveLeft == equipment[this.eqid].movpoints) { this.entrenchment++; }
+	this.moveLeft = equipment[this.eqid].movpoints; //reset movement points don't use unitData() since it could be mounted
 	this.hasMoved = this.hasFired = this.hasResupplied = false;
 	this.isMounted = false;
 	this.tempSpotted = false;
 	this.hits = 0;
 }
-Unit.prototype.log = function() { console.log(this); }

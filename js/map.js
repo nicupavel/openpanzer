@@ -213,8 +213,6 @@ Hex.prototype.getAttackableUnit = function(atkunit, airMode)
 	return null;
 }
 
-Hex.prototype.log = function() { console.log(this); }
-
 //Map Object Constructor
 function Map()
 {
@@ -502,7 +500,7 @@ function Map()
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
 		
-		this.delMoveSel();
+		this.setMoveRange(unit); //if unit can still move put new range
 		this.setAttackRange(unit) //Put new attack range
 
 		return win;
@@ -723,7 +721,7 @@ function Map()
 				unitList.splice(i, 1);
 		}
 	}
-	//Resets hasFired, hasMoved, hasRessuplied 
+	//Resets unit properties for a new turn
 	function unitsEndTurn()
 	{
 		for (var i = 0; i < unitList.length; i++)

@@ -28,7 +28,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	
 	var p = unit.getPos();
 	var ud = unit.unitData();
-	var range = ud.movpoints;
+	var range = unit.getMovesLeft();
 	var movmethod = ud.movmethod;
 	var moveCost = movTable[movmethod];
 	var enemySide = ~unit.player.side & 1;
