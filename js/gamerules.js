@@ -82,7 +82,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 							c[j].cost = moveCost[hex.terrain];
 						
 						//enemy unit zone of control ? no ZOC for air units 
-						if (hex.isZOC(enemySide))
+						if (hex.isZOC(enemySide) && c[j].cost < 254)
 							c[j].cost = 254; //stop movement
 						
 						if (c[j].cin == 0) c[j].cin = c[i].cout;
@@ -93,7 +93,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 							c[j].cout = c[j].cin + c[j].cost;
 						}
 						//console.log("\t Hex at Row:" + c[j].row + " Col:" + c[j].col + " RANGE:" + c[j].range + " CIN:" + c[j].cin + " COUT:" + c[j].cout + " COST:" + c[j].cost);
-						if ((c[j].cout <= range) || ((c[j].cost == 254) && (c[j].cin <= range))) 
+						if ((c[j].cout <= range) || ((c[j].cost <= 254) && (c[j].cin <= range))) 
 						{
 							if (canMoveInto(map, unit, c[j])) 
 								c[j].canMove = true; //To allow unit to move in this hex

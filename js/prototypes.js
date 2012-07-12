@@ -93,7 +93,7 @@ var sideNames =
 ];
 
 //TODO Frozen conditions
-//254 Stopmov (but select the tile), 255 No enter
+//254 Stop move (but select the tile), 255 Don't enter
 var movTable = 
 [
 //Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
