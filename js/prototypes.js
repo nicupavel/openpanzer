@@ -162,6 +162,7 @@ extendedCell.prototype = new Cell();
 function pathCell(cell)
 {
 	Cell.call(this, cell.row, cell.col);
+	this.cost = 1;
 	this.prev = null;
 	this.dist = Infinity;
 }

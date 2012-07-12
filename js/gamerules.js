@@ -210,6 +210,7 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 	for (var i = 0; i < cellList.length; i++)
 	{
 		var pc = new pathCell(cellList[i]);
+		pc.cost = cellList[i].cost;
 		pCells.push(pc);
 	}
 
@@ -235,10 +236,10 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 		{
 			if (isAdjacent(minDistCell.row, minDistCell.col, pCells[i].row, pCells[i].col))
 			{
-				//+1 is the cost since we don't consider terrain cost here.
-				if (pCells[i].dist == Infinity || (minDistCell.dist + 1) < pCells[i].dist)
+				//Add terrain cost to calculations (can use +1 instead for direct but incorect paths)
+				if (pCells[i].dist == Infinity || (minDistCell.dist + minDistCell.cost) < pCells[i].dist)
 				{
-					pCells[i].dist = minDistCell.dist + 1;
+					pCells[i].dist = minDistCell.dist + minDistCell.cost;
 					pCells[i].prev = minDistCell;
 					//console.log("\tAdjacent cell: [" + pCells[i].row + "," + pCells[i].col + "] Dist:"
 					//			+ pCells[i].dist + " Prev: [" + minDistCell.row + "," + minDistCell.col + "]");
