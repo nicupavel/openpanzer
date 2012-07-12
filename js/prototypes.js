@@ -48,13 +48,6 @@ var terrainNames =
 	"Impassable river", "Rough"
 ];
 
-var movMethod = 
-{ 
-	tracked: 0, halfTracked: 1, wheeled: 2, leg: 3, towed: 4, air: 5,
-	deepnaval: 6, costal: 7, allTerrainTracked: 8, amphibious: 9, naval: 10,
-	allTerrainLeg: 11
-}
-
 //TODO [0] should be NoCountry
 var countryNames = 
 [
@@ -91,6 +84,13 @@ var sideNames =
 	"Axis",
 	"Allies"
 ];
+
+var movMethod = 
+{ 
+	tracked: 0, halfTracked: 1, wheeled: 2, leg: 3, towed: 4, air: 5,
+	deepnaval: 6, costal: 7, allTerrainTracked: 8, amphibious: 9, naval: 10,
+	allTerrainLeg: 11
+}
 
 //TODO Frozen conditions
 //254 Stop move (but select the tile), 255 Don't enter
@@ -167,6 +167,14 @@ function pathCell(cell)
 	this.dist = Infinity;
 }
 pathCell.prototype = new Cell();
+
+function movementResults()
+{
+	this.isSurprised = false;
+	this.surpriseCell = [];
+	this.isVictorySide = -1;
+	this.passedCells = [];
+}
 
 function combatResults()
 {

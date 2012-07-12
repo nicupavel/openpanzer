@@ -269,7 +269,7 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 
 		//console.log("Removing: ["+minDistCell.row+","+minDistCell.col+"] from list Prev: [" 
 		//			+ minDistCell.prev.row + "," + minDistCell.prev.col + "]");
-		visitedCells.push(pCells[idx]);
+		visitedCells.push(pCells[idx]); //Just to keep reference going //TODO better way
 		pCells.splice(idx, 1);
 	}
 	
@@ -608,6 +608,7 @@ function canPassInto(map, unit, cell)
 
 	return false;
 }
+GameRules.canPassInto = function(map, unit, cell) { return canPassInto(map, unit, cell); } //TODO remove this wrappers
 
 GameRules.canResupply = function(map, unit)
 {

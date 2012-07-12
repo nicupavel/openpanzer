@@ -474,23 +474,29 @@ function Map()
 		var player = unit.player;
 		var side = player.side;
 		var win = -1;
-		
-		if (dstHex.flag != -1 && GameRules.canCapture(unit)) 
-		{ 
-			dstHex.flag = player.country; 
-			player.prestige += prestigeGains["flagCapture"];
-		}
-		
-		//Is a victory marked hex ?
-		if (dstHex.victorySide != -1 && GameRules.canCapture(unit))
+		var mr = new movementResults();
+		var canCapture = GameRules.canCapture(unit);
+		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
+		var moveCost = c[0].cost;
+		console.log(c);
+		for (var i = 1; i < c.length; i++) //0 is the current unit position
 		{
-			var enemyside = this.getPlayer(dstHex.owner).side;
-			if (this.updateVictorySides(side, enemyside))
-				win = side;
-			player.prestige += prestigeGains["objectiveCapture"];
+			var hex = this.map[c[i].row][c[i].col];
+			if (!GameRules.canPassInto(this.map, unit, c[i]))
+			{
+				mr.isSurprised = true;
+				break;
+			}
+			if (canCapture && this.captureHex(hex, player))
+				mr.isVictorySide = side;
+				
+			mr.passedCells.push(c[i]);
+			hex.owner = unit.owner;
+			moveCost += c[i].cost;
 		}
+		moveCost -= c[c.length - 1].cost; //remove last cost
 		
-		unit.move(GameRules.distance(s.row, s.col, drow, dcol));
+		unit.move(GameRules.distance(s.row, s.col, drow, dcol)); //TODO replace with cost
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
 		srcHex.delUnit(unit);
@@ -503,7 +509,7 @@ function Map()
 		this.setMoveRange(unit); //if unit can still move put new range
 		this.setAttackRange(unit) //Put new attack range
 
-		return win;
+		return mr.isVictorySide;
 	}
 	
 	this.resupplyUnit = function(unit)
@@ -607,6 +613,26 @@ function Map()
 		
 		return true;
 	}	
+	
+	//Captures a hex objective returns true is capture results in a win for the player
+	this.captureHex = function(hex, player)
+	{
+		var isWin = false;
+		if (hex.flag != -1) 
+		{ 
+			hex.flag = player.country; 
+			player.prestige += prestigeGains["flagCapture"];
+		}
+		//Is a victory marked hex ?
+		if (hex.victorySide != -1)
+		{
+			var enemyside = this.getPlayer(hex.owner).side;
+			if (this.updateVictorySides(player.side, enemyside))
+				isWin = true;
+			player.prestige += prestigeGains["objectiveCapture"];
+		}
+		return isWin;
+	}
 	
 	//Clone object / "copy constructor"
 	this.copy = function(m)
