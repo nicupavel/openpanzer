@@ -22,7 +22,6 @@ function UI(scenario)
 	var map = new Map();
 	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
-	var win = -1; //Neither side has won yet
 	map = GameState.restore();
 		
 	if (map === null) 
@@ -181,13 +180,13 @@ function handleUnitMove(row, col)
 {
 	var s = map.currentUnit.getPos();
 	var mm = map.currentUnit.unitData().movmethod;
-	//TODO surprise contact
-	var c = GameRules.getShortestPath(s, new Cell(row, col), map.getCurrentMoveRange());
+	var mr = map.moveUnit(map.currentUnit, row, col);
+	
 	soundData[moveSoundByMoveMethod[mm]].play();
-	r.moveAnimation(map.currentUnit, c);
-	win = map.moveUnit(map.currentUnit, row, col);
-	if (win >= 0) 
-		uiMessage("Victory","Side " + sideNames[win] + " wins by capturing all victory hexes"); 
+	r.moveAnimation(map.currentUnit, mr.passedCells);
+	
+	if (mr.isVictorySide >= 0) 
+		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
 }
 
 //handle attack performed by currently selected unit on row,col unit
@@ -767,7 +766,6 @@ function newScenario(scenario)
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
-	win = -1;
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	selectStartingUnit();

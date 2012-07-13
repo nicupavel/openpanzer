@@ -473,13 +473,12 @@ function Map()
 		var dstHex = this.map[drow][dcol];
 		var player = unit.player;
 		var side = player.side;
-		var win = -1;
 		var mr = new movementResults();
 		var canCapture = GameRules.canCapture(unit);
 		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
-		var moveCost = c[0].cost;
-		console.log(c);
-		for (var i = 1; i < c.length; i++) //0 is the current unit position
+		var moveCost = 0;
+		
+		for (var i = 0; i < c.length; i++)
 		{
 			var hex = this.map[c[i].row][c[i].col];
 			if (!GameRules.canPassInto(this.map, unit, c[i]))
@@ -494,14 +493,12 @@ function Map()
 			hex.owner = unit.owner;
 			moveCost += c[i].cost;
 		}
-		moveCost -= c[c.length - 1].cost; //remove last cost
-		
-		unit.move(GameRules.distance(s.row, s.col, drow, dcol)); //TODO replace with cost
+
+		unit.move(moveCost);
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
 		srcHex.delUnit(unit);
 		dstHex.setUnit(unit);
-		dstHex.owner = unit.owner;
 		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
@@ -509,7 +506,7 @@ function Map()
 		this.setMoveRange(unit); //if unit can still move put new range
 		this.setAttackRange(unit) //Put new attack range
 
-		return mr.isVictorySide;
+		return mr;
 	}
 	
 	this.resupplyUnit = function(unit)

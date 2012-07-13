@@ -69,7 +69,9 @@ Unit.prototype.copy = function(u)
 	if (u === null) return;
 	this.id = u.id;
 	this.eqid = u.eqid;
-	this.owner = u.owner;	this.hasMoved = u.hasMoved;	this.hasFired = u.hasFired;
+	this.owner = u.owner;
+	this.hasMoved = u.hasMoved;
+	this.hasFired = u.hasFired;
 	this.hasResupplied = u.hasResupplied;
 	this.isMounted = u.isMounted;
 	this.moveLeft = u.moveLeft;
@@ -144,25 +146,31 @@ Unit.prototype.fire = function(isAttacking)
 		this.hasFired = true; //Support and Defence fire don't block this unit for attacking
 }
 
-Unit.prototype.move = function(dist) 
+Unit.prototype.move = function(cost) 
 {
 	this.entrenchment = 0;
+	var fuelUsed = 0;
+	if (cost >= 254) //Remove stopmov or noenter costs
+		fuelUsed = cost - 254;
+	else
+		fuelUsed = cost;
+	
 	if (this.isMounted && (this.transport !== null)) 
 	{
 		this.hasFired = true; //can't fire after being moved in transport
 		if (GameRules.unitUsesFuel(this.transport))
-			this.transport.fuel -= dist;
+			this.transport.fuel -= fuelUsed;
 		this.moveLeft = 0;
 	}
 	else
 	{
 		if (GameRules.unitUsesFuel(this))
-			this.fuel -= dist; //TODO check if fuel consumption is based on terrain cost or just distance
+			this.fuel -= fuelUsed;
 		//Recon units can move multiple times
 		if (this.unitData().uclass != unitClass.recon)
 			this.moveLeft = 0;
 		else
-			this.moveLeft -= dist;
+			this.moveLeft -= cost; //TODO check how ZOC is handled on recon units
 	}
 	if (this.moveLeft <= 0) this.hasMoved = true;
 }
