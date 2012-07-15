@@ -465,41 +465,41 @@ function Map()
 		return cr;
 	}
 	
-	// moves a unit to a new hex returns side number if the move results in a win -1 otherwise
+	// moves a unit to a new hex returns a movementResults object
 	this.moveUnit = function(unit, drow, dcol)
 	{
 		var s = unit.getPos();
 		var srcHex = this.map[s.row][s.col];
-		var dstHex = this.map[drow][dcol];
 		var player = unit.player;
 		var side = player.side;
 		var mr = new movementResults();
 		var canCapture = GameRules.canCapture(unit);
 		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
-		var moveCost = 0;
+		var moveCost = c[0].cost;
 		
-		for (var i = 0; i < c.length; i++)
+		mr.passedCells.push(c[0]);
+		for (var i = 1; i < c.length; i++)
 		{
-			var hex = this.map[c[i].row][c[i].col];
 			if (!GameRules.canPassInto(this.map, unit, c[i]))
 			{
 				mr.isSurprised = true;
 				break;
 			}
-			if (canCapture && this.captureHex(hex, player))
+			if (canCapture && this.captureHex(c[i], player))
 				mr.isVictorySide = side;
 				
 			mr.passedCells.push(c[i]);
-			hex.owner = unit.owner;
 			moveCost += c[i].cost;
 		}
-
+		
+		var lastCell = mr.passedCells[mr.passedCells.length - 1];
+		var dstHex = this.map[lastCell.row][lastCell.col];
 		unit.move(moveCost);
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
 		srcHex.delUnit(unit);
 		dstHex.setUnit(unit);
-		unit.facing = GameRules.getDirection(s.row, s.col, drow, dcol);
+		unit.facing = GameRules.getDirection(s.row, s.col, lastCell.row, lastCell.col);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
 		
@@ -612,9 +612,12 @@ function Map()
 	}	
 	
 	//Captures a hex objective returns true is capture results in a win for the player
-	this.captureHex = function(hex, player)
+	this.captureHex = function(cell, player)
 	{
 		var isWin = false;
+		var hex = this.map[cell.row][cell.col];
+		
+		hex.owner = player.id;
 		if (hex.flag != -1) 
 		{ 
 			hex.flag = player.country; 
