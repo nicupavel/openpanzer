@@ -31,7 +31,8 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	var range = unit.getMovesLeft();
 	var movmethod = ud.movmethod;
 	var moveCost = movTable[movmethod];
-	var enemySide = ~unit.player.side & 1;
+	var side = unit.player.side;
+	var enemySide = ~side & 1;
 	
 	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
 		range = unit.getFuel();
@@ -50,11 +51,12 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	{
 		for (var i = 0; i < c.length; i++)
 		{
-			if (canMoveInto(map, unit, c[i]))
-			{
-				c[i].canMove = true;
-				allowedCells.push(c[i]);
-			}
+			hex = map[c[i].row][c[i].col];
+			if (hex.isSpotted(side) && !canMoveInto(map, unit, c[i])) //TODO tempSpotted
+				continue;
+			c[i].canMove = true;
+			c[i].cost = 1; //No Terrain cost for air
+			allowedCells.push(c[i]);
 		}
 		return allowedCells;
 	}
@@ -82,7 +84,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 							c[j].cost = moveCost[hex.terrain];
 						
 						//enemy unit zone of control ? no ZOC for air units 
-						if (hex.isZOC(enemySide) && c[j].cost < 254)
+						if (hex.isSpotted(side) && hex.isZOC(enemySide) && c[j].cost < 254) //TODO tempSpotted
 							c[j].cost = 254; //stop movement
 						
 						if (c[j].cin == 0) c[j].cin = c[i].cout;
@@ -95,10 +97,11 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 						//console.log("\t Hex at Row:" + c[j].row + " Col:" + c[j].col + " RANGE:" + c[j].range + " CIN:" + c[j].cin + " COUT:" + c[j].cout + " COST:" + c[j].cost);
 						if ((c[j].cout <= range) || ((c[j].cost <= 254) && (c[j].cin <= range))) 
 						{
-							if (canMoveInto(map, unit, c[j])) 
-								c[j].canMove = true; //To allow unit to move in this hex
 							if (canPassInto(map, unit, c[j])) 
 								c[j].canPass = true; //To allow friendly units pass thru this hex
+							if (hex.isSpotted(side) && !canMoveInto(map, unit, c[j]))
+								continue;	
+							c[j].canMove = true; //To allow unit to move in this hex
 						}
 					}
 				}

@@ -483,6 +483,7 @@ function Map()
 			if (!GameRules.canPassInto(this.map, unit, c[i]))
 			{
 				mr.isSurprised = true;
+				mr.surpriseCell = c[i];
 				break;
 			}
 			if (canCapture && this.captureHex(c[i], player))

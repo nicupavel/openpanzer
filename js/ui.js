@@ -184,7 +184,8 @@ function handleUnitMove(row, col)
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	r.moveAnimation(map.currentUnit, mr.passedCells);
-	
+	if (mr.isSurprised)
+		console.log("Surprised at: " + mr.surpriseCell.row + ", " + mr.surpriseCell.col);
 	if (mr.isVictorySide >= 0) 
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
 }
