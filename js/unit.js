@@ -39,6 +39,7 @@ function Unit(equipmentID)
 	this.hasFired = false;
 	this.hasResupplied = false;
 	this.isMounted = false;
+	this.isSurprised = false; //Unit has been surprised during move
 	this.tempSpotted = false;
 	this.strength = 10;
 	this.facing = 2; //default unit facing
@@ -74,6 +75,7 @@ Unit.prototype.copy = function(u)
 	this.hasFired = u.hasFired;
 	this.hasResupplied = u.hasResupplied;
 	this.isMounted = u.isMounted;
+	this.isSurprised = u.isSurprised;
 	this.moveLeft = u.moveLeft;
 	this.ammo = u.ammo;
 	this.fuel = u.fuel;

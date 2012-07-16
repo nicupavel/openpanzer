@@ -82,7 +82,7 @@ function handleMouseClick(e)
 		{
 			//attack an allowed hex unit
 			if (hex.isAttackSel && !map.currentUnit.hasFired)
-				handleUnitAttack(row, col);
+				handleUnitAttack(map.currentUnit, row, col);
 			else
 				if (hex.isMoveSel) //Move unit over/under clickedUnit
 					handleUnitMove(row, col);
@@ -181,21 +181,37 @@ function handleUnitMove(row, col)
 	var s = map.currentUnit.getPos();
 	var mm = map.currentUnit.unitData().movmethod;
 	var mr = map.moveUnit(map.currentUnit, row, col);
+	var moveAnimationCBData = 
+	{
+		unit: map.currentUnit,
+		moveResults: mr,
+		cbfunc: uiMoveAnimationFinished,
+	}
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
-	r.moveAnimation(map.currentUnit, mr.passedCells);
+	r.moveAnimation(moveAnimationCBData);
+}
+
+//Called when move animation finishes
+function uiMoveAnimationFinished(moveAnimationCBData)
+{
+	r.render();
+	var mr = moveAnimationCBData.moveResults;
+	var unit = moveAnimationCBData.unit;
+	var cell = mr.surpriseCell;
 	if (mr.isSurprised)
-		console.log("Surprised at: " + mr.surpriseCell.row + ", " + mr.surpriseCell.col);
+		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	if (mr.isVictorySide >= 0) 
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
 }
 
-//handle attack performed by currently selected unit on row,col unit
+
+//handle attack performed by attacking unit on row,col unit
 //TODO most of the code here pertaining to support fire should be moved to map object
-function handleUnitAttack(row, col)
+function handleUnitAttack(attackingUnit, row, col)
 {
 	var hex = map.map[row][col];
-	var attackingUnit = map.currentUnit;
+	
 	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
 		console.log(enemyUnit);
@@ -207,17 +223,20 @@ function handleUnitAttack(row, col)
 		{
 			units: [attackingUnit, enemyUnit],
 			oldstr: [attackingUnit.strength, enemyUnit.strength],
-			cbfunc: uiAnimationFinished,
+			cbfunc: uiAttackAnimationFinished,
 		}
-		//Support Fire
-		for (var u in supportUnits)
+		//Support Fire if attacking unit wasn't surprised
+		if (!attackingUnit.isSurprised)
 		{
-			var sp = supportUnits[u].getPos();
-			var sclass = supportUnits[u].unitData().uclass;
-			if (attackingUnit.destroyed)
-				break;
- 			map.attackUnit(supportUnits[u], attackingUnit, true);
-			r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
+			for (var u in supportUnits)
+			{
+				var sp = supportUnits[u].getPos();
+				var sclass = supportUnits[u].unitData().uclass;
+				if (attackingUnit.destroyed)
+					break;
+				map.attackUnit(supportUnits[u], attackingUnit, true);
+				r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
+			}
 		}
 		if (attackingUnit.destroyed) //TODO Do this better
 		{
@@ -244,10 +263,11 @@ function handleUnitAttack(row, col)
 		}
 		r.runAnimation(animationCBData);
 	}
+	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 }
 
 //Called when attack animation finishes 
-function uiAnimationFinished(animationCBData)
+function uiAttackAnimationFinished(animationCBData)
 {
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{

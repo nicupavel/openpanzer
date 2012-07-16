@@ -237,22 +237,24 @@ function Render(mapObj)
 	}
 	
 	//TODO stop another running animation 
-	this.moveAnimation = function(unit, cellList)
+	this.moveAnimation = function(moveAnimationCBData)
 	{
-		if (unit === null) return;
-		var ma = new MoveAnimation(unit, cellList);
+		if (moveAnimationCBData.unit === null) return;
+		var ma = new MoveAnimation(moveAnimationCBData);
 		ma.movTimer = setInterval( function() { ma.start();}, 30);
 	}
 	
 	//TODO performance consider animate the sprite with CSS since doesn't
 	//seem to get slower when canvas is zoomed on an iPad/Android
 	//Animates the unit moving thru a list of cells
-	function MoveAnimation (unit, cellList)
+	function MoveAnimation (moveAnimationCBData)
 	{
 		var animSteps = 5;
 		var movIndex = 0;
 		var movStep = 0;
-		
+		var unit = moveAnimationCBData.unit;
+		var cellList = moveAnimationCBData.moveResults.passedCells;
+
 		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
@@ -264,6 +266,7 @@ function Render(mapObj)
 				movIndex = 0;
 				clearInterval(this.movTimer);
 				unit.hasAnimation = false;
+				moveAnimationCBData.cbfunc(moveAnimationCBData);
 				//console.log("Stopping animation for unit id:" + unit.id);
 				return;
 			}
