@@ -482,7 +482,7 @@ function Map()
 		{
 			if (!GameRules.canPassInto(this.map, unit, c[i]))
 			{
-				mr.isSurprised = true;
+				mr.isSurprised = true; //TODO no need unit can be set as surprised
 				mr.surpriseCell = c[i];
 				break;
 			}

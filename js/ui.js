@@ -200,7 +200,10 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	var unit = moveAnimationCBData.unit;
 	var cell = mr.surpriseCell;
 	if (mr.isSurprised)
+	{
+		moveAnimationCBData.unit.isSurprised = true;
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
+	}
 	if (mr.isVictorySide >= 0) 
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
 }
