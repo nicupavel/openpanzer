@@ -53,3 +53,14 @@ function hoverout(e)
 	e.src = path + e.id + ".png";
 }
 
+function bounceText(x, y, text)
+{
+	var cdiv = addTag('mainbody', 'div');		
+	var ldiv = addTag(cdiv, 'div');
+	cdiv.style.cssText = "position:absolute; top:"+ y + "px; left:" + x + "px";
+	//CSS AnimationEvent callback to delete the created parent div
+	ldiv.addEventListener("animationend", function() { delTag(this.parentNode); }, false); //mozilla
+	ldiv.addEventListener("webkitAnimationEnd", function() { delTag(this.parentNode); }, false); //webkit
+	ldiv.className = "textBounce";
+	ldiv.innerHTML = text;
+}

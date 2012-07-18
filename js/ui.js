@@ -201,6 +201,8 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	var cell = mr.surpriseCell;
 	if (mr.isSurprised)
 	{
+		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		bounceText(pos.x, pos.y, "Surprised !");
 		moveAnimationCBData.unit.isSurprised = true;
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	}
@@ -279,14 +281,7 @@ function uiAttackAnimationFinished(animationCBData)
 		if (loss == 0) continue;
 		var cell = animationCBData.units[i].getPos();
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
-		var cdiv = addTag('mainbody', 'div');		
-		var ldiv = addTag(cdiv, 'div');
-		cdiv.style.cssText = "position:absolute; top:"+ pos.y + "px; left:" + pos.x + "px";
-		//CSS AnimationEvent callback to delete the created parent div
-		ldiv.addEventListener("animationend", function() { delTag(this.parentNode); }, false); //mozilla
-		ldiv.addEventListener("webkitAnimationEnd", function() { delTag(this.parentNode); }, false); //webkit
-		ldiv.className = "combat-loss";
-		ldiv.innerHTML = loss;
+		bounceText(pos.x, pos.y, loss);
 	}
 }
 
