@@ -430,7 +430,10 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 		adv += 4;
 	
 	if (atkunit.isSurprised)
+	{
 		adv = 0;
+		aav = aav/2;
+	}
 	//console.log("Attacker attack value:" + aav + " defence value:" + adv);
 	//console.log("Defender attack value:" + dav + " defence value:" + ddv);
 	//We consider that attacking unit can fire because otherwise won't have targets selected in UI
