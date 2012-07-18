@@ -618,17 +618,23 @@ function Map()
 		var isWin = false;
 		var hex = this.map[cell.row][cell.col];
 		
+		if (hex.owner == -1) //Hex not owned by any player
+				hex.owner = player.id;
+
+		var hexSide = this.getPlayer(hex.owner).side;
+
+		if (hexSide == player.side)
+			return;
+			
 		hex.owner = player.id;
-		if (hex.flag != -1) 
+		if (hex.flag != -1) //Secondary Objective
 		{ 
 			hex.flag = player.country; 
 			player.prestige += prestigeGains["flagCapture"];
 		}
-		//Is a victory marked hex ?
-		if (hex.victorySide != -1)
+		if (hex.victorySide != -1) //Primary Objective
 		{
-			var enemyside = this.getPlayer(hex.owner).side;
-			if (this.updateVictorySides(player.side, enemyside))
+			if (this.updateVictorySides(player.side, hexSide))
 				isWin = true;
 			player.prestige += prestigeGains["objectiveCapture"];
 		}
