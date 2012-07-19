@@ -219,7 +219,7 @@ function handleUnitAttack(attackingUnit, row, col)
 	
 	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
-		console.log(enemyUnit);
+		GameRules.calculateCombatResults(attackingUnit, enemyUnit, map.getUnits());
 		var cpos = attackingUnit.getPos();
 		var cclass = attackingUnit.unitData().uclass;
 		var eclass = enemyUnit.unitData().uclass;
