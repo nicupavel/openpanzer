@@ -278,7 +278,41 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 	
 	return [];
 }
-
+GameRules.calculateCombatResults = function(atkunit, defunit, unitlist)
+{
+	var supportUnits = [];
+	var realLosses = 0;
+	var realKills = 0;
+	var evalLosses = 0;
+	var evalKills = 0;
+	var side = atkunit.player.side;
+	
+	if (!atkunit.isSurprised)
+		supportUnits = GameRules.getSupportFireUnits(unitlist, atkunit, defunit);
+	
+	for (var u in supportUnits)
+	{
+		var hex = supportUnits[u].getHex();
+		var cr = GameRules.calculateAttackResults(supportUnits[u], atkunit);
+		if (hex.isSpotted(side) || supportUnits[u].tempSpotted)
+		{
+			evalLosses += cr.losses;
+			evalKills += cr.kills;
+		}
+		realLosses += cr.losses;
+		realKills += cr.kills;
+	}
+	
+	var cr = GameRules.calculateAttackResults(atkunit, defunit);
+	
+	evalLosses += cr.losses;
+	evalKills += cr.kills;
+	realLosses += cr.losses;
+	realKills += cr.kills;
+	
+	console.log("Real Kills: " + realKills + " Losses: " + realLosses + " Eval Kills: " + evalKills + " Losses: " + evalLosses);
+	
+}
 GameRules.calculateAttackResults = function(atkunit, defunit)
 {
 	var aPos = atkunit.getPos();
