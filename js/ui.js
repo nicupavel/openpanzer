@@ -216,14 +216,12 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 function handleUnitAttack(attackingUnit, row, col)
 {
 	var hex = map.map[row][col];
-	
 	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
 	{
 		GameRules.calculateCombatResults(attackingUnit, enemyUnit, map.getUnits());
 		var cpos = attackingUnit.getPos();
 		var cclass = attackingUnit.unitData().uclass;
 		var eclass = enemyUnit.unitData().uclass;
-		var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), attackingUnit, enemyUnit);
 		var animationCBData = 
 		{
 			units: [attackingUnit, enemyUnit],
@@ -233,6 +231,7 @@ function handleUnitAttack(attackingUnit, row, col)
 		//Support Fire if attacking unit wasn't surprised
 		if (!attackingUnit.isSurprised)
 		{
+			var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), attackingUnit, enemyUnit);
 			for (var u in supportUnits)
 			{
 				var sp = supportUnits[u].getPos();

@@ -619,7 +619,7 @@ function Render(mapObj)
 			c.fillStyle = "white";
 		
 		if (unit.hasMoved && unit.player == map.currentPlayer)
-			c.fillStyle = "b22222"; //FireBrick
+			c.fillStyle = "b24422"; 
 			
 		c.fillText(text, tx, ty + 8);
 
