@@ -4,8 +4,8 @@
 	z-index: 100;
 	border: 0px #fff solid;
 	margin-left: 10px;
-	width: 80px;
-	height: 20px;
+	min-width: 10px;
+	min-height: 10px;
 	font-family: sans-serif;
 	font-size: 15px;
 	font-color:red;
@@ -13,7 +13,7 @@
 	text-shadow: 0 0 0.2em #fff;
 	-webkit-animation:jump 2s linear 1 normal;
 	-moz-animation:jump 2s linear 1 normal;
-	
+	white-space: nowrap;
 }
 
 @-webkit-keyframes jump
