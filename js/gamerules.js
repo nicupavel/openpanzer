@@ -432,12 +432,12 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	//TODO Terrain checks
 	if (dTerrain == terrainType.City)
 		ddv += 4;
-	if ((dTerrain == terrainType.River || dTerrain == terrainType.Stream) && dHex.road != roadType.none)
+	if ((dTerrain == terrainType.River || dTerrain == terrainType.Stream) && dHex.road == roadType.none)
 	{	
 		ddv -= 4;
 		aav += 4;
 	}
-	if ((aTerrain == terrainType.River || aTerrain == terrainType.Stream) && aHex.road != roadType.none)
+	if ((aTerrain == terrainType.River || aTerrain == terrainType.Stream) && aHex.road == roadType.none)
 	{
 		adv -= 4;
 		dav += 4;
