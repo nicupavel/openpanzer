@@ -24,7 +24,9 @@ function addTag(parent, tag)
 	if (typeof(parent) === 'string') {	e = $(parent); }
 	else {e = parent;}
 	
-	e.appendChild(t);
+	if (e !== null)
+		e.appendChild(t);
+		
 	return t;
 }
 
