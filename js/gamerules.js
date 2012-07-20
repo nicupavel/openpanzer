@@ -279,7 +279,8 @@ GameRules.getShortestPath = function(startCell, endCell, cellList)
 	return [];
 }
 
-GameRules.calculateCombatResults = function(atkunit, defunit, unitlist)
+//This function calculates the kill/losses for all units involved in combat
+GameRules.calculateCombatResults = function(atkunit, defunit, unitlist, withHiddenUnits)
 {
 	var supportUnits = [];
 	var realLosses = 0;
@@ -287,6 +288,7 @@ GameRules.calculateCombatResults = function(atkunit, defunit, unitlist)
 	var evalLosses = 0;
 	var evalKills = 0;
 	var side = atkunit.player.side;
+	var cr;
 	
 	if (!atkunit.isSurprised)
 		supportUnits = GameRules.getSupportFireUnits(unitlist, atkunit, defunit);
@@ -294,7 +296,7 @@ GameRules.calculateCombatResults = function(atkunit, defunit, unitlist)
 	for (var u in supportUnits)
 	{
 		var hex = supportUnits[u].getHex();
-		var cr = GameRules.calculateAttackResults(supportUnits[u], atkunit);
+		cr = GameRules.calculateAttackResults(supportUnits[u], atkunit);
 		if (hex.isSpotted(side) || supportUnits[u].tempSpotted)
 		{
 			evalLosses += cr.kills; //Losses of atkunit are kills of the support fire
@@ -304,14 +306,26 @@ GameRules.calculateCombatResults = function(atkunit, defunit, unitlist)
 		realKills += cr.losses;
 	}
 	
-	var cr = GameRules.calculateAttackResults(atkunit, defunit);
+	cr = GameRules.calculateAttackResults(atkunit, defunit);
 	
 	evalLosses += cr.losses;
 	evalKills += cr.kills;
 	realLosses += cr.losses;
 	realKills += cr.kills;
 	
-	console.log("Real Kills: " + realKills + " Losses: " + realLosses + " Eval Kills: " + evalKills + " Losses: " + evalLosses);
+	if (withHiddenUnits)
+	{
+		cr.losses = realLosses;
+		cr.kills = realKills;
+	}
+	else
+	{
+		cr.losses = Math.min(evalLosses, atkunit.strength);
+		cr.kills = Math.min(evalKills, defunit.strength);
+	}
+	
+	//console.log("Real Kills: " + realKills + " Losses: " + realLosses + " Eval Kills: " + evalKills + " Losses: " + evalLosses);
+	return cr;
 }
 
 GameRules.calculateAttackResults = function(atkunit, defunit)

@@ -438,7 +438,7 @@ function Render(mapObj)
 		
 		var atkflag = atkunit.player.country;
 		var defflag = defunit.player.country;
-		var cr = GameRules.calculateAttackResults(atkunit, defunit);
+		var cr = GameRules.calculateCombatResults(atkunit, defunit, mapObj.getUnits(), false);
 		
 		bb.clearRect(0, 0, bbw, bbh);
 		bb.drawImage(imgAttackCursor, bbw/2 - imgAttackCursor.width/2, bbh/2 - imgAttackCursor.height/2);
