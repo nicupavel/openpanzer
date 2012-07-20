@@ -376,25 +376,27 @@ function Render(mapObj)
 	// "Private"
 	function createLayers()
 	{
+		//Set the width/height of the container div to browser window width/height
+		//This improves the performance. User will scroll the div instead of window
+		$('game').width = window.innerWidth + "px";
+		$('game').height = window.innerHeight + "px";
+		
 		//Check if the canvases already exists in the curent document to prevent 
 		//overlaying multiple rendering instances
 		//Map image as background
-		if ((cm = $('map')) === null) cm = document.createElement('canvas');
+		if ((cm = $('map')) === null) cm = addTag('game', 'canvas');
 		cm.id = "map";
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-		document.getElementById("game").appendChild(cm);
 		// Hexes/units/flags
-		if ((ch = $('hexes')) === null) ch = document.createElement('canvas');
+		if ((ch = $('hexes')) === null) ch = addTag('game', 'canvas');
 		ch.id = "hexes";
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX + 'px;top:'+ canvasOffsetY + 'px;';
-		document.getElementById("game").appendChild(ch);
 		// Animation and cursors
-		if ((ca = $('cursor')) === null) ca = document.createElement('canvas');
+		if ((ca = $('cursor')) === null) ca = addTag('game', 'canvas');
 		ca.id = "cursor";
 		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-		document.getElementById("game").appendChild(ca);
-		// Backbuffer
-		cbb = document.createElement('canvas');
+		// Backbuffer (not added as child to DOM)
+		cbb = addTag(null, 'canvas'); 
 		cbb.id = "backbuffer";
 		
 		cb = cm.getContext('2d');
