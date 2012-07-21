@@ -57,7 +57,7 @@ function hoverout(e)
 
 function bounceText(x, y, text)
 {
-	var cdiv = addTag('mainbody', 'div');		
+	var cdiv = addTag('game', 'div');
 	var ldiv = addTag(cdiv, 'div');
 	cdiv.style.cssText = "position:absolute; top:"+ y + "px; left:" + x + "px";
 	//CSS AnimationEvent callback to delete the created parent div

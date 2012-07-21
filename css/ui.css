@@ -10,14 +10,22 @@ body,html
 	padding:0; 
 	border:0; 
 	height:100%; 
-	overflow-y:auto; 
+	/*overflow-y:auto; */
+	overflow: hidden; /* hide the scroll bars that appear when the #game div is as large as the window */
 	background:black;
 	background-image: url('../resources/ui/page/images/mainbg.png');
 }
 #game
 {
+/*
 	margin-right: auto;
 	margin-left: auto;
+*/
+	position: relative;
+	overflow: auto;
+	margin: 0 auto;
+	border: 0px solid black;
+	outline: none; /* don't show the focus outline */
 }
 
 #menu 

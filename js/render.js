@@ -336,8 +336,9 @@ function Render(mapObj)
 		
 		if (absolute)
 		{ 
-			x0 += canvasOffsetX;
-			y0 += canvasOffsetY;
+			var vp = $('game');
+			x0 += canvasOffsetX - vp.clientLeft - vp.offsetLeft;
+			y0 += canvasOffsetY - vp.clientTop - vp.offsetTop;
 		}
 		
 		return new screenPos(x0, y0);
@@ -376,25 +377,17 @@ function Render(mapObj)
 	// "Private"
 	function createLayers()
 	{
-		//Set the width/height of the container div to browser window width/height
-		//This improves the performance. User will scroll the div instead of window
-		$('game').width = window.innerWidth + "px";
-		$('game').height = window.innerHeight + "px";
-		
 		//Check if the canvases already exists in the curent document to prevent 
 		//overlaying multiple rendering instances
 		//Map image as background
 		if ((cm = $('map')) === null) cm = addTag('game', 'canvas');
 		cm.id = "map";
-		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		// Hexes/units/flags
 		if ((ch = $('hexes')) === null) ch = addTag('game', 'canvas');
 		ch.id = "hexes";
-		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX + 'px;top:'+ canvasOffsetY + 'px;';
 		// Animation and cursors
 		if ((ca = $('cursor')) === null) ca = addTag('game', 'canvas');
 		ca.id = "cursor";
-		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		// Backbuffer (not added as child to DOM)
 		cbb = addTag(null, 'canvas'); 
 		cbb.id = "backbuffer";
@@ -424,6 +417,12 @@ function Render(mapObj)
 		//Add map image as background
 		//cb.drawImage(imgMapBackground, 0, 0);
 		cm.style.cssText += "background-image:url('" + imgMapBackground.src + "');";
+		
+		//Set the width/height of the container div to browser window width/height
+		//This improves the performance. User will scroll the div instead of window
+		$('game').style.width = window.innerWidth + "px";
+		$('game').style.height = window.innerHeight + "px";
+		$('game').tabIndex = 1; //For focusing the game area
 	}
 
 	//Generates an attack cursor on backbuffer canvas

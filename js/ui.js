@@ -757,8 +757,8 @@ function uiSetUnitOnViewPort(unit)
 	var cell = unit.getPos();
 	if (!cell || typeof cell === "undefined") return;
 	var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
-	document.body.scrollLeft = pos.x - window.innerWidth/2;
-	document.body.scrollTop = pos.y - window.innerHeight/2;
+	$('game').scrollLeft = pos.x - window.innerWidth/2;
+	$('game').scrollTop = pos.y - window.innerHeight/2;
 }
 
 //Selects the first unit that belongs to the currently playing side
@@ -793,11 +793,15 @@ function newScenario(scenario)
 function getMouseInfo(canvas, e)
 {
 	var mx, my, rclick;
+	var vp = $('game');
 	if (e.which) rclick = (e.which == 3);
-	else if (e.button) rclick = (e.button == 2);				
-	mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
-	my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;;	
+	else if (e.button) rclick = (e.button == 2);	
 	
+	//mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
+	//my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;	
+	mx = e.pageX - canvas.offsetLeft - vp.clientLeft - vp.offsetLeft + vp.scrollLeft;
+	my = e.pageY - canvas.offsetTop - vp.clientTop - vp.offsetTop + vp.scrollTop;
+	//console.log(mx + "," + my);
 	return new mouseInfo(mx, my, rclick);
 }
 
