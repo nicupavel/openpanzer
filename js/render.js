@@ -72,12 +72,7 @@ function Render(mapObj)
 		
 		if (uiSettings.hexGrid != drawnHexGrid)
 		{
-			if (uiSettings.hexGrid)
-				drawHexGrid = true;
-			else
-				drawHexGrid = false;
-			
-			drawnHexGrid = uiSettings.hexGrid;
+			drawnHexGrid = drawHexGrid = uiSettings.hexGrid;			
 			cb.clearRect(0, 0, cb.canvas.width, cb.canvas.height);
 		}
 		
@@ -371,7 +366,7 @@ function Render(mapObj)
 	//Sets the local uiSettings to UI uiSettings
 	this.setUISettings = function(obj) { uiSettings = obj; }
 	//Sets a new map for rendering. Only used to dinamically change the map being rendered
-	this.setNewMap = function(mapObj) { map = mapObj; }
+	this.setNewMap = function(mapObj) { map = mapObj; drawnHexGrid = false;}
 	
 		
 	// "Private"

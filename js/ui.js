@@ -1,4 +1,4 @@
-/**`
+/**
  * UI - handles mouse and dialog boxes
  *
  * http://www.linuxconsulting.ro
@@ -8,6 +8,7 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
+ 
 function UI(scenario)
 {
 	var uiSettings = 
