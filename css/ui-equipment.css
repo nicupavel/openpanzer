@@ -76,6 +76,8 @@
 
 #eqOkBut
 {
+	background-image: url('../resources/ui/buttons/ok.png');
+	background-repeat: no-repeat;
 	border: 0px solid #fff;
 	position:absolute;
 	width: 30px;
@@ -86,6 +88,8 @@
 
 #eqUpgradeBut
 {
+	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png');
+	background-repeat: no-repeat;
 	border: 0px solid #fff;
 	position:absolute;
 	width: 30px;
@@ -96,6 +100,8 @@
 
 #eqNewBut
 {
+	background-image: url('../resources/ui/dialogs/equipment/images/buy.png');
+	background-repeat: no-repeat;
 	border: 0px solid #fff;
 	position:absolute;
 	width: 30px;

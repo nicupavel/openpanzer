@@ -1,3 +1,51 @@
+/* contextual pop-up menu that appear when a unit can mount/reinforce/resupply/embark */
+#unit-context
+{
+	position: fixed;
+	z-index:100;
+	border: 0px solid white;
+	top: 92%;
+	background: rgba(20,20,20, 0.7);
+	padding: 5px;
+	float: left;
+	left:50%;
+	margin-left: -60px;
+	visibility: hidden;
+	border-radius: 5px;
+}
+
+.unit-context-buttons
+{
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	padding-left: 2px;
+	padding-right:2px;
+	margin:0px auto;
+	float:left;
+}
+
+#unit-context-mount
+{
+	background-image: url('../resources/ui/dialogs/unit-context/mount.png');
+}
+
+#unit-context-reinforce
+{
+	background-image: url('../resources/ui/dialogs/unit-context/reinforce.png');
+}
+
+#unit-context-resupply
+{
+	background-image: url('../resources/ui/dialogs/unit-context/resupply.png');
+}
+
+#unit-context-embark
+{
+	background-image: url('../resources/ui/dialogs/unit-context/embark.png');
+}
+
+/* unit information window */
 #unit-info
 {
 	position: fixed;

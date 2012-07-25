@@ -44,11 +44,13 @@
 
 #ui-message #uiokbut
 {
+	background-image: url('../resources/ui/buttons/ok.png');
+	background-repeat: no;
 	border: 0px #fff solid;
 	position:absolute;
-	top:170px;
-	left:275px;
-	width:25px;
+	top:165px;
+	left:270px;
+	width:30px;
 	height: 30px;
 	text-align: center;
 	color: #fff;
