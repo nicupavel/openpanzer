@@ -21,11 +21,31 @@ function addTag(parent, tag)
 {
 	var e;
 	var t = document.createElement(tag);
+	
 	if (typeof(parent) === 'string') {	e = $(parent); }
 	else {e = parent;}
 	
 	if (e !== null)
 		e.appendChild(t);
+		
+	return t;
+}
+
+//inserta a tag before a child element
+function insertTag(parent, tag, child)
+{
+	var e, c;
+	var t = document.createElement(tag);
+	
+	if (typeof(parent) === 'string') {	e = $(parent); }
+	else {e = parent;}
+	
+	if (typeof(child) === 'string') {	c = $(child); }
+	else {c = child;}
+	
+	
+	if (e !== null && c !== null)
+		e.insertBefore(t, c);
 		
 	return t;
 }
@@ -37,6 +57,16 @@ function delTag(tag)
 		tag.parentNode.removeChild(tag);
 }
 
+//remove all children of a tag
+function clearTag(tag)
+{
+	var t;
+	if (typeof(tag) === 'string') {	t = $(tag); }
+	else {t = tag;}
+	
+	while (t && t.hasChildNodes()) 
+    	t.removeChild(t.lastChild);
+}
 //Taken from http://modernizr.github.com/Modernizr/touch.html
 function hasTouch()
 {
