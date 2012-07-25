@@ -682,8 +682,8 @@ function updateEquipmentWindow(eqclass)
 		
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	//Remove older entries
-	$('unitlist').innerHTML = "";
-	$('eqUnitList').innerHTML = "";
+	clearTag('unitlist');
+	clearTag('eqUnitList');
 	$('currentPrestige').innerHTML = map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
