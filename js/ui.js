@@ -35,7 +35,13 @@ function UI(scenario)
 	var r = new Render(map);
 	r.setUISettings(uiSettings);
 	//redraw screen and center unit on screen when images have finished loading
-	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
+	r.cacheImages(function() 
+		{ 
+			selectStartingUnit(); //select the first available unit for the current side
+			uiSetUnitOnViewPort(map.currentUnit);
+			r.render();  
+		});
+		
 	var canvas = r.getCursorCanvas();
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
@@ -45,7 +51,7 @@ function UI(scenario)
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	buildMainMenu();
 	buildEquipmentWindow();
-	selectStartingUnit(); //select the first available unit for the current side
+	
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 	
@@ -852,10 +858,14 @@ function newScenario(scenario)
 	map = l.buildMap();
 	map.dumpMap();
 	r.setNewMap(map);
-	r.cacheImages(function() { r.render(); uiSetUnitOnViewPort(map.currentUnit); });
+	r.cacheImages(function() 
+		{ 
+			selectStartingUnit(); 
+			uiSetUnitOnViewPort(map.currentUnit);
+			r.render(); 
+		});
 	countries = map.getCountriesBySide(map.currentPlayer.side);
-	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
-	selectStartingUnit();
+	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
 }
 
