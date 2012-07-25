@@ -120,7 +120,7 @@ function handleMouseClick(e)
 			uiSettings.airMode = false; //If clicked unit is air select airmode automatically
 			hoverout($('air').firstChild); //Change air button to ON in UI
 	}
-	
+	updateUnitContextWindow(map.currentUnit);
 	//TODO partial screen updates (can update only attack or move selected hexes)
 	r.render(); 
 }
@@ -170,6 +170,9 @@ function handleUnitSelect(row, col)
 
 	if (map.currentUnit === null) 
 		return;
+		
+	//Update unit contextual window
+	updateUnitContextWindow(map.currentUnit);
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
 	if ($('equipment').style.visibility == "visible")
@@ -287,23 +290,34 @@ function uiAttackAnimationFinished(animationCBData)
 
 function buildMainMenu()
 {
-	//menu buttons div with id is the filename from resources/ui/menu/images
-	var menubuttons = [["buy","Upgrade/Buy Units(WIP)"],["inspectunit","Inspect Unit"],["hex","Toggle Hex Grid"],
-					   ["air","Toggle Air More On"],["zoom","Strategic Map"],["undo","Undo Last Move(TBD)"],
-					   ["endturn","End Turn"], ["mainmenu", "Main Menu"]];
+	//menu buttons div with id the image filename from resources/ui/menu/images
+	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
+	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
+						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1],
+					    ["air","Toggle Air More On", 1],["zoom","Strategic Map", 1],["undo","Undo Last Move(TBD)", 1]];
 					   
-	var sd = addTag('menu','div');
+	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
 	sd.innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
 	
-	for (b in menubuttons) 
+	var ld = addTag('statusbar','div');
+	ld.id = "locmsg"
+	ld.className = "message";
+	
+	for (var b = 0; b < menubuttons.length; b++) 
 	{
-		var div = addTag('menu','div');
-		var img = addTag(div, 'img');
+		var div;
 		
+		if (menubuttons[b][2])	//should be placed on slide div
+			div = addTag('slidemenu','div');
+		else
+			div = insertTag('menu', 'div', 'slidemenu');
+			
+		var img = addTag(div, 'img');
 		var id = menubuttons[b][0];
 		var title = menubuttons[b][1];
+		
 		div.id = id;
 		div.title = title;
 		div.className = "button";
@@ -311,10 +325,13 @@ function buildMainMenu()
 		img.src = "resources/ui/menu/images/" + id + ".png";
 		
 		div.onclick = function() { mainMenuButton(this.id); }
+		
+		if (uiSettings.hasTouch) return; //Don't set hover for touch-devices
+		
 		div.onmouseover = function() { hoverin(this.firstChild); }
-		//Keep selection for toggle buttons
 		div.onmouseout = function() 
-			{ 
+		{ 
+				//Keep selection for toggle buttons
 				if (uiSettings.airMode && this.id == "air") 
 					return;
 				if (uiSettings.mapZoom && this.id == "zoom") 
@@ -322,12 +339,8 @@ function buildMainMenu()
 				if (uiSettings.hexGrid && this.id == "hex") 
 					return;	
 				hoverout(this.firstChild); 
-			}
+		}
 	}
-	
-	var ld = addTag('menu','div');
-	ld.id = "locmsg"
-	ld.className = "message";
 }
 
 function mainMenuButton(id)
@@ -404,6 +417,7 @@ function mainMenuButton(id)
 			GameState.save(map);
 			countries = map.getCountriesBySide(map.currentPlayer.side);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
+			updateUnitContextWindow();
 			selectStartingUnit();
 			
 			$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
@@ -415,6 +429,17 @@ function mainMenuButton(id)
 		}
 		case 'mainmenu':
 		{
+			var v = $('slidemenu').style.visibility;
+			
+			if (v == "visible")
+			{
+				$('slidemenu').style.visibility = "hidden";
+			}
+			else
+			{
+				$('slidemenu').style.visibility = "visible";
+			}
+			
 			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
 			
@@ -430,6 +455,48 @@ function mainMenuButton(id)
 			break;
 		}
 	}
+}
+
+function updateUnitContextWindow(u)
+{
+	var div;
+	var nbuttons = 0;
+	clearTag('unit-context');
+	if (!u || !u.player || u.player.id != map.currentPlayer.id) return;
+	if (GameRules.canMount(u))
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-mount";
+		div.title = "Mount this unit into a transport";
+		div.onclick = function() {unitInfoButton('mount', u);}
+	}
+	
+	if (GameRules.canResupply(map.map, u))
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-resupply";
+		div.title = "Resupply Ammo and Fuel for this unit";
+		div.onclick = function() {unitInfoButton('resupply', u);}
+	}
+
+	if (GameRules.canReinforce(map.map, u)) 
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-reinforce";
+		div.title = "Reinforce unit strength";
+		div.onclick = function() {unitInfoButton('reinforce', u);}
+	}
+	
+	if (nbuttons > 0) 
+		$('unit-context').style.visibility = "visible";
+	else
+		$('unit-context').style.visibility = "hidden";
 }
 
 function updateUnitInfoWindow(u)
@@ -529,6 +596,7 @@ function unitInfoButton(action, unit)
 		}
 	}
 	$('unit-info').style.visibility = "hidden";
+	updateUnitContextWindow(unit);
 	r.render();
 }
 
