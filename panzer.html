@@ -26,7 +26,11 @@
 	<link href="css/ui.css" rel="stylesheet" type="text/css">
   </head>
   <body onload="gameStart();" id="mainbody">
-	<div id="menu"></div> <!-- Where the menu is being built -->
+  	<div id="statusbar"></div> <!-- Status bar where messages/infos are shown -->
+	<div id="menu"> <!-- Where the menu is being built -->
+		<div id="slidemenu"></div>
+	</div>
+	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
 	<div id="unit-info">  <!-- Unit info dialog -->
 	    <div id="container">
 			<div id="unit-image"></div>
