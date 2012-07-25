@@ -1,1 +1,1 @@
-Most of the images here were taken from OpenGeneral (http://opengeneral.sf.net)
+Images created by Iulian Luca lucaiuli@gmail.com
