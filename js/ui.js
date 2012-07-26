@@ -367,14 +367,20 @@ function mainMenuButton(id)
 		}
 		case 'zoom':
 		{	
-			var zoom = Math.min(window.innerWidth/canvas.width*100, window.innerHeight/canvas.height*100);
-			if ($('game').style.zoom === "100%" || $('game').style.zoom === '' )
+			var zoom = Math.min(window.innerWidth/canvas.width*100, window.innerHeight/canvas.height*100) >> 0;
+			
+			if ($('game').style.zoom == "100%" || $('game').style.zoom == '' )
 			{ 
-				$('game').style.zoom = zoom + "%"; 
+				$('game').style.zoom = zoom + "%";
+				$('game').style.width = ((window.innerWidth * 100 / zoom) >> 0) + 100 + "px";
+				$('game').style.height = ((window.innerHeight * 100 / zoom) >> 0) + 100 + "px";
+
 				uiSettings.mapZoom = true;
 			}
 			else 
 			{ 
+				$('game').style.width = window.innerWidth + "px";
+				$('game').style.height = window.innerHeight + "px";
 				$('game').style.zoom = "100%";
 				uiSettings.mapZoom = false;
 			}
@@ -468,7 +474,13 @@ function updateUnitContextWindow(u)
 	var div;
 	var nbuttons = 0;
 	clearTag('unit-context');
-	if (!u || !u.player || u.player.id != map.currentPlayer.id) return;
+	
+	if (!u || !u.player || u.player.id != map.currentPlayer.id) 
+	{
+		$('unit-context').style.visibility = "hidden";
+		return;
+	}
+	
 	if (GameRules.canMount(u))
 	{
 		nbuttons++;
