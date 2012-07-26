@@ -299,8 +299,8 @@ function buildMainMenu()
 	//menu buttons div with id the image filename from resources/ui/menu/images
 	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
 	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
-						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1],
-					    ["air","Toggle Air More On", 1],["zoom","Strategic Map", 1],["undo","Undo Last Move(TBD)", 1]];
+						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
+					    ["zoom","Strategic Map", 1],["undo","Undo Last Move(TBD)", 1], ["options","Options", 1]];
 					   
 	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
@@ -451,7 +451,10 @@ function mainMenuButton(id)
 			{
 				$('slidemenu').style.visibility = "visible";
 			}
-			
+			break;
+		}
+		case 'options':
+		{
 			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
 			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
 			
@@ -463,8 +466,8 @@ function mainMenuButton(id)
 				var scnOpt = addTag(scnSel, 'option');
 				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
 				scnOpt.text =  scenariolist[i][1];
-			}		
-			break;
+			}
+			break;		
 		}
 	}
 }
@@ -907,5 +910,5 @@ function gameStart()
 	scenario="resources/scenarios/xml/tutorial.xml";
 	ui = new UI(scenario);
 	//Bring up the "Main Menu"
-	ui.mainMenuButton('mainmenu');
+	ui.mainMenuButton('options');
 }
