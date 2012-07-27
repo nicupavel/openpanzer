@@ -32,12 +32,13 @@
 	</div>
 	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
 	<div id="unit-info">  <!-- Unit info dialog -->
-		<div class="uCol">
-			<div id="uImage"></div>
-			<div id="uName">Open Panzer</div>
-			<!-- <div id="uFlag"></div> -->
+		<div class="imageCol">
+		<div id="uImage"></div>	
 		</div>
-		<div class="uCol">
+		<div class="nameRow"><div id="uName"></div>
+		<div class="statsRow">
+			<div class="uStat" id="uFlag"></div>
+		
 			<div class="uStat" id="uStr"></div>
 			<div class="uStat" id="uFuel"></div>
 			<div class="uStat" id="uAmmo"></div>
@@ -60,8 +61,10 @@
 			<div class="uStat" id="uDRange"></div>
 			
 			<div class="uStat" id="uMoveType"></div>
-			<!-- <div class="uStat" id="uClass"></div> -->
 			<div class="uStat" id="uTarget"></div>
+			
+			<!-- <div class="uStat" id="uClass"></div> -->
+		</div>
 		</div>
 	</div>
 	<div id="ui-message"> <!-- Message popup -->

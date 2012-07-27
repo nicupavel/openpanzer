@@ -4,7 +4,8 @@
 	position: fixed;
 	z-index:100;
 	border: 0px solid white;
-	top: 92%;
+	top: 100%;
+	margin-top: -95px;
 	background: rgba(20,20,20, 0.7);
 	padding: 5px;
 	float: left;
@@ -16,7 +17,9 @@
 
 .unit-context-buttons
 {
+	border: 0px solid white;
 	background-repeat: no-repeat;
+	background-position: center;
 	width: 30px;
 	height: 30px;
 	padding-left: 2px;
@@ -25,33 +28,45 @@
 	float:left;
 }
 
-#unit-context-mount
-{
-	background-image: url('../resources/ui/dialogs/unit-context/mount.png');
-}
-
-#unit-context-reinforce
-{
-	background-image: url('../resources/ui/dialogs/unit-context/reinforce.png');
-}
-
-#unit-context-resupply
-{
-	background-image: url('../resources/ui/dialogs/unit-context/resupply.png');
-}
-
-#unit-context-embark
-{
-	background-image: url('../resources/ui/dialogs/unit-context/embark.png');
-}
+#unit-context-mount { background-image: url('../resources/ui/dialogs/unit-context/mount.png'); }
+#unit-context-reinforce { background-image: url('../resources/ui/dialogs/unit-context/reinforce.png'); }
+#unit-context-resupply { background-image: url('../resources/ui/dialogs/unit-context/resupply.png'); }
+#unit-context-embark { background-image: url('../resources/ui/dialogs/unit-context/embark.png'); }
 
 /* unit information window */
-.uCol
+
+.imageCol
 {
 	float: left;
 	border: 0px solid yellow;
-	min-height: 60px;
+	width: 100px;
+	height: 56px;
+	background: rgba(20,20,20, 0.7);
+	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
+	background-repeat: no-repeat;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
+
+.nameRow
+{
+	float: left;
+	border: 0px solid yellow;
+	width:740px;
+	padding:0px;
+}
+
+.statsRow
+{
+	float: left;
+	border: 0px solid red;
+	height: 40px;
+	background: rgba(20,20,20, 0.7);
+	border-top-right-radius: 5px;
+	width: 740px;
+}
+
+
 .uStat
 {
 	float: left;
@@ -67,18 +82,15 @@
 #unit-info
 {
 	position: fixed;
-	z-index:100;
+	z-index:90;
 	border: 0px solid white;
 	width: 840px;
 	top: 100%;
 	margin-top: -70px;
 	left: 50%;
 	margin-left: -420px;
-	background: rgba(20,20,20, 0.7);
-	padding: 5px;
-	float: left;
+	padding: 0px;
 	visibility: hidden;
-	border-radius: 5px;
 	font-family: Arial;
 	font-size: 12px;
 	font-weight: bold;
@@ -91,23 +103,31 @@
 	border: 0px #fff solid;
 	width: 80px;
 	height:50px;
-	margin: 0px auto;
 	-webkit-animation:unitanim 2s steps(9,end) infinite alternate;
 	-moz-animation:unitanim 2s steps(9,end) infinite alternate;
 	background:url('../resources/units/images/g87.png');
-	
 }
 
 #uName
 {
 	border: 0px #fff solid;
-	text-align: center;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 14px;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    2px 2px 0 #000;
 }
+
 #uFlag
 {
 	border: 0px #fff solid;
 	width:60px;
 	height:34px;
+	margin-top: 5px;
+	margin-left: 5px;
 	background-image: url('../resources/ui/flags/flag_big_18.png');
 }
 
