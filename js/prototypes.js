@@ -9,7 +9,8 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 }; 
+var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 };
+var unitTypeNames = ["Soft", "Hard", "Air", "Sea"];
 
 var unitClass = 
 {
@@ -18,6 +19,14 @@ var unitClass =
 	levelBomber: 12, airTransport: 13, submarine: 14, destroyer: 15, battleship: 16,
 	carrier: 17, navalTransport: 18, battleCruiser: 19, cruiser: 20, lightCruiser: 21
 };
+
+var unitClassNames =
+[
+	"No Class", "Infantry", "Tank", "Recon", "Anti Tank", "Flak", "Fortification",
+	"Ground Transport", "Artillery", "Air Defence", "Fighter Aircraft", "Tactical Bomber",
+	"Level Bomber", "Air Transport", "Submarine" , "Destroyer", "Battleship",
+	"Aircraft Carrier", "Naval Transport", "Battle Cruiser", "Cruiser", "Light Cruiser"
+];
 
 //Power of 2 bit masks. Hex with road value 136 means it has a road starting from mid of the hex
 //and going NW (128) and one starting from mid of the hex and going SE (8)
@@ -91,6 +100,12 @@ var movMethod =
 	deepnaval: 6, costal: 7, allTerrainTracked: 8, amphibious: 9, naval: 10,
 	allTerrainLeg: 11
 }
+
+var movMethodNames =
+[
+	"Tracked", "Half Tracked", "Wheeled", "Leg", "Towed", "Air", "Deep Naval", 
+	"Costal", "All Terrain Tracked", "Amphibious", "Naval", "All Terrain Leg"
+];
 
 //TODO Frozen conditions
 //254 Stop move (but select the tile), 255 Don't enter

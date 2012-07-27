@@ -70,11 +70,15 @@ function handleMouseClick(e)
 	}
 	
 	var clickedUnit = hex.getUnit(uiSettings.airMode);
+	
 	//Right click to show unit info or clear current selection
 	if (minfo.rclick) 
 	{ 
-		if (clickedUnit) 
+		if (clickedUnit)
+		{
+			$('unit-info').style.visibility = "visible";
 			updateUnitInfoWindow(clickedUnit);
+		}
 		else 
 		{
 			map.delCurrentUnit();
@@ -85,6 +89,8 @@ function handleMouseClick(e)
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
+		updateUnitInfoWindow(clickedUnit);
+		
 		if (map.currentUnit !== null && !uiSettings.deployMode )
 		{
 			//attack an allowed hex unit
@@ -392,15 +398,9 @@ function mainMenuButton(id)
 			var v = $('unit-info').style.visibility;
 			
 			if (v == "visible") 
-			{ 
 				$('unit-info').style.visibility = "hidden"; 
-			}
 			else 
-			{
-				//Just to show some window with dummy data if user press with no unit selected
 				$('unit-info').style.visibility = "visible"; 
-				if (map.currentUnit != null) updateUnitInfoWindow(map.currentUnit);
-			}
 			break;
 		}
 		case 'buy':
@@ -444,13 +444,9 @@ function mainMenuButton(id)
 			var v = $('slidemenu').style.visibility;
 			
 			if (v == "visible")
-			{
 				$('slidemenu').style.visibility = "hidden";
-			}
 			else
-			{
 				$('slidemenu').style.visibility = "visible";
-			}
 			break;
 		}
 		case 'options':
@@ -523,74 +519,61 @@ function updateUnitContextWindow(u)
 function updateUnitInfoWindow(u)
 {
 	var isEqUnit = false;
-	var uinfo, ammo, fuel;
-	$('unit-info').style.visibility  = "visible";
+	var uinfo, ammo, fuel, exp, ent;
 	
-	//Call from equipment window
+	if ($('unit-info').style.visibility == "hidden") return;
+
+	//Call from equipment window fill with default values (instead of creating a new unit object)
 	if (typeof u.unitData === "undefined") 
 	{
+		isEqUnit = true;
 		uinfo = u;
 		u.flag = u.country;
 		u.strength = 10;
-		isEqUnit = true;
 		ammo = u.ammo;
 		fuel = u.fuel;
+		exp = 0;
+		ent = 0;
 	}
 	else 
 	{	
 		uinfo = u.unitData(); 
 		ammo = u.getAmmo();
 		fuel = u.getFuel();
+		exp = u.experience;
+		ent = u.entrenchment;
 	}
 	
-	$('unit-image').style.backgroundImage = "url(" + uinfo.icon +")";
-	$('unit-flag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
-	$('unit-name').innerHTML = uinfo.name;
-	$('fuel').innerHTML = fuel;
-	$('ammo').innerHTML = ammo;
-	$('str').innerHTML = u.strength + "/10";
-	$('gunrange').innerHTML = uinfo.gunrange;
-	$('ini').innerHTML = uinfo.initiative;
-	$('spot').innerHTML = uinfo.spotrange;
-	$('ahard').innerHTML = uinfo.hardatk;
-	$('asoft').innerHTML = uinfo.softatk;
-	$('aair').innerHTML = uinfo.airatk;
-	$('anaval').innerHTML = uinfo.navalatk;
-	$('dhard').innerHTML = uinfo.grounddef;
-	$('dair').innerHTML = uinfo.airdef;
-	$('dclose').innerHTML = uinfo.closedef;
-	$('drange').innerHTML = uinfo.rangedefmod;
-
-	$('iokbut').onclick = function() { $('unit-info').style.visibility = "hidden"; }
-	$('imountbut').className = "";
-	$('iresupbut').className = "";
-	$('ireinfbut').className = "";
+	$('uImage').style.backgroundImage = "url(" + uinfo.icon +")";
+	//$('uFlag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
+	$('uName').innerHTML = uinfo.name + " " + unitClassNames[uinfo.uclass];
+	//$('uClass').innerHTML = uinfo.uclass;
+	$('uTarget').innerHTML = unitTypeNames[uinfo.target];
+	$('uMoveType').innerHTML = movMethodNames[uinfo.movmethod];
 	
+	$('uStr').innerHTML = u.strength + "/10";
+	$('uFuel').innerHTML = fuel;
+	$('uAmmo').innerHTML = ammo;
+	$('uGunRange').innerHTML = uinfo.gunrange;
+	$('uMovement').innerHTML = uinfo.movpoints;
+	
+	$('uExp').innerHTML = exp;
+	$('uEnt').innerHTML = ent;
+	$('uIni').innerHTML = uinfo.initiative;
+	$('uSpot').innerHTML = uinfo.spotrange;
+	
+	$('uAHard').innerHTML = uinfo.hardatk;
+	$('uASoft').innerHTML = uinfo.softatk;
+	$('uAAir').innerHTML = uinfo.airatk;
+	$('uANaval').innerHTML = uinfo.navalatk;
+	
+	$('uDHard').innerHTML = uinfo.grounddef;
+	$('uDAir').innerHTML = uinfo.airdef;
+	$('uDClose').innerHTML = uinfo.closedef;
+	$('uDRange').innerHTML = uinfo.rangedefmod;
+
 	if (isEqUnit) return;
-	if (u.player.id != map.currentPlayer.id) return;
-	
-	if (GameRules.canMount(u))
-	{
-		$('imountbut').className = "enabled";
-		$('imountbut').title = "Mount this unit into a transport";
-		$('imountbut').onclick = function() {unitInfoButton('mount', u);}
-	}
-	
-	if (GameRules.canResupply(map.map, u))
-	{
-		$('iresupbut').className = "enabled";
-		$('iresupbut').title = "Resupply Ammo and Fuel for this unit";
-		$('iresupbut').onclick = function() {unitInfoButton('resupply', u);}
-	}
-
-	if (GameRules.canReinforce(map.map, u)) 
-	{
-		$('ireinfbut').className = "enabled";
-		$('ireinfbut').title = "Reinforce unit strength";
-		$('ireinfbut').onclick = function() {unitInfoButton('reinforce', u);}
-	}
-	
-	console.log(u);
+	//TODO Add unit kills/medals	
 }
 
 function unitInfoButton(action, unit)
