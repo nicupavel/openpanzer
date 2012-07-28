@@ -85,12 +85,13 @@ function handleMouseClick(e)
 			r.render();
 		}
 		return true;
-	}	
+	}
+		
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
 		updateUnitInfoWindow(clickedUnit);
-		
+			
 		if (map.currentUnit !== null && !uiSettings.deployMode )
 		{
 			//attack an allowed hex unit
@@ -132,7 +133,9 @@ function handleMouseClick(e)
 			uiSettings.airMode = false; //If clicked unit is air select airmode automatically
 			hoverout($('air').firstChild); //Change air button to ON in UI
 	}
+	
 	updateUnitContextWindow(map.currentUnit);
+	
 	//TODO partial screen updates (can update only attack or move selected hexes)
 	r.render(); 
 }
@@ -316,7 +319,7 @@ function buildMainMenu()
 	var ld = addTag('statusbar','div');
 	ld.id = "locmsg"
 	ld.className = "message";
-	
+
 	for (var b = 0; b < menubuttons.length; b++) 
 	{
 		var div;
@@ -325,7 +328,7 @@ function buildMainMenu()
 			div = addTag('slidemenu','div');
 		else
 			div = insertTag('menu', 'div', 'slidemenu');
-			
+		
 		var img = addTag(div, 'img');
 		var id = menubuttons[b][0];
 		var title = menubuttons[b][1];
@@ -338,7 +341,7 @@ function buildMainMenu()
 		
 		div.onclick = function() { mainMenuButton(this.id); }
 		
-		if (uiSettings.hasTouch) return; //Don't set hover for touch-devices
+		if (uiSettings.hasTouch) continue; //Don't set hover for touch-devices
 		
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() 

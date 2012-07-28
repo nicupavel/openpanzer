@@ -75,12 +75,18 @@ function hasTouch()
 
 function hoverin(e)
 {
+	if (!e || typeof e === "undefined")
+		return;
+	
 	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
 	e.src = path + e.id + "-over.png";
 }
 
 function hoverout(e)
 {
+	if (!e || typeof e === "undefined")
+		return;
+	
 	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
 	e.src = path + e.id + ".png";
 }
