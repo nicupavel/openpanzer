@@ -413,14 +413,15 @@ function mainMenuButton(id)
 			if (v == "visible") 
 			{ 
 				$('equipment').style.visibility = "hidden"; 
-				$('container-unitlist').style.visibility = "hidden"; 
+				$('container-unitlist').style.visibility = "hidden";
 				uiSettings.deployMode = false;
 				
 			}
 			else 
 			{ 
 				$('equipment').style.visibility = "visible"; 
-				$('container-unitlist').style.visibility = "visible"; 
+				$('container-unitlist').style.visibility = "visible";
+				$('unit-info').style.visibility = "visible"; 
 				updateEquipmentWindow(unitClass.tank);
 			}
 			r.render();
