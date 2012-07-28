@@ -575,8 +575,22 @@ function updateUnitInfoWindow(u)
 	$('uDAir').innerHTML = uinfo.airdef;
 	$('uDClose').innerHTML = uinfo.closedef;
 	$('uDRange').innerHTML = uinfo.rangedefmod;
-
+	
 	if (isEqUnit) return;
+	
+	$('uTransport').className = " ";
+	
+	if (u.transport && !u.isMounted)
+	{
+		$('uTransport').className = "enabled";
+		$('uTransport').onclick = function() 
+			{ 
+				//Simulate a mounted unit to get transport + unit properties //TODO Better
+				u.isMounted = true; 
+				updateUnitInfoWindow(u); 
+				u.isMounted = false;
+			} 
+	}
 	//TODO Add unit kills/medals	
 }
 

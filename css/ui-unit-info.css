@@ -131,6 +131,17 @@
 	background-image: url('../resources/ui/flags/flag_big_18.png');
 }
 
+#uTransport.enabled
+{ 
+	float: left;
+	width: 30px;
+	height: 40px;
+	margin-left: 20px;
+	background-image: url('../resources/ui/dialogs/unit-info/images/unit-transport.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 #uClass 	{ background-image: url('../resources/ui/dialogs/unit-info/images/class.png'); }
 #uTarget 	{ background-image: url('../resources/ui/dialogs/unit-info/images/target-type.png'); }
 #uMoveType	{ background-image: url('../resources/ui/dialogs/unit-info/images/movement-type.png'); width: 60px;}
