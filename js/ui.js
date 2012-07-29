@@ -580,16 +580,29 @@ function updateUnitInfoWindow(u)
 	
 	$('uTransport').className = " ";
 	
-	if (u.transport && !u.isMounted)
+	//Add button to see transport/unit properties depending on unit state
+	if (u.transport)
 	{
-		$('uTransport').className = "enabled";
+		var simulateMount;
+		
+		if ( !u.isMounted)
+		{
+			$('uTransport').className = "toTransport";
+			simulateMount = true;
+		}
+		else
+		{
+			$('uTransport').className = "toUnit";
+			simulateMount = false; 
+		}
+		
 		$('uTransport').onclick = function() 
-			{ 
-				//Simulate a mounted unit to get transport + unit properties //TODO Better
-				u.isMounted = true; 
-				updateUnitInfoWindow(u); 
-				u.isMounted = false;
-			} 
+		{
+				var s = u.isMounted;
+				u.isMounted = simulateMount;
+				updateUnitInfoWindow(u);
+				u.isMounted = s;
+		}		
 	}
 	//TODO Add unit kills/medals	
 }
@@ -617,8 +630,8 @@ function unitInfoButton(action, unit)
 			break;
 		}
 	}
-	$('unit-info').style.visibility = "hidden";
 	updateUnitContextWindow(unit);
+	updateUnitInfoWindow(unit);
 	r.render();
 }
 

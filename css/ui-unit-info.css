@@ -131,16 +131,28 @@
 	background-image: url('../resources/ui/flags/flag_big_18.png');
 }
 
-#uTransport.enabled
-{ 
+#uTransport
+{
 	float: left;
-	width: 30px;
-	height: 40px;
 	margin-left: 20px;
-	background-image: url('../resources/ui/dialogs/unit-info/images/unit-transport.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+#uTransport.toTransport
+{ 
+	width: 30px;
+	height: 40px;
+	background-image: url('../resources/ui/dialogs/unit-info/images/unit-transport.png');	
+}
+
+#uTransport.toUnit
+{ 
+	width: 30px;
+	height: 40px;	
+	background-image: url('../resources/ui/dialogs/unit-info/images/transport-unit.png');
+}
+
 
 #uClass 	{ background-image: url('../resources/ui/dialogs/unit-info/images/class.png'); }
 #uTarget 	{ background-image: url('../resources/ui/dialogs/unit-info/images/target-type.png'); }
