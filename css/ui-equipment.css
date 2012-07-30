@@ -1,125 +1,120 @@
 #equipment
 {
 	position: fixed;
-	width: 290px;
-	height: 380px;
+	width: 840px;
 	left:50%;
-	margin-left: -395px;
-	top:50%;
-	margin-top: -188px;
+	margin-left: -420px;
+	top:140px;
 	color: #fff;
 	font-weight:bold;
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	background-image: url('../resources/ui/dialogs/equipment/images/eq-bg.png');
+	background: rgba(20,20,20, 0.7);
+	border-radius: 5px;
 	background-repeat: no-repeat;
 	z-index:98;
 	visibility: hidden;
-	overflow: hidden;	
+	overflow: hidden;
+	float: left;	
+}
+
+.hscroll-container
+{
+	min-width:835px;
+	margin:0 auto;
+	overflow: auto;
+}
+
+.hscroll
+{
+	padding-left: 5px;
+	float: left;
+	margin-right: -20000px;
 }
 
 #eqUnitList
 {
-	border: 0px solid #fff;
-	/*Win 7 Chrome bug: specifying the position here leaves the scrolling bars on screen when div is hidden */
-	/*
-	position: absolute;
-	height: 320px;
-	width:250px;
-	top: 24px;
-	left: 30px;
-	*/
-	height: 321px;
-	width:225px;
-	margin-top: 20px;
-	margin-left: 55px;
-	padding-left: 0px;
+	border: 0px solid white;
+}
+
+.eqSelClassBut
+{
+	width: 45px;
+	height: 30px;
 	float: left;
-	overflow: auto;
 }
 
 #eqSelClass
 {
 	border: 0px solid #fff;
-	position: absolute;
-	overflow: auto;
-	height: 340px;
-	width:47px;
-	top: 45px;
-	left: 8px;
+	overflow: hidden;
+	height: 30px;
+	width: 360px;
 	float: right;
+	margin-left: 50px;
 	z-index:100;
 }
 
-#eqSelCountry
+#eqSelCountryButton /* the round button below country flag */
 {
-	border: 0px solid #fff;
-	position: absolute;
-	overflow: hidden;
-	margin-top:3px;
-	margin-left:2px;
+	position:relative;
+	top: 5px;
+	left:10px;
+	float: left;
 	height: 30px;
-	width:21px;
-	top: 12px;
-	left: 20px;
+	width: 30px;
+	background-image: url('../resources/ui/buttons/empty.png');
+	background-repeat: no-repeat;
+	z-index:90;
+}
+
+#eqSelCountry  /* the actual country flag button with position relative to the eqSelCountryButton */
+{
+	position:relative;
+	top: 8px;
+	left:4px;
+	float: left;
+	height: 30px;
+	width: 21px;
 	background-image: url('../resources/ui/flags/flags_med.png');
 	background-repeat: no-repeat;
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
 	z-index:100;
 }
-#eqSelCountry:hover
-{
-	top:13px;
-	left:21px;
-}
 
-#eqOkBut
+
+#eqButtonsContainer
 {
-	background-image: url('../resources/ui/buttons/ok.png');
+	float: left;
+	width: 840px;
+	height: 40px;
+	border: 0px solid white;
+}
+.eqButton
+{
 	background-repeat: no-repeat;
 	border: 0px solid #fff;
-	position:absolute;
 	width: 30px;
 	height: 30px;
-	top: 343px;
-	left: 220px;
+	float: right;
+	margin: 5px 10px 0px 10px;
 }
 
-#eqUpgradeBut
-{
-	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png');
-	background-repeat: no-repeat;
-	border: 0px solid #fff;
-	position:absolute;
-	width: 30px;
-	height: 30px;
-	top: 343px;
-	left: 180px;
-}
+#eqOkBut { background-image: url('../resources/ui/buttons/ok.png'); }
+#eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
+#eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }
 
-#eqNewBut
-{
-	background-image: url('../resources/ui/dialogs/equipment/images/buy.png');
-	background-repeat: no-repeat;
-	border: 0px solid #fff;
-	position:absolute;
-	width: 30px;
-	height: 30px;
-	top: 343px;
-	left: 140px;
-}
 #currentPrestige
 {
+	float: left;
 	border: 0px solid #fff;
-	position:absolute;
-	width: 90px;
+	width: 400px;
 	height: 30px;
-	top: 350px;
-	left: 60px;
-	font-weight:bold;
-	font-family: Arial;
 	font-size: 14px;
+	color: #f8e064;
+	margin-top: 5px;
+	margin-left: 5px;
 }
 #currentPrestige img
 {
@@ -136,34 +131,20 @@
 	left: 50%;
 	top: 30px;
 	color: #fff;
-	font-weight:bold;
-	font-family: Arial;
 	font-size: 12px;
-	text-shadow: 0.1em 0.1em 0.2em black;
 	z-index: 98;
-}
-
-#hscroll-unitlist
-{
-	min-width:835px;
-	margin:0 auto;
-	overflow: auto;
 }
 
 #unitlist
 {
-	float:left;
-	padding-left: 5px;
 	background: rgba(0,0,0,0.6);
-	margin-right: -20000px;
 	border-radius: 5px;
-
 }
 
 .eqUnitBox
 {
 	border: 0px solid #fff;
-	width: 99px;
+	width: 110px;
 	height: 76px;
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
 	background-repeat: no-repeat;

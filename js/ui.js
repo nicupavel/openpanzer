@@ -639,7 +639,7 @@ function buildEquipmentWindow()
 {
 	//Build the class selection buttons [button name, description, unit class id from equipment.js]
 	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
-					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
+					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank2', 'Tank', 2],
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 	
 	//The default selected country in the div
@@ -660,13 +660,18 @@ function buildEquipmentWindow()
 		
 		var id = eqClassButtons[b][0];
 		div.id = id;
+		div.className = "eqSelClassBut";
 		div.title = eqClassButtons[b][1];
 		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() { updateEquipmentWindow(this.eqclass); }
+		
+		//TODO REVIEW hover for eq class buttons
+		/*
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() { hoverout(this.firstChild); }
+		*/
 	}
 	
 	//Bottom buttons
@@ -713,7 +718,7 @@ function updateEquipmentWindow(eqclass)
 	//Remove older entries
 	clearTag('unitlist');
 	clearTag('eqUnitList');
-	$('currentPrestige').innerHTML = map.currentPlayer.prestige + currencyIcon;
+	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
@@ -825,10 +830,10 @@ function updateEquipmentWindow(eqclass)
 			div.onclick = function() 
 				{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
-					$('eqUserSel').eqoffset  = $('eqUnitList').scrollTop; //save scroll position so at refresh we autoscroll 
+					$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.equnitid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
-					$('eqUnitList').scrollTop = $('eqUserSel').eqoffset; //scroll to the selected unit
+					$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
 				};
 		}
 	}
@@ -924,5 +929,5 @@ function gameStart()
 	scenario="resources/scenarios/xml/tutorial.xml";
 	ui = new UI(scenario);
 	//Bring up the "Main Menu"
-	ui.mainMenuButton('options');
+	ui.mainMenuButton('buy');
 }

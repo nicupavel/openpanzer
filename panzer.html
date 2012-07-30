@@ -72,17 +72,23 @@
 		<div id="message">message</div>
 		<div id="uiokbut"></div>
 	</div>
-	<div id="container-unitlist"><div id="hscroll-unitlist">
-		<div id="unitlist"></div><!-- Current player units -->
-	</div></div>
+	<div id="container-unitlist">
+		<div class="hscroll-container" id="hscroll-unitlist">
+			<div class="hscroll" id="unitlist"></div><!-- Current player units -->
+		</div>
+	</div>
 	<div id="equipment"><!-- Equipment Window -->
-		<div id="eqSelCountry"></div>
-		<div id="eqSelClass"></div>
-		<div id="eqUnitList"></div>
 		<div id="currentPrestige"></div>
-		<div id="eqOkBut"></div>
-		<div id="eqUpgradeBut"></div>
-		<div id="eqNewBut"></div>
+		<div id="eqSelClass"></div>
+		<div class="hscroll-container" id="hscroll-eqUnitList">
+			<div class="hscroll" id="eqUnitList"></div>
+		</div>
+		<div id="eqButtonsContainer">
+			<div id="eqSelCountryButton"><div id="eqSelCountry"></div></div>
+			<div class="eqButton" id="eqOkBut" ></div>
+			<div class="eqButton" id="eqUpgradeBut"></div>
+			<div class="eqButton" id="eqNewBut"></div>
+		</div>
 		<div id="eqUserSel"></div> <!-- keeps track of user selections -->
 	</div>
 	<div id="game"></div> <!-- Where the canvases are added -->
