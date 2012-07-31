@@ -681,34 +681,47 @@ function buildEquipmentWindow()
 	$('eqNewBut').title = "Buy unit as a new unit";
 	$('eqNewBut').onclick = function()
 		{
-				var eqid = $('eqUserSel').equnit;
-				if (typeof eqid === "undefined")
+				var eqUnit = $('eqUserSel').equnit;
+				var eqTransport = $('eqUserSel').eqtransport;
+				
+				if (typeof eqUnit === "undefined")
 					return;
-				var ret = map.currentPlayer.buyUnit(eqid, 0); //TODO transport
+					
+				if (typeof eqTransport === "undefined" || eqTransport == "")
+					eqTransport = 0;
+					
+				var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport); //TODO transport
 				if (ret)
-					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqid);
+					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqUnit + " with transport:" + eqTransport);
 				else
 					console.log("Can't buy a new unit");
-				updateEquipmentWindow(equipment[eqid].uclass);
+					
+				updateEquipmentWindow(equipment[eqUnit].uclass);
 		}
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
 	$('eqUpgradeBut').onclick = function()
 		{
 			var id = $('eqUserSel').userunit;
-			var eqid = $('eqUserSel').equnit;
+			var eqUnit = $('eqUserSel').equnit;
+			var eqTransport = $('eqUserSel').eqtransport;
 			
-			if (typeof id === "undefined" || typeof eqid === "undefined")
+			if (typeof id === "undefined" || typeof eqUnit === "undefined")
 				return;
-			console.log("Upgrading unit: " + id + " to equipment id:" + eqid);
-			if (map.upgradeUnit(id, eqid))
+				
+			if (typeof eqTransport === "undefined" || eqTransport == "")
+					eqTransport = 0;
+					
+			console.log("Upgrading unit: " + id + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
+			
+			if (map.upgradeUnit(id, eqUnit, eqTransport))
 			{
 				r.cacheImages(function() { r.render(); }); //Need to cache new image
-				updateEquipmentWindow(equipment[eqid].uclass);
+				updateEquipmentWindow(equipment[eqUnit].uclass);
 			}
 		}
 		
 	$('eqOkBut').title = "Close";
-	$('eqOkBut').onclick = function() { mainMenuButton("buy"); }
+	$('eqOkBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 }
 
 //TODO function too large break it
@@ -796,6 +809,7 @@ function updateEquipmentWindow(eqclass)
 				img.src = ud.icon;
 				txt.innerHTML = ud.name;
 				div.unitid = u.id;
+				div.uniteqid = u.eqid;
 				div.eqclass = ud.uclass;
 				div.country = u.player.country;
 				div.onclick = function() 
@@ -805,6 +819,7 @@ function updateEquipmentWindow(eqclass)
 							if (c[i] == this.country) break;
 						$('eqSelCountry').country = i;
 						$('eqUserSel').userunit = this.unitid; //save selected player unit
+						updateUnitInfoWindow(equipment[this.uniteqid]);
 						updateEquipmentWindow(this.eqclass);
 					}
 			}

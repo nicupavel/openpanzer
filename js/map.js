@@ -50,15 +50,22 @@ Player.prototype.buyUnit = function(unitid, transportid)
 	return true;
 }
 
-Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for upgrade
+Player.prototype.upgradeUnit = function(unit, upgradeid, transportid)
 {
 	var ocost = unit.unitData().cost * CURRENCY_MULTIPLIER;
 	var ncost = equipment[upgradeid].cost * CURRENCY_MULTIPLIER;
 	
+	if (transportid != 0 && typeof transportid !== "undefined")
+	{
+		ncost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+		if (unit.transport !== null)
+			ocost += unit.transport.unitData().cost * CURRENTCY_MULTIPLIER;
+	}	
 	if (ncost - ocost > this.prestige)
 		return false;	
-	if (!unit.upgrade(upgradeid))
+	if (!unit.upgrade(upgradeid, transportid))
 		return false;
+		
 	this.prestige -= (ncost - ocost);
 		
 	return true;
@@ -546,16 +553,19 @@ function Map()
 		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
-	this.upgradeUnit = function(id, upgradeid)
+	this.upgradeUnit = function(id, upgradeid, transportid)
 	{
 		var unit = null;
 		if ((unit = findUnitById(id)) == null)
 			return false;
 		var p = unit.player;
-		if (!p.upgradeUnit(unit, upgradeid))
+		if (!p.upgradeUnit(unit, upgradeid, transportid))
 			return false;
 		unitImagesList[unit.eqid] = unit.getIcon();
-
+		
+		if (unit.transport !== null) //TODO change this.addUnit to handle upgrading
+			unitImagesList[unit.transport.eqid] = unit.transport.icon;
+		
 		return true;
 	}
 	
