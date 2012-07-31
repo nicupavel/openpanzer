@@ -59,7 +59,7 @@ Player.prototype.upgradeUnit = function(unit, upgradeid, transportid)
 	{
 		ncost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
 		if (unit.transport !== null)
-			ocost += unit.transport.unitData().cost * CURRENTCY_MULTIPLIER;
+			ocost += unit.transport.unitData().cost * CURRENCY_MULTIPLIER;
 	}	
 	if (ncost - ocost > this.prestige)
 		return false;	
