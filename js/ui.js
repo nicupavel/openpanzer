@@ -20,6 +20,9 @@ function UI(scenario)
 		hasTouch: hasTouch(),
 	};
 	
+	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
+
+	
 	var map = new Map();
 	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
@@ -709,15 +712,18 @@ function buildEquipmentWindow()
 }
 
 //TODO function too large break it
+//TODO index equipment array
+//TODO clear onclick functions 
 function updateEquipmentWindow(eqclass)
 {
 	if ($('equipment').style.visibility !== "visible") 
 		return;
 		
-	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	//Remove older entries
 	clearTag('unitlist');
 	clearTag('eqUnitList');
+	clearTag('eqTransportList');
+	
 	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
@@ -815,26 +821,61 @@ function updateEquipmentWindow(eqclass)
 		var u = equipment[i];
 		if ((u.uclass == eqclass) && (u.country == country))
 		{
+			//Add the unit to the list
 			var div = addTag('eqUnitList', 'div');
 			var img = addTag(div, 'img');
 			var txt = addTag(div, 'div');
 			div.className = "eqUnitBox";
 			
-			if (u.id == eqUnitSelected)
-				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
-				
 			div.equnitid = u.id;
 			img.src = u.icon;
 			txt.innerHTML = u.name + " - " + u.cost * CURRENCY_MULTIPLIER;
 			txt.innerHTML += currencyIcon;
+			
 			div.onclick = function() 
-				{ 
+			{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
+					$('eqUserSel').eqtransport = ""; //clear transport selection on new unit selection 
 					$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.equnitid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 					$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
-				};
+			};
+			
+			if (u.id == eqUnitSelected)
+			{
+				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
+				
+				//Add the transport to the list
+				if (GameRules.isTransportable(u.id))
+				{
+					for (var i in equipment)
+					{
+						var t = equipment[i];
+						if ((t.uclass == unitClass.groundTransport) && (t.country == country))
+						{
+							var tdiv = addTag('eqTransportList', 'div');
+							var timg = addTag(tdiv, 'img');
+							var ttxt = addTag(tdiv, 'div');
+							tdiv.className = "eqUnitBox";
+							tdiv.eqtransportid = t.id;
+							timg.src = t.icon;
+							ttxt.innerHTML = t.name + " - " + t.cost * CURRENCY_MULTIPLIER;
+							ttxt.innerHTML += currencyIcon;
+							
+							tdiv.onclick = function()
+							{ 
+								$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
+								updateUnitInfoWindow(equipment[this.eqtransportid]); 
+								updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
+							};
+							
+							if (t.id == $('eqUserSel').eqtransport)
+								tdiv.title = t.name;
+						}
+					}
+				}
+			}
 		}
 	}
 }
