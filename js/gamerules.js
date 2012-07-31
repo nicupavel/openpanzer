@@ -822,6 +822,22 @@ GameRules.canUnmount = function(unit)
 	return false;
 }
 
+GameRules.isTransportable = function(unitID)
+{
+	var ud = equipment[unitID];
+	var movmethod = ud.movmethod;
+
+	//Fortifications are listed as towed for some reason
+	if (ud.uclass == unitClass.fortification)
+		return false;
+	
+	if ((movmethod != movMethod.towed) && (movmethod != movMethod.leg)
+		 && (movmethod != movMethod.allTerrainLeg))
+		return false; 
+
+	return true;
+}
+
 function isAir(unit)
 {
 	if (unit === null) 
