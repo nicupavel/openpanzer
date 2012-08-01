@@ -1,3 +1,40 @@
+.hscroll-container /* Generic container for horizontal scrolling */
+{
+	min-width:835px;
+	margin:0 auto;
+	overflow: auto;
+	z-index: 0;
+}
+
+.hscroll /* Force horizontal scrolling */
+{
+	padding-left: 5px;
+	float: left;
+	margin-right: -20000px;
+}
+
+/* The list of units currently on map with horizontal scrolling */
+#container-unitlist
+{
+	border: 0px solid #fff;
+	position: fixed;
+	min-width: 840px;
+	margin-left: -420px;
+	left: 50%;
+	top: 30px;
+	color: #fff;
+	font-size: 12px;
+	z-index: 98;
+}
+
+#unitlist
+{
+	background: rgba(0,0,0,0.6);
+	border-radius: 5px;
+}
+
+
+/* The equipment window with class selection buttons, equipment and transport units and buy/upgrade buttons */
 #equipment
 {
 	position: fixed;
@@ -19,21 +56,6 @@
 	float: left;	
 }
 
-.hscroll-container
-{
-	min-width:835px;
-	margin:0 auto;
-	overflow: auto;
-	z-index: 0;
-}
-
-.hscroll
-{
-	padding-left: 5px;
-	float: left;
-	margin-right: -20000px;
-}
-
 .eqSelClassBut
 {
 	width: 45px;
@@ -51,13 +73,21 @@
 	z-index:100;
 }
 
+#eqInfoBox /* Where upgrade/buy costs are displayed */
+{
+	font-size: 14px;
+	color: #f8e064;
+	margin-top: 5px;
+	margin-left: 5px;
+	float: left;
+}
+
 #eqButtonsContainer
 {
-	float: left;
-	width: 840px;
+	float: right;
 	height: 40px;
-	border: 0px solid white;
 }
+
 .eqButton
 {
 	background-repeat: no-repeat;
@@ -93,7 +123,7 @@
 
 #eqUserSel { z-index: 0; visibility: hidden; width:0px; height: 0px;}
 
-#currentPrestige
+#currentPrestige /* Where the current player prestige is displayed */
 {
 	float: left;
 	border: 0px solid #fff;
@@ -108,25 +138,6 @@
 {
 	margin-left: 5px;
 	vertical-align:middle;
-}
-
-#container-unitlist
-{
-	border: 0px solid #fff;
-	position: fixed;
-	min-width: 840px;
-	margin-left: -420px;
-	left: 50%;
-	top: 30px;
-	color: #fff;
-	font-size: 12px;
-	z-index: 98;
-}
-
-#unitlist
-{
-	background: rgba(0,0,0,0.6);
-	border-radius: 5px;
 }
 
 .eqUnitBox
