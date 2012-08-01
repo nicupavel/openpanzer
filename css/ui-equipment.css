@@ -96,7 +96,7 @@
 	margin: 5px 10px 0px 10px;
 }
 
-#eqOkBut { background-image: url('../resources/ui/buttons/ok.png'); }
+#eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
 #eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
 #eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }
 

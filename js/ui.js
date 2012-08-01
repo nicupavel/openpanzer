@@ -720,8 +720,8 @@ function buildEquipmentWindow()
 			}
 		}
 		
-	$('eqOkBut').title = "Close";
-	$('eqOkBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
+	$('eqCloseBut').title = "Close";
+	$('eqCloseBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 }
 
 //TODO function too large break it
