@@ -221,5 +221,6 @@ function screenPos(x, y)
 	this.y = y;
 }
 
-var CURRENCY_MULTIPLIER = 12;
+var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
+var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
 var VERSION = "1.9";

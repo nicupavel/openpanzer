@@ -906,6 +906,32 @@ GameRules.unitUsesFuel = function(unit)
 	return true;
 }
 
+GameRules.calculateUnitCosts = function(unitid, transportid)
+{
+	var cost = 0;
+	
+	if (unitid > 0 && typeof unitid !== "undefined")
+		cost += equipment[unitid].cost * CURRENCY_MULTIPLIER;
+	
+	if (transportid > 0 && typeof transportid !== "undefined")
+		cost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+
+	return cost;
+}
+
+GameRules.calculateUpgradeCosts = function(unit, upgradeid, transportid)
+{
+	var ocost = 0;
+	var ncost = GameRules.calculateUnitCosts(upgradeid, transportid);
+
+	if (unit.transport !== null)
+		ocost = GameRules.calculateUnitCosts(unit.eqid, unit.transport.eqid);
+	else
+		ocost = GameRules.calculateUnitCosts(unit.eqid, 0);
+ 	
+ 	return ((ncost - ocost) * UPGRADE_PENALTY) >> 0; 
+}
+
 //Returns aproximate cardinal directions x row, y col
 GameRules.getDirection = function(x1, y1, x2, y2)
 {

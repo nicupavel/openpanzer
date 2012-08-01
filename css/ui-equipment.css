@@ -24,6 +24,7 @@
 	min-width:835px;
 	margin:0 auto;
 	overflow: auto;
+	z-index: 0;
 }
 
 .hscroll
@@ -31,11 +32,6 @@
 	padding-left: 5px;
 	float: left;
 	margin-right: -20000px;
-}
-
-#eqUnitList
-{
-	border: 0px solid white;
 }
 
 .eqSelClassBut
@@ -103,6 +99,8 @@
 #eqOkBut { background-image: url('../resources/ui/buttons/ok.png'); }
 #eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
 #eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }
+
+#eqUserSel { z-index: 0; visibility: hidden; width:0px; height: 0px;}
 
 #currentPrestige
 {
