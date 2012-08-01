@@ -644,7 +644,7 @@ function buildEquipmentWindow()
 	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
 					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank2', 'Tank', 2],
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
-	
+
 	//The default selected country in the div
 	$('eqSelCountry').country = 0;
 	$('eqSelCountry').owner = 0;
@@ -653,6 +653,7 @@ function buildEquipmentWindow()
 		{
 			if (this.country >= countries.length - 1) this.country = 0; 
 			else this.country++;
+			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing country
 			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
@@ -668,7 +669,11 @@ function buildEquipmentWindow()
 		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
-		div.onclick = function() { updateEquipmentWindow(this.eqclass); }
+		div.onclick = function() 
+		{
+			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing class
+			updateEquipmentWindow(this.eqclass); 
+		}
 		
 		//TODO REVIEW hover for eq class buttons
 		/*
@@ -737,6 +742,10 @@ function updateEquipmentWindow(eqclass)
 	clearTag('eqUnitList');
 	clearTag('eqTransportList');
 	
+	var userUnitSelected = $('eqUserSel').userunit;
+	var eqUnitSelected = $('eqUserSel').equnit;
+	var eqTransportSelected = $('eqUserSel').eqtransport;
+	
 	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
@@ -779,7 +788,6 @@ function updateEquipmentWindow(eqclass)
 	else
 	{
 		//The actual units on the map
-		var userUnitSelected = $('eqUserSel').userunit;
 		//console.log("User Selected Unit:" + userUnitSelected);
 		var unitList = map.getUnits(); 
 		uiSettings.deployMode = false;
@@ -798,6 +806,7 @@ function updateEquipmentWindow(eqclass)
 				if (u.id == userUnitSelected)
 				{	
 					div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+					eqclass = ud.uclass; //Force unit class for equipment display
 					map.selectUnit(u); //select unit on map
 					r.render(); //refresh so the new selection appear
 					//bring the unit box into unit list view by scrolling
@@ -828,7 +837,6 @@ function updateEquipmentWindow(eqclass)
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
 	
-	var eqUnitSelected = $('eqUserSel').equnit;
 	//console.log("Selected unit:" + eqUnitSelected);
 	//Units in equipment
 	for (var i in equipment)
@@ -850,7 +858,7 @@ function updateEquipmentWindow(eqclass)
 			div.onclick = function() 
 			{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
-					$('eqUserSel').eqtransport = ""; //clear transport selection on new unit selection 
+					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
 					$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.equnitid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
@@ -885,7 +893,7 @@ function updateEquipmentWindow(eqclass)
 								updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 							};
 							
-							if (t.id == $('eqUserSel').eqtransport)
+							if (t.id == eqTransportSelected)
 								tdiv.title = t.name;
 						}
 					}
