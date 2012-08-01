@@ -746,6 +746,12 @@ function updateEquipmentWindow(eqclass)
 	var eqUnitSelected = $('eqUserSel').equnit;
 	var eqTransportSelected = $('eqUserSel').eqtransport;
 	
+	var eqInfoTxt = "New unit cost: " + GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
+	//TODO/REVIEW: We assume that selecting a unit on current units lists selects a map unit 
+	//Actually we should do map.findUnitById($('eqUserSel').userunit)
+	eqInfoTxt += " Upgrade unit cost: " + GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
+	$('eqInfoBox').innerHTML = eqInfoTxt;
+	
 	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
 	
 	//The current selected coutry in the div
