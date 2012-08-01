@@ -51,34 +51,6 @@
 	z-index:100;
 }
 
-#eqSelCountryButton /* the round button below country flag */
-{
-	position:relative;
-	top: 5px;
-	left:10px;
-	float: left;
-	height: 30px;
-	width: 30px;
-	background-image: url('../resources/ui/buttons/empty.png');
-	background-repeat: no-repeat;
-	z-index:90;
-}
-
-#eqSelCountry  /* the actual country flag button with position relative to the eqSelCountryButton */
-{
-	position:relative;
-	top: 8px;
-	left:4px;
-	float: left;
-	height: 30px;
-	width: 21px;
-	background-image: url('../resources/ui/flags/flags_med.png');
-	background-repeat: no-repeat;
-	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
-	z-index:100;
-}
-
-
 #eqButtonsContainer
 {
 	float: left;
@@ -94,6 +66,25 @@
 	height: 30px;
 	float: right;
 	margin: 5px 10px 0px 10px;
+}
+
+#eqSelCountryButton /* the round button below country flag */
+{
+	z-index: 90;
+	background-image: url('../resources/ui/buttons/empty.png');
+}
+
+#eqSelCountry  /* the actual country flag button with position relative to the eqSelCountryButton */
+{
+	position:relative;
+	top: 8px;
+	left:4px;
+	height: 30px;
+	width: 22px;
+	background-image: url('../resources/ui/flags/flags_med.png');
+	background-repeat: no-repeat;
+	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
+	z-index:100;
 }
 
 #eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
