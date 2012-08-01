@@ -734,7 +734,7 @@ function buildEquipmentWindow()
 //TODO clear onclick functions 
 function updateEquipmentWindow(eqclass)
 {
-	if ($('equipment').style.visibility !== "visible") 
+	if ($('container-unitlist').style.visibility !== "visible") 
 		return;
 		
 	//Remove older entries
