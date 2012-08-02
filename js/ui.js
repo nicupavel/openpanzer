@@ -652,7 +652,7 @@ function buildEquipmentWindow()
 {
 	//Build the class selection buttons [button name, description, unit class id from equipment.js]
 	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
-					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank2', 'Tank', 2],
+					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
 					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
 
 	//The default selected country in the div
