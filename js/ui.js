@@ -538,7 +538,10 @@ function updateUnitInfoWindow(u)
 		u.flag = u.country;
 		u.strength = 10;
 		ammo = u.ammo;
-		fuel = u.fuel;
+		if (u.fuel == 0)
+			fuel = "-";
+		else
+			fuel = u.fuel;
 		exp = 0;
 		ent = 0;
 	}
@@ -546,10 +549,17 @@ function updateUnitInfoWindow(u)
 	{	
 		uinfo = u.unitData(); 
 		ammo = u.getAmmo();
-		fuel = u.getFuel();
+		if (GameRules.unitUsesFuel(u))
+			fuel = u.getFuel();
+		else
+			fuel = "-";
 		exp = u.experience;
 		ent = u.entrenchment;
 	}
+	
+	if (ammo < 5) ammo = "<span style='color: red'>" + ammo + "</span>";
+	if (fuel < 15) fuel =  "<span style='color: red'>" + fuel + "</span>";
+	if (uinfo.gunrange == 0) uinfo.gunrange = 1;
 	
 	$('uImage').style.backgroundImage = "url(" + uinfo.icon +")";
 	$('uFlag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
