@@ -824,6 +824,8 @@ GameRules.canUnmount = function(unit)
 
 GameRules.isTransportable = function(unitID)
 {
+	if ((unitID < 1) || (typeof unitID === "undefined")) return false;
+	
 	var ud = equipment[unitID];
 	var movmethod = ud.movmethod;
 

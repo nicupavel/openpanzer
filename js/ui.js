@@ -22,7 +22,6 @@ function UI(scenario)
 	
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 
-	
 	var map = new Map();
 	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
@@ -664,6 +663,7 @@ function buildEquipmentWindow()
 			if (this.country >= countries.length - 1) this.country = 0; 
 			else this.country++;
 			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing country
+			$('eqUserSel').equnit = -1;
 			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
@@ -681,7 +681,8 @@ function buildEquipmentWindow()
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() 
 		{
-			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing class
+			$('eqUserSel').userunit = -1; //Clear existing unit selections when changing class
+			$('eqUserSel').equnit = -1;
 			updateEquipmentWindow(this.eqclass); 
 		}
 		
@@ -779,26 +780,19 @@ function updateEquipmentWindow(eqclass)
 		for (var i = 0; i < deployList.length; i++)
 		{
 			var ud = equipment[deployList[i][0]];
-			var div = addTag('unitlist', 'div');
-			var img = addTag(div, 'img');
-			var txt = addTag(div, 'div');
-			div.className = "eqUnitBox";
-			img.src = ud.icon;
-			txt.innerHTML = ud.name;
+			var div = uiAddUnitBox('unitlist', ud, false);
 			div.unitid = i;
 			div.eqclass = ud.uclass;
 			div.country = map.currentPlayer.country;
 			if (i == deployUnitSelected)
-			{	
-					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
-			}
-			
+				div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+						
 			div.onclick = function() 
-					{ 
-						$('eqUserSel').deployunit = this.unitid; //save selected player unit
-						updateEquipmentWindow(this.eqclass); //make selection appear
-						r.render(); //make the deployment mode appear
-					}
+			{ 
+				$('eqUserSel').deployunit = this.unitid; //save selected player unit
+				updateEquipmentWindow(this.eqclass); //make selection appear
+				r.render(); //make the deployment mode appear
+			}
 		}
 	}
 	else
@@ -814,11 +808,7 @@ function updateEquipmentWindow(eqclass)
 			var ud = u.unitData();
 			if (u.player.id == map.currentPlayer.id)
 			{
-				var div = addTag('unitlist', 'div');
-				var img = addTag(div, 'img');
-				var txt = addTag(div, 'div');
-				div.className = "eqUnitBox";
-				
+				var div = uiAddUnitBox('unitlist', ud, false);
 				if (u.id == userUnitSelected)
 				{	
 					div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
@@ -830,23 +820,20 @@ function updateEquipmentWindow(eqclass)
 					//bring the unit into map view
 					uiSetUnitOnViewPort(u);
 				}
-					
-				img.src = ud.icon;
-				txt.innerHTML = ud.name;
 				div.unitid = u.id;
 				div.uniteqid = u.eqid;
 				div.eqclass = ud.uclass;
 				div.country = u.player.country;
 				div.onclick = function() 
-					{ 
-						c = map.getCountriesBySide(map.currentPlayer.side);
-						for (i = 0; i < c.length; i++)
-							if (c[i] == this.country) break;
-						$('eqSelCountry').country = i;
-						$('eqUserSel').userunit = this.unitid; //save selected player unit
-						updateUnitInfoWindow(equipment[this.uniteqid]);
-						updateEquipmentWindow(this.eqclass);
-					}
+				{ 
+					c = map.getCountriesBySide(map.currentPlayer.side);
+					for (i = 0; i < c.length; i++)
+						if (c[i] == this.country) break;
+					$('eqSelCountry').country = i;
+					$('eqUserSel').userunit = this.unitid; //save selected player unit
+					updateUnitInfoWindow(equipment[this.uniteqid]);
+					updateEquipmentWindow(this.eqclass);
+				}
 			}
 		}
 	}
@@ -861,16 +848,10 @@ function updateEquipmentWindow(eqclass)
 		if ((u.uclass == eqclass) && (u.country == country))
 		{
 			//Add the unit to the list
-			var div = addTag('eqUnitList', 'div');
-			var img = addTag(div, 'img');
-			var txt = addTag(div, 'div');
-			div.className = "eqUnitBox";
-			
+			var div = uiAddUnitBox('eqUnitList', u, true);
 			div.equnitid = u.id;
-			img.src = u.icon;
-			txt.innerHTML = u.name + " - " + u.cost * CURRENCY_MULTIPLIER;
-			txt.innerHTML += currencyIcon;
-			
+			if (u.id == eqUnitSelected)
+				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
 			div.onclick = function() 
 			{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
@@ -880,43 +861,45 @@ function updateEquipmentWindow(eqclass)
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 					$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
 			};
-			
-			if (u.id == eqUnitSelected)
+		}
+	}
+	//Add the transport to the list if unit can be transported
+	if (GameRules.isTransportable(eqUnitSelected))
+	{
+		for (var i in equipment)
+		{
+			var t = equipment[i];
+			if ((t.uclass == unitClass.groundTransport) && (t.country == country))
 			{
-				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
-				
-				//Add the transport to the list
-				if (GameRules.isTransportable(u.id))
-				{
-					for (var i in equipment)
-					{
-						var t = equipment[i];
-						if ((t.uclass == unitClass.groundTransport) && (t.country == country))
-						{
-							var tdiv = addTag('eqTransportList', 'div');
-							var timg = addTag(tdiv, 'img');
-							var ttxt = addTag(tdiv, 'div');
-							tdiv.className = "eqUnitBox";
-							tdiv.eqtransportid = t.id;
-							timg.src = t.icon;
-							ttxt.innerHTML = t.name + " - " + t.cost * CURRENCY_MULTIPLIER;
-							ttxt.innerHTML += currencyIcon;
-							
-							tdiv.onclick = function()
-							{ 
-								$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
-								updateUnitInfoWindow(equipment[this.eqtransportid]); 
-								updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
-							};
-							
-							if (t.id == eqTransportSelected)
-								tdiv.title = t.name;
-						}
-					}
-				}
+				var tdiv = uiAddUnitBox('eqTransportList', t, true);
+				tdiv.eqtransportid = t.id;
+				if (t.id == eqTransportSelected)
+					tdiv.title = t.name;
+				tdiv.onclick = function()
+				{ 
+					$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
+					updateUnitInfoWindow(equipment[this.eqtransportid]); 
+					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
+				};
 			}
 		}
 	}
+}
+
+//Simple function to list a unit in a graphical unit box returns a DOM object
+function uiAddUnitBox(parentTagName, unitData, withPrice)
+{
+	var div = addTag(parentTagName, 'div');
+	var img = addTag(div, 'img');
+	var txt = addTag(div, 'div');
+	
+	div.className = "eqUnitBox";
+	img.src = unitData.icon;
+	txt.innerHTML = unitData.name;
+	if (withPrice) 
+		txt.innerHTML += " - " + unitData.cost * CURRENCY_MULTIPLIER + currencyIcon;
+	
+	return div;
 }
 
 function uiMessage(title, message)
