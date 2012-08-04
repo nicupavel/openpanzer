@@ -556,8 +556,8 @@ function updateUnitInfoWindow(u)
 		ent = u.entrenchment;
 	}
 	
-	if (ammo < 5) ammo = "<span style='color: red'>" + ammo + "</span>";
-	if (fuel < 15) fuel =  "<span style='color: red'>" + fuel + "</span>";
+	if (ammo < 5) ammo = "<span style='color: #FF6347'>" + ammo + "</span>";
+	if (fuel < 15) fuel =  "<span style='color: #FF6347'>" + fuel + "</span>";
 	if (uinfo.gunrange == 0) uinfo.gunrange = 1;
 	
 	$('uImage').style.backgroundImage = "url(" + uinfo.icon +")";
@@ -683,6 +683,7 @@ function buildEquipmentWindow()
 		{
 			$('eqUserSel').userunit = -1; //Clear existing unit selections when changing class
 			$('eqUserSel').equnit = -1;
+			$('eqUserSel').eqtransport = -1;
 			updateEquipmentWindow(this.eqclass); 
 		}
 		
@@ -700,12 +701,12 @@ function buildEquipmentWindow()
 				var eqUnit = $('eqUserSel').equnit;
 				var eqTransport = $('eqUserSel').eqtransport;
 				
-				if (typeof eqUnit === "undefined")
+				if (typeof eqUnit === "undefined" || eqUnit <= 0)
 					return;
-					
+
 				if (typeof eqTransport === "undefined" || eqTransport == "")
-					eqTransport = 0;
-					
+					eqTransport = -1;
+
 				var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport); //TODO transport
 				if (ret)
 					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqUnit + " with transport:" + eqTransport);
@@ -721,21 +722,21 @@ function buildEquipmentWindow()
 			var eqUnit = $('eqUserSel').equnit;
 			var eqTransport = $('eqUserSel').eqtransport;
 			
-			if (typeof id === "undefined" || typeof eqUnit === "undefined")
+			if (typeof id === "undefined")
 				return;
-				
+
 			if (typeof eqTransport === "undefined" || eqTransport == "")
-					eqTransport = 0;
-					
+					eqTransport = -1;
+
 			console.log("Upgrading unit: " + id + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
-			
+
 			if (map.upgradeUnit(id, eqUnit, eqTransport))
 			{
 				r.cacheImages(function() { r.render(); }); //Need to cache new image
-				updateEquipmentWindow(equipment[eqUnit].uclass);
+				if (eqUnit > 0 ) updateEquipmentWindow(equipment[eqUnit].uclass);
 			}
 		}
-		
+	
 	$('eqCloseBut').title = "Close";
 	$('eqCloseBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
 }
@@ -888,21 +889,57 @@ function updateEquipmentCosts()
 {
 	var eqUnitSelected = $('eqUserSel').equnit;
 	var eqTransportSelected = $('eqUserSel').eqtransport;
+	var userUnitSelected = $('eqUserSel').userunit;
 	var buyCost =0;
 	var upCost = 0;
+	var prestige = map.currentPlayer.prestige;
 	if (eqUnitSelected != -1)
 		buyCost = GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
 		
 	//TODO/REVIEW: We assume that selecting a unit on current units lists selects a map unit 
-	//Actually we should do var userUnitSelected = $('eqUserSel').userunit; map.findUnitById(userUnitSelected)
-	if (map.currentUnit !== null)
+	//Actually we should do  map.findUnitById(userUnitSelected)
+	if (map.currentUnit !== null && userUnitSelected != -1)
 		upCost = GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
 	
-	var eqInfoTxt = "New unit cost: " + buyCost + currencyIcon;
+	if (buyCost > 0 && buyCost <= prestige) 
+	{
+		$('eqNewText').innerHTML = "New unit cost: " + buyCost + currencyIcon;
+		$('eqNewBut').style.visibility = "visible";
+	}
+	else
+	{
+		if (buyCost > prestige)
+		{
+			var diff = buyCost - prestige;
+			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy</span>";
+		}
+		else
+		{
+			$('eqNewText').innerHTML = "";
+		}	
+		$('eqNewBut').style.visibility = "hidden";
+	}
 	
-	eqInfoTxt += " Upgrade unit cost: " + upCost + currencyIcon;
-	$('eqInfoBox').innerHTML = eqInfoTxt;
-	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
+	if (upCost > 0 && upCost <= prestige)
+	{
+		$('eqUpgradeText').innerHTML = " Upgrade unit cost: " + upCost + currencyIcon;
+		$('eqUpgradeBut').style.visibility = "visible";
+	}
+	else
+	{
+		if (upCost > prestige)
+		{
+			var diff = upCost - prestige;
+			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade</span>";
+		}
+		else
+		{
+			$('eqUpgradeText').innerHTML = "";
+		}	
+		$('eqUpgradeBut').style.visibility = "hidden";
+	}
+	
+	$('currentPrestige').innerHTML = "Available prestige: " + prestige + currencyIcon;
 }
 
 //Simple function to list a unit in a graphical unit box returns a DOM object

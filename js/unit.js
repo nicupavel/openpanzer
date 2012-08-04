@@ -179,6 +179,11 @@ Unit.prototype.move = function(cost)
 }
 Unit.prototype.upgrade = function(upgradeid, transportid)
 {
+
+	// 0 or -1 means keep the current unit and upgrade the transport eventually
+	if (upgradeid <= 0)
+		upgradeid = this.eqid;
+		
 	if (equipment[this.eqid].uclass != equipment[upgradeid].uclass)
 		return false;
 	

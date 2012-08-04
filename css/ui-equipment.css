@@ -73,16 +73,16 @@
 	z-index:100;
 }
 
-#eqInfoBox /* Where upgrade/buy costs are displayed */
+.eqCostText /* Where upgrade/buy costs are displayed */
 {
 	font-size: 14px;
 	color: #f8e064;
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-left: 5px;
-	float: left;
+	float: right;
 }
 
-#eqInfoBox img
+.eqCostText img
 {
 	margin-left: 5px;
 	vertical-align:middle;
@@ -96,10 +96,10 @@
 
 .eqButton
 {
+	min-width: 30px; 
+	min-height: 30px;
 	background-repeat: no-repeat;
 	border: 0px solid #fff;
-	width: 30px;
-	height: 30px;
 	float: right;
 	margin: 5px 10px 0px 10px;
 }
