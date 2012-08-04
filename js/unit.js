@@ -184,13 +184,8 @@ Unit.prototype.upgrade = function(upgradeid, transportid)
 	
 	this.eqid = upgradeid;
 
-	if (transportid != 0 && GameRules.isTransportable(this.eqid))
-	{
-		if (this.transport === null)
-			this.setTransport(transportid);
-		else
-			this.transport.eqid = transportid;
-	}
+	if (transportid > 0 && GameRules.isTransportable(this.eqid))
+		this.setTransport(transportid);
 	
 	this.entrenchment = 0;
 	this.hasMoved = this.hasFired = this.hasResupplied = true;
@@ -220,8 +215,10 @@ Unit.prototype.reinforce = function(str)
 
 Unit.prototype.setTransport = function(id) 
 { 
-	//Create and set the transport properties to match it's unit
-	this.transport = new Transport(id);
+	if (this.transport === null)
+		this.transport = new Transport(id);
+	else
+		this.transport.eqid = id;
 }
 
 Unit.prototype.mount = function() { this.isMounted = true; }

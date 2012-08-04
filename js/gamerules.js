@@ -927,8 +927,14 @@ GameRules.calculateUpgradeCosts = function(unit, upgradeid, transportid)
 		return 0;
 		
 	var ocost = 0;
-	var ncost = GameRules.calculateUnitCosts(upgradeid, transportid);
+	var ncost = 0;
 	
+	//if no upgradeid is given then only the transport is updated
+	if (upgradeid > 0 && typeof upgradeid !== "undefined")
+		ncost = GameRules.calculateUnitCosts(upgradeid, transportid);
+	else
+		ncost = GameRules.calculateUnitCosts(unit.eqid, transportid);
+		
 	if (unit.transport !== null)
 		ocost = GameRules.calculateUnitCosts(unit.eqid, unit.transport.eqid);
 	else

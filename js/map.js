@@ -569,7 +569,7 @@ function Map()
 		
 		var u = new Unit(player.deploymentList[deployid][0]);
 		var transportid = player.deploymentList[deployid][1];
-		if (transportid != 0 && typeof transportid !== "undefined")
+		if (transportid > 0 && typeof transportid !== "undefined")
 			u.setTransport(transportid);
 		u.owner = player.id;
 		u.flag = player.country * 1 + 1 ; //TODO fix this

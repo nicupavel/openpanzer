@@ -753,18 +753,6 @@ function updateEquipmentWindow(eqclass)
 	clearTag('eqUnitList');
 	clearTag('eqTransportList');
 	
-	var userUnitSelected = $('eqUserSel').userunit;
-	var eqUnitSelected = $('eqUserSel').equnit;
-	var eqTransportSelected = $('eqUserSel').eqtransport;
-	
-	var eqInfoTxt = "New unit cost: " + GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
-	//TODO/REVIEW: We assume that selecting a unit on current units lists selects a map unit 
-	//Actually we should do map.findUnitById($('eqUserSel').userunit)
-	eqInfoTxt += " Upgrade unit cost: " + GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
-	$('eqInfoBox').innerHTML = eqInfoTxt;
-	
-	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
-	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
@@ -798,8 +786,8 @@ function updateEquipmentWindow(eqclass)
 	else
 	{
 		//The actual units on the map
-		//console.log("User Selected Unit:" + userUnitSelected);
-		var unitList = map.getUnits(); 
+		var userUnitSelected = $('eqUserSel').userunit;
+		var unitList = map.getUnits();
 		uiSettings.deployMode = false;
 		
 		for (var i = 0; i < unitList.length; i++)
@@ -809,27 +797,30 @@ function updateEquipmentWindow(eqclass)
 			if (u.player.id == map.currentPlayer.id)
 			{
 				var div = uiAddUnitBox('unitlist', ud, false);
-				if (u.id == userUnitSelected)
-				{	
-					div.title = u.name; //apply the .eqUnitBox[title] css style to make unit appear selected
-					eqclass = ud.uclass; //Force unit class for equipment display
-					map.selectUnit(u); //select unit on map
-					r.render(); //refresh so the new selection appear
-					//bring the unit box into unit list view by scrolling
-					$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth;
-					//bring the unit into map view
-					uiSetUnitOnViewPort(u);
-				}
 				div.unitid = u.id;
 				div.uniteqid = u.eqid;
 				div.eqclass = ud.uclass;
 				div.country = u.player.country;
+				if (u.id == userUnitSelected)
+				{	
+					//Automatically set transport on transport list if user has not selected a new transport
+					if (u.transport !== null && $('eqUserSel').eqtransport == -1)
+						$('eqUserSel').eqtransport = u.transport.eqid;
+					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+					eqclass = ud.uclass; //Force unit class for equipment display
+					map.selectUnit(u); //select unit on map
+					r.render(); //refresh so the new selection appear
+					$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth; //scroll the unitlist to the selected unit
+					uiSetUnitOnViewPort(u); //bring the unit into map view
+				}
 				div.onclick = function() 
 				{ 
 					c = map.getCountriesBySide(map.currentPlayer.side);
 					for (i = 0; i < c.length; i++)
 						if (c[i] == this.country) break;
 					$('eqSelCountry').country = i;
+					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
+					$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection 
 					$('eqUserSel').userunit = this.unitid; //save selected player unit
 					updateUnitInfoWindow(equipment[this.uniteqid]);
 					updateEquipmentWindow(this.eqclass);
@@ -840,8 +831,8 @@ function updateEquipmentWindow(eqclass)
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
 	
-	//console.log("Selected unit:" + eqUnitSelected);
 	//Units in equipment
+	var eqUnitSelected = $('eqUserSel').equnit;
 	for (var i in equipment)
 	{
 		var u = equipment[i];
@@ -864,7 +855,8 @@ function updateEquipmentWindow(eqclass)
 		}
 	}
 	//Add the transport to the list if unit can be transported
-	if (GameRules.isTransportable(eqUnitSelected))
+	var eqTransportSelected = $('eqUserSel').eqtransport;
+	if (GameRules.isTransportable(eqUnitSelected) || eqTransportSelected > 0)
 	{
 		for (var i in equipment)
 		{
@@ -876,14 +868,41 @@ function updateEquipmentWindow(eqclass)
 				if (t.id == eqTransportSelected)
 					tdiv.title = t.name;
 				tdiv.onclick = function()
-				{ 
-					$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
+				{
+					//handle deselect of transport
+					if ($('eqUserSel').eqtransport == this.eqtransportid)
+						$('eqUserSel').eqtransport = -1;
+					else
+						$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
 					updateUnitInfoWindow(equipment[this.eqtransportid]); 
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 				};
 			}
 		}
 	}
+	updateEquipmentCosts();
+}
+
+//Updates the costs of user selected units in equipment window
+function updateEquipmentCosts()
+{
+	var eqUnitSelected = $('eqUserSel').equnit;
+	var eqTransportSelected = $('eqUserSel').eqtransport;
+	var buyCost =0;
+	var upCost = 0;
+	if (eqUnitSelected != -1)
+		buyCost = GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
+		
+	//TODO/REVIEW: We assume that selecting a unit on current units lists selects a map unit 
+	//Actually we should do var userUnitSelected = $('eqUserSel').userunit; map.findUnitById(userUnitSelected)
+	if (map.currentUnit !== null)
+		upCost = GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
+	
+	var eqInfoTxt = "New unit cost: " + buyCost + currencyIcon;
+	
+	eqInfoTxt += " Upgrade unit cost: " + upCost + currencyIcon;
+	$('eqInfoBox').innerHTML = eqInfoTxt;
+	$('currentPrestige').innerHTML = "Available prestige: " + map.currentPlayer.prestige + currencyIcon;
 }
 
 //Simple function to list a unit in a graphical unit box returns a DOM object
