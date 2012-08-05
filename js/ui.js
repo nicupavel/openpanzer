@@ -192,8 +192,7 @@ function handleUnitSelect(row, col)
 	updateUnitContextWindow(map.currentUnit);
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
-	if ($('equipment').style.visibility == "visible")
-		updateEquipmentWindow(map.currentUnit.unitData().uclass);
+	updateEquipmentWindow(map.currentUnit.unitData().uclass);
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -410,19 +409,18 @@ function mainMenuButton(id)
 		}
 		case 'buy':
 		{
-			var v = $('equipment').style.visibility;
-			
-			if (v == "visible") 
-			{ 
-				$('equipment').style.visibility = "hidden"; 
-				$('container-unitlist').style.visibility = "hidden";
+			var v = $('equipment').style.display;
+			if (v != "" && v != "none")
+			{
+				$('equipment').style.display = "none"; 
+				$('container-unitlist').style.display = "none";
 				uiSettings.deployMode = false;
 				
 			}
 			else 
-			{ 
-				$('equipment').style.visibility = "visible"; 
-				$('container-unitlist').style.visibility = "visible";
+			{
+				$('equipment').style.display = "inline"; 
+				$('container-unitlist').style.display = "inline";
 				$('unit-info').style.visibility = "visible"; 
 				updateEquipmentWindow(unitClass.tank);
 			}
@@ -738,7 +736,7 @@ function buildEquipmentWindow()
 		}
 	
 	$('eqCloseBut').title = "Close";
-	$('eqCloseBut').onclick = function() { $('equipment').style.visibility = "hidden"; }
+	$('eqCloseBut').onclick = function() { $('equipment').style.display = "none"; }
 }
 
 //TODO function too large break it
@@ -746,7 +744,7 @@ function buildEquipmentWindow()
 //TODO clear onclick functions 
 function updateEquipmentWindow(eqclass)
 {
-	if ($('container-unitlist').style.visibility !== "visible") 
+	if ($('container-unitlist').style.display == "none") 
 		return;
 		
 	//Remove older entries
