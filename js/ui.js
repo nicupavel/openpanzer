@@ -560,6 +560,7 @@ function updateUnitInfoWindow(u)
 	
 	$('uImage').style.backgroundImage = "url(" + uinfo.icon +")";
 	$('uFlag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
+	$('uFlag').innerHTML = countryNames[u.flag - 1];
 	$('uName').innerHTML = uinfo.name + " " + unitClassNames[uinfo.uclass];
 	//$('uClass').innerHTML = uinfo.uclass;
 	$('uTarget').innerHTML = unitTypeNames[uinfo.target];

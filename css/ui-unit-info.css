@@ -71,7 +71,7 @@
 	float: left;
 	background-repeat: no-repeat;
 	background-position: center top;
-	padding-top: 25px; /* for text alignment */
+	padding-top: 26px; /* for text alignment */
 	width: 30px;
 	text-align: center;
 	border: 0px solid blue;
@@ -130,6 +130,7 @@
 	margin-top: 5px;
 	margin-left: 5px;
 	background-image: url('../resources/ui/flags/flag_big_18.png');
+	line-height: 30px; /* for spacing vertically country name text */
 }
 
 #uTransport
