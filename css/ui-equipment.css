@@ -26,14 +26,9 @@
 	font-size: 12px;
 	z-index: 98;
 	display: none;
-}
-
-#unitlist
-{
 	background: rgba(0,0,0,0.6);
 	border-radius: 5px;
 }
-
 
 /* The equipment window with class selection buttons, equipment and transport units and buy/upgrade buttons */
 #equipment
