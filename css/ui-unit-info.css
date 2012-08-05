@@ -41,8 +41,7 @@
 	border: 0px solid yellow;
 	width: 100px;
 	height: 69px;
-	background: rgba(20,20,20, 0.7);
-	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
+	background-image: url('../resources/ui/dialogs/equipment/images/scope.png');
 	background-repeat: no-repeat;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -62,7 +61,7 @@
 	border: 0px solid red;
 	height: 60px;
 	background: rgba(20,20,20, 0.7);
-	border-top-right-radius: 5px;
+	border-radius: 5px;
 	width: 740px;
 }
 
@@ -101,6 +100,8 @@
 #uImage
 {	
 	border: 0px #fff solid;
+	margin-top:20px;
+	margin-left:10px;
 	width: 80px;
 	height:50px;
 	-webkit-animation:unitanim 2s steps(9,end) infinite alternate;
