@@ -40,7 +40,7 @@
 	float: left;
 	border: 0px solid yellow;
 	width: 100px;
-	height: 56px;
+	height: 69px;
 	background: rgba(20,20,20, 0.7);
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
 	background-repeat: no-repeat;
@@ -60,7 +60,7 @@
 {
 	float: left;
 	border: 0px solid red;
-	height: 40px;
+	height: 60px;
 	background: rgba(20,20,20, 0.7);
 	border-top-right-radius: 5px;
 	width: 740px;
