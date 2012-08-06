@@ -26,7 +26,7 @@ function UI(scenario)
 	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
 	map = GameState.restore();
-		
+
 	if (map === null) 
 	{
 		l.loadMap(scenario);
@@ -88,7 +88,7 @@ function handleMouseClick(e)
 		}
 		return true;
 	}
-		
+
 	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
@@ -109,7 +109,7 @@ function handleMouseClick(e)
 		{
 			handleUnitSelect(row, col);
 		}
-	}	
+	}
 	else //No unit on clicked hex
 	{
 		if (uiSettings.deployMode && hex.isDeployment > -1
@@ -347,14 +347,14 @@ function buildMainMenu()
 		div.onmouseover = function() { hoverin(this.firstChild); }
 		div.onmouseout = function() 
 		{ 
-				//Keep selection for toggle buttons
-				if (uiSettings.airMode && this.id == "air") 
-					return;
-				if (uiSettings.mapZoom && this.id == "zoom") 
-					return;
-				if (uiSettings.hexGrid && this.id == "hex") 
-					return;	
-				hoverout(this.firstChild); 
+			//Keep selection for toggle buttons
+			if (uiSettings.airMode && this.id == "air") 
+				return;
+			if (uiSettings.mapZoom && this.id == "zoom") 
+				return;
+			if (uiSettings.hexGrid && this.id == "hex") 
+				return;	
+			hoverout(this.firstChild); 
 		}
 	}
 }
@@ -467,7 +467,7 @@ function mainMenuButton(id)
 				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
 				scnOpt.text =  scenariolist[i][1];
 			}
-			break;		
+			break;
 		}
 	}
 }
@@ -774,7 +774,7 @@ function updateEquipmentWindow(eqclass)
 			div.country = map.currentPlayer.country;
 			if (i == deployUnitSelected)
 				div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
-						
+
 			div.onclick = function() 
 			{ 
 				$('eqUserSel').deployunit = this.unitid; //save selected player unit
@@ -915,7 +915,7 @@ function updateEquipmentCosts()
 		else
 		{
 			$('eqNewText').innerHTML = "";
-		}	
+		}
 		$('eqNewBut').style.visibility = "hidden";
 	}
 	
@@ -974,7 +974,7 @@ function uiEndTurnInfo()
 		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
 			+ " side has " + map.sidesVictoryHexes[playerList[i].side] + " victory points to conquer <br/>";
 	}
-	return infoStr;	
+	return infoStr;
 }
 
 
@@ -1011,11 +1011,11 @@ function newScenario(scenario)
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() 
-		{ 
-			selectStartingUnit(); 
-			uiSetUnitOnViewPort(map.currentUnit);
-			r.render(); 
-		});
+	{ 
+		selectStartingUnit(); 
+		uiSetUnitOnViewPort(map.currentUnit);
+		r.render(); 
+	});
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
@@ -1028,11 +1028,9 @@ function getMouseInfo(canvas, e)
 	if (e.which) rclick = (e.which == 3);
 	else if (e.button) rclick = (e.button == 2);	
 	
-	//mx = e.clientX - canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft;
-	//my = e.clientY - canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;	
 	mx = e.pageX - canvas.offsetLeft - vp.clientLeft - vp.offsetLeft + vp.scrollLeft;
 	my = e.pageY - canvas.offsetTop - vp.clientTop - vp.offsetTop + vp.scrollTop;
-	//console.log(mx + "," + my);
+
 	return new mouseInfo(mx, my, rclick);
 }
 
@@ -1043,7 +1041,7 @@ function gameStart()
 	rng = Math.round(Math.random() * (scenariolist.length - 1))
 	scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
 	//console.log("Number: " + rng + " Scenario:" + scenario);
-	
+
 	scenario="resources/scenarios/xml/tutorial.xml";
 	ui = new UI(scenario);
 	//Bring up the "Main Menu"
