@@ -131,6 +131,7 @@
 	margin-left: 5px;
 	background-image: url('../resources/ui/flags/flag_big_18.png');
 	line-height: 30px; /* for spacing vertically country name text */
+	white-space: nowrap;
 }
 
 #uTransport
