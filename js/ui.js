@@ -996,8 +996,9 @@ function selectStartingUnit()
 	{
 		if (unitList[i].player.id == map.currentPlayer.id)
 		{
-			map.selectUnit(unitList[i]);
-			$('eqUserSel').userunit = unitList[i].id; //save selected player unit
+			pos = unitList[i].getPos();
+			handleUnitSelect(pos.row, pos.col);
+			updateUnitInfoWindow(unitList[i]);
 			break;
 		}
 	}
