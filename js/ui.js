@@ -149,22 +149,7 @@ function handleMouseMove(e)
 	var c = r.screenToCell(minfo.x, minfo.y);
 
 	if (map.currentUnit != null) { r.drawCursor(c); }
-
-	hex = map.map[c.row][c.col];
-	if (!hex || typeof hex === "undefined")
-		return;
-
-	text = terrainNames[hex.terrain] + " (" + c.row + "," + c.col + ")";
-
-	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	
-	if ((unit = hex.getUnit(uiSettings.airMode)) !== null 
-		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
-			|| unit.player.side == map.currentPlayer.side)) 
-	{
-		text = " Unit: " + unit.unitData().name + " " + text; 
-	}
-	$('locmsg').innerHTML = text;
+	updateStatusBarLocation(c.row, c.col);
 }
 
 //handle unit deployment
@@ -193,6 +178,8 @@ function handleUnitSelect(row, col)
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
 	updateEquipmentWindow(map.currentUnit.unitData().uclass);
+	//Display selected unit on status bar
+	updateStatusBarLocation(row, col);
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -941,6 +928,23 @@ function updateEquipmentCosts()
 	$('currentPrestige').innerHTML = "Available prestige: " + prestige + currencyIcon;
 }
 
+function updateStatusBarLocation(row, col)
+{
+	var hex = map.map[row][col];
+	if (!hex || typeof hex === "undefined")
+		return false;
+	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
+
+	if (hex.name !== null)	{  text = hex.name + " " + text; }
+	
+	if ((unit = hex.getUnit(uiSettings.airMode)) !== null 
+		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
+			|| unit.player.side == map.currentPlayer.side)) 
+	{
+		text = " Unit: " + unit.unitData().name + " " + text; 
+	}
+	$('locmsg').innerHTML = text;
+}
 //Simple function to list a unit in a graphical unit box returns a DOM object
 function uiAddUnitBox(parentTagName, unitData, withPrice)
 {
