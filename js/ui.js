@@ -8,7 +8,7 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
- 
+
 function UI(scenario)
 {
 	var uiSettings = 
@@ -666,7 +666,7 @@ function buildEquipmentWindow()
 			updateEquipmentWindow(unitClass.tank);
 		};
 	//Unit Class buttons	
-	for (b in eqClassButtons)
+	for (var b in eqClassButtons)
 	{
 		var div = addTag('eqSelClass','div');
 		var img = addTag(div, 'img');
@@ -1038,12 +1038,12 @@ function getMouseInfo(canvas, e)
 
 function gameStart()
 {
-	rng = Math.round(Math.random() * (scenariolist.length - 1))
-	scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
+	var rng = Math.round(Math.random() * (scenariolist.length - 1))
+	var scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
 	//console.log("Number: " + rng + " Scenario:" + scenario);
 
 	scenario="resources/scenarios/xml/tutorial.xml";
-	ui = new UI(scenario);
+	var ui = new UI(scenario);
 	//Bring up the "Main Menu"
 	ui.mainMenuButton('buy');
 }
