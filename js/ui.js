@@ -203,7 +203,7 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	}
 	if (mr.isVictorySide >= 0) 
-		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
+		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
 }
 
 
@@ -286,7 +286,7 @@ function buildMainMenu()
 	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
 	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
 						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
-					    ["zoom","Strategic Map", 1],["undo","Undo Last Move(TBD)", 1], ["options","Options", 1]];
+					    ["zoom","Strategic Map", 1], ["options","Options", 1]];
 					   
 	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
@@ -468,7 +468,7 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-mount";
 		div.title = "Mount this unit into a transport";
-		div.onclick = function() {unitInfoButton('mount', u);}
+		div.onclick = function() {unitContextButton('mount', u);}
 	}
 	
 	if (GameRules.canResupply(map.map, u))
@@ -478,7 +478,7 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-resupply";
 		div.title = "Resupply Ammo and Fuel for this unit";
-		div.onclick = function() {unitInfoButton('resupply', u);}
+		div.onclick = function() {unitContextButton('resupply', u);}
 	}
 
 	if (GameRules.canReinforce(map.map, u)) 
@@ -488,7 +488,17 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-reinforce";
 		div.title = "Reinforce unit strength";
-		div.onclick = function() {unitInfoButton('reinforce', u);}
+		div.onclick = function() {unitContextButton('reinforce', u);}
+	}
+	
+	if (map.canUndoMove(u))
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-undo";
+		div.title = "Undo last move";
+		div.onclick = function() { unitContextButton('undo', u); }
 	}
 	
 	if (nbuttons > 0) 
@@ -501,7 +511,7 @@ function updateUnitInfoWindow(u)
 {
 	var isEqUnit = false;
 	var uinfo, ammo, fuel, exp, ent;
-	
+
 	if ($('unit-info').style.visibility == "hidden") return;
 
 	//Call from equipment window fill with default values (instead of creating a new unit object)
@@ -595,7 +605,7 @@ function updateUnitInfoWindow(u)
 	//TODO Add unit kills/medals	
 }
 
-function unitInfoButton(action, unit)
+function unitContextButton(action, unit)
 {
 	switch (action)
 	{
@@ -615,6 +625,11 @@ function unitInfoButton(action, unit)
 		case 'reinforce':
 		{
 			map.reinforceUnit(unit);
+			break;
+		}
+		case 'undo':
+		{
+			map.undoLastMove();
 			break;
 		}
 	}

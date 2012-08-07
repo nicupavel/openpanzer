@@ -174,6 +174,7 @@ GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
 	}
 }
 
+//Sets spotting range for a unit returns number of new units spotted
 GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 {
 	if (!unit) return;
@@ -182,6 +183,7 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 	var side = unit.player.side;
 	var range = unit.unitData().spotrange;
 	var r, c;
+	var newlySpottedUnits = 0;
 	var cells = getCellsInRange(p.row, p.col, range, mrows, mcols);
 	//Add current unit cell too as spotted
 	cells.push(new Cell(p.row, p.col)); 
@@ -191,8 +193,17 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 		r = cells[i].row;
 		c = cells[i].col;
 		//console.log("spot [" + r + "][" + c +"] set to:" + on + " for side: " + side);
+		//Check for a previously hidden unit
+		if (on && !map[r][c].isSpotted(side))
+		{
+			var sUnit = map[r][c].getUnit(false);
+			if (sUnit && sUnit.player.side != side)
+				newlySpottedUnits++;
+		}
 		map[r][c].setSpotted(side, on);
 	}
+	
+	return newlySpottedUnits;
 }
 
 GameRules.getShortestPath = function(startCell, endCell, cellList)
