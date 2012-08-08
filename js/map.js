@@ -477,9 +477,9 @@ function Map()
 		var moveCost = c[0].cost;
 		
 		//Save unit properties for undoing move
-		var savedUnit = new Unit(unit.eqid);
-		savedUnit.copy(unit);
-		savedUnit.setHex(unit.getHex());
+		lastMove.savedUnit = new Unit(unit.eqid);
+		lastMove.savedUnit.copy(unit);
+		lastMove.savedUnit.setHex(unit.getHex());
 		
 		mr.passedCells.push(c[0]);
 		for (var i = 1; i < c.length; i++)
@@ -513,14 +513,10 @@ function Map()
 		
 		//If the unit hasn't spotted new units or was surprised allow undo
 		if (newSpotted == 0 && !mr.isSurprised)
-		{
-			lastMove.unit = savedUnit;
-			lastMove.movedUnit = unit;
-		}
+			lastMove.unit = unit;
 		else
-		{
 			lastMove.unit = null;
-		}	
+
 		return mr;
 	}
 	
@@ -645,20 +641,21 @@ function Map()
 		if (lastMove.unit == null)
 			return;
 		var unit = lastMove.unit;
-		var oldunit = lastMove.movedUnit;
-		var sCell = oldunit.getPos();
-		var dCell = unit.getPos();
+		var sUnit = lastMove.savedUnit;
+		var sCell = unit.getPos();
+		var dCell = sUnit.getPos();
 		var srcHex = this.map[sCell.row][sCell.col];
 		var dstHex = this.map[dCell.row][dCell.col];
 		
-		GameRules.setZOCRange(this.map, oldunit, false, this.rows, this.cols); //remove old ZOC
-		GameRules.setSpotRange(this.map, oldunit, false, this.rows, this.cols); //remove old spotting range
-		srcHex.delUnit(oldunit);
-		delete(oldunit);
+		unit.copy(sUnit); //restore unit properties to previous state
+		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
+		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
+		srcHex.delUnit(unit);
 		dstHex.setUnit(unit);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
 		lastMove.unit = null; //Reset last move undo save
+		delete(lastMove.savedUnit); //delete no longer used unit
 		this.selectUnit(unit);
 	}
 	
@@ -788,7 +785,7 @@ function Map()
 	var lastMove = 
 	{
 		unit: null,
-		cell: null,
+		savedUnit: null,
 	}; 
 	//TODO UnitManager object
 	function findUnitById(id)
