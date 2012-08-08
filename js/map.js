@@ -701,9 +701,9 @@ function Map()
 	
 		this.allocMap();
 	
-		for (r = 0; r < m.rows; r++)
+		for (var r = 0; r < m.rows; r++)
 		{
-			for (c = 0; c < m.cols; c++)
+			for (var c = 0; c < m.cols; c++)
 			{
 				var h = m.map[r][c];
 				var hex = this.map[r][c];

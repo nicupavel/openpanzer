@@ -71,7 +71,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 			if (c[i].range == r)
 			{
 				//console.log("Checking for Row:"+ c[i].row + " Col:" + c[i].col + " range: " + c[i].range + " at range: " + r);
-				for (j  = 0; j < c.length; j++) //Look up adjacent cells for c[i]
+				for (var j = 0; j < c.length; j++) //Look up adjacent cells for c[i]
 				{
 					if (c[j].range < r) continue; //Not always true, there might be a path to reach a hex by turning back
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
@@ -643,7 +643,7 @@ GameRules.canAttack = function(unit, targetUnit) { return canAttack(unit, target
 //Checks if a given unit can move into a hex
 function canMoveInto(map, unit, cell)
 {
-	hex = map[cell.row][cell.col];
+	var hex = map[cell.row][cell.col];
 
 	if (isGround(unit) || isSea(unit))
 	{
@@ -661,7 +661,7 @@ function canMoveInto(map, unit, cell)
 //Checks if a unit can pass thru a hex ocupied by a friendly unit
 function canPassInto(map, unit, cell)
 {
-	hex = map[cell.row][cell.col];
+	var hex = map[cell.row][cell.col];
 	
 	if (isGround(unit) || isSea(unit))
 	{
@@ -911,7 +911,7 @@ GameRules.unitUsesFuel = function(unit)
 	if (unit.unitData().fuel == 0)
 		return false;
 		
-	m = unit.unitData().movmethod;
+	var m = unit.unitData().movmethod;
 	if ((m == movMethod.leg) || 
 		(m == movMethod.towed) ||
 		(m == movMethod.allTerrainLeg))
