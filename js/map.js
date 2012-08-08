@@ -38,28 +38,26 @@ Player.prototype.getCountryName = function() { return countryNames[this.country]
 Player.prototype.getSideName = function() { return sideNames[this.side]; }
 Player.prototype.buyUnit = function(unitid, transportid)
 {
-	var unitCost = equipment[unitid].cost * CURRENCY_MULTIPLIER;
-	if (transportid != 0 && typeof transportid !== "undefined")
-		unitCost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+	var cost = GameRules.calculateUnitCosts(unitid, transportid);
 		
-	if (unitCost > this.prestige) return false;
+	if (cost > this.prestige) return false;
 	
 	this.deploymentList.push([unitid, transportid]);
-	this.prestige -= unitCost;
+	this.prestige -= cost;
 
 	return true;
 }
 
-Player.prototype.upgradeUnit = function(unit, upgradeid) //TODO transport id for upgrade
+Player.prototype.upgradeUnit = function(unit, upgradeid, transportid)
 {
-	var ocost = unit.unitData().cost * CURRENCY_MULTIPLIER;
-	var ncost = equipment[upgradeid].cost * CURRENCY_MULTIPLIER;
-	
-	if (ncost - ocost > this.prestige)
+	var cost = GameRules.calculateUpgradeCosts(unit, upgradeid, transportid);
+
+	if (cost > this.prestige)
 		return false;	
-	if (!unit.upgrade(upgradeid))
+	if (!unit.upgrade(upgradeid, transportid))
 		return false;
-	this.prestige -= (ncost - ocost);
+		
+	this.prestige -= cost;
 		
 	return true;
 }
@@ -546,16 +544,19 @@ function Map()
 		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
-	this.upgradeUnit = function(id, upgradeid)
+	this.upgradeUnit = function(id, upgradeid, transportid)
 	{
 		var unit = null;
 		if ((unit = findUnitById(id)) == null)
 			return false;
 		var p = unit.player;
-		if (!p.upgradeUnit(unit, upgradeid))
+		if (!p.upgradeUnit(unit, upgradeid, transportid))
 			return false;
 		unitImagesList[unit.eqid] = unit.getIcon();
-
+		
+		if (unit.transport !== null) //TODO change this.addUnit to handle upgrading
+			unitImagesList[unit.transport.eqid] = unit.transport.icon;
+		
 		return true;
 	}
 	
@@ -568,7 +569,7 @@ function Map()
 		
 		var u = new Unit(player.deploymentList[deployid][0]);
 		var transportid = player.deploymentList[deployid][1];
-		if (transportid != 0 && typeof transportid !== "undefined")
+		if (transportid > 0 && typeof transportid !== "undefined")
 			u.setTransport(transportid);
 		u.owner = player.id;
 		u.flag = player.country * 1 + 1 ; //TODO fix this

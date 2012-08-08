@@ -822,6 +822,24 @@ GameRules.canUnmount = function(unit)
 	return false;
 }
 
+GameRules.isTransportable = function(unitID)
+{
+	if ((unitID < 1) || (typeof unitID === "undefined")) return false;
+	
+	var ud = equipment[unitID];
+	var movmethod = ud.movmethod;
+
+	//Fortifications are listed as towed for some reason
+	if (ud.uclass == unitClass.fortification)
+		return false;
+	
+	if ((movmethod != movMethod.towed) && (movmethod != movMethod.leg)
+		 && (movmethod != movMethod.allTerrainLeg))
+		return false; 
+
+	return true;
+}
+
 function isAir(unit)
 {
 	if (unit === null) 
@@ -888,6 +906,41 @@ GameRules.unitUsesFuel = function(unit)
 		(m == movMethod.allTerrainLeg))
 			return false;
 	return true;
+}
+
+GameRules.calculateUnitCosts = function(unitid, transportid)
+{
+	var cost = 0;
+	
+	if (unitid > 0 && typeof unitid !== "undefined")
+		cost += equipment[unitid].cost * CURRENCY_MULTIPLIER;
+	
+	if (transportid > 0 && typeof transportid !== "undefined")
+		cost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+
+	return cost;
+}
+
+GameRules.calculateUpgradeCosts = function(unit, upgradeid, transportid)
+{
+	if (unit === null)
+		return 0;
+		
+	var ocost = 0;
+	var ncost = 0;
+	
+	//if no upgradeid is given then only the transport is updated
+	if (upgradeid > 0 && typeof upgradeid !== "undefined")
+		ncost = GameRules.calculateUnitCosts(upgradeid, transportid);
+	else
+		ncost = GameRules.calculateUnitCosts(unit.eqid, transportid);
+		
+	if (unit.transport !== null)
+		ocost = GameRules.calculateUnitCosts(unit.eqid, unit.transport.eqid);
+	else
+		ocost = GameRules.calculateUnitCosts(unit.eqid, 0);
+ 	
+ 	return ((ncost - ocost) * UPGRADE_PENALTY) >> 0; 
 }
 
 //Returns aproximate cardinal directions x row, y col

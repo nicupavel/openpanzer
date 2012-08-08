@@ -27,6 +27,7 @@ Transport.prototype.copy = function(t)
 	this.fuel = t.fuel;
 }
 Transport.prototype.unitData = function() { return equipment[this.eqid]; }
+
 //Unit Object Constructor
 function Unit(equipmentID)
 {
@@ -176,11 +177,21 @@ Unit.prototype.move = function(cost)
 	}
 	if (this.moveLeft <= 0) this.hasMoved = true;
 }
-Unit.prototype.upgrade = function(upgradeid) //TODO add transportid to upgrade transport
+Unit.prototype.upgrade = function(upgradeid, transportid)
 {
+
+	// 0 or -1 means keep the current unit and upgrade the transport eventually
+	if (upgradeid <= 0)
+		upgradeid = this.eqid;
+		
 	if (equipment[this.eqid].uclass != equipment[upgradeid].uclass)
 		return false;
+	
 	this.eqid = upgradeid;
+
+	if (transportid > 0 && GameRules.isTransportable(this.eqid))
+		this.setTransport(transportid);
+	
 	this.entrenchment = 0;
 	this.hasMoved = this.hasFired = this.hasResupplied = true;
 	
@@ -209,8 +220,10 @@ Unit.prototype.reinforce = function(str)
 
 Unit.prototype.setTransport = function(id) 
 { 
-	//Create and set the transport properties to match it's unit
-	this.transport = new Transport(id);
+	if (this.transport === null)
+		this.transport = new Transport(id);
+	else
+		this.transport.eqid = id;
 }
 
 Unit.prototype.mount = function() { this.isMounted = true; }
