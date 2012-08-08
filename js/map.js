@@ -476,8 +476,10 @@ function Map()
 		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
 		var moveCost = c[0].cost;
 		
-		//Reset last move undo save
-		lastMove.unit = null;
+		//Save unit properties for undoing move
+		var savedUnit = new Unit(unit.eqid);
+		savedUnit.copy(unit);
+		savedUnit.setHex(unit.getHex());
 		
 		mr.passedCells.push(c[0]);
 		for (var i = 1; i < c.length; i++)
@@ -497,7 +499,6 @@ function Map()
 		
 		var lastCell = mr.passedCells[mr.passedCells.length - 1];
 		var dstHex = this.map[lastCell.row][lastCell.col];
-		var moveLeft = unit.moveLeft;
 		unit.move(moveCost);
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
@@ -513,11 +514,13 @@ function Map()
 		//If the unit hasn't spotted new units or was surprised allow undo
 		if (newSpotted == 0 && !mr.isSurprised)
 		{
-			lastMove.unit = unit;
-			lastMove.cell = s;
-			lastMove.cost = moveCost;
-			lastMove.moveLeft = moveLeft;
+			lastMove.unit = savedUnit;
+			lastMove.movedUnit = unit;
 		}
+		else
+		{
+			lastMove.unit = null;
+		}	
 		return mr;
 	}
 	
@@ -642,20 +645,19 @@ function Map()
 		if (lastMove.unit == null)
 			return;
 		var unit = lastMove.unit;
-		var sCell = unit.getPos();
-		var dCell = lastMove.cell;
+		var oldunit = lastMove.movedUnit;
+		var sCell = oldunit.getPos();
+		var dCell = unit.getPos();
 		var srcHex = this.map[sCell.row][sCell.col];
 		var dstHex = this.map[dCell.row][dCell.col];
 		
-		unit.move(-lastMove.cost);
-		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
-		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
-		srcHex.delUnit(unit);
+		GameRules.setZOCRange(this.map, oldunit, false, this.rows, this.cols); //remove old ZOC
+		GameRules.setSpotRange(this.map, oldunit, false, this.rows, this.cols); //remove old spotting range
+		srcHex.delUnit(oldunit);
+		delete(oldunit);
 		dstHex.setUnit(unit);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
-		unit.moveLeft = lastMove.moveLeft;
-		unit.hasMoved = false; //TODO save a copy of the unit object before moving to have all props restored
 		lastMove.unit = null; //Reset last move undo save
 		this.selectUnit(unit);
 	}
@@ -787,8 +789,6 @@ function Map()
 	{
 		unit: null,
 		cell: null,
-		cost: 0,
-		moveLeft: 0,
 	}; 
 	//TODO UnitManager object
 	function findUnitById(id)

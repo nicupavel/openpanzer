@@ -609,7 +609,7 @@ function Render(mapObj)
 		if (side == 1) { c.fillStyle = "green"; }
 		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
 		
-		if (unit.player != map.currentPlayer && unit.player.side == map.currentPlayer.side)
+		if (unit.player.id != map.currentPlayer.id && unit.player.side == map.currentPlayer.side)
 			c.fillStyle = "696969";
 		else
 			c.fillStyle = "white";
