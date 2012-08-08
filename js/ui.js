@@ -433,7 +433,7 @@ function mainMenuButton(id)
 		case 'options':
 		{
 			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
+			"npavel@linuxconsulting.ro <br><br> Graphical Assets by Luca Iulian<br> lucaiuli@gmail.com<br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
 			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}
@@ -1049,5 +1049,5 @@ function gameStart()
 	scenario="resources/scenarios/xml/tutorial.xml";
 	var ui = new UI(scenario);
 	//Bring up the "Main Menu"
-	ui.mainMenuButton('buy');
+	ui.mainMenuButton('options');
 }
