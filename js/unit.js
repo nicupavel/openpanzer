@@ -189,8 +189,16 @@ Unit.prototype.upgrade = function(upgradeid, transportid)
 	
 	this.eqid = upgradeid;
 
-	if (transportid > 0 && GameRules.isTransportable(this.eqid))
-		this.setTransport(transportid);
+	if (GameRules.isTransportable(this.eqid))
+	{
+		//Replace or create a new transport
+		if (transportid > 0) this.setTransport(transportid);
+	}
+	else
+	{
+		//Remove the tranport if the new unit is no longer transportable
+		if (this.transport !== null) this.transport = null;
+	}
 	
 	this.entrenchment = 0;
 	this.hasMoved = this.hasFired = this.hasResupplied = true;

@@ -728,7 +728,7 @@ function buildEquipmentWindow()
 
 //TODO function too large break it
 //TODO index equipment array
-//TODO clear onclick functions 
+//TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
 	if ($('container-unitlist').style.display == "none") 
@@ -791,7 +791,11 @@ function updateEquipmentWindow(eqclass)
 				{	
 					//Automatically set transport on transport list if user has not selected a new transport
 					if (u.transport !== null && $('eqUserSel').eqtransport == -1)
-						$('eqUserSel').eqtransport = u.transport.eqid;
+					{
+						//Check if user selected equipment unit for upgrade can be transported
+						if ($('eqUserSel').equnit == -1 || GameRules.isTransportable($('eqUserSel').equnit))
+							$('eqUserSel').eqtransport = u.transport.eqid;
+					}
 					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 					eqclass = ud.uclass; //Force unit class for equipment display
 					map.selectUnit(u); //select unit on map
