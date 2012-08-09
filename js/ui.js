@@ -774,6 +774,7 @@ function updateEquipmentWindow(eqclass)
 		//The actual units on the map
 		var userUnitSelected = $('eqUserSel').userunit;
 		var unitList = map.getUnits();
+		var forcedScroll;
 		uiSettings.deployMode = false;
 		
 		for (var i = 0; i < unitList.length; i++)
@@ -800,8 +801,11 @@ function updateEquipmentWindow(eqclass)
 					eqclass = ud.uclass; //Force unit class for equipment display
 					map.selectUnit(u); //select unit on map
 					r.render(); //refresh so the new selection appear
-					$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth; //scroll the unitlist to the selected unit
 					uiSetUnitOnViewPort(u); //bring the unit into map view
+					//This unit will be the last in div since the div is being built and we can use offsetWidth of the
+					//containing div to get offset from the position 0. This value will be used to scroll the div when 
+					//a unit is selected from the map not from the unit list ui div 
+					forcedScroll = $('unitlist').offsetWidth - ($('container-unitlist').offsetWidth + div.offsetWidth)/2;
 				}
 				div.onclick = function() 
 				{ 
@@ -812,11 +816,15 @@ function updateEquipmentWindow(eqclass)
 					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
 					$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection 
 					$('eqUserSel').userunit = this.unitid; //save selected player unit
+					$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.uniteqid]);
 					updateEquipmentWindow(this.eqclass);
+					$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
 				}
 			}
 		}
+		//Force scrolling when units are selected from the map to bring them into unit list view
+		$('hscroll-unitlist').scrollLeft = forcedScroll;
 	}
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
