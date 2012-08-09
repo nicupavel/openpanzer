@@ -15,7 +15,7 @@ function UI(scenario)
 	{
 		airMode:false, //flag used to select between overlapping ground/air units
 		mapZoom:false, //flag used to draw map in zoomed mode or not
-		hexGrid:true, // flag to notify render if it should draw or not hex grid
+		hexGrid:false, // flag to notify render if it should draw or not hex grid
 		deployMode:false, //used for unit deployment
 		hasTouch: hasTouch(),
 	};
@@ -53,7 +53,6 @@ function UI(scenario)
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	buildMainMenu();
 	buildEquipmentWindow();
-	
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
 	
@@ -123,21 +122,11 @@ function handleMouseClick(e)
 				map.delCurrentUnit();
 	}
 
-	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
 	//Set the airMode depending on current unit automatically
-	if (GameRules.isAir(map.currentUnit)) 
-	{
-			uiSettings.airMode = true; //If clicked unit is air select airmode automatically
-			hoverin($('air').firstChild); //Change air button to ON in UI
-	}
-	else
-	{
-			uiSettings.airMode = false; //If clicked unit is air select airmode automatically
-			hoverout($('air').firstChild); //Change air button to ON in UI
-	}
-	
+	uiSettings.airMode = GameRules.isAir(map.currentUnit);
+	toggleButton($('air').firstChild, uiSettings.airMode);
 	updateUnitContextWindow(map.currentUnit);
-	
+	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
 	//TODO partial screen updates (can update only attack or move selected hexes)
 	r.render(); 
 }
@@ -214,7 +203,7 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	}
 	if (mr.isVictorySide >= 0) 
-		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes"); 
+		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
 }
 
 
@@ -297,7 +286,7 @@ function buildMainMenu()
 	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
 	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
 						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
-					    ["zoom","Strategic Map", 1],["undo","Undo Last Move(TBD)", 1], ["options","Options", 1]];
+					    ["zoom","Strategic Map", 1], ["options","Options", 1]];
 					   
 	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
@@ -328,21 +317,6 @@ function buildMainMenu()
 		img.src = "resources/ui/menu/images/" + id + ".png";
 		
 		div.onclick = function() { mainMenuButton(this.id); }
-		
-		if (uiSettings.hasTouch) continue; //Don't set hover for touch-devices
-		
-		div.onmouseover = function() { hoverin(this.firstChild); }
-		div.onmouseout = function() 
-		{ 
-			//Keep selection for toggle buttons
-			if (uiSettings.airMode && this.id == "air") 
-				return;
-			if (uiSettings.mapZoom && this.id == "zoom") 
-				return;
-			if (uiSettings.hexGrid && this.id == "hex") 
-				return;	
-			hoverout(this.firstChild); 
-		}
 	}
 }
 
@@ -353,12 +327,14 @@ function mainMenuButton(id)
 		case 'air':
 		{
 			uiSettings.airMode = !uiSettings.airMode;
+			toggleButton($('air').firstChild, uiSettings.airMode);
 			r.render();
 			break;
 		}
 		case 'hex':
 		{
 			uiSettings.hexGrid = !uiSettings.hexGrid;
+			toggleButton($('hex').firstChild, uiSettings.hexGrid);
 			r.render();
 			break;
 		}
@@ -381,6 +357,7 @@ function mainMenuButton(id)
 				$('game').style.zoom = "100%";
 				uiSettings.mapZoom = false;
 			}
+			toggleButton($('zoom').firstChild, uiSettings.mapZoom);
 			r.render();
 			break;
 		}
@@ -388,10 +365,16 @@ function mainMenuButton(id)
 		{
 			var v = $('unit-info').style.visibility;
 			
-			if (v == "visible") 
+			if (v == "visible")
+			{
 				$('unit-info').style.visibility = "hidden"; 
+				toggleButton($('inspectunit').firstChild, false);
+			}
 			else 
-				$('unit-info').style.visibility = "visible"; 
+			{
+				$('unit-info').style.visibility = "visible";
+				toggleButton($('inspectunit').firstChild, true);
+			}
 			break;
 		}
 		case 'buy':
@@ -402,7 +385,7 @@ function mainMenuButton(id)
 				$('equipment').style.display = "none"; 
 				$('container-unitlist').style.display = "none";
 				uiSettings.deployMode = false;
-				
+				toggleButton($('buy').firstChild, false);
 			}
 			else 
 			{
@@ -410,6 +393,7 @@ function mainMenuButton(id)
 				$('container-unitlist').style.display = "inline";
 				$('unit-info').style.visibility = "visible"; 
 				updateEquipmentWindow(unitClass.tank);
+				toggleButton($('buy').firstChild, true);
 			}
 			r.render();
 			break;
@@ -435,15 +419,21 @@ function mainMenuButton(id)
 			var v = $('slidemenu').style.visibility;
 			
 			if (v == "visible")
+			{
 				$('slidemenu').style.visibility = "hidden";
+				toggleButton($('mainmenu').firstChild, false);
+			}
 			else
+			{
 				$('slidemenu').style.visibility = "visible";
+				toggleButton($('mainmenu').firstChild, true);
+			}
 			break;
 		}
 		case 'options':
 		{
 			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br><br> Available scenarios:<br>");
+			"npavel@linuxconsulting.ro <br><br> Graphical Assets by Luca Iulian<br> lucaiuli@gmail.com<br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
 			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}
@@ -478,7 +468,7 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-mount";
 		div.title = "Mount this unit into a transport";
-		div.onclick = function() {unitInfoButton('mount', u);}
+		div.onclick = function() {unitContextButton('mount', u);}
 	}
 	
 	if (GameRules.canResupply(map.map, u))
@@ -488,7 +478,7 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-resupply";
 		div.title = "Resupply Ammo and Fuel for this unit";
-		div.onclick = function() {unitInfoButton('resupply', u);}
+		div.onclick = function() {unitContextButton('resupply', u);}
 	}
 
 	if (GameRules.canReinforce(map.map, u)) 
@@ -498,7 +488,17 @@ function updateUnitContextWindow(u)
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-reinforce";
 		div.title = "Reinforce unit strength";
-		div.onclick = function() {unitInfoButton('reinforce', u);}
+		div.onclick = function() {unitContextButton('reinforce', u);}
+	}
+	
+	if (map.canUndoMove(u))
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-undo";
+		div.title = "Undo last move";
+		div.onclick = function() { unitContextButton('undo', u); }
 	}
 	
 	if (nbuttons > 0) 
@@ -511,7 +511,7 @@ function updateUnitInfoWindow(u)
 {
 	var isEqUnit = false;
 	var uinfo, ammo, fuel, exp, ent;
-	
+
 	if ($('unit-info').style.visibility == "hidden") return;
 
 	//Call from equipment window fill with default values (instead of creating a new unit object)
@@ -605,7 +605,7 @@ function updateUnitInfoWindow(u)
 	//TODO Add unit kills/medals	
 }
 
-function unitInfoButton(action, unit)
+function unitContextButton(action, unit)
 {
 	switch (action)
 	{
@@ -625,6 +625,11 @@ function unitInfoButton(action, unit)
 		case 'reinforce':
 		{
 			map.reinforceUnit(unit);
+			break;
+		}
+		case 'undo':
+		{
+			map.undoLastMove();
 			break;
 		}
 	}
@@ -672,12 +677,6 @@ function buildEquipmentWindow()
 			$('eqUserSel').eqtransport = -1;
 			updateEquipmentWindow(this.eqclass); 
 		}
-		
-		//TODO REVIEW hover for eq class buttons
-		/*
-		div.onmouseover = function() { hoverin(this.firstChild); }
-		div.onmouseout = function() { hoverout(this.firstChild); }
-		*/
 	}
 	
 	//Bottom buttons
@@ -1050,5 +1049,5 @@ function gameStart()
 	scenario="resources/scenarios/xml/tutorial.xml";
 	var ui = new UI(scenario);
 	//Bring up the "Main Menu"
-	ui.mainMenuButton('buy');
+	ui.mainMenuButton('options');
 }

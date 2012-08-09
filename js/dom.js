@@ -91,6 +91,14 @@ function hoverout(e)
 	e.src = path + e.id + ".png";
 }
 
+function toggleButton(e, state)
+{
+	if (state)
+		hoverin(e);
+	else
+		hoverout(e);
+}
+
 function bounceText(x, y, text)
 {
 	var cdiv = addTag('game', 'div');

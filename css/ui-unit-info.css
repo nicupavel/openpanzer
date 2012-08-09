@@ -1,4 +1,4 @@
-/* contextual pop-up menu that appear when a unit can mount/reinforce/resupply/embark */
+/* contextual pop-up menu that appear when a unit can mount/reinforce/resupply/embark/undo-move */
 #unit-context
 {
 	position: fixed;
@@ -32,6 +32,7 @@
 #unit-context-reinforce { background-image: url('../resources/ui/dialogs/unit-context/reinforce.png'); }
 #unit-context-resupply { background-image: url('../resources/ui/dialogs/unit-context/resupply.png'); }
 #unit-context-embark { background-image: url('../resources/ui/dialogs/unit-context/embark.png'); }
+#unit-context-undo { background-image: url('../resources/ui/dialogs/unit-context/undo.png'); }
 
 /* unit information window */
 

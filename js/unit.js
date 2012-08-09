@@ -8,7 +8,7 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
- 
+
 //Transport Object Constructor
 function Transport(equipmentID)
 {

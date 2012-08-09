@@ -411,6 +411,7 @@ function Map()
 		if (atkunit === null || defunit === null)
 			return null;
 		
+		lastMove.unit = null; //Reset last move undo save
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
 		var update = false; //Don't update unit list if not necessary
@@ -475,6 +476,11 @@ function Map()
 		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
 		var moveCost = c[0].cost;
 		
+		//Save unit properties for undoing move
+		lastMove.savedUnit = new Unit(unit.eqid);
+		lastMove.savedUnit.copy(unit);
+		lastMove.savedUnit.setHex(unit.getHex());
+		
 		mr.passedCells.push(c[0]);
 		for (var i = 1; i < c.length; i++)
 		{
@@ -500,16 +506,23 @@ function Map()
 		dstHex.setUnit(unit);
 		unit.facing = GameRules.getDirection(s.row, s.col, lastCell.row, lastCell.col);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
-		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
+		var newSpotted = GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
 		
 		this.setMoveRange(unit); //if unit can still move put new range
 		this.setAttackRange(unit) //Put new attack range
+		
+		//If the unit hasn't spotted new units or was surprised allow undo
+		if (newSpotted == 0 && !mr.isSurprised)
+			lastMove.unit = unit;
+		else
+			lastMove.unit = null;
 
 		return mr;
 	}
 	
 	this.resupplyUnit = function(unit)
 	{
+		lastMove.unit = null; //Reset last move undo save
 		var s = GameRules.getResupplyValue(this.map, unit);
 		unit.resupply(s.ammo, s.fuel); //Supply doesn't cost prestige
 		this.delAttackSel();
@@ -518,6 +531,7 @@ function Map()
 	
 	this.reinforceUnit = function(unit)
 	{
+		lastMove.unit = null; //Reset last move undo save
 		var str = GameRules.getReinforceValue(this.map, unit);
 		var p = unit.player;
 		if (!p.reinforceUnit(unit, str))
@@ -552,6 +566,7 @@ function Map()
 		var p = unit.player;
 		if (!p.upgradeUnit(unit, upgradeid, transportid))
 			return false;
+		lastMove.unit = null; //Reset last move undo save
 		unitImagesList[unit.eqid] = unit.getIcon();
 		
 		if (unit.transport !== null) //TODO change this.addUnit to handle upgrading
@@ -613,6 +628,37 @@ function Map()
 		return true;
 	}	
 	
+	//Returns true if last movement of a unit can be undoed 
+	this.canUndoMove = function(unit)
+	{
+		if (lastMove.unit !== null && lastMove.unit.id == unit.id)
+			return true;
+		return false;
+	}
+	
+	this.undoLastMove = function()
+	{
+		if (lastMove.unit == null)
+			return;
+		var unit = lastMove.unit;
+		var sUnit = lastMove.savedUnit;
+		var sCell = unit.getPos();
+		var dCell = sUnit.getPos();
+		var srcHex = this.map[sCell.row][sCell.col];
+		var dstHex = this.map[dCell.row][dCell.col];
+		
+		unit.copy(sUnit); //restore unit properties to previous state
+		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
+		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
+		srcHex.delUnit(unit);
+		dstHex.setUnit(unit);
+		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
+		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
+		lastMove.unit = null; //Reset last move undo save
+		delete(lastMove.savedUnit); //delete no longer used unit
+		this.selectUnit(unit);
+	}
+	
 	//Captures a hex objective returns true is capture results in a win for the player
 	this.captureHex = function(cell, player)
 	{
@@ -655,9 +701,9 @@ function Map()
 	
 		this.allocMap();
 	
-		for (r = 0; r < m.rows; r++)
+		for (var r = 0; r < m.rows; r++)
 		{
-			for (c = 0; c < m.cols; c++)
+			for (var c = 0; c < m.cols; c++)
 			{
 				var h = m.map[r][c];
 				var hex = this.map[r][c];
@@ -735,7 +781,12 @@ function Map()
 	}
 	
 	//Private
-
+	//For saving last move by a unit
+	var lastMove = 
+	{
+		unit: null,
+		savedUnit: null,
+	}; 
 	//TODO UnitManager object
 	function findUnitById(id)
 	{

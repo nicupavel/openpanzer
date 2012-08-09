@@ -71,7 +71,7 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 			if (c[i].range == r)
 			{
 				//console.log("Checking for Row:"+ c[i].row + " Col:" + c[i].col + " range: " + c[i].range + " at range: " + r);
-				for (j  = 0; j < c.length; j++) //Look up adjacent cells for c[i]
+				for (var j = 0; j < c.length; j++) //Look up adjacent cells for c[i]
 				{
 					if (c[j].range < r) continue; //Not always true, there might be a path to reach a hex by turning back
 					if (isAdjacent(c[i].row, c[i].col, c[j].row, c[j].col))
@@ -174,6 +174,7 @@ GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
 	}
 }
 
+//Sets spotting range for a unit returns number of new units spotted
 GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 {
 	if (!unit) return;
@@ -182,6 +183,7 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 	var side = unit.player.side;
 	var range = unit.unitData().spotrange;
 	var r, c;
+	var newlySpottedUnits = 0;
 	var cells = getCellsInRange(p.row, p.col, range, mrows, mcols);
 	//Add current unit cell too as spotted
 	cells.push(new Cell(p.row, p.col)); 
@@ -191,8 +193,17 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 		r = cells[i].row;
 		c = cells[i].col;
 		//console.log("spot [" + r + "][" + c +"] set to:" + on + " for side: " + side);
+		//Check for a previously hidden unit
+		if (on && !map[r][c].isSpotted(side))
+		{
+			var sUnit = map[r][c].getUnit(false);
+			if (sUnit && sUnit.player.side != side)
+				newlySpottedUnits++;
+		}
 		map[r][c].setSpotted(side, on);
 	}
+	
+	return newlySpottedUnits;
 }
 
 GameRules.getShortestPath = function(startCell, endCell, cellList)
@@ -632,7 +643,7 @@ GameRules.canAttack = function(unit, targetUnit) { return canAttack(unit, target
 //Checks if a given unit can move into a hex
 function canMoveInto(map, unit, cell)
 {
-	hex = map[cell.row][cell.col];
+	var hex = map[cell.row][cell.col];
 
 	if (isGround(unit) || isSea(unit))
 	{
@@ -650,7 +661,7 @@ function canMoveInto(map, unit, cell)
 //Checks if a unit can pass thru a hex ocupied by a friendly unit
 function canPassInto(map, unit, cell)
 {
-	hex = map[cell.row][cell.col];
+	var hex = map[cell.row][cell.col];
 	
 	if (isGround(unit) || isSea(unit))
 	{
@@ -900,7 +911,7 @@ GameRules.unitUsesFuel = function(unit)
 	if (unit.unitData().fuel == 0)
 		return false;
 		
-	m = unit.unitData().movmethod;
+	var m = unit.unitData().movmethod;
 	if ((m == movMethod.leg) || 
 		(m == movMethod.towed) ||
 		(m == movMethod.allTerrainLeg))
