@@ -133,7 +133,11 @@ function Render(mapObj)
 				if (unit !== null && !unit.hasAnimation
 						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 								|| unit.player.side == map.currentPlayer.side))
+				{
+					if (uiSettings.markOwnUnits && unit.player.id == map.currentPlayer.id)
+						drawHex(c, x0, y0, hexstyle.ownunit);
 					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode without strength box
+				}
 
 				unit = hex.getUnit(uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation 
@@ -628,9 +632,6 @@ function Render(mapObj)
 	
 	function drawHex(ctx, x0, y0, style)
 	{
-		ctx.lineWidth = style.lineWidth; 
-		ctx.lineJoin = style.lineJoin; 
-		ctx.strokeStyle = style.lineColor;
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
 		ctx.lineTo(x0 + s, y0);
@@ -643,7 +644,15 @@ function Render(mapObj)
 			ctx.fillStyle = style.fillColor;
 			ctx.fill();
 		}
+		
 		ctx.closePath();
-		ctx.stroke();
+		
+		if (style.lineWidth > 0)
+		{
+			ctx.lineWidth = style.lineWidth;
+			ctx.lineJoin = style.lineJoin; 
+			ctx.strokeStyle = style.lineColor;
+			ctx.stroke();
+		}
 	}
 }

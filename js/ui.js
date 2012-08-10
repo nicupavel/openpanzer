@@ -17,6 +17,7 @@ function UI(scenario)
 		mapZoom:false, //flag used to draw map in zoomed mode or not
 		hexGrid:false, // flag to notify render if it should draw or not hex grid
 		deployMode:false, //used for unit deployment
+		markOwnUnits: false, //To visually mark own units on map
 		hasTouch: hasTouch(),
 	};
 	

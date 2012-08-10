@@ -38,11 +38,18 @@ var hexstyle =
 		"lineWidth": 0.4,
 		"lineJoin": "miter",
 	},
-	"deploy": //deployment hexes
+	"deploy": //Deployment hexes
 	{ 
 		"fillColor": "rgba(128,128,128,0.8)",
 		"lineColor": "rgba(0,0,0,0.4)",
 		"lineWidth":  1,
+		"lineJoin":  "miter",
+	},
+	"ownunit": //Hex that has a current player unit on it
+	{ 
+		"fillColor": "rgba(30,144,255,0.3)",
+		"lineColor": "rgba(0,0,0,0.4)",
+		"lineWidth":  0,
 		"lineJoin":  "miter",
 	},
 };
