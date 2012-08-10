@@ -433,7 +433,7 @@ function mainMenuButton(id)
 		case 'options':
 		{
 			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br> Graphical Assets by Luca Iulian<br> lucaiuli@gmail.com<br><br> Available scenarios:<br>");
+			"npavel@linuxconsulting.ro <br><br> UI icons by Luca Iulian<br> lucaiuli@gmail.com<br><br> Available scenarios:<br>");
 			
 			var scnSel = addTag('message', 'select');
 			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}
@@ -728,7 +728,7 @@ function buildEquipmentWindow()
 
 //TODO function too large break it
 //TODO index equipment array
-//TODO clear onclick functions 
+//TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
 	if ($('container-unitlist').style.display == "none") 
@@ -774,6 +774,7 @@ function updateEquipmentWindow(eqclass)
 		//The actual units on the map
 		var userUnitSelected = $('eqUserSel').userunit;
 		var unitList = map.getUnits();
+		var forcedScroll;
 		uiSettings.deployMode = false;
 		
 		for (var i = 0; i < unitList.length; i++)
@@ -791,13 +792,20 @@ function updateEquipmentWindow(eqclass)
 				{	
 					//Automatically set transport on transport list if user has not selected a new transport
 					if (u.transport !== null && $('eqUserSel').eqtransport == -1)
-						$('eqUserSel').eqtransport = u.transport.eqid;
+					{
+						//Check if user selected equipment unit for upgrade can be transported
+						if ($('eqUserSel').equnit == -1 || GameRules.isTransportable($('eqUserSel').equnit))
+							$('eqUserSel').eqtransport = u.transport.eqid;
+					}
 					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 					eqclass = ud.uclass; //Force unit class for equipment display
 					map.selectUnit(u); //select unit on map
 					r.render(); //refresh so the new selection appear
-					$('hscroll-unitlist').scrollLeft = $('unitlist').offsetWidth; //scroll the unitlist to the selected unit
 					uiSetUnitOnViewPort(u); //bring the unit into map view
+					//This unit will be the last in div since the div is being built and we can use offsetWidth of the
+					//containing div to get offset from the position 0. This value will be used to scroll the div when 
+					//a unit is selected from the map not from the unit list ui div 
+					forcedScroll = $('unitlist').offsetWidth - ($('container-unitlist').offsetWidth + div.offsetWidth)/2;
 				}
 				div.onclick = function() 
 				{ 
@@ -808,11 +816,15 @@ function updateEquipmentWindow(eqclass)
 					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
 					$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection 
 					$('eqUserSel').userunit = this.unitid; //save selected player unit
+					$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll 
 					updateUnitInfoWindow(equipment[this.uniteqid]);
 					updateEquipmentWindow(this.eqclass);
+					$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
 				}
 			}
 		}
+		//Force scrolling when units are selected from the map to bring them into unit list view
+		$('hscroll-unitlist').scrollLeft = forcedScroll;
 	}
 	//Don't change the listing on dummy class
 	if (eqclass == 0) return;
