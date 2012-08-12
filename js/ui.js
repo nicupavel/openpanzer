@@ -78,7 +78,7 @@ function handleMouseClick(e)
 	{ 
 		if (clickedUnit)
 		{
-			$('unit-info').style.visibility = "visible";
+			$('unit-info').style.display = "inline";
 			updateUnitInfoWindow(clickedUnit);
 		}
 		else 
@@ -364,24 +364,21 @@ function mainMenuButton(id)
 		}
 		case 'inspectunit':
 		{
-			var v = $('unit-info').style.visibility;
-			
-			if (v == "visible")
+			if (isVisible('unit-info'))
 			{
-				$('unit-info').style.visibility = "hidden"; 
+				$('unit-info').style.display = "none"; 
 				toggleButton($('inspectunit').firstChild, false);
 			}
 			else 
 			{
-				$('unit-info').style.visibility = "visible";
+				$('unit-info').style.display = "inline";
 				toggleButton($('inspectunit').firstChild, true);
 			}
 			break;
 		}
 		case 'buy':
 		{
-			var v = $('equipment').style.display;
-			if (v != "" && v != "none")
+			if (isVisible('equipment'))
 			{
 				$('equipment').style.display = "none"; 
 				$('container-unitlist').style.display = "none";
@@ -392,7 +389,7 @@ function mainMenuButton(id)
 			{
 				$('equipment').style.display = "inline"; 
 				$('container-unitlist').style.display = "inline";
-				$('unit-info').style.visibility = "visible"; 
+				$('unit-info').style.display = "inline"; 
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy').firstChild, true);
 			}
@@ -417,16 +414,14 @@ function mainMenuButton(id)
 		}
 		case 'mainmenu':
 		{
-			var v = $('slidemenu').style.visibility;
-			
-			if (v == "visible")
+			if (isVisible('slidemenu'))
 			{
-				$('slidemenu').style.visibility = "hidden";
+				$('slidemenu').style.display = "none";
 				toggleButton($('mainmenu').firstChild, false);
 			}
 			else
 			{
-				$('slidemenu').style.visibility = "visible";
+				$('slidemenu').style.display = "inline";
 				toggleButton($('mainmenu').firstChild, true);
 			}
 			break;
@@ -458,7 +453,7 @@ function updateUnitContextWindow(u)
 	
 	if (!u || !u.player || u.player.id != map.currentPlayer.id) 
 	{
-		$('unit-context').style.visibility = "hidden";
+		$('unit-context').style.display = "none";
 		return;
 	}
 	
@@ -503,9 +498,9 @@ function updateUnitContextWindow(u)
 	}
 	
 	if (nbuttons > 0) 
-		$('unit-context').style.visibility = "visible";
+		$('unit-context').style.display = "inline";
 	else
-		$('unit-context').style.visibility = "hidden";
+		$('unit-context').style.display = "none";
 }
 
 function updateUnitInfoWindow(u)
@@ -513,7 +508,7 @@ function updateUnitInfoWindow(u)
 	var isEqUnit = false;
 	var uinfo, ammo, fuel, exp, ent;
 
-	if ($('unit-info').style.visibility == "hidden") return;
+	if (!isVisible('unit-info')) return;
 
 	//Call from equipment window fill with default values (instead of creating a new unit object)
 	if (typeof u.unitData === "undefined") 
@@ -732,7 +727,7 @@ function buildEquipmentWindow()
 //TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
-	if ($('container-unitlist').style.display == "none") 
+	if (!isVisible('container-unitlist')) 
 		return;
 		
 	//Remove older entries
@@ -902,39 +897,39 @@ function updateEquipmentCosts()
 	if (buyCost > 0 && buyCost <= prestige) 
 	{
 		$('eqNewText').innerHTML = "New unit cost: " + buyCost + currencyIcon;
-		$('eqNewBut').style.visibility = "visible";
+		$('eqNewBut').style.display = "inline";
 	}
 	else
 	{
 		if (buyCost > prestige)
 		{
 			var diff = buyCost - prestige;
-			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy</span>";
+			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy.</span>";
 		}
 		else
 		{
 			$('eqNewText').innerHTML = "";
 		}
-		$('eqNewBut').style.visibility = "hidden";
+		$('eqNewBut').style.display = "none";
 	}
 	
 	if (upCost > 0 && upCost <= prestige)
 	{
 		$('eqUpgradeText').innerHTML = " Upgrade unit cost: " + upCost + currencyIcon;
-		$('eqUpgradeBut').style.visibility = "visible";
+		$('eqUpgradeBut').style.display = "inline";
 	}
 	else
 	{
 		if (upCost > prestige)
 		{
 			var diff = upCost - prestige;
-			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade</span>";
+			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade.</span>";
 		}
 		else
 		{
 			$('eqUpgradeText').innerHTML = "";
 		}	
-		$('eqUpgradeBut').style.visibility = "hidden";
+		$('eqUpgradeBut').style.display = "none";
 	}
 	
 	$('currentPrestige').innerHTML = "Available prestige: " + prestige + currencyIcon;
@@ -977,8 +972,8 @@ function uiMessage(title, message)
 {
 	$('title').innerHTML = title;
 	$('message').innerHTML = message;
-	$('ui-message').style.visibility = "visible"
-	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+	$('ui-message').style.display = "inline"
+	$('uiokbut').onclick = function() { $('ui-message').style.display = "none"; }
 }
 
 function uiEndTurnInfo()

@@ -15,7 +15,7 @@
 	background-image: url('../resources/ui/dialogs/ui-message/images/ui-message.png');
 	z-index:99;
 	overflow-y: auto;
-	visibility: hidden;
+	display: none;
 	overflow: hidden;
 }
 

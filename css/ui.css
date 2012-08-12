@@ -63,7 +63,7 @@ body,html
 
 #slidemenu
 {
-	visibility:hidden;
+	display: none;
 }
 
 .message
