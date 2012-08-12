@@ -21,6 +21,14 @@ function UI(scenario)
 		hasTouch: hasTouch(),
 	};
 	
+	//Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
+	var eqClassButtons = 
+	{
+	"9": ['but-aa', 'Air defence'], "4": ['but-at', 'Anti-tank'], "8": ['but-arty', 'Artillery'],
+	"1": ['but-inf', 'Infantry'], "3":['but-rcn', 'Recon'], "2": ['but-tank', 'Tank'],
+	"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
+	};
+
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 
 	var map = new Map();
@@ -636,11 +644,6 @@ function unitContextButton(action, unit)
 
 function buildEquipmentWindow()
 {
-	//Build the class selection buttons [button name, description, unit class id from equipment.js]
-	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
-					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
-					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
-
 	//The default selected country in the div
 	$('eqSelCountry').country = 0;
 	$('eqSelCountry').owner = 0;
@@ -658,12 +661,11 @@ function buildEquipmentWindow()
 	{
 		var div = addTag('eqSelClass','div');
 		var img = addTag(div, 'img');
-		
 		var id = eqClassButtons[b][0];
 		div.id = id;
 		div.className = "eqSelClassBut";
 		div.title = eqClassButtons[b][1];
-		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
+		div.eqclass = b; //Hack to get parameter passed
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() 
@@ -734,6 +736,13 @@ function updateEquipmentWindow(eqclass)
 	clearTag('unitlist');
 	clearTag('eqUnitList');
 	clearTag('eqTransportList');
+	
+	//Toggle equipment class button on/off
+	var prevClass = $('eqUserSel').eqclass;
+	if (typeof prevClass !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
+		toggleButton($(eqClassButtons[prevClass][0]).firstChild, false);
+	toggleButton($(eqClassButtons[eqclass][0]).firstChild, true);
+	$('eqUserSel').eqclass = eqclass;
 	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
