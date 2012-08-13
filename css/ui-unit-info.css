@@ -11,7 +11,7 @@
 	float: left;
 	left:50%;
 	margin-left: -60px;
-	visibility: hidden;
+	display: none;
 	border-radius: 5px;
 }
 
@@ -90,7 +90,7 @@
 	left: 50%;
 	margin-left: -420px;
 	padding: 0px;
-	visibility: hidden;
+	display: none;
 	font-family: Arial;
 	font-size: 12px;
 	font-weight: bold;

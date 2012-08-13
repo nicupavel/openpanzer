@@ -99,6 +99,16 @@ function toggleButton(e, state)
 		hoverout(e);
 }
 
+function isVisible(tag)
+{
+	var v = $(tag).style.display;
+	
+	if (v != "" && v != "none")
+		return true;
+	
+	return false;
+}
+
 function bounceText(x, y, text)
 {
 	var cdiv = addTag('game', 'div');

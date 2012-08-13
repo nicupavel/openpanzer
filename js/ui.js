@@ -17,9 +17,18 @@ function UI(scenario)
 		mapZoom:false, //flag used to draw map in zoomed mode or not
 		hexGrid:false, // flag to notify render if it should draw or not hex grid
 		deployMode:false, //used for unit deployment
+		markOwnUnits: false, //To visually mark own units on map
 		hasTouch: hasTouch(),
 	};
 	
+	//Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
+	var eqClassButtons = 
+	{
+	"9": ['but-aa', 'Air defence'], "4": ['but-at', 'Anti-tank'], "8": ['but-arty', 'Artillery'],
+	"1": ['but-inf', 'Infantry'], "3":['but-rcn', 'Recon'], "2": ['but-tank', 'Tank'],
+	"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
+	};
+
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 
 	var map = new Map();
@@ -77,7 +86,7 @@ function handleMouseClick(e)
 	{ 
 		if (clickedUnit)
 		{
-			$('unit-info').style.visibility = "visible";
+			$('unit-info').style.display = "inline";
 			updateUnitInfoWindow(clickedUnit);
 		}
 		else 
@@ -363,24 +372,21 @@ function mainMenuButton(id)
 		}
 		case 'inspectunit':
 		{
-			var v = $('unit-info').style.visibility;
-			
-			if (v == "visible")
+			if (isVisible('unit-info'))
 			{
-				$('unit-info').style.visibility = "hidden"; 
+				$('unit-info').style.display = "none"; 
 				toggleButton($('inspectunit').firstChild, false);
 			}
 			else 
 			{
-				$('unit-info').style.visibility = "visible";
+				$('unit-info').style.display = "inline";
 				toggleButton($('inspectunit').firstChild, true);
 			}
 			break;
 		}
 		case 'buy':
 		{
-			var v = $('equipment').style.display;
-			if (v != "" && v != "none")
+			if (isVisible('equipment'))
 			{
 				$('equipment').style.display = "none"; 
 				$('container-unitlist').style.display = "none";
@@ -391,7 +397,7 @@ function mainMenuButton(id)
 			{
 				$('equipment').style.display = "inline"; 
 				$('container-unitlist').style.display = "inline";
-				$('unit-info').style.visibility = "visible"; 
+				$('unit-info').style.display = "inline"; 
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy').firstChild, true);
 			}
@@ -416,16 +422,14 @@ function mainMenuButton(id)
 		}
 		case 'mainmenu':
 		{
-			var v = $('slidemenu').style.visibility;
-			
-			if (v == "visible")
+			if (isVisible('slidemenu'))
 			{
-				$('slidemenu').style.visibility = "hidden";
+				$('slidemenu').style.display = "none";
 				toggleButton($('mainmenu').firstChild, false);
 			}
 			else
 			{
-				$('slidemenu').style.visibility = "visible";
+				$('slidemenu').style.display = "inline";
 				toggleButton($('mainmenu').firstChild, true);
 			}
 			break;
@@ -457,7 +461,7 @@ function updateUnitContextWindow(u)
 	
 	if (!u || !u.player || u.player.id != map.currentPlayer.id) 
 	{
-		$('unit-context').style.visibility = "hidden";
+		$('unit-context').style.display = "none";
 		return;
 	}
 	
@@ -502,9 +506,9 @@ function updateUnitContextWindow(u)
 	}
 	
 	if (nbuttons > 0) 
-		$('unit-context').style.visibility = "visible";
+		$('unit-context').style.display = "inline";
 	else
-		$('unit-context').style.visibility = "hidden";
+		$('unit-context').style.display = "none";
 }
 
 function updateUnitInfoWindow(u)
@@ -512,7 +516,7 @@ function updateUnitInfoWindow(u)
 	var isEqUnit = false;
 	var uinfo, ammo, fuel, exp, ent;
 
-	if ($('unit-info').style.visibility == "hidden") return;
+	if (!isVisible('unit-info')) return;
 
 	//Call from equipment window fill with default values (instead of creating a new unit object)
 	if (typeof u.unitData === "undefined") 
@@ -640,11 +644,6 @@ function unitContextButton(action, unit)
 
 function buildEquipmentWindow()
 {
-	//Build the class selection buttons [button name, description, unit class id from equipment.js]
-	var eqClassButtons = [['but-aa','Air defence', 9],['but-at', 'Anti-tank', 4],['but-arty', 'Artillery', 8],
-					  ['but-inf', 'Infantry', 1],['but-rcn','Recon', 3],['but-tank', 'Tank', 2],
-					  ['but-af','Air Fighter', 10], ['but-ab','Air Bomber', 11]];
-
 	//The default selected country in the div
 	$('eqSelCountry').country = 0;
 	$('eqSelCountry').owner = 0;
@@ -662,12 +661,11 @@ function buildEquipmentWindow()
 	{
 		var div = addTag('eqSelClass','div');
 		var img = addTag(div, 'img');
-		
 		var id = eqClassButtons[b][0];
 		div.id = id;
 		div.className = "eqSelClassBut";
 		div.title = eqClassButtons[b][1];
-		div.eqclass = eqClassButtons[b][2]; //Hack to get parameter passed
+		div.eqclass = b; //Hack to get parameter passed
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() 
@@ -731,13 +729,20 @@ function buildEquipmentWindow()
 //TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
-	if ($('container-unitlist').style.display == "none") 
+	if (!isVisible('container-unitlist')) 
 		return;
 		
 	//Remove older entries
 	clearTag('unitlist');
 	clearTag('eqUnitList');
 	clearTag('eqTransportList');
+	
+	//Toggle equipment class button on/off
+	var prevClass = $('eqUserSel').eqclass;
+	if (typeof prevClass !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
+		toggleButton($(eqClassButtons[prevClass][0]).firstChild, false);
+	toggleButton($(eqClassButtons[eqclass][0]).firstChild, true);
+	$('eqUserSel').eqclass = eqclass;
 	
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
@@ -901,39 +906,39 @@ function updateEquipmentCosts()
 	if (buyCost > 0 && buyCost <= prestige) 
 	{
 		$('eqNewText').innerHTML = "New unit cost: " + buyCost + currencyIcon;
-		$('eqNewBut').style.visibility = "visible";
+		$('eqNewBut').style.display = "inline";
 	}
 	else
 	{
 		if (buyCost > prestige)
 		{
 			var diff = buyCost - prestige;
-			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy</span>";
+			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy.</span>";
 		}
 		else
 		{
 			$('eqNewText').innerHTML = "";
 		}
-		$('eqNewBut').style.visibility = "hidden";
+		$('eqNewBut').style.display = "none";
 	}
 	
 	if (upCost > 0 && upCost <= prestige)
 	{
 		$('eqUpgradeText').innerHTML = " Upgrade unit cost: " + upCost + currencyIcon;
-		$('eqUpgradeBut').style.visibility = "visible";
+		$('eqUpgradeBut').style.display = "inline";
 	}
 	else
 	{
 		if (upCost > prestige)
 		{
 			var diff = upCost - prestige;
-			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade</span>";
+			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade.</span>";
 		}
 		else
 		{
 			$('eqUpgradeText').innerHTML = "";
 		}	
-		$('eqUpgradeBut').style.visibility = "hidden";
+		$('eqUpgradeBut').style.display = "none";
 	}
 	
 	$('currentPrestige').innerHTML = "Available prestige: " + prestige + currencyIcon;
@@ -976,8 +981,8 @@ function uiMessage(title, message)
 {
 	$('title').innerHTML = title;
 	$('message').innerHTML = message;
-	$('ui-message').style.visibility = "visible"
-	$('uiokbut').onclick = function() { $('ui-message').style.visibility = "hidden"; }
+	$('ui-message').style.display = "inline"
+	$('uiokbut').onclick = function() { $('ui-message').style.display = "none"; }
 }
 
 function uiEndTurnInfo()
