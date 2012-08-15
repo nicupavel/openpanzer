@@ -1,188 +1,187 @@
+/* contextual pop-up menu that appear when a unit can mount/reinforce/resupply/embark/undo-move */
+#unit-context
+{
+	position: fixed;
+	z-index:100;
+	border: 0px solid white;
+	top: 100%;
+	margin-top: -95px;
+	background: rgba(20,20,20, 0.7);
+	padding: 5px;
+	float: left;
+	left:50%;
+	margin-left: -60px;
+	display: none;
+	border-radius: 5px;
+}
+
+.unit-context-buttons
+{
+	border: 0px solid white;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 30px;
+	height: 30px;
+	padding-left: 2px;
+	padding-right:2px;
+	margin:0px auto;
+	float:left;
+}
+
+#unit-context-mount { background-image: url('../resources/ui/dialogs/unit-context/mount.png'); }
+#unit-context-reinforce { background-image: url('../resources/ui/dialogs/unit-context/reinforce.png'); }
+#unit-context-resupply { background-image: url('../resources/ui/dialogs/unit-context/resupply.png'); }
+#unit-context-embark { background-image: url('../resources/ui/dialogs/unit-context/embark.png'); }
+#unit-context-undo { background-image: url('../resources/ui/dialogs/unit-context/undo.png'); }
+
+/* unit information window */
+
+.imageCol
+{
+	float: left;
+	border: 0px solid yellow;
+	width: 100px;
+	height: 69px;
+	background-image: url('../resources/ui/dialogs/equipment/images/scope.png');
+	background-repeat: no-repeat;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.nameRow
+{
+	float: left;
+	border: 0px solid yellow;
+	width:740px;
+	padding:0px;
+}
+
+.statsRow
+{
+	float: left;
+	border: 0px solid red;
+	height: 60px;
+	background: rgba(20,20,20, 0.7);
+	border-radius: 5px;
+	width: 740px;
+}
+
+
+.uStat
+{
+	float: left;
+	background-repeat: no-repeat;
+	background-position: center top;
+	padding-top: 26px; /* for text alignment */
+	width: 30px;
+	text-align: center;
+	border: 0px solid blue;
+
+}
+
 #unit-info
 {
 	position: fixed;
-	width: 215px;
-	height: 375px;
-	left:50%;
-	margin-left: -107.5px;
-	top:50%;
-	margin-top: -187.5px;
-	color: #f8e064;
-	font-weight:bold;
+	z-index:90;
+	border: 0px solid white;
+	width: 840px;
+	top: 100%;
+	margin-top: -70px;
+	left: 50%;
+	margin-left: -420px;
+	padding: 0px;
+	display: none;
 	font-family: Arial;
 	font-size: 12px;
+	font-weight: bold;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-bg.png');
-	z-index:100;
-	overflow-y: auto;
-	visibility: hidden;
-	overflow: hidden;
+	color: #f8e064;
 }
 
-#unit-info #container
-{
-	position: relative;
-	border: 0px #fff solid;
-}
-
-#unit-image
+#uImage
 {	
 	border: 0px #fff solid;
+	margin-top:20px;
+	margin-left:10px;
 	width: 80px;
 	height:50px;
-	margin-top:50px;
-	margin-left:70px;
 	-webkit-animation:unitanim 2s steps(9,end) infinite alternate;
 	-moz-animation:unitanim 2s steps(9,end) infinite alternate;
 	background:url('../resources/units/images/g87.png');
-	
 }
-#unit-name
+
+#uName
 {
 	border: 0px #fff solid;
-	position:absolute;
-	top:65px;
-	left:30px;
-	width:150px;
-	text-align: center;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 14px;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    2px 2px 0 #000;
 }
-#unit-flag
+
+#uFlag
 {
 	border: 0px #fff solid;
-	position:absolute;
-	top:90px;
-	left:77px;
 	width:60px;
 	height:34px;
+	margin-top: 5px;
+	margin-left: 5px;
 	background-image: url('../resources/ui/flags/flag_big_18.png');
-}
-#fuel
-{
-	position:absolute;
-	top: 120px;
-	left:40px;
+	line-height: 30px; /* for spacing vertically country name text */
+	white-space: nowrap;
 }
 
-#ammo
+#uTransport
 {
-	position:absolute;
-	top: 120px;
-	left:160px;
-}
-#gunrange
-{
-	position: absolute;
-	top: 155px;
-	left:40px;
-}
-#ini
-{
-	position: absolute;
-	top: 155px;
-	left:80px;
-}
-#spot
-{
-	position: absolute;
-	top: 155px;
-	left:120px;
-}
-#str
-{
-	position: absolute;
-	top: 155px;
-	left:160px;
-}
-#ahard
-{
-	position: absolute;
-	top: 210px;
-	left:40px;
-}
-#asoft
-{
-	position: absolute;
-	top: 210px;
-	left:80px;
-}
-#aair
-{
-	position: absolute;
-	top: 210px;
-	left:120px;
-}
-#anaval
-{
-	position: absolute;
-	top: 210px;
-	left:160px;
-}
-#dhard
-{
-	position: absolute;
-	top: 265px;
-	left:40px;
-}
-#dair
-{
-	position: absolute;
-	top: 265px;
-	left:80px;
-}
-#dclose
-{
-	position: absolute;
-	top: 265px;
-	left:120px;
-}
-#drange
-{
-	position: absolute;
-	top: 265px;
-	left:160px;
-}
-#iokbut
-{
-	border: 0px solid #fff;
-	position: absolute;
-	top: 285px;
-	left:180px;
-	min-width: 20px;
-	height:20px;
+	float: left;
+	margin-left: 20px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-#ireinfbut
-{
-	border: 0px solid #fff;
-	position: absolute;
-	top: 285px;
-	left:112px;
-	min-width: 20px;
-	height:20px;
+#uTransport.toTransport
+{ 
+	width: 30px;
+	height: 40px;
+	background-image: url('../resources/ui/dialogs/unit-info/images/unit-transport.png');	
 }
-#ireinfbut.enabled { background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-reinforce.png');}
 
-#iresupbut
-{
-	border: 0px solid #fff;
-	position: absolute;
-	top: 285px;
-	left:80px;
-	min-width: 20px;
-	height:20px;
+#uTransport.toUnit
+{ 
+	width: 30px;
+	height: 40px;	
+	background-image: url('../resources/ui/dialogs/unit-info/images/transport-unit.png');
 }
-#iresupbut.enabled {	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-resupply.png');}
 
-#imountbut
-{
-	border: 0px solid #fff;
-	position: absolute;
-	top: 285px;
-	left:13px;
-	min-width: 20px;
-	height:20px;
-}
-#imountbut.enabled {	background-image: url('../resources/ui/dialogs/unit-info/images/unit-info-mount.png'); }
+
+#uClass 	{ background-image: url('../resources/ui/dialogs/unit-info/images/class.png'); }
+#uTarget 	{ background-image: url('../resources/ui/dialogs/unit-info/images/target-type.png'); }
+#uMoveType	{ background-image: url('../resources/ui/dialogs/unit-info/images/movement-type.png'); width: 60px;}
+
+#uStr 		{ background-image: url('../resources/ui/dialogs/unit-info/images/strength.png'); }
+#uAmmo 		{ background-image: url('../resources/ui/dialogs/unit-info/images/ammo.png'); }
+#uFuel 		{ background-image: url('../resources/ui/dialogs/unit-info/images/fuel.png'); }
+#uGunRange 	{ background-image: url('../resources/ui/dialogs/unit-info/images/attack-range.png'); }
+#uMovement 	{ background-image: url('../resources/ui/dialogs/unit-info/images/movement-range.png'); }
+
+#uExp 		{ background-image: url('../resources/ui/dialogs/unit-info/images/experience.png'); }
+#uEnt 		{ background-image: url('../resources/ui/dialogs/unit-info/images/entrenchment.png'); }
+#uIni 		{ background-image: url('../resources/ui/dialogs/unit-info/images/initiative.png'); }
+#uSpot 		{ background-image: url('../resources/ui/dialogs/unit-info/images/spot-range.png'); }
+
+#uAHard 	{ background-image: url('../resources/ui/dialogs/unit-info/images/attack-hard.png'); }
+#uASoft 	{ background-image: url('../resources/ui/dialogs/unit-info/images/attack-soft.png'); }
+#uAAir 		{ background-image: url('../resources/ui/dialogs/unit-info/images/attack-air.png'); }
+#uANaval 	{ background-image: url('../resources/ui/dialogs/unit-info/images/attack-naval.png'); }
+
+#uDHard		{ background-image: url('../resources/ui/dialogs/unit-info/images/defence-hard.png'); }
+#uDAir		{ background-image: url('../resources/ui/dialogs/unit-info/images/defence-air.png'); }
+#uDClose	{ background-image: url('../resources/ui/dialogs/unit-info/images/defence-close.png'); }
+#uDRange	{ background-image: url('../resources/ui/dialogs/unit-info/images/defence-ranged.png'); }
 
 @-webkit-keyframes unitanim
 {

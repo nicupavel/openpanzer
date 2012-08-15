@@ -28,7 +28,7 @@ body,html
 	outline: none; /* don't show the focus outline */
 }
 
-#menu 
+#statusbar 
 {
 	position:fixed; 
 	float:left; 
@@ -39,16 +39,38 @@ body,html
 	font-weight:bold; 
 	color:white; 
 	background-color:black;
-	opacity: 0.6; /* Use a background with rgba so buttons won't inherit opacity */
+	opacity: 0.6;
 	z-index:3;
+	border-radius: 5px;
+	padding: 5px 5px 0px 5px;
+}
+
+#menu 
+{
+	position:fixed; 
+	float:left; 
+	padding-left: 3px;
+	width: 35px;
+	left: 96%;
+	top: 30%;
+	border:0px solid #000; 
+	font-weight:bold; 
+	color:white; 
+	background-color:none;
+	/*opacity: 0.6; /* Use a background with rgba so buttons won't inherit opacity */
+	z-index:3;
+}
+
+#slidemenu
+{
+	display: none;
 }
 
 .message
 {
 	float:left; 
 	border: 0px solid #fff;
-	min-width: 290px;
-	margin: 5px 5px 0px 5px;
+	width: 340px;
 	height:20px;
 	color: #f8e064;
 	font-family: Arial;
@@ -58,6 +80,7 @@ body,html
 }
 .message#locmsg
 {
+	width: 490px;
 	text-align: right;
 }
 
@@ -87,4 +110,3 @@ option
 {
 	background-color: grey;
 }
-

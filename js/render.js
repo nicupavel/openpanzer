@@ -84,10 +84,10 @@ function Render(mapObj)
 		//than using clearRect seems faster at least on ball-bounce test
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		a.clearRect(0, 0, a.canvas.width, a.canvas.height);
-		for (row = 0; row < map.rows; row++) 
+		for (var row = 0; row < map.rows; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
-			for (col = 0; col < map.cols; col++) 
+			for (var col = 0; col < map.cols; col++) 
 			{
 				hex = map.map[row][col];
 
@@ -133,7 +133,11 @@ function Render(mapObj)
 				if (unit !== null && !unit.hasAnimation
 						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 								|| unit.player.side == map.currentPlayer.side))
+				{
+					if (uiSettings.markOwnUnits && unit.player.id == map.currentPlayer.id)
+						drawHex(c, x0, y0, hexstyle.ownunit);
 					drawHexUnit(c, x0, y0, unit, false); //Unit below depending on airMode without strength box
+				}
 
 				unit = hex.getUnit(uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation 
@@ -249,7 +253,8 @@ function Render(mapObj)
 		var movStep = 0;
 		var unit = moveAnimationCBData.unit;
 		var cellList = moveAnimationCBData.moveResults.passedCells;
-
+		var cPos, dPos;
+		var xstep, ystep;
 		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
@@ -268,8 +273,8 @@ function Render(mapObj)
 		
 			if (movStep == 0)
 			{
-				cCell = cellList[movIndex];
-				dCell = cellList[movIndex + 1];
+				var cCell = cellList[movIndex];
+				var dCell = cellList[movIndex + 1];
 			
 				cPos = cellToScreen(cCell.row, cCell.col);
 				dPos = cellToScreen(dCell.row, dCell.col);
@@ -277,12 +282,11 @@ function Render(mapObj)
 				xstep = ((dPos.x - cPos.x)/animSteps) >> 0;
 				ystep = ((dPos.y - cPos.y)/animSteps) >> 0;
 				
-				actualFacing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col); 
+				var actualFacing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col); 
 			
 				if (Math.abs(actualFacing - unit.facing) > 1) 
 					unit.facing = actualFacing;
 			}
-
 			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
 			cPos.x += xstep;
 			cPos.y += ystep;
@@ -318,6 +322,8 @@ function Render(mapObj)
 	//if absolute is set canvas offsets are added to positions
 	function cellToScreen(row, col, absolute)
 	{
+		var x0, y0;
+		
 		if (col & 1) // odd column
 		{
 			y0 =  row * 2 * r + r + renderOffsetY;
@@ -562,7 +568,7 @@ function Render(mapObj)
 		if (unit === null)
 			return;
 
-		image = imgUnits[unit.getIcon()];
+		var image = imgUnits[unit.getIcon()];
 		if (image) 
 		{
 			// Units have 15 possible orientations there are 9 sprites each ~80x50 in 1 row
@@ -573,7 +579,7 @@ function Render(mapObj)
 			//Offset the transparent regions of the unit sprite
 			var ix0 = (x0 - imagew/2 + s/2) >> 0;
 			var iy0 = (y0 - imageh/2 + r - unitTextHeight) >> 0;
-			facing = unit.facing;
+			var facing = unit.facing;
 			if (facing > 8)
 			{
 				facing = 16 - facing; 
@@ -609,12 +615,12 @@ function Render(mapObj)
 		if (side == 1) { c.fillStyle = "green"; }
 		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
 		
-		if (unit.player != map.currentPlayer && unit.player.side == map.currentPlayer.side)
+		if (unit.player.id != map.currentPlayer.id && unit.player.side == map.currentPlayer.side)
 			c.fillStyle = "696969";
 		else
 			c.fillStyle = "white";
 		
-		if (unit.hasMoved && unit.player == map.currentPlayer)
+		if (unit.hasMoved && unit.player.id == map.currentPlayer.id)
 			c.fillStyle = "b24422"; 
 			
 		c.fillText(text, tx, ty + 8);
@@ -626,9 +632,6 @@ function Render(mapObj)
 	
 	function drawHex(ctx, x0, y0, style)
 	{
-		ctx.lineWidth = style.lineWidth; 
-		ctx.lineJoin = style.lineJoin; 
-		ctx.strokeStyle = style.lineColor;
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
 		ctx.lineTo(x0 + s, y0);
@@ -641,7 +644,15 @@ function Render(mapObj)
 			ctx.fillStyle = style.fillColor;
 			ctx.fill();
 		}
+		
 		ctx.closePath();
-		ctx.stroke();
+		
+		if (style.lineWidth > 0)
+		{
+			ctx.lineWidth = style.lineWidth;
+			ctx.lineJoin = style.lineJoin; 
+			ctx.strokeStyle = style.lineColor;
+			ctx.stroke();
+		}
 	}
 }
