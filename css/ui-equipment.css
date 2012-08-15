@@ -1,126 +1,19 @@
-#equipment
+.hscroll-container /* Generic container for horizontal scrolling */
 {
-	position: fixed;
-	width: 290px;
-	height: 380px;
-	left:50%;
-	margin-left: -395px;
-	top:50%;
-	margin-top: -188px;
-	color: #fff;
-	font-weight:bold;
-	font-family: Arial;
-	font-size: 12px;
-	text-shadow: 0.1em 0.1em 0.2em black;
-	background-image: url('../resources/ui/dialogs/equipment/images/eq-bg.png');
-	background-repeat: no-repeat;
-	z-index:98;
-	visibility: hidden;
-	overflow: hidden;	
+	min-width:835px;
+	margin:0 auto;
+	overflow: auto;
+	z-index: 0;
 }
 
-#eqUnitList
+.hscroll /* Force horizontal scrolling */
 {
-	border: 0px solid #fff;
-	/*Win 7 Chrome bug: specifying the position here leaves the scrolling bars on screen when div is hidden */
-	/*
-	position: absolute;
-	height: 320px;
-	width:250px;
-	top: 24px;
-	left: 30px;
-	*/
-	height: 321px;
-	width:225px;
-	margin-top: 20px;
-	margin-left: 55px;
-	padding-left: 0px;
+	padding-left: 5px;
 	float: left;
-	overflow: auto;
+	margin-right: -20000px;
 }
 
-#eqSelClass
-{
-	border: 0px solid #fff;
-	position: absolute;
-	overflow: auto;
-	height: 340px;
-	width:47px;
-	top: 45px;
-	left: 8px;
-	float: right;
-	z-index:100;
-}
-
-#eqSelCountry
-{
-	border: 0px solid #fff;
-	position: absolute;
-	overflow: hidden;
-	margin-top:3px;
-	margin-left:2px;
-	height: 30px;
-	width:21px;
-	top: 12px;
-	left: 20px;
-	background-image: url('../resources/ui/flags/flags_med.png');
-	background-repeat: no-repeat;
-	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
-	z-index:100;
-}
-#eqSelCountry:hover
-{
-	top:13px;
-	left:21px;
-}
-
-#eqOkBut
-{
-	border: 0px solid #fff;
-	position:absolute;
-	width: 30px;
-	height: 30px;
-	top: 343px;
-	left: 220px;
-}
-
-#eqUpgradeBut
-{
-	border: 0px solid #fff;
-	position:absolute;
-	width: 30px;
-	height: 30px;
-	top: 343px;
-	left: 180px;
-}
-
-#eqNewBut
-{
-	border: 0px solid #fff;
-	position:absolute;
-	width: 30px;
-	height: 30px;
-	top: 343px;
-	left: 140px;
-}
-#currentPrestige
-{
-	border: 0px solid #fff;
-	position:absolute;
-	width: 90px;
-	height: 30px;
-	top: 350px;
-	left: 60px;
-	font-weight:bold;
-	font-family: Arial;
-	font-size: 14px;
-}
-#currentPrestige img
-{
-	margin-left: 5px;
-	vertical-align:middle;
-}
-
+/* The list of units currently on map with horizontal scrolling */
 #container-unitlist
 {
 	border: 0px solid #fff;
@@ -130,32 +23,129 @@
 	left: 50%;
 	top: 30px;
 	color: #fff;
+	font-size: 12px;
+	z-index: 98;
+	display: none;
+	background: rgba(0,0,0,0.6);
+	border-radius: 5px;
+}
+
+/* The equipment window with class selection buttons, equipment and transport units and buy/upgrade buttons */
+#equipment
+{
+	position: fixed;
+	width: 840px;
+	left:50%;
+	margin-left: -420px;
+	top:130px;
+	color: #fff;
 	font-weight:bold;
 	font-family: Arial;
 	font-size: 12px;
 	text-shadow: 0.1em 0.1em 0.2em black;
-	z-index: 98;
+	background: rgba(20,20,20, 0.7);
+	border-radius: 5px;
+	background-repeat: no-repeat;
+	z-index:98;
+	display: none;
+	overflow: hidden;
+	float: left;	
 }
 
-#hscroll-unitlist
+.eqSelClassBut
 {
-	min-width:835px;
-	margin:0 auto;
-	overflow: auto;
+	width: 45px;
+	height: 30px;
+	float: left;
 }
 
-#unitlist
+#eqSelClass
 {
-	float:left;
-	padding-left: 5px;
-	background: rgba(0,0,0,0.6);
-	margin-right: -20000px;
+	border: 0px solid #fff;
+	overflow: hidden;
+	width: 360px;
+	float: right;
+	margin-left: 50px;
+	z-index:100;
+}
+
+.eqCostText /* Where upgrade/buy costs are displayed */
+{
+	font-size: 14px;
+	color: #f8e064;
+	margin-top: 10px;
+	margin-left: 5px;
+	float: right;
+}
+
+.eqCostText img
+{
+	margin-left: 5px;
+	vertical-align:middle;
+}
+
+#eqButtonsContainer
+{
+	float: right;
+	height: 40px;
+}
+
+.eqButton
+{
+	min-width: 30px; 
+	min-height: 30px;
+	background-repeat: no-repeat;
+	border: 0px solid #fff;
+	float: right;
+	margin: 5px 10px 0px 10px;
+}
+
+#eqSelCountryButton /* the round button below country flag */
+{
+	z-index: 90;
+	background-image: url('../resources/ui/buttons/empty.png');
+}
+
+#eqSelCountry  /* the actual country flag button with position relative to the eqSelCountryButton */
+{
+	position:relative;
+	top: 8px;
+	left:4px;
+	height: 30px;
+	width: 22px;
+	background-image: url('../resources/ui/flags/flags_med.png');
+	background-repeat: no-repeat;
+	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
+	z-index:100;
+}
+
+#eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
+#eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
+#eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }
+
+#eqUserSel { z-index: 0; display:none; width:0px; height: 0px;}
+
+#currentPrestige /* Where the current player prestige is displayed */
+{
+	float: left;
+	border: 0px solid #fff;
+	width: 400px;
+	height: 30px;
+	font-size: 14px;
+	color: #f8e064;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#currentPrestige img
+{
+	margin-left: 5px;
+	vertical-align:middle;
 }
 
 .eqUnitBox
 {
 	border: 0px solid #fff;
-	width: 99px;
+	width: 110px;
 	height: 76px;
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box.png');
 	background-repeat: no-repeat;

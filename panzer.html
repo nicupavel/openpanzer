@@ -26,30 +26,45 @@
 	<link href="css/ui.css" rel="stylesheet" type="text/css">
   </head>
   <body onload="gameStart();" id="mainbody">
-	<div id="menu"></div> <!-- Where the menu is being built -->
+  	<div id="statusbar"></div> <!-- Status bar where messages/infos are shown -->
+	<div id="menu"> <!-- Where the menu is being built -->
+		<div id="slidemenu"></div>
+	</div>
+	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
 	<div id="unit-info">  <!-- Unit info dialog -->
-	    <div id="container">
-			<div id="unit-image"></div>
-			<div id="unit-name">Open Panzer</div>
-			<div id="unit-flag"></div>
-			<div id="fuel"></div>
-			<div id="ammo"></div>
-			<div id="gunrange"></div>
-			<div id="ini"></div>
-			<div id="spot"></div>
-			<div id="str"></div>
-			<div id="ahard"></div>
-			<div id="asoft"></div>
-			<div id="aair"></div>
-			<div id="anaval"></div>
-			<div id="dhard"></div>
-			<div id="dair"></div>
-			<div id="dclose"></div>
-			<div id="drange"></div>
-			<div id="iokbut"></div>
-			<div id="ireinfbut"></div>
-			<div id="iresupbut"></div>
-			<div id="imountbut"></div>
+		<div class="imageCol">
+		<div id="uImage"></div>	
+		</div>
+		<div class="nameRow"><div id="uName">Open Panzer</div>
+		<div class="statsRow">
+			<div class="uStat" id="uFlag"></div>
+		
+			<div class="uStat" id="uStr"></div>
+			<div class="uStat" id="uFuel"></div>
+			<div class="uStat" id="uAmmo"></div>
+			<div class="uStat" id="uGunRange"></div>
+			<div class="uStat" id="uMovement"></div>
+		
+			<div class="uStat" id="uExp"></div>
+			<div class="uStat" id="uEnt"></div>
+			<div class="uStat" id="uIni"></div>
+			<div class="uStat" id="uSpot"></div>
+
+			<div class="uStat" id="uAHard"></div>
+			<div class="uStat" id="uASoft"></div>
+			<div class="uStat" id="uAAir"></div>
+			<div class="uStat" id="uANaval"></div>
+
+			<div class="uStat" id="uDHard"></div>
+			<div class="uStat" id="uDAir"></div>
+			<div class="uStat" id="uDClose"></div>
+			<div class="uStat" id="uDRange"></div>
+			
+			<div class="uStat" id="uMoveType"></div>
+			<div class="uStat" id="uTarget"></div>
+			<!-- <div class="uStat" id="uClass"></div> -->
+			<div id="uTransport"></div>
+		</div>
 		</div>
 	</div>
 	<div id="ui-message"> <!-- Message popup -->
@@ -57,17 +72,24 @@
 		<div id="message">message</div>
 		<div id="uiokbut"></div>
 	</div>
-	<div id="container-unitlist"><div id="hscroll-unitlist">
-		<div id="unitlist"></div><!-- Current player units -->
-	</div></div>
+	<div id="container-unitlist">
+		<div class="hscroll-container" id="hscroll-unitlist">
+			<div class="hscroll" id="unitlist"></div><!-- Current player units -->
+		</div>
+	</div>
 	<div id="equipment"><!-- Equipment Window -->
-		<div id="eqSelCountry"></div>
-		<div id="eqSelClass"></div>
-		<div id="eqUnitList"></div>
 		<div id="currentPrestige"></div>
-		<div id="eqOkBut"></div>
-		<div id="eqUpgradeBut"></div>
-		<div id="eqNewBut"></div>
+		<div id="eqSelClass"></div>
+	 	<div class="hscroll-container" id="hscroll-eqUnitList"><div class="hscroll" id="eqUnitList"></div></div>
+		<div class="hscroll-container" id="hscroll-eqTransportList">
+			<div class="hscroll" id="eqTransportList"></div>
+		</div>
+		<div id="eqButtonsContainer">
+			<div class="eqButton" id="eqCloseBut"></div>
+			<div class="eqButton" id="eqSelCountryButton"><div id="eqSelCountry"></div></div>
+			<div class="eqButton" id="eqUpgradeBut"></div><div class="eqCostText" id="eqUpgradeText"></div>
+			<div class="eqButton" id="eqNewBut"></div><div class="eqCostText" id="eqNewText"></div>
+		</div>
 		<div id="eqUserSel"></div> <!-- keeps track of user selections -->
 	</div>
 	<div id="game"></div> <!-- Where the canvases are added -->
