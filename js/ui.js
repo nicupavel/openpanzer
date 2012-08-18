@@ -949,10 +949,12 @@ function updateStatusBarLocation(row, col)
 	var hex = map.map[row][col];
 	if (!hex || typeof hex === "undefined")
 		return false;
-	var text = terrainNames[hex.terrain] + " (" + row + "," + col + ")";
-
-	if (hex.name !== null)	{  text = hex.name + " " + text; }
-	
+	var text = "";
+	if (hex.road > roadType.none)
+		text = "/Road";
+	text = terrainNames[hex.terrain] + text + " (" + row + "," + col + ")";
+	if (hex.name !== null)
+		text = hex.name + " " + text;
 	if ((unit = hex.getUnit(uiSettings.airMode)) !== null 
 		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 			|| unit.player.side == map.currentPlayer.side)) 
