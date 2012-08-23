@@ -368,7 +368,11 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	var dTerrain = dHex.terrain;
 	
 	if (isAir(atkunit))	aTerrain == terrainType.Clear;
-	if (isAir(defunit))	dTerrain == terrainType.Clear;	
+	if (isAir(defunit))	dTerrain == terrainType.Clear;
+	
+	//Infantry always dismounts when attacked
+	if (defunit.isMounted && equipment[defunit.eqid].uclass == unitClass.infantry)
+			dData = equipment[defunit.eqid];
 	
 	//Attacking unit type
 	switch(aType)

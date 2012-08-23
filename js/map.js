@@ -414,14 +414,17 @@ function Map()
 		lastMove.unit = null; //Reset last move undo save
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
-		var update = false; //Don't update unit list if not necessary
+		var update = false; //Don't update unit list if not necessary		
 		var cr = GameRules.calculateAttackResults(atkunit, defunit);
 		
 		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
-		
+		//Dismount infantry when attacked
+		if (defunit.isMounted && equipment[defunit.eqid].uclass == unitClass.infantry)
+			defunit.unmount();
+			
 		atkunit.experience += cr.atkExpGained;
 		defunit.experience += cr.defExpGained;
 		
