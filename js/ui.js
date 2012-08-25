@@ -133,7 +133,7 @@ function handleMouseClick(e)
 
 	//Set the airMode depending on current unit automatically
 	uiSettings.airMode = GameRules.isAir(map.currentUnit);
-	toggleButton($('air').firstChild, uiSettings.airMode);
+	toggleButton($('air'), uiSettings.airMode);
 	updateUnitContextWindow(map.currentUnit);
 	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
 	//TODO partial screen updates (can update only attack or move selected hexes)
@@ -336,14 +336,14 @@ function mainMenuButton(id)
 		case 'air':
 		{
 			uiSettings.airMode = !uiSettings.airMode;
-			toggleButton($('air').firstChild, uiSettings.airMode);
+			toggleButton($('air'), uiSettings.airMode);
 			r.render();
 			break;
 		}
 		case 'hex':
 		{
 			uiSettings.hexGrid = !uiSettings.hexGrid;
-			toggleButton($('hex').firstChild, uiSettings.hexGrid);
+			toggleButton($('hex'), uiSettings.hexGrid);
 			r.render();
 			break;
 		}
@@ -366,7 +366,7 @@ function mainMenuButton(id)
 				$('game').style.zoom = "100%";
 				uiSettings.mapZoom = false;
 			}
-			toggleButton($('zoom').firstChild, uiSettings.mapZoom);
+			toggleButton($('zoom'), uiSettings.mapZoom);
 			r.render();
 			break;
 		}
@@ -375,12 +375,12 @@ function mainMenuButton(id)
 			if (isVisible('unit-info'))
 			{
 				$('unit-info').style.display = "none"; 
-				toggleButton($('inspectunit').firstChild, false);
+				toggleButton($('inspectunit'), false);
 			}
 			else 
 			{
 				$('unit-info').style.display = "inline";
-				toggleButton($('inspectunit').firstChild, true);
+				toggleButton($('inspectunit'), true);
 			}
 			break;
 		}
@@ -391,7 +391,7 @@ function mainMenuButton(id)
 				$('equipment').style.display = "none"; 
 				$('container-unitlist').style.display = "none";
 				uiSettings.deployMode = false;
-				toggleButton($('buy').firstChild, false);
+				toggleButton($('buy'), false);
 			}
 			else 
 			{
@@ -399,7 +399,7 @@ function mainMenuButton(id)
 				$('container-unitlist').style.display = "inline";
 				$('unit-info').style.display = "inline"; 
 				updateEquipmentWindow(unitClass.tank);
-				toggleButton($('buy').firstChild, true);
+				toggleButton($('buy'), true);
 			}
 			r.render();
 			break;
@@ -425,12 +425,12 @@ function mainMenuButton(id)
 			if (isVisible('slidemenu'))
 			{
 				$('slidemenu').style.display = "none";
-				toggleButton($('mainmenu').firstChild, false);
+				toggleButton($('mainmenu'), false);
 			}
 			else
 			{
 				$('slidemenu').style.display = "inline";
-				toggleButton($('mainmenu').firstChild, true);
+				toggleButton($('mainmenu'), true);
 			}
 			break;
 		}
@@ -740,8 +740,8 @@ function updateEquipmentWindow(eqclass)
 	//Toggle equipment class button on/off
 	var prevClass = $('eqUserSel').eqclass;
 	if (typeof prevClass !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
-		toggleButton($(eqClassButtons[prevClass][0]).firstChild, false);
-	toggleButton($(eqClassButtons[eqclass][0]).firstChild, true);
+		toggleButton($(eqClassButtons[prevClass][0]), false);
+	toggleButton($(eqClassButtons[eqclass][0]), true);
 	$('eqUserSel').eqclass = eqclass;
 	
 	//The current selected coutry in the div

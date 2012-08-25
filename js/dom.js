@@ -91,8 +91,15 @@ function hoverout(e)
 	e.src = path + e.id + ".png";
 }
 
-function toggleButton(e, state)
+function toggleButton(p, state)
 {
+	var e;
+	//Change the image from the button which *usually* is the firstChild
+	if (p && typeof p.firstChild !== "undefined")
+		e = p.firstChild;
+	else
+		e = p;
+		
 	if (state)
 		hoverin(e);
 	else
