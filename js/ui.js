@@ -738,10 +738,11 @@ function updateEquipmentWindow(eqclass)
 	clearTag('eqTransportList');
 	
 	//Toggle equipment class button on/off
-	var prevClass = $('eqUserSel').eqclass;
-	if (typeof prevClass !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
+	var prevClass = $('eqUserSel').eqclass || unitClass.tank;
+	if (typeof eqClassButtons[prevClass] !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
 		toggleButton($(eqClassButtons[prevClass][0]), false);
-	toggleButton($(eqClassButtons[eqclass][0]), true);
+	if (typeof eqClassButtons[eqclass] !== "undefined" && typeof eqClassButtons[eqclass][0] !== "undefined")
+		toggleButton($(eqClassButtons[eqclass][0]), true);
 	$('eqUserSel').eqclass = eqclass;
 	
 	//The current selected coutry in the div
@@ -831,8 +832,9 @@ function updateEquipmentWindow(eqclass)
 		//Force scrolling when units are selected from the map to bring them into unit list view
 		$('hscroll-unitlist').scrollLeft = forcedScroll;
 	}
-	//Don't change the listing on dummy class
-	if (eqclass == 0) return;
+	
+	//Don't list units from a class that isn't allowed to be bought
+	if (typeof eqClassButtons[eqclass] === "undefined") return;
 	
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
