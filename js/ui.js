@@ -156,7 +156,7 @@ function handleUnitDeployment(row, col)
 	var deployUnit = $('eqUserSel').deployunit; //TODO make this into a UI member
 	var ret = map.deployPlayerUnit(map.currentPlayer, deployUnit, row, col);
 	if (ret)
-		r.cacheImages(function() { r.render(); updateEquipmentWindow(map.currentUnit.unitData().uclass); });
+		r.cacheImages(function() { r.render(); updateEquipmentWindow(map.currentUnit.unitData(true).uclass); });
 	else 
 		console.log("Can't deploy unit in that location");
 	
@@ -175,7 +175,7 @@ function handleUnitSelect(row, col)
 	updateUnitContextWindow(map.currentUnit);
 	//Select unit on equipment window
 	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
-	updateEquipmentWindow(map.currentUnit.unitData().uclass);
+	updateEquipmentWindow(map.currentUnit.unitData(true).uclass);
 	//Display selected unit on status bar
 	updateStatusBarLocation(row, col);
 }
@@ -785,7 +785,7 @@ function updateEquipmentWindow(eqclass)
 		for (var i = 0; i < unitList.length; i++)
 		{
 			var u = unitList[i];
-			var ud = u.unitData();
+			var ud = u.unitData(true);
 			if (u.player.id == map.currentPlayer.id)
 			{
 				var div = uiAddUnitBox('unitlist', ud, false);
@@ -959,7 +959,7 @@ function updateStatusBarLocation(row, col)
 		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 			|| unit.player.side == map.currentPlayer.side)) 
 	{
-		text = " Unit: " + unit.unitData().name + " " + text; 
+		text = " Unit: " + unit.unitData(true).name + " " + text; 
 	}
 	$('locmsg').innerHTML = text;
 }
