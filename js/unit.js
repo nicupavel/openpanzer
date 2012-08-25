@@ -99,9 +99,9 @@ Unit.prototype.copy = function(u)
 	}
 }
 
-Unit.prototype.unitData = function()
+Unit.prototype.unitData = function(forceUnit)
 {
-	if ((this.isMounted) && (this.transport !== null))
+	if ((this.isMounted) && (this.transport !== null) && !forceUnit)
 		return equipment[this.transport.eqid]; 
 	else
 		return equipment[this.eqid]; 

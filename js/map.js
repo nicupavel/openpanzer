@@ -422,7 +422,7 @@ function Map()
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
 		//Dismount infantry when attacked
-		if (defunit.isMounted && !defunit.isSurprised && equipment[defunit.eqid].uclass == unitClass.infantry)
+		if (defunit.isMounted && !defunit.isSurprised && defunit.unitData(true).uclass == unitClass.infantry)
 			defunit.unmount();
 			
 		atkunit.experience += cr.atkExpGained;
