@@ -18,6 +18,8 @@ function Player()
 	this.country = -1;
 	this.prestige = 300;
 	this.playedTurn = -1;
+	this.type = playerType.humanLocal;
+	this.handler = null;
 	this.deploymentList = [];
 }
 //Player Object Public Methods
@@ -29,6 +31,7 @@ Player.prototype.copy = function(p)
 	this.country = p.country;
 	this.prestige = p.prestige;
 	this.playedTurn = p.playedTurn;
+	this.playerType = p.playerType;
 	this.deploymentList = [];
 	if (p.deploymentList)
 		for (var i = 0; i < p.deploymentList.length; i++)
@@ -269,7 +272,13 @@ function Map()
 	
 	this.addPlayer = function(player) 
 	{ 
-		playerList.push(player); 
+		playerList.push(player);
+		
+		if (WITH_AI && player.side > 0) 
+		{
+			player.type = playerType.aiLocal;
+			player.handler = new AI(player, this);
+		}
 		if  (this.currentPlayer === null) this.currentPlayer = playerList[0];
 	}
 	
@@ -328,7 +337,7 @@ function Map()
 			this.map[row][col].copy(hex); //copy values from the hex argument
 		//Increment victorySides for each side
 		if (hex.victorySide != -1) 
-			this.sidesVictoryHexes[hex.victorySide]++; 
+			this.sidesVictoryHexes[hex.victorySide]++;
 		if (hex.unit !== null) 
 			this.addUnit(hex.unit);
 		if (hex.airunit !== null)
@@ -403,6 +412,8 @@ function Map()
 				this.turn++;
 				unitsEndTurn();
 			}
+			if (this.currentPlayer.type == playerType.aiLocal)
+				this.currentPlayer.handler.run();
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol
@@ -417,7 +428,7 @@ function Map()
 		var update = false; //Don't update unit list if not necessary		
 		var cr = GameRules.calculateAttackResults(atkunit, defunit);
 		
-		console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
+		//console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
@@ -764,7 +775,8 @@ function Map()
 		for (var i = 0; i < playerList.length; i++)
 		{
 			console.log("Player: " + playerList[i].id + " Side:" + playerList[i].side 
-						+ " Country: " + playerList[i].getCountryName());
+						+ " Country: " + playerList[i].getCountryName()
+						+ " Type: " + playerList[i].type);
 		}
 		
 		console.log("Victory Hexes for Side 0: " +  this.sidesVictoryHexes[0] 
