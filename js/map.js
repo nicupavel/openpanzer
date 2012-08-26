@@ -31,7 +31,7 @@ Player.prototype.copy = function(p)
 	this.country = p.country;
 	this.prestige = p.prestige;
 	this.playedTurn = p.playedTurn;
-	this.playerType = p.playerType;
+	this.type = p.type;
 	this.deploymentList = [];
 	if (p.deploymentList)
 		for (var i = 0; i < p.deploymentList.length; i++)
