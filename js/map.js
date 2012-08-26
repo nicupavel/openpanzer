@@ -225,7 +225,7 @@ function Map()
 	this.terrainImage = null;
 	this.turn = 0;
 	this.currentUnit = null;
-	this.sidesVictoryHexes = [0, 0]; //Victory hexes for each side 
+	this.sidesVictoryHexes = [[], []]; //Victory hexes for each side 
 	this.currentPlayer = null; //Which player is currently playing
 	
 	var unitImagesList = {}; //a "hash" of unique unit images used for caching
@@ -335,26 +335,37 @@ function Map()
 			hex = this.map[row][col]; //in-place
 		else
 			this.map[row][col].copy(hex); //copy values from the hex argument
-		//Increment victorySides for each side
+		//Add coords for each victory hex into list
 		if (hex.victorySide != -1) 
-			this.sidesVictoryHexes[hex.victorySide]++;
+			this.sidesVictoryHexes[hex.victorySide].push(hex.getPos());
 		if (hex.unit !== null) 
 			this.addUnit(hex.unit);
 		if (hex.airunit !== null)
 			this.addUnit(hex.airunit);
 	}
 
-	//Simple increment/decrement
-	this.updateVictorySides = function(side, enemySide)
+	//Add remove victory hexes from the lists
+	this.updateVictorySides = function(side, cell)
 	{
-		//A side has ocuppied a victory hex that was marked as victory for it
-		this.sidesVictoryHexes[side]--;
-		this.sidesVictoryHexes[enemySide]++;
+		var enemySide = ~side & 1;
+		var eV = this.sidesVictoryHexes[enemySide];
+		var sV = this.sidesVictoryHexes[side];
+		//Side has ocuppied a victory hex that was marked as victory for it
+		for (var i = 0; i < sV.length; i++)
+		{
+			if (sV[i].row == cell.row && sV[i].col == cell.col)
+			{
+				eV.push(cell);
+				sV.splice(i, 1);
+				break;
+			}
+		}
+
 		console.log("Updated side victory hexes Side: " + side + " : " 
-					+ this.sidesVictoryHexes[side] + " Side: " + enemySide 
-					+ " : " + this.sidesVictoryHexes[enemySide]);
+					+ this.sidesVictoryHexes[side].length + " Side: " + enemySide 
+					+ " : " + this.sidesVictoryHexes[enemySide].length);
 		
-		if (this.sidesVictoryHexes[side] <= 0) 
+		if (this.sidesVictoryHexes[side].length == 0) 
 		{ 
 			console.log("Side: " + side + " WINS !");
 			return true;
@@ -695,7 +706,7 @@ function Map()
 		}
 		if (hex.victorySide != -1) //Primary Objective
 		{
-			if (this.updateVictorySides(player.side, hexSide))
+			if (this.updateVictorySides(player.side, hex.getPos()))
 				isWin = true;
 			player.prestige += prestigeGains["objectiveCapture"];
 		}
@@ -738,10 +749,13 @@ function Map()
 				this.setHex(r, c);
 			}
 		}
-		//update sideVictoryHexes with in progress values after setHex 
-		//calls setup the default map victory hex values
-		for (var i = 0; i < m.sidesVictoryHexes.length; i++)
-			this.sidesVictoryHexes[i] = m.sidesVictoryHexes[i];
+		//Update sideVictoryHexes with values from the in-progress game not
+		//the default ones set by setHex()
+		this.sidesVictoryHexes = [[],[]];
+		for (var i = 0; i < m.sidesVictoryHexes[0].length; i++)
+			this.sidesVictoryHexes[0].push(m.sidesVictoryHexes[0][i]);
+		for (var i = 0; i < m.sidesVictoryHexes[1].length; i++)
+			this.sidesVictoryHexes[1].push(m.sidesVictoryHexes[1][i]);
 	}
 
 	this.dumpMap = function()
@@ -779,8 +793,10 @@ function Map()
 						+ " Type: " + playerList[i].type);
 		}
 		
-		console.log("Victory Hexes for Side 0: " +  this.sidesVictoryHexes[0] 
-					+ " Victory Hexes for Side 1: " + this.sidesVictoryHexes[1]);
+		console.log("Victory Hexes for " + sideNames[0] + " side: " + this.sidesVictoryHexes[0].length);
+		console.log("Victory Hexes for " + sideNames[1] + " side:" + this.sidesVictoryHexes[1].length);
+		console.log(this.sidesVictoryHexes[0]);
+		console.log(this.sidesVictoryHexes[1]);
 		/*
 		for (var i = 0; i < unitImagesList.length; i++)
 		{

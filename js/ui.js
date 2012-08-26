@@ -996,7 +996,7 @@ function uiEndTurnInfo()
 	for (var i = 0; i < playerList.length; i++)
 	{
 		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
-			+ " side has " + map.sidesVictoryHexes[playerList[i].side] + " victory points to conquer <br/>";
+			+ " side has " + map.sidesVictoryHexes[playerList[i].side].length + " victory points to conquer <br/>";
 	}
 	return infoStr;
 }
