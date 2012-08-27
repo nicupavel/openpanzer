@@ -9,43 +9,39 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function MapLoader()
+function MapLoader(xmlFile)
 {
-	var map = null;
 	var xmlData = null;
+	var map;
 	
-	this.loadMap = function(xmlFile) 
+	if (loadMap()) 
+		return map;
+	return null;
+		
+	// Private functions 
+	function loadMap()
 	{
 		var xmlHtttp;
-		
+					
 		xmlHttp = new XMLHttpRequest();
 		xmlHttp.open("GET", xmlFile, false);
 		xmlHttp.send();
-		xmlData = xmlHttp.responseXML;
 		
-		if (xmlData == null) 
-		{
-			console.log("Cannot load map");
+		if ((xmlData = xmlHttp.responseXML) == null)
 			return false;
-		}
-		return true;
-	}
-	
-	this.buildMap = function()
-	{
+		
 		map = new Map();
-		if (! parseMapHeader())
-		{
-			console.log("Invalid map");
-			return null;
-		}
+		
+		if (!parseMapHeader())
+			return false;
+		
 		map.allocMap();
 		loadPlayers();
 		loadHexes();
-		return map;
+		
+		return true;
 	}
 	
-	// Private functions 
 	function parseMapHeader()
 	{
 		var mapHeader = xmlData.getElementsByTagName("map")[0];
@@ -63,8 +59,8 @@ function MapLoader()
 				map.terrainImage = mapHeader.getAttribute("image"); 
 				return true;
 			}
-			return false;
 		}
+		console.log("Invalid map");
 		return false;
 	}
 	

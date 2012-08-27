@@ -30,17 +30,12 @@ function UI(scenario)
 	};
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
-
-	var map = new Map();
-	var l = new MapLoader();	
 	var countries = []; //array for countries in this scenario
-	map = GameState.restore();
+	var map = GameState.restore();
 
 	if (map === null) 
-	{
-		l.loadMap(scenario);
-		map = l.buildMap();
-	}
+		map = new MapLoader(scenario);
+		
 	map.dumpMap();
 
 	var r = new Render(map);
@@ -1031,8 +1026,8 @@ function selectStartingUnit()
 function newScenario(scenario)
 {
 	GameState.clear();
-	l.loadMap(scenario);
-	map = l.buildMap();
+	
+	map = new MapLoader(scenario);
 	map.dumpMap();
 	r.setNewMap(map);
 	r.cacheImages(function() 
@@ -1060,15 +1055,3 @@ function getMouseInfo(canvas, e)
 }
 
 } //End of UI class
-
-function gameStart()
-{
-	var rng = Math.round(Math.random() * (scenariolist.length - 1))
-	var scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
-	//console.log("Number: " + rng + " Scenario:" + scenario);
-
-	scenario="resources/scenarios/xml/tutorial.xml";
-	var ui = new UI(scenario);
-	//Bring up the "Main Menu"
-	ui.mainMenuButton('options');
-}
