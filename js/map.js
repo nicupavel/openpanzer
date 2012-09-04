@@ -220,8 +220,8 @@ function Map()
 	this.rows = 0;
 	this.cols = 0;
 	this.map = null;
-	this.name = null;
-	this.description = null; 
+	this.name = "";
+	this.description = ""; 
 	this.terrainImage = null;
 	this.turn = 0;
 	this.currentUnit = null;

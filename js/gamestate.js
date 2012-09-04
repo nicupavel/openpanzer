@@ -8,55 +8,58 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
-
-var GameState = GameState || {}; //Namespace emulation
-
-GameState.saveItem = function(key, object)
+function GameState(Game)
 {
-	localStorage.setItem(key, JSON.stringify(object));
-}
-
-GameState.restoreItem = function(key)
-{
-	var object = localStorage.getItem(key);
-	return JSON.parse(object);
-}
-
-GameState.deleteItem = function(key)
-{
-	localStorage.removeItem(key);
-}
-
-GameState.save = function(map)
-{
-	GameState.saveItem('openpanzer-map-'+VERSION, map);
-	GameState.saveItem('openpanzer-players-'+VERSION, map.getPlayers());
-}
-
-GameState.restore = function()
-{
-	var map = new Map();
 	
-	var m = GameState.restoreItem('openpanzer-map-'+VERSION);
-	var p = GameState.restoreItem('openpanzer-players-'+VERSION);
-	
-	if ((m === null) || (p === null)) 
-		return null;
-		
-	for (i = 0; i < p.length; i++)
+	this.save = function()
 	{
-		player = new Player();
-		player.copy(p[i]);
-		map.addPlayer(player);
-	}	
+		saveItem('openpanzer-map-'+VERSION, Game.map);
+		saveItem('openpanzer-players-'+VERSION, Game.map.getPlayers());
+	}
+
+	this.restore = function()
+	{
+		var m = restoreItem('openpanzer-map-'+VERSION);
+		var p = restoreItem('openpanzer-players-'+VERSION);
 		
-	map.copy(m);	
+		if ((m === null) || (p === null)) 
+			return false;
+			
+		var map = Game.map;
+		
+		for (i = 0; i < p.length; i++)
+		{
+			player = new Player();
+			player.copy(p[i]);
+			map.addPlayer(player);
+		}	
+		map.copy(m);	
+		
+		return true;
+	}
+
+	this.clear = function()
+	{
+		deleteItem('openpanzer-map-'+VERSION);
+		deleteItem('openpanzer-players-'+VERSION);
+	}
+
+	//Private functions
+	function saveItem(key, object)
+	{
+		localStorage.setItem(key, JSON.stringify(object));
+	}
 	
-	return map;
+	function restoreItem(key)
+	{
+		var object = localStorage.getItem(key);
+		return JSON.parse(object);
+	}
+	
+	function deleteItem(key)
+	{
+		localStorage.removeItem(key);
+	}
 }
 
-GameState.clear = function()
-{
-	GameState.deleteItem('openpanzer-map-'+VERSION);
-	GameState.deleteItem('openpanzer-players-'+VERSION);
-}
+

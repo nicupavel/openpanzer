@@ -9,7 +9,7 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function UI(scenario)
+function UI(game)
 {
 	var uiSettings = 
 	{
@@ -31,13 +31,8 @@ function UI(scenario)
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	var countries = []; //array for countries in this scenario
-	var map = GameState.restore();
-
-	if (map === null) 
-		map = new MapLoader(scenario);
-		
-	map.dumpMap();
-
+	var map = game.map;
+	console.log (map);
 	var r = new Render(map);
 	r.setUISettings(uiSettings);
 	//redraw screen and center unit on screen when images have finished loading
@@ -402,7 +397,7 @@ function mainMenuButton(id)
 		case 'endturn':
 		{
 			map.endTurn();
-			GameState.save(map);
+			game.endTurn();
 			countries = map.getCountriesBySide(map.currentPlayer.side);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			updateUnitContextWindow();
@@ -1025,10 +1020,8 @@ function selectStartingUnit()
 
 function newScenario(scenario)
 {
-	GameState.clear();
-	
-	map = new MapLoader(scenario);
-	map.dumpMap();
+	game.newScenario(scenario);
+	map = game.map;
 	r.setNewMap(map);
 	r.cacheImages(function() 
 	{ 

@@ -11,16 +11,48 @@
  
  function Game()
  {
+ 	this.map = null;
+	this.ui = null;
+	this.state = null;
+	this.scenario = ""; 
+	this.turn = 0;
+
+	var loader = new MapLoader(this);
+	
+	this.init = function(scenario)
+	{
+		this.map = new Map();
+		this.state = new GameState(this);
+		this.scenario = scenario;
+		if (!this.state.restore())
+			loader.loadMap();
+			
+		this.ui = new UI(this);
+		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
+	}
+	
+	this.endTurn = function()
+	{
+		this.state.save();
+	}
+	
+	this.newScenario = function(scenario)
+	{
+		this.scenario = scenario;
+		this.map = new Map();
+		this.state.clear();
+		loader.loadMap();
+	}
  }
  
- function gameStart()
+function gameStart()
 {
+/*
 	var rng = Math.round(Math.random() * (scenariolist.length - 1))
 	var scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
-	//console.log("Number: " + rng + " Scenario:" + scenario);
-
-	scenario="resources/scenarios/xml/tutorial.xml";
-	var ui = new UI(scenario);
-	//Bring up the "Main Menu"
-	ui.mainMenuButton('options');
+	console.log("Number: " + rng + " Scenario:" + scenario);
+*/
+	scenario = "resources/scenarios/xml/tutorial.xml";
+	var game = new Game();
+	game.init(scenario);
 }

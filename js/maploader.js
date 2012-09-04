@@ -9,29 +9,23 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function MapLoader(xmlFile)
+function MapLoader(Game)
 {
 	var xmlData = null;
 	var map;
 	
-	if (loadMap()) 
-		return map;
-	return null;
-		
-	// Private functions 
-	function loadMap()
+	this.loadMap = function()
 	{
 		var xmlHtttp;
-					
-		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", xmlFile, false);
-		xmlHttp.send();
 		
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", Game.scenario, false);
+		xmlHttp.send();
+
 		if ((xmlData = xmlHttp.responseXML) == null)
 			return false;
-		
-		map = new Map();
-		
+
+		map = Game.map;
 		if (!parseMapHeader())
 			return false;
 		
@@ -42,6 +36,7 @@ function MapLoader(xmlFile)
 		return true;
 	}
 	
+	// Private functions 
 	function parseMapHeader()
 	{
 		var mapHeader = xmlData.getElementsByTagName("map")[0];
@@ -152,8 +147,6 @@ function MapLoader(xmlFile)
 			
 			return u;
 		}
-		
 		return null;
 	}
-	
 }
