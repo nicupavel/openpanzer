@@ -268,6 +268,7 @@ function handleUnitAttack(attackingUnit, row, col)
 //Called when attack animation finishes 
 function uiAttackAnimationFinished(animationCBData)
 {
+	game.events.emitEvent("AttackAnimation");
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{
 		if (animationCBData.units[i].destroyed)	continue;
