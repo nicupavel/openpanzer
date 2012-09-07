@@ -1,5 +1,5 @@
 /**
- * EventHandler manages events *
+ * EventHandler global event manager
  * http://www.linuxconsulting.ro
  * http://openpanzer.net
  *
@@ -8,7 +8,7 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function EventHandler()
+var EventHandler = new function()
 {
 	this.events = {};
 	

@@ -16,10 +16,9 @@
 	this.state = null;
 	this.scenario = ""; 
 	this.turn = 0;
-	this.events = new EventHandler();
-	this.events.addEvent("AttackAnimation");
-	this.events.addListener("AttackAnimation", function(){ console.log("executed");});
-	this.events.emitEvent("AttackAnimation");
+	EventHandler.addEvent("AttackAnimation");
+	EventHandler.addListener("AttackAnimation", function(){ console.log("executed");});
+	EventHandler.emitEvent("AttackAnimation");
 
 	var loader = new MapLoader(this);
 	
