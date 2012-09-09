@@ -28,15 +28,14 @@ var EventHandler = new function()
 		delete this.events[name];
 	}
 	
-	this.addListener = function(name, func)
+	this.addListener = function(name, func, params)
 	{
 		if (!this.events[name])
 		{
 			console.log("Can't add listener no such event: " + name);
 			return;
 		}
-		
-		document.addEventListener(name, func, false);
+		document.addEventListener(name, function(){ func(params); }, false);
 	}
 	
 	this.emitEvent = function(name)

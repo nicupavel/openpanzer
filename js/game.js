@@ -8,7 +8,7 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
- 
+ function testev(param){ console.log(param);}
  function Game()
  {
  	this.map = null;
@@ -17,8 +17,7 @@
 	this.scenario = ""; 
 	this.turn = 0;
 	EventHandler.addEvent("AttackAnimation");
-	EventHandler.addListener("AttackAnimation", function(){ console.log("executed");});
-	EventHandler.emitEvent("AttackAnimation");
+	EventHandler.addListener("AttackAnimation", testev, this);
 
 	var loader = new MapLoader(this);
 	
@@ -36,6 +35,7 @@
 	
 	this.endTurn = function()
 	{
+		this.turn++;
 		this.state.save();
 	}
 	
