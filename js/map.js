@@ -424,7 +424,7 @@ function Map()
 				unitsEndTurn();
 			}
 			if (this.currentPlayer.type == playerType.aiLocal)
-				this.currentPlayer.handler.run();
+				this.currentPlayer.handler.buildActions();
 	}
 	
 	//atkunit from srow, scol attacks defunit from drow, dcol

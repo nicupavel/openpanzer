@@ -13,15 +13,30 @@ function AI(player, map)
 {
 	var playerUnits = [];
 	var objectivePos = [];
+	var actionsQueue = [];
+	
 	console.log("Initialised player: " + player.getCountryName() + " as AI player");
-	this.run = function()
+	this.buildActions = function()
 	{
 		console.log("AI for player:" + player.getCountryName() + " running");
 		updateObjectives();
 		updateUnits();
 		performActions();
 		console.log("AI for player:" + player.getCountryName() + " finished");
-		map.endTurn();
+	}
+	
+	this.getAction = function()
+	{
+		if (actionsQueue.length == 0)
+			return null;
+		var action = actionsQueue[0];
+		actionsQueue.splice(0, 1);
+		return action;
+	}
+	
+	function addAction(actionType, params)
+	{
+		actionsQueue.push({ type: actionType, param: params });
 	}
 	
 	function updateObjectives()
@@ -56,7 +71,8 @@ function AI(player, map)
 			if ((u.ammo == 0 || (GameRules.unitUsesFuel(u) && u.fuel == 0)))
 			{
 				console.log("Unit: " + u.unitData().name + " performing resupply");
-				map.resupplyUnit(u);
+				//map.resupplyUnit(u);
+				addAction(actionType.resupply, [ u ]);
 			}
 		}
 	}
@@ -87,7 +103,8 @@ function AI(player, map)
 			
 			if (!unitToAttack) continue;
 			console.log("Unit: " + playerUnits[i].unitData().name + " attacking: " + unitToAttack.unitData().name);
-			if (!unitToAttack.hasFired) map.attackUnit(playerUnits[i], unitToAttack, false);
+			//if (!unitToAttack.hasFired) map.attackUnit(playerUnits[i], unitToAttack, false);
+			addAction(actionType.attack, [ playerUnits[i], unitToAttack ]);
 		}
 	}
 	

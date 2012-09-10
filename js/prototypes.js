@@ -147,12 +147,24 @@ var directionToRadians =
 	5*Math.PI/4, //SW
 	7*Math.PI/6, //SSW
 ];
+
 var playerType = 
 {
 	humanLocal: 0,
 	humanNetwork: 1,
 	aiLocal: 2,
 	aiServer: 3,
+};
+
+var actionType = 
+{
+	move: 0,
+	attack: 1,
+	resupply: 2,
+	reinforce: 3,
+	upgrade: 4,
+	buy: 5,
+	deploy: 6,
 };
 //Define prestige gains on different situations
 var prestigeGains = 
@@ -230,4 +242,4 @@ function screenPos(x, y)
 var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
 var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
 var VERSION = "2.1";
-var WITH_AI = false; //If we should assign a AI player for testing
+var WITH_AI = true; //If we should assign a AI player for testing
