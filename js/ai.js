@@ -70,7 +70,7 @@ function AI(player, map)
 				continue;
 			if ((u.ammo == 0 || (GameRules.unitUsesFuel(u) && u.fuel == 0)))
 			{
-				console.log("Unit: " + u.unitData().name + " performing resupply");
+				console.log("Unit: " + u.unitData().name + " " + u.id +  " performing resupply");
 				//map.resupplyUnit(u);
 				addAction(actionType.resupply, [ u ]);
 			}
@@ -102,7 +102,7 @@ function AI(player, map)
 			}
 			
 			if (!unitToAttack) continue;
-			console.log("Unit: " + playerUnits[i].unitData().name + " attacking: " + unitToAttack.unitData().name);
+			console.log("Unit: " + playerUnits[i].unitData().name + " " + playerUnits[i].id + " attacking: " + unitToAttack.unitData().name);
 			//if (!unitToAttack.hasFired) map.attackUnit(playerUnits[i], unitToAttack, false);
 			addAction(actionType.attack, [ playerUnits[i], unitToAttack ]);
 		}
