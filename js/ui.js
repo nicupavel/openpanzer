@@ -32,7 +32,6 @@ function UI(game)
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	var countries = []; //array for countries in this scenario
 	var map = game.map;
-	console.log (map);
 	var r = new Render(map);
 	r.setUISettings(uiSettings);
 	//redraw screen and center unit on screen when images have finished loading
@@ -171,9 +170,10 @@ function handleUnitSelect(row, col)
 }
 
 //handle the move of currently selected unit to row,col destination
-function handleUnitMove(row, col)
+this.uiUnitMove = function(unit, row, col) { return uiUnitMove(unit, row, col); }
+function handleUnitMove(row, col) { return uiUnitMove(map.currentUnit, row, col); }
+function uiUnitMove(unit, row, col)
 {
-	var s = map.currentUnit.getPos();
 	var mm = map.currentUnit.unitData().movmethod;
 	var mr = map.moveUnit(map.currentUnit, row, col);
 	var moveAnimationCBData = 
@@ -186,7 +186,6 @@ function handleUnitMove(row, col)
 	soundData[moveSoundByMoveMethod[mm]].play();
 	r.moveAnimation(moveAnimationCBData);
 }
-
 //Called when move animation finishes
 function uiMoveAnimationFinished(moveAnimationCBData)
 {
@@ -203,72 +202,81 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	}
 	if (mr.isVictorySide >= 0) 
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
+	
+	game.waitUIAnimation = false;
 }
 
 
 //handle attack performed by attacking unit on row,col unit
 //TODO most of the code here pertaining to support fire should be moved to map object
+this.uiUnitAttack = function(attackingUnit, enemyUnit) { return uiUnitAttack(attackingUnit, enemyUnit); }
 function handleUnitAttack(attackingUnit, row, col)
 {
 	var hex = map.map[row][col];
+	var enemyUnit = null;
 	if ((enemyUnit = hex.getAttackableUnit(attackingUnit, uiSettings.airMode)) !== null) //Select which unit to attack depending on uiSettings.airMode
+		return uiUnitAttack(attackingUnit, enemyUnit);
+	return false;
+}
+function uiUnitAttack(attackingUnit, enemyUnit)
+{
+	var cpos = attackingUnit.getPos();
+	var epos = enemyUnit.getPos();
+	var row = epos.row;
+	var col = epos.col;
+	var cclass = attackingUnit.unitData().uclass;
+	var eclass = enemyUnit.unitData().uclass;
+	var animationCBData = 
 	{
-		GameRules.calculateCombatResults(attackingUnit, enemyUnit, map.getUnits());
-		var cpos = attackingUnit.getPos();
-		var cclass = attackingUnit.unitData().uclass;
-		var eclass = enemyUnit.unitData().uclass;
-		var animationCBData = 
+		units: [attackingUnit, enemyUnit],
+		oldstr: [attackingUnit.strength, enemyUnit.strength],
+		cbfunc: uiAttackAnimationFinished,
+	}
+	//Support Fire if attacking unit wasn't surprised
+	if (!attackingUnit.isSurprised)
+	{
+		var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), attackingUnit, enemyUnit);
+		for (var u in supportUnits)
 		{
-			units: [attackingUnit, enemyUnit],
-			oldstr: [attackingUnit.strength, enemyUnit.strength],
-			cbfunc: uiAttackAnimationFinished,
+			var sp = supportUnits[u].getPos();
+			var sclass = supportUnits[u].unitData().uclass;
+			if (attackingUnit.destroyed)
+				break;
+			map.attackUnit(supportUnits[u], attackingUnit, true);
+			r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
 		}
-		//Support Fire if attacking unit wasn't surprised
-		if (!attackingUnit.isSurprised)
-		{
-			var supportUnits = GameRules.getSupportFireUnits(map.getUnits(), attackingUnit, enemyUnit);
-			for (var u in supportUnits)
-			{
-				var sp = supportUnits[u].getPos();
-				var sclass = supportUnits[u].unitData().uclass;
-				if (attackingUnit.destroyed)
-					break;
-				map.attackUnit(supportUnits[u], attackingUnit, true);
-				r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
-			}
-		}
+	}
+	if (attackingUnit.destroyed) //TODO Do this better
+	{
+		map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
+		r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+		r.addAnimation(cpos.row, cpos.col, "explosion");
+	}
+	else //Can we still attack ?
+	{
+		var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
+		r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
+		if (enemyUnit.destroyed)
+			r.addAnimation(row, col, "explosion");
+		else
+			if (cr.defcanfire)
+				r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
+		
 		if (attackingUnit.destroyed) //TODO Do this better
 		{
 			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
 			r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 			r.addAnimation(cpos.row, cpos.col, "explosion");
 		}
-		else //Can we still attack ?
-		{
-			var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-			r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
-			if (enemyUnit.destroyed)
-				r.addAnimation(row, col, "explosion");
-			else
-				if (cr.defcanfire)
-					r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
-			
-			if (attackingUnit.destroyed) //TODO Do this better
-			{
-				map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-				r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
-				r.addAnimation(cpos.row, cpos.col, "explosion");
-			}
-		}
-		r.runAnimation(animationCBData);
 	}
+	r.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 }
 
 //Called when attack animation finishes 
 function uiAttackAnimationFinished(animationCBData)
 {
-	EventHandler.emitEvent("AttackAnimation");
+	//EventHandler.emitEvent("AttackAnimation");
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{
 		if (animationCBData.units[i].destroyed)	continue;
@@ -278,6 +286,7 @@ function uiAttackAnimationFinished(animationCBData)
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
+	game.waitUIAnimation = false;
 }
 
 function buildMainMenu()
@@ -397,7 +406,6 @@ function mainMenuButton(id)
 		}
 		case 'endturn':
 		{
-			map.endTurn();
 			game.endTurn();
 			countries = map.getCountriesBySide(map.currentPlayer.side);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
