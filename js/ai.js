@@ -47,6 +47,7 @@ function AI(player, map)
 	function updateUnits()
 	{
 		var allUnits = map.getUnits();
+		playerUnits = [];
 		for (var i = 0; i < allUnits.length; i++)
 		{
 			if (allUnits[i].player.id == player.id)
