@@ -547,7 +547,6 @@ GameRules.getResupplyValue = function(map, unit)
 	var ammo = unit.unitData().ammo - unit.getAmmo();
 	var fuel = unit.unitData().fuel - unit.getFuel();
 	
-	
 	//Air units get full resupply even if other units are adjacent
 	if (isAir(unit))
 		return new Supply(ammo, fuel);

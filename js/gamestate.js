@@ -53,7 +53,8 @@ function GameState(Game)
 	function restoreItem(key)
 	{
 		var object = localStorage.getItem(key);
-		return JSON.parse(object);
+		if (object)	return JSON.parse(object);
+		else return null;
 	}
 	
 	function deleteItem(key)
