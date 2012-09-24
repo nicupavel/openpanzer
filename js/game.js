@@ -17,6 +17,7 @@ function Game()
 	this.state = null;
 	this.scenario = ""; 
 	this.turn = 0;
+	this.gameStarted = false;
 	this.waitUIAnimation = false;
 	//EventHandler.addEvent("AttackAnimation");
 	//EventHandler.addListener("AttackAnimation", testev, this);
@@ -34,10 +35,13 @@ function Game()
 			
 		this.ui = new UI(this);
 		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
+		this.gameStarted = true;
 	}
 
 	this.processTurn = function() 
 	{ 
+		if (!this.gameStarted)
+			return;
 		if (game.map.currentPlayer.type != playerType.aiLocal)
 			return;
 		console.log("Processing ..."); 
