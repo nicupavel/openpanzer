@@ -153,6 +153,8 @@ function handleUnitDeployment(row, col)
 //handle the selection of a new unit
 function handleUnitSelect(row, col)
 {
+	if (map.currentPlayer.type != playerType.humanLocal)
+		return;
 	var hex = map.map[row][col];
 	if (!map.selectUnit(hex.getUnit(uiSettings.airMode))) //can fail if clickedUnit is on enemy side
 		map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
