@@ -481,7 +481,7 @@ function Map()
 		if (!supportFire)
 		{
 			this.delAttackSel(); //delete attack selected hexes since unit has fired
-			if (!atkunit.destroyed && !atkunit.hasMoved)
+			if (!atkunit.destroyed && !atkunit.hasMoved) //TODO this is UI stuff
 				this.setMoveRange(atkunit); //refresh move range if unit has detroyed another unit
 		}
 		

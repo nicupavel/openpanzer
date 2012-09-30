@@ -224,6 +224,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 {
 	var cpos = attackingUnit.getPos();
 	var epos = enemyUnit.getPos();
+	if (!cpos || !epos) return;
 	var row = epos.row;
 	var col = epos.col;
 	var cclass = attackingUnit.unitData().uclass;
@@ -288,6 +289,7 @@ function uiAttackAnimationFinished(animationCBData)
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
+	r.render(); //TODO this is called twice. Call in handleMouseClicks() must be rewritten 
 	game.waitUIAnimation = false;
 }
 
@@ -1016,6 +1018,8 @@ function uiSetUnitOnViewPort(unit)
 //Selects the first unit that belongs to the currently playing side
 function selectStartingUnit()
 {
+	if (map.currentPlayer.type != playerType.humanLocal)
+		return;
 	var unitList = map.getUnits();
 	for (var i = 0; i < unitList.length; i++)
 	{

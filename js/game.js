@@ -40,12 +40,12 @@ function Game()
 
 	this.processTurn = function() 
 	{ 
-		if (!this.gameStarted)
+		if (!game.gameStarted)
 			return;
 		if (game.map.currentPlayer.type != playerType.aiLocal)
 			return;
 		console.log("Processing ..."); 
-		if (!this.waitUIAnimation) game.processAIActions();
+		if (!game.waitUIAnimation) game.processAIActions();
 	}
 
 	this.startTurn = function()
@@ -57,7 +57,7 @@ function Game()
 	{
 		var action = this.map.currentPlayer.handler.getAction();
 		if (!processAction(this, action))
-			this.endTurn();
+			this.ui.mainMenuButton('endturn');
 	}
 
 	this.endTurn = function()
@@ -87,14 +87,14 @@ function Game()
 		{
 			case actionType.move:
 			{
-				game.ui.uiUnitMove(p[0], p[1].row, p[1].col);
 				game.waitUIAnimation = true;
+				game.ui.uiUnitMove(p[0], p[1].row, p[1].col);
 				break;
 			}
 			case actionType.attack:
 			{
-				game.ui.uiUnitAttack(p[0], p[1], false);
 				game.waitUIAnimation = true;
+				game.ui.uiUnitAttack(p[0], p[1], false);
 				break;
 			}
 			case actionType.resupply:
