@@ -187,6 +187,7 @@ function uiUnitMove(unit, row, col)
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	r.moveAnimation(moveAnimationCBData);
+	return true;
 }
 //Called when move animation finishes
 function uiMoveAnimationFinished(moveAnimationCBData)
@@ -224,7 +225,11 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 {
 	var cpos = attackingUnit.getPos();
 	var epos = enemyUnit.getPos();
-	if (!cpos || !epos) return;
+	if (!cpos || !epos)
+	{
+		console.log("No attacking or defending unit, skipping attack");
+		return false;
+	}
 	var row = epos.row;
 	var col = epos.col;
 	var cclass = attackingUnit.unitData().uclass;
@@ -271,9 +276,15 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 			r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
 			r.addAnimation(cpos.row, cpos.col, "explosion");
 		}
+		else
+		{
+			if (enemyUnit.destroyed && !attackingUnit.hasMoved)
+				map.setMoveRange(attackingUnit); //refresh move range if unit has destroyed another unit
+		}
 	}
 	r.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
+	return true;
 }
 
 //Called when attack animation finishes 
@@ -289,6 +300,7 @@ function uiAttackAnimationFinished(animationCBData)
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
+		
 	r.render(); //TODO this is called twice. Call in handleMouseClicks() must be rewritten 
 	game.waitUIAnimation = false;
 }
@@ -335,6 +347,8 @@ function buildMainMenu()
 
 function mainMenuButton(id)
 {
+	if (map.currentPlayer.type == playerType.aiLocal)
+		return;
 	switch(id) 
 	{
 		case 'air':
@@ -415,12 +429,7 @@ function mainMenuButton(id)
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			updateUnitContextWindow();
 			selectStartingUnit();
-			
-			$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
-			uiMessage(map.currentPlayer.getCountryName() + " player on " 
-				+ map.currentPlayer.getSideName() +" side  Turn " + map.turn, uiEndTurnInfo());
-			
-			r.render();
+			uiEndTurnInfo();
 			break;
 		}
 		case 'mainmenu':
@@ -992,16 +1001,20 @@ function uiMessage(title, message)
 	$('uiokbut').onclick = function() { $('ui-message').style.display = "none"; }
 }
 
+this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
 function uiEndTurnInfo()
 {
 	var playerList = map.getPlayers();
 	var infoStr = "";
 	for (var i = 0; i < playerList.length; i++)
-	{
 		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
 			+ " side has " + map.sidesVictoryHexes[playerList[i].side].length + " victory points to conquer <br/>";
-	}
-	return infoStr;
+			
+	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
+	
+	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
+				+ " side  Turn " + map.turn, infoStr);
+	r.render();			
 }
 
 

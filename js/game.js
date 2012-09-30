@@ -57,7 +57,11 @@ function Game()
 	{
 		var action = this.map.currentPlayer.handler.getAction();
 		if (!processAction(this, action))
-			this.ui.mainMenuButton('endturn');
+		{
+			this.endTurn();
+			this.ui.uiEndTurnInfo();
+		}
+			
 	}
 
 	this.endTurn = function()
@@ -83,18 +87,19 @@ function Game()
 	{
 		if (!action) return false;
 		var p = action.param;
+		console.log(action);
 		switch(action.type)
 		{
 			case actionType.move:
-			{
-				game.waitUIAnimation = true;
-				game.ui.uiUnitMove(p[0], p[1].row, p[1].col);
+			{			
+				if (game.ui.uiUnitMove(p[0], p[1].row, p[1].col))
+					game.waitUIAnimation = true;
 				break;
 			}
 			case actionType.attack:
 			{
-				game.waitUIAnimation = true;
-				game.ui.uiUnitAttack(p[0], p[1], false);
+				if (game.ui.uiUnitAttack(p[0], p[1], false))
+					game.waitUIAnimation = true;
 				break;
 			}
 			case actionType.resupply:
