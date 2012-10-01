@@ -87,7 +87,6 @@ function Game()
 	{
 		if (!action) return false;
 		var p = action.param;
-		console.log(action);
 		switch(action.type)
 		{
 			case actionType.move:

@@ -57,9 +57,24 @@ function AI(player, map)
 	
 	function performActions()
 	{
+		performReinforce();
 		performResupply();
 		performAttack();
 		performMove();
+	}
+	
+	function performReinforce()
+	{
+		for (var i = 0; i < playerUnits.length; i++)
+		{
+			var u = playerUnits[i];
+			if (!GameRules.canReinforce(map.map, u)) continue;
+			if ((u.strength < 3) && (GameRules.getReinforceValue(map.map, u) > 1))
+			{
+				console.log("Unit: " + u.unitData().name + " " + u.id +  " performing reinforce");
+				addAction(actionType.reinforce, [ u ]);
+			}
+		}
 	}
 	
 	function performResupply()
@@ -67,12 +82,10 @@ function AI(player, map)
 		for (var i = 0; i < playerUnits.length; i++)
 		{
 			var u = playerUnits[i];
-			if (!GameRules.canResupply(map.map, u))
-				continue;
+			if (!GameRules.canResupply(map.map, u)) continue;
 			if ((u.ammo == 0 || (GameRules.unitUsesFuel(u) && u.fuel == 0)))
 			{
 				console.log("Unit: " + u.unitData().name + " " + u.id +  " performing resupply");
-				//map.resupplyUnit(u);
 				addAction(actionType.resupply, [ u ]);
 			}
 		}
@@ -91,6 +104,7 @@ function AI(player, map)
 				var hex = map.map[c[j].row][c[j].col];
 				var unit = hex.getAttackableUnit(playerUnits[i], false);
 				if (!unit) continue;
+				if (!GameRules.canAttack(playerUnits[i], unit)) continue;
 				//console.log("Unit: " + playerUnits[i].unitData().name + " could attack: " + unit.unitData().name);
 				var cr = GameRules.calculateCombatResults(playerUnits[i], unit, map.getUnits(), true);
 				
@@ -104,7 +118,7 @@ function AI(player, map)
 			
 			if (!unitToAttack) continue;
 			console.log("Unit: " + playerUnits[i].unitData().name + " " + playerUnits[i].id + " attacking: " + unitToAttack.unitData().name);
-			//if (!unitToAttack.hasFired) map.attackUnit(playerUnits[i], unitToAttack, false);
+			//if (!playerUnits[i].hasFired)
 			addAction(actionType.attack, [ playerUnits[i], unitToAttack ]);
 		}
 	}
