@@ -1017,7 +1017,7 @@ function uiEndTurnInfo()
 	r.render();			
 }
 
-
+this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
 function uiSetUnitOnViewPort(unit)
 {
 	if (!unit) return;

@@ -92,13 +92,20 @@ function Game()
 			case actionType.move:
 			{			
 				if (game.ui.uiUnitMove(p[0], p[1].row, p[1].col))
+				{
+					game.ui.uiSetUnitOnViewPort(p[0]);
 					game.waitUIAnimation = true;
+				}
 				break;
 			}
 			case actionType.attack:
 			{
 				if (game.ui.uiUnitAttack(p[0], p[1], false))
+				{
+					game.ui.uiSetUnitOnViewPort(p[0]);
 					game.waitUIAnimation = true;
+					console.log("Unit: " + p[0].unitData().name + " " + p[0].id + " attacking: " +p[1].unitData().name);
+				}
 				break;
 			}
 			case actionType.resupply:
