@@ -417,13 +417,17 @@ function Render(mapObj)
 		
 		//Add map image as background
 		//cb.drawImage(imgMapBackground, 0, 0);
-		cm.style.cssText += "background-image:url('" + imgMapBackground.src + "');";
+		cm.style.cssText += "background-image:url('" + imgMapBackground.src + "');"
+				+ "background-size: 100% 100%;"
+				+ "background-repeat: no-repeat;"
+				+ "background-attachment: scroll;";
 		
 		//Set the width/height of the container div to browser window width/height
 		//This improves the performance. User will scroll the div instead of window
 		$('game').style.width = window.innerWidth + "px";
 		$('game').style.height = window.innerHeight + "px";
 		$('game').tabIndex = 1; //For focusing the game area
+		$('game').focus();
 	}
 
 	//Generates an attack cursor on backbuffer canvas
