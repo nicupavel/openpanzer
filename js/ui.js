@@ -75,7 +75,7 @@ function handleMouseClick(e)
 	{ 
 		if (clickedUnit)
 		{
-			$('unit-info').style.display = "inline";
+			makeVisible('unit-info');
 			updateUnitInfoWindow(clickedUnit);
 		}
 		else 
@@ -392,12 +392,12 @@ function mainMenuButton(id)
 		{
 			if (isVisible('unit-info'))
 			{
-				$('unit-info').style.display = "none"; 
+				makeHidden('unit-info');
 				toggleButton($('inspectunit'), false);
 			}
 			else 
 			{
-				$('unit-info').style.display = "inline";
+				makeVisible('unit-info');
 				toggleButton($('inspectunit'), true);
 			}
 			break;
@@ -406,16 +406,16 @@ function mainMenuButton(id)
 		{
 			if (isVisible('equipment'))
 			{
-				$('equipment').style.display = "none"; 
-				$('container-unitlist').style.display = "none";
+				makeHidden('equipment'); 
+				makeHidden('container-unitlist');
 				uiSettings.deployMode = false;
 				toggleButton($('buy'), false);
 			}
 			else 
 			{
-				$('equipment').style.display = "inline"; 
-				$('container-unitlist').style.display = "inline";
-				$('unit-info').style.display = "inline"; 
+				makeVisible('unit-info');
+				makeVisible('container-unitlist');
+				makeVisible('equipment'); 
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy'), true);
 			}
@@ -436,12 +436,12 @@ function mainMenuButton(id)
 		{
 			if (isVisible('slidemenu'))
 			{
-				$('slidemenu').style.display = "none";
+				makeHidden('slidemenu');
 				toggleButton($('mainmenu'), false);
 			}
 			else
 			{
-				$('slidemenu').style.display = "inline";
+				makeVisible('slidemenu');
 				toggleButton($('mainmenu'), true);
 			}
 			break;
@@ -473,7 +473,7 @@ function updateUnitContextWindow(u)
 	
 	if (!u || !u.player || u.player.id != map.currentPlayer.id) 
 	{
-		$('unit-context').style.display = "none";
+		makeHidden('unit-context');
 		return;
 	}
 	
@@ -518,9 +518,9 @@ function updateUnitContextWindow(u)
 	}
 	
 	if (nbuttons > 0) 
-		$('unit-context').style.display = "inline";
+		makeVisible('unit-context');
 	else
-		$('unit-context').style.display = "none";
+		makeHidden('unit-context');
 }
 
 function updateUnitInfoWindow(u)
@@ -733,7 +733,7 @@ function buildEquipmentWindow()
 		}
 	
 	$('eqCloseBut').title = "Close";
-	$('eqCloseBut').onclick = function() { $('equipment').style.display = "none"; }
+	$('eqCloseBut').onclick = function() { makeHidden('equipment'); }
 }
 
 //TODO function too large break it
@@ -997,8 +997,8 @@ function uiMessage(title, message)
 {
 	$('title').innerHTML = title;
 	$('message').innerHTML = message;
-	$('ui-message').style.display = "inline"
-	$('uiokbut').onclick = function() { $('ui-message').style.display = "none"; }
+	makeVisible('ui-message');
+	$('uiokbut').onclick = function() { makeHidden('ui-message'); }
 }
 
 this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }

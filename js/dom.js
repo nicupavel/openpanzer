@@ -116,6 +116,18 @@ function isVisible(tag)
 	return false;
 }
 
+function makeVisible(tag)
+{
+	$(tag).style.display = "inline";
+	$(tag).focus();
+}
+
+function makeHidden(tag)
+{
+	$(tag).style.display = "none";
+	$('game').focus() //focus back the game canvas
+}
+
 function bounceText(x, y, text)
 {
 	var cdiv = addTag('game', 'div');
