@@ -52,9 +52,9 @@ function UI(game)
 	if (uiSettings.hasTouch && hasBrokenScroll())
 	{
 		touchScroll("game");
-		touchScroll("unitlist");
-		touchScroll("eqUnitList");
-		touchScroll("eqTransportList");
+		touchScroll("hscroll-unitlist");
+		touchScroll("hscroll-eqUnitList");
+		touchScroll("hscroll-eqTransportList");
 	}
 	
 	countries = map.getCountriesBySide(map.currentPlayer.side);
