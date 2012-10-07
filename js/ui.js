@@ -45,8 +45,17 @@ function UI(game)
 	var canvas = r.getCursorCanvas();
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
+	
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 	if (!uiSettings.hasTouch) canvas.addEventListener("mousemove", handleMouseMove, false);
+	
+	if (uiSettings.hasTouch && hasBrokenScroll())
+	{
+		touchScroll("game");
+		touchScroll("unitlist");
+		touchScroll("eqUnitList");
+		touchScroll("eqTransportList");
+	}
 	
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	buildMainMenu();
