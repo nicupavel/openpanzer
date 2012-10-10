@@ -255,6 +255,8 @@ function Render(mapObj)
 		var cellList = moveAnimationCBData.moveResults.passedCells;
 		var cPos, dPos;
 		var xstep, ystep;
+		var use2D = false;
+		
 		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
@@ -266,7 +268,7 @@ function Render(mapObj)
 			cPos.y += ystep;
 			drawHexUnit(a, cPos.x, cPos.y, unit, false);
 		}
-		//Blits unit image to a separate canvas
+		//Blits unit image to a separate canvas and animates using css properties
 		this.cssDraw = function(cPos, unit, needRedraw)
 		{
 			if (needRedraw)
@@ -276,10 +278,30 @@ function Render(mapObj)
 				drawUnitSprite(ubb, -renderOffsetX, -renderOffsetY, unit);
 			}
 			cubb.style.display = "inline";
-			cPos.x += xstep;
+			cPos.x += xstep ;
 			cPos.y += ystep;
-			cubb.style.top = cPos.y + canvasOffsetY + renderOffsetY + "px";
-			cubb.style.left = cPos.x + canvasOffsetX + renderOffsetX + "px"; 
+			if (use2D)
+			{
+				cubb.style.top = cPos.y + canvasOffsetY + renderOffsetY + "px";
+				cubb.style.left = cPos.x + canvasOffsetX + renderOffsetX + "px"; 
+			}
+			else
+			{
+				var transform = "translate3d(" + 1*(cPos.x + renderOffsetX) + "px, " + 1*(cPos.y + renderOffsetY) + "px, 0)";
+				
+				if (cubb.style.transition != "linear")
+				{
+					cubb.style.MozTransition = "linear";
+					cubb.style.webkitTransition = "linear";
+					cubb.style.oTransition = "linear";
+					cubb.style.transition = "linear";
+				}
+				
+				cubb.style.MozTransform = transform;
+				cubb.style.webkitTransform = transform;
+				cubb.style.oTransform = transform;
+				cubb.style.transform = transform;
+			}
 		}
 		
 		this.start = function()
