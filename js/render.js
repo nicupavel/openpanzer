@@ -272,13 +272,14 @@ function Render(mapObj)
 			if (needRedraw)
 			{
 				ubb.clearRect(0, 0, ubb.canvas.width, ubb.canvas.height);
-				drawUnitSprite(ubb, 0, 0, unit);
+				//Offset the sprite drawing on canvas otherwise it will be clipped 
+				drawUnitSprite(ubb, -renderOffsetX, -renderOffsetY, unit);
 			}
 			cubb.style.display = "inline";
 			cPos.x += xstep;
 			cPos.y += ystep;
-			cubb.style.top = cPos.y + canvasOffsetY + "px";
-			cubb.style.left = cPos.x + canvasOffsetX + "px";
+			cubb.style.top = cPos.y + canvasOffsetY + renderOffsetY + "px";
+			cubb.style.left = cPos.x + canvasOffsetX + renderOffsetX + "px"; 
 		}
 		
 		this.start = function()
