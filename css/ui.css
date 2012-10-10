@@ -26,6 +26,10 @@ body,html
 	margin: 0 auto;
 	border: 0px solid black;
 	outline: none; /* don't show the focus outline */
+	/* Activate 3D acceleration for WebKit based browsers*/
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+	-webkit-transform: translate3d(0, 0, 0);
 }
 
 /* Hide the touch highlight for Android/iOS*/
