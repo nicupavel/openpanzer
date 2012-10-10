@@ -28,10 +28,12 @@ function Render(mapObj)
 	var cm; // The map canvas element
 	var ca; // The animation canvas element.Also used as cursor coords but c canvas can be used as well
 	var cbb; //A backbuffer canvas for dynamically creating images (as in cursor image)
+	var cubb; //A backbuffer canvas for dynamically creating unit images //TODO: merge the 2 backbuffers into one
 	var c = null; //This is the context where the main drawing takes place (units, move and attack selection)
 	var cb = null;//This is the context where the map image and hex grid is drawn.
 	var a = null; //This is where the animations(explosions/fire/etc) are drawn. Also used as cursor coords but c canvas can be used as well
 	var bb = null; //Backbuffer context
+	var ubb = null; //Backbuffer for unit rendering
 	
 	//Hex sizes compatible with PG2 sizes
 	var s = 30;  //hexagon segment size                    |\  
@@ -243,8 +245,6 @@ function Render(mapObj)
 		ma.movTimer = setInterval( function() { ma.start();}, 30);
 	}
 	
-	//TODO performance consider animate the sprite with CSS since doesn't
-	//seem to get slower when canvas is zoomed on an iPad/Android
 	//Animates the unit moving thru a list of cells
 	function MoveAnimation (moveAnimationCBData)
 	{
@@ -258,14 +258,39 @@ function Render(mapObj)
 		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
+		//Directly blits the unit to the animation canvas (slow on Android)
+		this.directDraw = function(cPos, unit)
+		{
+			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
+			cPos.x += xstep;
+			cPos.y += ystep;
+			drawHexUnit(a, cPos.x, cPos.y, unit, false);
+		}
+		//Blits unit image to a separate canvas
+		this.cssDraw = function(cPos, unit, needRedraw)
+		{
+			if (needRedraw)
+			{
+				ubb.clearRect(0, 0, ubb.canvas.width, ubb.canvas.height);
+				drawUnitSprite(ubb, 0, 0, unit);
+			}
+			cubb.style.display = "inline";
+			cPos.x += xstep;
+			cPos.y += ystep;
+			cubb.style.top = cPos.y + canvasOffsetY + "px";
+			cubb.style.left = cPos.x + canvasOffsetX + "px";
+		}
+		
 		this.start = function()
 		{
+			var needRedraw = true;
 			if (movIndex >= cellList.length - 1)
 			{
 				movStep = 0;
 				movIndex = 0;
 				clearInterval(this.movTimer);
 				unit.hasAnimation = false;
+				cubb.style.display = "none";
 				moveAnimationCBData.cbfunc(moveAnimationCBData);
 				//console.log("Stopping animation for unit id:" + unit.id);
 				return;
@@ -285,12 +310,16 @@ function Render(mapObj)
 				var actualFacing = GameRules.getDirection(cCell.row, cCell.col, dCell.row, dCell.col); 
 			
 				if (Math.abs(actualFacing - unit.facing) > 1) 
+				{
 					unit.facing = actualFacing;
+					needRedraw = true;
+				}
 			}
-			a.clearRect(cPos.x - 20, cPos.y - 20, 80, 70); //hex size + 20
-			cPos.x += xstep;
-			cPos.y += ystep;
-			drawHexUnit(a, cPos.x, cPos.y, unit, false);
+			
+			//this.directDraw(cPos, unit);
+			this.cssDraw(cPos, unit, needRedraw);
+			
+			needRedraw = false;
 			movStep++;
 			
 			if (movStep >= animSteps) 
@@ -393,10 +422,15 @@ function Render(mapObj)
 		cbb = addTag(null, 'canvas'); 
 		cbb.id = "backbuffer";
 		
+		// Unit Backbuffer used for moving units as css sprites
+		if ((cubb = $('unitbackbuffer')) === null) cubb = addTag('game', 'canvas'); 
+		cubb.id = "unitbackbuffer";
+
 		cb = cm.getContext('2d');
 		c = ch.getContext('2d');
 		a = ca.getContext('2d');
 		bb = cbb.getContext('2d');
+		ubb = cubb.getContext('2d');
 	}
 	
 	//Draws map background image and sets canvases dimesions and position on screen
@@ -406,6 +440,7 @@ function Render(mapObj)
 		c.canvas.height = cb.canvas.height = a.canvas.height = imgMapBackground.height;
 		
 		bb.canvas.width = bb.canvas.height = 54; //Currently the size of the attack cursor
+		ubb.canvas.width = ubb.canvas.height = 120; //Currently the max size of a unit sprite //TODO compute this
 		
 		canvasOffsetX = window.innerWidth/2 - imgMapBackground.width/2;
 		if (canvasOffsetX < 0) { canvasOffsetX = 0;}
@@ -414,7 +449,7 @@ function Render(mapObj)
 		cm.style.cssText = 'z-index: 0;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		ch.style.cssText = 'z-index: 1;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
 		ca.style.cssText = 'z-index: 2;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px;';
-		
+		cubb.style.cssText = 'z-index: 3;position:absolute;left:' + canvasOffsetX +'px;top:'+ canvasOffsetY + 'px; display: none;';
 		//Add map image as background
 		//cb.drawImage(imgMapBackground, 0, 0);
 		cm.style.cssText += "background-image:url('" + imgMapBackground.src + "');"
@@ -567,41 +602,51 @@ function Render(mapObj)
 		c.restore();
 	}
 	
-	function drawHexUnit(c, x0, y0, unit, drawIndicators)
+	//TODO performance render unit to a backbuffer and on main render function render
+	// units in order of their image id so we can save some translate/rotate operations
+	function drawUnitSprite(c, x0, y0, unit)
 	{
 		if (unit === null)
-			return;
+		    return false;
 
 		var image = imgUnits[unit.getIcon()];
-		if (image) 
+		
+		if (!image)
+			return false;
+		
+		// Units have 15 possible orientations there are 9 sprites each ~80x50 in 1 row
+		// to get the rest of the orientations the sprite must be mirrored
+		var mirror = false;
+		var imagew = image.width/9; //Some images have bigger width
+		var imageh = image.height;
+		//Offset the transparent regions of the unit sprite
+		var ix0 = (x0 - imagew/2 + s/2) >> 0;
+		var iy0 = (y0 - imageh/2 + r - unitTextHeight) >> 0;
+		var facing = unit.facing;
+		if (facing > 8)
 		{
-			// Units have 15 possible orientations there are 9 sprites each ~80x50 in 1 row
-			// to get the rest of the orientations the sprite must be mirrored
-			var mirror = false;
-			var imagew = image.width/9; //Some images have bigger width
-			var imageh = image.height;
-			//Offset the transparent regions of the unit sprite
-			var ix0 = (x0 - imagew/2 + s/2) >> 0;
-			var iy0 = (y0 - imageh/2 + r - unitTextHeight) >> 0;
-			var facing = unit.facing;
-			if (facing > 8)
-			{
-				facing = 16 - facing; 
-				mirror = true;
-			}
-			var imgidx = imagew * facing;
-			if (mirror)
-			{
-				var flip = ix0 + imagew/2;
-				c.save();
-				c.translate(flip, 0);
-				c.scale(-1,1);
-				c.translate(-flip,0);
-			}
-			c.drawImage(image, imgidx , 0, imagew, imageh, ix0, iy0, imagew, imageh);
-			if (mirror) c.restore();
+			facing = 16 - facing; 
+			mirror = true;
 		}
-			
+		var imgidx = imagew * facing;
+		if (mirror)
+		{
+			var flip = ix0 + imagew/2;
+			c.save();
+			c.translate(flip, 0);
+			c.scale(-1,1);
+			c.translate(-flip,0);
+		}
+		c.drawImage(image, imgidx , 0, imagew, imageh, ix0, iy0, imagew, imageh);
+		
+		if (mirror) c.restore();
+		
+		return true;
+	}
+	
+	function drawHexUnit(c, x0, y0, unit, drawIndicators)
+	{
+		if (!drawUnitSprite(c, x0, y0, unit)) return;
 		if (!drawIndicators) return;
 		//TODO performance, consider caching glyphs digits and use drawImage/putImageData
 		//Currently fillText and fillRect doubles the rendering time
