@@ -73,7 +73,7 @@ function Animation(o)
 		o.ctx.save();
 		o.ctx.translate(o.x + o.sprite.width/2, o.y + o.sprite.image.height/2);
 		o.ctx.rotate(o.rotate);
-		if (count >= o.sprite.frames) { clearInterval(timer);  }
+		if (count > o.sprite.frames) { clearInterval(timer);  }
 		o.ctx.drawImage(o.sprite.image, o.sprite.width * count, 0, o.sprite.width, 
 						o.sprite.image.height, -o.sprite.width/2, -o.sprite.image.height/2, 
 						o.sprite.width, o.sprite.image.height);
