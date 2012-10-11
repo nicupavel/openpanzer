@@ -70,14 +70,18 @@ function Animation(o)
 	function animate()
 	{
 		o.ctx.clearRect(o.x, o.y, o.sprite.width, o.sprite.image.height);
-		o.ctx.save();
-		o.ctx.translate(o.x + o.sprite.width/2, o.y + o.sprite.image.height/2);
-		o.ctx.rotate(o.rotate);
-		if (count > o.sprite.frames) { clearInterval(timer);  }
-		o.ctx.drawImage(o.sprite.image, o.sprite.width * count, 0, o.sprite.width, 
-						o.sprite.image.height, -o.sprite.width/2, -o.sprite.image.height/2, 
-						o.sprite.width, o.sprite.image.height);
-		o.ctx.restore();
+		//Do one more loop to clear last frame rendered
+		if (count > o.sprite.frames) clearInterval(timer);
+		if (count <= o.sprite.frames)
+		{
+			o.ctx.save();
+			o.ctx.translate(o.x + o.sprite.width/2, o.y + o.sprite.image.height/2);
+			o.ctx.rotate(o.rotate);
+			o.ctx.drawImage(o.sprite.image, o.sprite.width * count, 0, o.sprite.width, 
+				o.sprite.image.height, -o.sprite.width/2, -o.sprite.image.height/2, 
+				o.sprite.width, o.sprite.image.height);
+			o.ctx.restore();
+		}
 		count++;
 	}
 }
