@@ -36,7 +36,6 @@ body,html
 *
 {
        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-       -moz-tap-highlight-color: rgba(255, 255, 255, 0);
        -webkit-touch-callout: none;
        -webkit-user-select: none;
        -moz-user-select: none;
@@ -70,8 +69,7 @@ body,html
 	border:0px solid #000; 
 	font-weight:bold; 
 	color:white; 
-	background-color:none;
-	/*opacity: 0.6; /* Use a background with rgba so buttons won't inherit opacity */
+	background-color: transparent;
 	z-index:3;
 }
 

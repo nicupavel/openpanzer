@@ -45,7 +45,7 @@
 #ui-message #uiokbut
 {
 	background-image: url('../resources/ui/buttons/ok.png');
-	background-repeat: no;
+	background-repeat: no-repeat;
 	border: 0px #fff solid;
 	position:absolute;
 	top:165px;
