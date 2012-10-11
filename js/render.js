@@ -85,7 +85,6 @@ function Render(mapObj)
 		//TODO performance consider clearing using putImageData with an empty image 
 		//than using clearRect seems faster at least on ball-bounce test
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
-		a.clearRect(0, 0, a.canvas.width, a.canvas.height);
 		for (var row = 0; row < map.rows; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
