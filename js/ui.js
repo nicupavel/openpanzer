@@ -201,8 +201,8 @@ function uiUnitMove(unit, row, col)
 	}
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
-	r.moveAnimation(moveAnimationCBData);
 	r.render(); //Update render so the old unit location is cleared
+	r.moveAnimation(moveAnimationCBData);
 	return true;
 }
 //Called when move animation finishes
