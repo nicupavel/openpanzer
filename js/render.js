@@ -157,7 +157,9 @@ function Render(mapObj)
 				}
 			}	
 		}
+		console.log("called from: " + arguments.callee.caller.name);
 		console.timeEnd("render timer");
+		
 	}
 		
 	//Renders attack or transport move cursor 

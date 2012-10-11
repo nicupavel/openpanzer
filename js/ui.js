@@ -74,7 +74,7 @@ function handleMouseClick(e)
 	if (typeof hex === "undefined")
 	{
 		console.log("Undefined hex:" + row + "," + col);
-		return true;
+		return true; //handled
 	}
 	
 	var clickedUnit = hex.getUnit(uiSettings.airMode);
@@ -89,8 +89,7 @@ function handleMouseClick(e)
 		}
 		else 
 		{
-			map.delCurrentUnit();
-			r.render();
+			handleUnitDeselect();
 		}
 		return true;
 	}
@@ -126,7 +125,7 @@ function handleMouseClick(e)
 			if (hex.isMoveSel && !map.currentUnit.hasMoved && map.currentUnit !== null)
 				handleUnitMove(row, col);
 			else //remove current selection
-				map.delCurrentUnit();
+				handleUnitDeselect();
 	}
 
 	//Set the airMode depending on current unit automatically
@@ -135,7 +134,6 @@ function handleMouseClick(e)
 	updateUnitContextWindow(map.currentUnit);
 	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
 	//TODO partial screen updates (can update only attack or move selected hexes)
-	r.render(); 
 }
 
 function handleMouseMove(e) 
@@ -159,6 +157,13 @@ function handleUnitDeployment(row, col)
 		console.log("Can't deploy unit in that location");
 	
 }
+
+function handleUnitDeselect()
+{
+	map.delCurrentUnit();
+	r.render();
+}
+
 //handle the selection of a new unit
 function handleUnitSelect(row, col)
 {
@@ -178,6 +183,7 @@ function handleUnitSelect(row, col)
 	updateEquipmentWindow(map.currentUnit.unitData(true).uclass);
 	//Display selected unit on status bar
 	updateStatusBarLocation(row, col);
+	r.render();
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -196,6 +202,7 @@ function uiUnitMove(unit, row, col)
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	r.moveAnimation(moveAnimationCBData);
+	r.render(); //Update render so the old unit location is cleared
 	return true;
 }
 //Called when move animation finishes
@@ -291,6 +298,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 				map.setMoveRange(attackingUnit); //refresh move range if unit has destroyed another unit
 		}
 	}
+	r.render(); //Render so new unit facings are shown correctly
 	r.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 	return true;
@@ -310,7 +318,7 @@ function uiAttackAnimationFinished(animationCBData)
 		bounceText(pos.x, pos.y, loss);
 	}
 		
-	r.render(); //TODO this is called twice. Call in handleMouseClicks() must be rewritten 
+	r.render();
 	game.waitUIAnimation = false;
 }
 
