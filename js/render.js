@@ -687,12 +687,12 @@ function Render(mapObj)
 		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
 		
 		if (unit.player.id != map.currentPlayer.id && unit.player.side == map.currentPlayer.side)
-			c.fillStyle = "696969";
+			c.fillStyle = "#696969";
 		else
 			c.fillStyle = "white";
 		
 		if (unit.hasMoved && unit.player.id == map.currentPlayer.id)
-			c.fillStyle = "b24422"; 
+			c.fillStyle = "#b24422"; 
 			
 		c.fillText(text, tx, ty + 8);
 
