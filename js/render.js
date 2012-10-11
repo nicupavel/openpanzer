@@ -253,7 +253,6 @@ function Render(mapObj)
 		var xstep, ystep;
 		var use2D = false;
 		
-		unit.hasAnimation = true; //signal render that unit is going to be move animated
 		this.movTimer = null;
 		
 		//Directly blits the unit to the animation canvas (slow on Android)

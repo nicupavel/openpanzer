@@ -201,6 +201,7 @@ function uiUnitMove(unit, row, col)
 	}
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
+	unit.hasAnimation = true; //signal render that unit is going to be move animated
 	r.render(); //Update render so the old unit location is cleared
 	r.moveAnimation(moveAnimationCBData);
 	return true;
