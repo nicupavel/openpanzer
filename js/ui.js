@@ -407,6 +407,7 @@ function mainMenuButton(id)
 			else 
 			{
 				makeVisible('unit-info');
+				if (map.currentUnit !== null) updateUnitInfoWindow(map.currentUnit);
 				toggleButton($('inspectunit'), true);
 			}
 			break;
