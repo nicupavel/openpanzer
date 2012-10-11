@@ -13,6 +13,7 @@
 function AnimationChain()
 {
 	var animationTasks = [];
+	var chainDelay = 500;
 	var i = 0;
 	
 	this.add = function(o)
@@ -33,7 +34,7 @@ function AnimationChain()
 		if (i < animationTasks.length)
 		{
 			animationTasks[i].start();
-			setTimeout(function() { obj.start(animationCBData); }, animationTasks[i].getDuration() + 100);
+			setTimeout(function() { obj.start(animationCBData); }, animationTasks[i].getDuration() + chainDelay);
 			i++;
 		}
 		else
