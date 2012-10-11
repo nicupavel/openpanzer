@@ -82,7 +82,6 @@ function Game()
 		loader.loadMap();
 	}
 
-	//TODO replace map function with ui functions for animations
 	function processAction(game, action)
 	{
 		if (!action) return false;

@@ -542,7 +542,7 @@ function getCombatKills(atkval, defval, atkunit, defunit)
 //TODO Terrain, Unit type and adjacent units 
 GameRules.getResupplyValue = function(map, unit)
 {
-	if (!GameRules.canResupply(map, unit)) return [0, 0]; //TODO redundant check made in UI
+	if (!GameRules.canResupply(map, unit)) return [0, 0];
 	//get maximum resupply values
 	var ammo = unit.unitData().ammo - unit.getAmmo();
 	var fuel = unit.unitData().fuel - unit.getFuel();
@@ -636,7 +636,7 @@ function canAttack(unit, targetUnit)
 	if (!GameRules.isEnemy(unit, targetUnit))
 		return false;
 
-	if (isAir(targetUnit) && unit.unitData().airatk <= 0 ) //TODO There is a special bit for this.
+	if (isAir(targetUnit) && unit.unitData().airatk <= 0 ) //TODO There is a special bit for this in pg2 equipment.
 		return false;
 		
 	return true;
@@ -782,7 +782,7 @@ GameRules.getSupportFireUnits = function(unitList, atkunit, defunit)
 		
 		if (!isAir(atkunit)) //Ground attack
 		{
-			if (ud.uclass == unitClass.artillery && canAttack(u, atkunit)) //TODO special bit for support fire
+			if (ud.uclass == unitClass.artillery && canAttack(u, atkunit)) //TODO special bit for support fire in pg2 equipment
 				supportUnits.push(u);
 		}
 		else //Air Attack
@@ -910,7 +910,6 @@ function isCloseCombatTerrain(t)
 
 GameRules.unitUsesFuel = function(unit)
 {
-	//TODO check: If fuel is defined as 0 in equipment then it means it doesn't use fuel ??
 	if (unit.unitData().fuel == 0)
 		return false;
 		

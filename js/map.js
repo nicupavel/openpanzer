@@ -400,7 +400,7 @@ function Map()
 	
 	this.endTurn = function()
 	{
-			//TODO create a Game Class
+			//TODO move to Game object where applicable
 			this.delMoveSel();
 			this.delAttackSel();
 			this.delCurrentUnit();

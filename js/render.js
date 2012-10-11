@@ -81,9 +81,6 @@ function Render(mapObj)
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
 
-		//TODO performance consider clearing and render only visible view port
-		//TODO performance consider clearing using putImageData with an empty image 
-		//than using clearRect seems faster at least on ball-bounce test
 		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 		for (var row = 0; row < map.rows; row++) 
 		{
@@ -176,8 +173,6 @@ function Render(mapObj)
 		if (lastCursorUnit !== map.currentUnit)
 			redraw = true; //Redraw because a new unit has been selected
 
-		//TODO Check if we should generate an TRANSPORT Cursor
-		
 		//Check if we should generate an ATTACK cursor
 		if (hex.isAttackSel && map.currentUnit !== null &&  !map.currentUnit.hasFired)
 		{	

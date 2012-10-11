@@ -61,7 +61,7 @@ function UI(game)
 	buildMainMenu();
 	buildEquipmentWindow();
 	
-	this.mainMenuButton = function(id) { mainMenuButton(id); } //Hack to bring up the mainmenu //TODO remove this
+	this.mainMenuButton = function(id) { mainMenuButton(id); } //Bring up the mainmenu
 	
 function handleMouseClick(e) 
 {
@@ -720,7 +720,7 @@ function buildEquipmentWindow()
 				if (typeof eqTransport === "undefined" || eqTransport == "")
 					eqTransport = -1;
 
-				var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport); //TODO transport
+				var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport);
 				if (ret)
 					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqUnit + " with transport:" + eqTransport);
 				else
