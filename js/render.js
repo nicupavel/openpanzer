@@ -61,31 +61,64 @@ function Render(mapObj)
 	var uiSettings = null;
 		
 	createLayers(); //Creates canvas layers
-				
-	this.render = function()
+	
+	//Renders the units/decals/hexgrid if row,col and range are defined then it will
+	//only partially render the canvas around row,col with range around this location
+	this.render = function(actionRow, actionCol, actionRange)
 	{
 		console.time("render timer");
-		var x0;
-		var y0;
+		var x0, y0;
+		var srow = 0;
+		var scol = 0;
+		var maxRow = map.rows;
+		var maxCol = map.cols;
 		var hex;
 		var current = null;
 		var unit = null;
 		var drawHexGrid = false;
+
+		if (actionRow === null || actionCol === null)
+			actionRow = actionCol = 0;
+		if (actionRange !== null && actionRange >= 0)
+		{
+			srow = actionRow - actionRange;
+			if (srow < 0) srow = 0;
+			maxRow = actionRow + actionRange;
+			if (maxRow > map.rows) maxRow = map.rows;
+			scol = actionCol - actionRange;
+			if (scol < 0) scol = 0;
+			maxCol = actionCol + actionRange;
+			if (maxCol > map.cols) maxCol = map.cols;
+			//console.log("actionRow:" + actionRow + " actionCol:" + actionCol +" srow:"+srow+" scol:"+scol+" maxRow:"+maxRow+" maxCol"+maxCol);
+		}
+		else
+			console.log("Full canvas render !");
 		
 		if (uiSettings.hexGrid != drawnHexGrid)
 		{
 			drawnHexGrid = drawHexGrid = uiSettings.hexGrid;			
 			cb.clearRect(0, 0, cb.canvas.width, cb.canvas.height);
+			/*
+			srow = scol = 0;
+			maxRow = map.rows;
+			maxCol = map.cols;
+			*/
 		}
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
-
-		c.clearRect(0, 0, c.canvas.width, c.canvas.height);
-		for (var row = 0; row < map.rows; row++) 
+		
+		var spos = cellToScreen(srow, scol, false);
+		var epos = cellToScreen(maxRow, maxCol, false);
+		//console.log(spos);
+		//console.log(epos);
+		
+		//c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+		c.clearRect(spos.x, spos.y, epos.x - spos.x, epos.y - spos.y);
+		for (var row = srow; row < maxRow; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
-			for (var col = 0; col < map.cols; col++) 
+			for (var col = scol; col < maxCol; col++) 
 			{
 				hex = map.map[row][col];
 
@@ -155,7 +188,7 @@ function Render(mapObj)
 				}
 			}	
 		}
-		console.log("called from: " + arguments.callee.caller.name);
+		//console.log("called from: " + arguments.callee.caller.name);
 		console.timeEnd("render timer");
 		
 	}
