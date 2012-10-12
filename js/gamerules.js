@@ -28,21 +28,12 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	
 	var p = unit.getPos();
 	var ud = unit.unitData();
-	var range = unit.getMovesLeft();
+	var range = GameRules.getUnitMoveRange(unit);
 	var movmethod = ud.movmethod;
 	var moveCost = movTable[movmethod];
 	var side = unit.player.side;
 	var enemySide = ~side & 1;
 	
-	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
-		range = unit.getFuel();
-		
-	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
-	if ((movmethod == movMethod.towed) && (unit.transport === null) 
-		&& (range == 0) && (ud.uclass != unitClass.fortification))
-	{
-		range = 1;	
-	}
 	//console.log("move range:" + range);
 	var c = getCellsInRange(p.row, p.col, range, rows, cols);
 	
@@ -117,18 +108,36 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 	return allowedCells;
 }
 
+//Return a unit maximum move range without considering terrain
+GameRules.getUnitMoveRange = function(unit)
+{
+	var range = unit.getMovesLeft();
+	var movmethod = unit.unitData().movmethod;
+
+	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
+		range = unit.getFuel();
+
+	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
+	if ((movmethod == movMethod.towed) && (unit.transport === null) 
+		&& (range == 0) && (ud.uclass != unitClass.fortification))
+	{
+		range = 1;
+	}
+
+	return range;
+}
+
 GameRules.getAttackRange = function(map, unit, rows, cols)
 {
 	var allowedCells = [];
 
 	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
 	var p = unit.getPos();
-	
+
 	//TODO weather ?
 	var side = unit.player.side;
-	var range = unit.unitData().gunrange;
-	if (range == 0)	range = 1;
-		
+	var range = GameRules.getUnitAttackRange(unit);
+
 	//console.log("attack range: "+ range);
 	var cellList = getCellsInRange(p.row, p.col, range, rows, cols);
 	
@@ -150,6 +159,14 @@ GameRules.getAttackRange = function(map, unit, rows, cols)
 			allowedCells.push(cell);
 	}
 	return allowedCells;
+}
+
+GameRules.getUnitAttackRange = function(unit)
+{
+	var range = unit.unitData().gunrange;
+	if (range == 0) range = 1;
+
+	return range;
 }
 
 //set zone of control on unit adjacent hexes
