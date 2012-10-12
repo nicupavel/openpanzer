@@ -183,7 +183,11 @@ function handleUnitSelect(row, col)
 	updateEquipmentWindow(map.currentUnit.unitData(true).uclass);
 	//Display selected unit on status bar
 	updateStatusBarLocation(row, col);
-	r.render();
+	
+	//Set the biggest range of the attack/move
+	var m = GameRules.getUnitMoveRange(map.currentUnit);
+	var a = GameRules.getUnitAttackRange(map.currentUnit);
+	r.render(row, col, m > a ? m : a);
 }
 
 //handle the move of currently selected unit to row,col destination
@@ -202,7 +206,7 @@ function uiUnitMove(unit, row, col)
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	unit.hasAnimation = true; //signal render that unit is going to be move animated
-	r.render(); //Update render so the old unit location is cleared
+	r.render(row, col, GameRules.getUnitMoveRange(map.currentUnit)); //Update render so the old unit location is cleared
 	r.moveAnimation(moveAnimationCBData);
 	return true;
 }
@@ -299,7 +303,8 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 				map.setMoveRange(attackingUnit); //refresh move range if unit has destroyed another unit
 		}
 	}
-	r.render(); //Render so new unit facings are shown correctly
+	//Render so new unit facings are shown correctly 7 is the biggest attack range including support fire
+	r.render(cpos.row, cpos.col, 7); 
 	r.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 	return true;
@@ -319,7 +324,7 @@ function uiAttackAnimationFinished(animationCBData)
 		bounceText(pos.x, pos.y, loss);
 	}
 		
-	r.render();
+	r.render(cell.row, cell.col, 7);
 	game.waitUIAnimation = false;
 }
 
