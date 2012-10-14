@@ -43,8 +43,8 @@
 	<icon src="resources/ui/page/icon/icon-72x72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="resources/ui/page/icon/icon-144x144.png" gap:platform="ios" width="144" height="144" />
 	
-	<gap:splash src="resources/ui/splash/non-retina-splash.png" width="1024" height="768" />
-	<gap:splash src="resources/ui/splash/retina-splash.png" width="2048" heigh="1536"/>
+	<gap:splash src="resources/ui/splash/splash-1280x775.png" width="1280" height="775" />
+	<gap:splash src="resources/ui/splash/splash-569x295.png" width="569" heigh="295"/>
 
 	<feature name="http://api.phonegap.com/1.0/network"/>
 	<feature name="http://api.phonegap.com/1.0/file"/>
