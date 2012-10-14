@@ -43,8 +43,10 @@
 	<icon src="resources/ui/page/icon/icon-72x72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="resources/ui/page/icon/icon-144x144.png" gap:platform="ios" width="144" height="144" />
 	
-	<gap:splash src="resources/ui/splash/splash-1280x775.png" width="1280" height="775" />
-	<gap:splash src="resources/ui/splash/splash-569x295.png" width="569" heigh="295"/>
+	<gap:splash src="resources/ui/splash/splash-1280x775.png" gap:platform="android" gap:density="xhdpi" />
+	<gap:splash src="resources/ui/splash/splash-1280x775.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="resources/ui/splash/splash-569x295.png" gap:platform="android" gap:density="ldpi"/>
+	<gap:splash src="resources/ui/splash/splash-569x295.png" gap:platform="android" gap:density="mdpi"/>
 
 	<feature name="http://api.phonegap.com/1.0/network"/>
 	<feature name="http://api.phonegap.com/1.0/file"/>
