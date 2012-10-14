@@ -76,8 +76,11 @@ function hasTouch()
 function hasBrokenScroll()
 {
 	var ua = navigator.userAgent;
-	//Only stock android browser on froyo/gingerbread suffers from div overflow scroll issue
+	//Stock android browser on froyo/gingerbread suffers from div overflow scroll issue
 	if (ua.match(/android 2/i) && ua.match(/applewebkit/i))
+		return true;
+	//Chrome mobile on jelly bean has issue bubbling up the evens to the game div and doesn't scroll
+	if (ua.match(/android 4/i) &&  ua.match(/chrome/i) && ua.match(/applewebkit/i))
 		return true;
 	return false;
 }
