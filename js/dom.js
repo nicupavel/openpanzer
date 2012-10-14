@@ -186,3 +186,15 @@ function touchScroll(id)
 			this.scrollLeft = scrollStartPosX-event.touches[0].pageX;
 		}, false);
 }
+
+function insertViewPort()
+{
+	var v = addTag(document.getElementsByTagName('head')[0], "meta");
+	var ratio = window.devicePixelRatio || 1;
+	var scale = 1.0/ratio;
+	
+	v.id = "viewport";
+	v.name = "viewport";
+	v.content = "width=device-width, initial-scale=" + scale +", maximum-scale=" + scale + ", user-scalable=0";
+}
+insertViewPort();
