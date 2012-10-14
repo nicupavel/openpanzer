@@ -76,8 +76,11 @@ function hasTouch()
 function hasBrokenScroll()
 {
 	var ua = navigator.userAgent;
-	//Only stock android browser on froyo/gingerbread suffers from div overflow scroll issue
+	//Stock android browser on froyo/gingerbread suffers from div overflow scroll issue
 	if (ua.match(/android 2/i) && ua.match(/applewebkit/i))
+		return true;
+	//Chrome mobile on jelly bean has issue bubbling up the evens to the game div and doesn't scroll
+	if (ua.match(/android 4/i) &&  ua.match(/chrome/i) && ua.match(/applewebkit/i))
 		return true;
 	return false;
 }
@@ -183,3 +186,15 @@ function touchScroll(id)
 			this.scrollLeft = scrollStartPosX-event.touches[0].pageX;
 		}, false);
 }
+
+function insertViewPort()
+{
+	var v = addTag(document.getElementsByTagName('head')[0], "meta");
+	var ratio = window.devicePixelRatio || 1;
+	var scale = 1.0/ratio;
+	
+	v.id = "viewport";
+	v.name = "viewport";
+	v.content = "width=device-width, initial-scale=" + scale +", maximum-scale=" + scale + ", user-scalable=0";
+}
+insertViewPort();
