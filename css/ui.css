@@ -84,7 +84,7 @@ body,html
 {
 	float:left; 
 	border: 0px solid #fff;
-	width: 340px;
+	width: 450px;
 	height:20px;
 	color: #f8e064;
 	font-family: Arial;
@@ -94,7 +94,7 @@ body,html
 }
 .message#locmsg
 {
-	width: 490px;
+	width: 380px;
 	text-align: right;
 }
 
