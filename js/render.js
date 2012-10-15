@@ -282,7 +282,9 @@ function Render(mapObj)
 			}
 			else
 			{
-				var transform = "translate3d(" + 1*(cPos.x + renderOffsetX) + "px, " + 1*(cPos.y + renderOffsetY) + "px, 0)";
+				//TODO: Any use of "3D accelerated function" regress the performance on iOS
+				//var transform = "translate3d(" + 1*(cPos.x + renderOffsetX) + "px, " + 1*(cPos.y + renderOffsetY) + "px, 0)";
+				var transform = "translate(" + 1*(cPos.x + renderOffsetX) + "px, " + 1*(cPos.y + renderOffsetY) + "px)";
 				
 				if (cubb.style.transition != "linear")
 				{
