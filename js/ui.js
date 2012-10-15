@@ -257,6 +257,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 		oldstr: [attackingUnit.strength, enemyUnit.strength],
 		cbfunc: uiAttackAnimationFinished,
 	}
+	uiAttackInfo(attackingUnit, enemyUnit); //Show info on status bar
 	//Support Fire if attacking unit wasn't surprised
 	if (!attackingUnit.isSurprised)
 	{
@@ -321,6 +322,17 @@ function uiAttackAnimationFinished(animationCBData)
 		
 	r.render();
 	game.waitUIAnimation = false;
+	uiTurnInfo();
+}
+
+function uiAttackInfo(atkunit, defunit)
+{
+	var ad = atkunit.unitData();
+	var dd = defunit.unitData();
+		
+	$('statusmsg').innerHTML = countryNames[atkunit.flag - 1] + " <b>" + ad.name + "</b> " + unitClassNames[ad.uclass] 
+				+ " attacking "
+				+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
 }
 
 function buildMainMenu()
@@ -334,7 +346,7 @@ function buildMainMenu()
 	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
 	sd.className = "message";
-	sd.innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
+	uiTurnInfo();
 	
 	var ld = addTag('statusbar','div');
 	ld.id = "locmsg"
@@ -1029,11 +1041,15 @@ function uiEndTurnInfo()
 		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
 			+ " side has " + map.sidesVictoryHexes[playerList[i].side].length + " victory points to conquer <br/>";
 			
-	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
-	
+	uiTurnInfo();
 	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
 				+ " side  Turn " + map.turn, infoStr);
 	r.render();			
+}
+
+function uiTurnInfo()
+{
+	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
 }
 
 this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
@@ -1078,7 +1094,7 @@ function newScenario(scenario)
 	});
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
-	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "  " + map.description;
+	uiEndTurnMessage();
 }
 
 function getMouseInfo(canvas, e)
