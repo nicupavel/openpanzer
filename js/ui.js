@@ -1064,7 +1064,7 @@ function uiEndTurnInfo()
 
 function uiTurnInfo()
 {
-	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns+ " " + map.name;
+	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + map.name;
 }
 
 this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
