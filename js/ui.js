@@ -1094,7 +1094,7 @@ function newScenario(scenario)
 	});
 	countries = map.getCountriesBySide(map.currentPlayer.side);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
-	uiEndTurnMessage();
+	uiTurnInfo();
 }
 
 function getMouseInfo(canvas, e)
