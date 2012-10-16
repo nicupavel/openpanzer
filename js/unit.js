@@ -154,7 +154,7 @@ Unit.prototype.move = function(cost)
 	this.entrenchment = 0;
 	var fuelUsed = 0;
 	if (cost >= 254) //Remove stopmov or noenter costs
-		fuelUsed = cost - 254;
+		fuelUsed = (cost / 254 + cost % 254) >> 0; //TODO: fix in GameRules unit shouldn't be allowed to move if cost > 254
 	else
 		fuelUsed = cost;
 	
