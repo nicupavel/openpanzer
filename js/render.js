@@ -126,11 +126,12 @@ function Render(mapObj)
 								
 				drawHexDecals(x0, y0, hex);
 				
-				//Don't render unit if it has a move animation or it's not spotted
+				//Don't render unit if it has a move animation or it's not spotted by
+				//the local playing player side
 				unit = hex.getUnit(!uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation
-						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
-								|| unit.player.side == map.currentPlayer.side))
+						&& (hex.isSpotted(game.spotSide) || unit.tempSpotted 
+								|| unit.player.side == game.spotSide))
 				{
 					if (uiSettings.markOwnUnits && unit.player.id == map.currentPlayer.id)
 						drawHex(c, x0, y0, hexstyle.ownunit);
@@ -139,8 +140,8 @@ function Render(mapObj)
 
 				unit = hex.getUnit(uiSettings.airMode);
 				if (unit !== null && !unit.hasAnimation 
-						&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
-								|| unit.player.side == map.currentPlayer.side))
+						&& (hex.isSpotted(game.spotSide) || unit.tempSpotted 
+								|| unit.player.side == game.spotSide))
 					drawHexUnit(c, x0, y0, unit, true); //Unit above with strength box drawn
 
 				if (uiSettings.hasTouch && hex.isAttackSel && map.currentUnit) //For touchScreens where we can't have mousecursors
@@ -158,7 +159,7 @@ function Render(mapObj)
 		console.timeEnd("render timer");
 		
 	}
-		
+
 	//Renders attack or transport move cursor 
 	this.drawCursor = function(cell)
 	{
