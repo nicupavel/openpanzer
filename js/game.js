@@ -19,11 +19,14 @@ function Game()
 	this.turn = 0;
 	this.gameStarted = false;
 	this.waitUIAnimation = false;
+	this.spotSide = -1; //currently visible side on map
+
 	//EventHandler.addEvent("AttackAnimation");
 	//EventHandler.addListener("AttackAnimation", testev, this);
 
 	var loader = new MapLoader(this);
 	var players = [];
+	var localPlayingSide = -1; //Which player side plays locally on this computer
 
 	this.init = function(scenario)
 	{
@@ -36,6 +39,13 @@ function Game()
 		this.ui = new UI(this);
 		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
 		this.gameStarted = true;
+
+		localPlayingSide = getLocalSide(this.map.getPlayers());
+		//TODO: move to startTurn()
+		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
+			this.spotSide = this.map.currentPlayer.side;
+		else
+			this.spotSide = localPlayingSide;
 	}
 
 	this.processTurn = function() 
@@ -70,6 +80,11 @@ function Game()
 		this.turn++;
 		this.state.save();
 		this.map.endTurn();
+		//TODO: move to startTurn()
+		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
+			this.spotSide = this.map.currentPlayer.side;
+		else
+			this.spotSide = localPlayingSide;
 	}
 
 	this.loop = setInterval(this.processTurn, 1000);
@@ -80,6 +95,7 @@ function Game()
 		this.map = new Map();
 		this.state.clear();
 		loader.loadMap();
+		localPlayingSide = getLocalSide(this.map.getPlayers());
 	}
 
 	function processAction(game, action)
@@ -89,7 +105,7 @@ function Game()
 		switch(action.type)
 		{
 			case actionType.move:
-			{			
+			{
 				if (game.ui.uiUnitMove(p[0], p[1].row, p[1].col))
 				{
 					game.ui.uiSetUnitOnViewPort(p[0]);
@@ -136,6 +152,29 @@ function Game()
 			}
 		}
 		return true;
+	}
+
+	//Returns which sides are played by players on this computer
+	//will return -1 no local sides, 0 side 0, 1 side 1, 2 both sides
+	//are playing on local computer (hotseat mode)
+	function getLocalSide(playerList)
+	{
+		var nrSides = 1;
+		var localSide = -1;
+		for (var i = 0; i < playerList.length; i++)
+		{
+			if (playerList[i].type == playerType.humanLocal)
+			{
+				if (localSide != -1 && localSide != playerList[i].side)
+					nrSides++; //We already found a local playing side
+				localSide = playerList[i].side;
+			}
+		}
+
+		if (nrSides > 1)
+			localSide = 2;
+
+		return localSide;
 	}
 }
 
