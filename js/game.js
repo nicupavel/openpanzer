@@ -16,7 +16,7 @@ function Game()
 	this.ui = null;
 	this.state = null;
 	this.scenario = ""; 
-	this.turn = 0;
+	this.turn = 1;
 	this.gameStarted = false;
 	this.waitUIAnimation = false;
 	this.spotSide = -1; //currently visible side on map

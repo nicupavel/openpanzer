@@ -219,10 +219,12 @@ function Map()
 	this.rows = 0;
 	this.cols = 0;
 	this.map = null;
+	this.file = "";
 	this.name = "";
 	this.description = ""; 
 	this.terrainImage = null;
-	this.turn = 0;
+	this.maxTurns = 1;
+	this.turn = 1;
 	this.currentUnit = null;
 	this.sidesVictoryHexes = [[], []]; //Victory hexes for each side 
 	this.currentPlayer = null; //Which player is currently playing
@@ -716,6 +718,7 @@ function Map()
 		this.cols = m.cols;
 		this.description = m.description;
 		this.terrainImage = m.terrainImage;
+		this.file = m.file;
 		this.name = m.name;
 		this.turn = m.turn;
 	

@@ -49,9 +49,11 @@ function MapLoader(Game)
 			{
 				map.rows = rows;
 				map.cols = cols;
+				map.file = mapHeader.getAttribute("file");
 				map.name = mapHeader.getAttribute("name");
 				map.description = mapHeader.getAttribute("description");
-				map.terrainImage = mapHeader.getAttribute("image"); 
+				map.terrainImage = mapHeader.getAttribute("image");
+				map.maxTurns = mapHeader.getAttribute("maxturns");
 				return true;
 			}
 		}
