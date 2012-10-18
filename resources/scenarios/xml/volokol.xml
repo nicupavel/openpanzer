@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="VOLOKOL.SCN" description="Volokolamsk" rows="21" cols="34" image="resources/maps/images/map_11.png">
+<map file="VOLOKOL.SCN" name="Volokolamsk" description="Volokolamsk&lt;br&gt;October 25, 1941&lt;br&gt;The Germans drive on the road towards Moscow.&lt;br&gt;Two Player&lt;br&gt;15 Turns&lt;br&gt;" maxturns="15" rows="21" cols="34" image="resources/maps/images/map_11.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="19" side="1"/>
   <hex row="0" col="5" terrain="10" name="Lama River"/>

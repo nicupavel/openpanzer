@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="METZ.SCN" description="Metz" rows="27" cols="42" image="resources/maps/images/map_26.png">
+<map file="METZ.SCN" name="Metz" description="Metz&lt;br&gt;November 17, 1944&lt;br&gt;The Allies try to kick the Germans out of the fortified city of Metz.&lt;br&gt;2 Players&lt;br&gt;12 Turns" maxturns="12" rows="27" cols="42" image="resources/maps/images/map_26.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="4" road="24"/>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="SUOMUSS.SCN" description="Suomussalmi" rows="35" cols="31" image="resources/maps/images/map_1.png">
+<map file="SUOMUSS.SCN" name="Suomussalmi" description="Suomussalmi&lt;br&gt;December 24, 1939&lt;br&gt;&#9;In the winter of 1939, Finland was invaded by the Soviet Union.  The Finns, although vastly outnumbered, were determined to defend their country.  The Soviet High Command hoped to &quot;cut Finland in two&quot; by driving past the key road junction of Suomussalmi and continuing to the Baltic Sea.  The Finnish commander, von Mannerheim, believed the Soviet attack had to be stopped at Suomussalmi, or his nation was doomed. &lt;br&gt;&#9;The Finnish forces have trapped one Soviet division in and around Suomussalmi, but an even more powerful Soviet relief force is moving to their aid.&lt;br&gt;&#9;You decide the outcome of the Winter War.  &lt;br&gt;Two Player&lt;br&gt;22 Turns&lt;br&gt;" maxturns="22" rows="35" cols="31" image="resources/maps/images/map_1.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="19" side="1"/>
   <hex row="0" col="1" terrain="3"/>

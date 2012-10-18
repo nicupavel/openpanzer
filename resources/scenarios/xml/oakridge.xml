@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="OAKRIDGE.SCN" description="Oak Ridge" rows="21" cols="32" image="resources/maps/images/map_27.png">
+<map file="OAKRIDGE.SCN" name="Oak Ridge" description="Oak Ridge&lt;br&gt;September 7, 1944&lt;br&gt;The German forces attempt to cut the Eastern United States in half, while the Americans attempt to hold Knoxville.&lt;br&gt;2 Players&lt;br&gt;16 Turns" maxturns="16" rows="21" cols="32" image="resources/maps/images/map_27.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="9" side="1"/>
   <hex row="0" col="0">

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="PROK2.SCN" description="Prokhorovka" rows="39" cols="44" image="resources/maps/images/map_0.png">
+<map file="PROK2.SCN" name="Prokhorovka" description="Prokhorovka&lt;br&gt;July 12, 1943&lt;br&gt;The Soviets go on the attack against the Germans in what was to become the largest tank battle in the world.&lt;br&gt;Two Player&lt;br&gt;16 Turns&lt;br&gt;" maxturns="16" rows="39" cols="44" image="resources/maps/images/map_0.png">
   <player id="0" country="19" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="1" terrain="3"/>

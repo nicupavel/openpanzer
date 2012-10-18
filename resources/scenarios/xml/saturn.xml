@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="SATURN.SCN" description="Saturn on the Chir" rows="39" cols="38" image="resources/maps/images/map_28.png">
+<map file="SATURN.SCN" name="Saturn on the Chir" description="Saturn on the Chir&lt;br&gt;November 18, 1942&lt;br&gt;The Soviets attempt to cut the Axis supply line going to Stalingrad.&lt;br&gt;Two Player&lt;br&gt;16 Turns&lt;br&gt;" maxturns="16" rows="39" cols="38" image="resources/maps/images/map_28.png">
   <player id="0" country="19" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="7" terrain="10"/>

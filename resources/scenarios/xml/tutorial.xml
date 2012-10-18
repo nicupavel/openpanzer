@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="TUTORIAL.SCN" description="Tutorial" rows="21" cols="27" image="resources/maps/images/map_21.png">
+<map file="TUTORIAL.SCN" name="Tutorial" description="Tutorial - Madrid Offensive&lt;br&gt;To win you must take Almadrones.&#13;&#10; &#13;&#10;2 Players&lt;br&gt;4 Turns" maxturns="4" rows="21" cols="27" image="resources/maps/images/map_21.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="25" side="1"/>
   <hex row="0" col="1" terrain="5"/>

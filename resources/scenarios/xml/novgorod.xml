@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="NOVGOROD.SCN" description="Novgorod" rows="39" cols="38" image="resources/maps/images/map_24.png">
+<map file="NOVGOROD.SCN" name="Novgorod" description="Novgorod&lt;br&gt;August 15, 1941&lt;br&gt;Staraya Russa, south of Novgorod, was an important communications center between Leningrad and Moscow.  Though the Germans made some progress, the Soviets prevented a complete breakthrough, delaying the German push to Moscow until the cold winter snows had fallen. &lt;br&gt;2 Players&lt;br&gt;18 Turns" maxturns="18" rows="39" cols="38" image="resources/maps/images/map_24.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="19" side="1"/>
   <hex row="0" col="2" road="8"/>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="CAENUS.SCN" description="Caen - Charnwood - Oden Valley" rows="29" cols="40" image="resources/maps/images/map_25.png">
+<map file="CAENUS.SCN" name="Caen - Charnwood - Oden Valley" description="Caen - Operation Charnwood&lt;br&gt;July 7, 1944&lt;br&gt;&#9;British commander Bernard Montgomery promised the Allied command that his troops would capture the old city of Caen on the first day of the Normandy landings. After weeks of hard, bloody fighting, Montgomery attempts to make good on his promise.&lt;br&gt;Two Player&lt;br&gt;18 Turns&lt;br&gt;" maxturns="18" rows="29" cols="40" image="resources/maps/images/map_25.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="9"/>

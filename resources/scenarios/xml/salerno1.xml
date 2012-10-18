@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="SALERNO1.SCN" description="Salerno - Return To Europe" rows="39" cols="44" image="resources/maps/images/map_5.png">
+<map file="SALERNO1.SCN" name="Salerno - Return To Europe" description="Salerno - Return To Europe&lt;br&gt;September 27, 1943&lt;br&gt;The Allies, after securing a beachhead in Italy, try to push the Germans away from Salerno and drive northward towards Naples.&lt;br&gt;Two Player&lt;br&gt;16 Turns&lt;br&gt;" maxturns="16" rows="39" cols="44" image="resources/maps/images/map_5.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="9"/>

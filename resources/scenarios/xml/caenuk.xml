@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="CAENUK.SCN" description="Caen - Operation Goodwood" rows="29" cols="40" image="resources/maps/images/map_25.png">
+<map file="CAENUK.SCN" name="Caen - Operation Goodwood" description="Caen - Operation Goodwood&lt;br&gt;July 17, 1944&lt;br&gt;&#9;After partial success in capturing Caen, the British attempt to push the Germans out of Caen and breakout of Normandy.&lt;br&gt;Two Player&lt;br&gt;22 Turns&lt;br&gt;" maxturns="22" rows="29" cols="40" image="resources/maps/images/map_25.png">
   <player id="0" country="22" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="9"/>

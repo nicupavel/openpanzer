@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="SAVANNAH.SCN" description="Savannah" rows="28" cols="37" image="resources/maps/images/map_13.png">
+<map file="SAVANNAH.SCN" name="Savannah" description="Savannah&lt;br&gt;June 6, 1944&lt;br&gt;The Germans and their allies invade the USA near Savannah.&lt;br&gt;2 Players&lt;br&gt;17 Turns" maxturns="17" rows="28" cols="37" image="resources/maps/images/map_13.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="9" side="1"/>
   <hex row="0" col="8" road="16"/>

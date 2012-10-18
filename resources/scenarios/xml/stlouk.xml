@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="STLOUK.SCN" description="Advance On St. Lo" rows="30" cols="37" image="resources/maps/images/map_18.png">
+<map file="STLOUK.SCN" name="Advance On St. Lo" description="St. Lo - Advance on St. Lo&lt;br&gt;June 30, 1944&lt;br&gt;&#9;American forces strike the Germans near St. Lo in preparation for a full-scale breakout.&lt;br&gt;2 Players&lt;br&gt;20 Turns" maxturns="20" rows="30" cols="37" image="resources/maps/images/map_18.png">
   <player id="0" country="22" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="10"/>

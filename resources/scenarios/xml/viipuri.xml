@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="VIIPURI.SCN" description="Viipuri" rows="27" cols="35" image="resources/maps/images/map_23.png">
+<map file="VIIPURI.SCN" name="Viipuri" description="Viipuri&lt;br&gt;June 15, 1944&lt;br&gt;The Soviets attempt to knock the Finns out of the war.&lt;br&gt;2 Players&lt;br&gt;17 Turns" maxturns="17" rows="27" cols="35" image="resources/maps/images/map_23.png">
   <player id="0" country="19" side="1"/>
   <player id="1" country="5" side="0"/>
   <hex row="0" col="2" road="16"/>

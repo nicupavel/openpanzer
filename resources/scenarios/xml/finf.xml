@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map name="FINF.SCN" description="Finnish Finished?" rows="27" cols="35" image="resources/maps/images/map_23.png">
+<map file="FINF.SCN" name="Finnish Finished?" description="Finnish Finished?&lt;br&gt;June 15, 1945&lt;br&gt;With the help of their German ally, Finland tries to retake what was lost to the Soviets a year earlier.&lt;br&gt;3 Players&lt;br&gt;20 Turns" maxturns="20" rows="27" cols="35" image="resources/maps/images/map_23.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="5" side="0"/>
   <player id="2" country="19" side="1"/>
