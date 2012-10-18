@@ -1,5 +1,7 @@
+#!/usr/bin/python
 #Copyright 2012 Nicu Pavel <npavel@mini-box.com>
 #Licensed under GPLv2
+
 import os, sys
 from pprint import pprint
 from struct import *
@@ -78,24 +80,50 @@ def get_scn_player_info(scnfile, pnr):
     scnfile.seek(pos)
     return playerinfo;
 
-# returns scenario description
-def get_scn_description(scnfile, text):
+# returns scenario name by reading from text (which is read from scen.txt)
+# at an offset specified in scn file
+def get_scn_name(scnfile, text):
     pos = scnfile.tell()
-    scnfile.seek(1+2+1)
+    scnfile.seek(1 + 2 + 1)
     txtpos = unpack('H', scnfile.read(2))[0]
-    desc = text[txtpos].rstrip()
+    name = text[txtpos].rstrip()
     scnfile.seek(pos)
-    return desc
+    return name
 
-# return map image name, cols and rows
+# returns scenario description 
+def get_scn_description(scnfile):
+    pos = scnfile.tell()
+    scnfile.seek(22 + 388 + 10800 + 20)
+    descfile = scnfile.read(20)
+    desc = "No description"
+    print "\tOpening description file '%s'" % descfile.upper()
+    try:
+	f = open(descfile.upper().strip('\0'),'r')
+    except IOError:
+	print "Can't open file"
+    else:
+	with f:
+	    desc = f.read()
+    scnfile.seek(pos)
+    return desc.replace("\r\n\r\n","<br>")
+
+# returns scenario maximum turns (tactical victory)
+def get_scn_maxturns(scnfile):
+    pos = scnfile.tell()
+    scnfile.seek(1 + 2 + 1 + 2 + 1 + 1 + 2 + 2 + 2 + 1 + 1)
+    maxturns = unpack('b', scnfile.read(1))[0]
+    scnfile.seek(pos)
+    return maxturns
+
+# return map image name, cols, rows
 def get_map_info(f):
-    mapinfo = []
+    mapinfo = {}
     pos = f.tell()
     f.seek(0)
     mapimgname = "map_" + str(unpack('h',f.read(2))[0]) + ".png"
-    mapinfo.append(mapimgname)
-    mapinfo.append(unpack('h',f.read(2))[0])
-    mapinfo.append(unpack('h',f.read(2))[0])
+    mapinfo['mapimg'] = mapimgname;
+    mapinfo['cols'] = unpack('h',f.read(2))[0]
+    mapinfo['rows'] = unpack('h',f.read(2))[0]
     f.seek(pos)
     return mapinfo
     
@@ -111,7 +139,7 @@ def generate_scn_js_file(scnlist):
 
 for scn in sys.argv[1:]:
 #for scn in ["CAENUK.SCN"]:
-    print "Processing %s\n" % scn
+    print "Processing %s" % scn
     # the corresponding scenarion txt name
     tf = open(os.path.splitext(scn)[0] + ".TXT",'r')
     sf = open(scn, 'rb')
@@ -120,19 +148,24 @@ for scn in sys.argv[1:]:
     # contains all names list from the txt file
     scntext = tf.readlines()
 
-    mapimgname, cols, rows = get_map_info(mf)
-    scndesc = get_scn_description(sf, scntext)
+    mapinfo = get_map_info(mf)
+    rows = mapinfo['rows'];
+    cols = mapinfo['cols'];
+    scnname = get_scn_name(sf, scntext)
+    scndesc = get_scn_description(sf)
     xmlname = os.path.splitext(scn)[0].lower() + ".xml"
     
-    scnlist.append((xmlname, scndesc))
+    scnlist.append((xmlname, scnname))
 
     #xmlmap = x.Element('map', name="" , description="", rows="", cols="" ,image="")
     xmlmap = x.Element('map')
-    xmlmap.set("name", scn)
+    xmlmap.set("file", scn)
+    xmlmap.set("name", scnname)
     xmlmap.set("description", scndesc)
+    xmlmap.set("maxturns", str(get_scn_maxturns(sf)))
     xmlmap.set("rows", str(rows))
     xmlmap.set("cols", str(cols))
-    xmlmap.set("image", MAP_IMAGE_URL + mapimgname)
+    xmlmap.set("image", MAP_IMAGE_URL + mapinfo['mapimg'])
     
     for i in range(4):
 	playerinfo = get_scn_player_info(sf, i)
