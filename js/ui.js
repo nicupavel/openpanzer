@@ -65,6 +65,9 @@ function UI(game)
 	
 function handleMouseClick(e) 
 {
+	if (!game.gameStarted || game.gameEnded)
+		return;
+	
 	var minfo = getMouseInfo(canvas, e);
 	var cell = r.screenToCell(minfo.x, minfo.y);
 	var row = cell.row;
@@ -220,9 +223,11 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 		moveAnimationCBData.unit.isSurprised = true;
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	}
-	if (mr.isVictorySide >= 0) 
+	if (mr.isVictorySide >= 0)
+	{
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
-	
+		game.gameEnded = true;
+	}
 	game.waitUIAnimation = false;
 }
 
@@ -456,6 +461,11 @@ function mainMenuButton(id)
 		case 'endturn':
 		{
 			game.endTurn();
+			if (game.gameEnded)
+			{
+				uiMessage("DEFEAT", "<br><br>You didn't capture the objectives in time");
+				return;
+			}
 			countries = map.getCountriesBySide(map.currentPlayer.side);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			updateUnitContextWindow();

@@ -16,8 +16,8 @@ function Game()
 	this.ui = null;
 	this.state = null;
 	this.scenario = ""; 
-	this.turn = 1;
 	this.gameStarted = false;
+	this.gameEnded = false;
 	this.waitUIAnimation = false;
 	this.spotSide = -1; //currently visible side on map
 
@@ -39,7 +39,8 @@ function Game()
 		this.ui = new UI(this);
 		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
 		this.gameStarted = true;
-
+		this.gameEnded = false;
+		
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		//TODO: move to startTurn()
 		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
@@ -50,7 +51,7 @@ function Game()
 
 	this.processTurn = function() 
 	{ 
-		if (!game.gameStarted)
+		if (!game.gameStarted || this.gameEnded)
 			return;
 		if (game.map.currentPlayer.type != playerType.aiLocal)
 			return;
@@ -69,26 +70,41 @@ function Game()
 		if (!processAction(this, action))
 		{
 			this.endTurn();
-			this.ui.uiEndTurnInfo();
+			if (!this.gameEnded) this.ui.uiEndTurnInfo();
 		}
 			
 	}
 
 	this.endTurn = function()
 	{
+		var lastSide = this.map.currentPlayer.side;
+		
 		this.waitUIAnimation = false;
-		this.turn++;
 		this.state.save();
 		this.map.endTurn();
+		//Check if game ended in defeat only for human players
+		if (this.map.turn >= this.map.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
+		{
+			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.map.turn))
+			{
+				console.log("Defeat turn:" + this.map.turn);
+				this.gameEnded = true;
+				return;
+			}
+		}
+		//Set the new visible side on map
 		//TODO: move to startTurn()
 		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
 			this.spotSide = this.map.currentPlayer.side;
 		else
 			this.spotSide = localPlayingSide;
+		
+		
 	}
 
 	this.loop = setInterval(this.processTurn, 1000);
 
+	//TODO: move to .init
 	this.newScenario = function(scenario)
 	{
 		this.scenario = scenario;
@@ -96,6 +112,8 @@ function Game()
 		this.state.clear();
 		loader.loadMap();
 		localPlayingSide = getLocalSide(this.map.getPlayers());
+		this.gameStarted = true;
+		this.gameEnded = false;
 	}
 
 	function processAction(game, action)
@@ -175,6 +193,19 @@ function Game()
 			localSide = 2;
 
 		return localSide;
+	}
+	
+	//Check if all players from a side have played certain turn
+	function hasSidePlayedTurn(playerList, side, turn)
+	{
+		for (var i = 0; i < playerList.length; i++)
+		{
+			if (playerList[i].side != side)
+				continue;
+			if (playerList[i].playedTurn != turn)
+				return false;
+		}
+		return true;
 	}
 }
 

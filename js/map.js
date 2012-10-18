@@ -721,6 +721,7 @@ function Map()
 		this.file = m.file;
 		this.name = m.name;
 		this.turn = m.turn;
+		this.maxTurns = m.maxTurns;
 	
 		this.allocMap();
 	
