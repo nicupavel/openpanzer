@@ -105,7 +105,8 @@ def get_scn_description(scnfile):
 	with f:
 	    desc = f.read()
     scnfile.seek(pos)
-    return desc.replace("\r\n\r\n","<br>")
+    nstr = desc.replace("\r\n\r\n","<br>").replace("\r\n","");
+    return nstr.replace('"', '\\"')
 
 # returns scenario maximum turns (tactical victory)
 def get_scn_maxturns(scnfile):
