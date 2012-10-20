@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="PROK1.SCN" name="Zitadelle" description="Zitadelle&lt;br&gt;July 5, 1943&lt;br&gt;The salient around Kursk, created by the Soviet advances after the German loss at Stalingrad, drew the Germans' attention.  The German plans, code named &quot;Zitadelle&quot;, were to cut the bulge by capturing Prokhorovka.  While the Germans waited to receive their new Tiger and Panther tanks before attacking, the Soviets, knowing of the German plan, took this time to deploy their forces in depth. &lt;br&gt;Two Player&lt;br&gt;19 Turns&lt;br&gt;" maxturns="19" rows="39" cols="44" image="resources/maps/images/map_0.png">
+<map file="PROK1.SCN" name="Zitadelle" maxturns="19" rows="39" cols="44" image="resources/maps/images/map_0.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="19" side="1"/>
   <hex row="0" col="1" terrain="3"/>

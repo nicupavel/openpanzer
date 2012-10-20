@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="DESSAU2.SCN" name="Hold the Line!" description="Hold the Line!&lt;br&gt;April 11, 1945&lt;br&gt;The German forces must hold the airfield near Kothen to ensure the landing of their elite troops.&lt;br&gt;2 Players, multiplay&lt;br&gt;7 Turns" maxturns="7" rows="29" cols="40" image="resources/maps/images/map_17.png">
+<map file="DESSAU2.SCN" name="Hold the Line!" maxturns="7" rows="29" cols="40" image="resources/maps/images/map_17.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="9" side="1"/>
   <hex row="0" col="10" terrain="10" name="Bode River"/>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="DESSAUUK.SCN" name="Dessau" description="Dessau&lt;br&gt;April 11, 1945&lt;br&gt;The Third Armored Division has been ordered to attack towards Dessau in an attempt to beat the Soviets to the experimental airbase nearby.  The Americans must capture the German town and airfield at Dessau.  The German defenders try to prevent an easy victory for the Americans.&lt;br&gt;2 Players&lt;br&gt;14 Turns" maxturns="14" rows="29" cols="40" image="resources/maps/images/map_17.png">
+<map file="DESSAUUK.SCN" name="Dessau" maxturns="14" rows="29" cols="40" image="resources/maps/images/map_17.png">
   <player id="0" country="22" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="10" terrain="10" name="Bode River"/>

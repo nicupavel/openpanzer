@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="ARRACT.SCN" name="Arracourt" description="Arracourt&lt;br&gt;September 8, 1944&lt;br&gt;&#9;With the Germans falling back in disarray after Falaise, the Allied forces try to secure Nancy as a springboard for the fall offensive into Germany itself.  Meanwhile, the Germans rush up new and refitted armored formations to stop the Allied onslaught.&lt;br&gt;2 Players&lt;br&gt;16 Turns" maxturns="16" rows="28" cols="41" image="resources/maps/images/map_19.png">
+<map file="ARRACT.SCN" name="Arracourt" maxturns="16" rows="28" cols="41" image="resources/maps/images/map_19.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="4" road="16"/>

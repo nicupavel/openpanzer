@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="KONRAD.SCN" name="Operation Konrad" description="Operation Konrad&lt;br&gt;January 14, 1945&lt;br&gt;The Hungarian capital of Budapest is besieged by the Red Army.  The Germans must break through the Soviet lines to help their last remaining ally.&lt;br&gt;2 Players&lt;br&gt;16 Turns" maxturns="16" rows="32" cols="40" image="resources/maps/images/map_30.png">
+<map file="KONRAD.SCN" name="Operation Konrad" maxturns="16" rows="32" cols="40" image="resources/maps/images/map_30.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="19" side="1"/>
   <hex row="0" col="7" road="16"/>

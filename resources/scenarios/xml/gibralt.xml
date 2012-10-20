@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="GIBRALT.SCN" name="Gibraltar or Bust (3 Player)" description="Gibraltar or Bust&lt;br&gt;September 20, 1940&lt;br&gt;&#9; After the fall of France, the Axis powers look for an avenue to Gibraltar.  They ask their one time partner, the Spanish Nationalists, but they deny land passage to the Straits.  With backing from the British, the Spanish await the Axis onslaught.&#13;&#10; &#13;&#10;3 Players&lt;br&gt;18 Turns&#13;&#10;" maxturns="16" rows="21" cols="27" image="resources/maps/images/map_21.png">
+<map file="GIBRALT.SCN" name="Gibraltar or Bust (3 Player)" maxturns="16" rows="21" cols="27" image="resources/maps/images/map_21.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="12" side="0"/>
   <player id="2" country="24" side="1"/>

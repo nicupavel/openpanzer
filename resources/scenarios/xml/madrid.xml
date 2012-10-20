@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="MADRID.SCN" name="Madrid Offensive" description="Madrid Offensive&lt;br&gt;December 23, 1938&lt;br&gt;&#9;The Civil War in Spain provided a testing ground for the German Wehrmacht, as well as the Soviet and Italian armies. In the battle of Guadalajara, northwest of Madrid, both sides committed some of their best units as the Nationalists tried to cut off Madrid, still held by the Republic despite repeated attacks.&#13;&#10; &#13;&#10;2 Players&lt;br&gt;20 Turns&#13;&#10;" maxturns="20" rows="21" cols="27" image="resources/maps/images/map_21.png">
+<map file="MADRID.SCN" name="Madrid Offensive" maxturns="20" rows="21" cols="27" image="resources/maps/images/map_21.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="25" side="1"/>
   <hex row="0" col="1" terrain="5"/>

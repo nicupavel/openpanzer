@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="ANTISAL.SCN" name="Invasion Salerno" description="Invasion Salerno&lt;br&gt;September 11, 1943&lt;br&gt;At the same time the Allies are establishing a foothold near Salerno, German forces are trying to push the Allied invasion back out to sea.&lt;br&gt;Two Player&lt;br&gt;13 Turns" maxturns="13" rows="39" cols="44" image="resources/maps/images/map_5.png">
+<map file="ANTISAL.SCN" name="Invasion Salerno" maxturns="13" rows="39" cols="44" image="resources/maps/images/map_5.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="9" side="1"/>
   <hex row="0" col="0" terrain="9">

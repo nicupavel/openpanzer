@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="WINDSOR.SCN" name="Windsor" description="Windsor&lt;br&gt;September 1, 1940&lt;br&gt;&#9;Assuming the German forces could get across the English Channel, the Germans would have to isolate London from the British interior by taking control of the territory near Windsor.  The British could be expected to pour every possible reinforcement into the battle for London.&lt;br&gt;2 Players&lt;br&gt;16 Turns" maxturns="16" rows="24" cols="27" image="resources/maps/images/map_7.png">
+<map file="WINDSOR.SCN" name="Windsor" maxturns="16" rows="24" cols="27" image="resources/maps/images/map_7.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0">

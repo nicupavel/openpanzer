@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="TOBRUK.SCN" name="Tobruk" description="Tobruk&lt;br&gt;April 8, 1941&lt;br&gt;The German-Italian force attempts to capture Tobruk in North Africa.&lt;br&gt;2 Players&lt;br&gt;12 Turns" maxturns="12" rows="34" cols="31" image="resources/maps/images/map_16.png">
+<map file="TOBRUK.SCN" name="Tobruk" maxturns="12" rows="34" cols="31" image="resources/maps/images/map_16.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0" terrain="9">

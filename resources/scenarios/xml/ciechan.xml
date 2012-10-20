@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="CIECHAN.SCN" name="Ciechanow" description="Ciechanow&lt;br&gt;September 5, 1939&lt;br&gt;&#9;The German troops try to clear Polish forces from Mlawa and Ciechanow.  The Polish army attempts to defend their homeland against the German invaders. &lt;br&gt;2 Players&lt;br&gt;17 Turns" maxturns="17" rows="32" cols="38" image="resources/maps/images/map_12.png">
+<map file="CIECHAN.SCN" name="Ciechanow" maxturns="17" rows="32" cols="38" image="resources/maps/images/map_12.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="15" side="1"/>
   <hex row="0" col="10" terrain="15"/>

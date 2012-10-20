@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="RTD.SCN" name="Race to Dunkirk" description="Race To Dunkirk&lt;br&gt;May 21, 1940&lt;br&gt;The Germans try to break through the Anglo-French lines and capture the French city of Dunkirk.&lt;br&gt;2 Player&lt;br&gt;20 Turns" maxturns="20" rows="39" cols="44" image="resources/maps/images/map_3.png">
+<map file="RTD.SCN" name="Race to Dunkirk" maxturns="20" rows="39" cols="44" image="resources/maps/images/map_3.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0" terrain="9"/>

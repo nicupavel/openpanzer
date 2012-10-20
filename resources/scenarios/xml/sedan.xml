@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="SEDAN.SCN" name="Sedan" description="Sedan&lt;br&gt;May 13, 1940&lt;br&gt;The German plan for the 1940 campaign in the west centered around a surprise strike through the dense Ardennes forest, emerging at Sedan to drive across France to the English Channel. This portion of the French line was considered the safest outside of Maginot, shielded as it was by the heavily forested Ardennes.&lt;br&gt;Despite the stunning German success, many things could have gone wrong.   The French might have succeeded and the German advance to the sea slowed enough to allow the Allied mobile forces to escape from the encirclement at Dunkirk.&lt;br&gt;&#13;&#10;2 Players&lt;br&gt;18 Turns" maxturns="18" rows="35" cols="41" image="resources/maps/images/map_22.png">
+<map file="SEDAN.SCN" name="Sedan" maxturns="18" rows="35" cols="41" image="resources/maps/images/map_22.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="6" side="1"/>
   <hex row="0" col="0" terrain="3"/>

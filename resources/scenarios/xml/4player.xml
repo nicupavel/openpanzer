@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="4PLAYER.SCN" name="Four Player Madness" description="Four Player Madness&lt;br&gt;August 8, 1945&lt;br&gt;The Axis players take on the Allied players.&lt;br&gt;2 Human Players vs. 2 Human Players&lt;br&gt;9 Turns" maxturns="9" rows="32" cols="38" image="resources/maps/images/map_12.png">
+<map file="4PLAYER.SCN" name="Four Player Madness" maxturns="9" rows="32" cols="38" image="resources/maps/images/map_12.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="12" side="0"/>
   <player id="2" country="22" side="1"/>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="MULTIBEA.SCN" name="Caging the Bear (Multi)" description="No description" maxturns="16" rows="27" cols="40" image="resources/maps/images/map_10.png">
+<map file="MULTIBEA.SCN" name="Caging the Bear (Multi)" maxturns="16" rows="27" cols="40" image="resources/maps/images/map_10.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="22" side="1"/>
   <player id="2" country="7" side="1"/>

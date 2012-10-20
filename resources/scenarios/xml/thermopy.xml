@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="THERMOPY.SCN" name="Thermopylae" description="Thermopylae&lt;br&gt;April 17, 1941&lt;br&gt;The Germans attempt to push through the Australian and New Zealand lines on the way to Athens, Greece.&lt;br&gt;2 Players&lt;br&gt;19 Turns" maxturns="19" rows="34" cols="44" image="resources/maps/images/map_14.png">
+<map file="THERMOPY.SCN" name="Thermopylae" maxturns="19" rows="34" cols="44" image="resources/maps/images/map_14.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0" terrain="16"/>

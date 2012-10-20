@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="MALTA.SCN" name="Malta" description="Malta&lt;br&gt;May 24, 1941&lt;br&gt;Hypothetical German-Italian invasion of the British controlled island of Malta.&lt;br&gt;Sitting astride the sea lanes between Italy and Libya, the British-held island of Malta proved a major nuisance to Italian efforts to push supply convoys across the Mediterranean Sea.  The German plan (Operation Hercules) put its faith in airborne landings.  German and Italian paratroopers would secure the most important points, and reinforcements would then come over the beaches to finish off the island's garrison.&#13;&#10;The Axis never found themselves in a position to assault Malta.&#13;&#10;This is one of the game's smallest maps, and provides a naval conflict as part of the action. &lt;br&gt;2 Players&lt;br&gt;11 Turns" maxturns="11" rows="26" cols="31" image="resources/maps/images/map_2.png">
+<map file="MALTA.SCN" name="Malta" maxturns="11" rows="26" cols="31" image="resources/maps/images/map_2.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="22" side="1"/>
   <hex row="0" col="0" terrain="9">

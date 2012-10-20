@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="MULTIRED.SCN" name="Red Tide Rising (3 Player)" description="Red Tide Rising&lt;br&gt;June 1, 1945&lt;br&gt;Postwar mistrust between the Allied Powers leads to hostilities. The Soviets attack U.S. and British forces near Dessau, attempting to drive towards Halle, Sangerhausen and Halberstadt. &lt;br&gt;3 Players &lt;br&gt;18 Turns" maxturns="18" rows="29" cols="40" image="resources/maps/images/map_17.png">
+<map file="MULTIRED.SCN" name="Red Tide Rising (3 Player)" maxturns="18" rows="29" cols="40" image="resources/maps/images/map_17.png">
   <player id="0" country="19" side="0"/>
   <player id="1" country="9" side="1"/>
   <player id="2" country="22" side="1"/>

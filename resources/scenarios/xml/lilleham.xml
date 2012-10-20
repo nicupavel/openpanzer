@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="LILLEHAM.SCN" name="Lillehammer" description="Lillehammer&lt;br&gt;April 20, 1940&lt;br&gt;The Germans attempt to push through central Norway, hoping to destroy the Norwegian army before the British Expeditionary Force arrives.&lt;br&gt;Two Player&lt;br&gt;15 Turns&lt;br&gt;" maxturns="15" rows="32" cols="40" image="resources/maps/images/map_9.png">
+<map file="LILLEHAM.SCN" name="Lillehammer" maxturns="15" rows="32" cols="40" image="resources/maps/images/map_9.png">
   <player id="0" country="7" side="0"/>
   <player id="1" country="14" side="1"/>
   <hex row="0" col="7" road="16"/>

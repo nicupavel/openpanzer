@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='ASCII'?>
-<map file="STLO2.SCN" name="St. Lo - Operation Cobra" description="St. Lo - Operation Cobra&lt;br&gt;July 25, 1944&lt;br&gt;The Allied forces attempt to breakout in Normandy against the Germans.&lt;br&gt;2 Players&lt;br&gt;16 Turns" maxturns="16" rows="30" cols="37" image="resources/maps/images/map_18.png">
+<map file="STLO2.SCN" name="St. Lo - Operation Cobra" maxturns="16" rows="30" cols="37" image="resources/maps/images/map_18.png">
   <player id="0" country="9" side="1"/>
   <player id="1" country="7" side="0"/>
   <hex row="0" col="0" terrain="10"/>
