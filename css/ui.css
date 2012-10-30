@@ -1,4 +1,5 @@
 @import url("fonts.css");
+@import url("ui-startmenu.css");
 @import url("ui-unit-info.css");
 @import url("ui-message.css");
 @import url("ui-equipment.css");
@@ -113,14 +114,15 @@ body,html
 select 
 {
 	background: transparent;
-	background-color: grey;
+/* 	background-color: grey; */
 	padding: 1px;
 	font-size: 12px;
 	color:  white;
-	border: 1px solid  #ccc;
+	border: 0px solid  #ccc;
+	width: 400px;
 }
 
 option
 {
-	background-color: grey;
+/* 	background-color: grey; */
 }
