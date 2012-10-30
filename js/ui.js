@@ -48,6 +48,7 @@ function UI(game)
 	}
 	
 	countries = map.getCountriesBySide(map.currentPlayer.side);
+	buildStartMenu();
 	buildMainMenu();
 	buildEquipmentWindow();
 	
@@ -330,13 +331,157 @@ function uiAttackInfo(atkunit, defunit)
 				+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
 }
 
+//Builds the start menu/options menu
+function buildStartMenu()
+{
+	//menu buttons divs with id, title the image filename from resources/ui/startmenu/images
+	var menubuttons = [["newscenario", "New Scenario"], ["continuegame", "Continue Game"], ["settings", "Settings"]];
+	//Settings with key in uiSettings and Title
+	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], 
+			["markOwnUnits", "Mark own units on map"]]
+	var imgres = "resources/ui/dialogs/startmenu/images/";
+	
+	//Add main buttons
+	for (var b = 0; b < menubuttons.length; b++) 
+	{
+		var div = addTag('smButtons', 'div');
+		var img = addTag(div, 'img');
+		div.id = menubuttons[b][0];
+		div.title = menubuttons[b][1];
+		div.className = "smMainButton";
+		img.src = "resources/ui/dialogs/startmenu/images/" + div.id + ".png";
+		div.onclick = function() { startMenuButton(this.id); }
+	}
+	
+	$('smLogoText').innerHTML = "version " + VERSION;
+	$('smCredits').innerHTML = "Copyright 2012 Nicu Pavel npavel@linuxconsulting.ro UI icons by Luca Iulian lucaiuli@gmail.com";
+	
+	//Add new scenario options(scenario list, description, players)
+	var scnSel = addTag('smScenSel', 'select');
+	for (var i = 0; i < scenariolist.length; i++)
+	{
+		var scnOpt = addTag(scnSel, 'option');
+		scnOpt.value = i;
+		scnOpt.text =  scenariolist[i][1];
+	}
+	scnSel.size = 3;
+	scnSel.onchange = function()
+		{
+			var v = this.options[this.selectedIndex].value;
+			$('smScenDesc').innerHTML = scenariolist[v][2];
+			
+			clearTag('smSide0');
+			$('smVS').innerHTML = "VS";
+			clearTag('smSide1');
+			//Clear previous player AI settings
+			uiSettings.isAI = [0, 0, 0, 0];
+			
+			//Add players for side 0 and 1
+			for (var s = 0; s <= 1; s++)
+			{
+				var data = scenariolist[v][3 + s];
+				var sideID = "smSide" + s;
+				var sideHeader = addTag(sideID, 'div');
+				sideHeader.className = "smSideHeader";
+				sideHeader.innerHTML = sideNames[s];
+				var sideImg = addTag(sideHeader, 'img');
+				sideImg.src = imgres + "side" + s + ".png";
+				
+				for (var i = 0; i < data.length; i++)
+				{
+					var containerDiv = addTag(sideID, 'div');
+					containerDiv.className = "smPlayerContainer";
+					var flagDiv = addTag(containerDiv, 'div');
+					flagDiv.className = "playerCountry";
+					flagDiv.style.backgroundPosition = "" + data[i]["country"] * -21 + "px 0px"; //Update flag
+					var contentDiv = addTag(containerDiv, 'div');
+					contentDiv.className = "playerName";
+					contentDiv.innerHTML = (scenariolist[v][3 + s][i]["id"] + 1) + ". " + countryNames[data[i]["country"]];
+					var smAIBut = addTag(containerDiv, 'img');
+					
+					smAIBut.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+					smAIBut.id = "ai" + data[i]["id"];
+					smAIBut.playerid = data[i]["id"];
+					smAIBut.onclick = function() 
+						{ 
+							uiSettings.isAI[this.playerid] = !uiSettings.isAI[this.playerid];
+							toggleCheckbox(this); 
+							console.log(uiSettings.isAI);
+						}
+				}
+			}
+			$('smScen').selectedScenario = "resources/scenarios/xml/" + scenariolist[v][0];
+		}
+	$('smBackBut').onclick = function() 
+		{ 
+			makeHidden('smScen');
+			makeVisible('smMain');
+		}
+	$('smPlayBut').onclick = function() 
+		{ 
+			var s = $('smScen').selectedScenario;
+			if (!s)	return;
+			newScenario(s);
+			makeHidden('smScen');
+			makeHidden('startmenu');
+			toggleButton($('options'), false);
+			game.state.saveSettings();
+		}
+	
+	//The settings window
+	for (var b = 0; b < settings.length; b++) 
+	{
+		var div = addTag('smSettings', 'div');
+		div.id = settings[b][0];
+		div.title = settings[b][1];
+		div.className = "setting";
+		div.innerHTML = settings[b][1];
+		var img = addTag(div, 'img');
+		img.id = settings[b][0];
+		img.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+		img.onclick = function() { uiSettings[this.id] = !uiSettings[this.id]; toggleCheckbox(this); console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]); }
+	}
+	$('smSetOkBut').onclick = function() 
+		{
+			makeHidden('smSettings');
+			makeVisible('smMain');
+			game.state.saveSettings();
+		}
+}
+
+function startMenuButton(id)
+{
+	switch(id) 
+	{
+		case 'newscenario':
+		{
+			makeHidden('smMain');
+			makeVisible('smScen');
+			break;
+		}
+		case 'continuegame':
+		{
+			makeHidden('startmenu');
+			toggleButton($('options'), false);
+			break;
+		}
+		case 'settings':
+		{
+			makeHidden('smMain');
+			makeVisible('smSettings');
+		}
+		
+	}
+}
+
+//Builds the in game right side menu
 function buildMainMenu()
 {
-	//menu buttons div with id the image filename from resources/ui/menu/images
+	//menu buttons divs with id the image filename from resources/ui/menu/images
 	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
 	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
-						["buy","Upgrade/Buy Units(WIP)", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
-					    ["zoom","Strategic Map", 1], ["options","Options", 1]];
+			   ["buy","Upgrade/Buy Units", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
+			   ["zoom","Strategic Map", 1], ["options","Options", 1]];
 					   
 	var sd = addTag('statusbar','div');
 	sd.id = "statusmsg";
@@ -479,17 +624,19 @@ function mainMenuButton(id)
 		}
 		case 'options':
 		{
-			uiMessage("Open Panzer version " + VERSION, "Copyright 2012 Nicu Pavel <br> " +
-			"npavel@linuxconsulting.ro <br><br> UI icons by Luca Iulian<br> lucaiuli@gmail.com<br><br> Available scenarios:<br>");
-			
-			var scnSel = addTag('message', 'select');
-			scnSel.onchange = function(){ newScenario(this.options[this.selectedIndex].value);}
-			
-			for (var i = 0; i < scenariolist.length; i++)
+			if (isVisible('startmenu'))
 			{
-				var scnOpt = addTag(scnSel, 'option');
-				scnOpt.value = "resources/scenarios/xml/" + scenariolist[i][0];
-				scnOpt.text =  scenariolist[i][1];
+				makeHidden('smMain');
+				makeHidden('smScen');
+				makeHidden('smSettings');
+				makeHidden('startmenu');
+				toggleButton($('options'), false);
+			}
+			else
+			{
+				makeVisible('startmenu');
+				makeVisible('smMain');
+				toggleButton($('options'), true);
 			}
 			break;
 		}
