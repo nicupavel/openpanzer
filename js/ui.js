@@ -11,16 +11,6 @@
 
 function UI(game)
 {
-	var uiSettings = 
-	{
-		airMode:false, //flag used to select between overlapping ground/air units
-		mapZoom:false, //flag used to draw map in zoomed mode or not
-		hexGrid:false, // flag to notify render if it should draw or not hex grid
-		deployMode:false, //used for unit deployment
-		markOwnUnits: false, //To visually mark own units on map
-		hasTouch: hasTouch(),
-	};
-	
 	//Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
 	var eqClassButtons = 
 	{
@@ -33,7 +23,7 @@ function UI(game)
 	var countries = []; //array for countries in this scenario
 	var map = game.map;
 	var r = new Render(map);
-	r.setUISettings(uiSettings);
+
 	//redraw screen and center unit on screen when images have finished loading
 	r.cacheImages(function() 
 		{ 

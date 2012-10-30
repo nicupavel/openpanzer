@@ -173,6 +173,21 @@ var prestigeGains =
 	flagCapture: 20,
 	objectiveCapture: 50,
 };
+
+//Holds the settings for the game ui and renderer
+var uiSettings = 
+{
+	airMode:false, //flag used to select between overlapping ground/air units
+	mapZoom:false, //flag used to draw map in zoomed mode or not
+	hexGrid:false, // flag to notify render if it should draw or not hex grid
+	deployMode:false, //used for unit deployment
+	markOwnUnits: false, //To visually mark own units on map
+	hasTouch: hasTouch(),
+	use3D: false, //use transform3d/translate3d functions
+	useRetina: false, //don't scale on retina displays devicePixelRatio > 1
+	isAI: [0, 0, 0, 0], //which player is played by AI 
+};
+	
 function Cell(row, col)
 {
 	this.row = row;
