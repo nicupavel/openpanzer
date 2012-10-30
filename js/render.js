@@ -57,9 +57,6 @@ function Render(mapObj)
 	//Animation Chain
 	var animationChain = new AnimationChain();
 
-	//Render Settings from UI
-	var uiSettings = null;
-		
 	createLayers(); //Creates canvas layers
 				
 	this.render = function()
@@ -252,7 +249,6 @@ function Render(mapObj)
 		var cellList = moveAnimationCBData.moveResults.passedCells;
 		var cPos, dPos;
 		var xstep, ystep;
-		var use2D = false;
 		
 		this.movTimer = null;
 		
@@ -276,7 +272,7 @@ function Render(mapObj)
 			cubb.style.display = "inline";
 			cPos.x += xstep ;
 			cPos.y += ystep;
-			if (use2D)
+			if (!uiSettings.use3D)
 			{
 				cubb.style.top = cPos.y + canvasOffsetY + renderOffsetY + "px";
 				cubb.style.left = cPos.x + canvasOffsetX + renderOffsetX + "px"; 
@@ -419,8 +415,6 @@ function Render(mapObj)
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
 	this.getCursorCanvas = function() { return ca; }
-	//Sets the local uiSettings to UI uiSettings
-	this.setUISettings = function(obj) { uiSettings = obj; }
 	//Sets a new map for rendering. Only used to dinamically change the map being rendered
 	this.setNewMap = function(mapObj) { map = mapObj; drawnHexGrid = false;}
 	
