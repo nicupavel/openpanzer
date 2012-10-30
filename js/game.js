@@ -33,20 +33,17 @@ function Game()
 		this.map = new Map();
 		this.state = new GameState(this);
 		this.scenario = scenario;
+
 		if (!this.state.restore())
 			loader.loadMap();
-			
+
 		this.ui = new UI(this);
 		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
 		this.gameStarted = true;
 		this.gameEnded = false;
 		
 		localPlayingSide = getLocalSide(this.map.getPlayers());
-		//TODO: move to startTurn()
-		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
-			this.spotSide = this.map.currentPlayer.side;
-		else
-			this.spotSide = localPlayingSide;
+		this.setCurrentSide();
 	}
 
 	this.processTurn = function() 
@@ -67,6 +64,7 @@ function Game()
 	this.processAIActions = function()
 	{
 		var action = this.map.currentPlayer.handler.getAction();
+		
 		if (!processAction(this, action))
 		{
 			this.endTurn();
@@ -93,13 +91,7 @@ function Game()
 			}
 		}
 		//Set the new visible side on map
-		//TODO: move to startTurn()
-		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
-			this.spotSide = this.map.currentPlayer.side;
-		else
-			this.spotSide = localPlayingSide;
-		
-		
+		this.setCurrentSide();
 	}
 
 	this.loop = setInterval(this.processTurn, 1000);
@@ -111,9 +103,18 @@ function Game()
 		this.map = new Map();
 		this.state.clear();
 		loader.loadMap();
-		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.gameStarted = true;
-		this.gameEnded = false;
+		this.gameEnded = false;	
+		localPlayingSide = getLocalSide(this.map.getPlayers());
+		this.setCurrentSide();
+	}
+	
+	this.setCurrentSide = function()
+	{
+		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
+			this.spotSide = this.map.currentPlayer.side;
+		else
+			this.spotSide = localPlayingSide;
 	}
 
 	function processAction(game, action)
