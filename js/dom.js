@@ -118,6 +118,23 @@ function toggleButton(p, state)
 		hoverout(e);
 }
 
+//Toggles a checkbox image(<name>-checked.png must exist)
+function toggleCheckbox(e)
+{
+	if (! e || !e.src) return;
+
+	var path = e.src.substring(0, e.src.lastIndexOf('/') + 1);
+	var hasChecked = e.src.lastIndexOf('-checked');
+	var name;
+	
+	if (hasChecked > -1)
+		name = e.src.substring(e.src.lastIndexOf('/') + 1, hasChecked);
+	else
+		name = e.src.substring(e.src.lastIndexOf('/') + 1, e.src.lastIndexOf('.')) + "-checked";
+
+	e.src = path + name + ".png";
+}
+
 function isVisible(tag)
 {
 	var v = $(tag).style.display;
