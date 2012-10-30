@@ -275,7 +275,7 @@ function Map()
 	{ 
 		playerList.push(player);
 		
-		if (WITH_AI && player.side > 0) 
+		if (WITH_AI && uiSettings.isAI[player.id]) 
 		{
 			player.type = playerType.aiLocal;
 			player.handler = new AI(player, this);
