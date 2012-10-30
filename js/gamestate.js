@@ -24,7 +24,10 @@ function GameState(Game)
 		
 		if ((m === null) || (p === null)) 
 			return false;
-			
+		
+		//Need to restore the settings since some players might be assigned to AI
+		this.restoreSettings();
+		
 		var map = Game.map;
 		
 		for (i = 0; i < p.length; i++)
@@ -44,6 +47,27 @@ function GameState(Game)
 		deleteItem('openpanzer-players-'+VERSION);
 	}
 
+	//Saves only the user settings
+	this.saveSettings = function()
+	{
+		saveItem('openpanzer-settings-'+VERSION, uiSettings);
+	}
+	
+	this.restoreSettings = function()
+	{
+		var s = restoreItem('openpanzer-settings-'+VERSION);
+		
+		if (!s) return false;
+		//Not all settings need to be restored since some are temp only
+		uiSettings.markOwnUnits = s.markOwnUnits;
+		uiSettings.use3D = s.use3D;
+		uiSettings.useRetina = s.useRetina;
+		
+		//Restore player AI settings
+		for (var i = 0; i < s.isAI.length; i++)
+			uiSettings.isAI[i] = s.isAI[i];
+	}
+	
 	//Private functions
 	function saveItem(key, object)
 	{
