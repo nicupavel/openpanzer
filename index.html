@@ -29,7 +29,31 @@
   </head>
   <body onload="gameStart();" id="mainbody">
 	<div id="statusbar"></div> <!-- Status bar where messages/infos are shown -->
-	<div id="menu"> <!-- Where the menu is being built -->
+	<div id="startmenu"> <!-- The main menu -->
+		<div id="smMain" class="mainPanel">
+			<div id="smLogo"><div id="smLogoText"></div></div>
+			<div id="smButtons"></div>
+			<div id="smCredits"></div>
+		</div>
+		<div id="smScen" class="mainPanel">
+			<div id="smScenSel"></div>
+			<div id="smScenDesc"></div>
+			<div id="smScenPlayers">
+				<div id="smSide0"></div>
+				<div id="smVS"></div>
+				<div id="smSide1"></div>
+			</div>
+			<div id="smScenButtons">
+				<div class="smSmallButton" id="smPlayBut"></div>
+				<div class="smSmallButton" id="smBackBut"></div>
+				
+			</div>
+		</div>
+		<div id="smSettings" class="mainPanel">
+			<div id="smSetOkBut" class="smSmallButton"></div>
+		</div>
+	</div>
+	<div id="menu"> <!-- Where the in game menu is being built -->
 		<div id="slidemenu"></div>
 	</div>
 	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
@@ -40,7 +64,6 @@
 		<div class="nameRow"><div id="uName">Open Panzer</div>
 		<div class="statsRow">
 			<div class="uStat" id="uFlag"></div>
-		
 			<div class="uStat" id="uStr"></div>
 			<div class="uStat" id="uFuel"></div>
 			<div class="uStat" id="uAmmo"></div>
