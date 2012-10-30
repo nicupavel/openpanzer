@@ -31,7 +31,7 @@ function addTag(parent, tag)
 	return t;
 }
 
-//inserta a tag before a child element
+//inserta a tag before a child element if child is null is placed at the end of node list
 function insertTag(parent, tag, child)
 {
 	var e, c;
@@ -44,7 +44,7 @@ function insertTag(parent, tag, child)
 	else {c = child;}
 	
 	
-	if (e !== null && c !== null)
+	if (e !== null)
 		e.insertBefore(t, c);
 		
 	return t;
