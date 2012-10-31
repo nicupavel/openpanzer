@@ -111,6 +111,11 @@ body,html
 
 .button img{ display:block;}
 
+a, a:visited
+{
+	color: white;
+}
+
 select 
 {
 	background: transparent;

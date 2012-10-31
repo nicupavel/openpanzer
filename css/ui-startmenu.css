@@ -37,11 +37,12 @@
 {
 	position: relative; /* for smLogoText */
 /*	width: 470px;*/
-	height: 132px;
+	height: 94px;
 	background-image: url('../resources/ui/dialogs/startmenu/images/logo.png');
+	background-repeat: no-repeat;
 	
 }
-#smLogoText
+#smLogoText, #smCredits
 {
 	position:absolute;
 	bottom:0;
@@ -57,7 +58,7 @@
 }
 .setting > img {	float: right; }
 
-.smMainButton { margin:0px auto 0px auto; width:100px; } /* the big main buttons */
+.smMainButton { margin:0px auto 0px auto; width:133px; } /* the big main buttons */
 .smSmallButton /* the small ok/close buttons at the bottom*/
 {
 	position: absolute;
