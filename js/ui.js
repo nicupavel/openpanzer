@@ -335,7 +335,7 @@ function uiAttackInfo(atkunit, defunit)
 function buildStartMenu()
 {
 	//menu buttons divs with id, title the image filename from resources/ui/startmenu/images
-	var menubuttons = [["newscenario", "New Scenario"], ["continuegame", "Continue Game"], ["settings", "Settings"]];
+	var menubuttons = [["newscenario", "New Scenario"], ["continuegame", "Continue Game"], ["settings", "Settings"], ["help", "Help"]];
 	//Settings with key in uiSettings and Title
 	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], 
 			["markOwnUnits", "Mark own units on map"]]
@@ -354,7 +354,7 @@ function buildStartMenu()
 	}
 	
 	$('smLogoText').innerHTML = "version " + VERSION;
-	$('smCredits').innerHTML = "Copyright 2012 Nicu Pavel npavel@linuxconsulting.ro UI icons by Luca Iulian lucaiuli@gmail.com";
+	$('smCredits').innerHTML = "Copyright 2012 <a href='http://linuxconsulting.ro/openpanzer'>Nicu Pavel</a>";	
 	
 	//Add new scenario options(scenario list, description, players)
 	var scnSel = addTag('smScenSel', 'select');
@@ -399,7 +399,7 @@ function buildStartMenu()
 					contentDiv.innerHTML = (scenariolist[v][3 + s][i]["id"] + 1) + ". " + countryNames[data[i]["country"]];
 					var smAIBut = addTag(containerDiv, 'img');
 					
-					smAIBut.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+					smAIBut.src = "resources/ui/dialogs/startmenu/images/aicheckbox.png";
 					smAIBut.id = "ai" + data[i]["id"];
 					smAIBut.playerid = data[i]["id"];
 					smAIBut.onclick = function() 
