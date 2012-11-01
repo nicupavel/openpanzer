@@ -37,13 +37,14 @@ function Game()
 		if (!this.state.restore())
 			loader.loadMap();
 
-		this.ui = new UI(this);
-		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
-		this.gameStarted = true;
-		this.gameEnded = false;
-		
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
+		
+		this.ui = new UI(this);
+		this.ui.mainMenuButton('options'); 	//Bring up the "Main Menu"
+		
+		this.gameStarted = true;
+		this.gameEnded = false;
 	}
 
 	this.processTurn = function() 

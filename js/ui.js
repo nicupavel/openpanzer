@@ -20,9 +20,9 @@ function UI(game)
 	};
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
-	var countries = []; //array for countries in this scenario
 	var map = game.map;
 	var r = new Render(map);
+	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
 
 	//redraw screen and center unit on screen when images have finished loading
 	r.cacheImages(function() 
@@ -47,7 +47,6 @@ function UI(game)
 		touchScroll("hscroll-eqTransportList");
 	}
 	
-	countries = map.getCountriesBySide(map.currentPlayer.side);
 	buildStartMenu();
 	buildMainMenu();
 	buildEquipmentWindow();
@@ -612,7 +611,7 @@ function mainMenuButton(id)
 				uiMessage("DEFEAT", "<br><br>You didn't capture the objectives in time");
 				return;
 			}
-			countries = map.getCountriesBySide(map.currentPlayer.side);
+			countries = map.getCountriesBySide(game.spotSide);
 			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 			updateUnitContextWindow();
 			selectStartingUnit();
@@ -1016,7 +1015,7 @@ function updateEquipmentWindow(eqclass)
 				}
 				div.onclick = function() 
 				{ 
-					c = map.getCountriesBySide(map.currentPlayer.side);
+					c = map.getCountriesBySide(game.spotSide);
 					for (i = 0; i < c.length; i++)
 						if (c[i] == this.country) break;
 					$('eqSelCountry').country = i;
@@ -1250,7 +1249,7 @@ function newScenario(scenario)
 		uiSetUnitOnViewPort(map.currentUnit);
 		r.render(); 
 	});
-	countries = map.getCountriesBySide(map.currentPlayer.side);
+	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
 	uiTurnInfo();
 }
