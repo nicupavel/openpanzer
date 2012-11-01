@@ -362,7 +362,7 @@ function buildStartMenu()
 	{
 		var scnOpt = addTag(scnSel, 'option');
 		scnOpt.value = i;
-		scnOpt.text =  scenariolist[i][1];
+		scnOpt.text = scenariolist[i][1];
 	}
 	scnSel.size = 3;
 	scnSel.onchange = function()
@@ -457,6 +457,18 @@ function startMenuButton(id)
 		{
 			makeHidden('smMain');
 			makeVisible('smScen');
+			//Make the current scenarion selected
+			var s = $('smScenSel').firstChild;
+			var o = s.options;
+			for (var i = 0; i < o.length; i++)
+			{
+				o[i].selected = false;
+				if (o[i].text === map.name)
+				{
+					o[i].selected = true;
+					s.onchange();
+				}
+			}
 			break;
 		}
 		case 'continuegame':
