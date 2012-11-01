@@ -115,19 +115,3 @@ a, a:visited
 {
 	color: white;
 }
-
-select 
-{
-	background: transparent;
-/* 	background-color: grey; */
-	padding: 1px;
-	font-size: 12px;
-	color:  white;
-	border: 0px solid  #ccc;
-	width: 400px;
-}
-
-option
-{
-/* 	background-color: grey; */
-}

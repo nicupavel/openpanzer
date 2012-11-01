@@ -27,7 +27,6 @@
 	left: 5px;
 	width: 470px;
 	height: 300px; 
-	border: 0px solid #fff;
 }
 
 #smScen { display: none; }
@@ -36,7 +35,6 @@
 #smLogo
 {
 	position: relative; /* for smLogoText */
-/*	width: 470px;*/
 	height: 94px;
 	background-image: url('../resources/ui/dialogs/startmenu/images/logo.png');
 	background-repeat: no-repeat;
@@ -47,6 +45,7 @@
 	position:absolute;
 	bottom:0;
 	right: 5px;
+	font-weight: normal;
 }
 
 .setting /* a setting line */
@@ -56,13 +55,18 @@
 	margin: 0px auto 0px auto;
 	line-height: 25px;
 }
-.setting > img {	float: right; }
+.setting > img { float: right; }
 
-.smMainButton { margin:0px auto 0px auto; width:133px; } /* the big main buttons */
-.smSmallButton /* the small ok/close buttons at the bottom*/
+.smMainButton  /* the big main buttons */
+{
+    margin:0px auto 0px auto;
+    width:133px;
+}
+
+.smSmallButton /* the small ok/close div buttons at the bottom*/
 {
 	position: absolute;
-	top: 265px;
+	top: 268px;
 	min-width: 30px; 
 	min-height: 30px;
 	background-repeat: no-repeat;
@@ -70,16 +74,27 @@
 	margin: 5px 10px 0px 10px;
 }
 
+/* small buttons */
 #smBackBut { background-image: url('../resources/ui/buttons/close.png'); right: 50px; }
 #smPlayBut { background-image: url('../resources/ui/buttons/ok.png'); right: 5px;}
 #smSetOkBut {background-image: url('../resources/ui/buttons/ok.png'); right: 5px;}
 
-#smScenSel
+#smScenSel /*Scenario selection div */
 {
-	width: 400px;
+	width: 460px;
 	margin: 0px auto 0px auto;
 }
-#smScenDesc
+#smScenSel select
+{
+	background: transparent;
+	padding: 1px;
+	font-size: 12px;
+	color:  white;
+	border: 0px solid  #ccc;
+	width: 460px;
+}
+
+#smScenDesc /* Scenario description div */
 {
 	padding-top: 10px;
 	width: 460px;
@@ -92,32 +107,36 @@
 	font-family: Arial;
 	font-size: 12px;
 }
-.smSideHeader { width: 80px; height: 25px; margin:0px auto 0px auto;}
-.smSideHeader > img { vertical-align: middle; }
-#smScenPlayers
+.smSideHeader  /* Header with name of sides */
+{
+    width: 80px;
+    height: 20px;
+    margin:0px auto 0px auto;
+}
+.smSideHeader > img { vertical-align: middle; } /* Side emblem */
+
+
+#smVS { width: 20px; float: left; }
+#smSide0, #smSide1 
+{
+	float: left;
+	width: 47%;
+}
+
+#smScenPlayers /* Scenario player big div */
 {
 	padding-top: 10px;
 	width: 470px;
 	margin: 0px auto 0px auto;
-	border: 0px solid red;
 }
 
-#smVS {width: 20px; border: 0px solid #fff; float: left;}
-#smSide0, #smSide1 
-{
-	float: left; 
-	width: 47%;
-	border: 0px solid #fff;
-}
-
-.smPlayerContainer
+.smPlayerContainer /* Container for each player in scenario */
 {	
 	width: 200px;
 	float: left;
 	margin: 0px auto 0px auto;
-	border: 0px solid #fff;
 }
-.smPlayerContainer > img { float: right; border: 0px solid #fff;}
+.smPlayerContainer > img { float: right; } /* AI/Human checkbox */
 
 .playerName
 {
@@ -125,7 +144,6 @@
 	margin-top: 5px;
 	margin-right: 10px;
 	margin-left: 5px;
-	border: 0px solid red;
 }
 
 .playerCountry  /* the country flag for player selection */
