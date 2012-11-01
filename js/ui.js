@@ -364,7 +364,6 @@ function buildStartMenu()
 		scnOpt.value = i;
 		scnOpt.text = scenariolist[i][1];
 	}
-	scnSel.size = 3;
 	scnSel.onchange = function()
 		{
 			var v = this.options[this.selectedIndex].value;

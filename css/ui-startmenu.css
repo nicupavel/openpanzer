@@ -87,11 +87,16 @@
 #smScenSel select
 {
 	background: transparent;
-	padding: 1px;
-	font-size: 12px;
+	font-size: 14px;
+	font-weight: bold;
 	color:  white;
-	border: 0px solid  #ccc;
 	width: 460px;
+	height: 35px;
+	border: 2px solid grey;
+}
+#smScenSel option
+{
+	background-color: grey;
 }
 
 #smScenDesc /* Scenario description div */
