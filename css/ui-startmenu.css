@@ -83,6 +83,9 @@
 {
 	width: 460px;
 	margin: 0px auto 0px auto;
+	border: 2px solid grey;
+	background: url('../resources/ui/dialogs/startmenu/images/arrow-down.png') no-repeat right;
+	overflow: hidden; /* to hide the select widget arrow */
 }
 #smScenSel select
 {
@@ -90,13 +93,13 @@
 	font-size: 14px;
 	font-weight: bold;
 	color:  white;
-	width: 460px;
+	width: 480px; /* wider than the container div so we can hide the arrow */
 	height: 35px;
-	border: 2px solid grey;
+	border: 0px;
 }
 #smScenSel option
 {
-	background-color: grey;
+	background-color: #5b5b5b;	
 }
 
 #smScenDesc /* Scenario description div */
