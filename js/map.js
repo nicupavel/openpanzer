@@ -362,8 +362,8 @@ function Map()
 			}
 		}
 
-		console.log("Updated side victory hexes Side: " + side + " : " 
-					+ this.sidesVictoryHexes[side].length + " Side: " + enemySide 
+		console.log("Updated side victory hexes Side: " + sideNames[side] + " : " 
+					+ this.sidesVictoryHexes[side].length + " Side: " + sideNames[enemySide]
 					+ " : " + this.sidesVictoryHexes[enemySide].length);
 		
 		if (this.sidesVictoryHexes[side].length == 0) 
