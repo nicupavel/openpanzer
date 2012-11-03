@@ -77,14 +77,14 @@ function Game()
 	this.endTurn = function()
 	{
 		var lastSide = this.map.currentPlayer.side;
-		
+
 		this.waitUIAnimation = false;
 		this.state.save();
 		this.map.endTurn();
 		//Check if game ended in defeat only for human players
 		if (this.map.turn >= this.map.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
 		{
-			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.map.turn))
+			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.map.maxTurns))
 			{
 				console.log("Defeat turn:" + this.map.turn);
 				this.gameEnded = true;
@@ -204,7 +204,7 @@ function Game()
 		{
 			if (playerList[i].side != side)
 				continue;
-			if (playerList[i].playedTurn != turn)
+			if (playerList[i].playedTurn < turn)
 				return false;
 		}
 		return true;
