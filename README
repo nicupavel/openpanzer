@@ -15,34 +15,40 @@ Supported browsers:
 OpenPanzer respects latest W3.org HTML5, CSS3 specs and browser specific specs are kept to a minimum -> null.
 Base supported javascript engine is V8 open source engine. Code should be kept to basic features of ECMAScript 5.
 
-OpenPanzer works in recent Google Chrome, Mozilla Firefox, Safari and Opera. OpenPanzer works on Android and iOS devices.
+OpenPanzer works in recent Google Chrome, Mozilla Firefox, Safari and Opera. OpenPanzer works on Android (tested on 2.2, 2.3, 4.x) and iOS devices (5.0+).
 
 Internet Explorer will proabably work with version 11 but extensive code changes for IE aren't a priority.
 
 Source code structure description:
 .
 ├── css                        - style sheets used for ui elements
-│   ├── ui.css                 - main window, main menu, generic dom elements
+│   ├── fonts.css              - fonts used in game
+│   ├── ui-combat-info.css     - animations used during combat
 │   ├── ui-equipment.css       - equipment window style and positioning
 │   ├── ui-message.css         - message windows style and positioning
-│   └── ui-unit-info.css       - unit information window style and positioning
+│   ├── ui-startmenu.css       - main menu shown when game starts
+│   ├── ui-unit-info.css       - unit information dialog
+│   └── ui.css                 - main window, main menu, generic dom elements
 ├── js
+│   ├── ai.js                  - AI engine
 │   ├── animation.js           - draws a series of sprites in a time interval
 │   ├── dom.js                 - generic function that deal with DOM
 │   ├── equipment-condensed.js - a condensed version of the unit properties
 │   ├── equipment.js           - developer version for unit properties
+│   ├── eventhandler.js        - event driven function (unused atm)
+│   ├── game.js                - generic game handler
 │   ├── gamerules.js           - attack, move, resupply, reinforce, distance rules
 │   ├── gamestate.js           - save/load game state to HTML 5 local storage
 │   ├── map.js                 - map, unit, player and hex objects
-│   ├── unit.js                - unit and transport objects
 │   ├── maploader.js           - loads scenarios and maps from a xml file
 │   ├── prototypes.js          - generic definitions
 │   ├── render.js              - canvas rendering functions
 │   ├── scenarios.js           - list of scenarios automatically generated
 │   ├── sound.js               - generic unit sounds functions
 │   ├── style.js               - canvas style for render.js
+│   ├── unit.js                - unit and transport objects
 │   └── ui.js                  - handle mouse, builds/updates UI windows
-├── panzer.html                - html file with basic DOM structure for openpanzer
+├── index.html                 - html file with basic DOM structure for openpanzer
 ├── resources
 │   ├── animations             - images with 1 row of sprites for animations
 │   ├── fonts                  - fonts used in OpenPanzer
@@ -53,13 +59,15 @@ Source code structure description:
 │   │   ├── buttons            - generic buttons (ok/close)
 │   │   ├── cursors            - mouse cursors used in game
 │   │   ├── dialogs
-│   │   │   ├── equipment      - images for equipment buttons/window 
-│   │   │   ├── ui-message     - images for message window
+│   │   │   ├── equipment      - images for equipment buttons/dialog
+│   │   │   ├── startmenu      - images for start menu dialog
+│   │   │   ├── ui-message     - images for message dialog
 │   │   │   ├── unit-context   - images for buttons that pop up on unit selections
 │   │   │   └── unit-info      - images for unit info stats
 │   │   ├── flags              - small (for cities) and big (for unit info) flags
 │   │   ├── indicators         - small indicators that are drawn on the map (unit has fire)
 │   │   ├── menu               - images used on main window text bar or main menu
+│   │   ├── splash             - splash images used as loading screen on android/ios
 │   │   ├── page               - images used outside main window
 │   └── units                  - 1x9 sprites with unit orientations for each unit
 └── tools
@@ -71,7 +79,7 @@ Source code structure description:
 Development notes:
 
 OpenPanzer doesn't use any external javascript libraries (like jquery, node etc), and should be kept like this.
-Styling DOM elements should be done in their CSS files. Adding style for elements in the code shouldn't exist.
+Styling DOM elements should be done in their CSS files. Adding style for static elements in the code shouldn't exist.
 All positioning of DOM elements should be done in CSS files. Bottom line: if something can be done in a css file 
 then there it should go not in the javascript code.
 Code additions should follow the coding style used so far (for object creation etc).
@@ -82,7 +90,7 @@ Running the code locally in Google Chrome requires --allow-file-access-from-file
 
 Graphical assets and other resources:
 
-Unit images are taken from OpenGeneral: http://sourceforge.net/apps/mediawiki/opengeneral/index.php?title=Main_Page
+Unit images are taken from OpenGeneral Icons project: http://opengeneral.sourceforge.net/db/icons/
 Scenarios and equipment are converted from original Panzer General 2.
-This game has been built around the specification of the original game compiled by Luis Guzman: http://luis-guzman.com/links/PG2_FilesSpec.htm
+This game has been built around the specification of the original game compiled by Luis Guzman: http://luis-guzman.com/links/PG2_FilesSpec.html
 Unit equipment is exported from PG2Suite: http://luis-guzman.com/PG2_Suite.html before being converted into a json format.
