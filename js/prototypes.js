@@ -182,8 +182,10 @@ var uiSettings =
 	hexGrid:false, // flag to notify render if it should draw or not hex grid
 	deployMode:false, //used for unit deployment
 	markOwnUnits: false, //To visually mark own units on map
-	hasTouch: hasTouch(),
-	use3D: false, //use transform3d/translate3d functions
+	markEnemyUnits: false, //To visually mark enemy units on map
+	markFOW: false, //Make Fog Of War visible
+	hasTouch: hasTouch(), //Automatically detected if device has touch controller
+	use3D: false, //use transform3d/translate3d functions for animations
 	useRetina: false, //don't scale on retina displays devicePixelRatio > 1
 	isAI: [0, 0, 0, 0], //which player is played by AI 
 };
