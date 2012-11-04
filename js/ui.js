@@ -336,8 +336,8 @@ function buildStartMenu()
 	//menu buttons divs with id, title the image filename from resources/ui/startmenu/images
 	var menubuttons = [["newscenario", "New Scenario"], ["continuegame", "Continue Game"], ["settings", "Settings"], ["help", "Help"]];
 	//Settings with key in uiSettings and Title
-	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], 
-			["markOwnUnits", "Mark own units on map"]]
+	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War"],
+			["markOwnUnits", "Mark own units on map"], ["markEnemyUnits", "Mark enemy units on map"]];
 	var imgres = "resources/ui/dialogs/startmenu/images/";
 	
 	//Add main buttons
