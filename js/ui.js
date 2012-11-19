@@ -151,10 +151,20 @@ function handleUnitDeployment(row, col)
 	
 }
 
+//Deselects a previously selected unit. Can have row,col as params since user can click or rightclick
+//everywhere on empty terrain to deselect a unit
 function handleUnitDeselect()
 {
-	map.delCurrentUnit();
-	r.render();
+	if (map.currentUnit !== null)
+	{
+		var p = map.currentUnit.getPos();
+		//RENDER UPDATE
+		//Set the biggest range of the attack/move
+		var m = GameRules.getUnitMoveRange(map.currentUnit);
+		var a = GameRules.getUnitAttackRange(map.currentUnit);
+		map.delCurrentUnit(); //deselect from map array before render
+		r.render(p.row, p.col, m > a ? m : a);
+	}
 }
 
 //handle the selection of a new unit
@@ -162,7 +172,11 @@ function handleUnitSelect(row, col)
 {
 	if (map.currentPlayer.type != playerType.humanLocal)
 		return;
+	
+	handleUnitDeselect(); //Deselect previously selected unit
+	
 	var hex = map.map[row][col];
+	
 	if (!map.selectUnit(hex.getUnit(uiSettings.airMode))) //can fail if clickedUnit is on enemy side
 		map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
 
@@ -177,39 +191,50 @@ function handleUnitSelect(row, col)
 	//Display selected unit on status bar
 	updateStatusBarLocation(row, col);
 	
+	//RENDER UPDATE
 	//Set the biggest range of the attack/move
 	var m = GameRules.getUnitMoveRange(map.currentUnit);
 	var a = GameRules.getUnitAttackRange(map.currentUnit);
 	r.render(row, col, m > a ? m : a);
 }
 
-//handle the move of currently selected unit to row,col destination
+//handle the move of a unit to row,col destination
 this.uiUnitMove = function(unit, row, col) { return uiUnitMove(unit, row, col); }
 function handleUnitMove(row, col) { return uiUnitMove(map.currentUnit, row, col); }
 function uiUnitMove(unit, row, col)
 {
-	var mm = map.currentUnit.unitData().movmethod;
-	var mr = map.moveUnit(map.currentUnit, row, col);
+	var mm = unit.unitData().movmethod;
+	var mr = map.moveUnit(unit, row, col);
+
 	var moveAnimationCBData = 
 	{
-		unit: map.currentUnit,
+		unit: unit,
 		moveResults: mr,
 		cbfunc: uiMoveAnimationFinished,
 	}
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	unit.hasAnimation = true; //signal render that unit is going to be move animated
-	r.render(row, col, GameRules.getUnitMoveRange(map.currentUnit)); //Update render so the old unit location is cleared
 	r.moveAnimation(moveAnimationCBData);
+	//Clear old unit location by deselecting the unit (will be selected when animation ends)
+	//handleUnitDeselect();
+	r.render(); //TODO partial renderer
 	return true;
 }
 //Called when move animation finishes
 function uiMoveAnimationFinished(moveAnimationCBData)
 {
-	r.render();
 	var mr = moveAnimationCBData.moveResults;
 	var unit = moveAnimationCBData.unit;
 	var cell = mr.surpriseCell;
+	
+	//RENDER UPDATE
+	//Set the biggest range of the attack/move
+	var m = GameRules.getUnitMoveRange(unit);
+	var a = GameRules.getUnitAttackRange(unit);
+	var p = unit.getPos();
+	r.render(p.row, p.col, m > a ? m : a);
+	
 	if (mr.isSurprised)
 	{
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
@@ -300,6 +325,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 		}
 	}
 	//Render so new unit facings are shown correctly 7 is the biggest attack range including support fire
+	//RENDER UPDATE
 	r.render(cpos.row, cpos.col, 7); 
 	r.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
@@ -319,7 +345,7 @@ function uiAttackAnimationFinished(animationCBData)
 		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
-		
+	//RENDER UPDATE
 	r.render(cell.row, cell.col, 7);
 	game.waitUIAnimation = false;
 	uiTurnInfo();
@@ -540,14 +566,14 @@ function mainMenuButton(id)
 		{
 			uiSettings.airMode = !uiSettings.airMode;
 			toggleButton($('air'), uiSettings.airMode);
-			r.render();
+			r.render(); //Full page rendering
 			break;
 		}
 		case 'hex':
 		{
 			uiSettings.hexGrid = !uiSettings.hexGrid;
 			toggleButton($('hex'), uiSettings.hexGrid);
-			r.render();
+			r.render(); //Full page rendering
 			break;
 		}
 		case 'zoom':
@@ -570,7 +596,7 @@ function mainMenuButton(id)
 				uiSettings.mapZoom = false;
 			}
 			toggleButton($('zoom'), uiSettings.mapZoom);
-			r.render();
+			r.render(); //Full page rendering
 			break;
 		}
 		case 'inspectunit':
@@ -605,7 +631,7 @@ function mainMenuButton(id)
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy'), true);
 			}
-			r.render();
+			r.render(); //TODO: full page render is needed only when showing/hiding deployment hexes
 			break;
 		}
 		case 'endturn':
@@ -844,7 +870,7 @@ function unitContextButton(action, unit)
 	}
 	updateUnitContextWindow(unit);
 	updateUnitInfoWindow(unit);
-	r.render();
+	r.render(); //TODO partial rendering
 }
 
 function buildEquipmentWindow()
