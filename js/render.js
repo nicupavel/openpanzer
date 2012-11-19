@@ -56,66 +56,58 @@ function Render(mapObj)
 	var unitTextHeight = 8;	
 	//Animation Chain
 	var animationChain = new AnimationChain();
+	
+	//Show bounding boxes for partial renderer
+	var partialRenderDebug = true;
 
 	createLayers(); //Creates canvas layers
 	
 	//Renders the units/decals/hexgrid if row,col and range are defined then it will
 	//only partially render the canvas around row,col with range around this location
-	this.render = function(actionRow, actionCol, actionRange)
+	this.render = function(orow, ocol, range)
 	{
 		console.time("render timer");
+		
 		var x0, y0;
-		var srow = 0;
-		var scol = 0;
-		var maxRow = map.rows;
-		var maxCol = map.cols;
+		
+		//Since cellToScreen returns top left corner of a hex in range we need to increase the range with at least 1 hex
+		//but since the clearing rectangle can half clear staggered hexes we render by 2 more hexes in each direction but
+		//we only clear a 1 hex smaller area in each direction
+		var clearZone = getZoneRangeLimits(orow, ocol, range + 1); //the map (cell) coords that will be cleared by clearRect
+		var renderZone = getZoneRangeLimits(orow, ocol, range + 2); //the map (cell) coords that will be rendered hex by hex
+					
 		var hex;
 		var current = null;
 		var unit = null;
 		var drawHexGrid = false;
-
-		if (actionRow === null || actionCol === null)
-			actionRow = actionCol = 0;
-		if (actionRange !== null && actionRange >= 0)
-		{
-			srow = actionRow - actionRange;
-			if (srow < 0) srow = 0;
-			maxRow = actionRow + actionRange;
-			if (maxRow > map.rows) maxRow = map.rows;
-			scol = actionCol - actionRange;
-			if (scol < 0) scol = 0;
-			maxCol = actionCol + actionRange;
-			if (maxCol > map.cols) maxCol = map.cols;
-			//console.log("actionRow:" + actionRow + " actionCol:" + actionCol +" srow:"+srow+" scol:"+scol+" maxRow:"+maxRow+" maxCol"+maxCol);
-		}
-		else
-			console.log("Full canvas render !");
 		
 		if (uiSettings.hexGrid != drawnHexGrid)
 		{
 			drawnHexGrid = drawHexGrid = uiSettings.hexGrid;			
 			cb.clearRect(0, 0, cb.canvas.width, cb.canvas.height);
-			/*
-			srow = scol = 0;
-			maxRow = map.rows;
-			maxCol = map.cols;
-			*/
 		}
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
 		
-		var spos = cellToScreen(srow, scol, false);
-		var epos = cellToScreen(maxRow, maxCol, false);
-		//console.log(spos);
-		//console.log(epos);
+		var spos = cellToScreen(clearZone.srow, clearZone.scol, false);
+		var epos = cellToScreen(clearZone.erow, clearZone.ecol, false);
+
 		
-		//c.clearRect(0, 0, c.canvas.width, c.canvas.height);
+		
 		c.clearRect(spos.x, spos.y, epos.x - spos.x, epos.y - spos.y);
-		for (var row = srow; row < maxRow; row++) 
+		
+		if (partialRenderDebug)			
+		{
+			console.log("Origin: %d,%d, range: %d render zone: %o, clear zone: %o, clear box: %o, %o", orow, ocol, range, renderZone, clearZone, spos, epos);
+			c.fillStyle = "rgba(" + Math.floor(Math.random() * 255) + ","+ Math.floor(Math.random() * range) + "," + Math.floor(Math.random() * 255) +", 0.9)";
+			c.fillRect(spos.x, spos.y, epos.x - spos.x, epos.y - spos.y);
+		}
+		
+		for (var row = renderZone.srow; row < renderZone.erow; row++) 
 		{
 			//we space the hexagons on each line next column being on the row below 
-			for (var col = scol; col < maxCol; col++) 
+			for (var col = renderZone.scol; col < renderZone.ecol; col++) 
 			{
 				hex = map.map[row][col];
 
@@ -185,7 +177,7 @@ function Render(mapObj)
 				}
 			}	
 		}
-		//console.log("called from: " + arguments.callee.caller.name);
+		console.log("called from: " + arguments.callee.caller.name);
 		console.timeEnd("render timer");
 		
 	}
@@ -751,5 +743,33 @@ function Render(mapObj)
 			ctx.strokeStyle = style.lineColor;
 			ctx.stroke();
 		}
+	}
+	
+	//Returns min and max row,col for a range around a cell(row,col)
+	function getZoneRangeLimits(row, col, range)
+	{
+		var z = { srow: 0, scol: 0, erow: map.rows, ecol: map.cols };
+		
+		if (row === null || col === null)
+			row = col = 0;
+		
+		if (range !== null && range >= 0)
+		{
+			z.srow = row - range;
+			
+			z.scol = col - range;
+			z.erow = row + range;
+			z.ecol = col + range;
+		
+			if (z.srow < 0) z.srow = 0;
+			if (z.scol < 0) z.scol = 0;
+			if (z.erow > map.rows) z.erow = map.rows;
+			if (z.ecol > map.cols) z.ecol = map.cols;
+		}
+		else
+		{
+			console.log("Full zone canvas render");
+		}
+		return z;
 	}
 }
