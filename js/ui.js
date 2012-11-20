@@ -21,18 +21,18 @@ function UI(game)
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	var map = game.map;
-	var r = new Render(map);
+	var R = new Render(map);
 	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
 
 	//redraw screen and center unit on screen when images have finished loading
-	r.cacheImages(function() 
+	R.cacheImages(function() 
 		{ 
 			selectStartingUnit(); //select the first available unit for the current side
 			uiSetUnitOnViewPort(map.currentUnit);
-			r.render();  
+			R.render();  //Full page rendering
 		});
 		
-	var canvas = r.getCursorCanvas();
+	var canvas = R.getCursorCanvas();
 	
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	
@@ -59,7 +59,7 @@ function handleMouseClick(e)
 		return;
 	
 	var minfo = getMouseInfo(canvas, e);
-	var cell = r.screenToCell(minfo.x, minfo.y);
+	var cell = R.screenToCell(minfo.x, minfo.y);
 	var row = cell.row;
 	var col = cell.col;
 	
@@ -133,9 +133,9 @@ function handleMouseMove(e)
 {
 	var unit, text, hex;
 	var minfo = getMouseInfo(canvas, e);
-	var c = r.screenToCell(minfo.x, minfo.y);
+	var c = R.screenToCell(minfo.x, minfo.y);
 
-	if (map.currentUnit != null) { r.drawCursor(c); }
+	if (map.currentUnit != null) { R.drawCursor(c); }
 	updateStatusBarLocation(c.row, c.col);
 }
 
@@ -145,7 +145,7 @@ function handleUnitDeployment(row, col)
 	var deployUnit = $('eqUserSel').deployunit; //TODO make this into a UI member
 	var ret = map.deployPlayerUnit(map.currentPlayer, deployUnit, row, col);
 	if (ret)
-		r.cacheImages(function() { r.render(); updateEquipmentWindow(map.currentUnit.unitData(true).uclass); });
+		R.cacheImages(function() { R.render(); updateEquipmentWindow(map.currentUnit.unitData(true).uclass); });
 	else 
 		console.log("Can't deploy unit in that location");
 	
@@ -158,12 +158,9 @@ function handleUnitDeselect()
 	if (map.currentUnit !== null)
 	{
 		var p = map.currentUnit.getPos();
-		//RENDER UPDATE
-		//Set the biggest range of the attack/move
-		var m = GameRules.getUnitMoveRange(map.currentUnit);
-		var a = GameRules.getUnitAttackRange(map.currentUnit);
+		var r = getRenderRange(map.currentUnit);
 		map.delCurrentUnit(); //deselect from map array before render
-		r.render(p.row, p.col, m > a ? m : a);
+		R.render(p.row, p.col, r);
 	}
 }
 
@@ -191,11 +188,8 @@ function handleUnitSelect(row, col)
 	//Display selected unit on status bar
 	updateStatusBarLocation(row, col);
 	
-	//RENDER UPDATE
-	//Set the biggest range of the attack/move
-	var m = GameRules.getUnitMoveRange(map.currentUnit);
-	var a = GameRules.getUnitAttackRange(map.currentUnit);
-	r.render(row, col, m > a ? m : a);
+	var r = getRenderRange(map.currentUnit);
+	R.render(row, col, r);
 }
 
 //handle the move of a unit to row,col destination
@@ -205,8 +199,7 @@ function uiUnitMove(unit, row, col)
 {
 	var mm = unit.unitData().movmethod;
 	//Save render properties before moving
-	var m = GameRules.getUnitMoveRange(unit);
-	var a = GameRules.getUnitAttackRange(unit);
+	var r = getRenderRange(unit);
 	var oldpos = unit.getPos();
 	var mr = map.moveUnit(unit, row, col);
 
@@ -219,11 +212,9 @@ function uiUnitMove(unit, row, col)
 	
 	soundData[moveSoundByMoveMethod[mm]].play();
 	unit.hasAnimation = true; //signal render that unit is going to be move animated
-	r.moveAnimation(moveAnimationCBData);
-	//Clear old unit location by deselecting the unit (will be selected when animation ends)
-	//RENDER UPDATE
-	//Set the biggest range of the attack/move
-	r.render(oldpos.row, oldpos.col, m > a ? m : a);
+	R.moveAnimation(moveAnimationCBData);
+	R.render(oldpos.row, oldpos.col, r);
+	
 	return true;
 }
 //Called when move animation finishes
@@ -232,17 +223,14 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	var mr = moveAnimationCBData.moveResults;
 	var unit = moveAnimationCBData.unit;
 	var cell = mr.surpriseCell;
-	
-	//RENDER UPDATE
-	//Set the biggest range of the attack/move
-	var m = GameRules.getUnitMoveRange(unit);
-	var a = GameRules.getUnitAttackRange(unit);
+	var r = getRenderRange(unit);
 	var p = unit.getPos();
-	r.render(p.row, p.col, m > a ? m : a);
+	
+	R.render(p.row, p.col, r);
 	
 	if (mr.isSurprised)
 	{
-		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, "Surprised !");
 		moveAnimationCBData.unit.isSurprised = true;
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
@@ -298,30 +286,30 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 			if (attackingUnit.destroyed)
 				break;
 			map.attackUnit(supportUnits[u], attackingUnit, true);
-			r.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
+			R.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
 		}
 	}
 	if (attackingUnit.destroyed) //TODO Do this better
 	{
 		map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-		r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
-		r.addAnimation(cpos.row, cpos.col, "explosion");
+		R.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+		R.addAnimation(cpos.row, cpos.col, "explosion");
 	}
 	else //Can we still attack ?
 	{
 		var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
-		r.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
+		R.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
 		if (enemyUnit.destroyed)
-			r.addAnimation(row, col, "explosion");
+			R.addAnimation(row, col, "explosion");
 		else
 			if (cr.defcanfire)
-				r.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
+				R.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
 		
 		if (attackingUnit.destroyed) //TODO Do this better
 		{
 			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-			r.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
-			r.addAnimation(cpos.row, cpos.col, "explosion");
+			R.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+			R.addAnimation(cpos.row, cpos.col, "explosion");
 		}
 		else
 		{
@@ -330,9 +318,8 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 		}
 	}
 	//Render so new unit facings are shown correctly 7 is the biggest attack range including support fire
-	//RENDER UPDATE
-	r.render(cpos.row, cpos.col, 7); 
-	r.runAnimation(animationCBData);
+	R.render(cpos.row, cpos.col, 7); 
+	R.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 	return true;
 }
@@ -347,11 +334,13 @@ function uiAttackAnimationFinished(animationCBData)
 		var loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
 		if (loss == 0) continue;
 		var cell = animationCBData.units[i].getPos();
-		var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
-	//RENDER UPDATE
-	r.render(cell.row, cell.col, 7);
+	
+	//TODO should check surviving unit getRenderRange since 
+	//it might have not moved and needs a bigger render range
+	R.render(cell.row, cell.col, 7);
 	game.waitUIAnimation = false;
 	uiTurnInfo();
 }
@@ -571,14 +560,14 @@ function mainMenuButton(id)
 		{
 			uiSettings.airMode = !uiSettings.airMode;
 			toggleButton($('air'), uiSettings.airMode);
-			r.render(); //Full page rendering
+			R.render(); //Full page rendering
 			break;
 		}
 		case 'hex':
 		{
 			uiSettings.hexGrid = !uiSettings.hexGrid;
 			toggleButton($('hex'), uiSettings.hexGrid);
-			r.render(); //Full page rendering
+			R.render(); //Full page rendering
 			break;
 		}
 		case 'zoom':
@@ -601,7 +590,7 @@ function mainMenuButton(id)
 				uiSettings.mapZoom = false;
 			}
 			toggleButton($('zoom'), uiSettings.mapZoom);
-			r.render(); //Full page rendering
+			R.render(); //Full page rendering
 			break;
 		}
 		case 'inspectunit':
@@ -636,7 +625,7 @@ function mainMenuButton(id)
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy'), true);
 			}
-			r.render(); //TODO: full page render is needed only when showing/hiding deployment hexes
+			R.render(); //TODO: full page render is needed only when showing/hiding deployment hexes
 			break;
 		}
 		case 'endturn':
@@ -875,7 +864,7 @@ function unitContextButton(action, unit)
 	}
 	updateUnitContextWindow(unit);
 	updateUnitInfoWindow(unit);
-	r.render(); //TODO partial rendering
+	R.render(); //TODO partial rendering
 }
 
 function buildEquipmentWindow()
@@ -951,7 +940,7 @@ function buildEquipmentWindow()
 
 			if (map.upgradeUnit(id, eqUnit, eqTransport))
 			{
-				r.cacheImages(function() { r.render(); }); //Need to cache new image
+				R.cacheImages(function() { R.render(); }); //Need to cache new image
 				if (eqUnit > 0 ) updateEquipmentWindow(equipment[eqUnit].uclass);
 			}
 		}
@@ -1007,7 +996,7 @@ function updateEquipmentWindow(eqclass)
 			{ 
 				$('eqUserSel').deployunit = this.unitid; //save selected player unit
 				updateEquipmentWindow(this.eqclass); //make selection appear
-				r.render(); //make the deployment mode appear
+				R.render(); //make the deployment mode appear
 			}
 		}
 	}
@@ -1042,7 +1031,7 @@ function updateEquipmentWindow(eqclass)
 					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 					eqclass = ud.uclass; //Force unit class for equipment display
 					map.selectUnit(u); //select unit on map
-					r.render(); //refresh so the new selection appear
+					R.render(); //refresh so the new selection appear
 					uiSetUnitOnViewPort(u); //bring the unit into map view
 					//This unit will be the last in div since the div is being built and we can use offsetWidth of the
 					//containing div to get offset from the position 0. This value will be used to scroll the div when 
@@ -1237,7 +1226,7 @@ function uiEndTurnInfo()
 	uiTurnInfo();
 	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
 				+ " side  Turn " + map.turn, infoStr);
-	r.render();			
+	R.render();			
 }
 
 function uiTurnInfo()
@@ -1251,7 +1240,7 @@ function uiSetUnitOnViewPort(unit)
 	if (!unit) return;
 	var cell = unit.getPos();
 	if (!cell || typeof cell === "undefined") return;
-	var pos = r.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+	var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 	$('game').scrollLeft = pos.x - window.innerWidth/2;
 	$('game').scrollTop = pos.y - window.innerHeight/2;
 }
@@ -1278,12 +1267,12 @@ function newScenario(scenario)
 {
 	game.newScenario(scenario);
 	map = game.map;
-	r.setNewMap(map);
-	r.cacheImages(function() 
+	R.setNewMap(map);
+	R.cacheImages(function() 
 	{ 
 		selectStartingUnit(); 
 		uiSetUnitOnViewPort(map.currentUnit);
-		r.render(); 
+		R.render(); 
 	});
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
@@ -1301,6 +1290,21 @@ function getMouseInfo(canvas, e)
 	my = e.pageY - canvas.offsetTop - vp.clientTop - vp.offsetTop + vp.scrollTop;
 
 	return new mouseInfo(mx, my, rclick);
+}
+
+//Returns the biggest range around a unit that should be rendered
+function getRenderRange(unit)
+{
+	if (unit === null) 
+		return 0;
+	
+	var range = GameRules.getUnitMoveRange(unit);
+	var r = GameRules.getUnitAttackRange(unit);
+	if (r > range) range = r;
+	r = unit.unitData().spotrange;
+	if (r > range) range = r;
+	
+	return range;
 }
 
 } //End of UI class
