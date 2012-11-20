@@ -58,12 +58,12 @@ function Render(mapObj)
 	var animationChain = new AnimationChain();
 	
 	//Show bounding boxes for partial renderer
-	var partialRenderDebug = true;
+	var partialRenderDebug = false;
 
 	createLayers(); //Creates canvas layers
 	
-	//Renders the units/decals/hexgrid if row,col and range are defined then it will
-	//only partially render the canvas around row,col with range around this location
+	//Renders the units/decals/hexgrid if orow,ocol and range are defined then it will
+	//only partially render the canvas around orow,ocol with range around this location
 	this.render = function(orow, ocol, range)
 	{
 		console.time("render timer");
@@ -89,12 +89,10 @@ function Render(mapObj)
 		
 		if (map.currentUnit !== null)
 			current = map.currentUnit.getPos();
-		
+
 		var spos = cellToScreen(clearZone.srow, clearZone.scol, false);
 		var epos = cellToScreen(clearZone.erow, clearZone.ecol, false);
 
-		
-		
 		c.clearRect(spos.x, spos.y, epos.x - spos.x, epos.y - spos.y);
 		
 		if (partialRenderDebug)			

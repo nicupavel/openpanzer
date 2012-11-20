@@ -258,5 +258,5 @@ function screenPos(x, y)
 
 var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
 var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
-var VERSION = "2.1";
+var VERSION = "2.2";
 var WITH_AI = true; //If we should assign a AI player for testing
