@@ -204,6 +204,10 @@ function handleUnitMove(row, col) { return uiUnitMove(map.currentUnit, row, col)
 function uiUnitMove(unit, row, col)
 {
 	var mm = unit.unitData().movmethod;
+	//Save render properties before moving
+	var m = GameRules.getUnitMoveRange(unit);
+	var a = GameRules.getUnitAttackRange(unit);
+	var oldpos = unit.getPos();
 	var mr = map.moveUnit(unit, row, col);
 
 	var moveAnimationCBData = 
@@ -217,8 +221,9 @@ function uiUnitMove(unit, row, col)
 	unit.hasAnimation = true; //signal render that unit is going to be move animated
 	r.moveAnimation(moveAnimationCBData);
 	//Clear old unit location by deselecting the unit (will be selected when animation ends)
-	//handleUnitDeselect();
-	r.render(); //TODO partial renderer
+	//RENDER UPDATE
+	//Set the biggest range of the attack/move
+	r.render(oldpos.row, oldpos.col, m > a ? m : a);
 	return true;
 }
 //Called when move animation finishes
