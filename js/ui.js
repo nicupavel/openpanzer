@@ -170,26 +170,35 @@ function handleUnitSelect(row, col)
 	if (map.currentPlayer.type != playerType.humanLocal)
 		return;
 	
-	handleUnitDeselect(); //Deselect previously selected unit
-	
-	var hex = map.map[row][col];
-	
-	if (!map.selectUnit(hex.getUnit(uiSettings.airMode))) //can fail if clickedUnit is on enemy side
-		map.selectUnit(hex.getUnit(!uiSettings.airMode)); //try the other unit on hex
+	var hex = map.map[row][col];	
+	var unit = hex.getUnit(uiSettings.airMode)
 
-	if (map.currentUnit === null) 
-		return;
-		
-	//Update unit contextual window
-	updateUnitContextWindow(map.currentUnit);
-	//Select unit on equipment window
-	$('eqUserSel').userunit = map.currentUnit.id; //save selected player unit
-	updateEquipmentWindow(map.currentUnit.unitData(true).uclass);
-	//Display selected unit on status bar
-	updateStatusBarLocation(row, col);
+	if (unit == null || unit.player.id != map.currentPlayer.id) //Can't select units from other players
+	{
+		unit = hex.getUnit(!uiSettings.airMode); //try the other unit on hex
+		if (unit == null || unit.player.id != map.currentPlayer.id)
+			return;
+	}
+
+	//Select unit on equipment window (can't be in uiUnitSelect because will loop)
+	$('eqUserSel').userunit = unit.id; //save selected player unit
+	updateEquipmentWindow(unit.unitData(true).uclass);
 	
-	var r = getRenderRange(map.currentUnit);
-	R.render(row, col, r);
+	return uiUnitSelect(unit);
+}
+function uiUnitSelect(unit)
+{
+	if (unit === null) 
+		return;
+	
+	var p = unit.getPos();
+	handleUnitDeselect();
+	map.selectUnit(unit);
+
+	updateUnitContextWindow(unit); //Update unit contextual window
+	updateStatusBarLocation(p.row, p.col); //Display selected unit on status bar
+	var r = getRenderRange(unit);
+	R.render(p.row, p.col, r);
 }
 
 //handle the move of a unit to row,col destination
@@ -327,14 +336,15 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 //Called when attack animation finishes 
 function uiAttackAnimationFinished(animationCBData)
 {
+	var cell, loss, pos;
 	//EventHandler.emitEvent("AttackAnimation");
 	for (var i = 0; i < animationCBData.units.length; i++)
 	{
 		if (animationCBData.units[i].destroyed)	continue;
-		var loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
+		loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
 		if (loss == 0) continue;
-		var cell = animationCBData.units[i].getPos();
-		var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		cell = animationCBData.units[i].getPos();
+		pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
 	
@@ -625,7 +635,7 @@ function mainMenuButton(id)
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy'), true);
 			}
-			R.render(); //TODO: full page render is needed only when showing/hiding deployment hexes
+			R.render(); //Full page render is needed for showing/hiding deployment hexes over all map
 			break;
 		}
 		case 'endturn':
@@ -1043,8 +1053,7 @@ function updateEquipmentWindow(eqclass)
 					}
 					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 					eqclass = ud.uclass; //Force unit class for equipment display
-					map.selectUnit(u); //select unit on map
-					R.render(); //refresh so the new selection appear
+					uiUnitSelect(u);
 					uiSetUnitOnViewPort(u); //bring the unit into map view
 					//This unit will be the last in div since the div is being built and we can use offsetWidth of the
 					//containing div to get offset from the position 0. This value will be used to scroll the div when 
@@ -1239,7 +1248,7 @@ function uiEndTurnInfo()
 	uiTurnInfo();
 	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
 				+ " side  Turn " + map.turn, infoStr);
-	R.render();			
+	R.render(); //Full page render when changing player/side			
 }
 
 function uiTurnInfo()
@@ -1285,7 +1294,7 @@ function newScenario(scenario)
 	{ 
 		selectStartingUnit(); 
 		uiSetUnitOnViewPort(map.currentUnit);
-		R.render(); 
+		R.render(); //Full page render on new map
 	});
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
