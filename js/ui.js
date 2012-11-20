@@ -836,35 +836,48 @@ function updateUnitInfoWindow(u)
 
 function unitContextButton(action, unit)
 {
+	//Remember the render range and position of unit before actions
+	var r = getRenderRange(unit);
+	var p = unit.getPos();
+	var refreshRender = false; //If a unit gets a new range after action
+	
 	switch (action)
 	{
-		case 'mount':
+		case 'mount': //Can get a bigger range on mount
 		{
 			if (unit.isMounted)
 				map.unmountUnit(unit);
 			else
 				map.mountUnit(unit);
+			refreshRender = true;
 			break;
 		}
-		case 'resupply':
+		case 'resupply': //same location same range
 		{
 			map.resupplyUnit(unit);
 			break;
 		}
-		case 'reinforce':
+		case 'reinforce': //same location same range
 		{
 			map.reinforceUnit(unit);
 			break;
 		}
-		case 'undo':
+		case 'undo': //new location different range
 		{
 			map.undoLastMove();
+			refreshRender = true;
 			break;
 		}
 	}
 	updateUnitContextWindow(unit);
 	updateUnitInfoWindow(unit);
-	R.render(); //TODO partial rendering
+	R.render(p.row, p.col, r); //remove old range
+	if (refreshRender)
+	{
+		r = getRenderRange(unit); //probably different range
+		p = unit.getPos(); //undoLastMove changes location
+		R.render(p.row, p.col, r); //remove old range
+	}
 }
 
 function buildEquipmentWindow()
