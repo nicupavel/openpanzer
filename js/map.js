@@ -508,7 +508,7 @@ function Map()
 		{
 			if (!GameRules.canPassInto(this.map, unit, c[i]))
 			{
-				mr.isSurprised = true; //TODO no need unit can be set as surprised
+				unit.isSurprised = true;
 				mr.surpriseCell = c[i];
 				break;
 			}
@@ -533,8 +533,8 @@ function Map()
 		this.setMoveRange(unit); //if unit can still move put new range
 		this.setAttackRange(unit) //Put new attack range
 		
-		//If the unit hasn't spotted new units or was surprised allow undo
-		if (newSpotted == 0 && !mr.isSurprised)
+		//If the unit hasn't spotted new units or wasn't surprised allow undo
+		if (newSpotted == 0 && !unit.isSurprised)
 			lastMove.unit = unit;
 		else
 			lastMove.unit = null;

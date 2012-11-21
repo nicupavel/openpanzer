@@ -231,17 +231,16 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 {
 	var mr = moveAnimationCBData.moveResults;
 	var unit = moveAnimationCBData.unit;
-	var cell = mr.surpriseCell;
 	var r = getRenderRange(unit);
 	var p = unit.getPos();
 	
 	R.render(p.row, p.col, r);
 	
-	if (mr.isSurprised)
+	if (unit.isSurprised)
 	{
+		var cell = mr.surpriseCell;
 		var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, "Surprised !");
-		moveAnimationCBData.unit.isSurprised = true;
 		handleUnitAttack(moveAnimationCBData.unit, cell.row, cell.col); //TODO select which unit has surprised (air / ground)
 	}
 	if (mr.isVictorySide >= 0)

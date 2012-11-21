@@ -220,7 +220,6 @@ pathCell.prototype = new Cell();
 
 function movementResults()
 {
-	this.isSurprised = false;
 	this.surpriseCell = [];
 	this.isVictorySide = -1;
 	this.passedCells = [];
