@@ -194,7 +194,7 @@ GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
 //Sets spotting range for a unit returns number of new units spotted
 GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 {
-	if (!unit) return;
+	if (!unit) return 0;
 	
 	var p = unit.getPos();
 	var side = unit.player.side;
@@ -384,8 +384,8 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	var aTerrain = aHex.terrain;
 	var dTerrain = dHex.terrain;
 	
-	if (isAir(atkunit))	aTerrain == terrainType.Clear;
-	if (isAir(defunit))	dTerrain == terrainType.Clear;
+	if (isAir(atkunit)) aTerrain = terrainType.Clear;
+	if (isAir(defunit)) dTerrain = terrainType.Clear;
 	
 	//Infantry always dismounts when attacked
 	if (defunit.isMounted && !defunit.isSurprised && defunit.unitData(true).uclass == unitClass.infantry)
@@ -507,7 +507,7 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 		ddv += dData.rangedefmod >> 1;
 	}
 	//TODO Initiative
-	if (aData.initialive > dData.initiative)
+	if (aData.initiative > dData.initiative)
 		adv += 4;
 	
 	if (atkunit.isSurprised)
@@ -876,7 +876,7 @@ function isAir(unit)
 	if (unit === null) 
 		return false;
 		
-	ud = unit.unitData();
+	var ud = unit.unitData();
 	if (ud.movmethod == movMethod.air) 
 		return true; 
 		
@@ -889,7 +889,7 @@ function isSea(unit)
 	if (unit === null)
 		return false;
 		
-	ud = unit.unitData();
+	var ud = unit.unitData();
 	if((ud.movmethod == movMethod.deepnaval) ||
 	   (ud.movmethod == movMethod.naval) || 
 	   (ud.movmethod == movMethod.costal))
@@ -905,7 +905,7 @@ function isGround(unit)
 	if (unit === null)
 		return false;
 		
-	ud = unit.unitData();
+	var ud = unit.unitData();
 	if ((ud.movmethod <  movMethod.air) ||
 	    (ud.movmethod == movMethod.allTerrainTracked) ||
 	    (ud.movmethod == movMethod.amphibious) ||

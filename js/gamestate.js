@@ -19,6 +19,7 @@ function GameState(Game)
 
 	this.restore = function()
 	{
+		var player;
 		var m = restoreItem('openpanzer-map-'+VERSION);
 		var p = restoreItem('openpanzer-players-'+VERSION);
 		
@@ -30,7 +31,7 @@ function GameState(Game)
 		
 		var map = Game.map;
 		
-		for (i = 0; i < p.length; i++)
+		for (var i = 0; i < p.length; i++)
 		{
 			player = new Player();
 			player.copy(p[i]);
@@ -66,6 +67,8 @@ function GameState(Game)
 		//Restore player AI settings
 		for (var i = 0; i < s.isAI.length; i++)
 			uiSettings.isAI[i] = s.isAI[i];
+
+		return true;
 	}
 	
 	//Private functions

@@ -551,7 +551,7 @@ function Render(mapObj)
 		var loaded = 0;
 		var toLoad = Object.keys(imgList).length; //Size of the "hash"
 
-		for (i in imgList)
+		for (var i in imgList)
 		{
 			if (typeof imgUnits[imgList[i]] !== "undefined" )
 			{

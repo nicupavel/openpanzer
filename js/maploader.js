@@ -16,7 +16,7 @@ function MapLoader(Game)
 	
 	this.loadMap = function()
 	{
-		var xmlHtttp;
+		var xmlHttp;
 		
 		xmlHttp = new XMLHttpRequest();
 		xmlHttp.open("GET", Game.scenario, false);
@@ -83,6 +83,7 @@ function MapLoader(Game)
 		if (hexNodes) 
 		{
 			var hex = null;
+			var u = null;
 			var row, col, v;
 			for (var i = 0; i < hexNodes.length; i++) 
 			{
@@ -124,7 +125,7 @@ function MapLoader(Game)
 		}
 	}
 	
-	function loadUnit(node, hex)
+	function loadUnit(node)
 	{
 		//create the unit object
 		var unitId = node.getAttribute("id");

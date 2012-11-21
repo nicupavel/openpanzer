@@ -56,7 +56,7 @@ function UI(game)
 function handleMouseClick(e) 
 {
 	if (!game.gameStarted || game.gameEnded)
-		return;
+		return false;
 	
 	var minfo = getMouseInfo(canvas, e);
 	var cell = R.screenToCell(minfo.x, minfo.y);
@@ -168,7 +168,7 @@ function handleUnitDeselect()
 function handleUnitSelect(row, col)
 {
 	if (map.currentPlayer.type != playerType.humanLocal)
-		return;
+		return false;
 	
 	var hex = map.map[row][col];	
 	var unit = hex.getUnit(uiSettings.airMode)
@@ -177,7 +177,7 @@ function handleUnitSelect(row, col)
 	{
 		unit = hex.getUnit(!uiSettings.airMode); //try the other unit on hex
 		if (unit == null || unit.player.id != map.currentPlayer.id)
-			return;
+			return false;
 	}
 
 	//Select unit on equipment window (can't be in uiUnitSelect because will loop)
@@ -199,6 +199,8 @@ function uiUnitSelect(unit)
 	updateStatusBarLocation(p.row, p.col); //Display selected unit on status bar
 	var r = getRenderRange(unit);
 	R.render(p.row, p.col, r);
+
+	return true;
 }
 
 //handle the move of a unit to row,col destination
@@ -300,7 +302,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 	if (attackingUnit.destroyed) //TODO Do this better
 	{
 		map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-		R.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+		R.drawCursor(cpos); //refresh cursor or it gets stuck in attack cursor
 		R.addAnimation(cpos.row, cpos.col, "explosion");
 	}
 	else //Can we still attack ?
@@ -316,7 +318,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 		if (attackingUnit.destroyed) //TODO Do this better
 		{
 			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-			R.drawCursor(cpos, uiSettings.airMode); //refresh cursor or it gets stuck in attack cursor
+			R.drawCursor(cpos); //refresh cursor or it gets stuck in attack cursor
 			R.addAnimation(cpos.row, cpos.col, "explosion");
 		}
 		else
@@ -346,10 +348,10 @@ function uiAttackAnimationFinished(animationCBData)
 		pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
-	
+	//TODO not needed to render again unless we make rendering not show unit losses from start of combat
 	//TODO should check surviving unit getRenderRange since 
 	//it might have not moved and needs a bigger render range
-	R.render(cell.row, cell.col, 7);
+	//R.render(cell.row, cell.col, 7);
 	game.waitUIAnimation = false;
 	uiTurnInfo();
 }
@@ -1194,7 +1196,9 @@ function updateEquipmentCosts()
 
 function updateStatusBarLocation(row, col)
 {
+	var unit;
 	var hex = map.map[row][col];
+
 	if (!hex || typeof hex === "undefined")
 		return false;
 	var text = "";
@@ -1203,13 +1207,15 @@ function updateStatusBarLocation(row, col)
 	text = terrainNames[hex.terrain] + text + " (" + row + "," + col + ")";
 	if (hex.name !== null)
 		text = hex.name + " " + text;
-	if ((unit = hex.getUnit(uiSettings.airMode)) !== null 
+	if ((unit = hex.getUnit(uiSettings.airMode)) !== null
 		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 			|| unit.player.side == map.currentPlayer.side)) 
 	{
 		text = " Unit: " + unit.unitData(true).name + " " + text; 
 	}
 	$('locmsg').innerHTML = text;
+
+	return true;
 }
 //Simple function to list a unit in a graphical unit box returns a DOM object
 function uiAddUnitBox(parentTagName, unitData, withPrice)
@@ -1276,7 +1282,7 @@ function selectStartingUnit()
 	{
 		if (unitList[i].player.id == map.currentPlayer.id)
 		{
-			pos = unitList[i].getPos();
+			var pos = unitList[i].getPos();
 			handleUnitSelect(pos.row, pos.col);
 			updateUnitInfoWindow(unitList[i]);
 			break;

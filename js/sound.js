@@ -32,7 +32,7 @@
  [
  	"track",	//tracked 0
 	"htrack",	//halfTracked
-    "htrack",	//wheeled
+    	"htrack",	//wheeled
 	"leg", 		//leg
 	"leg",		//towed
 	"air",		//air
@@ -62,9 +62,9 @@
 	{ 
 		if (sound)
 		{	
-            //requires audio to be preloaded
-            try { sound.currentTime = 0; } catch(e) {}; //restart if already playing
-            return sound.play(); 
+        		//requires audio to be preloaded
+			try { sound.currentTime = 0; } catch(e) {}; //restart if already playing
+			return sound.play();
 		}
 	}
  }

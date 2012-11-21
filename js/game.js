@@ -135,7 +135,7 @@ function Game()
 			}
 			case actionType.attack:
 			{
-				if (game.ui.uiUnitAttack(p[0], p[1], false))
+				if (game.ui.uiUnitAttack(p[0], p[1]))
 				{
 					game.ui.uiSetUnitOnViewPort(p[0]);
 					game.waitUIAnimation = true;
@@ -216,8 +216,7 @@ function gameStart()
 /*
 var rng = Math.round(Math.random() * (scenariolist.length - 1))
 var scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
-console.log("Number: " + rng + " Scenario:" + scenario);
 */
-scenario = "resources/scenarios/xml/tutorial.xml";
+var scenario = "resources/scenarios/xml/tutorial.xml";
 game.init(scenario);
 }

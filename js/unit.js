@@ -59,7 +59,7 @@ function Unit(equipmentID)
 	//Privileged Methods that access private properties/methods
 	this.setHex = function(h) { hex = h; }
 	this.getHex = function() { return hex; }
-	this.getPos = function() { if (hex !== null) return hex.getPos(); };
+	this.getPos = function() { if (hex === null) return null; return hex.getPos(); };
 	
 	//Private Methods and Properties
 	var hex = null; //The hex that this unit is on

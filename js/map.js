@@ -693,7 +693,7 @@ function Map()
 		var hexSide = this.getPlayer(hex.owner).side;
 
 		if (hexSide == player.side)
-			return;
+			return false;
 			
 		hex.owner = player.id;
 		if (hex.flag != -1) //Secondary Objective
