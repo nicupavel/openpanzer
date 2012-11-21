@@ -94,7 +94,7 @@ for line in f:
 
 # build the loader for condensed equipment js mapping key order from dictionary to array index
 jsloader = "\nvar equipment = {};\n"
-jsloader += "for (i in equipment_condensed)\n"
+jsloader += "for (var i in equipment_condensed)\n"
 jsloader += "{\n"
 jsloader +="\tvar ud = {};\n"
 jsloader +="\tvar e = equipment_condensed[i];\n"
