@@ -1,5 +1,5 @@
 /**
- * UI - handles mouse and dialog boxes
+ * UI - handles ui actions
  *
  * http://www.linuxconsulting.ro
  * http://openpanzer.net
@@ -125,8 +125,7 @@ function handleMouseClick(e)
 	uiSettings.airMode = GameRules.isAir(map.currentUnit);
 	toggleButton($('air'), uiSettings.airMode);
 	updateUnitContextWindow(map.currentUnit);
-	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions	
-	//TODO partial screen updates (can update only attack or move selected hexes)
+	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions
 }
 
 function handleMouseMove(e) 
@@ -472,7 +471,12 @@ function buildStartMenu()
 		div.innerHTML = settings[b][1];
 		var img = addTag(div, 'img');
 		img.id = settings[b][0];
-		img.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+
+		if (uiSettings[settings[b][0]])
+			img.src = "resources/ui/dialogs/startmenu/images/checkbox-checked.png";
+		else
+			img.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+
 		img.onclick = function() { uiSettings[this.id] = !uiSettings[this.id]; toggleCheckbox(this); console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]); }
 	}
 	$('smSetOkBut').onclick = function() 
