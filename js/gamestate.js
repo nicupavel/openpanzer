@@ -37,8 +37,8 @@ function GameState(Game)
 			player.copy(p[i]);
 			map.addPlayer(player);
 		}	
-		map.copy(m);	
-		
+		map.copy(m);
+
 		return true;
 	}
 
@@ -48,6 +48,22 @@ function GameState(Game)
 		deleteItem('openpanzer-players-'+VERSION);
 	}
 
+	//Save campaign settings
+	this.saveCampaign = function()
+	{
+		if (Game.campaign !== null)
+			saveItem('openpanzer-campaign-'+VERSION, Game.campaign.id);
+	}
+	
+	this.restoreCampaign = function()
+	{
+		//Set campaign index
+		var c = restoreItem('openpanzer-campaign-'+VERSION);
+		if (c === null)
+			return -1;
+		return c;
+	}
+	
 	//Saves only the user settings
 	this.saveSettings = function()
 	{
