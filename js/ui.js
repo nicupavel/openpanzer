@@ -20,6 +20,8 @@ function UI(game)
 	};
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
+	var scenarioPath = "resources/scenarios/xml/";
+
 	var map = game.map;
 	var R = new Render(map);
 	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
@@ -52,7 +54,7 @@ function UI(game)
 	buildEquipmentWindow();
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Bring up the mainmenu
-	
+
 function handleMouseClick(e) 
 {
 	if (!game.gameStarted || game.gameEnded)
@@ -369,30 +371,77 @@ function uiAttackInfo(atkunit, defunit)
 function buildStartMenu()
 {
 	//menu buttons divs with id, title the image filename from resources/ui/startmenu/images
-	var menubuttons = [["newscenario", "New Scenario"], ["continuegame", "Continue Game"], ["settings", "Settings"], ["help", "Help"]];
+	var menubuttons = [["newcampaign", "New Campaign"], ["newscenario", "New Scenario"], ["settings", "Settings"], ["help", "Help"], ["continuegame", "Continue Game"]];
 	//Settings with key in uiSettings and Title
 	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War"],
 			["markOwnUnits", "Mark own units on map"], ["markEnemyUnits", "Mark enemy units on map"]];
 	var imgres = "resources/ui/dialogs/startmenu/images/";
-	
+
+	var i, b, div, img;
+
 	//Add main buttons
-	for (var b = 0; b < menubuttons.length; b++) 
+	for (b = 0; b < menubuttons.length; b++)
 	{
-		var div = addTag('smButtons', 'div');
-		var img = addTag(div, 'img');
+		div = addTag('smButtons', 'div');
+		img = addTag(div, 'img');
 		div.id = menubuttons[b][0];
 		div.title = menubuttons[b][1];
 		div.className = "smMainButton";
 		img.src = "resources/ui/dialogs/startmenu/images/" + div.id + ".png";
 		div.onclick = function() { startMenuButton(this.id); }
 	}
-	
+	//Odd number of buttons center last one
+	if (menubuttons.length % 2)
+		div.className = "smMainButtonCenter"
+
 	$('smLogoText').innerHTML = "version " + VERSION;
-	$('smCredits').innerHTML = "Copyright 2012 <a href='http://linuxconsulting.ro/openpanzer'>Nicu Pavel</a>";	
+	$('smCredits').innerHTML = "Copyright 2012 <a href='http://linuxconsulting.ro/openpanzer'>Nicu Pavel</a>";
+
+	//Add new campaign options (campaign list, description)
+	var camSel = addTag('smCampSel', 'select')
+	for (i = 0; i < campaignlist.length; i++)
+	{
+		var camOpt = addTag(camSel, 'option');
+		camOpt.value = i;
+		camOpt.text = campaignlist[i]['title'];
+	}
+	camSel.onchange = function()
+	{
+		var v = this.options[this.selectedIndex].value;
+		$('smCampDesc').innerHTML = campaignlist[v].desc;
+		$('smCampPlayers').innerHTML = "<br/><br/>" +
+			"Campaign will be played as: " + countryNames[campaignlist[v].flag] + "<br/>" +
+			"Scenarios in this campaign: " + campaignlist[v].scenarios + "<br/>" +
+			"Starting prestige for player: " + campaignlist[v].prestige + currencyIcon;
+
+		$('smCamp').selectedCampaign = v; //save index to campaign from campaignlist //TODO move to userSel
+	}
+	$('smCBackBut').onclick = function()
+	{
+		makeHidden('smCamp');
+		makeVisible('smMain');
+	}
+	$('smCPlayBut').onclick = function()
+	{
+		var s = $('smCamp').selectedCampaign;
+		if (!s)	return;
+		console.log("Starting Campaign %s", s);
+		game.newCampaign(s);
+		makeHidden('smCamp');
+		makeHidden('startmenu');
+		toggleButton($('options'), false);
+		game.state.saveSettings();
+	}
+	/* Campaign debug button */
+	$('smCV').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("victory"); }
+	$('smCVB').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("briliant"); }
+	$('smCVT').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("tactical"); }
+	$('smCL').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("lose"); }
 	
+
 	//Add new scenario options(scenario list, description, players)
 	var scnSel = addTag('smScenSel', 'select');
-	for (var i = 0; i < scenariolist.length; i++)
+	for (i = 0; i < scenariolist.length; i++)
 	{
 		var scnOpt = addTag(scnSel, 'option');
 		scnOpt.value = i;
@@ -443,18 +492,18 @@ function buildStartMenu()
 						}
 				}
 			}
-			$('smScen').selectedScenario = "resources/scenarios/xml/" + scenariolist[v][0];
+			$('smScen').selectedScenario = v; //TODO move to userSel
 		}
-	$('smBackBut').onclick = function() 
+	$('smSBackBut').onclick = function()
 		{ 
 			makeHidden('smScen');
 			makeVisible('smMain');
 		}
-	$('smPlayBut').onclick = function() 
+	$('smSPlayBut').onclick = function()
 		{ 
 			var s = $('smScen').selectedScenario;
 			if (!s)	return;
-			newScenario(s);
+			newScenario(scenariolist[s][0], scenariolist[s][2]);
 			makeHidden('smScen');
 			makeHidden('startmenu');
 			toggleButton($('options'), false);
@@ -491,22 +540,23 @@ function startMenuButton(id)
 {
 	switch(id) 
 	{
+		case 'newcampaign':
+		{
+			makeHidden('smMain');
+			makeVisible('smCamp');
+			//Make the current campaign selected
+			if (game.campaign === null) //Select first campaign in list
+				setSelectOption($('smCampSel').firstChild, $('smCampSel').firstChild.options[0].text);
+			else //Select saved campaign
+				setSelectOption($('smCampSel').firstChild, game.campaign.name);
+			break;
+		}
 		case 'newscenario':
 		{
 			makeHidden('smMain');
 			makeVisible('smScen');
 			//Make the current scenarion selected
-			var s = $('smScenSel').firstChild;
-			var o = s.options;
-			for (var i = 0; i < o.length; i++)
-			{
-				o[i].selected = false;
-				if (o[i].text === map.name)
-				{
-					o[i].selected = true;
-					s.onchange();
-				}
-			}
+			setSelectOption($('smScenSel').firstChild, map.name);
 			break;
 		}
 		case 'continuegame':
@@ -891,7 +941,7 @@ function unitContextButton(action, unit)
 	{
 		r = getRenderRange(unit); //probably different range
 		p = unit.getPos(); //undoLastMove changes location
-		R.render(p.row, p.col, r); //remove old range
+		R.render(p.row, p.col, r); //render new range changes
 	}
 }
 
@@ -1237,12 +1287,15 @@ function uiAddUnitBox(parentTagName, unitData, withPrice)
 	return div;
 }
 
+this.uiMessage = function(title, message) { return uiMessage(title, message); }
 function uiMessage(title, message)
 {
 	$('title').innerHTML = title;
 	$('message').innerHTML = message;
 	makeVisible('ui-message');
-	$('uiokbut').onclick = function() { makeHidden('ui-message'); }
+	//TODO change to an event
+	game.uiMessageClicked = false;
+	$('uiokbut').onclick = function() { makeHidden('ui-message'); game.uiMessageClicked = true; }
 }
 
 this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
@@ -1294,8 +1347,10 @@ function selectStartingUnit()
 	}
 }
 
-function newScenario(scenario)
+this.newScenario = function(scenData) { return newScenario(scenData.scenario, scenData.intro); }
+function newScenario(scenario, introText)
 {
+	scenario = scenarioPath + scenario;
 	game.newScenario(scenario);
 	map = game.map;
 	R.setNewMap(map);
@@ -1308,6 +1363,7 @@ function newScenario(scenario)
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
 	uiTurnInfo();
+	uiMessage(map.name, introText);
 }
 
 function getMouseInfo(canvas, e)

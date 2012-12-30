@@ -8,34 +8,45 @@
  * Licensed under the GPL license:
  * http://www.gnu.org/licenses/gpl.html
  */
-function testev(param) { console.log(param); }
+
+/*function testev(param) { console.log(param); }*/
+
 var game = new Game();
 function Game()
 {
 	this.map = null;
 	this.ui = null;
 	this.state = null;
-	this.scenario = ""; 
-	this.gameStarted = false;
-	this.gameEnded = false;
-	this.waitUIAnimation = false;
+	this.campaign = null;
+	this.scenario = "";
+
+	this.gameStarted = false; //Game not yet fully initialised
+	this.gameEnded = false; //Game ended in victory or defeat
+	this.waitUIAnimation = false; //Wait for animation to finish before processing next AI action
 	this.spotSide = -1; //currently visible side on map
+	this.uiMessageClicked = false; //set to true when user clicks ok on uiMessage window //TODO change to event
 
 	//EventHandler.addEvent("AttackAnimation");
 	//EventHandler.addListener("AttackAnimation", testev, this);
 
 	var loader = new MapLoader(this);
-	var players = [];
 	var localPlayingSide = -1; //Which player side plays locally on this computer
+	var campaignCountry = -1; //This country plays campaign locally
+	var campaignPlayer = null; //Player that plays campaign locally
+	var savedPlayer = null; //Saved copy of the campaign player
+	var needScenarioLoad = false; //If a new scenario should be loaded durring campaign progress
+	var scenData = null; //Scenario data for the next campaign scenario
 
-	this.init = function(scenario)
+	this.init = function()
 	{
 		this.map = new Map();
 		this.state = new GameState(this);
-		this.scenario = scenario;
+		this.scenario = Game.defaultScenario;
 
 		if (!this.state.restore())
 			loader.loadMap();
+
+		setupPlayers(this.map);
 
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
@@ -51,6 +62,8 @@ function Game()
 	{ 
 		if (!game.gameStarted || this.gameEnded)
 			return;
+		if (scenData !== null && needScenarioLoad && game.uiMessageClicked) //Load next scenario in campaign chain
+			game.ui.newScenario(scenData);
 		if (game.map.currentPlayer.type != playerType.aiLocal)
 			return;
 		console.log("Processing ..."); 
@@ -87,7 +100,15 @@ function Game()
 			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.map.maxTurns))
 			{
 				console.log("Defeat turn:" + this.map.turn);
-				this.gameEnded = true;
+				//If in a compaign set the campaign outcome to lost and get next available scenario
+				if (this.campaign !== null)
+				{
+					this.continueCampaign("lose");
+				}
+				else //If single scenario game has ended
+				{
+					this.gameEnded = true;
+				}
 				return;
 			}
 		}
@@ -104,10 +125,52 @@ function Game()
 		this.map = new Map();
 		this.state.clear();
 		loader.loadMap();
-		this.gameStarted = true;
-		this.gameEnded = false;	
+		setupPlayers(this.map);
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
+
+		this.gameStarted = true;
+		this.gameEnded = false;
+
+		needScenarioLoad = false;
+		scenData = null;
+	}
+
+	this.newCampaign = function(campIndex)
+	{
+		this.campaign = new Campaign(campIndex);
+		campaignCountry = this.campaign.country;
+		savedPlayer = null;
+		//Start the first scenario
+		var scenData = this.campaign.getCurrentScenario();
+		console.log("Starting campaign %s with scenario %s", this.campaign.name, scenData.scenario);
+		this.ui.newScenario(scenData); //This calls this.newScenario() and setups players
+		campaignPlayer.prestige = this.campaign.startprestige;
+
+	}
+	
+	this.continueCampaign = function(outcomeType)
+	{
+		//Add prestige for finishing scenario
+		campaignPlayer.prestige += this.campaign.getOutcomePrestige(outcomeType);
+		//Save campaign player
+		savedPlayer.copy(campaignPlayer);
+		console.log(campaignPlayer);
+
+		var outcomeText = this.campaign.getOutcomeText(outcomeType);
+		scenData = this.campaign.loadNextScenario(outcomeType);
+		if (scenData == null)
+		{
+			this.ui.uiMessage("Campaign Finished", outcomeText);
+			this.gameEnded = true;
+		}
+		else
+		{
+			this.ui.uiMessage(outcomeType + " victory !", outcomeText);
+			needScenarioLoad = true; //Wait for user to click to continue to next scenario
+		}
+		this.state.saveCampaign();
+
 	}
 	
 	this.setCurrentSide = function()
@@ -116,6 +179,51 @@ function Game()
 			this.spotSide = this.map.currentPlayer.side;
 		else
 			this.spotSide = localPlayingSide;
+	}
+
+	//Set AI, Network or campaign for players. Local player is the default value
+	function setupPlayers(map)
+	{
+		var i;
+		var players = map.getPlayers();
+
+		if (players === null)
+			return false;
+		for (i = 0; i < players.length; i++)
+		{
+			if (campaignCountry != -1) //Campaign mode
+			{
+				//Assign AI players if not campaign playing country
+				if (players[i].country != campaignCountry)
+				{
+					players[i].type = playerType.aiLocal;
+					players[i].handler = new AI(players[i], map);
+				}
+				else //Copy or load the local player for campaign progress (should be only 1 or hell breaks lose see copy)
+				{
+					campaignPlayer = players[i]; //save a reference
+
+					if (savedPlayer === null) //Campaign just started save player from scenario settings
+					{
+						savedPlayer = new Player();
+						savedPlayer.copy(players[i]);
+					}
+					else //Campaign in progress restore saved instance
+					{
+						players[i].copy(savedPlayer);
+					}
+				}
+			}
+			else //Scenarion mode
+			{
+				if (uiSettings.isAI[players[i].id])
+				{
+					players[i].type = playerType.aiLocal;
+					players[i].handler = new AI(players[i], map);
+				}
+			}
+		}
+		return true;
 	}
 
 	function processAction(game, action)
@@ -211,12 +319,13 @@ function Game()
 	}
 }
 
+Game.defaultScenario = "resources/scenarios/xml/tutorial.xml";
+
 function gameStart()
 {
 /*
 var rng = Math.round(Math.random() * (scenariolist.length - 1))
 var scenario = "resources/scenarios/xml/" +  scenariolist[rng][0];
 */
-var scenario = "resources/scenarios/xml/tutorial.xml";
-game.init(scenario);
+game.init();
 }
