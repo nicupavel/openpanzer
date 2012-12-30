@@ -1,0 +1,266 @@
+[
+ {
+  "id": 0, 
+  "intro": "Herr General, we have underestimated the Bolsheviks' powers of resistance. They have crossed the Don and completely encircled Sixth Army. You must drive on Kletskaya and Serafimov to reestablish contact. We will never, never surrender to the Red Army, but in order for us to hold our position, you must prevail. Good Luck.", 
+  "outcome": {
+   "briliant": {
+    "goto": 1, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1000, 
+    "text": "Congratulations, Herr General.  Your troops have successfully cleared a corridor to our comrades in Sixth Army. We will be able to continue to send reinforcements and supplies to our brave men.  Bravo."
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, this is a disaster! Sixth Army is entirely lost to us.  Though this situation is not totally of your making, your career is obviously finished. You are dismissed."
+   }, 
+   "tactical": {
+    "goto": 1, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Congratulations, Herr General. Your troops have successfully cleared a corridor to our comrades in Sixth Army. We will be able to continue to send reinforcements and supplies to our brave men. Bravo."
+   }, 
+   "victory": {
+    "goto": 1, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Congratulations, Herr General. Your troops have successfully cleared a corridor to our comrades in Sixth Army. We will be able to continue to send reinforcements and supplies to our brave men. Bravo."
+   }
+  }, 
+  "scenario": "winter.xml", 
+  "startprestige": 0
+ }, 
+ {
+  "id": 1, 
+  "intro": "Herr General, as you know the Kursk Salient poses a serious threat to us. To reduce this salient and restore the integrity of our line, we will attack from the north and south, pocket, and then crush the enemy trapped inside. You and your command will lead the northern thrust of our offensive. You must penetrate as far as the town of Prokhorovka. Good Luck. ", 
+  "outcome": {
+   "briliant": {
+    "goto": 2, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1000, 
+    "text": "You have dealt the Red Army a crippling blow. With our line shortened, we will be able to transfer a large number of  troops to Feldmarschall von Paulus at Stalingrad. Superlative work, Herr General."
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, we have broken our teeth on the enemy defenses. The Bolsheviks are counterattacking all along our front. Army Group South has been shaken and must give ground. General Hoth will be assuming your duties. That is all."
+   }, 
+   "tactical": {
+    "goto": 2, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "You have dealt the Red Army a severe blow. With our line shortened, we will be able to transfer some troops to Feldmarschall von Paulus at Stalingrad. Good work, Herr General."
+   }, 
+   "victory": {
+    "goto": 2, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "You have dealt the Red Army a severe blow. With our line shortened, we will be able to transfer some troops to Feldmarschall von Paulus at Stalingrad. Good work, Herr General."
+   }
+  }, 
+  "scenario": "prok1.xml", 
+  "startprestige": 0
+ }, 
+ {
+  "id": 2, 
+  "intro": "Herr General, you already know that the enemy has launched an amphibious operation south of Naples, near Salerno. The terrain in this part of Italy is hilly and rugged, and we have been able to contain the enemy beachhead thus far. It is of critical importance that the Americans and British are not allowed to gain a foothold on the continent. We are relying on you and your crack troops to throw the enemy into the sea. Failure here is not an option.", 
+  "outcome": {
+   "briliant": {
+    "goto": 3, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1000, 
+    "text": "Herr General, once again you and your courageous men have kept us from the brink of disaster. Italy remains firmly in our camp, and the invaders have been forced out of Salerno. The Fatherland owes you a great debt."
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, I am sorry that the sacrifices of your fine troops have been in vain. Italy has  capitulated to the Allies, and we must fall back quickly or face annihilation. You have been ordered to Berlin. I do not envy your reception there."
+   }, 
+   "tactical": {
+    "goto": 3, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Herr General, once again you and your courageous men have kept us from the brink of disaster. The invaders have been forced out of Salerno. The Fatherland owes you a great debt.  "
+   }, 
+   "victory": {
+    "goto": 3, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Herr General, once again you and your courageous men have kept us from the brink of disaster. The invaders have been forced out of Salerno. The Fatherland owes you a great debt.  "
+   }
+  }, 
+  "scenario": "antisal.xml", 
+  "startprestige": 0
+ }, 
+ {
+  "id": 3, 
+  "intro": "Ja Wolfgang, I was as surprised as you that they chose Normandy.... Ah, Herr General, come in. Allow me to explain the present situation. We have a chance to drive the Allies back into the sea, here, near Caen. I will not pretend that this will be an easy task, but you have shown yourself to be a most resourceful fellow time and time again, ja? You will need all your skill to wrest a victory here. Our thoughts are with you. Ja, As I was saying, Wolfgang.... ", 
+  "outcome": {
+   "briliant": {
+    "goto": 4, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1000, 
+    "text": "Excellent! Despite the fact the enemy have managed to force their way inland at other points, you have swept all before you. And because of this blow you have dealt them, the Allies will not be able to take advantage of their successes elsewhere. It is unfortunate that we do not have more like you, Herr General. "
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, I am sorry that the sacrifice of your fine troops have been in vain.  You have been ordered to Berlin.  I do not envy your reception there."
+   }, 
+   "tactical": {
+    "goto": 4, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Very good! Despite the fact the enemy has managed to force their way inland at other points, you have swept all before you. And because of this blow you have dealt them, the Allies will not be able to take advantage of their successes elsewhere. You have done very well, Herr General."
+   }, 
+   "victory": {
+    "goto": 4, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Very good! Despite the fact the enemy has managed to force their way inland at other points, you have swept all before you. And because of this blow you have dealt them, the Allies will not be able to take advantage of their successes elsewhere. You have done very well, Herr General."
+   }
+  }, 
+  "scenario": "gcaen.xml", 
+  "startprestige": 0
+ }, 
+ {
+  "id": 4, 
+  "intro": "Herr General, we have an excellent opportunity to deliver a crushing blow to the enemy, here, north of Strasbourg. As you can see, the advance of the American Third Army has left this sector of \r\ntheir front inadequately defended. If you can knife through to Strasbourg, the Americans and British will be forced to halt their drive on the Fatherland. Good luck.\r\n", 
+  "outcome": {
+   "briliant": {
+    "goto": 5, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1000, 
+    "text": "Herr General, your thrust to Strasbourg will be used as a textbook example of offensive maneuver. This lightning blow has changed the course of the war in the west.  Outstanding."
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "The Americans and British have pushed us back across the Rhine. We no longer have the strength to halt them. All that is left for the fatherland is defeat and disgrace. But you have already experienced that. Haven't you, Herr General?"
+   }, 
+   "tactical": {
+    "goto": 5, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Herr General, your thrust to Strasbourg will be used as a textbook example of offensive maneuver. This lightning blow, you have changed the course of the war in the west. Outstanding."
+   }, 
+   "victory": {
+    "goto": 5, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 1500, 
+    "text": "Herr General, your thrust to Strasbourg will be used as a textbook example of offensive maneuver. This lightning blow, you have changed the course of the war in the west. Outstanding."
+   }
+  }, 
+  "scenario": "nordwind.xml", 
+  "startprestige": 0
+ }, 
+ {
+  "id": 5, 
+  "intro": "Herr General, I know that you and your men have not had time even to catch a breath, but the situation here is critical. Buda-Pest is besieged by the Bolsheviks. Your troops must force their way into the city. It is doubtful that our Hungarian allies will continue to fight if Buda-Pest falls. If you can drive the Reds into the Danube, we may stop the Russian Bear from consuming us.", 
+  "outcome": {
+   "briliant": {
+    "goto": 254, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "The Russians are dazed and reeling from the blows you and your brave men have delivered! Not only did you succeed in relieving Buda-Pest, you drove the Reds back across the Danube. Herr General, diplomatic representatives of Germany and the Soviet Union are meeting even as we speak... Your string of victories here, and in the west, are unparalleled. You are to return home to a grateful nation."
+   }, 
+   "lose": {
+    "goto": 255, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "It was hoped that you would once again snatch victory from defeat. But it was not to be. The Wehrmacht is a spent force, unable even to slow the Russian Bear.  I advise you to fight your way to the west, Herr General. The Reds are not known for their hospitality to guests."
+   }, 
+   "tactical": {
+    "goto": 254, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, diplomatic representatives of Germany and the Soviet Union are meeting even as we speak... Your string of victories here, and in the west, are unparalleled.... You are to return home to a grateful nation."
+   }, 
+   "victory": {
+    "goto": 254, 
+    "gotoplayed": [
+     0, 
+     0
+    ], 
+    "prestige": 0, 
+    "text": "Herr General, diplomatic representatives of Germany and the Soviet Union are meeting even as we speak... Your string of victories here, and in the west, are unparalleled.... You are to return home to a grateful nation."
+   }
+  }, 
+  "scenario": "konrad.xml", 
+  "startprestige": 0
+ }
+]
