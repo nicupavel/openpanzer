@@ -21,10 +21,13 @@ function Player()
 	this.type = playerType.humanLocal;
 	this.handler = null;
 	this.deploymentList = [];
+	this.coreUnitList = []; //Core units obtained during campaign
 }
 //Player Object Public Methods
 Player.prototype.copy = function(p)
 {
+	var i;
+
 	if (p === null) return;
 	this.id = p.id;
 	this.side = p.side;
@@ -33,9 +36,16 @@ Player.prototype.copy = function(p)
 	this.playedTurn = p.playedTurn;
 	this.type = p.type;
 	this.deploymentList = [];
+	this.coreUnitList = [];
+
 	if (p.deploymentList)
-		for (var i = 0; i < p.deploymentList.length; i++)
+		for (i = 0; i < p.deploymentList.length; i++)
 			this.deploymentList.push(p.deploymentList[i]);
+
+	if (p.coreUnitList)
+		for (i = 0; i < p.coreUnitList.length; i++)
+			this.coreUnitList.push(p.coreUnitList[i]);
+
 }
 Player.prototype.getCountryName = function() { return countryNames[this.country]; }
 Player.prototype.getSideName = function() { return sideNames[this.side]; }
