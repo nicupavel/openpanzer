@@ -52,7 +52,7 @@ odict = {}
 olist = [];
 # a dictionary with all values from the SuitePG2 exported csv
 unitdict = dict.fromkeys(unitkeys)
-# final equipment dictionary hash of hash results in a big dile > 300k
+# final equipment dictionary hash of hash results in a big file > 300k
 eqdict = {}
 # final equipment dictionary using the hash of list as alternative to the above hash
 eqcdict = {}
