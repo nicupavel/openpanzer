@@ -177,17 +177,17 @@ var prestigeGains =
 //Holds the settings for the game ui and renderer
 var uiSettings = 
 {
-	airMode:false, //flag used to select between overlapping ground/air units
-	mapZoom:false, //flag used to draw map in zoomed mode or not
-	hexGrid:false, // flag to notify render if it should draw or not hex grid
-	deployMode:false, //used for unit deployment
-	markOwnUnits: false, //To visually mark own units on map
-	markEnemyUnits: false, //To visually mark enemy units on map
-	markFOW: false, //Make Fog Of War visible
-	hasTouch: hasTouch(), //Automatically detected if device has touch controller
-	use3D: false, //use transform3d/translate3d functions for animations
-	useRetina: false, //don't scale on retina displays devicePixelRatio > 1
-	isAI: [0, 0, 0, 0], //which player is played by AI 
+	airMode:false,		//flag used to select between overlapping ground/air units
+	mapZoom:false,		//flag used to draw map in zoomed mode or not
+	hexGrid:false,		// flag to notify render if it should draw or not hex grid
+	deployMode:false,	//used for unit deployment
+	markOwnUnits: false, 	//To visually mark own units on map
+	markEnemyUnits: false,	//To visually mark enemy units on map
+	markFOW: false, 	//Make Fog Of War visible
+	hasTouch: hasTouch(),	//Automatically detected if device has touch controller
+	use3D: false,		//use transform3d/translate3d functions for animations
+	useRetina: false,	//don't scale on retina displays devicePixelRatio > 1
+	isAI: [0, 0, 0, 0],	//which player is played by AI
 };
 	
 function Cell(row, col)
@@ -258,4 +258,3 @@ function screenPos(x, y)
 var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
 var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
 var VERSION = "2.2";
-var WITH_AI = true; //If we should assign a AI player for testing
