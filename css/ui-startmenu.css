@@ -29,6 +29,7 @@
 	height: 300px; 
 }
 
+#smCamp { display: none; }
 #smScen { display: none; }
 #smSettings { display: none; padding-top: 10px;}
 
@@ -57,10 +58,22 @@
 }
 .setting > img { float: right; }
 
+#smButtons /* container of big main buttons */
+{
+    width: 266px;
+    height: 180px;
+    margin:0px auto 0px auto;
+}
+
 .smMainButton  /* the big main buttons */
 {
-    margin:0px auto 0px auto;
     width:133px;
+    float: left;
+}
+.smMainButtonCenter  /* the big main buttons */
+{
+    width:133px;
+    margin:0px auto 0px auto;
 }
 
 .smSmallButton /* the small ok/close div buttons at the bottom*/
@@ -75,11 +88,12 @@
 }
 
 /* small buttons */
-#smBackBut { background-image: url('../resources/ui/buttons/close.png'); right: 50px; }
-#smPlayBut { background-image: url('../resources/ui/buttons/ok.png'); right: 5px;}
+#smSBackBut, #smCBackBut { background-image: url('../resources/ui/buttons/close.png'); right: 50px; }
+#smSPlayBut, #smCPlayBut { background-image: url('../resources/ui/buttons/ok.png'); right: 5px;}
 #smSetOkBut {background-image: url('../resources/ui/buttons/ok.png'); right: 5px;}
 
-#smScenSel /*Scenario selection div */
+/*#smScenSel *//*Scenario selection div */
+.smSelect
 {
 	width: 460px;
 	margin: 0px auto 0px auto;
@@ -87,7 +101,8 @@
 	background: url('../resources/ui/dialogs/startmenu/images/arrow-down.png') no-repeat right;
 	overflow: hidden; /* to hide the select widget arrow */
 }
-#smScenSel select
+/*#smScenSel select*/
+.smSelect select
 {
 	background: transparent;
 	font-size: 14px;
@@ -97,12 +112,14 @@
 	height: 35px;
 	border: 0px;
 }
-#smScenSel option
+/*#smScenSel option*/
+.smSelect option
 {
 	background-color: #5b5b5b;	
 }
 
-#smScenDesc /* Scenario description div */
+/*#smScenDesc *//* Scenario description div */
+.smDesc
 {
 	padding-top: 10px;
 	width: 460px;
@@ -156,11 +173,11 @@
 
 .playerCountry  /* the country flag for player selection */
 {
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	height: 14px;
 	width: 22px;
 	background-image: url('../resources/ui/flags/flags_med.png');
 	background-repeat: no-repeat;
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
-	float: left;
+	/*float: left;*/
 }
