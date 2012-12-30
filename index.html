@@ -12,7 +12,8 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="resources/ui/page/icon/icon-144x144.png" />
 	<script src="js/dom.js"></script>
 	<script src="js/prototypes.js"></script>
-	<script src="js/scenarios.js"></script>
+    <script src="js/campaigns.js"></script>
+    <script src="js/scenarios.js"></script>
 	<script src="js/eventhandler.js"></script>
 	<script src="js/ai.js"></script>
 	<script src="js/style.js"></script>
@@ -26,6 +27,7 @@
 	<script src="js/map.js"></script>
 	<script src="js/maploader.js"></script>
 	<script src="js/render.js"></script>
+    <script src="js/campaign.js"></script>
 	<script src="js/ui.js"></script>
 	<script src="js/game.js"></script>
 	<link href="css/ui.css" rel="stylesheet" type="text/css">
@@ -38,18 +40,31 @@
 			<div id="smButtons"></div>
 			<div id="smCredits"></div>
 		</div>
+        <div id="smCamp" class="mainPanel">
+            <div id="smCampSel" class="smSelect"></div>
+            <div id="smCampDesc" class="smDesc"></div>
+            <div id="smCampPlayers"></div>
+            <div id="smCampButtons">
+                <div class="smSmallButton" id="smCPlayBut"></div>
+                <div class="smSmallButton" id="smCBackBut"></div>
+                <!-- Campaign debug buttons -->
+                <div style="float: left" id="smCVB">[Briliant Victory]</div>
+                <div style="float: left" id="smCV">[Normal Victory]</div>
+                <div style="float: left" id="smCVT">[Tactical Victory]</div>
+                <div style="float: left" id="smCL">[Lose]</div>
+            </div>
+        </div>
 		<div id="smScen" class="mainPanel">
-			<div id="smScenSel"></div>
-			<div id="smScenDesc"></div>
+			<div id="smScenSel" class="smSelect"></div>
+			<div id="smScenDesc" class="smDesc"></div>
 			<div id="smScenPlayers">
 				<div id="smSide0"></div>
 				<div id="smVS"></div>
 				<div id="smSide1"></div>
 			</div>
 			<div id="smScenButtons">
-				<div class="smSmallButton" id="smPlayBut"></div>
-				<div class="smSmallButton" id="smBackBut"></div>
-				
+				<div class="smSmallButton" id="smSPlayBut"></div>
+				<div class="smSmallButton" id="smSBackBut"></div>
 			</div>
 		</div>
 		<div id="smSettings" class="mainPanel">
