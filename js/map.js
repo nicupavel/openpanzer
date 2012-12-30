@@ -284,12 +284,6 @@ function Map()
 	this.addPlayer = function(player) 
 	{ 
 		playerList.push(player);
-		
-		if (WITH_AI && uiSettings.isAI[player.id]) 
-		{
-			player.type = playerType.aiLocal;
-			player.handler = new AI(player, this);
-		}
 		if  (this.currentPlayer === null) this.currentPlayer = playerList[0];
 	}
 	
