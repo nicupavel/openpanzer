@@ -67,6 +67,24 @@ function clearTag(tag)
 	while (t && t.hasChildNodes()) 
     	t.removeChild(t.lastChild);
 }
+
+//set current option of a select element by matching string
+function setSelectOption(e, str)
+{
+	var o = e.options;
+	for (var i = 0; i < o.length; i++)
+	{
+		o[i].selected = false; //deselect option
+		if (o[i].text === str)
+		{
+			o[i].selected = true;
+			e.onchange(); //Call the onchange() function
+			return true;
+		}
+	}
+	return false;
+}
+
 //Taken from http://modernizr.github.com/Modernizr/touch.html
 function hasTouch()
 {
