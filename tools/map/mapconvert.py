@@ -2,6 +2,8 @@
 #Copyright 2012 Nicu Pavel <npavel@mini-box.com>
 #Licensed under GPLv2
 
+# Exports a Panzer General 2 scenario (SCN) to xml
+
 import os, sys
 import pprint
 from struct import *
