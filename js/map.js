@@ -82,7 +82,7 @@ Player.prototype.buyUnit = function(unitid, transportid)
 	u.flag = this.country * 1 + 1 ; //TODO fix this
 	//u.player = this;
 
-	addCoreUnit(u);
+	this.addCoreUnit(u);
 
 	this.prestige -= cost;
 
