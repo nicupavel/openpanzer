@@ -20,8 +20,20 @@ function Player()
 	this.playedTurn = -1;
 	this.type = playerType.humanLocal;
 	this.handler = null;
-	this.deploymentList = [];
-	this.coreUnitList = []; //Core units obtained during campaign
+
+	//Privileged Methods that access private properties/methods
+	this.getCoreUnitList = function() { return coreUnitList; }
+	this.addCoreUnit = function(unit) { coreUnitList.push(unit); }
+	this.setCoreUnitList = function(list)
+	{
+		var i;
+		coreUnitList = [];
+		for (i = 0; i < list.length; i++)
+			coreUnitList.push(list[i]);
+	}
+
+	//Private property
+	var coreUnitList = []; //Core units obtained during campaign or bought by player
 }
 //Player Object Public Methods
 Player.prototype.copy = function(p)
@@ -35,27 +47,43 @@ Player.prototype.copy = function(p)
 	this.prestige = p.prestige;
 	this.playedTurn = p.playedTurn;
 	this.type = p.type;
-	this.deploymentList = [];
-	this.coreUnitList = [];
 
-	if (p.deploymentList)
-		for (i = 0; i < p.deploymentList.length; i++)
-			this.deploymentList.push(p.deploymentList[i]);
-
-	if (p.coreUnitList)
-		for (i = 0; i < p.coreUnitList.length; i++)
-			this.coreUnitList.push(p.coreUnitList[i]);
-
+	this.setCoreUnitList(p.getCoreUnitList());
 }
+
 Player.prototype.getCountryName = function() { return countryNames[this.country]; }
 Player.prototype.getSideName = function() { return sideNames[this.side]; }
+
+//Get the undeployed units from core unit list
+Player.prototype.hasUndeployedUnits = function()
+{
+	var i;
+	var cList = this.getCoreUnitList();
+	for (i = 0; i < cList.length; i++)
+		if (!cList[i].isDeployed())
+			return true;
+
+	return false;
+}
+
 Player.prototype.buyUnit = function(unitid, transportid)
 {
 	var cost = GameRules.calculateUnitCosts(unitid, transportid);
 		
 	if (cost > this.prestige) return false;
-	
-	this.deploymentList.push([unitid, transportid]);
+
+	var u = new Unit(unitid);
+	var transportid = transportid;
+
+	if (transportid > 0 && typeof transportid !== "undefined")
+		u.setTransport(transportid);
+
+	u.owner = this.id;
+	u.flag = this.country * 1 + 1 ; //TODO fix this
+	//u.player = this;
+
+	addCoreUnit(u);
+
 	this.prestige -= cost;
 
 	return true;
@@ -94,6 +122,30 @@ Player.prototype.endTurn = function(turn)
 {
 	this.playedTurn = turn;
 	this.prestige += prestigeGains["endTurn"];
+}
+
+Player.prototype.setCoreUnitsToHQ = function()
+{
+	var i, u;
+	var cList = this.getCoreUnitList();
+	for (i = 0; i < cList.length; i++)
+	{
+		u = cList[i];
+		if (u.destroyed) //remove if destroyed
+		{
+			cList[i] = null;
+			cList.splice(i, 1);
+			continue;
+		}
+
+		//TODO move this in Unit object in a setDefaults
+		u.strength = 10;
+		u.ammo = u.unitData().ammo;
+		u.fuel = u.unitData().fuel;
+		u.entrenchment = 0;
+		u.hits = 0;
+		u.setHex(null);
+	}
 }
 
 //Hex Object Constructor
@@ -605,17 +657,17 @@ function Map()
 	{
 		if (!player) 
 			return false;
-		if (deployid < 0 || deployid >= player.deploymentList.length)
+
+		var cList = player.getCoreUnitList();
+
+		if (deployid < 0 || deployid >= cList.length)
 			return false;
-		
-		var u = new Unit(player.deploymentList[deployid][0]);
-		var transportid = player.deploymentList[deployid][1];
-		if (transportid > 0 && typeof transportid !== "undefined")
-			u.setTransport(transportid);
-		u.owner = player.id;
-		u.flag = player.country * 1 + 1 ; //TODO fix this
-		u.player = player;
-		
+
+		var u = cList[deployid];
+
+		if (u === null || u.isDeployed())
+			return false;
+
 		var hex = this.map[row][col];
 		
 		if (GameRules.isAir(u) && hex.airunit !== null)
@@ -625,9 +677,9 @@ function Map()
 			
 		hex.setUnit(u);
 		this.addUnit(u);
-		//remove unit from deployment list as it has been deployed
-		player.deploymentList.splice(deployid);
-		
+
+
+
 		return true;
 	}
 	
@@ -653,8 +705,27 @@ function Map()
 		
 		return true;
 	}	
-	
-	//Returns true if last movement of a unit can be undoed 
+
+	//Builds a list of core units for a player. Only in campaign mode and only for the first scenario
+	//if the units are standing on a deployment hex
+	this.buildCoreUnitList = function(player)
+	{
+		var i;
+		for (i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i].player.id == player.id)
+			{
+				if (unitList[i].getHex().isDeployment == player.id)
+				{
+					player.addCoreUnit(unitList[i]);
+					console.log("Unit %s %o is a core unit for player %d",
+						unitList[i].unitData().name, unitList[i], player.id);
+				}
+			}
+		}
+	}
+
+	//Returns true if last movement of a unit can be undoed
 	this.canUndoMove = function(unit)
 	{
 		if (lastMove.unit !== null && lastMove.unit.id == unit.id)

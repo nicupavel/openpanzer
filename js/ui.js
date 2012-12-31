@@ -1053,16 +1053,20 @@ function updateEquipmentWindow(eqclass)
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
 	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
 
-	if (map.currentPlayer.deploymentList.length > 0)
+
+	if (map.currentPlayer.hasUndeployedUnits())
 	{
 		//The units that current player hasn't deployed yet
 		var deployUnitSelected = $('eqUserSel').deployunit;
-		var deployList = map.currentPlayer.deploymentList;
+		var deployList = map.currentPlayer.getCoreUnitList();
 		uiSettings.deployMode = true;
 		
 		for (var i = 0; i < deployList.length; i++)
 		{
-			var ud = equipment[deployList[i][0]];
+			if (deployList[i].isDeployed())
+				continue;
+
+			var ud = deployList[i].unitData();
 			var div = uiAddUnitBox('unitlist', ud, false);
 			div.unitid = i;
 			div.eqclass = ud.uclass;
@@ -1070,8 +1074,8 @@ function updateEquipmentWindow(eqclass)
 			if (i == deployUnitSelected)
 				div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
 
-			div.onclick = function() 
-			{ 
+			div.onclick = function()
+			{
 				$('eqUserSel').deployunit = this.unitid; //save selected player unit
 				updateEquipmentWindow(this.eqclass); //make selection appear
 				R.render(); //make the deployment mode appear
@@ -1277,7 +1281,7 @@ function uiAddUnitBox(parentTagName, unitData, withPrice)
 	var div = addTag(parentTagName, 'div');
 	var img = addTag(div, 'img');
 	var txt = addTag(div, 'div');
-	
+
 	div.className = "eqUnitBox";
 	img.src = unitData.icon;
 	txt.innerHTML = unitData.name;

@@ -146,6 +146,7 @@ function Game()
 		console.log("Starting campaign %s with scenario %s", this.campaign.name, scenData.scenario);
 		this.ui.newScenario(scenData); //This calls this.newScenario() and setups players
 		campaignPlayer.prestige = this.campaign.startprestige;
+		this.map.buildCoreUnitList(campaignPlayer); //Only for first scenario
 
 	}
 	
@@ -153,9 +154,10 @@ function Game()
 	{
 		//Add prestige for finishing scenario
 		campaignPlayer.prestige += this.campaign.getOutcomePrestige(outcomeType);
+		campaignPlayer.setCoreUnitsToHQ();
 		//Save campaign player
 		savedPlayer.copy(campaignPlayer);
-		console.log(campaignPlayer);
+		console.log(savedPlayer);
 
 		var outcomeText = this.campaign.getOutcomeText(outcomeType);
 		scenData = this.campaign.loadNextScenario(outcomeType);
