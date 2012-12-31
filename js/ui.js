@@ -1071,9 +1071,11 @@ function updateEquipmentWindow(eqclass)
 			div.unitid = i;
 			div.eqclass = ud.uclass;
 			div.country = map.currentPlayer.country;
+
 			if (i == deployUnitSelected)
 				div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
-
+			else
+				div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
 			div.onclick = function()
 			{
 				$('eqUserSel').deployunit = this.unitid; //save selected player unit
@@ -1101,6 +1103,9 @@ function updateEquipmentWindow(eqclass)
 				div.uniteqid = u.eqid;
 				div.eqclass = ud.uclass;
 				div.country = u.player.country;
+				if (u.isCore() && u.id != userUnitSelected)
+					div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
+
 				if (u.id == userUnitSelected)
 				{	
 					//Automatically set transport on transport list if user has not selected a new transport

@@ -162,6 +162,18 @@
 	background-repeat: no-repeat;
 }
 
+/* a eqUnitBox that has been clicked on make it appear selected */
+.eqUnitBox[selectedUnit]
+{
+    background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed-over.png');
+}
+
+/* a eqUnitBox that has a core unit for the player */
+.eqUnitBox[coreUnit]
+{
+    background-image: url('../resources/ui/dialogs/equipment/images/unit-box-core.png');
+}
+
 .eqUnitBox > img:first-child /*for the unit image*/
 {
 	/*select the 4th image each ~80px wide */
@@ -174,11 +186,6 @@
 {
 	margin-left: 2px;
 	vertical-align:middle;
-}
-/* a eqUnitBox that has been clicked on make it appear selected */
-.eqUnitBox[selectedUnit]
-{
-	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed-over.png');
 }
 
 .eqUnitBox div
