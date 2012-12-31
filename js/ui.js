@@ -1072,7 +1072,7 @@ function updateEquipmentWindow(eqclass)
 			div.eqclass = ud.uclass;
 			div.country = map.currentPlayer.country;
 			if (i == deployUnitSelected)
-				div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+				div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
 
 			div.onclick = function()
 			{
@@ -1110,7 +1110,7 @@ function updateEquipmentWindow(eqclass)
 						if ($('eqUserSel').equnit == -1 || GameRules.isTransportable($('eqUserSel').equnit))
 							$('eqUserSel').eqtransport = u.transport.eqid;
 					}
-					div.title = ud.name; //apply the .eqUnitBox[title] css style to make unit appear selected
+					div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
 					eqclass = ud.uclass; //Force unit class for equipment display
 					uiUnitSelect(u);
 					uiSetUnitOnViewPort(u); //bring the unit into map view
@@ -1153,7 +1153,7 @@ function updateEquipmentWindow(eqclass)
 			var div = uiAddUnitBox('eqUnitList', u, true);
 			div.equnitid = u.id;
 			if (u.id == eqUnitSelected)
-				div.title = u.name; //This is a hack to apply the .eqUnitBox[title] css style for selected unit
+				div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
 			div.onclick = function() 
 			{ 
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list

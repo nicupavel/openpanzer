@@ -175,8 +175,8 @@
 	margin-left: 2px;
 	vertical-align:middle;
 }
-/* a eqUnitBox that has been clicked on has been set a title */
-.eqUnitBox[title]
+/* a eqUnitBox that has been clicked on make it appear selected */
+.eqUnitBox[selectedUnit]
 {
 	background-image: url('../resources/ui/dialogs/equipment/images/unit-box-pressed-over.png');
 }
