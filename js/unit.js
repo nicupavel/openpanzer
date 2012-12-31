@@ -46,7 +46,7 @@ function Unit(equipmentID)
 	this.facing = 2; //default unit facing
 	this.flag = this.owner; //default flag
 	this.destroyed = false; //flag to check if a unit is destroyed
-	this.player = null;
+	this.player = null; //TODO remove use owner ID
 	this.transport = null; //transport class pointer
 	this.moveLeft = equipment[equipmentID].movpoints; //for phased/recon movement
 	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
@@ -105,6 +105,32 @@ Unit.prototype.unitData = function(forceUnit)
 		return equipment[this.transport.eqid]; 
 	else
 		return equipment[this.eqid]; 
+}
+
+//Simple check so we don't manage another property directly in unit object
+Unit.prototype.isDeployed = function()
+{
+	if (this.getHex() !== null)
+		return true;
+
+	return false;
+}
+
+//Check if a unit is a core unit for a campaign player
+Unit.prototype.isCore = function()
+{
+	var i;
+
+	if (!this.isDeployed()) //Undeployed unit belonging to this player
+		return true;
+
+	var cList = this.player.getCoreUnitList();
+
+	for (i = 0; i < cList.length; i++)
+		if (this.id == cList[i].id)
+			return true;
+
+	return false;
 }
 
 Unit.prototype.getMovesLeft = function()
