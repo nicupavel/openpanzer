@@ -1185,7 +1185,7 @@ function updateEquipmentWindow(eqclass)
 				var tdiv = uiAddUnitBox('eqTransportList', t, true);
 				tdiv.eqtransportid = t.id;
 				if (t.id == eqTransportSelected)
-					tdiv.title = t.name;
+					tdiv.setAttribute("selectedUnit", t.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
 				tdiv.onclick = function()
 				{
 					//handle deselect of transport
