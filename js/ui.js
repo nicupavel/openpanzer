@@ -249,7 +249,10 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	if (mr.isVictorySide >= 0)
 	{
 		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
-		game.gameEnded = true;
+		if (game.campaign !== null)
+			game.continueCampaign("victory"); //TODO move logic to game.js
+		else
+			game.gameEnded = true;
 	}
 	game.waitUIAnimation = false;
 }
