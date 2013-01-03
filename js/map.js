@@ -23,7 +23,13 @@ function Player()
 
 	//Privileged Methods that access private properties/methods
 	this.getCoreUnitList = function() { return coreUnitList; }
-	this.addCoreUnit = function(unit) { coreUnitList.push(unit); }
+	this.addCoreUnit = function(unit)
+	{
+		unit.isCore = true;
+		coreUnitList.push(unit);
+		console.log("Unit %s %o added as core unit for player %d",
+			unit.unitData().name, unit, this.id);
+	}
 	this.setCoreUnitList = function(list)
 	{
 		var i;
@@ -60,7 +66,7 @@ Player.prototype.hasUndeployedUnits = function()
 	var i;
 	var cList = this.getCoreUnitList();
 	for (i = 0; i < cList.length; i++)
-		if (!cList[i].isDeployed())
+		if (!cList[i].isDeployed)
 			return true;
 
 	return false;
@@ -139,12 +145,13 @@ Player.prototype.setCoreUnitsToHQ = function()
 		}
 
 		//TODO move this in Unit object in a setDefaults
+		u.isDeployed = false; //Send unit to HQ, undeploy from map
 		u.strength = 10;
 		u.ammo = u.unitData().ammo;
 		u.fuel = u.unitData().fuel;
 		u.entrenchment = 0;
 		u.hits = 0;
-		u.setHex(null);
+		u.setHex(null); //also does isDeployed = false
 	}
 }
 
@@ -239,7 +246,7 @@ Hex.prototype.setUnit = function(unit)
 	//Will return if unit object is just a copy.
 	if (unit === null || typeof unit.setHex === "undefined")
 		return;
-	unit.setHex(this);
+	unit.setHex(this); //back linking
 	if (GameRules.isAir(unit))
 		this.airunit = unit;
 	else
@@ -675,7 +682,7 @@ function Map()
 
 		var u = cList[deployid];
 
-		if (u === null || u.isDeployed())
+		if (u === null || u.isDeployed)
 			return false;
 
 		var hex = this.map[row][col];
@@ -684,11 +691,9 @@ function Map()
 			return false;
 		if (!GameRules.isAir(u) && hex.unit !== null)
 			return false;
-			
+
 		hex.setUnit(u);
 		this.addUnit(u);
-
-
 
 		return true;
 	}
@@ -717,7 +722,7 @@ function Map()
 	}	
 
 	//Builds a list of core units for a player. Only in campaign mode and only for the first scenario
-	//if the units are standing on a deployment hex
+	//if the units are standing on a deployment hex.
 	this.buildCoreUnitList = function(player)
 	{
 		var i;
