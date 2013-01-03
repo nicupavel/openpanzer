@@ -346,7 +346,17 @@ function Map()
 		else
 			return playerList[0]; //TODO parse supporting countries from the scenario file
 	}
-	
+
+	this.getPlayersByCountry = function(country)
+	{
+		var c = [];
+		var p = this.getPlayers();
+		for (var i = 0; i < p.length; i++)
+			if (p[i].country == country)
+				c.push(p[i]);
+		return c;
+	}
+
 	this.getCountriesBySide = function(side) //returns and array of countries playing on a side
 	{
 		var c = [];
