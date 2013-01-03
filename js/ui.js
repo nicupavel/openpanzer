@@ -843,7 +843,7 @@ function updateUnitInfoWindow(u)
 	$('uFlag').innerHTML = countryNames[u.flag - 1];
 	$('uName').innerHTML = uinfo.name + " " + unitClassNames[uinfo.uclass];
 
-	if (!isEqUnit && u.isCore())
+	if (!isEqUnit && u.isCore)
 		$('uName').innerHTML += " (Core Unit)";
 
 	//$('uClass').innerHTML = uinfo.uclass;
@@ -1066,7 +1066,7 @@ function updateEquipmentWindow(eqclass)
 		
 		for (var i = 0; i < deployList.length; i++)
 		{
-			if (deployList[i].isDeployed())
+			if (deployList[i].isDeployed)
 				continue;
 
 			var ud = deployList[i].unitData();
@@ -1106,7 +1106,7 @@ function updateEquipmentWindow(eqclass)
 				div.uniteqid = u.eqid;
 				div.eqclass = ud.uclass;
 				div.country = u.player.country;
-				if (u.isCore() && u.id != userUnitSelected)
+				if (u.isCore && u.id != userUnitSelected)
 					div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
 
 				if (u.id == userUnitSelected)
