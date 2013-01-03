@@ -731,11 +731,31 @@ function Map()
 			if (unitList[i].player.id == player.id)
 			{
 				if (unitList[i].getHex().isDeployment == player.id)
-				{
 					player.addCoreUnit(unitList[i]);
-					console.log("Unit %s %o is a core unit for player %d",
-						unitList[i].unitData().name, unitList[i], player.id);
-				}
+			}
+		}
+	}
+
+	//Restore a core unit list from a localStorage load, coreUnits has unit properties but no methods
+	this.restoreCoreUnitList = function(player, coreUnits)
+	{
+		var i, u;
+		//First look for units already deployed on map hexes and link them to core units if they are core
+		for (i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i].isCore && unitList[i].isDeployed)
+				player.addCoreUnit(unitList[i]);
+
+		}
+
+		for (i = 0; i < coreUnits.length; i++)
+		{
+			if (!coreUnits[i].isDeployed) //Undeployed units must be recreated
+			{
+				u = new Unit(coreUnits[i].eqid);
+				u.copy(coreUnits[i]); //Copy properties
+				player.addCoreUnit(u);
+				//Units will be added to the map with this.deployPlayerUnit()
 			}
 		}
 	}

@@ -31,9 +31,8 @@ function Game()
 
 	var loader = new MapLoader(this);
 	var localPlayingSide = -1; //Which player side plays locally on this computer
-	var campaignCountry = -1; //This country plays campaign locally
 	var campaignPlayer = null; //Player that plays campaign locally
-	var savedPlayer = null; //Saved copy of the campaign player
+	var savedPlayer = null; //Saved copy of the campaign player used between campaign scenarios
 	var needScenarioLoad = false; //If a new scenario should be loaded durring campaign progress
 	var scenData = null; //Scenario data for the next campaign scenario
 
@@ -44,9 +43,9 @@ function Game()
 		this.scenario = Game.defaultScenario;
 
 		if (!this.state.restore())
-			loader.loadMap();
+			loader.loadMap();//Load default scenario from this.scenario
 
-		setupPlayers(this.map);
+		setupPlayers(this);
 
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
@@ -93,6 +92,10 @@ function Game()
 
 		this.waitUIAnimation = false;
 		this.state.save();
+
+		if (this.campaign !== null) //Save campaign to remove deployed units from saved list
+			game.state.saveCampaign();
+
 		this.map.endTurn();
 		//Check if game ended in defeat only for human players
 		if (this.map.turn >= this.map.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
@@ -125,7 +128,7 @@ function Game()
 		this.map = new Map();
 		this.state.clear();
 		loader.loadMap();
-		setupPlayers(this.map);
+		setupPlayers(this);
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
 
@@ -134,12 +137,15 @@ function Game()
 
 		needScenarioLoad = false;
 		scenData = null;
+		this.state.save();
+
+		if (this.campaign !== null)
+			this.state.saveCampaign(); //Save progression between scenario loading delays in campaign
 	}
 
 	this.newCampaign = function(campIndex)
 	{
 		this.campaign = new Campaign(campIndex);
-		campaignCountry = this.campaign.country;
 		savedPlayer = null;
 		//Start the first scenario
 		var scenData = this.campaign.getCurrentScenario();
@@ -147,7 +153,7 @@ function Game()
 		this.ui.newScenario(scenData); //This calls this.newScenario() and setups players
 		campaignPlayer.prestige = this.campaign.startprestige;
 		this.map.buildCoreUnitList(campaignPlayer); //Only for first scenario
-
+		this.state.saveCampaign(); //save updated core unit list
 	}
 	
 	this.continueCampaign = function(outcomeType)
@@ -171,10 +177,16 @@ function Game()
 			this.ui.uiMessage(outcomeType + " victory !", outcomeText);
 			needScenarioLoad = true; //Wait for user to click to continue to next scenario
 		}
-		this.state.saveCampaign();
-
 	}
-	
+	//TODO move to Campaign object
+	this.getCampaignPlayer = function()
+	{
+		if (this.campaign !== null)
+			return campaignPlayer;
+
+		return null;
+	}
+
 	this.setCurrentSide = function()
 	{
 		if (localPlayingSide == 2) //Both sides are playing locally in HotSeat mode
@@ -184,26 +196,29 @@ function Game()
 	}
 
 	//Set AI, Network or campaign for players. Local player is the default value
-	function setupPlayers(map)
+	function setupPlayers(game)
 	{
 		var i;
-		var players = map.getPlayers();
+		var players = game.map.getPlayers();
 
 		if (players === null)
 			return false;
 		for (i = 0; i < players.length; i++)
 		{
-			if (campaignCountry != -1) //Campaign mode
+			if (game.campaign !== null) //Campaign mode
 			{
+				console.log("Campaign country: %d", game.campaign.country);
+
 				//Assign AI players if not campaign playing country
-				if (players[i].country != campaignCountry)
+				if (players[i].country != game.campaign.country)
 				{
 					players[i].type = playerType.aiLocal;
-					players[i].handler = new AI(players[i], map);
+					players[i].handler = new AI(players[i], game.map);
 				}
 				else //Copy or load the local player for campaign progress (should be only 1 or hell breaks lose see copy)
 				{
 					campaignPlayer = players[i]; //save a reference
+					console.log("Setting campaignPlayer to %o", campaignPlayer);
 
 					if (savedPlayer === null) //Campaign just started save player from scenario settings
 					{
@@ -221,7 +236,7 @@ function Game()
 				if (uiSettings.isAI[players[i].id])
 				{
 					players[i].type = playerType.aiLocal;
-					players[i].handler = new AI(players[i], map);
+					players[i].handler = new AI(players[i], game.map);
 				}
 			}
 		}

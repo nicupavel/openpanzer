@@ -506,6 +506,7 @@ function buildStartMenu()
 		{ 
 			var s = $('smScen').selectedScenario;
 			if (!s)	return;
+			game.campaign = null; //New scenario delete campaign
 			newScenario(scenariolist[s][0], scenariolist[s][2]);
 			makeHidden('smScen');
 			makeHidden('startmenu');
