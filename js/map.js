@@ -48,7 +48,7 @@ Player.prototype.copy = function(p)
 	this.playedTurn = p.playedTurn;
 	this.type = p.type;
 
-	this.setCoreUnitList(p.getCoreUnitList());
+	if (p.getCoreUnitList) { this.setCoreUnitList(p.getCoreUnitList()); }
 }
 
 Player.prototype.getCountryName = function() { return countryNames[this.country]; }
@@ -639,7 +639,7 @@ function Map()
 	this.upgradeUnit = function(id, upgradeid, transportid)
 	{
 		var unit = null;
-		if ((unit = findUnitById(id)) == null)
+		if ((unit = findUnitById(id)) == null) //Find in list of units on the map
 			return false;
 		var p = unit.player;
 		if (!p.upgradeUnit(unit, upgradeid, transportid))
