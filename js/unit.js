@@ -127,7 +127,7 @@ Unit.prototype.isCore = function()
 	var cList = this.player.getCoreUnitList();
 
 	for (i = 0; i < cList.length; i++)
-		if (this.id == cList[i].id)
+		if (this.id == cList[i].id && this.eqid == cList[i].eqid) //TODO on new scenario unit ID might clash
 			return true;
 
 	return false;
