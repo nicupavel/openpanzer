@@ -41,6 +41,8 @@ function Unit(equipmentID)
 	this.hasResupplied = false;
 	this.isMounted = false;
 	this.isSurprised = false; //Unit has been surprised during move
+	this.isDeployed = false; //Unit is deployed on map or it's on equipment window
+	this.isCore = false; //Unit is a core unit for the campaign player
 	this.tempSpotted = false;
 	this.strength = 10;
 	this.facing = 2; //default unit facing
@@ -57,9 +59,22 @@ function Unit(equipmentID)
 	this.entrenchment = 0; //level of entrenchment this unit has
 	
 	//Privileged Methods that access private properties/methods
-	this.setHex = function(h) { hex = h; }
 	this.getHex = function() { return hex; }
-	this.getPos = function() { if (hex === null) return null; return hex.getPos(); };
+	this.setHex = function(h)
+	{
+		hex = h;
+		if (h !== null) // set unit as deployed or not
+			this.isDeployed = true;
+		else
+			this.isDeployed = false;
+	}
+
+	this.getPos = function()
+	{
+		if (hex === null)
+			return null;
+		return hex.getPos();
+	};
 	
 	//Private Methods and Properties
 	var hex = null; //The hex that this unit is on
@@ -77,6 +92,8 @@ Unit.prototype.copy = function(u)
 	this.hasResupplied = u.hasResupplied;
 	this.isMounted = u.isMounted;
 	this.isSurprised = u.isSurprised;
+	this.isDeployed = u.isDeployed;
+	this.isCore = u.isCore;
 	this.moveLeft = u.moveLeft;
 	this.ammo = u.ammo;
 	this.fuel = u.fuel;
@@ -105,32 +122,6 @@ Unit.prototype.unitData = function(forceUnit)
 		return equipment[this.transport.eqid]; 
 	else
 		return equipment[this.eqid]; 
-}
-
-//Simple check so we don't manage another property directly in unit object
-Unit.prototype.isDeployed = function()
-{
-	if (this.getHex() !== null)
-		return true;
-
-	return false;
-}
-
-//Check if a unit is a core unit for a campaign player
-Unit.prototype.isCore = function()
-{
-	var i;
-
-	if (!this.isDeployed()) //Undeployed unit belonging to this player
-		return true;
-
-	var cList = this.player.getCoreUnitList();
-
-	for (i = 0; i < cList.length; i++)
-		if (this.id == cList[i].id && this.eqid == cList[i].eqid) //TODO on new scenario unit ID might clash
-			return true;
-
-	return false;
 }
 
 Unit.prototype.getMovesLeft = function()
