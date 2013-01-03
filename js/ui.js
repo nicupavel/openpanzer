@@ -807,7 +807,7 @@ function updateUnitContextWindow(u)
 function updateUnitInfoWindow(u)
 {
 	var isEqUnit = false;
-	var uinfo, ammo, fuel, exp, ent;
+	var uinfo, ammo, fuel = "-", exp = 0, ent = 0;
 
 	if (!isVisible('unit-info')) return;
 
@@ -819,9 +819,7 @@ function updateUnitInfoWindow(u)
 		u.flag = u.country;
 		u.strength = 10;
 		ammo = u.ammo;
-		if (u.fuel == 0)
-			fuel = "-";
-		else
+		if (u.fuel != 0)
 			fuel = u.fuel;
 		exp = 0;
 		ent = 0;
@@ -832,8 +830,6 @@ function updateUnitInfoWindow(u)
 		ammo = u.getAmmo();
 		if (GameRules.unitUsesFuel(u))
 			fuel = u.getFuel();
-		else
-			fuel = "-";
 		exp = u.experience;
 		ent = u.entrenchment;
 	}
@@ -846,6 +842,10 @@ function updateUnitInfoWindow(u)
 	$('uFlag').style.backgroundImage = "url('resources/ui/flags/flag_big_" + u.flag +".png')";
 	$('uFlag').innerHTML = countryNames[u.flag - 1];
 	$('uName').innerHTML = uinfo.name + " " + unitClassNames[uinfo.uclass];
+
+	if (!isEqUnit && u.isCore())
+		$('uName').innerHTML += " (Core Unit)";
+
 	//$('uClass').innerHTML = uinfo.uclass;
 	$('uTarget').innerHTML = unitTypeNames[uinfo.target];
 	$('uMoveType').innerHTML = movMethodNames[uinfo.movmethod];
@@ -971,7 +971,7 @@ function buildEquipmentWindow()
 		div.id = id;
 		div.className = "eqSelClassBut";
 		div.title = eqClassButtons[b][1];
-		div.eqclass = b; //Hack to get parameter passed
+		div.eqclass = b;
 		img.id = id;
 		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
 		div.onclick = function() 
@@ -1081,7 +1081,7 @@ function updateEquipmentWindow(eqclass)
 				div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
 			div.onclick = function()
 			{
-				$('eqUserSel').deployunit = this.unitid; //save selected player unit
+				$('eqUserSel').deployunit = this.unitid; //save selected player unit for deployment
 				updateEquipmentWindow(this.eqclass); //make selection appear
 				R.render(); //make the deployment mode appear
 			}
