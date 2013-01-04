@@ -761,6 +761,27 @@ function Map()
 		}
 	}
 
+	//Remove units standing on deployment hexes in campaign mode for scenarios loaded after first scenario
+	this.removeNonCampaignUnits = function(player)
+	{
+		var i, h, update = false;
+		for (i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i].player.id == player.id && !unitList[i].isCore) //Guard agains calls with deployed core units
+			{
+				h = unitList[i].getHex();
+				if (h && h.isDeployment == player.id)
+				{
+					h.delUnit(unitList[i]);
+					unitList[i].destroyed = true;
+					update = true;
+				}
+			}
+		}
+		if (update)
+			updateUnitList();
+	}
+
 	//Returns true if last movement of a unit can be undoed
 	this.canUndoMove = function(unit)
 	{

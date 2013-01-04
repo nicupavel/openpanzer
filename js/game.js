@@ -34,6 +34,7 @@ function Game()
 	var campaignPlayer = null; //Player that plays campaign locally
 	var savedPlayer = null; //Saved copy of the campaign player used between campaign scenarios
 	var needScenarioLoad = false; //If a new scenario should be loaded durring campaign progress
+	var shouldRemoveNonCampaignUnits = false; //If we should remove scenario only units from campaign scenarios
 	var scenData = null; //Scenario data for the next campaign scenario
 
 	this.init = function()
@@ -137,16 +138,22 @@ function Game()
 
 		needScenarioLoad = false;
 		scenData = null;
-		this.state.save();
 
 		if (this.campaign !== null)
+		{
 			this.state.saveCampaign(); //Save progression between scenario loading delays in campaign
+			if (shouldRemoveNonCampaignUnits)
+				this.map.removeNonCampaignUnits(campaignPlayer);
+		}
+
+		this.state.save();
 	}
 
 	this.newCampaign = function(campIndex)
 	{
 		this.campaign = new Campaign(campIndex);
 		savedPlayer = null;
+		shouldRemoveNonCampaignUnits = false; //For first scenario is not needed
 		//Start the first scenario
 		var scenData = this.campaign.getCurrentScenario();
 		console.log("Starting campaign %s with scenario %s", this.campaign.name, scenData.scenario);
@@ -164,6 +171,7 @@ function Game()
 		//Save campaign player
 		savedPlayer.copy(campaignPlayer);
 		console.log(savedPlayer);
+		shouldRemoveNonCampaignUnits = true;
 
 		var outcomeText = this.campaign.getOutcomeText(outcomeType);
 		scenData = this.campaign.loadNextScenario(outcomeType);
@@ -207,8 +215,6 @@ function Game()
 		{
 			if (game.campaign !== null) //Campaign mode
 			{
-				console.log("Campaign country: %d", game.campaign.country);
-
 				//Assign AI players if not campaign playing country
 				if (players[i].country != game.campaign.country)
 				{
