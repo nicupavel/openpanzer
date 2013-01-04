@@ -4,6 +4,7 @@
 	margin:0 auto;
 	overflow: auto;
 	z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 
 .hscroll /* Force horizontal scrolling */
