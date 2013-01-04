@@ -141,6 +141,7 @@ Player.prototype.setCoreUnitsToHQ = function()
 		{
 			cList[i] = null;
 			cList.splice(i, 1);
+			i--;
 			continue;
 		}
 
@@ -942,8 +943,11 @@ function Map()
 	{
 		for (var i = 0; i < unitList.length; i++)
 		{
-			if (unitList[i] !== null && unitList[i].destroyed)
+			if (unitList[i] === null || unitList[i].destroyed)
+			{
 				unitList.splice(i, 1);
+				i--;
+			}
 		}
 	}
 	//Resets unit properties for a new turn
