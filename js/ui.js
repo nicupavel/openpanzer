@@ -143,10 +143,10 @@ function handleMouseMove(e)
 //handle unit deployment
 function handleUnitDeployment(row, col)
 {
-	var deployUnit = $('eqUserSel').deployunit; //TODO make this into a UI member
+	var deployUnit = $('eqUserSel').deployunit;
 	var ret = map.deployPlayerUnit(map.currentPlayer, deployUnit, row, col);
 	if (ret)
-		R.cacheImages(function() { R.render(); updateEquipmentWindow(map.currentUnit.unitData(true).uclass); });
+		R.cacheImages(function() { R.render(); updateEquipmentWindow(unitClass.tank); });
 	else 
 		console.log("Can't deploy unit in that location");
 	
@@ -1008,30 +1008,44 @@ function buildEquipmentWindow()
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
 	$('eqUpgradeBut').onclick = function()
 		{
-			var id = $('eqUserSel').userunit;
-			var eqUnit = $('eqUserSel').equnit;
+			var id = $('eqUserSel').userunit; //real unit id on map
+			var deployid = $('eqUserSel').deployunit; //id for units on deployment list
+
+			var eqUnit = $('eqUserSel').equnit; //Can be undefined as we can only upgrade transport
 			var eqTransport = $('eqUserSel').eqtransport;
-			
-			if (typeof id === "undefined")
-				return;
+
+			var p = map.currentPlayer;
+			var u = null;
 
 			if (typeof eqTransport === "undefined" || eqTransport == "")
-					eqTransport = -1;
-
-			console.log("Upgrading unit: " + id + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
-
-			if (map.upgradeUnit(id, eqUnit, eqTransport))
+				eqTransport = -1;
+			
+			if (typeof id === "undefined" || id == -1) //Upgrade an undeployed unit
 			{
-				R.cacheImages(function() { R.render(); }); //Need to cache new image
-				if (eqUnit > 0 ) updateEquipmentWindow(equipment[eqUnit].uclass);
+				console.log("Upgrading undeployed unit: " + deployid + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
+				u = p.getCoreUnitList()[deployid];
+				if (p.upgradeUnit(u, eqUnit, eqTransport))
+				{
+					updateEquipmentWindow(equipment[u.eqid].uclass);
+				}
 			}
+			else //Upgrade a unit already on map
+			{
+				console.log("Upgrading unit: " + id + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
+				if (map.upgradeUnit(id, eqUnit, eqTransport))
+				{
+					R.cacheImages(function() { R.render(); }); //Need to cache new image
+					if (eqUnit > 0 ) updateEquipmentWindow(equipment[eqUnit].uclass);
+				}
+
+			}
+
 		}
 	
 	$('eqCloseBut').title = "Close";
 	$('eqCloseBut').onclick = function() { makeHidden('equipment'); }
 }
 
-//TODO function too large break it
 //TODO index equipment array
 //TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
@@ -1061,97 +1075,103 @@ function updateEquipmentWindow(eqclass)
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
 	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
 
+	var unitList = [];
+	var forcedScroll;
+	var u, ud;
+	var div;
 
 	if (map.currentPlayer.hasUndeployedUnits())
 	{
 		//The units that current player hasn't deployed yet
-		var deployUnitSelected = $('eqUserSel').deployunit;
-		var deployList = map.currentPlayer.getCoreUnitList();
+		userUnitSelected = $('eqUserSel').deployunit;
+		unitList = map.currentPlayer.getCoreUnitList();
 		uiSettings.deployMode = true;
-		
-		for (var i = 0; i < deployList.length; i++)
-		{
-			if (deployList[i].isDeployed)
-				continue;
-
-			var ud = deployList[i].unitData();
-			var div = uiAddUnitBox('unitlist', ud, false);
-			div.unitid = i;
-			div.eqclass = ud.uclass;
-			div.country = map.currentPlayer.country;
-
-			if (i == deployUnitSelected)
-				div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
-			else
-				div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
-			div.onclick = function()
-			{
-				$('eqUserSel').deployunit = this.unitid; //save selected player unit for deployment
-				updateEquipmentWindow(this.eqclass); //make selection appear
-				R.render(); //make the deployment mode appear
-			}
-		}
 	}
 	else
 	{
 		//The actual units on the map
-		var userUnitSelected = $('eqUserSel').userunit;
-		var unitList = map.getUnits();
-		var forcedScroll;
+		userUnitSelected = $('eqUserSel').userunit;
+		unitList = map.getUnits();
 		uiSettings.deployMode = false;
-		
-		for (var i = 0; i < unitList.length; i++)
-		{
-			var u = unitList[i];
-			var ud = u.unitData(true);
-			if (u.player.id == map.currentPlayer.id)
-			{
-				var div = uiAddUnitBox('unitlist', ud, false);
-				div.unitid = u.id;
-				div.uniteqid = u.eqid;
-				div.eqclass = ud.uclass;
-				div.country = u.player.country;
-				if (u.isCore && u.id != userUnitSelected)
-					div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
-
-				if (u.id == userUnitSelected)
-				{	
-					//Automatically set transport on transport list if user has not selected a new transport
-					if (u.transport !== null && $('eqUserSel').eqtransport == -1)
-					{
-						//Check if user selected equipment unit for upgrade can be transported
-						if ($('eqUserSel').equnit == -1 || GameRules.isTransportable($('eqUserSel').equnit))
-							$('eqUserSel').eqtransport = u.transport.eqid;
-					}
-					div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
-					eqclass = ud.uclass; //Force unit class for equipment display
-					uiUnitSelect(u);
-					uiSetUnitOnViewPort(u); //bring the unit into map view
-					//This unit will be the last in div since the div is being built and we can use offsetWidth of the
-					//containing div to get offset from the position 0. This value will be used to scroll the div when 
-					//a unit is selected from the map not from the unit list ui div 
-					forcedScroll = $('unitlist').offsetWidth - ($('container-unitlist').offsetWidth + div.offsetWidth)/2;
-				}
-				div.onclick = function() 
-				{ 
-					c = map.getCountriesBySide(game.spotSide);
-					for (i = 0; i < c.length; i++)
-						if (c[i] == this.country) break;
-					$('eqSelCountry').country = i;
-					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
-					$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection 
-					$('eqUserSel').userunit = this.unitid; //save selected player unit
-					$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll 
-					updateUnitInfoWindow(equipment[this.uniteqid]);
-					updateEquipmentWindow(this.eqclass);
-					$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
-				}
-			}
-		}
-		//Force scrolling when units are selected from the map to bring them into unit list view
-		$('hscroll-unitlist').scrollLeft = forcedScroll;
 	}
-	
+
+	for (var i = 0; i < unitList.length; i++)
+	{
+		u = unitList[i];
+		if (uiSettings.deployMode && u.isDeployed)
+			continue;
+		if (u.player.id != map.currentPlayer.id)
+			continue;
+
+		ud = u.unitData(true);
+		div = uiAddUnitBox('unitlist', ud, false);
+
+		if (uiSettings.deployMode)
+			div.unitid = i;
+		else
+			div.unitid = u.id;
+
+		div.uniteqid = u.eqid;
+		div.eqclass = ud.uclass;
+		div.country = u.player.country;
+
+		if (u.isCore && div.unitid != userUnitSelected)
+			div.setAttribute("coreUnit", ud.name); //apply the [coreUnit] style when not selected
+
+		if (div.unitid == userUnitSelected)
+		{
+			//Automatically set transport on transport list if user has not selected a new transport
+			if (u.transport !== null && $('eqUserSel').eqtransport == -1)
+			{
+				//Check if user selected equipment unit for upgrade can be transported
+				if ($('eqUserSel').equnit == -1 || GameRules.isTransportable($('eqUserSel').equnit))
+					$('eqUserSel').eqtransport = u.transport.eqid;
+			}
+			div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
+			eqclass = ud.uclass; //Force unit class for equipment display
+
+			if (!uiSettings.deployMode) //Not on map
+			{
+				uiUnitSelect(u);
+				uiSetUnitOnViewPort(u); //bring the unit into map view
+			}
+			//This unit will be the last in div since the div is being built and we can use offsetWidth of the
+			//containing div to get offset from the position 0. This value will be used to scroll the div when
+			//a unit is selected from the map not from the unit list ui div
+			forcedScroll = $('unitlist').offsetWidth - ($('container-unitlist').offsetWidth + div.offsetWidth)/2;
+		}
+
+		div.onclick = function()
+		{
+			c = map.getCountriesBySide(game.spotSide);
+			for (i = 0; i < c.length; i++)
+				if (c[i] == this.country) break;
+
+			if (uiSettings.deployMode)
+			{
+				$('eqUserSel').deployunit = this.unitid; //save selected player unit for deployment
+				$('eqUserSel').userunit = -1 //clear any remaining selection
+			}
+			else
+			{
+				$('eqUserSel').userunit = this.unitid; //save selected player unit
+				$('eqUserSel').deployunit = -1; //clear any remaining selection
+			}
+
+			$('eqSelCountry').country = i;
+			$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection
+			$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection
+			$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll
+
+			updateUnitInfoWindow(equipment[this.uniteqid]);
+			updateEquipmentWindow(this.eqclass);
+			$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
+		}
+	}
+	//Force scrolling when units are selected from the map to bring them into unit list view
+	$('hscroll-unitlist').scrollLeft = forcedScroll;
+
+
 	//Don't list units from a class that isn't allowed to be bought
 	if (typeof eqClassButtons[eqclass] === "undefined") return;
 	
@@ -1210,20 +1230,26 @@ function updateEquipmentWindow(eqclass)
 //Updates the costs of user selected units in equipment window
 function updateEquipmentCosts()
 {
+	var userUnitSelected = $('eqUserSel').userunit; //unit already on map
+	var deployUnitSelected = $('eqUserSel').deployunit; //unit no deployed on map
 	var eqUnitSelected = $('eqUserSel').equnit;
 	var eqTransportSelected = $('eqUserSel').eqtransport;
-	var userUnitSelected = $('eqUserSel').userunit;
 	var buyCost = 0;
 	var upCost = 0;
 	var prestige = map.currentPlayer.prestige;
-	var unit = map.getUnitById(userUnitSelected);
+	var unit = null;
+
+	if (deployUnitSelected == -1 || typeof deployUnitSelected === "undefined")
+		unit = map.getUnitById(userUnitSelected);
+	else
+		unit = map.currentPlayer.getCoreUnitList()[deployUnitSelected];
+
+	if (unit !== null)
+		upCost = GameRules.calculateUpgradeCosts(unit, eqUnitSelected, eqTransportSelected);
 
 	if (eqUnitSelected != -1)
 		buyCost = GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
 
-	if (unit !== null)
-		upCost = GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
-	
 	if (buyCost > 0 && buyCost <= prestige) 
 	{
 		$('eqNewText').innerHTML = "New unit cost: " + buyCost + currencyIcon;

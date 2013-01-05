@@ -86,7 +86,7 @@ Player.prototype.buyUnit = function(unitid, transportid)
 
 	u.owner = this.id;
 	u.flag = this.country * 1 + 1 ; //TODO fix this
-	//u.player = this;
+	u.player = this;
 
 	this.addCoreUnit(u);
 
