@@ -338,6 +338,18 @@ function Map()
 	}
 	
 	this.getUnits = function() { return unitList; }
+	this.getUnitById = function(id)
+	{
+		if (id < 0 || typeof id === "undefined")
+			return null;
+
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i] !== null && unitList[i].id == id)
+				return unitList[i];
+		}
+		return null;
+	}
 	this.getUnitImagesList = function() { return unitImagesList; }
 	this.getPlayers = function() { return playerList; }
 	
@@ -657,7 +669,7 @@ function Map()
 	this.upgradeUnit = function(id, upgradeid, transportid)
 	{
 		var unit = null;
-		if ((unit = findUnitById(id)) == null) //Find in list of units on the map
+		if ((unit = this.getUnitById(id)) == null)
 			return false;
 		var p = unit.player;
 		if (!p.upgradeUnit(unit, upgradeid, transportid))
@@ -949,16 +961,7 @@ function Map()
 		unit: null,
 		savedUnit: null,
 	}; 
-	//TODO UnitManager object
-	function findUnitById(id)
-	{
-		for (var i = 0; i < unitList.length; i++)
-		{
-			if (unitList[i] !== null && unitList[i].id == id) 
-				return unitList[i];
-		}
-		return null;
-	}
+
 	//Checks for destroyed units and remove them from list
 	function updateUnitList()
 	{

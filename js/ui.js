@@ -1209,15 +1209,15 @@ function updateEquipmentCosts()
 	var eqUnitSelected = $('eqUserSel').equnit;
 	var eqTransportSelected = $('eqUserSel').eqtransport;
 	var userUnitSelected = $('eqUserSel').userunit;
-	var buyCost =0;
+	var buyCost = 0;
 	var upCost = 0;
 	var prestige = map.currentPlayer.prestige;
+	var unit = map.getUnitById(userUnitSelected);
+
 	if (eqUnitSelected != -1)
 		buyCost = GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
-		
-	//TODO/REVIEW: We assume that selecting a unit on current units lists selects a map unit 
-	//Actually we should do  map.findUnitById(userUnitSelected)
-	if (map.currentUnit !== null && userUnitSelected != -1)
+
+	if (unit !== null)
 		upCost = GameRules.calculateUpgradeCosts(map.currentUnit, eqUnitSelected, eqTransportSelected);
 	
 	if (buyCost > 0 && buyCost <= prestige) 
