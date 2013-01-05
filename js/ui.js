@@ -1036,9 +1036,13 @@ function buildEquipmentWindow()
 //TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
-	if (!isVisible('container-unitlist')) 
+	if (!isVisible('container-unitlist'))
 		return;
-		
+
+	//Don't show AI/others unit lists
+	if(map.currentPlayer.side !== game.spotSide)
+		return;
+
 	//Remove older entries
 	clearTag('unitlist');
 	clearTag('eqUnitList');
