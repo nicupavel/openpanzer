@@ -437,12 +437,15 @@ function buildStartMenu()
 		toggleButton($('options'), false);
 		game.state.saveSettings();
 	}
+
 	/* Campaign debug button */
-	$('smCV').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("victory"); }
-	$('smCVB').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("briliant"); }
-	$('smCVT').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("tactical"); }
-	$('smCL').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("lose"); }
-	
+	if (DEBUG_CAMPAIGN)
+	{
+		$('smCV').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("victory"); }
+		$('smCVB').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("briliant"); }
+		$('smCVT').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("tactical"); }
+		$('smCL').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("lose"); }
+	}
 
 	//Add new scenario options(scenario list, description, players)
 	var scnSel = addTag('smScenSel', 'select');

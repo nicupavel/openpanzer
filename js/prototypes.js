@@ -258,4 +258,5 @@ function screenPos(x, y)
 
 var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
 var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
+var DEBUG_CAMPAIGN = true; //If victory choices buttons should be shown for easy campaign progress
 var VERSION = "2.2";
