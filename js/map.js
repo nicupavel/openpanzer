@@ -146,6 +146,8 @@ Player.prototype.setCoreUnitsToHQ = function()
 		}
 
 		//TODO move this in Unit object in a setDefaults
+		u.unmount();
+		u.hasMoved = u.hasFired = u.hasResupplied = false;
 		u.isDeployed = false; //Send unit to HQ, undeploy from map
 		u.strength = 10;
 		u.ammo = u.unitData().ammo;
