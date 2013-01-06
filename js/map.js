@@ -152,6 +152,12 @@ Player.prototype.setCoreUnitsToHQ = function()
 		u.strength = 10;
 		u.ammo = u.unitData().ammo;
 		u.fuel = u.unitData().fuel;
+		if (u.transport !== null) //resupply transport too
+		{
+			u.transport.fuel = u.transport.unitData().fuel;
+			u.transport.ammo = u.transport.unitData().ammo;
+		}
+		u.moveLeft = u.unitData().movpoints;
 		u.entrenchment = 0;
 		u.hits = 0;
 		u.setHex(null); //also does isDeployed = false

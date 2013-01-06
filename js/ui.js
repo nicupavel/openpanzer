@@ -1168,7 +1168,7 @@ function updateEquipmentWindow(eqclass)
 			$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection
 			$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll
 
-			updateUnitInfoWindow(equipment[this.uniteqid]);
+			updateUnitInfoWindow(equipment[this.uniteqid]); //TODO show real unit stats
 			updateEquipmentWindow(this.eqclass);
 			$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
 		}
