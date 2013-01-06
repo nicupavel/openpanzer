@@ -222,19 +222,29 @@ function touchScroll(id)
 		}, false);
 }
 
-function insertViewPort()
+function changeViewPort()
 {
-	var ua = navigator.userAgent;
-	//Only for iOS devices
-	if (ua.match(/(iPad|iPhone|iPod)/i))
-	{
-		var v = addTag(document.getElementsByTagName('head')[0], "meta");
-		var ratio = window.devicePixelRatio || 1;
-		var scale = 1.0; // Don't take ratio in account for now since we want same zoom: /ratio;
-	
-		v.id = "viewport";
-		v.name = "viewport";
-		v.content = "width=device-width, initial-scale=" + scale +", maximum-scale=" + scale + ", user-scalable=0";
-	}
+        var i, meta = null;
+        var scale = 1.0;
+        var ratio = window.devicePixelRatio || 1;
+        var metaTags = document.getElementsByTagName("meta");
+
+        for (i = 0; i < metaTags.length; i++)
+                if (metaTags[i].name == "viewport")
+                    meta = metaTags[i];
+
+        if (meta === null)
+        {
+            meta = addTag(document.getElementsByTagName('head')[0], "meta");
+            meta.id = "viewport";
+            meta.name = "viewport";
+        }
+
+	//var ua = navigator.userAgent;
+        //if (ua.match(/(iPad|iPhone|iPod)/i)) //Only for iOS devices
+        if (uiSettings.useRetina)
+                scale = 1.0 / ratio;
+
+        meta.content = "width=device-width, initial-scale=" + scale +", maximum-scale=" + scale + ", user-scalable=0";
 }
-insertViewPort();
+changeViewPort(); //Set default viewport settings

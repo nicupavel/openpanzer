@@ -39,6 +39,8 @@ function UI(game)
 	window.oncontextmenu = function() { return false; } //disable rightclick menu
 	
 	canvas.addEventListener("mousedown", handleMouseClick, false);
+
+	uiSettings.hasTouch = hasTouch();
 	if (!uiSettings.hasTouch) canvas.addEventListener("mousemove", handleMouseMove, false);
 	
 	if (uiSettings.hasTouch && hasBrokenScroll())

@@ -184,9 +184,10 @@ var uiSettings =
 	markOwnUnits: false, 	//To visually mark own units on map
 	markEnemyUnits: false,	//To visually mark enemy units on map
 	markFOW: false, 	//Make Fog Of War visible
-	hasTouch: hasTouch(),	//Automatically detected if device has touch controller
+	hasTouch: false,	//Set in UI if device has touch
 	use3D: false,		//use transform3d/translate3d functions for animations
 	useRetina: false,	//don't scale on retina displays devicePixelRatio > 1
+	allowZoom: false,	//If user should be able to zoom in/out manually
 	isAI: [0, 0, 0, 0],	//which player is played by AI
 };
 	
