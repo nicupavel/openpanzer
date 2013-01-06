@@ -218,7 +218,9 @@ Unit.prototype.upgrade = function(upgradeid, transportid)
 	}
 	
 	this.entrenchment = 0;
-	this.hasMoved = this.hasFired = this.hasResupplied = true;
+
+	if (this.isDeployed) //Allow undeployed units to move/attack after upgrade (HQ upgrade)
+		this.hasMoved = this.hasFired = this.hasResupplied = true;
 	
 	return true;
 }
