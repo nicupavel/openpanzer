@@ -1357,7 +1357,7 @@ function uiEndTurnInfo()
 			
 	uiTurnInfo();
 	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
-				+ " side  Turn " + map.turn, infoStr);
+				+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
 	R.render(); //Full page render when changing player/side			
 }
 
