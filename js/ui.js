@@ -1085,6 +1085,8 @@ function updateEquipmentWindow(eqclass)
 	var u, ud;
 	var div;
 
+	var oldDeployMode = uiSettings.deployMode;
+
 	if (map.currentPlayer.hasUndeployedUnits())
 	{
 		//The units that current player hasn't deployed yet
@@ -1099,6 +1101,9 @@ function updateEquipmentWindow(eqclass)
 		unitList = map.getUnits();
 		uiSettings.deployMode = false;
 	}
+
+	if (oldDeployMode !== uiSettings.deployMode) //Check if we should refresh canvas for new mode
+		R.render(); //Full canvas render
 
 	for (var i = 0; i < unitList.length; i++)
 	{
