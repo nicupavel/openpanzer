@@ -57,7 +57,7 @@ function UI(game)
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Bring up the mainmenu
 
-function handleMouseClick(e) 
+function handleMouseClick(e)
 {
 	if (!game.gameStarted || game.gameEnded)
 		return false;
@@ -130,6 +130,7 @@ function handleMouseClick(e)
 	toggleButton($('air'), uiSettings.airMode);
 	updateUnitContextWindow(map.currentUnit);
 	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions
+	return true;
 }
 
 function handleMouseMove(e) 
@@ -192,7 +193,7 @@ function handleUnitSelect(row, col)
 function uiUnitSelect(unit)
 {
 	if (unit === null) 
-		return;
+		return false;
 	
 	var p = unit.getPos();
 	handleUnitDeselect();
@@ -1082,7 +1083,7 @@ function updateEquipmentWindow(eqclass)
 
 	var unitList = [];
 	var forcedScroll;
-	var u, ud;
+	var u, ud, userUnitSelected;
 	var div;
 
 	var oldDeployMode = uiSettings.deployMode;

@@ -20,7 +20,7 @@ function MapLoader(Game)
 		
 		xmlHttp = new XMLHttpRequest();
 		xmlHttp.open("GET", Game.scenario, false);
-		xmlHttp.send();
+		xmlHttp.send(null);
 
 		if ((xmlData = xmlHttp.responseXML) == null)
 			return false;
