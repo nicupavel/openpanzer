@@ -79,7 +79,6 @@ Player.prototype.buyUnit = function(unitid, transportid)
 	if (cost > this.prestige) return false;
 
 	var u = new Unit(unitid);
-	var transportid = transportid;
 
 	if (transportid > 0 && typeof transportid !== "undefined")
 		u.setTransport(transportid);
@@ -367,7 +366,7 @@ function Map()
 		if  (this.currentPlayer === null) this.currentPlayer = playerList[0];
 	}
 	
-	this.getPlayer = function(id) 
+	this.getPlayer = function(id) //TODO/FIX: returns player @ index instead of checking the ID
 	{ 
 		if (id < playerList.length)
 			return playerList[id]; 
@@ -593,6 +592,7 @@ function Map()
 		var moveCost = c[0].cost;
 		
 		//Save unit properties for undoing move
+		lastMove.clear();
 		lastMove.savedUnit = new Unit(unit.eqid);
 		lastMove.savedUnit.copy(unit);
 		lastMove.savedUnit.setHex(unit.getHex());
@@ -606,15 +606,20 @@ function Map()
 				mr.surpriseCell = c[i];
 				break;
 			}
-			if (canCapture && this.captureHex(c[i], player))
-				mr.isVictorySide = side;
-				
 			mr.passedCells.push(c[i]);
 			moveCost += c[i].cost;
 		}
 		
 		var lastCell = mr.passedCells[mr.passedCells.length - 1];
 		var dstHex = this.map[lastCell.row][lastCell.col];
+
+		//Only certain units ending on their destination can capture objectives
+		if (lastCell.row == drow && lastCell.col == dcol)
+		{
+			if (canCapture && this.captureHex(dstHex, player))
+				mr.isVictorySide = side;
+		}
+
 		unit.move(moveCost);
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
 		GameRules.setSpotRange(this.map, unit, false, this.rows, this.cols); //remove old spotting range
@@ -631,7 +636,7 @@ function Map()
 		if (newSpotted == 0 && !unit.isSurprised)
 			lastMove.unit = unit;
 		else
-			lastMove.unit = null;
+			lastMove.clear();
 
 		return mr;
 	}
@@ -828,37 +833,67 @@ function Map()
 		dstHex.setUnit(unit);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols); //set new ZOC
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols); //set new spotting range
-		lastMove.unit = null; //Reset last move undo save
-		delete(lastMove.savedUnit); //delete no longer used unit
 		this.selectUnit(unit);
+
+		var currentPlayer = this.getPlayer(unit.player.id);
+
+		//Restore srcHex properties
+		srcHex.owner = lastMove.oldOwner;
+		if (lastMove.oldFlag != -1)
+		{
+			srcHex.flag = lastMove.oldFlag;
+		}
+
+		if (lastMove.oldVictorySide != -1)
+		{
+			//remove from taken objectives
+			var enemySide = ~currentPlayer.side & 1;
+			this.updateVictorySides(enemySide, srcHex.getPos());
+			srcHex.victorySide = lastMove.oldVictorySide;
+		}
+
+
+		currentPlayer.prestige -= lastMove.prestigeGain; //Remove any prestige gains
+		lastMove.clear(); //Reset last move undo save
 	}
-	
+
 	//Captures a hex objective returns true is capture results in a win for the player
-	this.captureHex = function(cell, player)
+	this.captureHex = function(hex, player)
 	{
 		var isWin = false;
-		var hex = this.map[cell.row][cell.col];
-		
+		var prestigeGain = 0;
 		if (hex.owner == -1) //Hex not owned by any player
-				hex.owner = player.id;
+			return false;
 
 		var hexSide = this.getPlayer(hex.owner).side;
-
 		if (hexSide == player.side)
 			return false;
-			
+
+		lastMove.oldOwner = hex.owner;
 		hex.owner = player.id;
+
 		if (hex.flag != -1) //Secondary Objective
-		{ 
-			hex.flag = player.country; 
-			player.prestige += prestigeGains["flagCapture"];
+		{
+			lastMove.oldFlag = hex.flag;
+			hex.flag = player.country;
+
+			if (hex.victorySide == -1) //Only if not a bigger objective
+				prestigeGain += prestigeGains["flagCapture"];
 		}
+
 		if (hex.victorySide != -1) //Primary Objective
 		{
+			lastMove.oldVictorySide = hex.victorySide;
+			hex.victorySide = ~player.side & 1; //set it as a victory objective for enemy side
 			if (this.updateVictorySides(player.side, hex.getPos()))
 				isWin = true;
-			player.prestige += prestigeGains["objectiveCapture"];
+			prestigeGain += prestigeGains["objectiveCapture"];
+
 		}
+
+		lastMove.prestigeGain = prestigeGain; //Save how much it earned
+		player.prestige += prestigeGain;
+
 		return isWin;
 	}
 	
@@ -963,12 +998,23 @@ function Map()
 	}
 	
 	//Private
-	//For saving last move by a unit
+
+	//For saving changes made by last move of a unit
 	var lastMove = 
 	{
-		unit: null,
-		savedUnit: null,
-	}; 
+		unit: null, 		//Current unit properties
+		savedUnit: null, 	//Old state unit properties (fuel, movesleft)
+		oldOwner: -1,		//If changed owner of the hex
+		oldFlag: -1,		//If changed a flag
+		oldVictorySide: -1, 	//If an objective was captured
+		prestigeGain: 0,	//If player got any prestige
+		clear: function()
+			{
+				this.unit = this.savedUnit = null;
+				this.oldVictorySide = this.oldOwner = this.oldFlag = -1;
+				this.prestigeGains = 0;
+			}
+	};
 
 	//Checks for destroyed units and remove them from list
 	function updateUnitList()
