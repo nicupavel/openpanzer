@@ -20,7 +20,7 @@ function UI(game)
 	};
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
-	var scenarioPath = "resources/scenarios/xml/";
+	var scenarioPath = "resources/scenarios/data/";
 
 	var map = game.map;
 	var R = new Render(map);

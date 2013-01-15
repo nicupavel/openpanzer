@@ -2,7 +2,7 @@
 <html>
   <head>
 	<title>Open Panzer</title>
-	<meta name="Author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
+	<meta name="author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
 	<meta name="description" content="HTML5 Panzer General 2 Clone"/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="icon" href="resources/ui/page/icon/icon.png" type="image/png"/>
@@ -10,17 +10,20 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="resources/ui/page/icon/icon-72x72.png" />
 	<link rel="apple-touch-icon" sizes="114x114" href="resources/ui/page/icon/icon-114x114.png" />
 	<link rel="apple-touch-icon" sizes="144x144" href="resources/ui/page/icon/icon-144x144.png" />
+
+    <script src="resources/scenarios/scenarios.js"></script>
+    <script src="resources/campaigns/campaigns.js"></script>
+
+    <script src="resources/equipment/equipment-condensed.js"></script> <!-- for loading speed -->
+    <!-- <script src="resources/equipment/equipment.js"></script> --> <!-- the human readable version for development -->
+
+    <!-- <script src="js/eventhandler.js"></script> -->
     <script src="js/prototypes.js"></script>
     <script src="js/dom.js"></script>
-    <script src="js/campaigns.js"></script>
-    <script src="js/scenarios.js"></script>
-	<script src="js/eventhandler.js"></script>
 	<script src="js/ai.js"></script>
 	<script src="js/style.js"></script>
 	<script src="js/sound.js"></script>
 	<script src="js/animation.js"></script>
-	<script src="js/equipment-condensed.js"></script> <!-- for loading speed -->
-	<!-- <script src="js/equipment.js"></script> --> <!-- the human readable version for development -->
 	<script src="js/gamerules.js"></script>
 	<script src="js/gamestate.js"></script>
 	<script src="js/unit.js"></script>
@@ -30,7 +33,9 @@
     <script src="js/campaign.js"></script>
 	<script src="js/ui.js"></script>
 	<script src="js/game.js"></script>
+
 	<link href="css/ui.css" rel="stylesheet" type="text/css">
+
   </head>
   <body onload="gameStart();" id="mainbody">
 	<div id="statusbar"></div> <!-- Status bar where messages/infos are shown -->

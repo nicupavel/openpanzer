@@ -19,7 +19,7 @@ function Campaign(campIndex)
 	this.id = campIndex;
 
 	var currentScenario = 0;
-	var campaignPath = "resources/campaigns/";
+	var campaignPath = "resources/campaigns/data/";
 	var campaignData = loadCampaign(campaignInfo.file);
 
 	this.setScenarioById = function(scenarioID)
