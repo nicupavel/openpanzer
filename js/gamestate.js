@@ -113,19 +113,27 @@ function GameState(Game)
 	//Private functions
 	function saveItem(key, object)
 	{
-		localStorage.setItem(key, JSON.stringify(object));
+		if (localStorage)
+			localStorage.setItem(key, JSON.stringify(object));
 	}
 	
 	function restoreItem(key)
 	{
-		var object = localStorage.getItem(key);
-		if (object)	return JSON.parse(object);
-		else return null;
+		var object = null;
+
+		if (localStorage)
+			object = localStorage.getItem(key);
+
+		if (object)
+			return JSON.parse(object);
+
+		return null;
 	}
 	
 	function deleteItem(key)
 	{
-		localStorage.removeItem(key);
+		if (localStorage)
+			localStorage.removeItem(key);
 	}
 }
 
