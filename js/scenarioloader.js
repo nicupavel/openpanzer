@@ -1,5 +1,5 @@
 /**
- * MapLoader - Loads XML scenarios as exported from mapconvert.py script
+ * ScenarioLoader - Loads XML scenarios as exported from mapconvert.py script
  *
  * http://www.linuxconsulting.ro
  * http://openpanzer.net
@@ -9,27 +9,27 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-function MapLoader(Game)
+function ScenarioLoader()
 {
 	var xmlData = null;
-	var map;
-	
-	this.loadMap = function()
+	var map = null;
+
+	this.loadScenario = function(mapObj, scenarioFile)
 	{
 		var xmlHttp;
-		
+		map = mapObj;
+
 		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", Game.scenario, false);
+		xmlHttp.open("GET", scenarioFile, false);
 		xmlHttp.send(null);
 
 		if ((xmlData = xmlHttp.responseXML) == null)
 			return false;
 
-		map = Game.map;
 		if (!parseMapHeader())
 			return false;
 		
-		map.allocMap();
+		map.allocMap(); //Must have map header properties set
 		loadPlayers();
 		loadHexes();
 		

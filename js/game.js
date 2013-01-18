@@ -18,7 +18,7 @@ function Game()
 	this.ui = null;
 	this.state = null;
 	this.campaign = null;
-	this.scenario = "";
+	this.scenario = Game.defaultScenario;
 
 	this.gameStarted = false; //Game not yet fully initialised
 	this.gameEnded = false; //Game ended in victory or defeat
@@ -29,7 +29,7 @@ function Game()
 	//EventHandler.addEvent("AttackAnimation");
 	//EventHandler.addListener("AttackAnimation", testev, this);
 
-	var loader = new MapLoader(this);
+	var loader = new ScenarioLoader(); // scenario loader instance
 	var localPlayingSide = -1; //Which player side plays locally on this computer
 	var campaignPlayer = null; //Player that plays campaign locally
 	var savedPlayer = null; //Saved copy of the campaign player used between campaign scenarios
@@ -41,10 +41,10 @@ function Game()
 	{
 		this.map = new Map();
 		this.state = new GameState(this);
-		this.scenario = Game.defaultScenario;
 
 		if (!this.state.restore())
-			loader.loadMap();//Load default scenario from this.scenario
+			if (!loader.loadScenario(this.map, this.scenario)) //Load default scenario
+				console.log("Error : Cannot load scenario " + this.scenario);
 
 		setupPlayers(this);
 
@@ -128,7 +128,9 @@ function Game()
 		this.scenario = scenario;
 		this.map = new Map();
 		this.state.clear();
-		loader.loadMap();
+		if (!loader.loadScenario(this.map, this.scenario))
+			console.log("Error : Cannot load scenario " + this.scenario);
+
 		setupPlayers(this);
 		localPlayingSide = getLocalSide(this.map.getPlayers());
 		this.setCurrentSide();
@@ -342,7 +344,7 @@ function Game()
 	}
 }
 
-Game.defaultScenario = "resources/scenarios/xml/tutorial.xml";
+Game.defaultScenario = "resources/scenarios/data/tutorial.xml";
 
 function gameStart()
 {
