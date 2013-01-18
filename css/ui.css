@@ -51,9 +51,7 @@ body,html
 	min-width: 840px;
 	margin-left: -420px;
 	left: 50%;
-	border:0px solid #000; 
-	font-weight:bold; 
-	color:white; 
+	border:0px solid #000;
 	background-color:black;
 	opacity: 0.6;
 	z-index:3;
@@ -81,22 +79,28 @@ body,html
 	display: none;
 }
 
+#statusmsg
+{
+    width: 450px;
+    height:20px;
+    float: left;
+}
+
+#locmsg
+{
+    width: 390px;
+    height:20px;
+    text-align: right;
+    float: left;
+}
+
 .message
 {
-	float:left; 
-	border: 0px solid #fff;
-	width: 450px;
-	height:20px;
 	color: #f8e064;
 	font-family: Arial;
 	font-size: 14px;
 	font-weight: normal;
 	text-shadow: 0.1em 0.1em 0.2em black;
-}
-.message#locmsg
-{
-	width: 380px;
-	text-align: right;
 }
 
 .button

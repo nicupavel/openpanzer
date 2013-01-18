@@ -53,7 +53,10 @@ function UI(game)
 	
 	buildStartMenu();
 	buildMainMenu();
+	buildUnitInfoWindow();
 	buildEquipmentWindow();
+
+	uiTurnInfo();
 	
 	this.mainMenuButton = function(id) { mainMenuButton(id); } //Bring up the mainmenu
 
@@ -592,15 +595,6 @@ function buildMainMenu()
 	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
 			   ["buy","Upgrade/Buy Units", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
 			   ["zoom","Strategic Map", 1], ["options","Options", 1]];
-					   
-	var sd = addTag('statusbar','div');
-	sd.id = "statusmsg";
-	sd.className = "message";
-	uiTurnInfo();
-	
-	var ld = addTag('statusbar','div');
-	ld.id = "locmsg"
-	ld.className = "message";
 
 	for (var b = 0; b < menubuttons.length; b++) 
 	{
@@ -811,6 +805,28 @@ function updateUnitContextWindow(u)
 		makeHidden('unit-context');
 }
 
+//Builds the unit stats info window
+function buildUnitInfoWindow()
+{
+	//Unit stats that will be listed on the window format <id>, <title>
+	var unitstats = [ ["uFlag", "country flag"],["uStr", "Unit strength"], ["uFuel", "Unit fuel"], ["uAmmo", "Unit Ammo"],
+			   ["uGunRange", "Firing range"], ["uMovement", "Movement range"],["uExp", "Combat Experience"],
+			   ["uEnt","Entrenchment"], ["uIni", "Combat initiative"], ["uSpot", "Spotting range"],
+			   ["uAHard", "Power vs Hard targets"], ["uASoft", "Power vs Soft targets"], ["uAAir", "Power vs Air targets"],
+			   ["uANaval", "Power vs Naval targets"], ["uDHard", "Defence vs Hard targets"], ["uDAir", "Defence vs Air targets"],
+			   ["uDClose", "Defence in close combat"],["uDRange", "Defence in ranged combat"], ["uMoveType", "Movement type"],
+			   ["uTarget", "Target type"], ["uTransport", "See unit/transport"] /*, ["uClass", "Unit class"]*/ ];
+
+	for (var s = 0; s < unitstats.length; s++)
+	{
+		var div = addTag('statsRow','div');
+
+		div.id = unitstats[s][0];
+		div.title = unitstats[s][1];
+		div.className = "uStat";
+	}
+}
+//Updates the unit stats info window
 function updateUnitInfoWindow(u)
 {
 	var isEqUnit = false;

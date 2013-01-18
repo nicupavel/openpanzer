@@ -38,7 +38,6 @@
 
   </head>
   <body onload="gameStart();" id="mainbody">
-	<div id="statusbar"></div> <!-- Status bar where messages/infos are shown -->
 	<div id="startmenu"> <!-- The main menu -->
 		<div id="smMain" class="mainPanel">
 			<div id="smLogo"><div id="smLogoText"></div></div>
@@ -76,43 +75,19 @@
 			<div id="smSetOkBut" class="smSmallButton"></div>
 		</div>
 	</div>
+    <div id="statusbar">
+        <div id="statusmsg" class="message"></div>
+        <div id="locmsg" class="message"></div>
+    </div> <!-- Status bar where messages/infos are shown -->
 	<div id="menu"> <!-- Where the in game menu is being built -->
 		<div id="slidemenu"></div>
 	</div>
 	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
 	<div id="unit-info">  <!-- Unit info dialog -->
-		<div class="imageCol">
-		<div id="uImage"></div>	
-		</div>
-		<div class="nameRow"><div id="uName">Open Panzer</div>
-		<div class="statsRow">
-			<div class="uStat" id="uFlag"></div>
-			<div class="uStat" id="uStr"></div>
-			<div class="uStat" id="uFuel"></div>
-			<div class="uStat" id="uAmmo"></div>
-			<div class="uStat" id="uGunRange"></div>
-			<div class="uStat" id="uMovement"></div>
-		
-			<div class="uStat" id="uExp"></div>
-			<div class="uStat" id="uEnt"></div>
-			<div class="uStat" id="uIni"></div>
-			<div class="uStat" id="uSpot"></div>
-
-			<div class="uStat" id="uAHard"></div>
-			<div class="uStat" id="uASoft"></div>
-			<div class="uStat" id="uAAir"></div>
-			<div class="uStat" id="uANaval"></div>
-
-			<div class="uStat" id="uDHard"></div>
-			<div class="uStat" id="uDAir"></div>
-			<div class="uStat" id="uDClose"></div>
-			<div class="uStat" id="uDRange"></div>
-			
-			<div class="uStat" id="uMoveType"></div>
-			<div class="uStat" id="uTarget"></div>
-			<!-- <div class="uStat" id="uClass"></div> -->
-			<div id="uTransport"></div>
-		</div>
+		<div class="imageCol"><div id="uImage"></div></div>
+		<div class="nameRow">
+            <div id="uName">Open Panzer</div>
+		    <div id="statsRow" class="statsRow"></div>
 		</div>
 	</div>
 	<div id="ui-message"> <!-- Message popup -->
