@@ -47,11 +47,11 @@ Source code structure description:
 │   └── ui.js                  - handle mouse, builds/updates UI windows
 ├── resources
 │   ├── animations             - images with 1 row of sprites for animations
-│   ├── campaigns              - campaigns and campaigns.js index converted with tools/campaign/campaign-convert.py
+│   ├── campaigns              - campaigns and campaignlist.js index converted with tools/campaign/campaign-convert.py
 │   ├── equipment              - contains units equipment/properties
 │   ├── fonts                  - fonts used in OpenPanzer
 │   ├── maps                   - big images for the map background
-│   ├── scenarios              - scenarios and scenarios.js index converted with tools/map/mapconvert.py 
+│   ├── scenarios              - scenarios and scenariolist.js index converted with tools/map/mapconvert.py
 │   ├── sounds                 - sounds used for units
 │   ├── ui
 │   │   ├── buttons            - generic buttons (ok/close)
