@@ -9,7 +9,8 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
-var GameRules = GameRules || {}; //Namespace emulation
+//var GameRules = GameRules || {}; //Namespace emulation
+var GameRules = (function(GameRules) { //Module start
 
 //returns a cell list with hexes that a unit @ row,col can move to
 //Works by computing cost of ajacent hexes by range expanding from 0 to unit movpoints
@@ -1130,4 +1131,5 @@ function getCellsInRange(row, col, range, mrows, mcols)
 	}
 	return cellList;
 }
-
+//------------------------ MODULE END ----------------------
+return GameRules; }(GameRules || {})); //Module end giberish
