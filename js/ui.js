@@ -22,7 +22,7 @@ function UI(game)
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
 	var scenarioPath = "resources/scenarios/data/";
 
-	var map = game.map;
+	var map = game.scenario.map;
 	var R = new Render(map);
 	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
 
@@ -516,7 +516,7 @@ function buildStartMenu()
 			var s = $('smScen').selectedScenario;
 			if (!s)	return;
 			game.campaign = null; //New scenario delete campaign
-			newScenario(scenariolist[s][0], scenariolist[s][2]);
+			game.newScenario(scenariolist[s][0], scenariolist[s][2]);
 			makeHidden('smScen');
 			makeHidden('startmenu');
 			toggleButton($('options'), false);
@@ -1417,12 +1417,9 @@ function selectStartingUnit()
 	}
 }
 
-this.newScenario = function(scenData) { return newScenario(scenData.scenario, scenData.intro); }
-function newScenario(scenario, introText)
+this.setNewScenario = function()
 {
-	scenario = scenarioPath + scenario;
-	game.newScenario(scenario);
-	map = game.map;
+	map = game.scenario.map;
 	R.setNewMap(map);
 	R.cacheImages(function() 
 	{ 
@@ -1433,7 +1430,7 @@ function newScenario(scenario, introText)
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
 	uiTurnInfo();
-	uiMessage(map.name, introText);
+	uiMessage(game.scenario.name, game.scenario.description);
 }
 
 function getMouseInfo(canvas, e)

@@ -13,7 +13,7 @@ function GameState(Game)
 
 	var saveName =
 	{
-		map:     'openpanzer-map-'+VERSION,
+		map:     'openpanzer-scenario-'+VERSION,
 		players: 'openpanzer-players-'+VERSION,
 		settings:'openpanzer-settings-'+VERSION,
 		campaign:'openpanzer-campaign-'+VERSION,
@@ -21,8 +21,8 @@ function GameState(Game)
 
 	this.save = function()
 	{
-		saveItem(saveName.map, Game.map);
-		saveItem(saveName.players, Game.map.getPlayers());
+		saveItem(saveName.map, Game.scenario.map);
+		saveItem(saveName.players, Game.scenario.map.getPlayers());
 	}
 
 	this.restore = function()
@@ -38,7 +38,7 @@ function GameState(Game)
 		//Need to restore the settings since some players might be assigned to AI
 		this.restoreSettings();
 
-		var map = Game.map;
+		var map = Game.scenario.map;
 
 		for (var i = 0; i < p.length; i++)
 		{
