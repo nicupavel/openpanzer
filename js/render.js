@@ -129,11 +129,15 @@ function Render(mapObj)
 				}
 				else
 				{
-					if (hex.isMoveSel)
-						drawHex(c, x0, y0, hexstyle.move);
+					//Don't show move/attack hexes for non local players
+					if (map.currentPlayer.side == game.spotSide)
+					{
+						if (hex.isMoveSel)
+							drawHex(c, x0, y0, hexstyle.move);
 
-					if (hex.isAttackSel)
-						drawHex(c, x0, y0, hexstyle.attack);
+						if (hex.isAttackSel)
+							drawHex(c, x0, y0, hexstyle.attack);
+					}
 				}
 
 				if (uiSettings.mapZoom) 
