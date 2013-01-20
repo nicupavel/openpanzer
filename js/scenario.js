@@ -37,4 +37,38 @@ function Scenario(scenFile)
 			}
 		}
 	}
+
+	//Checks if local human player (not net/ai) has reached the map turn limit
+	this.checkDefeat = function(lastSide, localPlayingSide)
+	{
+		if (this.map.turn >= this.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
+		{
+			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.maxTurns))
+			{
+				console.log("Defeat for %s on turn %d !", this.map.currentPlayer.getCountryName(), this.map.turn);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//TODO add checkVictory and add brilian/tactical/victory outcomes in scenario information during conversion
+	this.checkVictory = function()
+	{
+
+	}
+	
+	//Private methods
+	//Check if all players from a side have played certain turn
+	function hasSidePlayedTurn(playerList, side, turn)
+	{
+		for (var i = 0; i < playerList.length; i++)
+		{
+			if (playerList[i].side != side)
+				continue;
+			if (playerList[i].playedTurn < turn)
+				return false;
+		}
+		return true;
+	}
 }

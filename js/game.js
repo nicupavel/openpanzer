@@ -96,23 +96,20 @@ function Game()
 			game.state.saveCampaign();
 
 		this.scenario.map.endTurn();
+
 		//Check if game ended in defeat only for human players
-		if (this.scenario.map.turn >= this.scenario.map.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
+		if (this.scenario.checkDefeat(lastSide, localPlayingSide))
 		{
-			if (hasSidePlayedTurn(this.scenario.map.getPlayers(), lastSide, this.scenario.map.maxTurns))
+			//If in a compaign set the campaign outcome to lost and get next available scenario
+			if (this.campaign !== null)
 			{
-				console.log("Defeat turn:" + this.scenario.map.turn);
-				//If in a compaign set the campaign outcome to lost and get next available scenario
-				if (this.campaign !== null)
-				{
-					this.continueCampaign("lose");
-				}
-				else //If single scenario game has ended
-				{
-					this.gameEnded = true;
-				}
-				return;
+				this.continueCampaign("lose");
 			}
+			else //If single scenario game has ended
+			{
+				this.gameEnded = true;
+			}
+			return;
 		}
 		//Set the new visible side on map
 		this.setCurrentSide();
@@ -323,19 +320,6 @@ function Game()
 			localSide = 2;
 
 		return localSide;
-	}
-	
-	//Check if all players from a side have played certain turn
-	function hasSidePlayedTurn(playerList, side, turn)
-	{
-		for (var i = 0; i < playerList.length; i++)
-		{
-			if (playerList[i].side != side)
-				continue;
-			if (playerList[i].playedTurn < turn)
-				return false;
-		}
-		return true;
 	}
 }
 
