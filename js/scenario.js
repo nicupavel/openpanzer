@@ -57,7 +57,7 @@ function Scenario(scenFile)
 	{
 
 	}
-	
+
 	//Private methods
 	//Check if all players from a side have played certain turn
 	function hasSidePlayedTurn(playerList, side, turn)

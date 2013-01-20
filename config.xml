@@ -13,7 +13,7 @@
 		Nicu Pavel
 	</author>
 	
-	<preference name="phonegap-version" value="2.2.0" />
+	<preference name="phonegap-version" value="2.3.0" />
 	<preference name="orientation" value="landscape" />
 	<preference name="target-device" value="universal" />
 	<preference name="fullscreen" value="true" />
