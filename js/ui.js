@@ -14,13 +14,12 @@ function UI(game)
 	//Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
 	var eqClassButtons = 
 	{
-	"9": ['but-aa', 'Air defence'], "4": ['but-at', 'Anti-tank'], "8": ['but-arty', 'Artillery'],
-	"1": ['but-inf', 'Infantry'], "3":['but-rcn', 'Recon'], "2": ['but-tank', 'Tank'],
-	"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
+		"9": ['but-aa', 'Air defence'], "4": ['but-at', 'Anti-tank'], "8": ['but-arty', 'Artillery'],
+		"1": ['but-inf', 'Infantry'], "3":['but-rcn', 'Recon'], "2": ['but-tank', 'Tank'],
+		"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
 	};
 
 	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
-	var scenarioPath = "resources/scenarios/data/";
 
 	var map = game.scenario.map;
 	var R = new Render(map);
@@ -158,7 +157,7 @@ function handleUnitDeployment(row, col)
 	
 }
 
-//Deselects a previously selected unit. Can have row,col as params since user can click or rightclick
+//Deselects a previously selected unit. Can't have row,col as params since user can click or rightclick
 //everywhere on empty terrain to deselect a unit
 function handleUnitDeselect()
 {
