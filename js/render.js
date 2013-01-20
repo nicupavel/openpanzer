@@ -120,31 +120,39 @@ function Render(mapObj)
 					y0 = row * 2 * r  + renderOffsetY;
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
-				
-				if (uiSettings.deployMode && hex.isDeployment > -1)
-					if (map.getPlayer(hex.isDeployment).side == map.currentPlayer.side)
+
+				//Only show deployment hexes not move/attack hexes on deploy mode
+				if (uiSettings.deployMode)
+				{
+					if (hex.isDeployment > -1 && map.getPlayer(hex.isDeployment).side == map.currentPlayer.side)
 						drawHex(c, x0, y0, hexstyle.deploy);
-					
+				}
+				else
+				{
+					if (hex.isMoveSel)
+						drawHex(c, x0, y0, hexstyle.move);
+
+					if (hex.isAttackSel)
+						drawHex(c, x0, y0, hexstyle.attack);
+				}
+
 				if (uiSettings.mapZoom) 
 				{
 					drawHexZoomDecals(x0, y0, hex); 
 					continue;  
 				}
-				
-				if (hex.isMoveSel && !uiSettings.deployMode) 
-					drawHex(c, x0, y0, hexstyle.move);
-				
-				if (hex.isAttackSel && !uiSettings.deployMode) 
-					drawHex(c, x0, y0, hexstyle.attack);
-				
+				else
+				{
+					drawHexDecals(x0, y0, hex);
+				}
+
 				if ((current !== null) && (typeof current !== "undefined") 
 					&& (row == current.row) && (col == current.col))
 					drawHex(c, x0, y0, hexstyle.current);
 				
 				if (drawHexGrid)
 					drawHex(cb, x0, y0, hexstyle.generic);
-								
-				drawHexDecals(x0, y0, hex);
+
 				
 				//Don't render unit if it has a move animation or it's not spotted by
 				//the local playing player side
