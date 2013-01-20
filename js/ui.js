@@ -142,7 +142,7 @@ function handleMouseMove(e)
 	var minfo = getMouseInfo(canvas, e);
 	var c = R.screenToCell(minfo.x, minfo.y);
 
-	if (map.currentUnit != null) { R.drawCursor(c); }
+	if (map.currentUnit != null && !uiSettings.mapZoom) { R.drawCursor(c); }
 	updateStatusBarLocation(c.row, c.col);
 }
 
