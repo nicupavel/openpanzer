@@ -179,7 +179,7 @@ function Game()
 		}
 		else
 		{
-			this.ui.uiMessage(outcomeType + " victory !", outcomeText);
+			this.ui.uiMessage(outcomeNames[outcomeType], outcomeText);
 			needScenarioLoad = true; //Wait for user to click to continue to next scenario
 		}
 	}

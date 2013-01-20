@@ -107,6 +107,14 @@ var movMethodNames =
 	"Costal", "All Terrain Tracked", "Amphibious", "Naval", "All Terrain Leg"
 ];
 
+var outcomeNames =
+{
+	"lose": "Defeat",
+	"victory": "Victory",
+	"tactical": "Tactical Victory",
+	"briliant": "Briliant Victory"
+};
+
 //TODO Frozen conditions
 //254 Stop move (but select the tile), 255 Don't enter
 var movTable = 
