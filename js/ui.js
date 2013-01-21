@@ -982,7 +982,7 @@ function buildEquipmentWindow()
 			else this.country++;
 			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing country
 			$('eqUserSel').equnit = -1;
-			updateEquipmentWindow(unitClass.tank);
+			updateEquipmentWindow($('eqUserSel').eqclass || unitClass.tank);
 		};
 	//Unit Class buttons	
 	for (var b in eqClassButtons)
@@ -1068,7 +1068,6 @@ function buildEquipmentWindow()
 }
 
 //TODO index equipment array
-//TODO/REVIEW clear onclick functions when using clearTag
 function updateEquipmentWindow(eqclass)
 {
 	if (!isVisible('container-unitlist'))
