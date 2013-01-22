@@ -41,9 +41,9 @@ function Scenario(scenFile)
 	//Checks if local human player (not net/ai) has reached the map turn limit
 	this.checkDefeat = function(lastSide, localPlayingSide)
 	{
-		if (this.map.turn >= this.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
+		if (this.map.turn >= this.map.maxTurns && (lastSide == localPlayingSide || localPlayingSide == 2))
 		{
-			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.maxTurns))
+			if (hasSidePlayedTurn(this.map.getPlayers(), lastSide, this.map.maxTurns))
 			{
 				console.log("Defeat for %s on turn %d !", this.map.currentPlayer.getCountryName(), this.map.turn);
 				return true;
