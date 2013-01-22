@@ -171,12 +171,12 @@ function Game()
 		scenData = this.campaign.loadNextScenario(outcomeType);
 		if (scenData == null)
 		{
-			this.ui.uiMessage("Campaign Finished", outcomeText);
+			UIBuilder.message("Campaign Finished", outcomeText);
 			this.gameEnded = true;
 		}
 		else
 		{
-			this.ui.uiMessage(outcomeNames[outcomeType], outcomeText);
+			UIBuilder.message(outcomeNames[outcomeType], outcomeText);
 			needScenarioLoad = true; //Wait for user to click to continue to next scenario
 		}
 	}

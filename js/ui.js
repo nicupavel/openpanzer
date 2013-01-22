@@ -11,16 +11,6 @@
 
 function UI(game)
 {
-	//Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
-	var eqClassButtons = 
-	{
-		"9": ['but-aa', 'Air defence'], "4": ['but-at', 'Anti-tank'], "8": ['but-arty', 'Artillery'],
-		"1": ['but-inf', 'Infantry'], "3":['but-rcn', 'Recon'], "2": ['but-tank', 'Tank'],
-		"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
-	};
-
-	var currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
-
 	var map = game.scenario.map;
 	var R = new Render(map);
 	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
@@ -34,9 +24,6 @@ function UI(game)
 		});
 		
 	var canvas = R.getCursorCanvas();
-	
-	window.oncontextmenu = function() { return false; } //disable rightclick menu
-	
 	canvas.addEventListener("mousedown", handleMouseClick, false);
 
 	uiSettings.hasTouch = hasTouch();
@@ -49,15 +36,15 @@ function UI(game)
 		touchScroll("hscroll-eqUnitList");
 		touchScroll("hscroll-eqTransportList");
 	}
+
+	toggleRightClick(false);
 	
-	buildStartMenu();
-	buildMainMenu();
-	buildUnitInfoWindow();
-	buildEquipmentWindow();
+	UIBuilder.buildStartMenu();
+	UIBuilder.buildMainMenu();
+	UIBuilder.buildUnitInfoWindow();
+	UIBuilder.buildEquipmentWindow();
 
 	uiTurnInfo();
-	
-	this.mainMenuButton = function(id) { mainMenuButton(id); } //Bring up the mainmenu
 
 function handleMouseClick(e)
 {
@@ -93,7 +80,6 @@ function handleMouseClick(e)
 		return true;
 	}
 
-	//Clicked hex has a unit ?
 	if (clickedUnit) 
 	{
 		updateUnitInfoWindow(clickedUnit);
@@ -375,180 +361,7 @@ function uiAttackInfo(atkunit, defunit)
 				+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
 }
 
-//Builds the start menu/options menu
-function buildStartMenu()
-{
-	//menu buttons divs with id, title the image filename from resources/ui/startmenu/images
-	var menubuttons = [["newcampaign", "New Campaign"], ["newscenario", "New Scenario"], ["settings", "Settings"], ["help", "Help"], ["continuegame", "Continue Game"]];
-	//Settings with key in uiSettings and Title
-	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War"],
-			["markOwnUnits", "Mark own units on map"], ["markEnemyUnits", "Mark enemy units on map"]];
-	var imgres = "resources/ui/dialogs/startmenu/images/";
-
-	var i, b, div, img;
-
-	//Add main buttons
-	for (b = 0; b < menubuttons.length; b++)
-	{
-		div = addTag('smButtons', 'div');
-		img = addTag(div, 'img');
-		div.id = menubuttons[b][0];
-		div.title = menubuttons[b][1];
-		div.className = "smMainButton";
-		img.src = "resources/ui/dialogs/startmenu/images/" + div.id + ".png";
-		div.onclick = function() { startMenuButton(this.id); }
-	}
-	//Odd number of buttons center last one
-	if (menubuttons.length % 2)
-		div.className = "smMainButtonCenter"
-
-	$('smLogoText').innerHTML = "version " + VERSION;
-	$('smCredits').innerHTML = "Copyright 2012 <a href='http://linuxconsulting.ro/openpanzer'>Nicu Pavel</a>";
-
-	//Add new campaign options (campaign list, description)
-	var camSel = addTag('smCampSel', 'select')
-	for (i = 0; i < campaignlist.length; i++)
-	{
-		var camOpt = addTag(camSel, 'option');
-		camOpt.value = i;
-		camOpt.text = campaignlist[i]['title'];
-	}
-	camSel.onchange = function()
-	{
-		var v = this.options[this.selectedIndex].value;
-		$('smCampDesc').innerHTML = campaignlist[v].desc;
-		$('smCampPlayers').innerHTML = "<br/><br/>" +
-			"Campaign will be played as: " + countryNames[campaignlist[v].flag] + "<br/>" +
-			"Scenarios in this campaign: " + campaignlist[v].scenarios + "<br/>" +
-			"Starting prestige for player: " + campaignlist[v].prestige + currencyIcon;
-
-		$('smCamp').selectedCampaign = v; //save index to campaign from campaignlist //TODO move to userSel
-	}
-	$('smCBackBut').onclick = function()
-	{
-		makeHidden('smCamp');
-		makeVisible('smMain');
-	}
-	$('smCPlayBut').onclick = function()
-	{
-		var s = $('smCamp').selectedCampaign;
-		if (!s)	return;
-		console.log("Starting Campaign %s", s);
-		game.newCampaign(s);
-		makeHidden('smCamp');
-		makeHidden('startmenu');
-		toggleButton($('options'), false);
-		game.state.saveSettings();
-	}
-
-	/* Campaign debug button */
-	if (DEBUG_CAMPAIGN)
-	{
-		$('smCV').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("victory"); }
-		$('smCVB').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("briliant"); }
-		$('smCVT').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("tactical"); }
-		$('smCL').onclick = function() { makeHidden('smCamp'); makeHidden('startmenu'); game.continueCampaign("lose"); }
-	}
-
-	//Add new scenario options(scenario list, description, players)
-	var scnSel = addTag('smScenSel', 'select');
-	for (i = 0; i < scenariolist.length; i++)
-	{
-		var scnOpt = addTag(scnSel, 'option');
-		scnOpt.value = i;
-		scnOpt.text = scenariolist[i][1];
-	}
-	scnSel.onchange = function()
-		{
-			var v = this.options[this.selectedIndex].value;
-			$('smScenDesc').innerHTML = scenariolist[v][2];
-			
-			clearTag('smSide0');
-			$('smVS').innerHTML = "VS";
-			clearTag('smSide1');
-			//Clear previous player AI settings
-			uiSettings.isAI = [0, 0, 0, 0];
-			
-			//Add players for side 0 and 1
-			for (var s = 0; s <= 1; s++)
-			{
-				var data = scenariolist[v][3 + s];
-				var sideID = "smSide" + s;
-				var sideHeader = addTag(sideID, 'div');
-				sideHeader.className = "smSideHeader";
-				sideHeader.innerHTML = sideNames[s];
-				var sideImg = addTag(sideHeader, 'img');
-				sideImg.src = imgres + "side" + s + ".png";
-				
-				for (var i = 0; i < data.length; i++)
-				{
-					var containerDiv = addTag(sideID, 'div');
-					containerDiv.className = "smPlayerContainer";
-					var flagDiv = addTag(containerDiv, 'div');
-					flagDiv.className = "playerCountry";
-					flagDiv.style.backgroundPosition = "" + data[i]["country"] * -21 + "px 0px"; //Update flag
-					var contentDiv = addTag(containerDiv, 'div');
-					contentDiv.className = "playerName";
-					contentDiv.innerHTML = (scenariolist[v][3 + s][i]["id"] + 1) + ". " + countryNames[data[i]["country"]];
-					var smAIBut = addTag(containerDiv, 'img');
-					
-					smAIBut.src = "resources/ui/dialogs/startmenu/images/aicheckbox.png";
-					smAIBut.id = "ai" + data[i]["id"];
-					smAIBut.playerid = data[i]["id"];
-					smAIBut.onclick = function() 
-						{ 
-							uiSettings.isAI[this.playerid] = !uiSettings.isAI[this.playerid];
-							toggleCheckbox(this); 
-							console.log(uiSettings.isAI);
-						}
-				}
-			}
-			$('smScen').selectedScenario = v; //TODO move to userSel
-		}
-	$('smSBackBut').onclick = function()
-		{ 
-			makeHidden('smScen');
-			makeVisible('smMain');
-		}
-	$('smSPlayBut').onclick = function()
-		{ 
-			var s = $('smScen').selectedScenario;
-			if (!s)	return;
-			game.campaign = null; //New scenario delete campaign
-			game.newScenario(scenariolist[s][0], scenariolist[s][2]);
-			makeHidden('smScen');
-			makeHidden('startmenu');
-			toggleButton($('options'), false);
-			game.state.saveSettings();
-		}
-	
-	//The settings window
-	for (var b = 0; b < settings.length; b++) 
-	{
-		var div = addTag('smSettings', 'div');
-		div.id = settings[b][0];
-		div.title = settings[b][1];
-		div.className = "setting";
-		div.innerHTML = settings[b][1];
-		var img = addTag(div, 'img');
-		img.id = settings[b][0];
-
-		if (uiSettings[settings[b][0]])
-			img.src = "resources/ui/dialogs/startmenu/images/checkbox-checked.png";
-		else
-			img.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
-
-		img.onclick = function() { uiSettings[this.id] = !uiSettings[this.id]; toggleCheckbox(this); console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]); }
-	}
-	$('smSetOkBut').onclick = function() 
-		{
-			makeHidden('smSettings');
-			makeVisible('smMain');
-			game.state.saveSettings();
-		}
-}
-
-function startMenuButton(id)
+this.startMenuButton = function(id)
 {
 	switch(id) 
 	{
@@ -586,39 +399,7 @@ function startMenuButton(id)
 	}
 }
 
-//Builds the in game right side menu
-function buildMainMenu()
-{
-	//menu buttons divs with id the image filename from resources/ui/menu/images
-	//format is <id>, <title>, <0/1 if should be placed in slide div or not>
-	var menubuttons = [ ["inspectunit","Inspect Unit", 0], ["endturn","End Turn", 0],["mainmenu", "Main  Menu", 0],
-			   ["buy","Upgrade/Buy Units", 1],["hex","Toggle Hex Grid", 1], ["air","Toggle Air Mode On", 1],
-			   ["zoom","Strategic Map", 1], ["options","Options", 1]];
-
-	for (var b = 0; b < menubuttons.length; b++) 
-	{
-		var div;
-		
-		if (menubuttons[b][2])	//should be placed on slide div
-			div = addTag('slidemenu','div');
-		else
-			div = insertTag('menu', 'div', 'slidemenu');
-		
-		var img = addTag(div, 'img');
-		var id = menubuttons[b][0];
-		var title = menubuttons[b][1];
-		
-		div.id = id;
-		div.title = title;
-		div.className = "button";
-		img.id = id;
-		img.src = "resources/ui/menu/images/" + id + ".png";
-		
-		div.onclick = function() { mainMenuButton(this.id); }
-	}
-}
-
-function mainMenuButton(id)
+this.mainMenuButton = function(id)
 {
 	if (map.currentPlayer.type == playerType.aiLocal)
 		return;
@@ -804,27 +585,6 @@ function updateUnitContextWindow(u)
 		makeHidden('unit-context');
 }
 
-//Builds the unit stats info window
-function buildUnitInfoWindow()
-{
-	//Unit stats that will be listed on the window format <id>, <title>
-	var unitstats = [ ["uFlag", "country flag"],["uStr", "Unit strength"], ["uFuel", "Unit fuel"], ["uAmmo", "Unit Ammo"],
-			   ["uGunRange", "Firing range"], ["uMovement", "Movement range"],["uExp", "Combat Experience"],
-			   ["uEnt","Entrenchment"], ["uIni", "Combat initiative"], ["uSpot", "Spotting range"],
-			   ["uAHard", "Power vs Hard targets"], ["uASoft", "Power vs Soft targets"], ["uAAir", "Power vs Air targets"],
-			   ["uANaval", "Power vs Naval targets"], ["uDHard", "Defence vs Hard targets"], ["uDAir", "Defence vs Air targets"],
-			   ["uDClose", "Defence in close combat"],["uDRange", "Defence in ranged combat"], ["uMoveType", "Movement type"],
-			   ["uTarget", "Target type"], ["uTransport", "See unit/transport"] /*, ["uClass", "Unit class"]*/ ];
-
-	for (var s = 0; s < unitstats.length; s++)
-	{
-		var div = addTag('statsRow','div');
-
-		div.id = unitstats[s][0];
-		div.title = unitstats[s][1];
-		div.className = "uStat";
-	}
-}
 //Updates the unit stats info window
 function updateUnitInfoWindow(u)
 {
@@ -970,64 +730,41 @@ function unitContextButton(action, unit)
 	}
 }
 
-function buildEquipmentWindow()
+this.equipmentWindowButtons = function(id)
 {
-	//The default selected country in the div
-	$('eqSelCountry').country = 0;
-	$('eqSelCountry').owner = 0;
-	$('eqSelCountry').title = 'Click to change country';
-	$('eqSelCountry').onclick = function() 
+	switch(id)
+	{
+		case 'changecountry':
 		{
-			if (this.country >= countries.length - 1) this.country = 0; 
-			else this.country++;
+			if ($('eqSelCountry').country >= countries.length - 1) $('eqSelCountry').country = 0;
+			else $('eqSelCountry').country++;
 			$('eqUserSel').userunit = -1; //Clear existing unit selection when changing country
 			$('eqUserSel').equnit = -1;
-			updateEquipmentWindow($('eqUserSel').eqclass || unitClass.tank);
-		};
-	//Unit Class buttons	
-	for (var b in eqClassButtons)
-	{
-		var div = addTag('eqSelClass','div');
-		var img = addTag(div, 'img');
-		var id = eqClassButtons[b][0];
-		div.id = id;
-		div.className = "eqSelClassBut";
-		div.title = eqClassButtons[b][1];
-		div.eqclass = b;
-		img.id = id;
-		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
-		div.onclick = function() 
-		{
-			$('eqUserSel').userunit = -1; //Clear existing unit selections when changing class
-			$('eqUserSel').equnit = -1;
-			$('eqUserSel').eqtransport = -1;
-			updateEquipmentWindow(this.eqclass); 
+			game.ui.updateEquipmentWindow($('eqUserSel').eqclass || unitClass.tank); //previous class or tank class
+			break;
 		}
-	}
-	
-	//Bottom buttons
-	$('eqNewBut').title = "Buy unit as a new unit";
-	$('eqNewBut').onclick = function()
+		case 'buy':
 		{
-				var eqUnit = $('eqUserSel').equnit;
-				var eqTransport = $('eqUserSel').eqtransport;
-				
-				if (typeof eqUnit === "undefined" || eqUnit <= 0)
-					return;
+			var eqUnit = $('eqUserSel').equnit;
+			var eqTransport = $('eqUserSel').eqtransport;
 
-				if (typeof eqTransport === "undefined" || eqTransport == "")
-					eqTransport = -1;
+			if (typeof eqUnit === "undefined" || eqUnit <= 0)
+				return;
 
-				var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport);
-				if (ret)
-					console.log("Player:" + map.currentPlayer.getCountryName() + " bought unit id: " + eqUnit + " with transport:" + eqTransport);
-				else
-					console.log("Can't buy a new unit");
-					
-				updateEquipmentWindow(equipment[eqUnit].uclass);
+			if (typeof eqTransport === "undefined" || eqTransport == "")
+				eqTransport = -1;
+
+			var ret = map.currentPlayer.buyUnit(eqUnit, eqTransport);
+			if (ret)
+				console.log("Bought unit id: " + eqUnit + " with transport:" + eqTransport);
+			else
+				console.log("Can't buy a new unit");
+
+			updateEquipmentWindow(equipment[eqUnit].uclass);
+
+			break;
 		}
-	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
-	$('eqUpgradeBut').onclick = function()
+		case 'upgrade':
 		{
 			var id = $('eqUserSel').userunit; //real unit id on map
 			var deployid = $('eqUserSel').deployunit; //id for units on deployment list
@@ -1040,7 +777,7 @@ function buildEquipmentWindow()
 
 			if (typeof eqTransport === "undefined" || eqTransport == "")
 				eqTransport = -1;
-			
+
 			if (typeof id === "undefined" || id == -1) //Upgrade an undeployed unit
 			{
 				console.log("Upgrading undeployed unit: " + deployid + " to equipment id:" + eqUnit + " with transport:" + eqTransport);
@@ -1062,12 +799,12 @@ function buildEquipmentWindow()
 			}
 
 		}
-	
-	$('eqCloseBut').title = "Close";
-	$('eqCloseBut').onclick = function() { makeHidden('equipment'); }
+	}
+
 }
 
 //TODO index equipment array
+this.updateEquipmentWindow = function(eqclass) { return updateEquipmentWindow(eqclass); }
 function updateEquipmentWindow(eqclass)
 {
 	if (!isVisible('container-unitlist'))
@@ -1084,10 +821,10 @@ function updateEquipmentWindow(eqclass)
 	
 	//Toggle equipment class button on/off
 	var prevClass = $('eqUserSel').eqclass || unitClass.tank;
-	if (typeof eqClassButtons[prevClass] !== "undefined" && typeof eqClassButtons[prevClass][0] !== "undefined")
-		toggleButton($(eqClassButtons[prevClass][0]), false);
-	if (typeof eqClassButtons[eqclass] !== "undefined" && typeof eqClassButtons[eqclass][0] !== "undefined")
-		toggleButton($(eqClassButtons[eqclass][0]), true);
+	if (typeof UIBuilder.eqClassButtons[prevClass] !== "undefined" && typeof UIBuilder.eqClassButtons[prevClass][0] !== "undefined")
+		toggleButton($(UIBuilder.eqClassButtons[prevClass][0]), false);
+	if (typeof UIBuilder.eqClassButtons[eqclass] !== "undefined" && typeof UIBuilder.eqClassButtons[eqclass][0] !== "undefined")
+		toggleButton($(UIBuilder.eqClassButtons[eqclass][0]), true);
 	$('eqUserSel').eqclass = eqclass;
 	
 	//The current selected coutry in the div
@@ -1198,7 +935,7 @@ function updateEquipmentWindow(eqclass)
 
 
 	//Don't list units from a class that isn't allowed to be bought
-	if (typeof eqClassButtons[eqclass] === "undefined") return;
+	if (typeof UIBuilder.eqClassButtons[eqclass] === "undefined") return;
 	
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
@@ -1275,45 +1012,7 @@ function updateEquipmentCosts()
 	if (eqUnitSelected != -1)
 		buyCost = GameRules.calculateUnitCosts(eqUnitSelected, eqTransportSelected);
 
-	if (buyCost > 0 && buyCost <= prestige) 
-	{
-		$('eqNewText').innerHTML = "New unit cost: " + buyCost + currencyIcon;
-		$('eqNewBut').style.display = "inline";
-	}
-	else
-	{
-		if (buyCost > prestige)
-		{
-			var diff = buyCost - prestige;
-			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy.</span>";
-		}
-		else
-		{
-			$('eqNewText').innerHTML = "";
-		}
-		$('eqNewBut').style.display = "none";
-	}
-	
-	if (upCost > 0 && upCost <= prestige)
-	{
-		$('eqUpgradeText').innerHTML = " Upgrade unit cost: " + upCost + currencyIcon;
-		$('eqUpgradeBut').style.display = "inline";
-	}
-	else
-	{
-		if (upCost > prestige)
-		{
-			var diff = upCost - prestige;
-			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade.</span>";
-		}
-		else
-		{
-			$('eqUpgradeText').innerHTML = "";
-		}	
-		$('eqUpgradeBut').style.display = "none";
-	}
-	
-	$('currentPrestige').innerHTML = "Available prestige: " + prestige + currencyIcon;
+	UIBuilder.showEquipmentCosts(prestige, buyCost, upCost);
 }
 
 function updateStatusBarLocation(row, col)
@@ -1339,6 +1038,7 @@ function updateStatusBarLocation(row, col)
 
 	return true;
 }
+
 //Simple function to list a unit in a graphical unit box returns a DOM object
 function uiAddUnitBox(parentTagName, unitData, withPrice)
 {
@@ -1350,21 +1050,12 @@ function uiAddUnitBox(parentTagName, unitData, withPrice)
 	img.src = unitData.icon;
 	txt.innerHTML = unitData.name;
 	if (withPrice) 
-		txt.innerHTML += " - " + unitData.cost * CURRENCY_MULTIPLIER + currencyIcon;
+		txt.innerHTML += " - " + unitData.cost * CURRENCY_MULTIPLIER + UIBuilder.currencyIcon;
 	
 	return div;
 }
 
-this.uiMessage = function(title, message) { return uiMessage(title, message); }
-function uiMessage(title, message)
-{
-	$('title').innerHTML = title;
-	$('message').innerHTML = message;
-	makeVisible('ui-message');
-	//TODO change to an event
-	game.uiMessageClicked = false;
-	$('uiokbut').onclick = function() { makeHidden('ui-message'); game.uiMessageClicked = true; }
-}
+function uiMessage(title, message) { UIBuilder.message(title, message); }
 
 this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
 function uiEndTurnInfo()
@@ -1378,7 +1069,7 @@ function uiEndTurnInfo()
 	uiTurnInfo();
 	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
 				+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
-	R.render(); //Full page render when changing player/side			
+	R.render(); //Full page render when changing player/side
 }
 
 function uiTurnInfo()
@@ -1386,6 +1077,7 @@ function uiTurnInfo()
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + map.name;
 }
 
+//Centers unit on player screen
 this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
 function uiSetUnitOnViewPort(unit)
 {

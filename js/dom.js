@@ -91,6 +91,12 @@ function hasTouch()
 	return "ontouchstart" in window;
 }
 
+//Function to disable/enable right click
+function toggleRightClick( status )
+{
+	window.oncontextmenu = function() { return status; }
+}
+
 function hasBrokenScroll()
 {
 	var ua = navigator.userAgent;
