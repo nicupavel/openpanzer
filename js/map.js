@@ -429,9 +429,21 @@ function Map()
 			hex = this.map[row][col]; //in-place
 		else
 			this.map[row][col].copy(hex); //copy values from the hex argument
+
 		//Add coords for each victory hex into list
-		if (hex.victorySide != -1) 
-			this.sidesVictoryHexes[hex.victorySide].push(hex.getPos());
+		var victorySide = hex.victorySide;
+
+		if ( victorySide != -1)
+		{
+			//Check ownership. Some victory hexes for other side might be already captured (see salerno map)
+			if (hex.owner != -1 && (victorySide == this.getPlayer(hex.owner).side))
+			{
+				console.log("Victory hex for side %d already captured by player %d !", victorySide, hex.owner);
+				victorySide = ~ victorySide & 1; //Change to enemy side
+			}
+			this.sidesVictoryHexes[victorySide].push(hex.getPos());
+		}
+
 		if (hex.unit !== null) 
 			this.addUnit(hex.unit);
 		if (hex.airunit !== null)
