@@ -82,7 +82,7 @@ function handleMouseClick(e)
 
 	if (clickedUnit) 
 	{
-		updateUnitInfoWindow(clickedUnit);
+		updateUnitInfoWindow(clickedUnit); //Also update for clicks on enemy units
 			
 		if (map.currentUnit !== null && !uiSettings.deployMode )
 		{
@@ -116,7 +116,7 @@ function handleMouseClick(e)
 	//Set the airMode depending on current unit automatically
 	uiSettings.airMode = GameRules.isAir(map.currentUnit);
 	toggleButton($('air'), uiSettings.airMode);
-	updateUnitContextWindow(map.currentUnit);
+	updateUnitContextWindow(map.currentUnit); //Update after an action not only on select/deselect
 	//TODO make unitList equipment window show strength/movement/attack status and update it on all actions
 	return true;
 }
@@ -344,21 +344,26 @@ function uiAttackAnimationFinished(animationCBData)
 		bounceText(pos.x, pos.y, loss);
 	}
 	//TODO not needed to render again unless we make rendering not show unit losses from start of combat
-	//TODO should check surviving unit getRenderRange since 
-	//it might have not moved and needs a bigger render range
+	//TODO should check surviving unit getRenderRange since it might have not moved and needs a bigger render range
 	//R.render(cell.row, cell.col, 7);
 	game.waitUIAnimation = false;
 	uiTurnInfo();
 }
 
-function uiAttackInfo(atkunit, defunit)
+this.setNewScenario = function()
 {
-	var ad = atkunit.unitData();
-	var dd = defunit.unitData();
-		
-	$('statusmsg').innerHTML = countryNames[atkunit.flag - 1] + " <b>" + ad.name + "</b> " + unitClassNames[ad.uclass] 
-				+ " attacking "
-				+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
+	map = game.scenario.map;
+	R.setNewMap(map);
+	R.cacheImages(function()
+	{
+		selectStartingUnit();
+		uiSetUnitOnViewPort(map.currentUnit);
+		R.render(); //Full page render on new map
+	});
+	countries = map.getCountriesBySide(game.spotSide);
+	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
+	uiTurnInfo();
+	uiMessage(game.scenario.name, game.scenario.description);
 }
 
 this.startMenuButton = function(id)
@@ -401,8 +406,6 @@ this.startMenuButton = function(id)
 
 this.mainMenuButton = function(id)
 {
-	if (map.currentPlayer.type == playerType.aiLocal)
-		return;
 	switch(id) 
 	{
 		case 'air':
@@ -459,6 +462,9 @@ this.mainMenuButton = function(id)
 		}
 		case 'buy':
 		{
+			if (map.currentPlayer.type != playerType.humanLocal)
+				return;
+
 			if (isVisible('equipment'))
 			{
 				makeHidden('equipment'); 
@@ -479,17 +485,7 @@ this.mainMenuButton = function(id)
 		}
 		case 'endturn':
 		{
-			game.endTurn();
-			if (game.gameEnded)
-			{
-				uiMessage("DEFEAT", "<br><br>You didn't capture the objectives in time");
-				return;
-			}
-			countries = map.getCountriesBySide(game.spotSide);
-			updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
-			updateUnitContextWindow();
-			selectStartingUnit();
-			uiEndTurnInfo();
+			uiEndTurn();
 			break;
 		}
 		case 'mainmenu':
@@ -1055,7 +1051,24 @@ function uiAddUnitBox(parentTagName, unitData, withPrice)
 	return div;
 }
 
-function uiMessage(title, message) { UIBuilder.message(title, message); }
+function uiEndTurn()
+{
+	if (map.currentPlayer.type != playerType.humanLocal)
+		return;
+
+	game.endTurn();
+
+	if (game.gameEnded)
+	{
+		uiMessage("DEFEAT", "<br><br>You didn't capture the objectives in time");
+		return;
+	}
+	countries = map.getCountriesBySide(game.spotSide);
+	updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
+	updateUnitContextWindow();
+	selectStartingUnit();
+	uiEndTurnInfo();
+}
 
 this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
 function uiEndTurnInfo()
@@ -1072,10 +1085,22 @@ function uiEndTurnInfo()
 	R.render(); //Full page render when changing player/side
 }
 
+function uiAttackInfo(atkunit, defunit)
+{
+	var ad = atkunit.unitData();
+	var dd = defunit.unitData();
+
+	$('statusmsg').innerHTML = countryNames[atkunit.flag - 1] + " <b>" + ad.name + "</b> " + unitClassNames[ad.uclass]
+		+ " attacking "
+		+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
+}
+
 function uiTurnInfo()
 {
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + map.name;
 }
+
+function uiMessage(title, message) { UIBuilder.message(title, message); }
 
 //Centers unit on player screen
 this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
@@ -1105,22 +1130,6 @@ function selectStartingUnit()
 			break;
 		}
 	}
-}
-
-this.setNewScenario = function()
-{
-	map = game.scenario.map;
-	R.setNewMap(map);
-	R.cacheImages(function() 
-	{ 
-		selectStartingUnit(); 
-		uiSetUnitOnViewPort(map.currentUnit);
-		R.render(); //Full page render on new map
-	});
-	countries = map.getCountriesBySide(game.spotSide);
-	updateEquipmentWindow(unitClass.tank); //Refresh equipment window	
-	uiTurnInfo();
-	uiMessage(game.scenario.name, game.scenario.description);
 }
 
 function getMouseInfo(canvas, e)
