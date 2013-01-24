@@ -305,7 +305,7 @@ UIBuilder.showEquipmentCosts = function(prestige, buyCost, upCost)
 		if (buyCost > prestige)
 		{
 			var diff = buyCost - prestige;
-			$('eqNewText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to buy.</span>";
+			$('eqNewText').innerHTML = "<span style='color:#BB7575'>Need " + diff + " more prestige to buy.</span>";
 		}
 		else
 		{
@@ -324,7 +324,7 @@ UIBuilder.showEquipmentCosts = function(prestige, buyCost, upCost)
 		if (upCost > prestige)
 		{
 			var diff = upCost - prestige;
-			$('eqUpgradeText').innerHTML = "<span style='color:#FF6347'>Need " + diff + " more prestige to upgrade.</span>";
+			$('eqUpgradeText').innerHTML = "<span style='color:#BB7575'>Need " + diff + " more prestige to upgrade.</span>";
 		}
 		else
 		{
