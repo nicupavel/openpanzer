@@ -56,9 +56,9 @@ function Game()
 		this.gameEnded = false;
 	}
 
-	this.processTurn = function() 
+	this.processTurn = function()
 	{ 
-		if (!game.gameStarted || this.gameEnded)
+		if (!game.gameStarted || game.gameEnded)
 			return;
 		if (scenData !== null && needScenarioLoad && game.uiMessageClicked) //Load next scenario in campaign chain
 			game.newScenario(scenData.scenario, scenData.intro);
@@ -90,11 +90,6 @@ function Game()
 		var lastSide = this.scenario.map.currentPlayer.side;
 
 		this.waitUIAnimation = false;
-		this.state.save();
-
-		if (this.campaign !== null) //Save campaign to remove deployed units from saved list
-			game.state.saveCampaign();
-
 		this.scenario.map.endTurn();
 
 		//Check if game ended in defeat only for human players
@@ -111,6 +106,12 @@ function Game()
 			}
 			return;
 		}
+
+		this.state.save();
+		if (this.campaign !== null) //Save campaign to remove deployed units from saved list
+			game.state.saveCampaign();
+
+
 		//Set the new visible side on map
 		this.setCurrentSide();
 	}
