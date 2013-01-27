@@ -387,10 +387,19 @@ function Render(mapObj)
 	{
 		var vrow; //virtual graphical rows
 		var trow, tcol; //true map rows/cols
+		var srenderOffsetY = renderOffsetY; // add some scalling on Y when zoomed
 
-		tcol = Math.round((x - renderOffsetX) / colSlice + mousePrecisionOffset) - 1; 		
+		//If we're in tactical map scale the values coresponding to zoom level
+		if (uiSettings.mapZoom)
+		{
+			x = (x * uiSettings.zoomLevel);
+			y = (y * uiSettings.zoomLevel);
+			srenderOffsetY = srenderOffsetY * uiSettings.zoomLevel;
+		}
+
+		tcol = Math.round((x - renderOffsetX) / colSlice + mousePrecisionOffset) - 1;
 		//a graphical row (half hex) not the array row
-		vrow = (y - renderOffsetY * (~tcol & 1)) / r; //Half hexes add r if col is odd
+		vrow = (y - srenderOffsetY * (~tcol & 1)) / r; //Half hexes add r if col is odd
 		//shift to correct row index	
 		trow = Math.round(vrow/2 - 1 * (vrow & 1));
 		if (trow < 0) { trow = 0; }

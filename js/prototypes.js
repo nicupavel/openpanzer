@@ -187,6 +187,7 @@ var uiSettings =
 {
 	airMode:false,		//flag used to select between overlapping ground/air units
 	mapZoom:false,		//flag used to draw map in zoomed mode or not
+	zoomLevel: 1,		//The mapZoom level
 	hexGrid:false,		// flag to notify render if it should draw or not hex grid
 	deployMode:false,	//used for unit deployment
 	markOwnUnits: false, 	//To visually mark own units on map

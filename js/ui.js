@@ -431,8 +431,10 @@ this.mainMenuButton = function(id)
 				$('game').style.zoom = zoom + "%";
 				$('game').style.width = ((window.innerWidth * 100 / zoom) >> 0) + 100 + "px";
 				$('game').style.height = ((window.innerHeight * 100 / zoom) >> 0) + 100 + "px";
+				console.log("Zoom :" + zoom + " level:" + zoom/100);
 
 				uiSettings.mapZoom = true;
+				uiSettings.zoomLevel = 100/zoom;
 			}
 			else 
 			{ 
@@ -440,6 +442,7 @@ this.mainMenuButton = function(id)
 				$('game').style.height = window.innerHeight + "px";
 				$('game').style.zoom = "100%";
 				uiSettings.mapZoom = false;
+				uiSettings.zoomLevel = 1;
 			}
 			toggleButton($('zoom'), uiSettings.mapZoom);
 			R.render(); //Full page rendering
