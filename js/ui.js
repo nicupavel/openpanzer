@@ -62,7 +62,14 @@ function handleMouseClick(e)
 		console.log("Undefined hex:" + row + "," + col);
 		return true; //handled
 	}
-	
+
+	if (uiSettings.mapZoom)
+	{
+		uiToggleMapZoom();
+		uiSetCellOnViewPort(cell);
+		return true;
+	}
+
 	var clickedUnit = hex.getUnit(uiSettings.airMode);
 	
 	//Right click to show unit info or clear current selection
@@ -172,7 +179,7 @@ function handleUnitSelect(row, col)
 			return false;
 	}
 
-	//Select unit on equipment window (can't be in uiUnitSelect because will loop)
+	//Select unit on equipment window (can't be in uiUnitSelect because will loop in updateEquipmentWindow())
 	$('eqUserSel').userunit = unit.id; //save selected player unit
 	updateEquipmentWindow(unit.unitData(true).uclass);
 	
@@ -424,27 +431,7 @@ this.mainMenuButton = function(id)
 		}
 		case 'zoom':
 		{	
-			var zoom = Math.min(window.innerWidth/canvas.width*100, window.innerHeight/canvas.height*100) >> 0;
-			
-			if ($('game').style.zoom == "100%" || $('game').style.zoom == '' )
-			{ 
-				$('game').style.zoom = zoom + "%";
-				$('game').style.width = ((window.innerWidth * 100 / zoom) >> 0) + 100 + "px";
-				$('game').style.height = ((window.innerHeight * 100 / zoom) >> 0) + 100 + "px";
-				console.log("Zoom :" + zoom + " level:" + zoom/100);
-
-				uiSettings.mapZoom = true;
-				uiSettings.zoomLevel = 100/zoom;
-			}
-			else 
-			{ 
-				$('game').style.width = window.innerWidth + "px";
-				$('game').style.height = window.innerHeight + "px";
-				$('game').style.zoom = "100%";
-				uiSettings.mapZoom = false;
-				uiSettings.zoomLevel = 1;
-			}
-			toggleButton($('zoom'), uiSettings.mapZoom);
+			uiToggleMapZoom();
 			R.render(); //Full page rendering
 			break;
 		}
@@ -1109,12 +1096,20 @@ function uiMessage(title, message) { UIBuilder.message(title, message); }
 this.uiSetUnitOnViewPort = function(unit) { return uiSetUnitOnViewPort(unit); }
 function uiSetUnitOnViewPort(unit)
 {
-	if (!unit) return;
-	var cell = unit.getPos();
-	if (!cell || typeof cell === "undefined") return;
+	if (!unit) return false;
+	return uiSetCellOnViewPort(unit.getPos());
+}
+
+//Centers the screen on a map cell
+function uiSetCellOnViewPort(cell)
+{
+	if (!cell || typeof cell === "undefined")
+		return false;
+
 	var pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
 	$('game').scrollLeft = pos.x - window.innerWidth/2;
 	$('game').scrollTop = pos.y - window.innerHeight/2;
+	return true;
 }
 
 //Selects the first unit that belongs to the currently playing side
@@ -1161,6 +1156,32 @@ function getRenderRange(unit)
 	if (r > range) range = r;
 	
 	return range;
+}
+
+function uiToggleMapZoom()
+{
+	var zoom = Math.min(window.innerWidth/canvas.width*100, window.innerHeight/canvas.height*100) >> 0;
+
+	if ($('game').style.zoom == "100%" || $('game').style.zoom == '' )
+	{
+		$('game').style.zoom = zoom + "%";
+		$('game').style.width = ((window.innerWidth * 100 / zoom) >> 0) + 100 + "px";
+		$('game').style.height = ((window.innerHeight * 100 / zoom) >> 0) + 100 + "px";
+		console.log("Zoom :" + zoom + " level:" + zoom/100);
+
+		uiSettings.mapZoom = true;
+		uiSettings.zoomLevel = 100/zoom;
+	}
+	else
+	{
+		$('game').style.width = window.innerWidth + "px";
+		$('game').style.height = window.innerHeight + "px";
+		$('game').style.zoom = "100%";
+		uiSettings.mapZoom = false;
+		uiSettings.zoomLevel = 1;
+	}
+	toggleButton($('zoom'), uiSettings.mapZoom);
+	R.render(); //Full page render
 }
 
 } //End of UI class
