@@ -125,13 +125,17 @@ def get_scn_description(scnfile):
     nstr = desc.replace("\r\n\r\n","<br>").replace("\r\n","");
     return nstr.replace('"', '\\"')
 
-# returns scenario maximum turns (tactical victory)
-def get_scn_maxturns(scnfile):
+# returns scenario victory turns (briliant, victory, tactical)
+def get_scn_victory_turns(scnfile):
     pos = scnfile.tell()
-    scnfile.seek(1 + 2 + 1 + 2 + 1 + 1 + 2 + 2 + 2 + 1 + 1)
-    maxturns = unpack('b', scnfile.read(1))[0]
+    scnfile.seek(1 + 2 + 1 + 2 + 1 + 1 + 2 + 2 + 2 )
+    t = scnfile.read(3)
+    turns = []
+    for i in range(3):
+	turns.append(unpack('b', t[i : i+1])[0])
+    
     scnfile.seek(pos)
-    return maxturns
+    return turns
 
 # return map image name, cols, rows
 def get_map_info(f):
@@ -180,7 +184,7 @@ for scn in sys.argv[1:]:
     xmlmap = x.Element('map')
     xmlmap.set("file", scn)
     xmlmap.set("name", scnname)
-    xmlmap.set("maxturns", str(get_scn_maxturns(sf)))
+    xmlmap.set("turns", str(get_scn_victory_turns(sf))[1:-1])
     xmlmap.set("rows", str(rows))
     xmlmap.set("cols", str(cols))
     xmlmap.set("image", MAP_IMAGE_URL + mapinfo['mapimg'])
