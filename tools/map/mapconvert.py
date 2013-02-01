@@ -90,8 +90,8 @@ def get_scn_player_info(scnfile, pnr):
 
     # parse player prestige per turn
     tp = []
-    for i in range(80):
-	tp.append(unpack('b', data[i + 1 + 16])[0])
+    for i in range(40):  #40 turns of 2 bytes each
+	tp.append(unpack('h', data[i * 2 + 17: i * 2 + 17 + 2])[0])  #skip 17 bytes of data from the top
     playerinfo['turnprestige'] = tp
 
     scnfile.seek(pos)
