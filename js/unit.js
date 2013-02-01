@@ -50,6 +50,7 @@ function Unit(equipmentID)
 	this.destroyed = false; //flag to check if a unit is destroyed
 	this.player = null; //TODO remove use owner ID
 	this.transport = null; //transport class pointer
+	this.carrier = -1 //air/naval carrier which is not a unit assigned transport
 	this.moveLeft = equipment[equipmentID].movpoints; //for phased/recon movement
 	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
 	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()

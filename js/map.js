@@ -21,6 +21,13 @@ function Player()
 	this.type = playerType.humanLocal;
 	this.handler = null;
 
+	//One time use transports available for this players
+	this.airTransports = 0;
+	this.navalTransports = 0;
+
+	this.supportCountries = [];
+	this.prestigePerTurn = [];
+
 	//Privileged Methods that access private properties/methods
 	this.getCoreUnitList = function() { return coreUnitList; }
 	this.addCoreUnit = function(unit)
@@ -300,6 +307,7 @@ function Map()
 	this.name = "";
 	this.description = ""; 
 	this.terrainImage = null;
+	this.victoryTurns = []; //Turns limit for briliant, victory and tactical victory
 	this.maxTurns = 1;
 	this.turn = 1;
 	this.currentUnit = null;

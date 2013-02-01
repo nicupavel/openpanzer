@@ -53,7 +53,11 @@ function ScenarioLoader()
 				map.name = mapHeader.getAttribute("name");
 				map.description = mapHeader.getAttribute("description");
 				map.terrainImage = mapHeader.getAttribute("image");
-				map.maxTurns = mapHeader.getAttribute("maxturns");
+				map.victoryTurns = mapHeader.getAttribute("turns").split(", ");
+				for (var i = 0; i < map.victoryTurns.length; i++)
+					map.victoryTurns[i] = +map.victoryTurns[i] //convert to int
+				map.maxTurns = map.victoryTurns[2]; //tactical victory
+
 				return true;
 			}
 		}
@@ -72,6 +76,10 @@ function ScenarioLoader()
 				p.id = playerNodes[i].getAttribute("id");
 				p.side = playerNodes[i].getAttribute("side");
 				p.country = playerNodes[i].getAttribute("country");
+				p.airTransports = playerNodes[i].getAttribute("airtrans");
+				p.navalTransports = playerNodes[i].getAttribute("navaltrans");
+				p.supportCountries = playerNodes[i].getAttribute("support").split(", ");
+				p.prestigePerTurn = playerNodes[i].getAttribute("turnprestige").split(", ");
 				map.addPlayer(p);
 			}
 		}
@@ -131,7 +139,7 @@ function ScenarioLoader()
 		var unitId = node.getAttribute("id");
 		var playerId = node.getAttribute("owner");
 		var u = null;
-		var facing, flag, transport, experience, entrenchment;
+		var facing, flag, transport, carrier, experience, entrenchment;
 		
 		if (unitId >= 0 && playerId >= 0)
 		{
@@ -143,6 +151,8 @@ function ScenarioLoader()
 				u.flag = flag >> 0;
 			if ((transport = node.getAttribute("transport")) !== null)
 				u.setTransport(transport);
+			if ((carrier = node.getAttribute("carrier")) !== null)
+				u.carrier = carrier;
 			if ((experience = node.getAttribute("exp")) !== null)
 				u.experience = experience >> 0;
 			if ((entrenchment = node.getAttribute("ent")) !== null)
