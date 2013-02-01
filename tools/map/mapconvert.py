@@ -54,12 +54,13 @@ def get_scn_units(f):
 	flag = unpack('b', u[u_off_flag:u_off_flag + 1])[0]
 	face = unpack('h', u[u_off_face:u_off_face + 2])[0]
 	transport = unpack('h', u[u_off_transport:u_off_transport + 2])[0]
+	etransport = unpack('h', u[u_off_transport + 2:u_off_transport + 4])[0]
 	experience = unpack('h', u[u_off_experience:u_off_experience + 2])[0]
 	entrenchment = unpack('b', u[u_off_entrenchment:u_off_entrenchment + 1])[0]
 	if (col,row) in units:
-	    units[(col,row)] += [(uid, owner, flag, face, transport, experience, entrenchment)]
+	    units[(col,row)] += [(uid, owner, flag, face, transport, etransport, experience, entrenchment)]
 	else:
-	    units[(col,row)] = [(uid, owner, flag, face, transport, experience, entrenchment)]
+	    units[(col,row)] = [(uid, owner, flag, face, transport, etransport, experience, entrenchment)]
     f.seek(pos)
     return units
 
@@ -77,8 +78,22 @@ def get_scn_player_info(scnfile, pnr):
     pos = scnfile.tell()
     scnfile.seek(22+97*pnr)
     data = scnfile.read(97)
-    playerinfo['country'] = unpack('b', data[0])[0];
-    playerinfo['side'] = unpack('b', data[16])[0];
+    playerinfo['country'] = unpack('b', data[0])[0]
+    playerinfo['side'] = unpack('b', data[16])[0]
+    # parse supporting countries (max 4)
+    sc = []
+    for i in range(4):
+	sc.append(unpack('b', data[i + 1])[0])
+    playerinfo['support'] = sc;
+    playerinfo['airtrans'] = unpack('b', data[6])[0]
+    playerinfo['navaltrans'] = unpack('b', data[7])[0]
+
+    # parse player prestige per turn
+    tp = []
+    for i in range(80):
+	tp.append(unpack('b', data[i + 1 + 16])[0])
+    playerinfo['turnprestige'] = tp
+
     scnfile.seek(pos)
     return playerinfo;
 
@@ -179,6 +194,10 @@ for scn in sys.argv[1:]:
 	    tmpnode.set("id", str(i))
 	    tmpnode.set("country", str(playerinfo['country']-1))
 	    tmpnode.set("side", str(playerinfo['side']))
+	    tmpnode.set("airtrans", str(playerinfo['airtrans']))
+	    tmpnode.set("navaltrans", str(playerinfo['navaltrans']))
+	    tmpnode.set("support", str(playerinfo['support'])[1:-1]) #slice off []
+	    tmpnode.set("turnprestige", str(playerinfo['turnprestige'])[1:-1]) #slice off []
 	    tmpdict = {}
 	    tmpdict["id"] = i
 	    tmpdict["country"] = playerinfo['country'] - 1
@@ -238,9 +257,10 @@ for scn in sys.argv[1:]:
 		    utmpnode.set("owner", str(l[1]))
 		    if (l[2] != 0): utmpnode.set("flag", str(l[2])) #flags png images start from 1 in js
 		    utmpnode.set("face", str(l[3]))
-		    if (l[4] != 0): utmpnode.set("transport", str(l[4]))
-		    if (l[5] != 0): utmpnode.set("exp", str(l[5]))
-		    if (l[6] != 0): utmpnode.set("ent", str(l[6]))
+		    if (l[4] != 0): utmpnode.set("transport", str(l[4])) #assigned ground transport
+		    if (l[5] != 0): utmpnode.set("etransport", str(l[5])) #air/naval transport
+		    if (l[6] != 0): utmpnode.set("exp", str(l[6]))
+		    if (l[7] != 0): utmpnode.set("ent", str(l[7]))
         col = col + 1
         mapoffset = mapoffset + 7
         scnoffset = scnoffset + 6
