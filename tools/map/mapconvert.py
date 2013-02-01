@@ -54,13 +54,13 @@ def get_scn_units(f):
 	flag = unpack('b', u[u_off_flag:u_off_flag + 1])[0]
 	face = unpack('h', u[u_off_face:u_off_face + 2])[0]
 	transport = unpack('h', u[u_off_transport:u_off_transport + 2])[0]
-	etransport = unpack('h', u[u_off_transport + 2:u_off_transport + 4])[0]
+	carrier = unpack('h', u[u_off_transport + 2:u_off_transport + 4])[0]
 	experience = unpack('h', u[u_off_experience:u_off_experience + 2])[0]
 	entrenchment = unpack('b', u[u_off_entrenchment:u_off_entrenchment + 1])[0]
 	if (col,row) in units:
-	    units[(col,row)] += [(uid, owner, flag, face, transport, etransport, experience, entrenchment)]
+	    units[(col,row)] += [(uid, owner, flag, face, transport, carrier, experience, entrenchment)]
 	else:
-	    units[(col,row)] = [(uid, owner, flag, face, transport, etransport, experience, entrenchment)]
+	    units[(col,row)] = [(uid, owner, flag, face, transport, carrier, experience, entrenchment)]
     f.seek(pos)
     return units
 
@@ -262,7 +262,7 @@ for scn in sys.argv[1:]:
 		    if (l[2] != 0): utmpnode.set("flag", str(l[2])) #flags png images start from 1 in js
 		    utmpnode.set("face", str(l[3]))
 		    if (l[4] != 0): utmpnode.set("transport", str(l[4])) #assigned ground transport
-		    if (l[5] != 0): utmpnode.set("etransport", str(l[5])) #air/naval transport
+		    if (l[5] != 0): utmpnode.set("carrier", str(l[5])) #air/naval transport
 		    if (l[6] != 0): utmpnode.set("exp", str(l[6]))
 		    if (l[7] != 0): utmpnode.set("ent", str(l[7]))
         col = col + 1
