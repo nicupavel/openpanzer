@@ -59,6 +59,8 @@ function Render(mapObj)
 	
 	//Show bounding boxes for partial renderer
 	var partialRenderDebug = false;
+	//Log render speed
+	var logRenderSpeed = false;
 
 	createLayers(); //Creates canvas layers
 	
@@ -66,7 +68,7 @@ function Render(mapObj)
 	//only partially render the canvas around orow,ocol with range around this location
 	this.render = function(orow, ocol, range)
 	{
-		console.time("render timer");
+		if (logRenderSpeed) console.time("render timer");
 		
 		var x0, y0;
 		
@@ -187,8 +189,9 @@ function Render(mapObj)
 				}
 			}	
 		}
-		console.log("called from: " + arguments.callee.caller.name);
-		console.timeEnd("render timer");
+
+		if (logRenderSpeed) console.log("called from: " + arguments.callee.caller.name);
+		if (logRenderSpeed) console.timeEnd("render timer");
 		
 	}
 
@@ -786,7 +789,7 @@ function Render(mapObj)
 		}
 		else
 		{
-			console.log("Full zone canvas render");
+			if (logRenderSpeed) console.log("Full zone canvas render");
 		}
 		return z;
 	}
