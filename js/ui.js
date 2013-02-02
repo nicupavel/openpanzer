@@ -246,11 +246,19 @@ function uiMoveAnimationFinished(moveAnimationCBData)
 	}
 	if (mr.isVictorySide >= 0)
 	{
-		uiMessage("Victory","Side " + sideNames[mr.isVictorySide] + " wins by capturing all victory hexes");
+		var victoryType = game.scenario.checkVictory();
 		if (game.campaign !== null)
-			game.continueCampaign("victory"); //TODO move logic to game.js
+		{
+			game.continueCampaign(victoryType); //TODO move logic to game.js //Does his own uiMessage
+		}
 		else
+		{
+			uiMessage(outcomeNames[victoryType],
+				map.currentPlayer.getCountryName() + " on " + sideNames[mr.isVictorySide]
+				+ " side wins by capturing all victory hexes");
+
 			game.gameEnded = true;
+		}
 	}
 	game.waitUIAnimation = false;
 }
@@ -1063,15 +1071,24 @@ function uiEndTurn()
 this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
 function uiEndTurnInfo()
 {
-	var playerList = map.getPlayers();
-	var infoStr = "";
-	for (var i = 0; i < playerList.length; i++)
-		infoStr +=  playerList[i].getCountryName() + " player on " +  playerList[i].getSideName()
-			+ " side has " + map.sidesVictoryHexes[playerList[i].side].length + " victory points to conquer <br/>";
-			
+
+	var p = map.currentPlayer;
+	var turnsLeft = 0;
+
+	var infoStr = "<br/><br/>There are <b>" + map.sidesVictoryHexes[p.side].length + "</b> objectives left to conquer <br/><br/>";
+
+	if ((turnsLeft = map.victoryTurns[0] - (map.turn - 1)) > 0)
+		infoStr += "<b>" + turnsLeft + "</b> turns left for <b>" + outcomeNames["briliant"] + "</b><br/>";
+
+	if ((turnsLeft = map.victoryTurns[1] - (map.turn -1)) > 0)
+		infoStr += "<b>" + turnsLeft + "</b>  turns left for <b>" + outcomeNames["victory"] + "</b><br/>";
+
+	if ((turnsLeft = map.victoryTurns[2] - (map.turn -1)) > 0)
+		infoStr += "<b>" + turnsLeft + "</b>  turns left for <b>" + outcomeNames["tactical"] + "</b><br/>";
+
 	uiTurnInfo();
-	uiMessage(map.currentPlayer.getCountryName() + " player on " + map.currentPlayer.getSideName() 
-				+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
+	uiMessage(p.getCountryName() + " player on " + map.currentPlayer.getSideName()
+			+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
 	R.render(); //Full page render when changing player/side
 }
 

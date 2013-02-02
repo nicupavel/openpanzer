@@ -985,6 +985,10 @@ function Map()
 			this.sidesVictoryHexes[0].push(m.sidesVictoryHexes[0][i]);
 		for (var i = 0; i < m.sidesVictoryHexes[1].length; i++)
 			this.sidesVictoryHexes[1].push(m.sidesVictoryHexes[1][i]);
+
+		//Copy victoryTurns
+		for (var i = 0; i < m.victoryTurns.length; i++)
+			this.victoryTurns.push(m.victoryTurns[i]);
 	}
 
 	this.dumpMap = function()

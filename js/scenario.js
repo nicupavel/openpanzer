@@ -52,10 +52,16 @@ function Scenario(scenFile)
 		return false;
 	}
 
-	//TODO add checkVictory and add brilian/tactical/victory outcomes in scenario information during conversion
 	this.checkVictory = function()
 	{
+		if (this.map.turn <= this.map.victoryTurns[0])
+			return "briliant";
+		if (this.map.turn <= this.map.victoryTurns[1])
+			return "victory";
+		if (this.map.turn <= this.map.victoryTurns[2])
+			return "tactical";
 
+		return "lose"; //shouldn't happen as checkDefeat checks each turn
 	}
 
 	//Private methods
