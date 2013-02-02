@@ -42,8 +42,8 @@ function ScenarioLoader()
 		var mapHeader = xmlData.getElementsByTagName("map")[0];
 		if (mapHeader) 
 		{
-			var rows = mapHeader.getAttribute("rows");
-			var cols = mapHeader.getAttribute("cols");
+			var rows = +mapHeader.getAttribute("rows");
+			var cols = +mapHeader.getAttribute("cols");
 			//console.log("Rows: " + rows + " Cols: " + cols);
 			if (rows > 0 && rows < 99 && cols > 0 && cols < 99)
 			{
@@ -73,13 +73,20 @@ function ScenarioLoader()
 			for (var i = 0; i < playerNodes.length; i++)
 			{
 				var p = new Player();
-				p.id = playerNodes[i].getAttribute("id");
-				p.side = playerNodes[i].getAttribute("side");
-				p.country = playerNodes[i].getAttribute("country");
-				p.airTransports = playerNodes[i].getAttribute("airtrans");
-				p.navalTransports = playerNodes[i].getAttribute("navaltrans");
+				p.id = +playerNodes[i].getAttribute("id");
+				p.side = +playerNodes[i].getAttribute("side");
+				p.country = +playerNodes[i].getAttribute("country");
+				p.airTransports = +playerNodes[i].getAttribute("airtrans");
+				p.navalTransports = +playerNodes[i].getAttribute("navaltrans");
+
 				p.supportCountries = playerNodes[i].getAttribute("support").split(", ");
+				for (var j = 0; j < p.supportCountries.length; j++)
+					p.supportCountries[j] = +p.supportCountries[j]; //convert to int
+
 				p.prestigePerTurn = playerNodes[i].getAttribute("turnprestige").split(", ");
+				for (var j = 0; j < p.prestigePerTurn; j++)
+					p.prestigePerTurn[j] = +p.prestigePerTurn[j]; //convert to int
+
 				map.addPlayer(p);
 			}
 		}
@@ -95,8 +102,8 @@ function ScenarioLoader()
 			var row, col, v;
 			for (var i = 0; i < hexNodes.length; i++) 
 			{
-				row = hexNodes[i].getAttribute("row");
-				col = hexNodes[i].getAttribute("col");
+				row = +hexNodes[i].getAttribute("row");
+				col = +hexNodes[i].getAttribute("col");
 				hex = map.map[row][col];
 				if (!hex || typeof hex === "undefined")
 				{
@@ -105,19 +112,19 @@ function ScenarioLoader()
 				}
 				
 				if ((v = hexNodes[i].getAttribute("terrain")) !== null)
-					hex.terrain = v >> 0;
+					hex.terrain = +v;
 				if ((v = hexNodes[i].getAttribute("road")) !== null)
-					hex.road = v >> 0;
+					hex.road = +v;
 				if ((v = hexNodes[i].getAttribute("name")) !== null)
 					hex.name = v;
 				if ((v = hexNodes[i].getAttribute("flag")) !== null)
-					hex.flag = v >> 0;
+					hex.flag = +v;
 				if ((v = hexNodes[i].getAttribute("owner")) !== null)
-					hex.owner = v >> 0;
+					hex.owner = +v;
 				if ((v = hexNodes[i].getAttribute("victory")) !== null)
-					hex.victorySide = v >> 0;
+					hex.victorySide = +v;
 				if ((v = hexNodes[i].getAttribute("deploy")) !== null)
-					hex.isDeployment = v >> 0;
+					hex.isDeployment = +v;
 				
 				for (var j = 0; j < hexNodes[i].childNodes.length; j++)
 				{		
@@ -146,17 +153,17 @@ function ScenarioLoader()
 			u = new Unit(unitId);
 			u.owner = playerId >> 0;
 			if ((facing = node.getAttribute("face")) !== null)
-				u.facing = facing >> 0;
+				u.facing = +facing;
 			if ((flag = node.getAttribute("flag")) !== null)
-				u.flag = flag >> 0;
+				u.flag = +flag;
 			if ((transport = node.getAttribute("transport")) !== null)
-				u.setTransport(transport);
+				u.setTransport(+transport);
 			if ((carrier = node.getAttribute("carrier")) !== null)
-				u.carrier = carrier;
+				u.carrier = +carrier;
 			if ((experience = node.getAttribute("exp")) !== null)
-				u.experience = experience >> 0;
+				u.experience = +experience;
 			if ((entrenchment = node.getAttribute("ent")) !== null)
-				u.entrenchment = entrenchment >> 0;
+				u.entrenchment = +entrenchment;
 			
 			return u;
 		}
