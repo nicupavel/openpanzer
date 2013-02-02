@@ -84,7 +84,7 @@ function ScenarioLoader()
 					p.supportCountries[j] = +p.supportCountries[j]; //convert to int
 
 				p.prestigePerTurn = playerNodes[i].getAttribute("turnprestige").split(", ");
-				for (var j = 0; j < p.prestigePerTurn; j++)
+				for (var j = 0; j < p.prestigePerTurn.length; j++)
 					p.prestigePerTurn[j] = +p.prestigePerTurn[j]; //convert to int
 
 				map.addPlayer(p);
