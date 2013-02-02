@@ -392,7 +392,7 @@ function Map()
 		if (id < playerList.length)
 			return playerList[id]; 
 		else
-			return playerList[0]; //TODO parse supporting countries from the scenario file
+			return playerList[0];
 	}
 
 	this.getPlayersByCountry = function(country)
@@ -405,13 +405,23 @@ function Map()
 		return c;
 	}
 
-	this.getCountriesBySide = function(side) //returns and array of countries playing on a side
+	//returns and array of countries playing on a side including supporting countries for the side players
+	this.getCountriesBySide = function(side)
 	{
 		var c = [];
 		var p = this.getPlayers();
 		for (var i = 0; i < p.length; i++)
+		{
 			if (p[i].side == side)
-				c.push(p[i].country);
+			{
+				c.push(p[i].country); //add player country
+				for (var j = 0; j < p[i].supportCountries.length; j++)
+				{
+					if (p[i].supportCountries[j] > 0)
+						c.push(p[i].supportCountries[j] - 1) //add supporting country //TODO -1 fix indexes
+				}
+			}
+		}
 		return c;
 	}
 	
