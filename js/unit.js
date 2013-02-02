@@ -95,6 +95,7 @@ Unit.prototype.copy = function(u)
 	this.isSurprised = u.isSurprised;
 	this.isDeployed = u.isDeployed;
 	this.isCore = u.isCore;
+	this.carrier = u.carrier;
 	this.moveLeft = u.moveLeft;
 	this.ammo = u.ammo;
 	this.fuel = u.fuel;

@@ -174,10 +174,10 @@ var actionType =
 	buy: 5,
 	deploy: 6,
 };
+
 //Define prestige gains on different situations
 var prestigeGains = 
 {
-	endTurn: 30,
 	flagCapture: 20,
 	objectiveCapture: 50,
 };

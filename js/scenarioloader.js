@@ -87,6 +87,9 @@ function ScenarioLoader()
 				for (var j = 0; j < p.prestigePerTurn.length; j++)
 					p.prestigePerTurn[j] = +p.prestigePerTurn[j]; //convert to int
 
+				//Set start prestige
+				p.prestige = p.prestigePerTurn[0];
+
 				map.addPlayer(p);
 			}
 		}

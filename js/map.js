@@ -16,7 +16,7 @@ function Player()
 	this.id = -1;
 	this.side = -1;
 	this.country = -1;
-	this.prestige = 300;
+	this.prestige = 0;
 	this.playedTurn = -1;
 	this.type = playerType.humanLocal;
 	this.handler = null;
@@ -60,6 +60,15 @@ Player.prototype.copy = function(p)
 	this.prestige = p.prestige;
 	this.playedTurn = p.playedTurn;
 	this.type = p.type;
+
+	this.airTransports = p.airTransports;
+	this.navalTransports = p.navalTransports;
+
+	for (var i = 0; i < p.supportCountries.length; i++)
+		this.supportCountries.push(p.supportCountries[i]);
+
+	for (var i = 0; i < p.prestigePerTurn.length; i++)
+		this.prestigePerTurn.push(p.prestigePerTurn[i]);
 
 	if (p.getCoreUnitList) { this.setCoreUnitList(p.getCoreUnitList()); }
 }
@@ -133,7 +142,11 @@ Player.prototype.reinforceUnit = function(unit, strength)
 Player.prototype.endTurn = function(turn)
 {
 	this.playedTurn = turn;
-	this.prestige += prestigeGains["endTurn"];
+
+	//turn starts from 1, array index from 0. turn 1 or 0 array index will be applied when scen is loaded/game
+	//is started, turn 2 prestige will get added at the end of turn 1
+	if (turn < this.prestigePerTurn.length)
+		this.prestige += this.prestigePerTurn[turn];
 }
 
 Player.prototype.setCoreUnitsToHQ = function()
