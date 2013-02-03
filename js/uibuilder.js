@@ -278,7 +278,7 @@ UIBuilder.buildUnitInfoWindow = function()
 		["uGunRange", "Firing range"], ["uMovement", "Movement range"],["uExp", "Combat Experience"],
 		["uEnt","Entrenchment"], ["uIni", "Combat initiative"], ["uSpot", "Spotting range"],
 		["uAHard", "Power vs Hard targets"], ["uASoft", "Power vs Soft targets"], ["uAAir", "Power vs Air targets"],
-		["uANaval", "Power vs Naval targets"], ["uDHard", "Defence vs Hard targets"], ["uDAir", "Defence vs Air targets"],
+		["uANaval", "Power vs Naval targets"], ["uDHard", "Defence vs ground attacker"], ["uDAir", "Defence vs air attacker"],
 		["uDClose", "Defence in close combat"],["uDRange", "Defence in ranged combat"], ["uMoveType", "Movement type"],
 		["uTarget", "Target type"], ["uTransport", "See unit/transport"] /*, ["uClass", "Unit class"]*/ ];
 
