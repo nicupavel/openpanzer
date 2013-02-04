@@ -530,9 +530,10 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	//console.log("Defender attack value:" + dav + " defence value:" + ddv);
 	//We consider that attacking unit can fire because otherwise won't have targets selected in UI
 	//Check if defending unit can fire back
-	//Can't fire back when attacked from range
-	if (d > 1) 
+	//Can't fire back when attacked from range except naval units combat
+	if (d > 1 && !(isSea(atkunit) && isSea(defunit)))
 		cr.defcanfire = false;
+	
 	if (!canAttack(defunit, atkunit)) 
 		cr.defcanfire = false;
 	
