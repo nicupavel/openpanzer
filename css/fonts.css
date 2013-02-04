@@ -4,7 +4,8 @@
 @font-face 
 {
 	font-family: unitInfo;
-	src: url('../resources/fonts/m04.ttf') format('truetype'); /* Good 8px Outlined font */
+	font-weight: bold;
+	src: url('../resources/fonts/m04b.TTF') format('truetype');
 	/*src: url('../resources/fonts/sg05.ttf') format('truetype');  */ /* Good outlined 10px font could be used */
 	/*src: url('../resources/fonts/goldbox.ttf') format('truetype'); /* Good bold and small font looks good */
 	/*src: url('../resources/fonts/smwtext2nc.ttf') format('truetype');*/ /* Good bold 10px font looks good */
@@ -13,7 +14,7 @@
 	/* src: url('../resources/fonts/addlg.ttf') format('truetype'); */ /* Interesting BIG numbers*/
 	/* src: url('../resources/fonts/bmarmy.ttf') format('truetype'); */ /* Bold font but 1 digit looks bad */
 	/* src: url('../resources/fonts/bmsta.ttf') format('truetype');*/ /* Interesting digits are inside a rouded rectangle */
-	/* src: url('../resources/fonts/m04b.TTF') format('truetype'); */ /*Above font without outline */
+	/* src: url('../resources/fonts/m04b.TTF') format('truetype'); */ /*Same as m04 font without outline 8px*/
 	/*src: url('../resources/fonts/m41.TTF') format('truetype'); */ /* Interesting 8px bold font */
 	/*src: url('../resources/fonts/m42.TTF') format('truetype'); */ /* Interesting 8px bold font */	
 	/*src: url('../resources/fonts/massia.ttf') format('truetype'); */ /* Big bold 10px font */
@@ -21,7 +22,12 @@
 	/*src: url('../resources/fonts/ponderosa.ttf') format('truetype');  */ /* Big bold 10px font but too much spacing between glyps*/
 	/*src: url('../resources/fonts/retrovillenc.ttf') format('truetype'); */ /* 10px font but glyphs curves are too thin */
 	/*src: url('../resources/fonts/smwtextnc.ttf') format('truetype'); */ /* Courier like font too thin */
+}
 
+@font-face
+{
+	font-family: coreUnitFont;
+	src: url('../resources/fonts/m04.ttf') format('truetype'); /* Good 8px Outlined font */
 }
 
 

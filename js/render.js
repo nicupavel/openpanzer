@@ -714,6 +714,9 @@ function Render(mapObj)
 		
 		//Write unit strength in a box below unit
 		c.font = unitTextHeight + "px unitInfo, sans-serif";
+		if (unit.isCore)
+			c.font = unitTextHeight + "px coreUnitFont, sans-serif";
+
 		var text = "" + unit.strength;
 		var tx = (x0 + h/2) >> 0;
 		var ty = y0 + 2 * r - (unitTextHeight + 2); //text size + spacing
