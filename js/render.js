@@ -538,8 +538,8 @@ function Render(mapObj)
 		if (!atkunit || !defunit)
 			return null;
 		
-		var atkflag = atkunit.player.country;
-		var defflag = defunit.player.country;
+		var atkflag = atkunit.flag - 1; //flags from 1-25, array from 0-24
+		var defflag = defunit.flag - 1;
 		var cr = GameRules.calculateCombatResults(atkunit, defunit, mapObj.getUnits(), false);
 		
 		bb.clearRect(0, 0, bbw, bbh);
