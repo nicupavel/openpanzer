@@ -507,10 +507,20 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 		adv += aData.rangedefmod >> 1;
 		ddv += dData.rangedefmod >> 1;
 	}
-	//TODO Initiative
-	if (aData.initiative > dData.initiative)
-		adv += 4;
 	
+	//TODO Initiative (evaluate initiative based on class, terrain initiative)
+	var initiativeDiff = aData.initiative - dData.initiative;
+	if (initiativeDiff >= 0)
+	{
+		adv += 4;
+		aav += Math.min(4, initiativeDiff);
+	}
+	else
+	{
+		ddv +=4;
+		dav += Math.min(4, -(initiativeDiff));
+	}
+
 	if (atkunit.isSurprised)
 	{
 		adv = 0;
@@ -549,7 +559,8 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 function getCombatKills(atkval, defval, atkunit, defunit)
 {
 	var atkclass = atkunit.unitData().uclass;
-	var kF = atkval - defval;
+	var kF = atkval - defval; //Kill fractions
+
 	if (kF > 4) kF = 4 + (2 * kF - 8) / 5; //PG2 formula
 	kF += 6;
 	
@@ -560,7 +571,7 @@ function getCombatKills(atkval, defval, atkunit, defunit)
 	if (kF < 1) kF = 1;
 	if (kF > 19) kF = 19;
 	
-	return ((5 * kF * atkunit.strength + 50)/100) >> 0;
+	return Math.round((5 * kF * atkunit.strength + 50)/100);
 }
 
 //TODO Terrain, Unit type and adjacent units 
