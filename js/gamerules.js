@@ -856,6 +856,65 @@ function isAirfieldAroundUnit(map, unit)
 	return false;
 }
 
+//Returns 0 if it's NOT possible, 1 air embark, 2 naval embark
+GameRules.getEmbarkType =  function(map, unit)
+{
+	var pos = unit.getPos();
+	var hex = map[pos.row][pos.col];
+	var uc = unit.unitData().uclass;
+
+	if (hex.terrain == terrainType.Airfield && unit.player.airTransports > 0)
+		if (uc == unitClass.infantry)
+			return 1;
+
+	if (hex.terrain == terrainType.Port && unit.player.navalTransports > 0)
+		if (uc < unitClass.fighter && uc != unitClass.fortification)
+			return 2;
+
+	return 0;
+}
+
+//Returns a list of position for disembark
+GameRules.getDisembarkPositions = function(map, unit)
+{
+	var cellList = [];
+	var ud = unit.unitData();
+
+	//Can't disembark after move
+	if (!unit.hasMoved && (ud.uclass == unitClass.airTransport || ud.uclass == unitClass.navalTransport))
+	{
+		var p = unit.getPos();
+		var realMovMethod = equipment[unit.eqid].movmethod;
+		var moveCost = movTable[realMovMethod];
+		var adj = getAdjacent(p.row, p.col);
+
+		for (var h in adj)
+		{
+			var hex = map[adj[h].row][adj[h].col];
+			//Only ground units can be transported
+			if (hex.unit === null && moveCost[hex.terrain] < 255)
+				cellList.push(new Cell(adj[h].row, adj[h].col));
+		}
+	}
+
+	return cellList;
+}
+
+GameRules.canEmbark = function(map, unit)
+{
+	if (GameRules.getEmbarkType(map, unit) > 0)
+		return true;
+	return false;
+}
+
+GameRules.canDisembark = function(map, unit)
+{
+	var l = GameRules.getDisembarkPositions(map, unit);
+	if (l.length > 0)
+		return true;
+	return false;
+}
+
 GameRules.canMount = function(unit)
 {
 	if (!unit.hasMoved && isGround(unit) && unit.transport !== null)

@@ -120,17 +120,24 @@ Unit.prototype.copy = function(u)
 
 Unit.prototype.unitData = function(forceUnit)
 {
-	if ((this.isMounted) && (this.transport !== null) && !forceUnit)
+	if (this.carrier != -1 && !forceUnit) //Unit on carrier
+		return equipment[this.carrier];
+	
+	if ((this.isMounted) && (this.transport !== null) && !forceUnit) //Unit on transport
 		return equipment[this.transport.eqid]; 
 	else
-		return equipment[this.eqid]; 
+		return equipment[this.eqid];  //Real Unit
 }
 
 Unit.prototype.getMovesLeft = function()
 {
+	//On carrier always has movement of the carrier
+	if (this.carrier != -1)
+		return equipment[this.carrier].movpoints;
+	
 	//There is no point saving moveLeft in transport object since they consume all points when moving
 	if ((this.isMounted) && (this.transport !== null))
-		return equipment[this.transport.eqid].movpoints
+		return equipment[this.transport.eqid].movpoints;
 	else
 		return this.moveLeft;
 }
@@ -186,7 +193,7 @@ Unit.prototype.move = function(cost)
 	}
 	else
 	{
-		if (GameRules.unitUsesFuel(this))
+		if (GameRules.unitUsesFuel(this) && this.carrier == -1)
 			this.fuel -= fuelUsed;
 		//Recon units can move multiple times
 		if (this.unitData().uclass != unitClass.recon)
@@ -256,7 +263,9 @@ Unit.prototype.setTransport = function(id)
 }
 
 Unit.prototype.mount = function() { this.isMounted = true; }
-Unit.prototype.unmount = function() { this.isMounted = false;	}
+Unit.prototype.unmount = function() { this.isMounted = false; }
+Unit.prototype.embark = function() { return; /* find out carrier id */ }
+Unit.prototype.disembark = function() { this.carrier = -1; }
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
 {

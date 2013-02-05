@@ -539,10 +539,20 @@ function updateUnitContextWindow(u)
 		div = addTag('unit-context', 'div');
 		div.className = "unit-context-buttons";
 		div.id = "unit-context-mount";
-		div.title = "Mount this unit into a transport";
+		div.title = "Mount/Umount this unit in/from a transport";
 		div.onclick = function() {unitContextButton('mount', u);}
 	}
 	
+	if (GameRules.canEmbark(map.map, u) || GameRules.canDisembark(map.map, u))
+	{
+		nbuttons++;
+		div = addTag('unit-context', 'div');
+		div.className = "unit-context-buttons";
+		div.id = "unit-context-embark";
+		div.title = "Embark/DisEmbark this unit in/from a air/naval transport";
+		div.onclick = function() {unitContextButton('embark', u);}
+	}
+
 	if (GameRules.canResupply(map.map, u))
 	{
 		nbuttons++;
@@ -693,6 +703,15 @@ function unitContextButton(action, unit)
 				map.unmountUnit(unit);
 			else
 				map.mountUnit(unit);
+			refreshRender = true;
+			break;
+		}
+		case 'embark':
+		{
+			if (unit.carrier != -1)
+				map.disembarkUnit(unit);
+			else
+				map.embarkUnit(unit);
 			refreshRender = true;
 			break;
 		}

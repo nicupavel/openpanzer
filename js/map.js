@@ -354,11 +354,14 @@ function Map()
 		uniqueID++;
 		
 		unitList.push(unit); 
-		unitImagesList[unit.eqid] = unit.getIcon();
+		unitImagesList[unit.eqid] = equipment[unit.eqid].icon; //unit.getIcon(); //TODO rewrite this
 		
 		if (unit.transport !== null)
 			unitImagesList[unit.transport.eqid] = unit.transport.icon;
 		
+		if (unit.carrier != -1)
+			unitImagesList[unit.carrier] = equipment[unit.carrier].icon;
+
 		//Sets the player struct
 		unit.player = this.getPlayer(unit.owner);
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols);
@@ -722,6 +725,42 @@ function Map()
 		this.selectUnit(unit); //Select the unit again to have the move range adjusted
 	}
 	
+	this.embarkUnit = function(unit)
+	{
+		var et = 0;
+		if ((et = GameRules.getEmbarkType(this.map, unit)) > 0)
+		{
+			unit.player.airTransports--;
+			//TODO Get carrier ID for player or unit country from equipment
+			//TODO Use unit.embark()
+			if (et == 1)
+				unit.carrier = 176;
+			else
+				unit.carrier = 546;
+
+			return true;
+		}
+		return false;
+	}
+
+	this.disembarkUnit = function(unit)
+	{
+		var c = GameRules.getDisembarkPositions(this.map, unit);
+		if (c.length <= 0)
+			return false;
+		this.delMoveSel();
+		this.delAttackSel();
+
+		unit.disembark();
+
+		for (var i = 0; i < c.length; i++)
+		{
+			moveSelected.push(c[i]);
+			this.map[c[i].row][c[i].col].isMoveSel = true;
+		}
+		return true;
+	}
+
 	this.upgradeUnit = function(id, upgradeid, transportid)
 	{
 		var unit = null;
