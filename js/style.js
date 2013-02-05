@@ -53,3 +53,12 @@ var hexstyle =
 		"lineJoin":  "miter",
 	},
 };
+
+var unitstyle =
+{
+	axisBox			: "#383838", //grey
+	alliedBox		: "#808000", //green 
+	playerText		: "white",
+	alliedPlayerText	: "#696969", //light brown
+	movedUnitText		: "#b24422", //brown
+};

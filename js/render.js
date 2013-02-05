@@ -724,17 +724,17 @@ function Render(mapObj)
 		var boxWidth = 17;  // c.measureText(text).width + 2 too slow
 		if (unit.strength < 10) boxWidth = 9;
 		
-		c.fillStyle = "black";
-		if (side == 1) { c.fillStyle = "green"; }
+		c.fillStyle = unitstyle.axisBox;
+		if (side == 1) { c.fillStyle = unitstyle.alliedBox; }
 		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
 		
 		if (unit.player.id != map.currentPlayer.id && unit.player.side == map.currentPlayer.side)
-			c.fillStyle = "#696969";
+			c.fillStyle = unitstyle.alliedPlayerText;
 		else
-			c.fillStyle = "white";
+			c.fillStyle = unitstyle.playerText;
 		
 		if (unit.hasMoved && unit.player.id == map.currentPlayer.id)
-			c.fillStyle = "#b24422"; 
+			c.fillStyle = unitstyle.movedUnitText; 
 			
 		c.fillText(text, tx, ty + 8);
 
