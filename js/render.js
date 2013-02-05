@@ -548,7 +548,7 @@ function Render(mapObj)
 		bb.drawImage(imgFlags, flw*defflag, 0, flw, flh, bbw - flw, 0, flw, flh);
 		
 		//estimated losses and kills
-		bb.font = unitTextHeight + "px unitInfo, sans-serif";
+		bb.font = unitTextHeight + "px coreUnitFont, sans-serif";
 		bb.fillStyle = "yellow";
 		bb.textBaseline = "top";
 		
@@ -713,9 +713,17 @@ function Render(mapObj)
 		//Currently fillText and fillRect doubles the rendering time
 		
 		//Write unit strength in a box below unit
-		c.font = unitTextHeight + "px unitInfo, sans-serif";
-		if (unit.isCore)
+		if (game.campaign !== null) //Campaign mode
+		{
+			if (unit.isCore)
+				c.font = unitTextHeight + "px coreUnitFont, sans-serif";
+			else
+				c.font = unitTextHeight + "px unitInfo, sans-serif"; //normal units
+		}
+		else //Scenario mode
+		{
 			c.font = unitTextHeight + "px coreUnitFont, sans-serif";
+		}
 
 		var text = "" + unit.strength;
 		var tx = (x0 + h/2) >> 0;
@@ -723,7 +731,7 @@ function Render(mapObj)
 		var side = unit.player.side;
 		var boxWidth = 17;  // c.measureText(text).width + 2 too slow
 		if (unit.strength < 10) boxWidth = 9;
-		
+
 		c.fillStyle = unitstyle.axisBox;
 		if (side == 1) { c.fillStyle = unitstyle.alliedBox; }
 		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
@@ -732,10 +740,10 @@ function Render(mapObj)
 			c.fillStyle = unitstyle.alliedPlayerText;
 		else
 			c.fillStyle = unitstyle.playerText;
-		
+
 		if (unit.hasMoved && unit.player.id == map.currentPlayer.id)
 			c.fillStyle = unitstyle.movedUnitText; 
-			
+
 		c.fillText(text, tx, ty + 8);
 
 		//draw indicator for unit.hasFired
