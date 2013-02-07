@@ -111,6 +111,7 @@
 	width: 480px; /* wider than the container div so we can hide the arrow */
 	height: 35px;
 	border: 0px;
+	 -webkit-appearance: none; /* fix for chrome in windows where background no longer shows */
 }
 /*#smScenSel option*/
 .smSelect option
