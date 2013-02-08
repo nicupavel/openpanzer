@@ -66,11 +66,10 @@ UIBuilder.buildStartMenu = function()
 	{
 		var v = this.options[this.selectedIndex].value;
 		$('smCampDesc').innerHTML = campaignlist[v].desc;
-		$('smCampPlayers').innerHTML = "<br/><br/>" +
-			"Campaign will be played as: " + countryNames[campaignlist[v].flag] + "<br/>" +
-			"Scenarios in this campaign: " + campaignlist[v].scenarios + "<br/>" +
-			"Starting prestige for player: " + campaignlist[v].prestige + UIBuilder.currencyIcon;
-
+		$('smCampCountry').innerHTML = "<b>Country</b><br/>" + countryNames[campaignlist[v].flag];
+		$('smCampScenarios').innerHTML = "<b>Scenarios</b><br/>" + campaignlist[v].scenarios;
+		$('smCampPrestige').innerHTML = "<b>Start prestige</b><br/>" + campaignlist[v].prestige + "&nbsp;" + UIBuilder.currencyIcon;
+		
 		$('smCamp').selectedCampaign = v; //save index to campaign from campaignlist //TODO move to userSel
 	}
 	$('smCBackBut').onclick = function()
@@ -138,7 +137,8 @@ UIBuilder.buildStartMenu = function()
 				flagDiv.style.backgroundPosition = "" + data[i]["country"] * -21 + "px 0px"; //Update flag
 				var contentDiv = addTag(containerDiv, 'div');
 				contentDiv.className = "playerName";
-				contentDiv.innerHTML = (scenariolist[v][3 + s][i]["id"] + 1) + ". " + countryNames[data[i]["country"]];
+				//contentDiv.innerHTML = (scenariolist[v][3 + s][i]["id"] + 1) + ". " + countryNames[data[i]["country"]];
+				contentDiv.innerHTML = countryNames[data[i]["country"]];
 				var smAIBut = addTag(containerDiv, 'img');
 
 				smAIBut.src = "resources/ui/dialogs/startmenu/images/aicheckbox.png";

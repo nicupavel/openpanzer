@@ -118,7 +118,25 @@
 	background-color: #5b5b5b;	
 }
 
-/*#smScenDesc *//* Scenario description div */
+#smCampInfo 
+{ 
+	width: 460px; 
+	margin: 0px auto;
+	padding-top: 10px;
+}
+.smCampDetails
+{
+	float:left; 
+	width: 150px; 
+	height: 60px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color:  white;
+	line-height: 30px;
+}
+
+/*#smScenDesc *//* Scenario/Campaign description div */
 .smDesc
 {
 	padding-top: 10px;
@@ -127,10 +145,10 @@
 	overflow: auto;
 	margin:0px auto 0px auto;
  	color: #f8e064; 
-/*	color: white;*/
 	font-weight:normal;
 	font-family: Arial;
 	font-size: 12px;
+	border-bottom: 1px solid #484848;
 }
 .smSideHeader  /* Header with name of sides */
 {
@@ -169,15 +187,17 @@
 	margin-top: 5px;
 	margin-right: 10px;
 	margin-left: 5px;
+	font-weight: normal;
+	color: white;
 }
 
 .playerCountry  /* the country flag for player selection */
 {
-	/*margin-top: 5px;*/
+	margin-top: 5px;
 	height: 14px;
 	width: 22px;
 	background-image: url('../resources/ui/flags/flags_med.png');
 	background-repeat: no-repeat;
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
-	/*float: left;*/
+	float: left;
 }
