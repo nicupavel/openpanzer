@@ -469,6 +469,7 @@ this.mainMenuButton = function(id)
 				makeHidden('container-unitlist');
 				uiSettings.deployMode = false;
 				toggleButton($('buy'), false);
+				uiTurnInfo(); //Write back the turn info since we change the info when we open equipment window
 			}
 			else 
 			{
@@ -844,7 +845,7 @@ function updateEquipmentWindow(eqclass)
 	var c = $('eqSelCountry').country;
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
 	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
-
+	
 	var unitList = [];
 	var forcedScroll;
 	var u, ud, userUnitSelected;
@@ -858,6 +859,7 @@ function updateEquipmentWindow(eqclass)
 		userUnitSelected = $('eqUserSel').deployunit;
 		unitList = map.currentPlayer.getCoreUnitList();
 		uiSettings.deployMode = true;
+		$('statusmsg').innerHTML = "<b> Deploy your core units on map grey hexes.</b>"
 	}
 	else
 	{
@@ -865,6 +867,8 @@ function updateEquipmentWindow(eqclass)
 		userUnitSelected = $('eqUserSel').userunit;
 		unitList = map.getUnits();
 		uiSettings.deployMode = false;
+		$('statusmsg').innerHTML = "<b> Units currently deployed on map.</b>"
+		$('eqInfoText').innerHTML = unitClassNames[eqclass] + " upgrades for " + countryNames[country - 1];
 	}
 
 	if (oldDeployMode !== uiSettings.deployMode) //Check if we should refresh canvas for new mode
