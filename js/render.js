@@ -123,6 +123,10 @@ function Render(mapObj)
 					x0 = col * (s + h) + h + renderOffsetX;
 				}
 
+				if ((current !== null) && (typeof current !== "undefined") 
+					&& (row == current.row) && (col == current.col))
+					drawHex(c, x0, y0, hexstyle.current);
+
 				//Only show deployment hexes not move/attack hexes on deploy mode
 				if (uiSettings.deployMode)
 				{
@@ -152,10 +156,6 @@ function Render(mapObj)
 					drawHexDecals(x0, y0, hex);
 				}
 
-				if ((current !== null) && (typeof current !== "undefined") 
-					&& (row == current.row) && (col == current.col))
-					drawHex(c, x0, y0, hexstyle.current);
-				
 				if (drawHexGrid)
 					drawHex(cb, x0, y0, hexstyle.generic);
 
