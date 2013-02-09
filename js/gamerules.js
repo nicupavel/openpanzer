@@ -128,9 +128,11 @@ GameRules.getUnitMoveRange = function(unit)
 	return range;
 }
 
-GameRules.getAttackRange = function(map, unit, rows, cols)
+//Returns the map cells with units that can be attacked by a unit
+GameRules.getUnitAttackCells = function(map, unit, rows, cols)
 {
 	var allowedCells = [];
+	var target = null;
 
 	if (unit === null || unit.hasFired || unit.getAmmo() <= 0) return []; 
 	var p = unit.getPos();
@@ -150,14 +152,32 @@ GameRules.getAttackRange = function(map, unit, rows, cols)
 		var cell = cellList[i];
 		var hex = map[cell.row][cell.col];
 
-		if (hex.getAttackableUnit(unit, 0)) //Can attack the ground unit on this hex?
+		if ((target = hex.getAttackableUnit(unit, 0)) !== null) //Can attack the ground unit on this hex?
 		{
-			allowedCells.push(cell);
-			continue; //don't push same cell twice below
+			if (GameRules.isAir(unit) && range <= 1) //Air can only attack non Air unit below
+			{
+				if (p.row == cell.row && p.col == cell.col)
+					allowedCells.push(cell);
+			}
+			else
+			{
+				allowedCells.push(cell);
+				continue; //don't push same cell twice below
+			}
 		}
 
-		if (hex.getAttackableUnit(unit, 1)) //Can attack the air unit on this hex ?
-			allowedCells.push(cell);
+		if ((target = hex.getAttackableUnit(unit, 1)) !== null) //Can attack the air unit on this hex ?
+		{
+			if (GameRules.isAir(unit)) //Air can attack air units on adjacent hexes
+			{
+				if (GameRules.isAir(target))
+					allowedCells.push(cell);
+			}
+			else
+			{
+				allowedCells.push(cell);
+			}
+		}
 	}
 	return allowedCells;
 }

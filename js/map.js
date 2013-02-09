@@ -530,7 +530,7 @@ function Map()
 	this.setAttackRange = function(unit)
 	{
 		this.delAttackSel();
-		var c = GameRules.getAttackRange(this.map, unit, this.rows, this.cols);
+		var c = GameRules.getUnitAttackCells(this.map, unit, this.rows, this.cols);
 		
 		for (var i = 0; i < c.length; i++)
 		{

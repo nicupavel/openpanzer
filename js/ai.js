@@ -95,7 +95,7 @@ function AI(player, map)
 	{
 		for (var i = 0; i < playerUnits.length; i++)
 		{
-			var c = GameRules.getAttackRange(map.map, playerUnits[i], map.rows, map.cols);
+			var c = GameRules.getUnitAttackCells(map.map, playerUnits[i], map.rows, map.cols);
 			var unitToAttack = null;
 			for (var j = 0; j < c.length; j++)
 			{
