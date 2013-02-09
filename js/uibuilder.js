@@ -336,6 +336,33 @@ UIBuilder.showEquipmentCosts = function(prestige, buyCost, upCost)
 	$('currentPrestige').innerHTML = "Available prestige: " + prestige + UIBuilder.currencyIcon;
 }
 
+UIBuilder.showAttackInfo = function(atkunit, defunit)
+{
+	var ad = atkunit.unitData();
+	var dd = defunit.unitData();
+	var tmpdiv;
+
+	clearTag($('statusmsg'));
+	tmpdiv = addTag($('statusmsg'), 'div');
+	tmpdiv.className = "playerCountry";
+	tmpdiv.style.marginTop = "0px";
+	tmpdiv.style.backgroundPosition = "" + (atkunit.flag - 1) * -21 + "px 0px"; //Update flag
+
+	tmpdiv = addTag($('statusmsg'), 'div');
+	tmpdiv.style.cssFloat = "left";
+	tmpdiv.innerHTML = "<b>" + ad.name + "</b> " + unitClassNames[ad.uclass] + " attacking &nbsp;";
+
+	tmpdiv = addTag($('statusmsg'), 'div');
+	tmpdiv.className = "playerCountry";
+	tmpdiv.style.marginTop = "0px";
+	tmpdiv.style.backgroundPosition = "" + (defunit.flag - 1) * -21 + "px 0px"; //Update flag
+
+	tmpdiv = addTag($('statusmsg'), 'div');
+	tmpdiv.style.cssFloat = "left";
+	tmpdiv.innerHTML = "<b>" + dd.name + "</b> " + unitClassNames[dd.uclass];
+}
+
+
 UIBuilder.message = function(title, message)
 {
 		$('title').innerHTML = title;

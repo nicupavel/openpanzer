@@ -294,7 +294,7 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 		oldstr: [attackingUnit.strength, enemyUnit.strength],
 		cbfunc: uiAttackAnimationFinished,
 	}
-	uiAttackInfo(attackingUnit, enemyUnit); //Show info on status bar
+	UIBuilder.showAttackInfo(attackingUnit, enemyUnit); //Show info on status bar
 	//Support Fire if attacking unit wasn't surprised
 	if (!attackingUnit.isSurprised)
 	{
@@ -859,7 +859,7 @@ function updateEquipmentWindow(eqclass)
 		userUnitSelected = $('eqUserSel').deployunit;
 		unitList = map.currentPlayer.getCoreUnitList();
 		uiSettings.deployMode = true;
-		$('statusmsg').innerHTML = "<b> Deploy your core units on map grey hexes.</b>"
+		$('statusmsg').innerHTML = "Deploy your core units on map grey hexes."
 	}
 	else
 	{
@@ -867,7 +867,7 @@ function updateEquipmentWindow(eqclass)
 		userUnitSelected = $('eqUserSel').userunit;
 		unitList = map.getUnits();
 		uiSettings.deployMode = false;
-		$('statusmsg').innerHTML = "<b> Units currently deployed on map.</b>"
+		$('statusmsg').innerHTML = "Units currently deployed on map."
 		$('eqInfoText').innerHTML = unitClassNames[eqclass] + " upgrades for " + countryNames[country - 1];
 	}
 
@@ -1115,18 +1115,9 @@ function uiEndTurnInfo()
 	R.render(); //Full page render when changing player/side
 }
 
-function uiAttackInfo(atkunit, defunit)
-{
-	var ad = atkunit.unitData();
-	var dd = defunit.unitData();
-
-	$('statusmsg').innerHTML = countryNames[atkunit.flag - 1] + " <b>" + ad.name + "</b> " + unitClassNames[ad.uclass]
-		+ " attacking "
-		+ countryNames[defunit.flag - 1]+ " <b>"+ dd.name + "</b> " + unitClassNames[dd.uclass];
-}
-
 function uiTurnInfo()
 {
+	clearTag($('statusmsg'));
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + map.name;
 }
 

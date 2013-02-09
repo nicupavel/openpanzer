@@ -52,8 +52,11 @@ body,html
 	margin-left: -420px;
 	left: 50%;
 	border:0px solid #000;
+	/* to have content with opacity 
 	background-color:black;
 	opacity: 0.6;
+	*/
+	background: rgba(0,0,0,0.6);
 	z-index:3;
 	border-radius: 5px;
 	padding: 5px 5px 0px 5px;
