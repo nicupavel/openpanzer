@@ -636,7 +636,7 @@ function Map()
 		var canCapture = GameRules.canCapture(unit);
 		var c = GameRules.getShortestPath(s, new Cell(drow, dcol), moveSelected);
 		var moveCost = c[0].cost;
-		
+
 		//Save unit properties for undoing move
 		lastMove.clear();
 		lastMove.savedUnit = new Unit(unit.eqid);
@@ -665,6 +665,9 @@ function Map()
 			if (canCapture && this.captureHex(dstHex, player))
 				mr.isVictorySide = side;
 		}
+
+		if (!moveCost || moveCost < 0) //NaN from disembark that doesn't do cell costs
+			moveCost = 0;
 
 		unit.move(moveCost);
 		GameRules.setZOCRange(this.map, unit, false, this.rows, this.cols); //remove old ZOC
@@ -731,13 +734,7 @@ function Map()
 		if ((et = GameRules.getEmbarkType(this.map, unit)) > 0)
 		{
 			unit.player.airTransports--;
-			//TODO Get carrier ID for player or unit country from equipment
-			//TODO Use unit.embark()
-			if (et == 1)
-				unit.carrier = 176;
-			else
-				unit.carrier = 546;
-
+			unit.embark(et);
 			return true;
 		}
 		return false;

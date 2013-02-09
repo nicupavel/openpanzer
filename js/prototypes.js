@@ -10,6 +10,7 @@
  */
 
 var unitType = { none:-1, soft:0, hard:1, air:2, sea:3 };
+var carrierType = { none: 0, air: 1, naval: 2 };
 var unitTypeNames = ["Soft", "Hard", "Air", "Sea"];
 
 var unitClass = 

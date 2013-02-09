@@ -264,7 +264,18 @@ Unit.prototype.setTransport = function(id)
 
 Unit.prototype.mount = function() { this.isMounted = true; }
 Unit.prototype.unmount = function() { this.isMounted = false; }
-Unit.prototype.embark = function() { return; /* find out carrier id */ }
+
+Unit.prototype.embark = function(type) 
+{ 
+	//TODO Get carrier ID for player or unit country from equipment
+	//TODO Use unit.embark()
+	if (type == carrierType.air)
+		this.carrier = 176;
+	else
+		this.carrier = 546;
+	return true;
+}
+
 Unit.prototype.disembark = function() { this.carrier = -1; }
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
