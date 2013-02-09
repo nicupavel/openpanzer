@@ -603,8 +603,9 @@ function Render(mapObj)
 			var tx = x0 +  s/2 - flw/2;
 			var ty = y0 + 2 * r - flh - 2;
 			
-			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh);
-			
+			//Draw with flw + 1 in destination width otherwise flag will get scaled down
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw + 1, flh);
+
 			if (hex.victorySide != -1)
 			{
 				c.beginPath();
@@ -659,7 +660,7 @@ function Render(mapObj)
 		}
 		if (flag == -1) return;
 		
-		c.drawImage(imgFlags, flw * flag, 0, flw, flh, tx, ty, scale*s, scale*s/(flw/flh));
+		c.drawImage(imgFlags, flw * flag, 0, flw, flh, tx, ty, scale * s, scale * s/(flw/flh));
 		c.restore();
 	}
 	
