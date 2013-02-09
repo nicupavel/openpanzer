@@ -60,5 +60,5 @@ var unitstyle =
 	alliedBox		: "#808000", //green 
 	playerText		: "white",
 	alliedPlayerText	: "#696969", //light brown
-	movedUnitText		: "#b24422", //brown
+	movedUnitText		: "#A9A9A9", //dark grey
 };
