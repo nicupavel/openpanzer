@@ -148,7 +148,7 @@ var directionToRadians =
 	Math.PI/6, //NNE
 	0, //N
 	11*Math.PI/6, //NNW
-	7*Math.PI/4,, //NW
+	7*Math.PI/4, //NW
 	5*Math.PI/3, //WNW
 	3*Math.PI/2, //W
 	4*Math.PI/3, //WSW
