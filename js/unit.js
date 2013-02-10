@@ -268,7 +268,6 @@ Unit.prototype.unmount = function() { this.isMounted = false; }
 Unit.prototype.embark = function(type) 
 { 
 	//TODO Get carrier ID for player or unit country from equipment
-	//TODO Use unit.embark()
 	if (type == carrierType.air)
 		this.carrier = 176;
 	else

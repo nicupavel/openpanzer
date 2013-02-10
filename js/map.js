@@ -285,12 +285,15 @@ Hex.prototype.delUnit = function(unit)
 {
 	if (unit === null || typeof unit.setHex === "undefined")
 		return;
+
 	unit.setHex(null);
-	//TODO revise this. check units id ?
-	if (GameRules.isAir(unit))
-		this.airunit = null;
-	else
+	//Need to remove by id instead of isAir(unit) since in case of carriers with paratroopers 
+	//unit type is changing from air to ground.
+	if (this.unit !== null && this.unit.id == unit.id)
 		this.unit = null;
+
+	if (this.airunit !== null && this.airunit.id == unit.id)
+		this.airunit = null;
 }
 
 //Returns the unit from this hex that can be attacked by atkunit
@@ -745,16 +748,17 @@ function Map()
 		var c = GameRules.getDisembarkPositions(this.map, unit);
 		if (c.length <= 0)
 			return false;
+
 		this.delMoveSel();
 		this.delAttackSel();
-
-		unit.disembark();
-
 		for (var i = 0; i < c.length; i++)
 		{
 			moveSelected.push(c[i]);
 			this.map[c[i].row][c[i].col].isMoveSel = true;
 		}
+
+		unit.disembark();
+
 		return true;
 	}
 
@@ -808,7 +812,7 @@ function Map()
 	{
 		if (unit === null)
 			return false;
-		
+
 		//Can't select units from other players
 		if (unit.player.id != this.currentPlayer.id)
 			return false;
@@ -850,7 +854,6 @@ function Map()
 		{
 			if (unitList[i].isCore && unitList[i].isDeployed)
 				player.addCoreUnit(unitList[i]);
-
 		}
 
 		for (i = 0; i < coreUnits.length; i++)
