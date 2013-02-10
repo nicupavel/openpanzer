@@ -39,7 +39,11 @@ function Render(mapObj)
 	var s = 30;  //hexagon segment size                    |\  
 	var h = s/2; //hexagon height h = sin(30)*s           r| \ s
 	var r = 25;  //hexagon radius r = cos(30)*s ~ s*0.833  -h-
-
+	
+	//Medium flag sizes used to mark objectives on map
+	var flw = 21; //Flag width
+	var flh = 14; //Flag height
+	
 	// Canvas offset from the browser window (leaves space for top menu)
 	var canvasOffsetX = 0;
 	var canvasOffsetY = 30;
@@ -529,9 +533,6 @@ function Render(mapObj)
 	//Generates an attack cursor on backbuffer canvas
 	function generateAttackCursor(atkunit, defunit, asDataURL)
 	{
-		
-		var flw = 21; //one flag width
-		var flh = 14; //flag height
 		var bbw = bb.canvas.width;
 		var bbh = bb.canvas.height;
 
@@ -598,13 +599,10 @@ function Render(mapObj)
 	{
 		if (hex.flag != -1) 
 		{ 
-			var flw = 21; //one flag width
-			var flh = 14; //flag height
-			var tx = x0 +  s/2 - flw/2;
-			var ty = y0 + 2 * r - flh - 2;
-			
-			//Draw with flw + 1 in destination width otherwise flag will get scaled down
-			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw + 1, flh);
+			var tx = (x0 +  s/2 - flw/2) >> 0;
+			var ty = (y0 + 2 * r - flh - 2) >> 0;
+
+			c.drawImage(imgFlags, flw * hex.flag, 0, flw, flh, tx, ty, flw, flh);
 
 			if (hex.victorySide != -1)
 			{
@@ -625,11 +623,8 @@ function Render(mapObj)
 	
 	function drawHexZoomDecals(x0, y0, hex)
 	{
-		var flw = 21; //one flag width
-		var flh = 14; //flag height
-		
-		var tx = x0 +  (s - h)/2 - flw/2;
-		var ty = y0 +  r - flh - 2;
+		var tx = (x0 +  (s - h)/2 - flw/2) >> 0;
+		var ty = (y0 +  r - flh - 2 ) >> 0;
 		
 		var flag = -1;
 		var scale = 0;
@@ -789,7 +784,6 @@ function Render(mapObj)
 		if (range !== null && range >= 0)
 		{
 			z.srow = row - range;
-			
 			z.scol = col - range;
 			z.erow = row + range;
 			z.ecol = col + range;
