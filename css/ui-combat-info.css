@@ -6,11 +6,10 @@
 	margin-left: 10px;
 	min-width: 10px;
 	min-height: 10px;
-	font-family: sans-serif;
-	font-size: 15px;
-	color: #4C0000;
-	font-weight: bold;
-	text-shadow: 0 0 0.2em #fff;
+	font-family: coreUnitFont;
+	font-size: 8px;
+	color: #f8e064;
+	background-color: #AA1919;
 	-webkit-animation:jump 2s linear 1 normal;
 	-moz-animation:jump 2s linear 1 normal;
 	white-space: nowrap;
