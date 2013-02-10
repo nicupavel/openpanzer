@@ -730,7 +730,7 @@ function Render(mapObj)
 
 		c.fillStyle = unitstyle.axisBox;
 		if (side == 1) { c.fillStyle = unitstyle.alliedBox; }
-		c.fillRect(tx, ty, boxWidth, unitTextHeight); 
+		c.fillRect(tx, ty - 1, boxWidth, unitTextHeight + 2); //Add one row of pixels above and below unit strength
 		
 		if (unit.player.id != map.currentPlayer.id && unit.player.side == map.currentPlayer.side)
 			c.fillStyle = unitstyle.alliedPlayerText;
