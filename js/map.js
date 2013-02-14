@@ -579,21 +579,20 @@ function Map()
 		lastMove.unit = null; //Reset last move undo save
 		var a = atkunit.getPos();
 		var d = defunit.getPos();
-		var update = false; //Don't update unit list if not necessary		
 		var cr = GameRules.calculateAttackResults(atkunit, defunit);
 		
 		//console.log(a.row + "," + a.col + " attacking: " + d.row + "," +d.col);
 		
 		atkunit.facing = GameRules.getDirection(a.row, a.col, d.row, d.col);
 		defunit.facing = GameRules.getDirection(d.row, d.col, a.row, a.col);
+
 		//Dismount infantry when attacked
 		if (defunit.isMounted && !defunit.isSurprised && defunit.unitData(true).uclass == unitClass.infantry)
 			defunit.unmount();
 			
 		atkunit.experience += cr.atkExpGained;
 		defunit.experience += cr.defExpGained;
-		
-		//TODO do this better
+
 		if (!supportFire) atkunit.fire(true);
 		else atkunit.fire(false);
 		
@@ -604,30 +603,41 @@ function Map()
 			defunit.fire(false);
 			atkunit.hit(cr.losses);
 		}
-		
-		if (atkunit.destroyed) 
-		{
-			GameRules.setZOCRange(this.map, atkunit, false, this.rows, this.cols); //remove old ZOC
-			GameRules.setSpotRange(this.map, atkunit, false, this.rows, this.cols); //remove old spotting range
-			this.map[a.row][a.col].delUnit(atkunit);
-			update = true;
-		}
-			
-		if (defunit.destroyed)
-		{
-			GameRules.setZOCRange(this.map, defunit, false, this.rows, this.cols); //remove old ZOC
-			GameRules.setSpotRange(this.map, defunit, false, this.rows, this.cols); //remove old spotting range
-			this.map[d.row][d.col].delUnit(defunit);
-			update = true;
-		}	
-		
+
 		if (!supportFire)
 			this.delAttackSel(); //delete attack selected hexes since unit has fired
 
-		if (update) updateUnitList();
 		return cr;
 	}
-	
+
+	this.updateUnitList = function()
+	{
+		//console.time("UpdateUnitList");
+		for (var i = 0; i < unitList.length; i++)
+		{
+			if (unitList[i].destroyed)
+			{
+				var pos = unitList[i].getPos();
+				if (pos)
+				{
+					GameRules.setZOCRange(this.map, unitList[i], false, this.rows, this.cols); //remove old ZOC
+					GameRules.setSpotRange(this.map, unitList[i], false, this.rows, this.cols); //remove old spotting range
+					this.map[pos.row][pos.col].delUnit(unitList[i]);
+
+				}
+				unitList.splice(i, 1);
+				i--;
+			}
+			if (unitList[i] === null)
+			{
+				console.log("NULL UNIT at index %d", i);
+				unitList.splice(i, 1);
+				i--;
+			}
+		}
+		//console.timeEnd("UpdateUnitList");
+	}
+
 	// moves a unit to a new hex returns a movementResults object
 	this.moveUnit = function(unit, drow, dcol)
 	{
@@ -886,7 +896,7 @@ function Map()
 			}
 		}
 		if (update)
-			updateUnitList();
+			this.updateUnitList();
 	}
 
 	//Returns true if last movement of a unit can be undoed
@@ -1102,18 +1112,6 @@ function Map()
 			}
 	};
 
-	//Checks for destroyed units and remove them from list
-	function updateUnitList()
-	{
-		for (var i = 0; i < unitList.length; i++)
-		{
-			if (unitList[i] === null || unitList[i].destroyed)
-			{
-				unitList.splice(i, 1);
-				i--;
-			}
-		}
-	}
 	//Resets unit properties for a new turn
 	function unitsEndTurn()
 	{

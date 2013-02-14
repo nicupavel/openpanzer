@@ -704,7 +704,7 @@ function Render(mapObj)
 	function drawHexUnit(c, x0, y0, unit, drawIndicators)
 	{
 		if (!drawUnitSprite(c, x0, y0, unit)) return;
-		if (!drawIndicators) return;
+		if (!drawIndicators || unit.strength < 1) return;
 		//TODO performance, consider caching glyphs digits and use drawImage/putImageData
 		//Currently fillText and fillRect doubles the rendering time
 		

@@ -275,6 +275,7 @@ function handleUnitAttack(attackingUnit, row, col)
 		return uiUnitAttack(attackingUnit, enemyUnit);
 	return false;
 }
+
 function uiUnitAttack(attackingUnit, enemyUnit)
 {
 	var cpos = attackingUnit.getPos();
@@ -290,11 +291,13 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 	var eclass = enemyUnit.unitData().uclass;
 	var animationCBData = 
 	{
-		units: [attackingUnit, enemyUnit],
-		oldstr: [attackingUnit.strength, enemyUnit.strength],
+		attacking: {unit: attackingUnit, cell: cpos, oldstr: attackingUnit.strength },
+		defending: {unit: enemyUnit, cell: epos, oldstr: enemyUnit.strength },
 		cbfunc: uiAttackAnimationFinished,
 	}
+
 	UIBuilder.showAttackInfo(attackingUnit, enemyUnit); //Show info on status bar
+
 	//Support Fire if attacking unit wasn't surprised
 	if (!attackingUnit.isSurprised)
 	{
@@ -309,36 +312,17 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 			R.addAnimation(sp.row, sp.col, attackAnimationByClass[sclass], supportUnits[u].facing ); //Hits by supporting units
 		}
 	}
-	if (attackingUnit.destroyed) //TODO Do this better
-	{
-		map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-		R.drawCursor(cpos); //refresh cursor or it gets stuck in attack cursor
-		R.addAnimation(cpos.row, cpos.col, "explosion");
-	}
-	else //Can we still attack ?
+	if (!attackingUnit.destroyed) //Can we still attack ?
 	{
 		var cr = map.attackUnit(attackingUnit, enemyUnit, false); //Only attack an enemy unit on that hex
 		R.addAnimation(cpos.row, cpos.col, attackAnimationByClass[cclass], attackingUnit.facing);
-		if (enemyUnit.destroyed)
-			R.addAnimation(row, col, "explosion");
-		else
-			if (cr.defcanfire)
-				R.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
-		
-		if (attackingUnit.destroyed) //TODO Do this better
-		{
-			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
-			R.drawCursor(cpos); //refresh cursor or it gets stuck in attack cursor
-			R.addAnimation(cpos.row, cpos.col, "explosion");
-		}
-		else
-		{
-			if (enemyUnit.destroyed && !attackingUnit.hasMoved)
-				map.setMoveRange(attackingUnit); //refresh move range if unit has destroyed another unit
-		}
+
+		if (!enemyUnit.destroyed && cr.defcanfire)
+			R.addAnimation(row, col, attackAnimationByClass[eclass], enemyUnit.facing); //Hits to the unit being attacked
+
 	}
 	//Render so new unit facings are shown correctly 7 is the biggest attack range including support fire
-	R.render(cpos.row, cpos.col, 7); 
+	R.render(cpos.row, cpos.col, 7); //TODO compute
 	R.runAnimation(animationCBData);
 	attackingUnit.isSurprised = false; //When combat ends unit is no longer surprised
 	return true;
@@ -348,19 +332,70 @@ function uiUnitAttack(attackingUnit, enemyUnit)
 function uiAttackAnimationFinished(animationCBData)
 {
 	var cell, loss, pos;
-	//EventHandler.emitEvent("AttackAnimation");
-	for (var i = 0; i < animationCBData.units.length; i++)
+	var refreshRender = false;
+	var renderRange = 1;
+
+	var a = animationCBData.attacking;
+	var d = animationCBData.defending;
+
+	loss = a.unit.strength - a.oldstr;
+	if (loss < 0 && -loss < a.oldstr)
 	{
-		if (animationCBData.units[i].destroyed)	continue;
-		loss = animationCBData.units[i].strength - animationCBData.oldstr[i];
-		if (loss == 0) continue;
-		cell = animationCBData.units[i].getPos();
-		pos = R.cellToScreen(cell.row, cell.col, true); //return absolute(window) values
+		pos = R.cellToScreen(a.cell.row, a.cell.col, true); //return absolute(window) values
 		bounceText(pos.x, pos.y, loss);
 	}
-	//TODO not needed to render again unless we make rendering not show unit losses from start of combat
-	//TODO should check surviving unit getRenderRange since it might have not moved and needs a bigger render range
-	//R.render(cell.row, cell.col, 7);
+
+	loss = d.unit.strength - d.oldstr;
+	if (loss < 0 && -loss < d.oldstr)
+	{
+		pos = R.cellToScreen(d.cell.row, d.cell.col, true); //return absolute(window) values
+		bounceText(pos.x, pos.y, loss);
+	}
+
+
+	if (a.unit.destroyed || d.unit.destroyed) //Cleanup dead units
+	{
+		map.updateUnitList();
+		refreshRender = true;
+	}
+
+	//Do explosion animation along with deleting units from map and refreshing selection
+	if (a.unit.destroyed)
+	{
+		R.addAnimation(a.cell.row, a.cell.col, "explosion");
+		R.runAnimation(null);
+	}
+
+	if (d.unit.destroyed)
+	{
+		R.addAnimation(d.cell.row, d.cell.col, "explosion");
+		R.runAnimation(null);
+	}
+
+	//Refresh map selections
+	if (map.currentUnit && map.currentUnit.id == a.unit.id) //Do we still have the unit selected
+	{
+		if (a.unit.destroyed)
+		{
+			map.delCurrentUnit(); //remove current selection if unit was destroyed in attack
+			R.drawCursor(a.cell); //refresh cursor or it gets stuck in attack cursor
+			renderRange = 7; //TODO compute this
+		}
+		else
+		{
+			if (!a.unit.hasMoved && d.unit.destroyed) //refresh move range if unit has destroyed another unit
+			{
+				map.setMoveRange(a.unit);
+				var tmp = getRenderRange(a.unit);
+				if (tmp > renderRange) renderRange = tmp;
+				refreshRender = true;
+			}
+		}
+	}
+
+	if (refreshRender)
+		R.render(a.cell.row, a.cell.col, renderRange);
+
 	game.waitUIAnimation = false;
 	uiTurnInfo();
 }

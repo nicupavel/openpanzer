@@ -196,6 +196,9 @@ GameRules.setZOCRange = function(map, unit, on, mrows, mcols)
 	if (!unit || isAir(unit)) return;
 	
 	var p = unit.getPos();
+
+	if (!p) return;
+
 	var side = unit.player.side;
 	var r, c;
 	var adj =  getAdjacent(p.row, p.col);
@@ -218,6 +221,9 @@ GameRules.setSpotRange = function(map, unit, on, mrows, mcols)
 	if (!unit) return 0;
 	
 	var p = unit.getPos();
+
+	if (!p) return;
+
 	var side = unit.player.side;
 	var range = unit.unitData().spotrange;
 	var r, c;
@@ -680,13 +686,13 @@ GameRules.getReinforceValue = function(map, unit)
 //Checks if a unit can attack another unit without considering range
 function canAttack(unit, targetUnit)
 {
-	if (unit === null)
+	if (unit === null || unit.destroyed)
 		return false;
 	
 	if (unit.getAmmo() <= 0)
 		return false;
 	
-	if (targetUnit === null)
+	if (targetUnit === null || targetUnit.destroyed)
 		return false;
 	
 	if (!GameRules.isEnemy(unit, targetUnit))
@@ -706,11 +712,13 @@ function canMoveInto(map, unit, cell)
 
 	if (isGround(unit) || isSea(unit))
 	{
-		if (hex.unit === null) 	return true;	
+		if (hex.unit === null)
+			return true;
 	}
 	if (isAir(unit))
 	{
-		if (hex.airunit === null) return true;
+		if (hex.airunit === null)
+			return true;
 	}
 	
 	return false;
