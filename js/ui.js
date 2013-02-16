@@ -903,7 +903,8 @@ function updateEquipmentWindow(eqclass)
 		unitList = map.getUnits();
 		uiSettings.deployMode = false;
 		$('statusmsg').innerHTML = "Units currently deployed on map."
-		$('eqInfoText').innerHTML = unitClassNames[eqclass] + " upgrades for " + countryNames[country - 1];
+		$('eqInfoText').innerHTML = game.scenario.date.getFullYear() + " " + unitClassNames[eqclass]
+						+ " upgrades for " + countryNames[country - 1];
 	}
 
 	if (oldDeployMode !== uiSettings.deployMode) //Check if we should refresh canvas for new mode
@@ -912,6 +913,7 @@ function updateEquipmentWindow(eqclass)
 	for (var i = 0; i < unitList.length; i++)
 	{
 		u = unitList[i];
+
 		if (uiSettings.deployMode && u.isDeployed)
 			continue;
 		if (u.player.id != map.currentPlayer.id)
@@ -994,6 +996,12 @@ function updateEquipmentWindow(eqclass)
 	for (var i in equipment)
 	{
 		var u = equipment[i];
+
+		if (u.yearavailable > game.scenario.date.getFullYear())
+			continue;
+		if (u.yearexpired < game.scenario.date.getFullYear())
+			continue;
+
 		if ((u.uclass == eqclass) && (u.country == country))
 		{
 			//Add the unit to the list
@@ -1019,6 +1027,12 @@ function updateEquipmentWindow(eqclass)
 		for (var i in equipment)
 		{
 			var t = equipment[i];
+
+			if (t.yearavailable > game.scenario.date.getFullYear())
+				continue;
+			if (t.yearexpired < game.scenario.date.getFullYear())
+				continue;
+
 			if ((t.uclass == unitClass.groundTransport) && (t.country == country))
 			{
 				var tdiv = uiAddUnitBox('eqTransportList', t, true);
