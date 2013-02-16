@@ -12,15 +12,16 @@
 function ScenarioLoader()
 {
 	var xmlData = null;
-	var map = null;
+	var scen = null;
 
-	this.loadScenario = function(mapObj, scenarioFile)
+	this.loadScenario = function(scenarioObject)
 	{
 		var xmlHttp;
-		map = mapObj;
+
+		scen = scenarioObject;
 
 		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", scenarioFile, false);
+		xmlHttp.open("GET", scen.file, false);
 		xmlHttp.send(null);
 
 		if ((xmlData = xmlHttp.responseXML) == null)
@@ -29,7 +30,7 @@ function ScenarioLoader()
 		if (!parseMapHeader())
 			return false;
 		
-		map.allocMap(); //Must have map header properties set
+		scen.map.allocMap(); //Must have map header properties set
 		loadPlayers();
 		loadHexes();
 		
@@ -47,16 +48,23 @@ function ScenarioLoader()
 			//console.log("Rows: " + rows + " Cols: " + cols);
 			if (rows > 0 && rows < 99 && cols > 0 && cols < 99)
 			{
-				map.rows = rows;
-				map.cols = cols;
-				map.file = mapHeader.getAttribute("file");
-				map.name = mapHeader.getAttribute("name");
-				map.description = mapHeader.getAttribute("description");
-				map.terrainImage = mapHeader.getAttribute("image");
-				map.victoryTurns = mapHeader.getAttribute("turns").split(", ");
-				for (var i = 0; i < map.victoryTurns.length; i++)
-					map.victoryTurns[i] = +map.victoryTurns[i] //convert to int
-				map.maxTurns = map.victoryTurns[2]; //tactical victory
+				scen.map.rows = rows;
+				scen.map.cols = cols;
+				scen.map.file = mapHeader.getAttribute("file");
+				scen.map.name = mapHeader.getAttribute("name");
+				scen.map.description = mapHeader.getAttribute("description");
+				scen.map.terrainImage = mapHeader.getAttribute("image");
+				scen.map.victoryTurns = mapHeader.getAttribute("turns").split(", ");
+				for (var i = 0; i < scen.map.victoryTurns.length; i++)
+					scen.map.victoryTurns[i] = +scen.map.victoryTurns[i] //convert to int
+				scen.map.maxTurns = scen.map.victoryTurns[2]; //tactical victory
+
+				//TODO move more generics from map to scenario object
+				scen.maxTurns = scen.map.victoryTurns[2]; //tactical victory
+				scen.date .setTime(Date.parse(mapHeader.getAttribute("date")));
+				scen.atmosferic = +mapHeader.getAttribute("atmosferic");
+				scen.latitude = +mapHeader.getAttribute("latitude");
+				scen.ground = +mapHeader.getAttribute("ground");
 
 				return true;
 			}
@@ -90,7 +98,7 @@ function ScenarioLoader()
 				//Set start prestige
 				p.prestige = p.prestigePerTurn[0];
 
-				map.addPlayer(p);
+				scen.map.addPlayer(p);
 			}
 		}
 	}
@@ -107,7 +115,7 @@ function ScenarioLoader()
 			{
 				row = +hexNodes[i].getAttribute("row");
 				col = +hexNodes[i].getAttribute("col");
-				hex = map.map[row][col];
+				hex = scen.map.map[row][col];
 				if (!hex || typeof hex === "undefined")
 				{
 					console.log("Invalid Hex at row:" + row + " col:" + col);
@@ -138,7 +146,7 @@ function ScenarioLoader()
 							hex.setUnit(u);
 					}
 				}
-				map.setHex(row, col);
+				scen.map.setHex(row, col);
 			}
 		}
 	}

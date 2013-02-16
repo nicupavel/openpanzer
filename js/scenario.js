@@ -17,12 +17,17 @@ function Scenario(scenFile)
 	this.description = "";
 	this.name = "";
 	this.maxTurns = 0;
-	this.file = Scenario.scenarioPath + scenFile;
+	this.date = new Date();
+	this.atmosferic = 0;
+	this.latitude = 0;
+	this.ground = 0;
+	this.turnsPerDay = 0;
 	this.map = new Map();
+	this.file = Scenario.scenarioPath + scenFile;
 
 	if (typeof scenFile !== "undefined")
 	{
-		if (!Scenario.loader.loadScenario(this.map, this.file))
+		if (!Scenario.loader.loadScenario(this))
 			console.log("Error cannot load scenario id: %d from %s ", scenIndex, this.file);
 
 		this.maxTurns = this.map.maxTurns;
