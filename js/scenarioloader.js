@@ -61,7 +61,7 @@ function ScenarioLoader()
 
 				//TODO move more generics from map to scenario object
 				scen.maxTurns = scen.map.victoryTurns[2]; //tactical victory
-				scen.date .setTime(Date.parse(mapHeader.getAttribute("date")));
+				scen.date.setTime(Date.parse(mapHeader.getAttribute("date")));
 				scen.atmosferic = +mapHeader.getAttribute("atmosferic");
 				scen.latitude = +mapHeader.getAttribute("latitude");
 				scen.ground = +mapHeader.getAttribute("ground");
