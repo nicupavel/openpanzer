@@ -101,6 +101,11 @@ function ScenarioLoader()
 				scen.map.addPlayer(p);
 			}
 		}
+
+		//Build the equipment since we know all player and supporting countries
+		var countryList = scen.map.getCountriesBySide(0)
+		Equipment.buildEquipment(countryList.concat(scen.map.getCountriesBySide(1)));
+
 	}
 	
 	function loadHexes()

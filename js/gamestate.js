@@ -45,7 +45,12 @@ function GameState(Game)
 			player = new Player();
 			player.copy(p[i]);
 			map.addPlayer(player);
-		}	
+		}
+
+		//Build the equipment since we know all player and supporting countries
+		var countryList = map.getCountriesBySide(0);
+		Equipment.buildEquipment(countryList.concat(map.getCountriesBySide(1)));
+
 		map.copy(m);
 
 		//Restore campaign state
