@@ -9,59 +9,62 @@
  * http://www.gnu.org/licenses/gpl.html
  */
 
+var Equipment = (function(Equipment) { //Module start
+
 Equipment.equipment = {};
 Equipment.equipmentIndexes = {};
 Equipment.equipmentPath = "resources/equipment/";
 Equipment.filePrefix = "equipment-country-";
-Equipment.allCountries = [10,11,13,15,16,18,20,23,25,26,4,6,7,8];
-Equipment.testCountries = [10, 8];
 
-function Equipment()
+Equipment.buildEquipment = function(countryList)
 {
-	this.buildEquipment = function(countryList)
+	var e = null;
+
+	Equipment.equipment = {};
+	Equipment.equipmentIndexes = {};
+
+	for (var i = 0; i < countryList.length; i++)
 	{
-		var e = null;
+		if ((e = loadEquipment(countryList[i])) == null)
+			return false;
 
-		Equipment.equipment = {};
-		Equipment.equipmentIndexes = {};
-
-		for (var i = 0; i < countryList.length; i++)
+		Equipment.equipmentIndexes[countryList[i]] = e.indexes;
+		for (var u in e.units)
 		{
-			if ((e = loadEquipment(countryList[i])) == null)
-				return false;
+			//TODO Without this defined the retained size of each object is much bigger
+			Equipment.equipment[u] = { gunrange:0, icon:0, yearexpired:0, cost:0, initiative:0, spotrange :0,
+				hardatk :0, id :0, softatk:0, uclass:0, airdef:0, fuel:0, rangedefmod:0,airatk :0, movmethod :0,
+				navalatk :0, movpoints :0, grounddef :0, target:0, yearavailable :0, name :0, country :0,
+				closedef :0, ammo :0 };
 
-			Equipment.equipmentIndexes[countryList[i]] = e.indexes;
+			Equipment.equipment[u].__proto__ = null;
 
-			for (var u in e.units)
-			{
-				Equipment.equipment[u] = {};
-				for(var h = 0; h < e.parsehints.length; h++)
-					Equipment.equipment[u][e.parsehints[h]] = e.units[u][h];
+			for(var h = 0; h < e.parsehints.length; h++)
+				Equipment.equipment[u][e.parsehints[h]] = e.units[u][h];
 
-			}
-			delete e.parsehints;
-			delete e.indexes;
-			delete e.units;
-			e = null;
-
+			//TODO freeze object foreach Object.freeze(Equipment.equipment[u])
 		}
-		//equipment = Equipment.equipment;
+
+		delete e.parsehints;
+		delete e.indexes;
+		delete e.units;
+		e = null;
 	}
-
-	function loadEquipment(country)
-	{
-		var req;
-		var jsonFile = Equipment.filePrefix + country + ".json";
-		if (jsonFile == null || typeof jsonFile === "undefined")
-			return null;
-
-		req = new XMLHttpRequest();
-		req.open("GET", Equipment.equipmentPath + jsonFile, false);
-		req.send(null);
-
-		if (req.responseText == null)
-			return null;
-		return JSON.parse(req.responseText);
-	}
-
 }
+
+function loadEquipment(country)
+{
+	country = country + 1; //TODO fix indexes
+
+	var jsonFile = Equipment.filePrefix + country + ".json";
+	var req = new XMLHttpRequest();
+	req.open("GET", Equipment.equipmentPath + jsonFile, false);
+	req.send(null);
+	console.log("Loading equipment %s", jsonFile);
+	if (req.responseText == null)
+		return null;
+	return JSON.parse(req.responseText);
+}
+
+//------------------------ MODULE END ----------------------
+return Equipment; }(Equipment || {})); //Module end
