@@ -207,7 +207,6 @@ function Render(mapObj)
 		var hex = map.map[row][col];
 		var curw = bb.canvas.width; //cursor width
 		var curh = bb.canvas.height; //cursor height
-		
 		var redraw = false;
 		
 		if (lastCursorUnit !== map.currentUnit)
@@ -541,7 +540,7 @@ function Render(mapObj)
 		
 		var atkflag = atkunit.flag - 1; //flags from 1-25, array from 0-24
 		var defflag = defunit.flag - 1;
-		var cr = GameRules.calculateCombatResults(atkunit, defunit, mapObj.getUnits(), false);
+		var cr = GameRules.calculateCombatResults(atkunit, defunit, map.getUnits(), false);
 		
 		bb.clearRect(0, 0, bbw, bbh);
 		bb.drawImage(imgAttackCursor, bbw/2 - imgAttackCursor.width/2, bbh/2 - imgAttackCursor.height/2);
