@@ -12,10 +12,15 @@
 //Transport Object Constructor
 function Transport(equipmentID)
 {
+	if (typeof Equipment.equipment[equipmentID] === "undefined")
+	{
+		console.log("Undefined transport equipment id %d", equipmentID);
+		equipmentID = Object.keys(Equipment.equipment)[0];
+	}
 	this.eqid = equipmentID;
-	this.ammo = equipment[equipmentID].ammo;
-	this.fuel = equipment[equipmentID].fuel;
-	this.icon = equipment[equipmentID].icon; //This is only used when building image cache list in map.js
+	this.ammo = Equipment.equipment[equipmentID].ammo;
+	this.fuel = Equipment.equipment[equipmentID].fuel;
+	this.icon = Equipment.equipment[equipmentID].icon; //This is only used when building image cache list in map.js
 }
 
 //Transport Object Public Methods
@@ -26,12 +31,16 @@ Transport.prototype.copy = function(t)
 	this.ammo = t.ammo;
 	this.fuel = t.fuel;
 }
-Transport.prototype.unitData = function() { return equipment[this.eqid]; }
+Transport.prototype.unitData = function() { return Equipment.equipment[this.eqid]; }
 
 //Unit Object Constructor
 function Unit(equipmentID)
 {
-	if (typeof equipment[equipmentID] === "undefined") { equipmentID = 1; }
+	if (typeof Equipment.equipment[equipmentID] === "undefined")
+	{
+		console.log("Undefined unit equipment id %d", equipmentID);
+		equipmentID = Object.keys(Equipment.equipment)[0];
+	}
 	//Public Properties
 	this.id = -1;
 	this.eqid = equipmentID;
@@ -51,9 +60,9 @@ function Unit(equipmentID)
 	this.player = null; //TODO remove use owner ID
 	this.transport = null; //transport class pointer
 	this.carrier = -1 //air/naval carrier which is not a unit assigned transport
-	this.moveLeft = equipment[equipmentID].movpoints; //for phased/recon movement
-	this.ammo = equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
-	this.fuel = equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
+	this.moveLeft = Equipment.equipment[equipmentID].movpoints; //for phased/recon movement
+	this.ammo = Equipment.equipment[equipmentID].ammo; //holds the ammo of the unit but it's getter is getAmmo()
+	this.fuel = Equipment.equipment[equipmentID].fuel; //holds the fuel of the unit but it's getter is getFuel()
 	this.hasAnimation = false; //flag if the unit has a move animation
 	this.hits = 0; //the number of hits unit received this turn
 	this.experience = 0; //combat experience
@@ -121,23 +130,27 @@ Unit.prototype.copy = function(u)
 Unit.prototype.unitData = function(forceUnit)
 {
 	if (this.carrier != -1 && !forceUnit) //Unit on carrier
-		return equipment[this.carrier];
-	
+		return Equipment.equipment[this.carrier];
+
 	if ((this.isMounted) && (this.transport !== null) && !forceUnit) //Unit on transport
-		return equipment[this.transport.eqid]; 
+		return Equipment.equipment[this.transport.eqid];
 	else
-		return equipment[this.eqid];  //Real Unit
+	{
+		if (typeof Equipment.equipment[this.eqid] === "undefined")
+			console.log("Undefined EQUIPMENT ID: %d object %o unit id %d unit object %o", this.eqid, Equipment.equipment[this.eqid], this.id, this);
+		return Equipment.equipment[this.eqid];  //Real Unit
+	}
 }
 
 Unit.prototype.getMovesLeft = function()
 {
 	//On carrier always has movement of the carrier
 	if (this.carrier != -1)
-		return equipment[this.carrier].movpoints;
+		return Equipment.equipment[this.carrier].movpoints;
 	
 	//There is no point saving moveLeft in transport object since they consume all points when moving
 	if ((this.isMounted) && (this.transport !== null))
-		return equipment[this.transport.eqid].movpoints;
+		return Equipment.equipment[this.transport.eqid].movpoints;
 	else
 		return this.moveLeft;
 }
@@ -210,7 +223,7 @@ Unit.prototype.upgrade = function(upgradeid, transportid)
 	if (upgradeid <= 0)
 		upgradeid = this.eqid;
 		
-	if (equipment[this.eqid].uclass != equipment[upgradeid].uclass)
+	if (Equipment.equipment[this.eqid].uclass != Equipment.equipment[upgradeid].uclass)
 		return false;
 	
 	this.eqid = upgradeid;
@@ -279,10 +292,15 @@ Unit.prototype.disembark = function() { this.carrier = -1; }
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
 {
-	if (!this.hasMoved && this.moveLeft == equipment[this.eqid].movpoints) { this.entrenchment++; }
-	this.moveLeft = equipment[this.eqid].movpoints; //reset movement points don't use unitData() since it could be mounted
+	if (!this.hasMoved && this.moveLeft == Equipment.equipment[this.eqid].movpoints) { this.entrenchment++; }
+	this.moveLeft = Equipment.equipment[this.eqid].movpoints; //reset movement points don't use unitData() since it could be mounted
 	this.hasMoved = this.hasFired = this.hasResupplied = false;
 	this.isMounted = false;
 	this.tempSpotted = false;
 	this.hits = 0;
+}
+//frees memory asociated with this object if possible
+Unit.prototype.delete = function()
+{
+	//TODO can't delete units since some of them are linked in coreUnits for campaign players
 }

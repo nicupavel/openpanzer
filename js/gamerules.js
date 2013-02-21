@@ -113,13 +113,13 @@ GameRules.getMoveRange = function(map, unit, rows, cols)
 GameRules.getUnitMoveRange = function(unit)
 {
 	var range = unit.getMovesLeft();
-	var movmethod = unit.unitData().movmethod;
+	var ud = unit.unitData();
 
 	if (GameRules.unitUsesFuel(unit) && (unit.getFuel() < range)) 
 		range = unit.getFuel();
 
 	//Towed units with no transport should be able to move at 1 range(looks like forts are towed too)
-	if ((movmethod == movMethod.towed) && (unit.transport === null) 
+	if ((ud.movmethod == movMethod.towed) && (unit.transport === null)
 		&& (range == 0) && (ud.uclass != unitClass.fortification))
 	{
 		range = 1;
@@ -416,7 +416,7 @@ GameRules.calculateAttackResults = function(atkunit, defunit)
 	
 	//Infantry always dismounts when attacked
 	if (defunit.isMounted && !defunit.isSurprised && defunit.unitData(true).uclass == unitClass.infantry)
-			dData = equipment[defunit.eqid];
+			dData = Equipment.equipment[defunit.eqid];
 	
 	//Attacking unit type
 	switch(aType)
@@ -912,7 +912,7 @@ GameRules.getDisembarkPositions = function(map, unit)
 	if (!unit.hasMoved && (ud.uclass == unitClass.airTransport || ud.uclass == unitClass.navalTransport))
 	{
 		var p = unit.getPos();
-		var realMovMethod = equipment[unit.eqid].movmethod;
+		var realMovMethod = Equipment.equipment[unit.eqid].movmethod;
 		var moveCost = movTable[realMovMethod];
 		var adj = getAdjacent(p.row, p.col);
 
@@ -963,7 +963,7 @@ GameRules.isTransportable = function(unitID)
 {
 	if ((unitID < 1) || (typeof unitID === "undefined")) return false;
 	
-	var ud = equipment[unitID];
+	var ud = Equipment.equipment[unitID];
 	var movmethod = ud.movmethod;
 
 	//Fortifications are listed as towed for some reason
@@ -1049,10 +1049,10 @@ GameRules.calculateUnitCosts = function(unitid, transportid)
 	var cost = 0;
 	
 	if (unitid > 0 && typeof unitid !== "undefined")
-		cost += equipment[unitid].cost * CURRENCY_MULTIPLIER;
+		cost += Equipment.equipment[unitid].cost * CURRENCY_MULTIPLIER;
 	
 	if (transportid > 0 && typeof transportid !== "undefined")
-		cost += equipment[transportid].cost * CURRENCY_MULTIPLIER;
+		cost += Equipment.equipment[transportid].cost * CURRENCY_MULTIPLIER;
 
 	return cost;
 }

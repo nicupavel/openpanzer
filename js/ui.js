@@ -809,7 +809,7 @@ this.equipmentWindowButtons = function(id)
 			else
 				console.log("Can't buy a new unit");
 
-			updateEquipmentWindow(equipment[eqUnit].uclass);
+			updateEquipmentWindow(Equipment.equipment[eqUnit].uclass);
 
 			break;
 		}
@@ -833,7 +833,7 @@ this.equipmentWindowButtons = function(id)
 				u = p.getCoreUnitList()[deployid];
 				if (p.upgradeUnit(u, eqUnit, eqTransport))
 				{
-					updateEquipmentWindow(equipment[u.eqid].uclass);
+					updateEquipmentWindow(Equipment.equipment[u.eqid].uclass);
 				}
 			}
 			else //Upgrade a unit already on map
@@ -842,7 +842,7 @@ this.equipmentWindowButtons = function(id)
 				if (map.upgradeUnit(id, eqUnit, eqTransport))
 				{
 					R.cacheImages(function() { R.render(); }); //Need to cache new image
-					if (eqUnit > 0 ) updateEquipmentWindow(equipment[eqUnit].uclass);
+					if (eqUnit > 0 ) updateEquipmentWindow(Equipment.equipment[eqUnit].uclass);
 				}
 
 			}
@@ -979,7 +979,7 @@ function updateEquipmentWindow(eqclass)
 			$('eqUserSel').equnit = -1; //clear equipment unit selection on new unit selection
 			$('eqUserSel').unitscroll = $('hscroll-unitlist').scrollLeft; //save scroll position so at refresh we autoscroll
 
-			updateUnitInfoWindow(equipment[this.uniteqid]); //TODO show real unit stats
+			updateUnitInfoWindow(Equipment.equipment[this.uniteqid]); //TODO show real unit stats
 			updateEquipmentWindow(this.eqclass);
 			$('hscroll-unitlist').scrollLeft = $('eqUserSel').unitscroll; //scroll to the selected unit
 		}
@@ -993,9 +993,9 @@ function updateEquipmentWindow(eqclass)
 	
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
-	for (var i in equipment)
+	for (var i in Equipment.equipment)
 	{
-		var u = equipment[i];
+		var u = Equipment.equipment[i];
 
 		if (u.yearavailable > game.scenario.date.getFullYear())
 			continue;
@@ -1014,7 +1014,7 @@ function updateEquipmentWindow(eqclass)
 					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
 					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
 					$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll 
-					updateUnitInfoWindow(equipment[this.equnitid]); 
+					updateUnitInfoWindow(Equipment.equipment[this.equnitid]);
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 					$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
 			};
@@ -1024,9 +1024,9 @@ function updateEquipmentWindow(eqclass)
 	var eqTransportSelected = $('eqUserSel').eqtransport;
 	if (GameRules.isTransportable(eqUnitSelected) || eqTransportSelected > 0)
 	{
-		for (var i in equipment)
+		for (var i in Equipment.equipment)
 		{
-			var t = equipment[i];
+			var t = Equipment.equipment[i];
 
 			if (t.yearavailable > game.scenario.date.getFullYear())
 				continue;
@@ -1046,7 +1046,7 @@ function updateEquipmentWindow(eqclass)
 						$('eqUserSel').eqtransport = -1;
 					else
 						$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
-					updateUnitInfoWindow(equipment[this.eqtransportid]); 
+					updateUnitInfoWindow(Equipment.equipment[this.eqtransportid]);
 					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
 				};
 			}

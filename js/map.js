@@ -355,15 +355,15 @@ function Map()
 		//Assign an unique id to the unit
 		unit.id = uniqueID;
 		uniqueID++;
-		
-		unitList.push(unit); 
-		unitImagesList[unit.eqid] = equipment[unit.eqid].icon; //unit.getIcon(); //TODO rewrite this
+
+		unitList.push(unit);
+		unitImagesList[unit.eqid] = Equipment.equipment[unit.eqid].icon; //unit.getIcon(); //TODO rewrite this
 		
 		if (unit.transport !== null)
 			unitImagesList[unit.transport.eqid] = unit.transport.icon;
 		
 		if (unit.carrier != -1)
-			unitImagesList[unit.carrier] = equipment[unit.carrier].icon;
+			unitImagesList[unit.carrier] = Equipment.equipment[unit.carrier].icon;
 
 		//Sets the player struct
 		unit.player = this.getPlayer(unit.owner);
