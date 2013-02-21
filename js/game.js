@@ -36,9 +36,6 @@ function Game()
 	var scenData = null; //campaign scenario data passed for delayed load during campaign progress
 	var shouldRemoveNonCampaignUnits = false; //If we should remove scenario only units from campaign scenarios
 
-	var eq = new Equipment();
-	eq.buildEquipment(Equipment.allCountries);
-
 	this.init = function()
 	{
 		this.state = new GameState(this);
