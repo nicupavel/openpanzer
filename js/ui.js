@@ -852,7 +852,6 @@ this.equipmentWindowButtons = function(id)
 
 }
 
-//TODO index equipment array
 this.updateEquipmentWindow = function(eqclass) { return updateEquipmentWindow(eqclass); }
 function updateEquipmentWindow(eqclass)
 {
@@ -879,9 +878,12 @@ function updateEquipmentWindow(eqclass)
 	//The current selected coutry in the div
 	var c = $('eqSelCountry').country;
 	var country = parseInt(countries[c]) + 1; //country id that is saved on unit data starts from 1 
+
 	$('eqSelCountry').style.backgroundPosition = "" + countries[c] * -21 + "px 0px"; //Update flag
-	
+
+	var scenarioYear =  game.scenario.date.getFullYear();
 	var unitList = [];
+	var eqUnitList = [];
 	var forcedScroll;
 	var u, ud, userUnitSelected;
 	var div;
@@ -987,69 +989,63 @@ function updateEquipmentWindow(eqclass)
 	//Force scrolling when units are selected from the map to bring them into unit list view
 	$('hscroll-unitlist').scrollLeft = forcedScroll;
 
-
 	//Don't list units from a class that isn't allowed to be bought
 	if (typeof UIBuilder.eqClassButtons[eqclass] === "undefined") return;
 	
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
-	for (var i in Equipment.equipment)
+	eqUnitList = Equipment.getCountryEquipmentByClass(eqclass, country, "cost", false);
+
+	for (var i = 0; i < eqUnitList.length; i++)
 	{
-		var u = Equipment.equipment[i];
+		var u = Equipment.equipment[eqUnitList[i]];
 
-		if (u.yearavailable > game.scenario.date.getFullYear())
-			continue;
-		if (u.yearexpired < game.scenario.date.getFullYear())
+		if (u.yearavailable > scenarioYear || u.yearexpired < scenarioYear)
 			continue;
 
-		if ((u.uclass == eqclass) && (u.country == country))
+		//Add the unit to the list
+		var div = uiAddUnitBox('eqUnitList', u, true);
+		div.equnitid = u.id;
+		if (u.id == eqUnitSelected)
+			div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
+		div.onclick = function()
 		{
-			//Add the unit to the list
-			var div = uiAddUnitBox('eqUnitList', u, true);
-			div.equnitid = u.id;
-			if (u.id == eqUnitSelected)
-				div.setAttribute("selectedUnit", ud.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
-			div.onclick = function() 
-			{ 
-					$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
-					$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection 
-					$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll 
-					updateUnitInfoWindow(Equipment.equipment[this.equnitid]);
-					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
-					$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
-			};
-		}
+			$('eqUserSel').equnit = this.equnitid; //save the selected unit in the equipment list
+			$('eqUserSel').eqtransport = -1; //clear transport selection on new unit selection
+			$('eqUserSel').eqscroll  = $('hscroll-eqUnitList').scrollLeft; //save scroll position so at refresh we autoscroll
+			updateUnitInfoWindow(Equipment.equipment[this.equnitid]);
+			updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
+			$('hscroll-eqUnitList').scrollLeft = $('eqUserSel').eqscroll; //scroll to the selected unit
+		};
+
 	}
 	//Add the transport to the list if unit can be transported
 	var eqTransportSelected = $('eqUserSel').eqtransport;
 	if (GameRules.isTransportable(eqUnitSelected) || eqTransportSelected > 0)
 	{
-		for (var i in Equipment.equipment)
+		eqUnitList = Equipment.getCountryEquipmentByClass(unitClass.groundTransport, country, "cost", false);
+
+		for (var i = 0; i < eqUnitList.length; i++)
 		{
-			var t = Equipment.equipment[i];
+			var t = Equipment.equipment[eqUnitList[i]];
 
-			if (t.yearavailable > game.scenario.date.getFullYear())
-				continue;
-			if (t.yearexpired < game.scenario.date.getFullYear())
+			if (t.yearavailable > scenarioYear || t.yearexpired < scenarioYear)
 				continue;
 
-			if ((t.uclass == unitClass.groundTransport) && (t.country == country))
+			var tdiv = uiAddUnitBox('eqTransportList', t, true);
+			tdiv.eqtransportid = t.id;
+			if (t.id == eqTransportSelected)
+				tdiv.setAttribute("selectedUnit", t.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
+			tdiv.onclick = function()
 			{
-				var tdiv = uiAddUnitBox('eqTransportList', t, true);
-				tdiv.eqtransportid = t.id;
-				if (t.id == eqTransportSelected)
-					tdiv.setAttribute("selectedUnit", t.name) //apply the .eqUnitBox[selectedUnit] css style to make unit appear selected
-				tdiv.onclick = function()
-				{
-					//handle deselect of transport
-					if ($('eqUserSel').eqtransport == this.eqtransportid)
-						$('eqUserSel').eqtransport = -1;
-					else
-						$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list 
-					updateUnitInfoWindow(Equipment.equipment[this.eqtransportid]);
-					updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
-				};
-			}
+				//handle deselect of transport
+				if ($('eqUserSel').eqtransport == this.eqtransportid)
+					$('eqUserSel').eqtransport = -1;
+				else
+					$('eqUserSel').eqtransport = this.eqtransportid; //save the selected unit in the equipment list
+				updateUnitInfoWindow(Equipment.equipment[this.eqtransportid]);
+				updateEquipmentWindow(eqclass); //To "unselect" previous selected unit
+			};
 		}
 	}
 	updateEquipmentCosts();
