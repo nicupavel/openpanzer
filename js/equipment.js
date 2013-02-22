@@ -25,10 +25,11 @@ Equipment.buildEquipment = function(countryList)
 
 	for (var i = 0; i < countryList.length; i++)
 	{
-		if ((e = loadEquipment(countryList[i])) == null)
+		var c = countryList[i] + 1; //TODO fix indexes
+		if ((e = loadEquipment(c)) == null)
 			return false;
 
-		Equipment.equipmentIndexes[countryList[i]] = e.indexes;
+		Equipment.equipmentIndexes[c] = e.indexes;
 		for (var u in e.units)
 		{
 			//TODO Without this defined the retained size of each object is much bigger
@@ -52,10 +53,19 @@ Equipment.buildEquipment = function(countryList)
 	}
 }
 
+Equipment.getCountryEquipmentByClass = function(uclass, country, sortkey, reverse)
+{
+	return getCoutryEquipmentByKey("unitclass", uclass,  country, sortkey, reverse);
+}
+
+//TODO for the case where a campaign player buys units from a supporting country in a scenario
+Equipment.addUnitsToEquipment = function(countryUnitHash)
+{
+
+}
+
 function loadEquipment(country)
 {
-	country = country + 1; //TODO fix indexes
-
 	var jsonFile = Equipment.filePrefix + country + ".json";
 	var req = new XMLHttpRequest();
 	req.open("GET", Equipment.equipmentPath + jsonFile, false);
@@ -66,5 +76,33 @@ function loadEquipment(country)
 	return JSON.parse(req.responseText);
 }
 
+//Selects equipment by key with value(only unitclass defined atm) and country sorting it by sortkey
+function getCoutryEquipmentByKey(key, value, country, sortkey, reverse)
+{
+	var eqList = [];
+	if (Equipment.equipmentIndexes[country].hasOwnProperty(key))
+		eqList = Equipment.equipmentIndexes[country][key][value];
+
+	//TODO the case where there is no indexed key in equipment
+
+	if (sortkey)
+		eqList.sort(keySort(sortkey, reverse));
+
+	return eqList;
+}
+
+
+function keySort(key, reverse)
+{
+	var order = 1; //ascending
+	if (reverse) order = -1; //descending
+
+	return function(a, b) {
+		if (Equipment.equipment[a][key] < Equipment.equipment[b][key]) return -1 * order;
+		if (Equipment.equipment[a][key] > Equipment.equipment[b][key]) return +1 * order;
+		return 0;
+	}
+
+}
 //------------------------ MODULE END ----------------------
 return Equipment; }(Equipment || {})); //Module end
