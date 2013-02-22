@@ -924,6 +924,11 @@ function updateEquipmentWindow(eqclass)
 		ud = u.unitData(true);
 		div = uiAddUnitBox('unitlist', ud, false);
 
+		//Make a default selection for deployment mode so we don't have to click each time we deploy.
+		if (uiSettings.deployMode && (typeof userUnitSelected === "undefined" || unitList[userUnitSelected].isDeployed))
+			$('eqUserSel').deployunit = userUnitSelected = i;
+
+
 		if (uiSettings.deployMode)
 			div.unitid = i;
 		else
