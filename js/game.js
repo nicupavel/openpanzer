@@ -162,7 +162,7 @@ function Game()
 	{
 		//Add prestige for finishing scenario
 		campaignPlayer.prestige += this.campaign.getOutcomePrestige(outcomeType);
-		campaignPlayer.setCoreUnitsToHQ();
+		campaignPlayer.setPlayerToHQ(); //reset player and it's core units
 		//Save campaign player
 		savedPlayer.copy(campaignPlayer);
 		console.log(savedPlayer);

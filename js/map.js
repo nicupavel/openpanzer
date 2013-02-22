@@ -64,11 +64,13 @@ Player.prototype.copy = function(p)
 	this.airTransports = p.airTransports;
 	this.navalTransports = p.navalTransports;
 
-	for (var i = 0; i < p.supportCountries.length; i++)
-		this.supportCountries.push(p.supportCountries[i]);
+	if (p.supportCountries)
+		for (var i = 0; i < p.supportCountries.length; i++)
+			this.supportCountries.push(p.supportCountries[i]);
 
-	for (var i = 0; i < p.prestigePerTurn.length; i++)
-		this.prestigePerTurn.push(p.prestigePerTurn[i]);
+	if (p.prestigePerTurn)
+		for (var i = 0; i < p.prestigePerTurn.length; i++)
+			this.prestigePerTurn.push(p.prestigePerTurn[i]);
 
 	if (p.getCoreUnitList) { this.setCoreUnitList(p.getCoreUnitList()); }
 }
@@ -149,9 +151,16 @@ Player.prototype.endTurn = function(turn)
 		this.prestige += this.prestigePerTurn[turn];
 }
 
-Player.prototype.setCoreUnitsToHQ = function()
+//Reset player properties from previous scenario and resets/reinforce/resupply it's core unit status
+Player.prototype.setPlayerToHQ = function()
 {
 	var i, u;
+
+	this.supportCountries = [];
+	this.prestigePerTurn = [];
+	this.airTransports = 0;
+	this.navalTransports = 0;
+
 	var cList = this.getCoreUnitList();
 	for (i = 0; i < cList.length; i++)
 	{
