@@ -13,7 +13,8 @@ function GameState(Game)
 
 	var saveName =
 	{
-		map:     'openpanzer-scenario-'+VERSION,
+
+		scenario:'openpanzer-scenario-'+VERSION,
 		players: 'openpanzer-players-'+VERSION,
 		settings:'openpanzer-settings-'+VERSION,
 		campaign:'openpanzer-campaign-'+VERSION,
@@ -21,6 +22,7 @@ function GameState(Game)
 
 	this.save = function()
 	{
+		saveItem(saveName.scenario, Game.scenario);
 		saveItem(saveName.map, Game.scenario.map);
 		saveItem(saveName.players, Game.scenario.map.getPlayers());
 	}
@@ -28,16 +30,17 @@ function GameState(Game)
 	this.restore = function()
 	{
 		var player;
-		var m = restoreItem(saveName.map);
+		var s = restoreItem(saveName.scenario);
 		var p = restoreItem(saveName.players);
 		var c = restoreItem(saveName.campaign);
 		
-		if ((m === null) || (p === null)) 
+		if ((s === null) || (p === null))
 			return false;
 		
 		//Need to restore the settings since some players might be assigned to AI
 		this.restoreSettings();
 
+		Game.scenario = new Scenario(s.file);
 		var map = Game.scenario.map;
 
 		for (var i = 0; i < p.length; i++)
@@ -51,7 +54,7 @@ function GameState(Game)
 		var countryList = map.getCountriesBySide(0);
 		Equipment.buildEquipment(countryList.concat(map.getCountriesBySide(1)));
 
-		map.copy(m);
+		Game.scenario.copy(s);
 
 		//Restore campaign state
 		if (c !== null)
@@ -68,7 +71,7 @@ function GameState(Game)
 
 	this.clear = function()
 	{
-		deleteItem(saveName.map);
+		deleteItem(saveName.scenario);
 		deleteItem(saveName.players);
 		deleteItem(saveName.campaign);
 	}

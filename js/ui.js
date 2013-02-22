@@ -413,7 +413,7 @@ this.setNewScenario = function()
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	uiTurnInfo();
-	uiMessage(game.scenario.name, game.scenario.description);
+	uiMessage(game.scenario.name, game.scenario.getDescription());
 }
 
 this.startMenuButton = function(id)

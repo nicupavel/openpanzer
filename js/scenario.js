@@ -14,7 +14,6 @@ Scenario.scenarioPath = "resources/scenarios/data/";
 
 function Scenario(scenFile)
 {
-	this.description = "";
 	this.name = "";
 	this.maxTurns = 0;
 	this.date = new Date();
@@ -23,24 +22,28 @@ function Scenario(scenFile)
 	this.ground = 0;
 	this.turnsPerDay = 0;
 	this.map = new Map();
-	this.file = Scenario.scenarioPath + scenFile;
+	this.file = scenFile;
+
+	var description = "";
 
 	if (typeof scenFile !== "undefined")
 	{
-		if (!Scenario.loader.loadScenario(this))
-			console.log("Error cannot load scenario id: %d from %s ", scenIndex, this.file);
-
-		this.maxTurns = this.map.maxTurns;
-
 		//Lookup information about scenario in scenariolist if exists
 		for (var i = 0; i < scenariolist.length; i++)
 		{
 			if (scenariolist[i][0] == scenFile)
 			{
 				this.name = scenariolist[i][1];
-				this.description = scenariolist[i][2];
+				description = scenariolist[i][2];
 			}
 		}
+	}
+
+	//Loads scenario data files
+	this.load = function()
+	{
+		return Scenario.loader.loadScenario(this);
+		//this.maxTurns = this.map.maxTurns;
 	}
 
 	//Checks if local human player (not net/ai) has reached the map turn limit
@@ -69,6 +72,22 @@ function Scenario(scenFile)
 		return "lose"; //shouldn't happen as checkDefeat checks each turn
 	}
 
+	this.getDescription = function() { return description; }
+	this.setDescription = function(str) { description = str; }
+
+	//Copy constructor
+	this.copy = function(s)
+	{
+		//name already set in constructor
+		this.maxTurns = s.maxTurns;
+		this.date = new Date(s.date);
+		this.atmosferic = s.atmosferic;
+		this.latitude = s.latitude;
+		this.ground = s.ground;
+		this.turnsPerDay = s.turnsPerDay;
+		this.map.copy(s.map);
+		this.file = s.file;
+	}
 	//Private methods
 	//Check if all players from a side have played certain turn
 	function hasSidePlayedTurn(playerList, side, turn)

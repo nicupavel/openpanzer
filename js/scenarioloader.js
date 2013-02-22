@@ -21,7 +21,7 @@ function ScenarioLoader()
 		scen = scenarioObject;
 
 		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("GET", scen.file, false);
+		xmlHttp.open("GET", Scenario.scenarioPath + scen.file, false);
 		xmlHttp.send(null);
 
 		if ((xmlData = xmlHttp.responseXML) == null)
@@ -50,13 +50,13 @@ function ScenarioLoader()
 			{
 				scen.map.rows = rows;
 				scen.map.cols = cols;
-				scen.map.file = mapHeader.getAttribute("file");
 				scen.map.name = mapHeader.getAttribute("name");
-				scen.map.description = mapHeader.getAttribute("description");
 				scen.map.terrainImage = mapHeader.getAttribute("image");
 				scen.map.victoryTurns = mapHeader.getAttribute("turns").split(", ");
+
 				for (var i = 0; i < scen.map.victoryTurns.length; i++)
 					scen.map.victoryTurns[i] = +scen.map.victoryTurns[i] //convert to int
+
 				scen.map.maxTurns = scen.map.victoryTurns[2]; //tactical victory
 
 				//TODO move more generics from map to scenario object

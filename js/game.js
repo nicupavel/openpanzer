@@ -41,8 +41,11 @@ function Game()
 		this.state = new GameState(this);
 		this.scenario = new Scenario();
 
-		if (!this.state.restore())
+		if (!this.state.restore()) //No savegame
+		{
 			this.scenario = new Scenario(Game.defaultScenario);
+			this.scenario.load();
+		}
 
 		setupPlayers(this);
 
@@ -122,8 +125,12 @@ function Game()
 	this.newScenario = function(scenFile, scenIntro)
 	{
 		this.state.clear();
+
 		this.scenario = new Scenario(scenFile);
-		if (typeof scenIntro !== "undefined") this.scenario.description = scenIntro;
+		this.scenario.load();
+
+		if (typeof scenIntro !== "undefined") this.scenario.setDescription(scenIntro); //Set from campaign
+
 		setupPlayers(this);
 		localPlayingSide = getLocalSide(this.scenario.map.getPlayers());
 		this.setCurrentSide();
@@ -149,6 +156,7 @@ function Game()
 		this.campaign = new Campaign(campIndex);
 		savedPlayer = null;
 		shouldRemoveNonCampaignUnits = false; //For first scenario is not needed
+
 		//Start the first scenario
 		var scenData = this.campaign.getCurrentScenario();
 		console.log("Starting campaign %s with scenario %s", this.campaign.name, scenData.scenario);
