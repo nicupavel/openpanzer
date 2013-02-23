@@ -125,6 +125,13 @@ function Game()
 	{
 		this.state.clear();
 
+		//Cleanup old state
+		this.scenario.map.delete();
+		delete(this.scenario.map);
+		this.scenario.map = null;
+		delete(this.scenario);
+		this.scenario = null;
+
 		this.scenario = new Scenario(scenFile);
 		this.scenario.load();
 

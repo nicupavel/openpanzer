@@ -192,6 +192,11 @@ Player.prototype.setPlayerToHQ = function()
 	}
 }
 
+Player.prototype.delete = function()
+{
+	//TODO check savedPlayer in campaign mode
+}
+
 //Hex Object Constructor
 function Hex(row, col)
 {
@@ -320,6 +325,24 @@ Hex.prototype.getAttackableUnit = function(atkunit, airMode)
 		return u;
 
 	return null;
+}
+
+//frees memory asociated with this object if possible
+Hex.prototype.delete = function()
+{
+	if (this.unit)
+	{
+		this.unit.delete();
+		delete(this.unit);
+		this.unit = null;
+	}
+
+	if (this.airunit)
+	{
+		this.airunit.delete();
+		delete(this.airunit);
+		this.airunit = null;
+	}
 }
 
 //Map Object Constructor
@@ -1043,6 +1066,20 @@ function Map()
 		//Copy victoryTurns
 		for (var i = 0; i < m.victoryTurns.length; i++)
 			this.victoryTurns.push(m.victoryTurns[i]);
+	}
+
+	//frees memory asociated with this object if possible
+	this.delete = function()
+	{
+		for(var i = 0; i < this.rows; i++)
+		{
+			for(var j = 0; j < this.cols; j++)
+			{
+				this.map[i][j].delete();
+				delete(this.map[i][j]);
+			}
+		}
+		this.map = null;
 	}
 
 	this.dumpMap = function()
