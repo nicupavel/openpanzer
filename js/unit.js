@@ -73,10 +73,9 @@ function Unit(equipmentID)
 	this.setHex = function(h)
 	{
 		hex = h;
-		if (h !== null) // set unit as deployed or not
+		if (h !== null) // set unit as deployed (might be called from map.deployUnit)
 			this.isDeployed = true;
-		else
-			this.isDeployed = false;
+		//We don't set isDeployed to false here only in setPlayerToHQ() when units are sent to HQ pool
 	}
 
 	this.getPos = function()
