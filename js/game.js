@@ -39,7 +39,6 @@ function Game()
 	this.init = function()
 	{
 		this.state = new GameState(this);
-		this.scenario = new Scenario();
 
 		if (!this.state.restore()) //No savegame
 		{

@@ -1093,8 +1093,16 @@ function updateStatusBarLocation(row, col)
 	if (hex.road > roadType.none)
 		text = "/Road";
 	text = terrainNames[hex.terrain] + text + " (" + row + "," + col + ")";
+
 	if (hex.name !== null)
 		text = hex.name + " " + text;
+
+	if (hex.terrain == terrainType.Airfield && map.currentPlayer.airTransports > 0)
+		text += " Air Transports: " + map.currentPlayer.airTransports;
+
+	if (hex.terrain == terrainType.Port && map.currentPlayer.navalTransports > 0)
+		text += " Naval Transports: " + map.currentPlayer.navalTransports;
+
 	if ((unit = hex.getUnit(uiSettings.airMode)) !== null
 		&& (hex.isSpotted(map.currentPlayer.side) || unit.tempSpotted 
 			|| unit.player.side == map.currentPlayer.side)) 
