@@ -208,7 +208,7 @@ function Render(mapObj)
 		var curw = bb.canvas.width; //cursor width
 		var curh = bb.canvas.height; //cursor height
 		var redraw = false;
-		
+
 		if (lastCursorUnit !== map.currentUnit)
 			redraw = true; //Redraw because a new unit has been selected
 
@@ -408,7 +408,8 @@ function Render(mapObj)
 		//shift to correct row index	
 		trow = Math.round(vrow/2 - 1 * (vrow & 1));
 		if (trow < 0) { trow = 0; }
-		
+		if (trow > map.rows - 1) trow = map.rows - 1;
+		if (tcol > map.cols - 1) tcol = map.cols - 1;
 		//console.log("Hex is at [" +  trow + "][" + tcol + "] Virtual [" + vrow + "][" + tcol + "]");
 		return new Cell(trow, tcol);
 	}
