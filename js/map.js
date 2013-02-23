@@ -640,6 +640,7 @@ function Map()
 		return cr;
 	}
 
+	//TODO unit might still exist in player coreUnitList
 	this.updateUnitList = function()
 	{
 		//console.time("UpdateUnitList");

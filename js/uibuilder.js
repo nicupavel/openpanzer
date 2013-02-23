@@ -237,6 +237,12 @@ UIBuilder.buildEquipmentWindow = function()
 	$('eqSelCountry').country = 0;
 	$('eqSelCountry').owner = 0;
 
+	//No user selections by default
+	$('eqUserSel').deployunit = -1;
+	$('eqUserSel').userunit = -1;
+	$('eqUserSel').equnit = -1;
+	$('eqUserSel').eqtransport = -1;
+
 	//Unit Class buttons
 	for (var b in UIBuilder.eqClassButtons)
 	{

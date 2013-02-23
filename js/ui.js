@@ -45,6 +45,8 @@ function UI(game)
 	UIBuilder.buildEquipmentWindow();
 
 	uiTurnInfo();
+	uiShowDeploymentWindow();
+	updateEquipmentWindow(); //Update after making deploy/current unit list visible or it won't update
 
 function handleMouseClick(e)
 {
@@ -413,6 +415,7 @@ this.setNewScenario = function()
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	uiTurnInfo();
+	uiShowDeploymentWindow();
 	uiMessage(game.scenario.name, game.scenario.getDescription());
 }
 
@@ -896,7 +899,7 @@ function updateEquipmentWindow(eqclass)
 		userUnitSelected = $('eqUserSel').deployunit;
 		unitList = map.currentPlayer.getCoreUnitList();
 		uiSettings.deployMode = true;
-		$('statusmsg').innerHTML = "Deploy your core units on map grey hexes."
+		$('statusmsg').innerHTML = "Deploy (on map grey hexes) or upgrade your core units"
 	}
 	else
 	{
@@ -925,7 +928,7 @@ function updateEquipmentWindow(eqclass)
 		div = uiAddUnitBox('unitlist', ud, false);
 
 		//Make a default selection for deployment mode so we don't have to click each time we deploy.
-		if (uiSettings.deployMode && (typeof userUnitSelected === "undefined" || unitList[userUnitSelected].isDeployed))
+		if (uiSettings.deployMode && (userUnitSelected == -1 || unitList[userUnitSelected].isDeployed))
 			$('eqUserSel').deployunit = userUnitSelected = i;
 
 
@@ -1073,7 +1076,7 @@ function updateEquipmentCosts()
 	else
 		unit = map.currentPlayer.getCoreUnitList()[deployUnitSelected];
 
-	if (unit !== null)
+	if (typeof unit !== "undefined" && unit !== null)
 		upCost = GameRules.calculateUpgradeCosts(unit, eqUnitSelected, eqTransportSelected);
 
 	if (eqUnitSelected != -1)
@@ -1170,6 +1173,7 @@ function uiEndTurnInfo()
 	uiTurnInfo();
 	uiMessage(p.getCountryName() + " player on " + map.currentPlayer.getSideName()
 			+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
+
 	R.render(); //Full page render when changing player/side
 }
 
@@ -1245,6 +1249,16 @@ function getRenderRange(unit)
 	if (r > range) range = r;
 	
 	return range;
+}
+
+//Shows deployment window if player has undeployed units at new scenario or new turn
+function uiShowDeploymentWindow()
+{
+	if (map.currentPlayer.hasUndeployedUnits())
+	{
+		makeVisible('container-unitlist');
+		toggleButton($('buy'), true);
+	}
 }
 
 function uiToggleMapZoom()
