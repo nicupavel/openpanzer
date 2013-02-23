@@ -171,7 +171,9 @@ function Game()
 		//Add prestige for finishing scenario
 		campaignPlayer.prestige += this.campaign.getOutcomePrestige(outcomeType);
 		campaignPlayer.setPlayerToHQ(); //reset player and it's core units
-		//Save campaign player
+		//Save campaign player //TODO delete/new ?
+		savedPlayer.supportCountries = [];
+		savedPlayer.prestigePerTurn = [];
 		savedPlayer.copy(campaignPlayer);
 		console.log(savedPlayer);
 		shouldRemoveNonCampaignUnits = true;
