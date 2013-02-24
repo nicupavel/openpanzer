@@ -908,8 +908,6 @@ function updateEquipmentWindow(eqclass)
 		unitList = map.getUnits();
 		uiSettings.deployMode = false;
 		$('statusmsg').innerHTML = "Units currently deployed on map."
-		$('eqInfoText').innerHTML = game.scenario.date.getFullYear() + " " + unitClassNames[eqclass]
-						+ " upgrades for " + countryNames[country - 1];
 	}
 
 	if (oldDeployMode !== uiSettings.deployMode) //Check if we should refresh canvas for new mode
@@ -999,7 +997,9 @@ function updateEquipmentWindow(eqclass)
 
 	//Don't list units from a class that isn't allowed to be bought
 	if (typeof UIBuilder.eqClassButtons[eqclass] === "undefined") return;
-	
+
+	//Info text above
+	$('eqInfoText').innerHTML = scenarioYear + " " + unitClassNames[eqclass] + " upgrades for " + countryNames[country - 1];
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
 	eqUnitList = Equipment.getCountryEquipmentByClass(eqclass, country, "cost", false);
