@@ -439,7 +439,7 @@ this.startMenuButton = function(id)
 			makeHidden('smMain');
 			makeVisible('smScen');
 			//Make the current scenarion selected
-			setSelectOption($('smScenSel').firstChild, map.name);
+			setSelectOption($('smScenSel').firstChild, game.scenario.name);
 			break;
 		}
 		case 'continuegame':
@@ -1192,7 +1192,7 @@ function uiEndTurnInfo()
 function uiTurnInfo()
 {
 	clearTag($('statusmsg'));
-	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + map.name;
+	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + game.scenario.name;
 }
 
 function uiMessage(title, message) { UIBuilder.message(title, message); }

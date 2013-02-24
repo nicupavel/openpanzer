@@ -50,7 +50,6 @@ function ScenarioLoader()
 			{
 				scen.map.rows = rows;
 				scen.map.cols = cols;
-				scen.map.name = mapHeader.getAttribute("name");
 				scen.map.terrainImage = mapHeader.getAttribute("image");
 				scen.map.victoryTurns = mapHeader.getAttribute("turns").split(", ");
 

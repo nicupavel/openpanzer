@@ -351,7 +351,6 @@ function Map()
 	this.rows = 0;
 	this.cols = 0;
 	this.map = null;
-	this.name = "";
 	this.terrainImage = null;
 	this.victoryTurns = []; //Turns limit for briliant, victory and tactical victory
 	this.maxTurns = 1;
