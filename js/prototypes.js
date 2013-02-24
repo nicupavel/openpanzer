@@ -58,6 +58,11 @@ var terrainNames =
 	"Impassable river", "Rough"
 ];
 
+var groundCondition = { dry:0, frozen: 1, mud: 2 };
+var groundConditionNames = [ "Dry", "Frozen", "Mud" ];
+var weatherCondition = { fair:0, overcast: 1, rain: 2, snow: 3 };
+var weatherConditionNames = ["Fair", "Overcast", "Raining", "Snowing"];
+
 //TODO [0] should be NoCountry
 var countryNames = 
 [
