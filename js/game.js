@@ -92,7 +92,7 @@ function Game()
 		var lastSide = this.scenario.map.currentPlayer.side;
 
 		this.waitUIAnimation = false;
-		this.scenario.map.endTurn();
+		this.scenario.endTurn();
 
 		//Check if game ended in defeat only for human players
 		if (this.scenario.checkDefeat(lastSide, localPlayingSide))

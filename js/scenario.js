@@ -20,7 +20,8 @@ function Scenario(scenFile)
 	this.atmosferic = 0;
 	this.latitude = 0;
 	this.ground = 0;
-	this.turnsPerDay = 0;
+	this.turnsPerDay = 0;  //how many turns to increase day
+	this.dayTurn = 0;      //the turn in current day
 	this.map = new Map();
 	this.file = scenFile;
 
@@ -74,6 +75,22 @@ function Scenario(scenFile)
 
 	this.getDescription = function() { return description; }
 	this.setDescription = function(str) { description = str; }
+
+	this.endTurn = function()
+	{
+		//increase the scenario date
+		this.dayTurn ++;
+		if (this.dayTurn >= this.turnsPerDay)
+		{
+			this.dayTurn = 0;
+			this.date.setDate(this.date.getDate() + 1); //increase 1 day
+		}
+
+		//handle weather and ground changes
+
+		//end map turn
+		this.map.endTurn();
+	}
 
 	//Copy constructor
 	this.copy = function(s)
