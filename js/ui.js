@@ -1150,16 +1150,29 @@ function uiEndTurn()
 	updateUnitContextWindow();
 	selectStartingUnit();
 	uiEndTurnInfo();
+	R.render(); //Full page render when changing player/side
 }
 
-this.uiEndTurnInfo = function() { return uiEndTurnInfo(); }
+//Called from game after AI/NET turn
+this.uiEndTurnInfo = function()
+{
+	R.render(); //Full page render when changing player/sidereturn
+	uiEndTurnInfo();
+}
+
+//Shows turn info message dialog
 function uiEndTurnInfo()
 {
 
 	var p = map.currentPlayer;
 	var turnsLeft = 0;
 
-	var infoStr = "<br/><br/>There are <b>" + map.sidesVictoryHexes[p.side].length + "</b> objectives left to conquer <br/><br/>";
+	var infoStr = "<b>" + game.scenario.date.toDateString() + "</b></br>";
+
+	infoStr += weatherConditionNames[game.scenario.atmosferic] + " weather ";
+	infoStr += " and " + groundConditionNames[game.scenario.ground] + " ground.";
+
+	infoStr += "<br/><br/>There are <b>" + map.sidesVictoryHexes[p.side].length + "</b> objectives left to conquer <br/><br/>";
 
 	if ((turnsLeft = map.victoryTurns[0] - (map.turn - 1)) > 0)
 		infoStr += "<b>" + turnsLeft + "</b> turns left for <b>" + outcomeNames["briliant"] + "</b><br/>";
@@ -1173,10 +1186,9 @@ function uiEndTurnInfo()
 	uiTurnInfo();
 	uiMessage(p.getCountryName() + " player on " + map.currentPlayer.getSideName()
 			+ " side  Turn " + map.turn + "/" + map.maxTurns, infoStr);
-
-	R.render(); //Full page render when changing player/side
 }
 
+//Show turn info status bar messaage
 function uiTurnInfo()
 {
 	clearTag($('statusmsg'));

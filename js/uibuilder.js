@@ -228,6 +228,9 @@ UIBuilder.buildMainMenu = function()
 
 		div.onclick = function() { game.ui.mainMenuButton(this.id); }
 	}
+
+	//Make the status bar clickable and show turn info
+	$('statusbar').onclick = function() { game.ui.uiEndTurnInfo(); }
 }
 
 
