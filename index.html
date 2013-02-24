@@ -3,7 +3,7 @@
   <head>
 	<title>Open Panzer</title>
 	<meta name="author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
-	<meta name="description" content="HTML5 Panzer General 2 Clone"/>
+	<meta name="description" content="HTML5 Panzer General 2 remake"/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="icon" href="resources/ui/page/icon/icon.png" type="image/png"/>
 	<link rel="apple-touch-icon" href="resources/ui/page/icon/icon-57x57.png" />
@@ -40,6 +40,12 @@
   </head>
   <body onload="gameStart();" id="mainbody">
 	<!-- Game UI -->
+    <div id="ui-message"> <!-- Message popup -->
+        <div id="title">OpenPanzer</div>
+        <div id="message">Open source HTML5 Turn Based strategy game a remake of old Panzer General 2.<br> (c) 2013 Nicu Pavel. <a href="https://github.com/nicupavel/openpanzer">GitHub Project</a></div>
+        <div id="uiokbut"></div>
+    </div>
+
 	<div id="startmenu"> <!-- The main menu -->
 		<div id="smMain" class="mainPanel">
 			<div id="smLogo"><div id="smLogoText"></div></div>
@@ -83,26 +89,25 @@
 			<div id="smSetOkBut" class="smSmallButton"></div>
 		</div>
 	</div>
+
     <div id="statusbar">
         <div id="statusmsg" class="message"></div>
         <div id="locmsg" class="message"></div>
     </div> <!-- Status bar where messages/infos are shown -->
+
 	<div id="menu"> <!-- Where the in game menu is being built -->
 		<div id="slidemenu"></div>
 	</div>
+
 	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
 	<div id="unit-info">  <!-- Unit info dialog -->
 		<div class="imageCol"><div id="uImage"></div></div>
 		<div class="nameRow">
-            <div id="uName">Open Panzer</div>
+            <div id="uName">Select unit to see stats</div>
 		    <div id="statsRow" class="statsRow"></div>
 		</div>
 	</div>
-	<div id="ui-message"> <!-- Message popup -->
-		<div id="title">title</div>
-		<div id="message">message</div>
-		<div id="uiokbut"></div>
-	</div>
+
 	<div id="container-unitlist">
 		<div class="hscroll-container" id="hscroll-unitlist">
 			<div class="hscroll" id="unitlist"></div><!-- Current player units -->
@@ -124,6 +129,7 @@
 		</div>
 		<div id="eqUserSel"></div> <!-- keeps track of user selections -->
 	</div>
+
 	<div id="game"></div> <!-- Where the canvases are added -->
 	<!-- reference custom fonts so they get loaded before the canvas rendering -->
 	<span style="font-family: unitInfo; visibility: hidden">Preloading unitInfo font</span>
