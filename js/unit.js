@@ -299,7 +299,7 @@ Unit.prototype.unitEndTurn = function()
 	this.hits = 0;
 }
 //frees memory asociated with this object if possible
-Unit.prototype.delete = function()
+Unit.prototype.cleanup = function()
 {
 	//TODO can't delete units since some of them are linked in coreUnits for campaign players
 }

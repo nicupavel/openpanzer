@@ -126,7 +126,7 @@ function Game()
 		this.state.clear();
 
 		//Cleanup old state
-		this.scenario.map.delete();
+		this.scenario.map.cleanup();
 		delete(this.scenario.map);
 		this.scenario.map = null;
 		delete(this.scenario);

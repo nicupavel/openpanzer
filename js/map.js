@@ -192,7 +192,7 @@ Player.prototype.setPlayerToHQ = function()
 	}
 }
 
-Player.prototype.delete = function()
+Player.prototype.cleanup = function()
 {
 	//TODO check savedPlayer in campaign mode
 }
@@ -328,18 +328,18 @@ Hex.prototype.getAttackableUnit = function(atkunit, airMode)
 }
 
 //frees memory asociated with this object if possible
-Hex.prototype.delete = function()
+Hex.prototype.cleanup = function()
 {
 	if (this.unit)
 	{
-		this.unit.delete();
+		this.unit.cleanup();
 		delete(this.unit);
 		this.unit = null;
 	}
 
 	if (this.airunit)
 	{
-		this.airunit.delete();
+		this.airunit.cleanup();
 		delete(this.airunit);
 		this.airunit = null;
 	}
@@ -1069,13 +1069,13 @@ function Map()
 	}
 
 	//frees memory asociated with this object if possible
-	this.delete = function()
+	this.cleanup = function()
 	{
 		for(var i = 0; i < this.rows; i++)
 		{
 			for(var j = 0; j < this.cols; j++)
 			{
-				this.map[i][j].delete();
+				this.map[i][j].cleanup();
 				delete(this.map[i][j]);
 			}
 		}
