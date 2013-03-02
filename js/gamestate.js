@@ -108,6 +108,7 @@ function GameState(Game)
 		if (!s) return false;
 		//Not all settings need to be restored since some are temp only
 		uiSettings.markOwnUnits = s.markOwnUnits;
+		uiSettings.markEnemyUnits = s.markEnemyUnits;
 		uiSettings.use3D = s.use3D;
 		uiSettings.useRetina = s.useRetina;
 		
