@@ -23,7 +23,6 @@ function GameState(Game)
 	this.save = function()
 	{
 		saveItem(saveName.scenario, Game.scenario);
-		saveItem(saveName.map, Game.scenario.map);
 		saveItem(saveName.players, Game.scenario.map.getPlayers());
 	}
 

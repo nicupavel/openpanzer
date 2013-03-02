@@ -278,12 +278,14 @@ Unit.prototype.mount = function() { this.isMounted = true; }
 Unit.prototype.unmount = function() { this.isMounted = false; }
 
 Unit.prototype.embark = function(type) 
-{ 
-	//TODO Get carrier ID for player or unit country from equipment
-	if (type == carrierType.air)
-		this.carrier = 176;
-	else
-		this.carrier = 546;
+{
+	var id = Equipment.getCountryEquipmentByClass(type, this.player.country + 1)[0]; //TODO Already found in map.addPlayer
+
+	if (!id || typeof id === "undefined")
+		return false;
+
+	this.carrier = id;
+
 	return true;
 }
 

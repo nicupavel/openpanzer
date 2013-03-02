@@ -748,10 +748,15 @@ function unitContextButton(action, unit)
 		case 'embark':
 		{
 			if (unit.carrier != -1)
+			{
 				map.disembarkUnit(unit);
+				refreshRender = true;
+			}
 			else
-				map.embarkUnit(unit);
-			refreshRender = true;
+			{
+				if (map.embarkUnit(unit))
+					refreshRender = true;
+			}
 			break;
 		}
 		case 'resupply': //same location same range

@@ -396,6 +396,12 @@ function Map()
 
 		//Sets the player struct
 		unit.player = this.getPlayer(unit.owner);
+
+		//Some units have no flag defined put player country flag
+		if (unit.flag == -1)
+			unit.flag = unit.player.country + 1;
+
+		//Set zone of control and spotting range of this unit
 		GameRules.setZOCRange(this.map, unit, true, this.rows, this.cols);
 		GameRules.setSpotRange(this.map, unit, true, this.rows, this.cols);
 	}
@@ -417,9 +423,27 @@ function Map()
 	this.getPlayers = function() { return playerList; }
 	
 	this.addPlayer = function(player) 
-	{ 
+	{
+		if (!player)
+			return;
+
 		playerList.push(player);
 		if  (this.currentPlayer === null) this.currentPlayer = playerList[0];
+
+		//Check if player has available transports to add their images to the preloading list
+		if (player.airTransports > 0)
+		{
+			var id = Equipment.getCountryEquipmentByClass(unitClass.airTransport, player.country + 1)[0];
+			if (id && typeof id !== "undefined")
+				unitImagesList[id] = Equipment.equipment[id].icon;
+		}
+
+		if (player.navalTransports > 0)
+		{
+			var id = Equipment.getCountryEquipmentByClass(unitClass.navalTransport, player.country + 1)[0];
+			if (id && typeof id !== "undefined")
+				unitImagesList[id] = Equipment.equipment[id].icon;
+		}
 	}
 	
 	this.getPlayer = function(id) //TODO/FIX: returns player @ index instead of checking the ID
@@ -776,8 +800,19 @@ function Map()
 		var et = 0;
 		if ((et = GameRules.getEmbarkType(this.map, unit)) > 0)
 		{
-			unit.player.airTransports--;
-			unit.embark(et);
+			if (!unit.embark(et))
+				return false;
+			if (et == unitClass.airTransport)
+				unit.player.airTransports--;
+
+			if (et == unitClass.navalTransport)
+				unit.player.navalTransports--;
+
+			//Refresh selection for the new move/attack range
+			this.delMoveSel();
+			this.delAttackSel();
+			this.selectUnit(unit);
+
 			return true;
 		}
 		return false;
@@ -811,6 +846,8 @@ function Map()
 		if (!p.upgradeUnit(unit, upgradeid, transportid))
 			return false;
 		lastMove.unit = null; //Reset last move undo save
+
+		//Add the new unit icon
 		unitImagesList[unit.eqid] = unit.getIcon();
 		
 		if (unit.transport !== null) //TODO change this.addUnit to handle upgrading

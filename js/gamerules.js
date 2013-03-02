@@ -893,13 +893,13 @@ GameRules.getEmbarkType =  function(map, unit)
 
 	if (hex.terrain == terrainType.Airfield && unit.player.airTransports > 0)
 		if (uc == unitClass.infantry)
-			return carrierType.air;
+			return unitClass.airTransport;
 
 	if (hex.terrain == terrainType.Port && unit.player.navalTransports > 0)
 		if (uc < unitClass.fighter && uc != unitClass.fortification)
-			return carrierType.naval;
+			return unitClass.navalTransport;
 
-	return carrierType.none;
+	return unitClass.none;
 }
 
 //Returns a list of position for disembark
