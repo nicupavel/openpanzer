@@ -57,7 +57,8 @@ var hexstyle =
 var unitstyle =
 {
 	axisBox			: "#383838", //grey
-	alliedBox		: "#808000", //green 
+	alliedBox		: "#808000", //green
+	alliedBoxMarked		: "#FF0000", //red
 	playerText		: "white",
 	alliedPlayerText	: "#696969", //light brown
 	movedUnitText		: "#A9A9A9", //dark grey
