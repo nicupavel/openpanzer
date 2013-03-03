@@ -80,10 +80,17 @@ function loadEquipment(country)
 function getCoutryEquipmentByKey(key, value, country, sortkey, reverse)
 {
 	var eqList = [];
+
+	if (typeof Equipment.equipmentIndexes[country] === "undefined") //TODO send load request ?
+	{
+		console.log("Can't lookup equipment index for country %d", country);
+		return eqList;
+	}
+
 	if (Equipment.equipmentIndexes[country].hasOwnProperty(key))
 		eqList = Equipment.equipmentIndexes[country][key][value];
 
-	//TODO the case where there is no indexed key in equipment
+
 
 	if (sortkey)
 		eqList.sort(keySort(sortkey, reverse));

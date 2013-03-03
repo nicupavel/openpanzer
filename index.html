@@ -114,18 +114,29 @@
 		</div>
 	</div>
 	<div id="equipment"><!-- Equipment Window -->
+        <div id="eqSortButtonsContainer">
+            <div class="eqSortClassBut" id="eqSortOrderBut"></div>
+            <div class="eqSortClassBut" id="eqSortOptionsBut"></div>
+        </div>
 		<div id="eqInfoText">Equipment upgrades and new units</div>
 		<div id="eqSelClass"></div>
 	 	<div class="hscroll-container" id="hscroll-eqUnitList"><div class="hscroll" id="eqUnitList"></div></div>
 		<div class="hscroll-container" id="hscroll-eqTransportList">
 			<div class="hscroll" id="eqTransportList"></div>
 		</div>
-		<div id="eqButtonsContainer">
-            <div id="currentPrestige"></div>
-			<div class="eqButton" id="eqCloseBut"></div>
-			<div class="eqButton" id="eqSelCountryButton"><div id="eqSelCountry"></div></div>
-			<div class="eqButton" id="eqUpgradeBut"></div><div class="eqCostText" id="eqUpgradeText"></div>
-			<div class="eqButton" id="eqNewBut"></div><div class="eqCostText" id="eqNewText"></div>
+        <div id="eqActionsContainer">
+		    <div id="eqButtonsContainer">
+                <div id="currentPrestige"></div>
+			    <div class="eqButton" id="eqCloseBut"></div>
+			    <div class="eqButton" id="eqSelCountryButton"><div id="eqSelCountry"></div></div>
+			    <div class="eqButton" id="eqUpgradeBut"></div><div class="eqCostText" id="eqUpgradeText"></div>
+			    <div class="eqButton" id="eqNewBut"></div><div class="eqCostText" id="eqNewText"></div>
+            </div>
+            <div id="eqSortOptions">
+                <div id="eqSortInfo"></div>
+                <div id="eqSortOptionsContainer"></div>
+                <div class="eqButton" id="eqSortCloseBut"></div>
+            </div>
 		</div>
 		<div id="eqUserSel"></div> <!-- keeps track of user selections -->
 	</div>

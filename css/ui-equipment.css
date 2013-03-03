@@ -54,11 +54,27 @@
 	float: left;	
 }
 
+#eqSortButtonsContainer
+{
+    height: 30px;
+    float: left;
+    margin-top: 1px;
+}
+
+.eqSortClassBut
+{
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-righ: 5px;
+    float: left;
+}
+
 #eqInfoText
 {
 	height: 30px;
 	float: left;
-	padding-top: 5px;
+	padding-top: 7px;
 	padding-left: 10px;
 	font-size: 14px;
 	color: #f8e064;
@@ -118,6 +134,22 @@
     border-top: 1px solid #f8e064;
 }
 
+#eqSortOptions
+{
+    position: relative;
+    display: none;
+    z-index: 101; /* bigger then #eqSelCountry */
+    height: 40px;
+    width: 100%;
+    top: 0px;  /* overlap #eqButtonsContainer */
+    border-top: 1px solid #f8e064;
+    float: right;
+    font-size: 14px;
+}
+
+#eqSortInfo { float: left; margin-top: 10px; margin-left: 5px; width: 320px;}
+#eqSortOptionsContainer { float:left; margin-top: 5px }
+
 .eqButton
 {
 	min-width: 30px; 
@@ -146,8 +178,9 @@
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
 	z-index:100;
 }
-
-#eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
+#eqSortOptionsBut { background-image: url('../resources/ui/dialogs/equipment/images/sort-options.png'); }
+#eqSortOrderBut { background-image: url('../resources/ui/dialogs/equipment/images/sort-order.png'); }
+#eqSortCloseBut,#eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
 #eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
 #eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }
 

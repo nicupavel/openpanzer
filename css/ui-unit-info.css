@@ -72,7 +72,7 @@
 	float: left;
 	background-repeat: no-repeat;
 	background-position: center top;
-	padding-top: 26px; /* for text alignment */
+	padding-top: 27px; /* for text alignment */
 	width: 30px;
 	text-align: center;
 	border: 0px solid blue;
@@ -157,7 +157,7 @@
 	background-image: url('../resources/ui/dialogs/unit-info/images/transport-unit.png');
 }
 
-
+#uCost   	{ background-image: url('../resources/ui/dialogs/unit-info/images/unit-cost.png'); }
 #uClass 	{ background-image: url('../resources/ui/dialogs/unit-info/images/class.png'); }
 #uTarget 	{ background-image: url('../resources/ui/dialogs/unit-info/images/target-type.png'); }
 #uMoveType	{ background-image: url('../resources/ui/dialogs/unit-info/images/movement-type.png'); width: 60px;}

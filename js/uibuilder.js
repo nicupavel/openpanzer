@@ -22,6 +22,21 @@ UIBuilder.eqClassButtons =
 	"10": ['but-af', 'Air Fighter'], "11": ['but-ab', 'Air Bomber']
 };
 
+//Unit stats that will be listed on the window format <id>, <title>, <isSortKey>, <sortKeyName>
+UIBuilder.unitstats =
+[
+	["uFlag", "country flag", 0, null],["uCost", "Unit price", 1, "cost"], ["uStr", "Unit strength", 0, null],
+	["uFuel", "Unit fuel", 0, "fuel"], ["uAmmo", "Unit Ammo", 1, "ammo"], ["uGunRange", "Firing range", 1, "gunrange"],
+	["uMovement", "Movement range", 1, "movpoints"], ["uExp", "Combat Experience", 0, null],
+	["uEnt","Entrenchment", 0, null], ["uIni", "Combat initiative", 1, "initiative"],
+	["uSpot", "Spotting range", 1, "spotrange"], ["uAHard", "Power vs Hard targets", 1, "hardatk"],
+	["uASoft", "Power vs Soft targets", 1, "softatk"], ["uAAir", "Power vs Air targets", 1, "airatk"],
+	["uANaval", "Power vs Naval targets", 1, "navalatk"], ["uDHard", "Defence vs ground attacker", 1, "grounddef"],
+	["uDAir", "Defence vs air attacker", 1, "airdef"], ["uDClose", "Defence in close combat", 1, "closeddef"],
+	["uDRange", "Defence in ranged combat", 1, "rangedefmod"], ["uMoveType", "Movement type", 0, null],
+	["uTarget", "Target type", 0, null], ["uTransport", "See unit/transport", 0, null] /*, ["uClass", "Unit class", 0, null]*/
+];
+
 
 //Builds the start menu/options menu
 UIBuilder.buildStartMenu = function()
@@ -246,6 +261,16 @@ UIBuilder.buildEquipmentWindow = function()
 	$('eqUserSel').equnit = -1;
 	$('eqUserSel').eqtransport = -1;
 
+	//Sorting options
+	$('eqUserSel').sortorder = 0;
+	$('eqUserSel').sortproperty = 'cost';
+
+	//Top Sorting buttons
+	$('eqSortOrderBut').title = 'Click to change sorting order ascending/descenting';
+	$('eqSortOrderBut').onclick = function() { game.ui.equipmentWindowButtons('sortorder'); };
+	$('eqSortOptionsBut').title = 'Click to change sort category';
+	$('eqSortOptionsBut').onclick = function() { game.ui.equipmentWindowButtons('sortoptions'); };
+
 	//Unit Class buttons
 	for (var b in UIBuilder.eqClassButtons)
 	{
@@ -271,32 +296,50 @@ UIBuilder.buildEquipmentWindow = function()
 	$('eqSelCountry').title = 'Click to change country';
 	$('eqSelCountry').onclick = function() { game.ui.equipmentWindowButtons('changecountry'); };
 	$('eqNewBut').title = "Buy unit as a new unit";
-	$('eqNewBut').onclick = function() { game.ui.equipmentWindowButtons('buy'); }
+	$('eqNewBut').onclick = function() { game.ui.equipmentWindowButtons('buy'); };
 	$('eqUpgradeBut').title = "Upgrade selected unit to this unit";
-	$('eqUpgradeBut').onclick = function() { game.ui.equipmentWindowButtons('upgrade'); }
+	$('eqUpgradeBut').onclick = function() { game.ui.equipmentWindowButtons('upgrade'); };
 	$('eqCloseBut').title = "Close";
-	$('eqCloseBut').onclick = function() { makeHidden('equipment'); }
+	$('eqCloseBut').onclick = function() { makeHidden('equipment'); };
 }
 
+//Builds the sorting options on equipment
+UIBuilder.buildEquipmentSortOptions = function()
+{
+	$('eqSortInfo').innerHTML = "Sort equipment by: ";
+
+	for (var s = 0; s < UIBuilder.unitstats.length; s++)
+	{
+		if (!UIBuilder.unitstats[s][2] || !UIBuilder.unitstats[s][3])
+			continue;
+
+		div = addTag('eqSortOptionsContainer','div');
+		div.id = UIBuilder.unitstats[s][0];
+		div.title = UIBuilder.unitstats[s][1];
+		div.className = "uStat";
+		div.sortproperty = UIBuilder.unitstats[s][3];
+		div.onclick = function()
+		{
+			$('eqUserSel').sortproperty = this.sortproperty;
+			game.ui.updateEquipmentWindow($('eqUserSel').eqclass);
+			$('eqSortInfo').innerHTML = "Sorted by: " + this.title;
+		};
+	}
+	$('eqSortCloseBut').title = "Close sorting options";
+	$('eqSortCloseBut').onclick = function() { makeHidden('eqSortOptions'); makeVisible('eqButtonsContainer'); };
+
+}
 
 //Builds the unit stats info window
 UIBuilder.buildUnitInfoWindow = function()
 {
-	//Unit stats that will be listed on the window format <id>, <title>
-	var unitstats = [ ["uFlag", "country flag"],["uStr", "Unit strength"], ["uFuel", "Unit fuel"], ["uAmmo", "Unit Ammo"],
-		["uGunRange", "Firing range"], ["uMovement", "Movement range"],["uExp", "Combat Experience"],
-		["uEnt","Entrenchment"], ["uIni", "Combat initiative"], ["uSpot", "Spotting range"],
-		["uAHard", "Power vs Hard targets"], ["uASoft", "Power vs Soft targets"], ["uAAir", "Power vs Air targets"],
-		["uANaval", "Power vs Naval targets"], ["uDHard", "Defence vs ground attacker"], ["uDAir", "Defence vs air attacker"],
-		["uDClose", "Defence in close combat"],["uDRange", "Defence in ranged combat"], ["uMoveType", "Movement type"],
-		["uTarget", "Target type"], ["uTransport", "See unit/transport"] /*, ["uClass", "Unit class"]*/ ];
-
-	for (var s = 0; s < unitstats.length; s++)
+	for (var s = 0; s < UIBuilder.unitstats.length; s++)
 	{
+		if (UIBuilder.unitstats[s][0] == "uCost") //Don't show cost on info window
+			continue;
 		var div = addTag('statsRow','div');
-
-		div.id = unitstats[s][0];
-		div.title = unitstats[s][1];
+		div.id = UIBuilder.unitstats[s][0];
+		div.title = UIBuilder.unitstats[s][1];
 		div.className = "uStat";
 	}
 }

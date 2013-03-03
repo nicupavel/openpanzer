@@ -43,6 +43,7 @@ function UI(game)
 	UIBuilder.buildMainMenu();
 	UIBuilder.buildUnitInfoWindow();
 	UIBuilder.buildEquipmentWindow();
+	UIBuilder.buildEquipmentSortOptions();
 
 	uiTurnInfo();
 	uiShowDeploymentWindow();
@@ -513,7 +514,10 @@ this.mainMenuButton = function(id)
 			{
 				makeVisible('unit-info');
 				makeVisible('container-unitlist');
-				makeVisible('equipment'); 
+				makeVisible('equipment');
+				//By default show buy buttons not sort options
+				makeHidden('eqSortOptions');
+				makeVisible('eqButtonsContainer');
 				updateEquipmentWindow(unitClass.tank);
 				toggleButton($('buy'), true);
 			}
@@ -791,6 +795,28 @@ this.equipmentWindowButtons = function(id)
 {
 	switch(id)
 	{
+		case 'sortorder':
+		{
+			var order = $('eqUserSel').sortorder || 0;
+			order = ~order & 1;
+			$('eqUserSel').sortorder = order;
+			updateEquipmentWindow($('eqUserSel').eqclass);
+			break;
+		}
+		case 'sortoptions':
+		{
+			if (isVisible('eqSortOptions'))
+			{
+				makeHidden('eqSortOptions');
+				makeVisible('eqButtonsContainer');
+			}
+			else
+			{
+				makeHidden('eqButtonsContainer');
+				makeVisible('eqSortOptions');
+			}
+			break;
+		}
 		case 'changecountry':
 		{
 			if ($('eqSelCountry').country >= countries.length - 1) $('eqSelCountry').country = 0;
@@ -852,12 +878,9 @@ this.equipmentWindowButtons = function(id)
 					R.cacheImages(function() { R.render(); }); //Need to cache new image
 					if (eqUnit > 0 ) updateEquipmentWindow(Equipment.equipment[eqUnit].uclass);
 				}
-
 			}
-
 		}
 	}
-
 }
 
 this.updateEquipmentWindow = function(eqclass) { return updateEquipmentWindow(eqclass); }
@@ -1007,7 +1030,9 @@ function updateEquipmentWindow(eqclass)
 	$('eqInfoText').innerHTML = scenarioYear + " " + unitClassNames[eqclass] + " upgrades for " + countryNames[country - 1];
 	//Units in equipment
 	var eqUnitSelected = $('eqUserSel').equnit;
-	eqUnitList = Equipment.getCountryEquipmentByClass(eqclass, country, "cost", false);
+	var sortOrder = $('eqUserSel').sortorder;
+	var sortProperty = $('eqUserSel').sortproperty || "cost"
+	eqUnitList = Equipment.getCountryEquipmentByClass(eqclass, country, sortProperty, sortOrder);
 
 	for (var i = 0; i < eqUnitList.length; i++)
 	{
@@ -1036,7 +1061,7 @@ function updateEquipmentWindow(eqclass)
 	var eqTransportSelected = $('eqUserSel').eqtransport;
 	if (GameRules.isTransportable(eqUnitSelected) || eqTransportSelected > 0)
 	{
-		eqUnitList = Equipment.getCountryEquipmentByClass(unitClass.groundTransport, country, "cost", false);
+		eqUnitList = Equipment.getCountryEquipmentByClass(unitClass.groundTransport, country, sortProperty, sortOrder);
 
 		for (var i = 0; i < eqUnitList.length; i++)
 		{
