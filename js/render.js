@@ -14,10 +14,10 @@ function Render(mapObj)
 	var map = mapObj;
 	
 	var imgUnits = {};
-	var imgAttackCursor;
-	var imgFlags;
-	var imgMapBackground;
-	var imgUnitFire;
+	var imgAttackCursor = null;
+	var imgFlags = null;
+	var imgMapBackground = null;
+	var imgUnitFire = null;
 		
 	var drawnHexGrid = false; //Force first time rendering of hex grid but prevent redraw if no changes
 	var lastCursorCell = null; //Last cell for which the cursor was built
@@ -445,19 +445,30 @@ function Render(mapObj)
 	//Caches images, func a function to call upon cache completion
 	this.cacheImages = function(func)
 	{
-		imgAttackCursor = new Image();
-		imgAttackCursor.src = "resources/ui/cursors/attack.png";
-		
-		imgFlags = new Image();
-		imgFlags.src = "resources/ui/flags/flags_med.png";
-		
-		imgUnitFire = new Image();
-		imgUnitFire.src = "resources/ui/indicators/unit-fire.png";
-		
-		imgMapBackground = new Image();
-		imgMapBackground.src = map.terrainImage;
-		imgMapBackground.onload = function() { setupLayers(); func(); }
-		
+		if (!imgAttackCursor)
+		{
+			imgAttackCursor = new Image();
+			imgAttackCursor.src = "resources/ui/cursors/attack.png";
+		}
+		if (!imgFlags)
+		{
+			imgFlags = new Image();
+			imgFlags.src = "resources/ui/flags/flags_med.png";
+		}
+
+		if (!imgUnitFire)
+		{
+			imgUnitFire = new Image();
+			imgUnitFire.src = "resources/ui/indicators/unit-fire.png";
+		}
+
+		if (!imgMapBackground)
+		{
+			imgMapBackground = new Image();
+			imgMapBackground.src = map.terrainImage;
+			imgMapBackground.onload = function() { setupLayers(); func(); }
+		}
+
 		cacheUnitImages(map.getUnitImagesList(), func);
 	}
 	
@@ -465,8 +476,17 @@ function Render(mapObj)
 	this.getHexesCanvas = function() { return ch; }
 	this.getMapCanvas = function() { return cm; }
 	this.getCursorCanvas = function() { return ca; }
+
 	//Sets a new map for rendering. Only used to dinamically change the map being rendered
-	this.setNewMap = function(mapObj) { map = mapObj; drawnHexGrid = false;}
+	this.setNewMap = function(mapObj)
+	{
+		map = mapObj;
+		drawnHexGrid = false;
+		//Force reload of background image
+		imgMapBackground = null;
+		//Cleanup no longer user unit images
+		cleanupUnitImagesCache(map.getUnitImagesList());
+	}
 	
 		
 	// "Private"
@@ -577,7 +597,7 @@ function Render(mapObj)
 
 		for (var i in imgList)
 		{
-			if (typeof imgUnits[imgList[i]] !== "undefined" )
+			if (typeof imgUnits[imgList[i]] !== "undefined")
 			{
 				//console.log("Already loaded");
 				loaded++;
@@ -589,12 +609,26 @@ function Render(mapObj)
 			{
 				loaded++;  
 				if (loaded == toLoad)
-					func();
+					if (func) func();
 			}
 			imgUnits[imgList[i]].src = imgList[i];
-		}	
+		}
 	}
-	
+
+	//Cleans up unused unit images
+	function cleanupUnitImagesCache(imgList)
+	{
+		for (var i in imgUnits)
+		{
+			if (typeof imgList[imgUnits[i]] === "undefined")
+			{
+				//console.log("Removing unused entry %s", imgUnits[i].src);
+				imgUnits[i] = null;
+				delete(imgUnits[i]);
+			}
+		}
+	}
+
 	function drawHexDecals(x0, y0, hex)
 	{
 		if (hex.flag != -1) 
