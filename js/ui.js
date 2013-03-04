@@ -791,32 +791,11 @@ function unitContextButton(action, unit)
 	}
 }
 
+//Equipment window buttons that can't be directly handled in UIBuilder
 this.equipmentWindowButtons = function(id)
 {
 	switch(id)
 	{
-		case 'sortorder':
-		{
-			var order = $('eqUserSel').sortorder || 0;
-			order = ~order & 1;
-			$('eqUserSel').sortorder = order;
-			updateEquipmentWindow($('eqUserSel').eqclass);
-			break;
-		}
-		case 'sortoptions':
-		{
-			if (isVisible('eqSortOptions'))
-			{
-				makeHidden('eqSortOptions');
-				makeVisible('eqButtonsContainer');
-			}
-			else
-			{
-				makeHidden('eqButtonsContainer');
-				makeVisible('eqSortOptions');
-			}
-			break;
-		}
 		case 'changecountry':
 		{
 			if ($('eqSelCountry').country >= countries.length - 1) $('eqSelCountry').country = 0;

@@ -178,8 +178,7 @@
 	background-position: -147px 0px; /*start with german flag 8th flag of 21px each */
 	z-index:100;
 }
-#eqSortOptionsBut { background-image: url('../resources/ui/dialogs/equipment/images/sort-options.png'); }
-#eqSortOrderBut { background-image: url('../resources/ui/dialogs/equipment/images/sort-order.png'); }
+
 #eqSortCloseBut,#eqCloseBut { background-image: url('../resources/ui/buttons/close.png'); }
 #eqUpgradeBut {	background-image: url('../resources/ui/dialogs/equipment/images/upgrade.png'); }
 #eqNewBut {	background-image: url('../resources/ui/dialogs/equipment/images/buy.png'); }

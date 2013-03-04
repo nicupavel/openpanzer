@@ -11,8 +11,13 @@
 
 var UIBuilder = (function(UIBuilder) { //Module start
 
+//Path to menu image assets
+UIBuilder.startMenuImgPath = "resources/ui/dialogs/startmenu/images/";
+UIBuilder.menuImgPath = "resources/ui/menu/images/";
+UIBuilder.eqImgPath = "resources/ui/dialogs/equipment/images/";
+
 //The prestige "currency" icon
-UIBuilder.currencyIcon = "<img src='resources/ui/dialogs/equipment/images/currency.png'/>";
+UIBuilder.currencyIcon = "<img src='" + UIBuilder.eqImgPath + "currency.png'/>";
 
 //Build the class selection buttons "unitClass.id from equipment.js": [button name, description, ]
 UIBuilder.eqClassButtons =
@@ -47,7 +52,6 @@ UIBuilder.buildStartMenu = function()
 	//Settings with key in uiSettings and Title
 	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War"],
 			["markOwnUnits", "Mark own units on map"], ["markEnemyUnits", "Mark enemy units on map"]];
-	var imgres = "resources/ui/dialogs/startmenu/images/";
 
 	var i, b, div, img;
 
@@ -59,7 +63,7 @@ UIBuilder.buildStartMenu = function()
 		div.id = menubuttons[b][0];
 		div.title = menubuttons[b][1];
 		div.className = "smMainButton";
-		img.src = "resources/ui/dialogs/startmenu/images/" + div.id + ".png";
+		img.src = UIBuilder.startMenuImgPath + div.id + ".png";
 		div.onclick = function() { game.ui.startMenuButton(this.id); }
 	}
 	//Odd number of buttons center last one
@@ -141,7 +145,7 @@ UIBuilder.buildStartMenu = function()
 			sideHeader.className = "smSideHeader";
 			sideHeader.innerHTML = sideNames[s];
 			var sideImg = addTag(sideHeader, 'img');
-			sideImg.src = imgres + "side" + s + ".png";
+			sideImg.src = UIBuilder.startMenuImgPath + "side" + s + ".png";
 
 			for (var i = 0; i < data.length; i++)
 			{
@@ -156,7 +160,7 @@ UIBuilder.buildStartMenu = function()
 				contentDiv.innerHTML = countryNames[data[i]["country"]];
 				var smAIBut = addTag(containerDiv, 'img');
 
-				smAIBut.src = "resources/ui/dialogs/startmenu/images/aicheckbox.png";
+				smAIBut.src = UIBuilder.startMenuImgPath + "aicheckbox.png";
 				smAIBut.id = "ai" + data[i]["id"];
 				smAIBut.playerid = data[i]["id"];
 				smAIBut.onclick = function()
@@ -198,9 +202,9 @@ UIBuilder.buildStartMenu = function()
 		img.id = settings[b][0];
 
 		if (uiSettings[settings[b][0]])
-			img.src = "resources/ui/dialogs/startmenu/images/checkbox-checked.png";
+			img.src = UIBuilder.startMenuImgPath + "checkbox-checked.png";
 		else
-			img.src = "resources/ui/dialogs/startmenu/images/checkbox.png";
+			img.src = UIBuilder.startMenuImgPath + "checkbox.png";
 
 		img.onclick = function() { uiSettings[this.id] = !uiSettings[this.id]; toggleCheckbox(this); console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]); }
 	}
@@ -239,7 +243,7 @@ UIBuilder.buildMainMenu = function()
 		div.title = title;
 		div.className = "button";
 		img.id = id;
-		img.src = "resources/ui/menu/images/" + id + ".png";
+		img.src = UIBuilder.menuImgPath + id + ".png";
 
 		div.onclick = function() { game.ui.mainMenuButton(this.id); }
 	}
@@ -267,9 +271,37 @@ UIBuilder.buildEquipmentWindow = function()
 
 	//Top Sorting buttons
 	$('eqSortOrderBut').title = 'Click to change sorting order ascending/descenting';
-	$('eqSortOrderBut').onclick = function() { game.ui.equipmentWindowButtons('sortorder'); };
+	$('eqSortOrderBut').onclick = function()
+		{
+			var order = $('eqUserSel').sortorder || 0;
+			order = ~order & 1;
+			$('eqUserSel').sortorder = order;
+			game.ui.updateEquipmentWindow($('eqUserSel').eqclass);
+			toggleButton($('eqSortOrderBut'), order);
+		};
+	var img =  addTag('eqSortOrderBut', 'img');
+	img.id = "sort-order";
+	img.src = UIBuilder.eqImgPath + "sort-order.png";
+
 	$('eqSortOptionsBut').title = 'Click to change sort category';
-	$('eqSortOptionsBut').onclick = function() { game.ui.equipmentWindowButtons('sortoptions'); };
+	$('eqSortOptionsBut').onclick = function()
+		{
+			if (isVisible('eqSortOptions'))
+			{
+				makeHidden('eqSortOptions');
+				makeVisible('eqButtonsContainer');
+				toggleButton($('eqSortOptionsBut'), false);
+			}
+			else
+			{
+				makeHidden('eqButtonsContainer');
+				makeVisible('eqSortOptions');
+				toggleButton($('eqSortOptionsBut'), true);
+			}
+		};
+	img =  addTag('eqSortOptionsBut', 'img');
+	img.id = "sort-options";
+	img.src = UIBuilder.eqImgPath + "sort-options.png";
 
 	//Unit Class buttons
 	for (var b in UIBuilder.eqClassButtons)
@@ -282,7 +314,7 @@ UIBuilder.buildEquipmentWindow = function()
 		div.title = UIBuilder.eqClassButtons[b][1];
 		div.eqclass = b;
 		img.id = id;
-		img.src = "resources/ui/dialogs/equipment/images/" + id + ".png";
+		img.src = UIBuilder.eqImgPath + id + ".png";
 		div.onclick = function()
 		{
 			$('eqUserSel').userunit = -1; //Clear existing unit selections when changing class
