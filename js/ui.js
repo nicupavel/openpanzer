@@ -414,6 +414,7 @@ this.setNewScenario = function()
 		R.render(); //Full page render on new map
 	});
 	countries = map.getCountriesBySide(game.spotSide);
+	UIBuilder.setDefaultUserSelections(); //Remove previous user selections
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
 	uiTurnInfo();
 	uiShowDeploymentWindow();

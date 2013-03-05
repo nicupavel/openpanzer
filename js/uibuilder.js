@@ -252,8 +252,7 @@ UIBuilder.buildMainMenu = function()
 	$('statusbar').onclick = function() { game.ui.uiEndTurnInfo(); }
 }
 
-
-UIBuilder.buildEquipmentWindow = function()
+UIBuilder.setDefaultUserSelections = function()
 {
 	//The default selected country in the div
 	$('eqSelCountry').country = 0;
@@ -268,6 +267,11 @@ UIBuilder.buildEquipmentWindow = function()
 	//Sorting options
 	$('eqUserSel').sortorder = 0;
 	$('eqUserSel').sortproperty = 'cost';
+}
+
+UIBuilder.buildEquipmentWindow = function()
+{
+	UIBuilder.setDefaultUserSelections();
 
 	//Top Sorting buttons
 	$('eqSortOrderBut').title = 'Click to change sorting order ascending/descenting';
