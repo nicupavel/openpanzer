@@ -120,14 +120,19 @@ var outcomeNames =
 	"briliant": "Briliant Victory"
 };
 
-//TODO Frozen conditions
-//254 Stop move (but select the tile), 255 Don't enter
-var movTable = 
+//Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
+var terrainEntrenchment =
+[ 0, 3, 0, 2, 2, 1, 2, 0, 0, 0, 0, 4, 1, 0, 0, 0, 2 ];
+var terrainInitiative =
+[ 99, 1, 99, 3, 3, 5, 1, 99,2, 99, 99, 3, 5, 99, 99, 99, 3, 1];
+
+//Tables for movement cost for different ground conditions 254 Stop move (but select the tile), 255 Don't enter
+var movTableDry =
 [
 //Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
 [1, 1, 1, 2, 4, 2, 254, 1, 4, 255, 254, 1, 1, 2, 255, 255, 2, 1], //Tracked
 [1, 1, 1, 2, 254, 2, 254, 1, 4, 255, 254, 1, 1, 2, 255, 255, 2, 1], //Half Tracked
-[2, 1, 1, 4, 254, 3, 254, 3, 254, 255, 254, 2, 1, 4, 255, 255, 4, 1], //Wheeled
+[2, 1, 1, 4, 254, 3, 254, 3, 254, 255, 254, 2, 1, 4, 255, 255, 2, 1], //Wheeled
 [1, 1, 1, 2, 2, 2, 254, 2, 2, 255, 254, 1, 1, 1, 255, 255, 2, 1], //Leg
 [1, 1, 1, 1, 1, 1, 254, 1, 255, 255, 254, 1, 1, 254, 255, 255, 1, 1], //Towed
 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //Air
@@ -138,6 +143,44 @@ var movTable =
 [255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 1, 255, 255, 255, 255, 255], //Naval
 [1, 1, 1, 1, 2, 1, 1, 2, 2, 255, 254, 1, 1, 1, 255, 255, 1, 1], //All Terrain Leg (Mountain)
 ];
+
+var movTableFrozen =
+[
+//Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
+[1, 1, 1, 2, 4, 2, 254, 1, 2, 255, 2, 1, 1, 2, 255, 255, 2, 1], //Tracked
+[1, 1, 1, 2, 254, 3, 254, 1, 2, 255, 2, 1, 1, 2, 255, 255, 3, 1], //Half Tracked
+[2, 2, 2, 254, 254, 254, 254, 3, 3, 255, 3, 3, 2, 4, 255, 255, 4, 2], //Wheeled
+[1, 1, 1, 2, 2, 2, 254, 2, 1, 255, 2, 1, 1, 1, 255, 255, 2, 1], //Leg
+[1, 1, 1, 1, 1, 1, 254, 1, 1, 255, 254, 1, 1, 254, 255, 255, 1, 1], //Towed
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //Air
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 1, 255, 255, 255, 255, 255], //Deep Naval
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 2, 255, 255, 1, 255, 255, 255, 255, 255], //Costal
+[1, 1, 1, 2, 3, 3, 254, 2, 3, 255, 2, 1, 1, 1, 255, 255, 3, 1], //All Terrain Tracked
+[1, 1, 1, 2, 4, 3, 254, 1, 3, 254, 2, 2, 1, 2, 255, 255, 3, 1], //Amphibious
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 1, 255, 255, 255, 255, 255], //Naval
+[1, 1, 1, 1, 2, 1, 2, 2, 1, 255, 2, 1, 1, 1, 255, 255, 2, 1], //All Terrain Leg (Mountain)
+];
+
+
+var movTableMud =
+[
+//Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
+[2, 1, 1, 2, 4, 3, 254, 1, 254, 255, 254, 2, 1, 2, 255, 255, 3, 2], //Tracked
+[3, 1, 1, 2, 254, 3, 254, 1, 254, 255, 254, 2, 1, 2, 255, 255, 3, 2], //Half Tracked
+[4, 2, 2, 254, 254, 254, 254, 3, 254, 255, 254, 4, 2, 4, 255, 255, 254, 2], //Wheeled
+[2, 1, 1, 2, 2, 2, 254, 2, 1, 255, 254, 2, 1, 1, 255, 255, 3, 1], //Leg
+[2, 1, 1, 1, 1, 2, 254, 1, 255, 255, 254, 21, 1, 254, 255, 255, 2, 2], //Towed
+[2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //Air
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 1, 255, 255, 255, 255, 255], //Deep Naval
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 2, 255, 255, 1, 255, 255, 255, 255, 255], //Costal
+[2, 1, 1, 2, 3, 3, 254, 2, 3, 255, 255, 2, 1, 1, 255, 255, 4, 2], //All Terrain Tracked
+[1, 1, 1, 2, 4, 3, 254, 1, 3, 254, 3, 2, 1, 2, 255, 255, 3, 1], //Amphibious
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 1, 255, 255, 255, 255, 255], //Naval
+[2, 1, 1, 1, 3, 1, 3, 2, 1, 255, 254, 2, 1, 1, 255, 255, 3, 1], //All Terrain Leg (Mountain)
+];
+
+//The default movement table it will be changed on scenario depending on weather conditions
+var movTable = movTableDry;
 
 //Lookup table used for rotation of animations for a certain direction
 //Our animations are by default facing North table gives the radians for rotate
