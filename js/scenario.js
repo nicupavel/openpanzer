@@ -43,7 +43,9 @@ function Scenario(scenFile)
 	//Loads scenario data files
 	this.load = function()
 	{
-		return Scenario.loader.loadScenario(this);
+		var loaded = Scenario.loader.loadScenario(this);
+		this.setMoveTable();
+		return loaded;
 		//this.maxTurns = this.map.maxTurns;
 	}
 
@@ -92,6 +94,25 @@ function Scenario(scenFile)
 		this.map.endTurn();
 	}
 
+	//Sets the movement cost table for the scenario
+	this.setMoveTable = function()
+	{
+		switch (this.ground)
+		{
+			case groundCondition.dry:
+				movTable = movTableDry;
+				break;
+			case groundCondition.frozen:
+				movTable = movTableFrozen;
+				break;
+			case groundCondition.mud:
+				movTable = movTableMud;
+				break;
+			default:
+				movTable = movTableDry;
+		};
+	}
+
 	//Copy constructor
 	this.copy = function(s)
 	{
@@ -104,6 +125,7 @@ function Scenario(scenFile)
 		this.turnsPerDay = s.turnsPerDay;
 		this.map.copy(s.map);
 		this.file = s.file;
+		this.setMoveTable();
 	}
 	//Private methods
 	//Check if all players from a side have played certain turn
