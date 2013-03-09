@@ -50,8 +50,9 @@ UIBuilder.buildStartMenu = function()
 	var menubuttons = [["newcampaign", "New Campaign"], ["newscenario", "New Scenario"], ["settings", "Settings"],
 			   ["help", "Help"], ["continuegame", "Continue Game"]];
 	//Settings with key in uiSettings and Title
-	var settings = [["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War"],
-			["markOwnUnits", "Mark own units on map"], ["markEnemyUnits", "Mark enemy units on map"]];
+	var settings = [["showGridTerrain", "Show terrain with Hex Grid"],["useRetina", "Use Retina Resolution(TBD)"],
+			["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War(TBD)"], ["markOwnUnits", "Mark own units on map"],
+			["markEnemyUnits", "Mark enemy units on map"]];
 
 	var i, b, div, img;
 

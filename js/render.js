@@ -89,7 +89,7 @@ function Render(mapObj)
 		
 		if (uiSettings.hexGrid != drawnHexGrid)
 		{
-			drawnHexGrid = drawHexGrid = uiSettings.hexGrid;			
+			drawnHexGrid = drawHexGrid = uiSettings.hexGrid;
 			cb.clearRect(0, 0, cb.canvas.width, cb.canvas.height);
 		}
 		
@@ -161,7 +161,7 @@ function Render(mapObj)
 				}
 
 				if (drawHexGrid)
-					drawHex(cb, x0, y0, hexstyle.generic);
+					drawHex(cb, x0, y0, hexstyle.generic, hex.terrain);
 
 				
 				//Don't render unit if it has a move animation or it's not spotted by
@@ -787,7 +787,7 @@ function Render(mapObj)
 			c.drawImage(imgUnitFire, x0 - 1, y0 + 2 * r - unitTextHeight);
 	}
 	
-	function drawHex(ctx, x0, y0, style)
+	function drawHex(ctx, x0, y0, style, terrain)
 	{
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
@@ -811,6 +811,14 @@ function Render(mapObj)
 			ctx.strokeStyle = style.lineColor;
 			ctx.stroke();
 		}
+		if (uiSettings.showGridTerrain && typeof terrain !== "undefined")
+		{
+			var tx = (x0 + h + h/2 -2) >> 0;
+			var ty = y0 + 2*r -24/2; //text size + spacing
+			ctx.font = "24px openpanzer, sans-serif"; //TODO use vm vh instead of px when mobile support it
+			ctx.fillStyle = unitstyle.terrainText;
+			ctx.fillText(terrainencoding[terrain], tx, ty);
+		}
 	}
 	
 	//Returns min and max row,col for a range around a cell(row,col)
@@ -820,7 +828,7 @@ function Render(mapObj)
 		
 		if (row === null || col === null)
 			row = col = 0;
-		
+
 		if (range !== null && range >= 0)
 		{
 			z.srow = row - range;

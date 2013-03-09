@@ -110,6 +110,7 @@ function GameState(Game)
 		uiSettings.markEnemyUnits = s.markEnemyUnits;
 		uiSettings.use3D = s.use3D;
 		uiSettings.useRetina = s.useRetina;
+		uiSettings.showGridTerrain = s.showGridTerrain;
 		
 		//Restore player AI settings
 		for (var i = 0; i < s.isAI.length; i++)
