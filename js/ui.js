@@ -1205,6 +1205,8 @@ function uiTurnInfo()
 	clearTag($('statusmsg'));
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + game.scenario.name;
 	$('weathermsg').innerHTML = groundFontEncoding[game.scenario.ground] + weatherFontEncoding[game.scenario.atmosferic];
+	$('weathermsg').title = groundConditionNames[game.scenario.ground] + " ground and "
+				+ weatherConditionNames[game.scenario.atmosferic] + " weather";
 
 }
 
