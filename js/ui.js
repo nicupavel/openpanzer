@@ -1122,6 +1122,7 @@ function updateStatusBarLocation(row, col)
 	{
 		text = " Unit: " + unit.unitData(true).name + " " + text; 
 	}
+
 	$('locmsg').innerHTML = text;
 
 	return true;
@@ -1203,6 +1204,8 @@ function uiTurnInfo()
 {
 	clearTag($('statusmsg'));
 	$('statusmsg').innerHTML = map.currentPlayer.getCountryName() + " Turn: " + map.turn + "/" + map.maxTurns + " " + game.scenario.name;
+	$('weathermsg').innerHTML = groundFontEncoding[game.scenario.ground] + weatherFontEncoding[game.scenario.atmosferic];
+
 }
 
 function uiMessage(title, message) { UIBuilder.message(title, message); }

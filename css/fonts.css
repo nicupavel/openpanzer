@@ -1,6 +1,7 @@
-/* Fonts are taken from dafont.com free and GPL fonts */
-/* It's a good idea to convert from TTF to OTF to reduce size except the case
-   where TTF front contains outlines which aren't rendered when using OTF*/
+/* Fonts are taken from dafont.com free and GPL fonts except openpanzer font */
+/* It's a good idea to convert from TTF to OTF to reduce size except the case */
+/* where TTF front contains outlines which aren't rendered when using OTF */
+
 @font-face 
 {
 	font-family: unitInfo;
@@ -30,4 +31,11 @@
 	src: url('../resources/fonts/m04.ttf') format('truetype'); /* Good 8px Outlined font */
 }
 
-
+/* font for weather, ground conditions and terrain type */
+@font-face
+{
+    font-family: 'openpanzer';
+    src:url('../resources/fonts/openpanzer.ttf') format('truetype'), url('../resources/fonts/openpanzer.svg#openpanzer') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

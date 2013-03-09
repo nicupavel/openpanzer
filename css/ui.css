@@ -52,14 +52,13 @@ body,html
 	margin-left: -420px;
 	left: 50%;
 	border:0px solid #000;
-	/* to have content with opacity 
+	/* to have content with opacity too
 	background-color:black;
 	opacity: 0.6;
 	*/
 	background: rgba(0,0,0,0.6);
 	z-index:3;
 	border-radius: 5px;
-	padding: 5px 5px 0px 5px;
 }
 
 #menu 
@@ -82,11 +81,24 @@ body,html
 	display: none;
 }
 
+#weathermsg
+{
+    font-family: openpanzer;
+    font-size: 20px;
+    cursor: help;
+    float: left;
+    color: #33ccff;
+    padding-top: 1px;
+    padding-left: 5px;
+    -webkit-font-smoothing: antialiased;
+}
+
 #statusmsg
 {
     width: 450px;
     height:20px;
     float: left;
+    padding: 5px 5px 0px 5px;
 }
 
 #locmsg
@@ -95,6 +107,7 @@ body,html
     height:20px;
     text-align: right;
     float: left;
+    padding: 5px 5px 0px 5px;
 }
 
 .message
