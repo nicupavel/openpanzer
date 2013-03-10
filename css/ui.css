@@ -44,6 +44,20 @@ body,html
        -moz-user-select: none;
 }
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    border: 1px solid #006400;
+    height: 8px;
+    background-color: rgba(248, 224, 100,0.6);
+}
+/* TODO for firefox when support appears */
+
 #statusbar 
 {
 	position:fixed; 
