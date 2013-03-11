@@ -60,7 +60,7 @@
 	
 	this.play = function()	
 	{ 
-		if (sound)
+		if (sound && !uiSettings.muteUnitSounds)
 		{	
         		//requires audio to be preloaded
 			try { sound.currentTime = 0; } catch(e) {}; //restart if already playing

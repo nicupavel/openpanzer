@@ -240,6 +240,7 @@ var uiSettings =
 	zoomLevel: 1,		//The mapZoom level
 	hexGrid:false,		// flag to notify render if it should draw or not hex grid
 	showGridTerrain: false, //if terrain icons should be shown when hex grid in on
+	muteUnitSounds: false, //if unit combat sound should be muted
 	deployMode:false,	//used for unit deployment
 	markOwnUnits: false, 	//To visually mark own units on map
 	markEnemyUnits: false,	//To visually mark enemy units on map
