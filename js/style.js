@@ -62,7 +62,8 @@ var unitstyle =
 	playerText		: "white",
 	alliedPlayerText	: "#696969", //light brown
 	movedUnitText		: "#A9A9A9", //dark grey
-	terrainText		: "#ccffcc", //yellowish the color of the openpanzer icon font used for terrain icons
+	terrainText		: "#333333",
+	terrainTextStroke	: "#f8e064",
 };
 
-var terrainencoding = ["9", ":", ";", "<", "@", "=", ">", "7", "6", "8", "5", "4", "3", "2", "A", "0", "?"];
+var terrainencoding = ["A", "B", "C", "D", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "Q"];

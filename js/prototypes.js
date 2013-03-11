@@ -59,10 +59,10 @@ var terrainNames =
 
 var groundCondition = { dry:0, frozen: 1, mud: 2 };
 var groundConditionNames = [ "Dry", "Frozen", "Mud" ];
-var groundFontEncoding = ["/", ".", "-"]; //openpanzer icon font mapping
+var groundFontEncoding = ["6", "8", "7"]; //openpanzer icon font mapping
 var weatherCondition = { fair:0, overcast: 1, rain: 2, snow: 3 };
 var weatherConditionNames = ["Fair", "Overcast", "Raining", "Snowing"];
-var weatherFontEncoding = ["%", "&", "(", "#"]; //openpanzer icon font mapping
+var weatherFontEncoding = ["4", "5", "1", "2"]; //openpanzer icon font mapping
 
 //TODO [0] should be NoCountry
 var countryNames = 

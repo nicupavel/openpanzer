@@ -811,11 +811,15 @@ function Render(mapObj)
 			ctx.strokeStyle = style.lineColor;
 			ctx.stroke();
 		}
-		if (uiSettings.showGridTerrain && typeof terrain !== "undefined")
+		if ((uiSettings.showGridTerrain && typeof terrain !== "undefined") && terrain != terrainType.Clear)
 		{
 			var tx = (x0 + h + h/2 -2) >> 0;
 			var ty = y0 + 2*r -24/2; //text size + spacing
 			ctx.font = "24px openpanzer, sans-serif"; //TODO use vm vh instead of px when mobile support it
+
+			ctx.strokeStyle =unitstyle.terrainTextStroke;
+			ctx.lineWidth = 1;
+			ctx.strokeText(terrainencoding[terrain], tx - 1, ty - 1);
 			ctx.fillStyle = unitstyle.terrainText;
 			ctx.fillText(terrainencoding[terrain], tx, ty);
 		}
