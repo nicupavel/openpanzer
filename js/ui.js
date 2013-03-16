@@ -16,12 +16,7 @@ function UI(game)
 	var countries = map.getCountriesBySide(game.spotSide); //array for current side countries
 
 	//redraw screen and center unit on screen when images have finished loading
-	R.cacheImages(function() 
-		{ 
-			selectStartingUnit(); //select the first available unit for the current side
-			uiSetUnitOnViewPort(map.currentUnit);
-			R.render();  //Full page rendering
-		});
+	uiMapCacheImages();
 		
 	var canvas = R.getCursorCanvas();
 	canvas.addEventListener("mousedown", handleMouseClick, false);
@@ -407,12 +402,7 @@ this.setNewScenario = function()
 {
 	map = game.scenario.map;
 	R.setNewMap(map);
-	R.cacheImages(function()
-	{
-		selectStartingUnit();
-		uiSetUnitOnViewPort(map.currentUnit);
-		R.render(); //Full page render on new map
-	});
+	uiMapCacheImages();
 	countries = map.getCountriesBySide(game.spotSide);
 	UIBuilder.setDefaultUserSelections(); //Remove previous user selections
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window
@@ -1159,9 +1149,8 @@ function uiEndTurn()
 	countries = map.getCountriesBySide(game.spotSide);
 	updateEquipmentWindow(unitClass.tank); //Refresh equipment window for the new player
 	updateUnitContextWindow();
-	selectStartingUnit();
 	uiEndTurnInfo();
-	R.render(); //Full page render when changing player/side
+	uiMapRenderAndSelectUnit();
 }
 
 //Called from game after AI/NET turn
@@ -1261,6 +1250,26 @@ function getMouseInfo(canvas, e)
 	my = e.pageY - canvas.offsetTop - vp.clientTop - vp.offsetTop + vp.scrollTop;
 
 	return new mouseInfo(mx, my, rclick);
+}
+
+function uiMapRenderAndSelectUnit()
+{
+	R.render();  //Full page rendering
+	selectStartingUnit(); //select the first available unit for the current side
+	uiSetUnitOnViewPort(map.currentUnit);
+}
+
+function uiMapCacheImages()
+{
+	if (hasBrokenClearRect())
+	{
+		console.log("Broken canvas clearRect workaround");
+		R.cacheImages(function() {window.setTimeout(uiMapRenderAndSelectUnit, 3000)});
+	}
+	else
+	{
+		R.cacheImages(uiMapRenderAndSelectUnit);
+	}
 }
 
 //Returns the biggest range around a unit that should be rendered

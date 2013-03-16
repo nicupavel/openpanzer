@@ -109,6 +109,17 @@ function hasBrokenScroll()
 	return false;
 }
 
+//Android 4.x stock browser has issues clearing the canvas. Canvas retain a random drawing state from the first
+//writes that come in a certain time after the canvas was created
+function hasBrokenClearRect()
+{
+	var ua = navigator.userAgent;
+	//Stock android browser on froyo/gingerbread suffers from div overflow scroll issue
+	if (ua.match(/android 4/i) && !ua.match(/chrome/i))
+		return true;
+	return false;
+}
+
 function hoverin(e)
 {
 	if (!e || typeof e === "undefined")
