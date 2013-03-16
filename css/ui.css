@@ -99,6 +99,7 @@ body,html
 {
     font-family: openpanzer;
     font-size: 20px;
+    width: 40px;
     cursor: help;
     float: left;
     color: #33ccff;
@@ -109,19 +110,19 @@ body,html
 
 #statusmsg
 {
-    width: 450px;
+    width: 420px;
     height:20px;
     float: left;
-    padding: 5px 5px 0px 5px;
+    padding: 5px 0px 0px 5px;
 }
 
 #locmsg
 {
-    width: 390px;
+    width: 360px;
     height:20px;
     text-align: right;
     float: left;
-    padding: 5px 5px 0px 5px;
+    padding: 5px 5px 0px 0px;
 }
 
 .message
