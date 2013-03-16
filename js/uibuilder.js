@@ -51,7 +51,7 @@ UIBuilder.buildStartMenu = function()
 			   ["help", "Help"], ["continuegame", "Continue Game"]];
 	//Settings with key in uiSettings and Title
 	var settings = [["showGridTerrain", "Show terrain with Hex Grid"],["muteUnitSounds", "Mute unit combat sounds"],
-			["useRetina", "Use Retina Resolution(TBD)"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War(TBD)"],
+			["useRetina", "Use Retina Resolution"], ["use3D", "Use 3D acceleration"], ["markFOW", "Show Fog Of War(TBD)"],
 			["markOwnUnits", "Mark own units on map"],	["markEnemyUnits", "Mark enemy units on map"]];
 
 	var i, b, div, img;
@@ -207,13 +207,23 @@ UIBuilder.buildStartMenu = function()
 		else
 			img.src = UIBuilder.startMenuImgPath + "checkbox.png";
 
-		img.onclick = function() { uiSettings[this.id] = !uiSettings[this.id]; toggleCheckbox(this); console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]); }
+		img.onclick = function()
+		{
+			uiSettings[this.id] = !uiSettings[this.id];
+			toggleCheckbox(this);
+			if (this.id == "useRetina")
+				$('smSettings').needPageReload = true;
+			console.log("Settings " + this.id + " changed to:" + uiSettings[this.id]);
+		}
 	}
 	$('smSetOkBut').onclick = function()
 	{
 		makeHidden('smSettings');
 		makeVisible('smMain');
 		game.state.saveSettings();
+
+		if ($('smSettings').needPageReload)
+			location.reload(true);
 	}
 }
 

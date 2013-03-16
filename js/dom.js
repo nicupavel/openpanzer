@@ -243,8 +243,13 @@ function changeViewPort()
 {
         var i, meta = null;
         var scale = 1.0;
+	var maximumScale = 1.0;
+	var deviceDensity = "medium-dpi"; //Default android scale like param
         var ratio = window.devicePixelRatio || 1;
         var metaTags = document.getElementsByTagName("meta");
+	var state = new GameState(null); //To restore only settings
+
+	state.restoreSettings();
 
         for (i = 0; i < metaTags.length; i++)
                 if (metaTags[i].name == "viewport")
@@ -260,8 +265,12 @@ function changeViewPort()
 	//var ua = navigator.userAgent;
         //if (ua.match(/(iPad|iPhone|iPod)/i)) //Only for iOS devices
         if (uiSettings.useRetina)
+	{
                 scale = 1.0 / ratio;
+		deviceDensity = "device-dpi"; //maximum device-dpi
+		maximumScale = 5;
+	}
 
-        meta.content = "width=device-width, initial-scale=" + scale +", maximum-scale=" + scale + ", user-scalable=0";
+	meta.content = "width=device-width, initial-scale=" + scale +",maximum-scale=" + maximumScale + " , user-scalable=1, target-densitydpi=" + deviceDensity;
 }
 changeViewPort(); //Set default viewport settings
