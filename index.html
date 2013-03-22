@@ -4,41 +4,9 @@
 	<title>Open Panzer</title>
 	<meta name="author" content="Nicu Pavel, npavel@linuxconsulting.ro"/>
 	<meta name="description" content="HTML5 Panzer General 2 remake"/>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="icon" href="resources/ui/page/icon/icon.png" type="image/png"/>
-	<link rel="apple-touch-icon" href="resources/ui/page/icon/icon-57x57.png" />
-	<link rel="apple-touch-icon" sizes="72x72" href="resources/ui/page/icon/icon-72x72.png" />
-	<link rel="apple-touch-icon" sizes="114x114" href="resources/ui/page/icon/icon-114x114.png" />
-	<link rel="apple-touch-icon" sizes="144x144" href="resources/ui/page/icon/icon-144x144.png" />
-
-	<script src="resources/scenarios/scenariolist.js"></script>
-	<script src="resources/campaigns/campaignlist.js"></script>
-	<!-- <script src="resources/equipment/equipment-condensed-all.js"></script> --> <!-- for loading speed -->
-	<!-- <script src="resources/equipment/equipment-all.js"></script> --> <!-- the human readable version for development -->
-	<!-- <script src="js/eventhandler.js"></script> -->
-	<script src="js/prototypes.js"></script>
-    <script src="js/gamestate.js"></script>
-	<script src="js/equipment.js"></script>
-	<script src="js/dom.js"></script>
-	<script src="js/ai.js"></script>
-	<script src="js/style.js"></script>
-	<script src="js/sound.js"></script>
-	<script src="js/animation.js"></script>
-	<script src="js/gamerules.js"></script>
-	<script src="js/unit.js"></script>
-	<script src="js/map.js"></script>
-	<script src="js/scenarioloader.js"></script>
-	<script src="js/render.js"></script>
-	<script src="js/scenario.js"></script>
-	<script src="js/campaign.js"></script>
-	<script src="js/uibuilder.js"></script>
-	<script src="js/ui.js"></script>
-	<script src="js/game.js"></script>
-
-	<link href="css/ui.css" rel="stylesheet" type="text/css">
-
+	<meta http-equiv="refresh" content=0 URL="http://openpanzer.net">
   </head>
-  <body onload="gameStart();" id="mainbody">
+  <body id="mainbody">
 	<!-- Game UI -->
     <div id="ui-message"> <!-- Message popup -->
         <div id="title">OpenPanzer</div>
@@ -46,105 +14,5 @@
         <div id="uiokbut"></div>
     </div>
 
-	<div id="startmenu"> <!-- The main menu -->
-		<div id="smMain" class="mainPanel">
-			<div id="smLogo"><div id="smLogoText"></div></div>
-			<div id="smButtons"></div>
-			<div id="smCredits"></div>
-		</div>
-        <div id="smCamp" class="mainPanel">
-            <div id="smCampSel" class="smSelect"></div>
-            <div id="smCampDesc" class="smDesc"></div>
-            <div id="smCampInfo">
-		<div id="smCampCountry" class="smCampDetails"></div>
-		<div id="smCampScenarios" class="smCampDetails"></div>
-		<div id="smCampPrestige" class="smCampDetails"></div>
-            </div>
-            <div id="smCampButtons">
-                <div class="smSmallButton" id="smCPlayBut"></div>
-                <div class="smSmallButton" id="smCBackBut"></div>
-                <!-- Campaign debug buttons -->
-                <!--
-                <div style="float: left" id="smCVB">[Briliant Victory]</div>
-                <div style="float: left" id="smCV">[Normal Victory]</div>
-                <div style="float: left" id="smCVT">[Tactical Victory]</div>
-                <div style="float: left" id="smCL">[Lose]</div>
-                -->
-            </div>
-        </div>
-		<div id="smScen" class="mainPanel">
-			<div id="smScenSel" class="smSelect"></div>
-			<div id="smScenDesc" class="smDesc"></div>
-			<div id="smScenPlayers">
-				<div id="smSide0"></div>
-				<div id="smVS"></div>
-				<div id="smSide1"></div>
-			</div>
-			<div id="smScenButtons">
-				<div class="smSmallButton" id="smSPlayBut"></div>
-				<div class="smSmallButton" id="smSBackBut"></div>
-			</div>
-		</div>
-		<div id="smSettings" class="mainPanel">
-			<div id="smSetOkBut" class="smSmallButton"></div>
-		</div>
-	</div>
-
-    <div id="statusbar">
-        <div id="weathermsg""></div>
-        <div id="statusmsg" class="message"></div>
-        <div id="locmsg" class="message"></div>
-    </div> <!-- Status bar where messages/infos are shown -->
-
-	<div id="menu"> <!-- Where the in game menu is being built -->
-		<div id="slidemenu"></div>
-	</div>
-
-	<div id="unit-context"></div> <!-- Where the buttons for unit contextual actions appear -->
-	<div id="unit-info">  <!-- Unit info dialog -->
-		<div class="imageCol"><div id="uImage"></div></div>
-		<div class="nameRow">
-            <div id="uName">Select unit to see stats</div>
-		    <div id="statsRow" class="statsRow"></div>
-		</div>
-	</div>
-
-	<div id="container-unitlist">
-		<div class="hscroll-container" id="hscroll-unitlist">
-			<div class="hscroll" id="unitlist"></div><!-- Current player units -->
-		</div>
-	</div>
-	<div id="equipment"><!-- Equipment Window -->
-        <div id="eqSortButtonsContainer">
-            <div class="eqSortClassBut" id="eqSortOrderBut"></div>
-            <div class="eqSortClassBut" id="eqSortOptionsBut"></div>
-        </div>
-		<div id="eqInfoText">Equipment upgrades and new units</div>
-		<div id="eqSelClass"></div>
-	 	<div class="hscroll-container" id="hscroll-eqUnitList"><div class="hscroll" id="eqUnitList"></div></div>
-		<div class="hscroll-container" id="hscroll-eqTransportList">
-			<div class="hscroll" id="eqTransportList"></div>
-		</div>
-        <div id="eqActionsContainer">
-		    <div id="eqButtonsContainer">
-                <div id="currentPrestige"></div>
-			    <div class="eqButton" id="eqCloseBut"></div>
-			    <div class="eqButton" id="eqSelCountryButton"><div id="eqSelCountry"></div></div>
-			    <div class="eqButton" id="eqUpgradeBut"></div><div class="eqCostText" id="eqUpgradeText"></div>
-			    <div class="eqButton" id="eqNewBut"></div><div class="eqCostText" id="eqNewText"></div>
-            </div>
-            <div id="eqSortOptions">
-                <div id="eqSortInfo"></div>
-                <div id="eqSortOptionsContainer"></div>
-                <div class="eqButton" id="eqSortCloseBut"></div>
-            </div>
-		</div>
-		<div id="eqUserSel"></div> <!-- keeps track of user selections -->
-	</div>
-
-	<div id="game"></div> <!-- Where the canvases are added -->
-	<!-- reference custom fonts so they get loaded before the canvas rendering -->
-	<span style="font-family: unitInfo; visibility: hidden">Preloading unitInfo font</span>
-	<span style="font-family: coreUnitFont; visibility: hidden">Preloading coreUnitFont</span>
   </body>
 </html>
