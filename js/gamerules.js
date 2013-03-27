@@ -804,6 +804,21 @@ GameRules.canCapture = function(unit)
 	return true;
 }
 
+//Which unit class can gain entrenchments
+GameRules.canEntrench = function(unit)
+{
+
+	if (unit === null)
+		return false;
+
+	var uc = unit.unitData().uclass;
+
+	if (unitEntrenchRate[uc] > 0)
+		return true;
+
+	return false;
+}
+
 GameRules.isEnemy = function(unit, targetUnit)
 {
 	if (unit === null || targetUnit === null)

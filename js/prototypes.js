@@ -28,6 +28,9 @@ var unitClassNames =
 	"Aircraft Carrier", "Naval Transport", "Battle Cruiser", "Cruiser", "Light Cruiser"
 ];
 
+//How fast a unit class entrench
+var unitEntrenchRate = [0, 3, 1, 2, 2, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 //Power of 2 bit masks. Hex with road value 136 means it has a road starting from mid of the hex
 //and going NW (128) and one starting from mid of the hex and going SE (8)
 var roadType = 
@@ -56,6 +59,10 @@ var terrainNames =
 	"Swamp", "Ocean", "River", "Fortification", "Port", "Stream", "Escarpment",
 	"Impassable river", "Rough"
 ];
+
+//Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
+var terrainEntrenchment = [ 0, 3, 0, 2, 2, 1, 2, 0, 0, 0, 0, 4, 1, 0, 0, 0, 2 ];
+var terrainInitiative = [ 99, 1, 99, 3, 3, 5, 1, 99,2, 99, 99, 3, 5, 99, 99, 99, 3, 1];
 
 var groundCondition = { dry:0, frozen: 1, mud: 2 };
 var groundConditionNames = [ "Dry", "Frozen", "Mud" ];
@@ -121,12 +128,6 @@ var outcomeNames =
 	"tactical": "Tactical Victory",
 	"briliant": "Briliant Victory"
 };
-
-//Clear, City, Airfield, Forest, Bocage, Hill, Mountain, Sand, Swamp, Ocean, River, Fortification, Port, Stream, Escarpment, impassableRiver, Rough, Roads
-var terrainEntrenchment =
-[ 0, 3, 0, 2, 2, 1, 2, 0, 0, 0, 0, 4, 1, 0, 0, 0, 2 ];
-var terrainInitiative =
-[ 99, 1, 99, 3, 3, 5, 1, 99,2, 99, 99, 3, 5, 99, 99, 99, 3, 1];
 
 //Tables for movement cost for different ground conditions 254 Stop move (but select the tile), 255 Don't enter
 var movTableDry =

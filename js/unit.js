@@ -67,6 +67,7 @@ function Unit(equipmentID)
 	this.hits = 0; //the number of hits unit received this turn
 	this.experience = 0; //combat experience
 	this.entrenchment = 0; //level of entrenchment this unit has
+	this.entrenchTicks = 0; //how many tick to gain another entrenchment
 	
 	//Privileged Methods that access private properties/methods
 	this.getHex = function() { return hex; }
@@ -114,6 +115,7 @@ Unit.prototype.copy = function(u)
 	this.hits = u.hits;
 	this.experience = u.experience;
 	this.entrenchment = u.entrenchment;
+	this.entrenchTicks = u.entrenchTicks;
 	if (u.player !== null)
 	{
 		this.player = new Player();
@@ -189,7 +191,7 @@ Unit.prototype.fire = function(isAttacking)
 
 Unit.prototype.move = function(cost) 
 {
-	this.entrenchment = 0;
+	this.entrenchment = 0; //loses all entrenchment
 	var fuelUsed = 0;
 	if (cost >= 254) //Remove stopmov or noenter costs
 		fuelUsed = (cost / 254 + cost % 254) >> 0; //TODO: fix in GameRules unit shouldn't be allowed to move if cost > 254
@@ -289,11 +291,48 @@ Unit.prototype.embark = function(type)
 	return true;
 }
 
+Unit.prototype.entrench = function()
+{
+	var hex = null;
+	var uc = this.unitData().uclass;
+	var terrainEntrench = 0;
+
+	if (!GameRules.canEntrench(this))
+		return false;
+
+	hex = this.getHex();
+
+	if (!hex) return false;
+
+	terrainEntrench = terrainEntrenchment[hex.terrain];
+
+	if (this.entrenchment >= terrainEntrenchment[hex.terrain])
+	{
+		var entrenchLevel = this.entrenchment - terrainEntrench;
+		var nextEntrenchLevel = 9 * entrenchLevel + 4;
+		this.entrenchTicks += +(this.experience/100) + (terrainEntrench + 1) * unitEntrenchRate[uc];
+		while(this.entrenchTicks >= nextEntrenchLevel && this.entrenchment < (terrainEntrench + 5))
+		{
+			this.entrenchTicks -= nextEntrenchLevel;
+			this.entrenchment++;
+			entrenchLevel++;
+			nextEntrenchLevel = 9 * entrenchLevel + 4;
+		}
+	}
+	else
+	{
+		this.entrenchment = terrainEntrench;
+		this.entrenchTicks = 0;
+	}
+
+	return true;
+}
+
 Unit.prototype.disembark = function() { this.carrier = -1; }
 Unit.prototype.getIcon = function() { var u = this.unitData(); return u.icon; }
 Unit.prototype.unitEndTurn = function()
 {
-	if (!this.hasMoved && this.moveLeft == Equipment.equipment[this.eqid].movpoints) { this.entrenchment++; }
+	this.entrench();
 	this.moveLeft = Equipment.equipment[this.eqid].movpoints; //reset movement points don't use unitData() since it could be mounted
 	this.hasMoved = this.hasFired = this.hasResupplied = false;
 	this.isMounted = false;
