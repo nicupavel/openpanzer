@@ -91,6 +91,5 @@ Running the code locally in Google Chrome requires --allow-file-access-from-file
 Graphical assets and other resources:
 
 Unit images are taken from OpenGeneral Icons project: http://opengeneral.sourceforge.net/db/icons/
-Campaigns, scenarios and equipment are converted, for now, from original Panzer General 2.
 This game has been built around the specification of the original game compiled by Luis Guzman: http://luis-guzman.com/links/PG2_FilesSpec.html
 Unit equipment is exported from PG2Suite: http://luis-guzman.com/PG2_Suite.html before being converted into a json format.
