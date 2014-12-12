@@ -37,11 +37,11 @@ function insertTag(parent, tag, child)
 	var e, c;
 	var t = document.createElement(tag);
 	
-	if (typeof(parent) === 'string') {	e = $(parent); }
-	else {e = parent;}
+	if (typeof(parent) === 'string') { e = $(parent); }
+	else { e = parent; }
 	
-	if (typeof(child) === 'string') {	c = $(child); }
-	else {c = child;}
+	if (typeof(child) === 'string') { c = $(child); }
+	else { c = child; }
 	
 	
 	if (e !== null)
@@ -68,6 +68,24 @@ function clearTag(tag)
     	t.removeChild(t.lastChild);
 }
 
+//Returns tag position
+function getPosition(tag)
+{
+    var r = {};
+
+    if (isVisible(tag))
+    {
+        r = $(tag).getBoundingClientRect();
+    }
+    else
+    {
+        makeVisible(tag);
+        r = $(tag).getBoundingClientRect();
+        makeHidden(tag);
+    }
+
+    return r;
+}
 //set current option of a select element by matching string
 function setSelectOption(e, str)
 {
@@ -75,7 +93,7 @@ function setSelectOption(e, str)
 	for (var i = 0; i < o.length; i++)
 	{
 		o[i].selected = false; //deselect option
-		if (o[i].text === str)
+		if (str.trim() === o[i].text.trim())
 		{
 			o[i].selected = true;
 			e.onchange(); //Call the onchange() function
@@ -138,7 +156,31 @@ function hoverout(e)
 	e.src = path + e.id + ".png";
 }
 
-function toggleButton(p, state)
+//Toggle a button made with a font glyph normal button is has lower case letter, selected is uppercase
+function toggleButton(e, state)
+{
+	if (!e)
+		return false;
+
+	var glyph = e.innerHTML;
+
+	if (state)
+	{
+		e.setAttribute("selected", "on");
+		if (e.hasSelectedGlyph)
+			e.innerHTML = glyph.toUpperCase();
+	}
+	else
+	{
+		e.removeAttribute("selected");
+		if (e.hasSelectedGlyph)
+			e.innerHTML = glyph.toLowerCase();
+	}
+
+	return true;
+}
+
+function toggleButtonWithImage(p, state)
 {
 	var e;
 	//Change the image from the button which *usually* is the firstChild
@@ -153,8 +195,24 @@ function toggleButton(p, state)
 		hoverout(e);
 }
 
-//Toggles a checkbox image(<name>-checked.png must exist)
+//Toggles a checkbox with glyph, same as toggleButton() but without state
 function toggleCheckbox(e)
+{
+	if (!e)
+		return false;
+
+	var glyph = e.innerHTML;
+
+	if (glyph === glyph.toUpperCase())
+		e.innerHTML = glyph.toLowerCase();
+	else
+		e.innerHTML = glyph.toUpperCase();
+
+	return true;
+}
+
+//Toggles a checkbox image(<name>-checked.png must exist)
+function toggleCheckboxWithImage(e)
 {
 	if (! e || !e.src) return;
 
@@ -192,15 +250,34 @@ function makeHidden(tag)
 	$('game').focus() //focus back the game canvas
 }
 
-function bounceText(x, y, text)
+function bounceText(x, y, text, positive)
 {
 	var cdiv = addTag('game', 'div');
 	var ldiv = addTag(cdiv, 'div');
+
 	cdiv.style.cssText = "position:absolute; top:"+ y + "px; left:" + x + "px";
+
+	if (+uiSettings.uiScale != 1)
+	{
+		var transform = "scale(" + uiSettings.uiScale + "," + uiSettings.uiScale + ")";
+		cdiv.style.webkitTransformOrigin = "50% 50%";
+		cdiv.style.mozTransformOrigin = "50% 50%";
+		cdiv.style.transformOrigin = "50% 50%";
+
+
+		cdiv.style.webkitTransform = transform;
+		cdiv.style.MozTransform = transform;
+		cdiv.style.transform = transform;
+	}
+
 	//CSS AnimationEvent callback to delete the created parent div
 	ldiv.addEventListener("animationend", function() { delTag(this.parentNode); }, false); //mozilla
 	ldiv.addEventListener("webkitAnimationEnd", function() { delTag(this.parentNode); }, false); //webkit
-	ldiv.className = "textBounce";
+
+	if (positive)
+		ldiv.className = "textBounceGreen";
+	else
+		ldiv.className = "textBounceRed";
 	ldiv.innerHTML = text;
 }
 
@@ -239,38 +316,69 @@ function touchScroll(id)
 		}, false);
 }
 
+function addStyleSheet(name)
+{
+	var ss = document.createElement("link");
+	ss.setAttribute("rel", "stylesheet");
+	ss.setAttribute("type", "text/css");
+	ss.setAttribute("href", "css/" + name);
+	if (!ss || typeof ss === "undefined")
+		return false;
+	document.getElementsByTagName("head")[0].appendChild(ss);
+	return true;
+}
+
 function changeViewPort()
 {
-        var i, meta = null;
-        var scale = 1.0;
+	var i, meta = null;
+	var scale = 1.0;
 	var maximumScale = 1.0;
 	var deviceDensity = "medium-dpi"; //Default android scale like param
-        var ratio = window.devicePixelRatio || 1;
-        var metaTags = document.getElementsByTagName("meta");
+	var deviceWidth = "width=device-width, " //Device width viewport statement. For iPhone 5 FS it won't be applied
+	var ratio = window.devicePixelRatio || 1;
+	var metaTags = document.getElementsByTagName("meta");
 	var state = new GameState(null); //To restore only settings
 
 	state.restoreSettings();
 
-        for (i = 0; i < metaTags.length; i++)
-                if (metaTags[i].name == "viewport")
-                    meta = metaTags[i];
+	for (i = 0; i < metaTags.length; i++)
+			if (metaTags[i].name == "viewport")
+				meta = metaTags[i];
 
-        if (meta === null)
-        {
-            meta = addTag(document.getElementsByTagName('head')[0], "meta");
-            meta.id = "viewport";
-            meta.name = "viewport";
-        }
-
-	//var ua = navigator.userAgent;
-        //if (ua.match(/(iPad|iPhone|iPod)/i)) //Only for iOS devices
-        if (uiSettings.useRetina)
+	if (meta === null)
 	{
-                scale = 1.0 / ratio;
-		deviceDensity = "device-dpi"; //maximum device-dpi
-		maximumScale = 5;
+		meta = addTag(document.getElementsByTagName('head')[0], "meta");
+		meta.id = "viewport";
+		meta.name = "viewport";
 	}
 
-	meta.content = "width=device-width, initial-scale=" + scale +",maximum-scale=" + maximumScale + " , user-scalable=1, target-densitydpi=" + deviceDensity;
+	var ua = navigator.userAgent;
+
+	if (ua.match(/(iPhone|iPod)/i)) //Use retina automatically on iPhone/iPod
+	{
+		deviceWidth = ""; //Don't set device-width for iPhones to prevent letterboxing on iPhone5
+		//Old iPhone non retina scale it down to 0.5
+		if (ratio == 1.0)
+			ratio = 2.0;
+	}
+
+	/*
+	if (ua.match(/android/i) && ua.match(/mobile/i)) //Use retina on Android phones (test not always true)
+		uiSettings.useRetina = true;
+	*/
+
+	//For Android where 1.5 means hidpi
+	if (ratio > 1 && ratio < 2)
+		ratio = 2;
+
+	if (uiSettings.useRetina)
+	{
+		scale = 1.0 / ratio;
+		deviceDensity = "device-dpi"; //maximum device-dpi
+		maximumScale = scale; // + 0.15; // Allow some zooming on retina (more affects performance)
+	}
+
+	//meta.content = deviceWidth + "initial-scale=" + scale +",maximum-scale=" + maximumScale + " , user-scalable=1, target-densitydpi=" + deviceDensity;
+	meta.content = deviceWidth + "initial-scale=" + scale +",maximum-scale=" + maximumScale + " , user-scalable=1";
 }
 changeViewPort(); //Set default viewport settings

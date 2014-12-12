@@ -71,10 +71,11 @@ var weatherCondition = { fair:0, overcast: 1, rain: 2, snow: 3 };
 var weatherConditionNames = ["Fair", "Overcast", "Raining", "Snowing"];
 var weatherFontEncoding = ["4", "5", "1", "2"]; //openpanzer icon font mapping
 
-//TODO [0] should be NoCountry
+//TODO [0] should be All Countries
 var countryNames = 
 [
-	"Austria",
+	//"All Countries",
+	"Slovakia",
 	"Belgium",
 	"Bulgaria",
 	"Czechoslovakia",
@@ -92,14 +93,14 @@ var countryNames =
 	"Poland",
 	"Portugal",
 	"Romania",
-	"Spain",
+	"Croatia",
 	"Russia",
 	"Sweden",
-	"Switzerland",
+	"Allied Yugoslavia",
 	"United Kingdom",
 	"Yugoslavia",
-	"Nationalist",
-	"Republican"
+	"Nationalist Spain",
+	"Republican Spain",
 ];
 
 var sideNames = 
@@ -118,7 +119,7 @@ var movMethod =
 var movMethodNames =
 [
 	"Tracked", "Half Tracked", "Wheeled", "Leg", "Towed", "Air", "Deep Naval", 
-	"Costal", "All Terrain Tracked", "Amphibious", "Naval", "All Terrain Leg"
+	"Costal", "All Terrain", "Amphibious", "Naval", "Mountain Leg"
 ];
 
 var outcomeNames =
@@ -126,7 +127,7 @@ var outcomeNames =
 	"lose": "Defeat",
 	"victory": "Victory",
 	"tactical": "Tactical Victory",
-	"briliant": "Briliant Victory"
+	"briliant": "Brilliant Victory"
 };
 
 //Tables for movement cost for different ground conditions 254 Stop move (but select the tile), 255 Don't enter
@@ -213,6 +214,7 @@ var playerType =
 	humanNetwork: 1,
 	aiLocal: 2,
 	aiServer: 3,
+	aiScripted: 4
 };
 
 var actionType = 
@@ -224,6 +226,12 @@ var actionType =
 	upgrade: 4,
 	buy: 5,
 	deploy: 6,
+	mount: 7,
+	umount: 8,
+	select: 9,
+	endturn: 10,
+	message: 11,
+	viewport: 12
 };
 
 //Define prestige gains on different situations
@@ -233,26 +241,98 @@ var prestigeGains =
 	objectiveCapture: 50,
 };
 
+//Define score gains
+var scoreGains =
+{
+	coreUnit: -15, //initial score calculation number of core units * this score
+	normalUnit: -5, //initial score calculation number of non core units * this score
+	objectivePerTurn: +1000, //initial score calculation number of objectives to capture * this score / turns
+	flagCapture: +50,
+	objectiveCapture: +100,
+	endTurn: -10,
+	damage: +10, //per strength unit
+	casualty: -5, //per strength unit
+	casualtyCore: -10, //per strength unit
+	reinforce: -5, //per strength unit
+	resupply: -10, //per action
+};
+
 //Holds the settings for the game ui and renderer
 var uiSettings = 
 {
-	airMode:false,		//flag used to select between overlapping ground/air units
-	mapZoom:false,		//flag used to draw map in zoomed mode or not
-	zoomLevel: 1,		//The mapZoom level
-	hexGrid:false,		// flag to notify render if it should draw or not hex grid
+	airMode:false,			//flag used to select between overlapping ground/air units
+    strategicZoom: false,   //flag used to draw map in strategic zoom mode or not
+	strategicZoomLevel: 1,	//The strategic map zoom level
+	mapZoom:false,			//flag used to draw map in zoomed mode or not
+	zoomLevel: 1,			//The mapZoom level
+	uiScale: 1.0, 		    //The scale at which is UI elements are zoomed
+	uiSize: 840,			//The size of UI windows width
+	hexGrid:false,			// flag to notify render if it should draw or not hex grid
 	showGridTerrain: false, //if terrain icons should be shown when hex grid in on
-	muteUnitSounds: false, //if unit combat sound should be muted
-	deployMode:false,	//used for unit deployment
+	muteUnitSounds: false, 	//if unit combat sound should be muted
+	deployMode:false,		//used for unit deployment
 	markOwnUnits: false, 	//To visually mark own units on map
 	markEnemyUnits: false,	//To visually mark enemy units on map
-	markFOW: false, 	//Make Fog Of War visible
-	hasTouch: false,	//Set in UI if device has touch
-	use3D: false,		//use transform3d/translate3d functions for animations
-	useRetina: false,	//don't scale on retina displays devicePixelRatio > 1
-	allowZoom: false,	//If user should be able to zoom in/out manually
-	isAI: [0, 0, 0, 0],	//which player is played by AI
+	markFOW: false, 		//Make Fog Of War visible
+	hasTouch: false,		//Set in UI if device has touch
+	use3D: false,			//use transform3d/translate3d functions for animations
+	useRetina: false,		//don't scale on retina displays devicePixelRatio > 1
+	allowZoom: false,		//If user should be able to zoom in/out manually
+	isAI: [0, 0, 0, 0],		//which player is played by AI
 };
-	
+
+//What triggered end of the campaign/scenario
+var endGameType =
+{
+	moveCapture: "moveCapture",			//Captured all objectives
+	noTurnsLeft: "noTurnsLeft",			//No more turns left
+};
+
+var endGameLossText =
+{
+	moveCapture: "Enemy has captured all your objectives !<br>",
+	noTurnsLeft: "You don't have any turns left !<br>",
+}
+
+var leaderType =
+{
+	//Class Leaders
+	mechanizedVeteran: 		1, 	//Air Defence unit may move and fire in the same turn.
+	tankKiller: 			2,	//Anti-Tank unit will not receive a penalty for movement into combat .
+	marksman:				3,	//The artillery unit’s attack range is increased by one hex.
+	skilledInterceptor:		4,	//Fighter unit can intercept multiple enemy fighters in the defensive phase.
+	tenaciousDefense:		5,	//The infantry unit’s ground defense factor is increased by 4.
+	eliteReconVeteran:		6,	//Recon unit’s spotting range is increased by two hexes.
+	skilledAssault:			7,	//The tactical bomber cannot be surprised ("out of the sun") while moving.
+	aggressiveTankManeuver:	8,	//Tank’s movement factor is increased by 1.
+	//Random Leaders:
+	aggressiveAttack:		9,	//Each of the unit’s attack values is increased by 2.
+	aggressiveManeuver:		10,	//The unit’s movement factor is increased by 1.
+	allWeatherCombat:		11,	//The air unit is not affected by weather conditions. ''Note: This can only be awarded air units.''
+	alpineTraining:			12,	//When moving the unit treats forest and mountain hexes as clear terrain.
+	battlefieldIntelligence:13,	//The unit cannot be surprised.
+	bridging:				14,	//When moving the unit treats passable river hexes as rough terrain.
+	combatSupport:			15,	//The unit provides both Resilience and Skilled Ground Attack abilities to all adjoining units during combat phases. Will aid inflicting losses and save from loses by 2 to 3 points each battle.
+	determinedDefense:		16,	//Each of the unit’s defense factors is increased by 2.
+	devastatingFire:		17,	//The unit may fire twice in a turn.
+	ferociousDefense:		18,	//The unit’s entrenchment cannot be ignored by enemy units.
+	fireDiscipline:			19,	//The unit will expend only one-half of an ammunition point each time it attacks.
+	firstStrike:			20,	//The unit will fire first against an enemy unit if it wins the initiative in a combat round.
+	forestCamouflage:		21,	//If in a forest hex the unit cannot be spotted by enemy units unless they move adjacent to it.
+	infiltrationTactics:	22,	//The unit ignores enemy unit entrenchment when calculating combat results.
+	influence:				23,	//Allows the unit to upgrade to better equipment at reduced prestige point cost.
+	liberator:				24,	//You receive double the normal number of prestige points for all objective and victory hexes captured by the unit.
+	overwatch:				25,	//The unit will fire at any enemy unit that moves within its range. The enemy unit is automatically surprised, allowing your unit to fire first and at the enemy’s close assault, rather than its ground defense, factor.
+	overwhelmingAttack:		26,	//When attacking the unit will have an indeterminate number of the suppression points it would otherwise inflict converted to kills.
+	reconMovement:			27,	//The unit is permitted phased movement, just like reconnaissance units.
+	resilience:				28,	//The unit will suffer 1 to 3 fewer step casualties than normal units when attacked.
+	shockTactics:			29,	//Any suppression which the unit inflicts on an enemy unit will last the entire player’s turn, not just the specific combat round.
+	skilledGroundAttack:	30,	//The unit will inflict 1 to 3 more step casualties than normal units when attacking.
+	skilledReconnaissance:	31,	//The unit’s spotting range is increased by one hex.
+	streetFighter:			32,	//The unit ignores an enemy unit’s city entrenchment when calculating combat results.
+	superiorManeuver:		33,	//The unit may bypass enemy units’ zones of control.
+}
+
 function Cell(row, col)
 {
 	this.row = row;
@@ -283,9 +363,11 @@ pathCell.prototype = new Cell();
 
 function movementResults()
 {
-	this.surpriseCell = [];
-	this.isVictorySide = -1;
-	this.passedCells = [];
+	this.isVisible = false; //Move is at least partially visible on the player screen
+	this.surpriseCell = []; //Where did the surprise contact took place
+	this.isVictorySide = -1; //Did it end in a scenario win for a side
+	this.passedCells = []; //Which cell it passed so we can draw the animation in render accordingly
+	this.isCapture = false; //Did it capture any kind of objective
 }
 
 function combatResults()
@@ -297,12 +379,18 @@ function combatResults()
 	this.atkExpGained = 0;
 	this.defExpGained = 0;
 	this.defcanfire = true;
+	this.atkLeaderGain = false;
+	this.defLeaderGain = false;
+	this.isOverrun = false; //Tank overrun
+	this.isRugged = false; //Infantry rugged defense
 }
 
-function Supply(a, f)
+function Supply(a, f, ta, tf)
 {
 	this.ammo = a;
 	this.fuel = f;
+    this.transportAmmo = ta || 0;
+    this.transportFuel = tf || 0;
 }
 
 function mouseInfo(x, y, rclick)
@@ -318,7 +406,13 @@ function screenPos(x, y)
 	this.y = y;
 }
 
+var UNIT_RETREAT_THRESHOLD = 0.6 //Percentage of losses for which a unit starts to retreat
 var CURRENCY_MULTIPLIER = 12; //PG2 uses this multiplier for unit costs defined in equipment
 var UPGRADE_PENALTY = 1.25; //Upgrade costs is multiplied with this value
+var SCENARIO_START_PRESTIGE = 2000; //Start prestige for scenarios played outside of a campaign
+var PROTOTYPE_MIN_COST = 200; //Don't give players prototypes that are cheaper than this (with CURRENCY_MULTIPLIER)
 var DEBUG_CAMPAIGN = false; //If victory choices buttons should be shown for easy campaign progress ALSO uncomment the lines in index.html
-var VERSION = "2.4";
+var DEBUG_AI_MOVES = false; //If we should show AI moves (used in game.js)
+var VERSION = "2.9.0";
+var NATIVE_PLATFORM = "generic";
+var DEBUG_CAMPAIGN = true;
