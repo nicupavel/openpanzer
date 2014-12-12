@@ -1,0 +1,13 @@
+/* also forces webkit scroll bars to show on touch devices*/
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    border: 1px solid #006400;
+    height: 8px;
+    background-color: rgba(248, 224, 100,0.6);
+}

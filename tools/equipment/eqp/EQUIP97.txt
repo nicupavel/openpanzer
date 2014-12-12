@@ -1,0 +1,3998 @@
+Error VERSION: OpenPanzer 0.2
+40 ItK/36
+37 PstK/36
+50 PstK/38
+75 PstK/40
+StuG IIIG
+105 H/37
+150 H/40
+76,2 K/02
+BT-42
+Jaakari
+Suojeluskunta
+Jalkavaki
+Pioneeri
+Ratsuvaki
+BAF-C
+BT-7
+6ton
+Pz IVJ
+T-23
+Hevonen
+MT
+BW
+FR
+JK
+FE
+M16
+25mm mle34
+90mm mle40
+M10
+105mm C mle35
+155mm L mle17F
+75mm C mle97
+M7
+Abri
+Fortification
+37 Chasseurs a Cheval
+37 Chasseurs a Pied
+37 Sapeurs
+37 Infanterie
+43 Infanterie
+M8
+AMD 178
+Dunkerque BB
+Richelieu BB
+Suffren CA
+La Galissonniere LC
+Le Fantasque DD
+Char B1bis
+H39
+M5A1
+M4A2
+M4A1(76)W
+R35
+R40
+S35
+AGR2
+M3A1
+MCG
+Attelage
+D.520C.1
+MS.406C.1
+Po.633B.2
+Po.650
+2 Flak38
+2 Flakvierling38
+3.7 PaK36
+3.7 FlaK36
+3.7cm FlaK Möbelwagen
+8.8 FlaK18
+FlaKPz V Coelian
+FlaKPz 38(t)
+FlakPz IV Ostwind
+SdKfz 7/1
+SdKfz 6/2
+SdKfz 10/4
+FlaKPz IV Wirbelwind
+5 PaK38
+7.5 PaK40
+8.8 FlaK36
+8.8 PaK41/43
+Ferdinand
+Hetzer
+Jagdpanther
+JgdPz IV/48
+JgdPz IV/70A
+Jagdtiger
+Marder IIIH
+Nashorn
+JgdPz I
+StuG IIIF
+StuG IIIG
+10.5 leFH18
+15 sFH18
+17 K18
+7.5 leFK18
+Grille Ausf. M
+SdKfz 165 Hummel
+15 NbWf41
+Wurfrahmen
+3.7inch
+sIG IB
+sIG IIB
+StuG IIIB
+StuH 42
+SdKfz 124 Wespe
+Stuetzpunkt
+Festung
+SS Infanterie
+Kavallerie
+Sturmpioniere
+Brückenpioniere
+Landwehr
+Gebirgsjäger
+Fallschirmjäger
+Infanterie
+Volkssturm
+Psw 222
+Psw 231(8)
+Psw 233
+Psw 234/1
+Psw 234/2
+Psw 234/3
+Psw 234/4
+Bismarck BB
+Scharnhorst BB
+Hipper CA
+Konigsberg CL
+Graf Zeppelin CVL
+Zerstorer 1934 DD
+Pz VIII Maus
+Pz VA Panther
+Pz VD Panther
+Pz VG Panther
+Panther II
+Pz 35(t)
+Pz 38(t)A
+Pz 38(t)F
+Pz IA
+Pz IB
+Pz IIA
+Pz IIF
+Pz IIIE
+Pz IIIG
+Pz IIIJ
+Pz IIIL
+Pz IIIH
+Pz IIIN
+Pz IVD
+Pz IVF2
+Pz IVG
+Pz IVH
+Pz IVJ
+Pz VI Tiger
+Pz VIB Tiger II
+SdKfz 250/1
+SdKfz 251/1
+Opel Blitz
+Pferdewagen
+Me-109E-3
+Me-109G-2
+Me-109K-4
+Bf 110C-4
+Do-335
+Fw-190A-3
+Fw-190D-9
+He-162A-2
+Ta-152H
+Me-262A-1
+Bf 110D-2
+Fw-190F-3
+Fw-190G-2
+Hs-129B-2
+Ju-87B-1
+Ju-87D-1
+Ju-87G-1
+Ju 52/3mg5e
+50mm 38M
+75mm 97/38M
+105mm 37M
+75mm 15M
+StuG IIIG
+Pesadija
+12cm m/32
+Huszar
+Honved
+39M Csaba
+35M Ansaldo
+T-38
+Pz IVH
+40M Turan
+41M Turan
+38M Ford
+Szeker
+Bf 109F-4/B
+Bf 109G-10
+Ju 87D-1
+Ju 52/3m
+20mm 20/65
+20mm 20/65 Camion
+47mm 47/32
+Sem 47/32 L40
+Sem 75/32 M41
+Sem 90/53 M41
+100mm 100/17
+149mm 149/13
+75mm 75/27
+Sem 105/25 M43
+Sem 75/18 M41
+Ridotto
+Fortificazione
+40 Alpini
+40 Bersaglieri
+40 Genio Guastatori
+40 Fanteria
+AB-41
+Littorio BB
+Zara CA
+Di Giussano CL
+L6/40
+M13/40
+M14/41
+M15/42
+P26/40
+F626
+Carro
+G.55/1
+MC.200 serie I
+MC.202 serie VI
+MC.205 serie III
+Re.2000
+Re.2005
+Ba.65bis
+Ca.310
+SM.81
+20mm M.32
+37mm M.36
+75mm M.40
+47mm M.35
+StuG IIIG
+149mm 149/13
+65mm 65/15
+Stuart V
+T-34/85
+Legion
+Milicia
+Infanteria
+Pz I con Breda
+Pz IB
+Pz IIIJ
+F621
+Caballos
+CR.32
+Ju 52/3m
+75mm m/01 Pv
+7,5cm m/01
+43 Partizani
+Gladiator IIA
+Vernepliktige
+Vogn
+76,2mm wz.42
+37mm wz.36
+105mm A wz.13
+87,6mm H wz.40
+75mm A wz.97
+20mm M.39
+40 Marins
+39 Kawaleria
+38 Pionierzy
+43 SP Piechota
+38 Piechota
+39 Piechota
+Staghound I
+7TP
+Cromwell IV
+Sherman IIA
+R35
+TKS
+PF-621L
+Zaprzeg
+P.11c (4 km)
+PZL.23B Karas
+F.VII
+37mm PTP.30
+155mm 155/14
+75mm 75/28
+75mm mle31
+Motorcycles
+Internacional
+Milicia Popular
+Infanteria
+BA-6
+BT-5
+T-26
+Chevrolet
+Caballos
+I-16-10
+DC-2
+20mm M30
+75mm M40
+47mm M35
+Maresal
+TAs
+100mm M14/34
+75mm M97
+Heavy Art Bunker
+P.7a
+40 Cavalerie
+40 Infanterie
+T-38
+T-4G
+R-2
+R-35
+RN
+Atelaj
+Bf-109G-4
+IAR-80A
+P-24e
+IAR-81A
+Ju-52/3m
+20mm
+40mm I
+40mm Portee
+17pdr
+2pdr
+6pdr II
+Achilles
+Wolverine
+25pdr
+13pdr
+5.5inch
+7.2inch I
+Bishop
+Sexton
+Bunker
+Fortification
+Infantry
+Infantry
+40 Engineers
+40 Commando
+40 Bridging
+40 Ghurka
+40 Home Guard
+40 Indian Infantry
+Infantry
+41 Parachute Infantry
+41 Infantry
+40 Royal Marines
+AEC I
+AEC II
+AEC III
+Daimler II
+Humber II
+Humber IV
+Scout
+Staghound I
+Renown BC
+King George V BB
+County CA
+Leander CL
+Illustrious CV
+Tribal DD
+Centurion
+Challenger
+Churchill III
+Churchill II CS
+Comet
+Cromwell VI
+Cromwell VII
+Cruiser IV
+Crusader I
+Crusader II
+Crusader III
+Grant I
+Stuart I
+Sherman III
+Stuart V
+Matilda II
+Firefly VC
+Valentine III
+Valentine XI
+Lt IV
+OY
+Carrier
+Doprava
+Hurricane I
+M9
+Spitfire IA
+Spitfire IX
+Spitfire VB
+Spitfire XII
+Spitfire XIVE
+Beaufighter TF.X
+Hurricane IIC
+Hurricane IVD
+Mosquito FB.VI
+Tempest V
+Typhoon IB
+Dakota
+3inch M5
+90mm M1A1
+M15A1
+M16
+3inch M5
+37mm M3
+57mm M1
+M10
+M18
+M3 GMC
+M36
+105mm How M2
+155mm How M1
+75mm How M8 AB
+8inch Gun M1
+M12
+M4(105)
+M7
+M8
+T19 HMC
+Strongpoint
+Fortification
+42 Combat Engineer
+42 Bridging
+42 USMC
+40 National Guard
+43 Parachute Infantry
+42 Ranger
+40 Infantry
+M20
+M24
+M8
+M3A1
+New Orleans CA
+Iowa BB
+Brooklyn CL
+Essex CV
+Yorktown CV
+Fletcher DD
+M2A4
+M3A1
+M5A1
+M26
+M29
+M4A1
+M4A1(76)W
+M4A3
+M4A3E2
+M4A3(76)W HVSS
+B.534-IV
+GMC 2.5t
+M3
+Kuljetusalus
+F4U-1A Corsair
+P-38F
+P-38J
+P-38L
+P-40E-1
+P-47C-5
+P-47D-25
+P-47N-20
+P-51B
+P-51D-5
+P-51H-5
+P-80A
+A-20B
+A-26B
+B-25D
+B-25H
+B-25J
+B-26B
+A-24B
+A-36
+C-47
+GAZ/25
+37mm ZP-39
+76.2mm ZP-38
+45mm PTP-37
+76,2mm PP-27
+ISU-122
+ISU-152
+SU-100
+SU-152
+SU-76M
+SU-85
+122mm M-30
+152mm ML-20
+76,2mm F-22
+Inzenyr
+4,7cm vz39
+BM-13-16
+BM-31-12
+SU-122
+4cm vz36
+Sprezeni
+D.O.T.
+Fort
+41 Kavaleria
+41 Saperno-Shturmovoi
+41 Opolchenye
+38 Sapernii
+43 Kavaleria
+42 Gvardeskaya
+41 Morskaya Pehota
+41 Parashutisti
+41 Strelkovy
+BA-10
+BA-64
+Krasnij Krim CL
+Marat BB
+Kirov CA
+Storozhevoi DD
+BT-5
+BT-7/37
+IS-2
+IS-3
+KV-1/39
+KV-1/40
+KV-1/42
+KV-2
+KV-85
+T-26/38
+T-34/40
+T-34/41
+T-43
+T-34/43
+T-34-85
+T-60
+T-70
+ZiS-5
+Tyaga
+Yak-1 M-105P
+Yak-9
+La-5FN
+La-7
+La-9
+LaGG-3
+Yak-3
+MiG-3
+I-16-29
+Yak-7A
+P-39Q
+Il-10
+Il-2
+Il-2 KSS
+Li-2
+Transport
+Transportschiffe
+Transporto
+Transport
+Transport
+Transport
+Lt VI
+Soldati DD
+41 FFL Infanterie
+Aquila CVL
+Me-109B-2
+2cm vz35
+3,7cm vz37
+10,5cm K vz35
+15cm H vz25
+8cm K vz30
+Recon Plane
+P-37B
+Pechota
+LT vz35
+LT vz38
+RN
+43 Infantry
+Transporte
+Sotransport
+Transport
+Transporte
+Transport
+F-VII
+Oxford I
+OA vz30
+203mm BR-4
+SamPanc wz.34-I
+Hjulryttere
+AB
+TB
+25mm mle38
+H35
+Krad Schüzte
+8.8 FlaK36
+120mm M11
+75mm mle32
+47mm mle37
+150mm M.36
+150mm M34
+155mm C mle17
+Char D1B
+Char D2
+Halftrack
+Inginero Sapiori
+Hawk 75A-2
+Ippikon
+7.5 PaK97/38
+Marder II
+Camiao
+StuG IV
+AT Bunker
+21 M18
+21 NbWf42
+30 NbWf42
+4/1 Maultier
+Panzergrenadiere
+Luftwaffen
+SS Panzergrenadiere
+Hitlerjugend
+Brandenburger
+42 Arditi
+40 Pionieri
+Sapeurs
+Skua
+Aufklärer
+Ingenjorer
+Pz IVF1
+Me-109F-4
+Me-110G-4
+40/43M Zrinyi
+75mm 75/46
+Tractor
+210mm 210/22
+Sem 149/40 M43
+41 Paracadutisti
+Archer
+18pdr
+75mm
+4.5inch
+155mm C mle17
+Daimler I CS
+Lastbil
+Staghound III
+43 Gvardeiskaya
+Centaur I
+Centaur IV CS
+Churchill I
+Churchill II
+120mm PM-38
+Inzenjerija
+Churchill V CS
+Churchill VII
+Churchill VIII
+37 Chasseurs Colonial
+Engenharia
+75mm IG
+37mm
+Me 109E-3a
+20mm
+Cruiser I
+Cruiser IIA
+Cruiser III
+Ford V8
+105mm M19
+Hussarer
+105mm
+IMAD
+Valentine VIII
+105mm FK30
+Spitfire IIA
+AEC III
+90mm M2
+PZL.37B Los
+I-15 M-25
+Railgun
+105mm C mle35
+43 Tirailleurs
+M43
+75mm M36
+T30 HMC
+M3
+Cavalaria
+Konjska zaprega
+M3A3
+11,4cm M 917
+Gladiator IIA
+M4A3E2(76)W
+85mm ZP-39
+152mm M-09/30
+BM-8-36
+39 Voiska NKVD
+43 Strelkovy
+FAI M
+T-38
+BT-7A
+BT-7M
+IS-1
+65mm 65/17 AT
+KV-1S/42
+100mm BS-3
+T-13B3
+OT-34
+7.5 leIG18 PaK
+T-44-100
+T-44-85
+57mm ZiS-2
+Yak-1B
+Yak-7B M-105PF
+Yak-9D
+Matilda I
+AB-40
+Blenheim I
+Muhendis
+Grille Ausf. H
+P-63A
+TK3
+75mm m/32
+FlakPz IV Kugelblitz
+43 Fallschirmjäger
+20mm M.23
+43 Infanterie
+Infantry
+43 Infantry
+43 Infantry
+Ca.135bis
+75mm Gun M1897A4
+L3/35
+AMC 34
+37mm 37/45
+Tetrarch
+40 Cavalleria
+Jäger
+37 Gendarmes
+37 Legionnaire
+155mm H wz.17
+40mm wz.36
+SamPanc wz.29
+Do-17Z-1
+SdKfz 250/9
+SdKfz 250/10
+M13
+40 MVSN
+Pionerer
+Crocodile
+T-26S
+37 Tirailleurs
+Rohamutasz
+Michanikon
+Ingenieria
+Infanteria de Navarra
+Azul Infanteria
+Guardia Asalto
+Dinamiteros
+7.5 LG40
+40mm m/36
+40 Bersaglieri in motocicletta
+37mm m/38
+Spitfire IIA
+He-111H-3
+7,5cm Kan m/02
+10,5cm Haub m/40
+37 Pontonniers
+15cm Haub m/39
+Infanteri
+Jagare
+Kavalleri
+Pionjarer
+Hemvarn
+Pbil m/40
+Pbil m/31
+Strv m/37
+Strv m/40K
+Strv m/42
+J 8B
+J 20
+J 22A
+CR.42bis
+B 17
+Hast
+Lbil m/39
+Transport
+TP 5
+37mm 36M
+21 K38
+Fw 200C-3
+Sverige B
+Attilio Regolo CL
+40mm M36
+37mm M35
+75mm M04
+155mm M17
+NC-27
+Pezikon
+Orino Pezikon
+Euzonoi
+P.24G
+Metagogiko
+Hansa-Lloyd 2.5t
+Ippilaton
+Anson Transport
+MS
+BL
+15mm M.38
+37mm M.39
+75mm M.28
+Pesadija
+Konjica
+12 GrW42
+R-35
+IK-2
+Brodski Prevoz
+Konjska zaprega
+IMAD
+AF.39
+40 Vanatori de Munte
+Blenheim I
+20mm D/65
+37mm D/39
+75mm D/27
+105mm D/35
+Pehota
+Kavaleria
+M-222
+Reno
+B-534 Dogan
+Karutca
+Blitz 3t
+Transport
+Ju-52/3m Sowa
+GL
+20mm vz36
+40mm mle36
+47mm mle31
+75mm C mle04
+105mm L mle13
+Infanterie
+Cavalerie
+Milice
+T-15
+ACG-1
+G.Ib
+38 Kazaki
+Jazdectvo
+Attelage
+FN
+SM-73
+Transport
+40mm M36
+75mm M34
+75mm M03
+Infanterie
+44 Jalkavaki
+D.XXIII
+T.V
+Paard en Wagen
+Trado II
+41 Motociklisti
+37 Motocyclistes
+F.VII
+Zee Vervoer
+40mm M.36
+37mm M.35
+75mm M.03/10
+105mm M.16
+Piyade
+Suvari
+Daglari
+Humber II
+Lt VIb
+T-26
+P.24A
+MS-406
+Hurricane IA
+Blenheim I
+Yuk vagonu
+ZiS-5
+Gunboat G
+MTB
+Deniz Tasima
+Anson I
+Dragoner
+B.71
+41 Albanesi
+40 Libici
+Gladiator I
+41 Partisani
+40 Stridsgrupp
+40 Resistance
+EDES
+2cm M 938
+3,7cm HK
+7,5cm M 904
+Infantaria
+Caballeria
+Gladiator IIA
+Transporte a Cavalo
+47mm M35
+Genie
+C-47
+Transporte
+20mm M35
+75mm FK02
+105mm 105/28
+Infanteri
+IIIJ
+Hestevogn
+Mosquito PR.XVI
+40mm M1
+IIIS
+Soetransport
+de Ruyter CL
+Torpedo Boat TB
+Mariniers
+Huzaren
+76,2mm ZiS-3
+Inzinieri
+105mm K vz35
+Pechota
+47mm vz36
+Morski Prijevoz
+75mm H vz15
+Partizani
+150mm H vz25
+Battle I
+Zaprah
+RN
+Hurricane I
+88mm vz37
+M38 Landsverk
+38 Gornostrelky
+AMC P16
+25pdr AT
+Mines
+FT17
+Ju-87C-1
+I-153
+150mm 14M
+R-1
+Ocean SS
+75mm C mle97/35 AC
+T-11
+Hegyivadasz
+Bk.534
+Gladiator IIA
+80mm 29/38M
+Cetnici
+CR.42
+105mm M.15/26
+Chasseurs Ardennais
+OA vz30
+Marder 38T H
+LT vz35
+Fox VIR
+G.50
+Blenheim I Ikarus
+Me 410A-1
+He-51C
+25mm ZP-40
+Bre.693AB.2
+M3A3
+Light Coastal Battery
+Tenger Szallitas
+Valentine IX
+40mm 36M
+Doprava
+F-4
+Po.63.11A.3
+Bicycles
+LT vz38
+C-445
+75mm M.28
+37mm M.39
+Domobrani
+150mm M13
+Ustase
+100mm M.14/19
+Brdska Pesadija
+Ca.310
+Bf 109E-7
+Zaprega
+IMAD
+F.VII
+Morski Prijevoz
+M11/39
+40 Genio
+Inzenjerija
+40M Nimrod
+Hlinkova Garda
+Pe-2
+T-28
+CR.42
+L3/35
+B-71 Jerav
+SB 2M-100A
+SB 2M-100
+Radar Bunker
+Mines
+Ro.37
+Ju-88A-4
+P-35A
+Sturmpanzer IV
+SM.79
+Swordfish III
+Tempest V
+Pe-2B
+F4F-4 Wildcat
+TBD-1 Devastator
+Fw-189 Uhu
+43 USMC
+L3/35 FL
+AA Cruiser
+Area AD
+Naval Gun
+Barrage Balloon
+Skis
+Jeep
+Mules
+Motorboat
+Minelayer
+Heavy Coastal Battery
+Pontoon Bridge
+Minesweeper
+Frigate
+Coastal SS
+Medium SS
+7,65mm mle17
+Camion de MG
+76,2mm de 76
+T-13B1
+75mm M mle34
+120mm L mle31
+150mm C mle13
+155mm L mle17
+152mm C mle17
+220mm C mle16
+Legere
+Cadre
+Garnison
+Chasseurs
+Motocyclistes
+91Y
+Reconnaissance
+FT-18
+Hurricane I
+R-31
+Battle I
+VCL B
+88mm D/53
+75mm D/36
+70mm D/11
+75mm D/16
+150mm D/28
+120mm D/15
+150mm D/13
+Parashutna Drujina
+Granichari
+MG
+Gvardia
+Ansaldo-Fiat
+Hotchkiss
+T-IV
+P-24B Yastreb
+D-520
+Av-135 Lyastovica
+Bf 109E-4 Strela
+Bf 109G-2 Strela
+PZL 43A Chayka
+Do 17Ka-1 Uragan
+MB-200 Buhal
+Ju 87D-5 Shchuka
+76.2mm
+47mm
+81mm
+100mm
+Inzenjerija
+Titova Garda
+L3/35
+Konjica
+AB-41
+Spitfire VB tropical
+Hurricane IVRP
+Mazge
+65mm M.06
+100mm M.16/19
+105mm M.15/26
+150mm M.36
+81mm M.31/38
+Gradjanska Vojska
+Konjanistvo
+Padobranstvo
+Planinsko Pjesastvo
+Vojne Krajine
+Vratar
+Izvidjacki Dvokotac
+SPW
+G.50bis
+TK3
+Bre.19.8
+Pz IIIN
+Po.25A.2
+Pz IVF
+MS.406C.1
+Do 17Z-2
+Bf 109G-10
+Znaim CL
+8cm vz22/24
+10cm H vz30
+7cm H vz08
+Horska Pechota
+MG
+Jizda
+Pohranicni Pechota
+OA vz27
+Ta vz33
+LT vz34
+Bk.534
+MB.200
+T-IV
+75mm M32
+37mm FfK M37
+20mm M35
+150mm FH17
+Livgarden
+Cykelspejdere
+IIJ
+Pv M39
+IIIR
+Herulf Trolle B
+Havmanden SS
+7,62 ItKk/31
+20 ItK/39
+ItPsv/38
+75 ItK/29
+88 ItK/37
+25 PstK/34
+45 PstK/38
+75 PstK/97-38
+81 Krh/36
+120 Krh/40
+Arttrakt m/40
+Pz IVC
+76,2 K/36
+76,2 RK/27
+84 K/18
+105 K/34
+7.5 leIG18
+114 H/18
+122 H/09-10
+82mm BM-37 AB
+152 H/09-30
+152 H/15-17
+203 H/17
+44 Jaakari
+MG
+Glenten TB
+Rajavartio-osasto
+Sissi
+Kevyt Osasto
+BAB-B
+T-37A
+T-34/85
+CUw
+Ejtoernyos
+BU
+HC
+FA
+MY
+85mm ZP-39
+SB
+FK
+DN
+Ilmarinen CA
+Vetehinen SS
+8mm mle14
+20mm mle39
+75mm mle13/34 Portee
+40mm mle36
+47mm 15TCC Portee
+57mm mle41
+C-47
+65mm M mle06
+75mm M mle28
+105mm L mle13
+105mm M mle28
+105mm L mle36
+220mm L mle17
+87.6mm C mle40
+81mm mle39
+155mm C mle28
+155mm C mle41
+75mm M mle27
+37 Mtr Infanterie
+37 Chasseurs Alpins
+37 Garnison
+37 Dragons Portes
+31 Infanterie
+37 Spahis
+43 Chocs
+AMD 50AM
+AMD 80AM
+AMR 35
+M3A1
+FCM 36
+Crusader II
+Centaur III
+P.38F
+P.47D
+Spitfire IX
+D.510C.1
+VG.33C.1
+CR.714
+MB.151C.1
+MB.155C.1
+Po.631C.3
+Lat.298A
+B.26B
+Martin 167A.3
+MB.210BN.5
+LeO.451B.4
+Am.143BN.5
+DB.7B.3
+Am.354B.4
+LN.401
+MB.174A.3
+F.222.2BN.5
+Jaguar DD
+Duguay-Trouin LC
+Emile Bertin LC
+Algerie CA
+Bearn CVL
+Redoutable SS
+3.7 FlaK43
+5 FlaK41
+SdKfz 251/21
+4.7 PaK36(t)
+7.62 PaK36(r)
+SdKfz 251/22
+SdKfz 251/16
+JgdPz II PzSelb
+FJ 8 GrW42k
+Marder IIIM
+StuG 851(i)
+10 NbWf35
+7.5 leFK16nA
+7.5 GebG36
+10 GebH16
+10.5 K18
+15 sIG33
+15 K39
+28/32 NbWf41
+7.92mm FG 42
+FJ Sturmpioniere
+SS Polizei
+MG 34
+Volksgrenadiere
+Freiwilligen
+Kriegsmarine
+39 SS Kavallerie
+SS Gebirgsjäger
+45 Kriegsmarine
+43 Fusiliere
+Kfz 13
+Psw 221
+Psw 231(6)
+SdKfz 250/8
+Psw 204(f)
+AufPz 38(t)
+Pz IIL Luchs
+Psw 203(i)
+Pz IID
+Pz II(F)
+Pz III(F)
+Pz 735(f)
+Pz 731(f)
+Pz 739(f)
+Pz 747(r)
+Pz IIIG Tauchfahig
+Pz IVD Tauchfahig
+Pz 737(i)
+Fw-190A-8
+Me-109G-6
+Me-109G-10
+He-219
+Me-262A-1b 
+He-112B-2
+Me 410B-1
+Ju 86D-1
+Me 262A-2a
+Ar 234B-2
+Hs 123A-1
+He 115A-1
+Hs 129B-3/Wa
+Hs 129B-1
+Do 217E-1
+He 177A-5/R2
+Zerstorer 1936A DD
+Emden CL
+Lutzow BC
+Deutschland B
+U-7 SS
+U-69 SS
+U-37 SS
+7.92mm M26
+20mm M37
+88mm M18
+81mm M27/31
+65mm M06
+105mm M27
+MG
+Pezikon Ochyroseon
+Omas Anagnoriseos
+L3/35
+MB.151
+Po.633B.2 Grec
+Battle I
+Bre.XIX B.2
+Georgios DD
+Ellis CL
+Averof C
+Hs.126K-6
+Glafkos SS
+8mm 31M
+40mm 40M
+75mm 40M
+JgdPz 38(t)
+81mm 36M
+76,5mm 5/8M
+76,5mm 18M
+100mm 14M
+150mm 31M
+105mm 31M
+210mm 40M
+Gpu
+Hatarvadasz
+41M Ansaldo
+H35
+38M Toldi I
+38M Toldi IIA
+Pz IIIM
+Pz IVF
+CR.32ter
+Heja II
+Bf 109G-2
+Bf 109G-6
+Bf 109G-4
+Me-210Ca-1
+Ju 87D-5
+Ju 86K-2m
+Fw 190F-8
+75mm 75/39
+75mm 75/46 Camion
+90mm 90/53
+90mm 90/53 Camion
+M15/42 Contraerea
+75mm 75/39
+75mm 75/46 Camion
+90mm 90/53 Camion
+105mm 105/11
+Sem 75/18 M40
+Sem 75/18 M42
+Sem 75/34 M42
+Sem 75/34 M43
+Sem 75/46 M43
+Sem 105/25 M43
+81mm 81/14
+65mm 65/17
+70mm 70/15
+75mm 75/18
+75mm 75/13
+105mm 105/11
+149mm 149/28
+149mm 149/40
+152mm 152/45
+42 Difesa Costiera
+40 San Marco
+RSI Guardia Nazionale
+RSI Fanteria
+RSI Brigate Nera
+Partigiani
+AB-43
+AB-611
+AB IZ
+AB Lince
+L5/30
+L3/33
+L3/38
+M10/35
+M20/35
+CR.32
+Ro.57bis
+Re.2001CN
+Re.2002
+Ju-87B-1
+Ba.88
+SM.81
+SM.84
+Ca.135Mod
+Z.1007bis
+BR.20
+Armoured Train
+P.108B
+AS37
+Navigatori DD
+Di Savoia CL
+Garibaldi CL
+Trento CA
+Andrea Doria BB
+Legionarii SS
+7.92mm M.17
+37mm M.34
+40mm M.33
+65mm M.13
+70mm 70/15
+75mm 75/28
+105mm 105/28
+MG
+Morroqui Caballeria
+Motoristas
+Bilbao
+UNL 35
+He 51B-1
+Bf 109B-2
+Ro.37bis
+Bf 109E-3
+G.50
+Sm.79
+He 111B-1
+Ba.65
+Ca.310
+Ceuta DD
+Navarra CL
+Coast Defence Ship B
+Canarias CA
+Battleship B
+General Mola SS
+7,92mm M17
+20mm M29
+57mm M94
+81mm M29
+105mm M27
+120mm M78
+152mm M17
+MG
+Jagers
+Grenswacht
+Grenadiers
+32 MG Fanteria
+M36 Landsverk
+M39 DAF
+LT M1936b
+FK.51
+D.XVII
+C.VE
+C.X
+T.VIIIw
+DB-8A-3N
+Admiralen DD
+Sumatra CL
+Tromp CL
+O SS
+K SS
+40mm m/36
+9TP
+8cm m/35
+7,5cm m/11-24
+MG
+Skyttelag
+Kebur Zabagna
+Milorg
+Politi
+H75A-6
+C.VD
+Sleipner TB
+Norge B
+B1 SS
+7,92mm wz.08
+75mm wz.36
+75mm wz.14
+M16
+57mm wz.41
+Wolverine
+65mm AG wz.06
+75mm A wz.02/26
+100mm H wz.14/19
+120mm H wz.09/31
+220mm M wz.32
+Sexton
+182,8mm H wz.43
+37 Obrona Narodowa
+38 KOP Gorska
+38 Ckm Piechota
+38 KOP
+39 Marszowy
+39 Piechota Gorska
+43 SP Pionierzy
+43 Piechota
+41 Pionierzy
+44 Piechota AK
+Crusader AA II
+SamPanc wz.28
+SamPanc wz.34-II
+38 Zwiadowcy Rowerowi
+Greyhound
+Stuart I
+FT-17
+TKS FK wz.38
+Vickers E dw
+Spitfire IX
+Mustang III
+Hurricane IA
+Mosquito FB.VI
+C2P
+Carrier
+C-47
+Wicher DD
+Orzel SS
+7,7mm M 917
+7,5cm M 931
+15,2cm M 918
+Cacadores
+Infantaria em Bicicleta
+CCL Carden Lloyd
+MS-233
+Spitfire VB
+Blenheim IV
+Duoro DD
+Delfim SS
+10,5cm m/04
+Guiseppe Garibaldi
+Kerekpar
+Barbed Wire
+AT Hinders
+Roadblock
+Factory
+Patrol Boat
+Auxiliary Cruiser
+Monitor BM
+7.92mm M.17
+40mm M.30
+76.2mm M.31
+45mm PTP.32
+70mm 70/16
+76.2mm 76/40
+107mm 107/38
+114mm 114/13
+152mm 152/32
+Guardia Republicana
+Caballeria
+FAI
+Bilbao
+UNL 35
+FT-17
+I-152
+I-16-5
+D.371
+Bre.19B.2
+R-Z
+Po.540M.5
+A.101
+Fleet Gunboat G
+Il-2 KSS
+Mendez Nunez LC
+MS.406
+B-1 SS
+C-1 SS
+10.5 LG42
+StuIG 33B
+L3/35
+T-26
+Morroqui
+IZ
+Po-25A
+Hurricane IIC
+7.92mm M17
+25mm M39
+88mm M36
+37mm M36
+47mm M18
+75mm M97/38
+75mm M43
+TACAM R-2
+TACAM T-60
+81mm M35
+120mm M42
+75mm M15
+105mm M13
+100mm M16
+40 Graniceri
+Partizani
+40 Mtr Infanterie
+40 Puscasi Marini
+43 Parasutisti
+40 Jandarmi
+OA-30
+AB-41
+FT-17
+T-3N
+T-4F
+43M Turan
+10cm H vz14/19
+IAR-80
+IAR-80B
+IAR-80C
+Bf-109E-3a
+S.328
+He-112B-0
+IAR-37
+IAR-81
+S-79B
+MB-210
+He-111E-3
+Po-633
+UE
+SPW
+Ferdinand DD
+Delfinul SS
+84mm vz22
+37mm vz37
+50mm vz38
+75mm vz40
+100mm H vz14/19
+105mm H vz18
+Horska Pechota
+MG
+Motocyklisti
+Bicyklisti
+LT vz34
+T vz33
+LT vz40
+LT 2C
+T 3N
+Bf-109E-7
+B.534-IV
+Ju-87D-3
+He-111P-1
+Sm.84bis
+S.328
+20mm m/40
+7,5cm m/37
+Yak-1B
+20mm m/40
+57mm m/43
+Sav m/43
+Pvkv m/43
+7,5cm Kan m/02-33
+10,5cm Haub m/10
+10,5cm Kan m/34
+12cm Grk m/41
+15cm Haub m/06
+43 Infanteri
+43 Jagare
+Cykelkavalleri
+Bicikl Pehota
+Azul Asaltos
+Strv m/39
+Strv m/41
+J 9
+J 11
+Azul Rec
+J 26
+B 16
+B 3
+B 5
+B 18
+Kp-bil m/42
+Wrangel DD
+Goteborg DD
+Fylgia CL
+Gotland CL
+Aran CA
+Delfinen SS
+U1 SS
+7.92mm M.39
+75mm M.32
+77mm M.16
+120mm M.04
+150mm M.13
+Yedek Asker
+Bisiklet Arama
+Pz IIIJ
+Pz IVG
+P-40C
+Fw-190A-3
+Spitfire VB
+Hurricane IIC
+Battle I
+B-10
+B-24D
+T6
+Tinaztepe DD
+Yavuz BC
+Medidjieh C
+Ay SS
+3inch
+Crusader AA I
+Crusader AA II
+6pdr IV
+6pdr Deacon
+3inch
+4.2inch
+3.7inch AB
+75mm I AB
+6inch
+7.2inch IV
+8inch
+9.2inch
+44 Royal Marines
+40 Arab Legion
+40 Colonial Infantry
+40 MMG
+Marmon-Herrington II
+Marmon-Herrington III
+Staghound II CS
+Otter I
+Rolls Royce I
+Valentine I
+Matilda III CS
+Covenanter III
+Crusader II CS
+Covenanter III CS
+Churchill AVRE
+Churchill VI
+Cromwell IV
+Firefly IIC
+Sherman IIA
+Sherman V
+Fulmar I
+Martlet I
+Meteor I
+Defiant I
+Albacore
+Beaufort I
+Mosquito NF.II
+Blenheim IV
+Barracuda III
+Hudson I
+Mosquito B.IV
+Nomad I
+Whirlwind IA
+Halifax I
+Lancaster I
+Level Bomber
+Horse
+PZL.50A Jastrzab
+L DD
+Crown Colony CL
+Town CL
+Dido CL
+Cathedral CA
+Admiral BC
+Revenge BB
+Queen Elizabeth BB
+Furious CV
+Hermes CVL
+S SS
+.50 M51
+37mm M1A2
+M19
+M36B2
+81mm Mortar M1
+4.2inch Mortar M30
+75mm How M1A1
+75mm RCL M20 AB
+BA-3
+105mm How M3 AB
+155mm How M1918A3
+155mm Gun M1A1
+155mm Gun M1918M1
+M40
+240mm How M1
+8inch How M1
+42 Mountain
+M3A1
+M5
+M4
+M4A3(75)W
+M4A3(76)W
+M4A4
+M4A6
+M22
+43 Alpini
+LVT(A)4
+F6F-5 Hellcat
+F4U-4 Corsair
+P-39D-2
+P-40C
+TB-7
+P-40N-1
+A-20G
+P-61A-1
+TBF-1 Avenger
+PBY-5 Catalina
+PV-1 Ventura
+B-17G
+B-24D
+B-29
+15cm H vz37
+Horse
+Mohan DD
+Cleveland CL
+Atlanta CL
+Omaha CL
+Portland CA
+Penascola CA
+Alaska BC
+Washington BB
+Maryland BB
+Nevada BB
+Commencement Bay CVE
+Gato SS
+Maxim 4M
+GAZ/Maxim 4M
+37mm PTP-30
+45mm PTP-42
+57mm M1
+ZiS-30
+76,2mm F-22
+76,2mm M-02/30
+100mm BS-3
+76,2mm PP-27
+76,2mm M-02/30
+76,2mm ZiS-3
+76,2mm E-2
+107mm M-10/30
+122mm M-10/30
+122mm A-19
+152mm M-10
+152mm D-1
+152mm BR-2
+210mm BR-17
+280mm BR-5
+BM-8-24
+82mm BM-37
+107mm PBHM-38
+160mm MT-13
+41 Shtraf
+41 Pogranichnik
+42 PPSh Pehota
+38 Pulemetny
+42 Specnaz
+Carrier
+M5A1
+KV-8
+M4A2
+M4A2(76)W
+M3A1
+Churchill III
+Matilda II
+OT-133
+T-26/31
+T-27
+T-35/39
+T-37A
+T-40
+I-15 M-25
+I-16-10
+P-39N
+P-40K
+Hurricane IIB
+Pe-3bis
+A-20B
+B-25D
+Ar-2
+TB-1
+Tu-2S
+Su-2
+DB-3TP
+DB-3F
+T-20
+Leningrad DD
+Novik DD
+Sts SS
+S SS
+C SS
+7.92mm M.14
+20mm M.39
+76.5mm M.05/32
+80mm M.36
+37mm M.17
+47mm M.36
+T-32
+81mm M.31/38
+65mm M.06
+100mm M.14/19
+100mm M.16/19
+105mm M.36
+120mm M.11
+150mm M.14
+155mm M.17
+MG
+Kraljevska Garda
+Cetnicka Konjica
+Biciklisticka Izvidnica
+FT-17
+NC-27
+IK-3
+Yugoslav Fury II
+Ca.310
+SM-79K
+Do-17Kb-1
+Bre.19.8 FAK
+Dubrovnik DD
+Dalmacija CL
+Hrabri Class
+155mm 155/13
+Guardia Civil
+SM.81
+Ju 52/3m
+12.8 FlaK40
+2.8 lePaK41
+Ju 52/3mg4e
+He 111B-1
+Spitfire VC
+Ksp
+MG
+MG
+MG
+MG
+Granicari
+4.5inch
+Motorrijder
+HQ
+Heavy AT Bunker
+Light Art Bunker
+Psw 221 PaK 41
+Battle I
+Spitfire VB
+B.25D
+Hurricane IIC
+P.39Q
+Valentine VIII
+Sherman III
+Valentine III
+182,8mm H wz.41
+Sherman V
+Carrier
+Kittyhawk IA
+Tomahawk IIB
+Marder I
+JgdPz 38(t)
+Carrier
+43 Fanteria
+43 Bersaglieri
+P26/43
+40 Fanteria da Montagna
+150mm H vz37
+MCG-5
+75mm M.29
+7,5cm M 940
+105mm How M2
+10,5 leFH18
+Entrenchment
+150mm M.33
+15 sFH37(t)
+85mm M25
+75mm M19
+90mm 90/53
+44M Zrinyi
+Carrier
+76.5mm M.05/32
+Infantry
+44 Infantry
+Legija
+42 Cavalry
+12.8 PaK44
+7,5cm H vz15
+Valentine DD
+4.5inch
+37mm mle16
+39 Infanterie de l'Air
+M4A1 DD
+155mm M17
+155mm 155/14
+47mm M36
+Csendor
+Pontonniers
+Mostovi Drujini
+Mostovna Inzenjerija
+Mostovna Inzenjerija
+Mostni Zeniste
+Broingenioerer
+Tienraivaaja
+Michanikoi
+Utasz
+Pontoneros
+Pontoniers
+Broingeniorer
+38 Saperzy
+Engenharia de Pontes
+Pontoneros
+40 Pontonieri
+Zenisti
+Broingenjorer
+Handassa
+Mostovna Inzenjerija
+105mm D/52
+Ju-52/3m
+T-20
+43 Armored Infantry
+75mm 75/32
+50mm M.38
+75mm M.18
+150mm 150/28
+43 Parachute Engineers
+43 Airborne Engineers
+T-III
+43 Piechota
+Partisans
+94mm wz.38
+7.7mm M12
+20mm M23
+Ymetrayas Zabagnoch
+75mm M97
+20mm M23
+37mm M35
+75mm M97
+81mm M29
+75mm M85
+63.5mm M83
+Kaleh Masgebiya Aaf
+Mahel Safari
+Tigray Chitet
+Amhara Chitet
+Galla
+Gideon
+Arbenyotch
+Balderas Zeb
+Deldey Agenagn
+Mehandisoch
+Ascari
+Yekegnt Feresegna
+Fiat
+Fiat 3000
+Tera Feres
+Yetechanu Beklowoch
+Ford A
+Po.25TOE
+Po.25A.2
+F VII
+Yebaaher Meguwaguwaja
+57mm M41
+37mm M29
+75mm M34
+105mm M32
+87,6mm M40
+Infanterie
+KNIL Infanterie
+KNIL Landstorm
+Stadswacht
+44 Infanterie
+White
+Marmon-Herrington III
+Humber IV
+Overwalwagen
+CTLS
+M3A1
+Muilezels
+Utility B
+Carrier
+CW-21b
+B-339D
+Kittyhawk IV
+H75A-7
+Spitfire VB
+Spitfire IX
+Spitfire XIVE
+Martin 139WH-2
+Hurricane IIA
+Mitchell II
+Do.24K-2
+Hudson I
+20mm
+40mm I
+7.7mm
+3inch
+3.7inch
+2pdr
+6pdr II
+6pdr IV
+17pdr
+MMG
+18pdr
+4.5inch
+3.7inch
+25pdr
+6inch
+3inch
+Bridging
+Engineer
+NZTF
+44 Infantry
+Maori
+Cavalry
+Reserve
+Home Guard
+White
+Carrier
+Staghound III
+Marmon-Herrington II
+Valentine I
+Valentine III
+Valentine III CS
+Stuart I
+Sherman III
+Firefly VC
+Hurricane IIB tropical
+Kittyhawk III
+F4U-1A Corsair
+Spitfire IA
+Spitfire IIA
+Spitfire VB
+Spitfire IX
+Hudson I
+Vildebeest
+Baffin
+SBD-3 Dauntless
+TBF-1 Avenger
+Catalina III
+Typhoon IB
+Tempest V
+Mosquito FB.VI
+Beaufighter IIF
+Mosquito NF.XIII
+Ventura I
+Blenheim IVF
+Hampden TB.I
+Stirling I
+Lancaster I
+Horse
+OY
+Carrier
+Dakota
+Transport
+Achilles CL
+Gambia CL
+20mm
+40mm I
+3.7inch
+MMG
+2pdr
+6pdr II
+6pdr IV
+17pdr
+Wolverine
+18pdr
+4.5inch
+5.5inch
+3inch
+4.2inch
+Sexton
+Bridging
+Engineer
+44 Infantry
+Rhodesian
+ACF
+Cape Corps
+NMC
+Cavalry
+Motorcyclists
+SARC I
+SARC II
+SARC III
+Staghound III
+Daimler II
+Carrier
+Lt II IP
+Lt III IP
+Sherman III
+Sherman IIA
+Fury I
+Hurricane I
+Hurricane IIB tropical
+Gladiator IIA
+Spitfire VB tropical
+Spitfire VC tropical
+Spitfire IX
+Tomahawk IIB
+Kittyhawk IA
+Blenheim IV
+Baltimore IIIA
+Junkers 86Z
+Beaufort I
+Beaufighter TF.X
+Maryland II
+Marauder II
+Hartbees
+Battle I
+Mosquito PR.IX
+Hurricane IID
+Hart I
+Wellington GR.XI
+Horse
+OY
+Carrier
+Dakota
+Transport
+Good Hope DD
+20mm
+3.7inch
+40mm I
+2pdr
+6pdr II
+6pdr IV
+17pdr
+Wolverine
+Archer
+MMG
+18pdr
+4.5inch
+4.5inch
+5.5inch
+25pdr
+4.2inch
+3inch
+75mm
+105mm
+Sexton
+Bridging
+Engineer
+Paratrooper
+Mounted Militia
+Militia
+44 Militia
+Guards
+Commando
+Mountain
+PCMR
+Staghound I
+Lynx
+Fox I
+White
+Carrier
+M1917
+Lee
+Grizzly
+Valentine III
+Stuart VI
+Matilda II
+Churchill I
+Churchill II
+Churchill III
+Churchill OKE
+Sherman III
+Sherman V
+Ram I
+Ram II
+Badger
+Horse
+FC60L
+Carrier
+Kangaroo
+Kittyhawk III
+Hurricane XII
+Hurricane IA
+Spitfire VC
+Spitfire IX
+Spitfire XIVE
+Tomahawk IIA
+Spitfire XVIE
+Spitfire IIA
+Mustang III
+Battle I
+Beaufighter IIF
+Beaufort I
+Catalina III
+Hudson I
+B-25J Mitchell
+Mosquito FB.VI
+Typhoon IB
+Mosquito NF.II
+Hurricane IVD
+Blenheim IV
+Halifax II
+Lancaster I
+Liberator GR.VIII
+Iroquis DD
+Saguenay DD
+Uganda CL
+Ameer CVE
+Dakota
+Transport
+20mm
+40mm I
+3.7inch
+2pdr
+6pdr II
+6pdr IV
+17pdr
+MMG
+18pdr
+4.5inch
+6inch
+25pdr
+5.5inch
+3inch
+4.2inch
+25pdr Baby
+44 Infantry
+Engineer
+Bridging
+Commando
+Guerilla
+CMF
+Paratrooper
+Papuan
+Marmon-Herrington III
+ACV-IP II
+Coastwatchers
+Carrier
+Lt VI
+Matilda II
+Crusader II
+Grant I
+Stuart I
+Matilda IIICS
+Frog I
+Churchill VII
+Horse
+OY
+Carrier
+Mules
+Kittyhawk IV
+Tomahawk IIB
+Boomerang I
+Gladiator IIA
+Hurricane IA tropical
+Spitfire VB
+Spitfire VIII
+Anson GR.I
+Wirraway
+Hudson I
+Battle I
+Catalina III
+Beaufort IA
+Vengeance I
+Ventura I
+Sunderland I
+Beaufighter IIF
+Mosquito NF.II
+Halifax II
+Lancaster I
+Liberator IIIA
+Dakota
+Stuart DD
+Arunta DD
+Perth CL
+Adelaide CL
+Australia CA
+K9 SS
+Transport
+6inch
+Siskin IIIA
+Wapiti IIA
+3.7inch
+M17
+76,2mm ZP-38
+37mm ZP-39
+Armoured Train
+SU-85
+ISU-122
+SU-76M
+ISU-152
+47mm 47/32
+Armoured Train
+76,2mm ZiS-3
+122mm M-30
+152mm ML-20
+Naval support DD
+Naval support LC
+75mm 75/27
+60pdr
+Tribal
+Commando
+Nomads
+Piechota
+Saperzy Mostowi
+Saperzy
+Dubats
+Refugees
+Snipers
+BA-64
+Scouts
+T-34/43
+T-34/85
+T-70
+IS-1
+IS-2
+M13/40
+R35
+Camels
+Elephants
+Fortified caves
+MG tank turrets
+Light tank turrets
+Medium tank turrets
+Torpedo battery
+Super-Heavy Coastal Battery
+Outpost
+Destroyer DD
+Light Cruiser CL
+UDT
+Surfaced SS
+Surfaced SS
+Surfaced SS
+Coastal mines
+Seaplane tender AV
+Dirt Field
+klFWg
+sFWg
+H830B
+leZgkw 3t
+RSO
+mZgkw 8t
+sZgkw 12t
+Radfahrer
+Blitz 1t
+Protze
+SturmTiger
+7,62 FK296(r)
+12,2 leFH396(r)
+10 leFH14/19(t)
+15,5 sFH414(f)
+10,5 K332(f)
+10,5 leFH16
+15 sFH13
+15,2 sFH443(r)
+35 Infanterie
+Bf 109C-1
+Ar 65E-1
+Hs 126B-1
+40 Garda
+43 Infanterie
+41 Rezervisti
+43 Garda
+43 Vanatori de Munte
+VdC R-35
+Ju-87D-5
+Ju-88A-4
+38 Strelkovy
+39 Novobranets
+Internacional
+SMG Piechota
+DIE Infantaria
+Drifting mines
+20mm mle23
+47mm mle89
+57mm mle41
+87,6mm C mle40
+70mm M mle06
+Force Publique
+Cavalerie Colonial
+Infanterie
+Genie
+44 Infanterie
+Fuselier
+White
+Daimler II
+Carrier
+Carrier
+R-38
+Spitfire IIA
+Spitfire VB
+Spitfire IX
+Spitfire XIVE
+Tempest V
+C-47
+44 Pehota
+Liberator IV
+P-39Q
+P-39N
+P-51D
+YaK-1
+YaK-9D
+Pe-2
+Il-2
+20mm m/23
+57mm m/41
+37mm m/38
+12cm m/09
+8,67cm m/40
+Grensejeger
+Garden
+Infanteri
+44 Infanteri
+Carrier
+Carrier
+Cletrac
+Hurricane IIB
+Spitfire IIA
+Spitfire VB
+Spitfire IX
+M.F.11 Hover
+He-115A-2
+Catalina III
+Mosquito FB.VI
+C-47
+Bath DD
+44 Granichari
+Blenheim I
+Hs-129B-2
+25pdr
+40mm M.36
+75mm M.15
+81mm M.36
+100mm M.16
+114mm M.18
+122mm M.10/30
+Bishop
+44 Yedek Asker
+44 Daglari
+44 Piyade
+FT17
+R35
+Stuart V
+Valentine III
+Sherman III
+P-40D
+Bre-19B-2
+Blenheim IV
+Beaufort
+Baltimore V
+Light horse
+Ford A
+Heavy horse
+G1200
+Mules
+Maulesel
+M3 GMC
+25mm wz.34
+105mm A wz.29
+107mm M wz.35
+Scout
+Humber II
+Vickers E jw
+Challenger
+Grant I
+R40
+Lekki zaprzeg
+Ciezki zaprzeg
+PZInz 302
+PF-618
+C4P
+C7P
+Rowery
+UE
+AGR2
+Carrier
+C8
+Matador
+CX22
+Hurricane IIB
+Mosquito NF.II
+Beaufighter IIF
+Lublin R-XIIID
+Lancaster I
+Lett vogn
+Hester
+Matador
+Carrier
+Radarcruiser CL
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Entrenched
+Field hospital
+Atelaj usor
+H901
+93T
+Atelaj greu
+F3
+6STP6L
+T6
+Biciclete
+Magari
+105mm M36
+50mm M38
+45mm M32
+75mm M39
+76.2mm M36
+122mm M10/30
+37mm M36
+Leogkaya tyaga
+GAZ-64
+GAZ-AA
+STZ-5
+US-6
+S-2
+Tyazholaya tyaga
+Voroshilovets
+Viuchny transport
+SU-76i
+R-Z
+2pdr
+3pdr
+40 Scots Infantry
+43 Scots Infantry
+37 Regulars
+40 Infantry
+37 Colonial Infantry
+40 Crown Volunteers
+Medium IIA
+Fury I
+Gauntlet II
+Bulldog IIA
+Hurricane IIA
+Spitfire F.21
+Firefly I
+Hind I
+Baltimore IIIA
+Ventura I
+Boston II
+Maryland II
+Marauder III
+Anson I
+A DD
+Light horse
+C8
+Carrier
+MW 15cwt
+Matador
+Pioneer
+CX22
+Light horse
+C8
+Carrier
+MW 15cwt
+Matador
+Pioneer
+CX22
+Light horse
+C8
+Carrier
+MW 15cwt
+Matador
+Pioneer
+CX22
+Light horse
+CMP
+Carrier
+MW 15cwt
+Matador
+Pioneer
+C15TA
+Light horse
+C8
+Carrier
+MW 15cwt
+Matador
+Pioneer
+CX22
+Gemele
+88mm 88/56
+8mm modello 37
+75mm 75/46
+105mm 105/28
+149mm 149/35
+32 Ascari
+32 Ascari Cavalleria
+32 MVSN
+42 AS Fanteria
+40 Carabinieri
+41 Guarnigione
+P30/43bis
+Ca.111
+Cavallo leggero
+TL37
+Dovunque
+P4-100
+Tipo 61
+3RO
+Cavallo pesante
+TM40
+Biciclette
+Muli da soma
+8mm Dbl m/36
+10,5cm m/42
+10,5cm Kan m/17
+15,2cm Kan m/37
+43 Militarpolis
+J 21
+B 4
+S 6
+T 2
+Latt hast
+Tung hast
+Tdgb m/39
+Lbil m/42
+Tdgb m/40
+Arttrakt m/28
+Cyklar
+Recon Balloon
+43 Indian Infantry
+43 Ghurka
+Pansarinfanteri
+Kevyt hevonen
+Raskas hevonen
+T-6
+Ford A
+Polkupyorat
+105 K/29
+152 H/37
+BL
+76.5mm 5/8M
+88mm 37M
+47mm 36M
+45M Arpad
+150mm 43M
+35 Honved
+44 Honved
+Gepkocsizo lovesz
+44 Gepkocsizo lovesz
+44 Huszar
+44 Hatarvadasz
+Polgarorseg
+Felderito huszar
+44 Kerekpar
+45M Tas
+WM 21B Solyom
+Fw 189A-1
+Ju 88A-4
+Konnyu szeker
+38M G-5
+37M Hansa-Lloyd
+38M Botond A
+28M Pavesi
+KV-40
+32M Breda
+Oszverek
+Nehez szeker
+Kerekparos
+2 Flak38 LKW
+3,7 Flak36 LKW
+leZgkw 1t
+2G8T
+Nimbus
+MG
+Politi-infanteri
+43 Infanteri
+43 Livgarden
+H.M.II
+B.17A
+G1200
+Thames
+Kornbech
+Lbil m/42
+38 Grenzschutz
+Zandarmerija
+Straza
+BT-7M
+Laka konjska zaprega
+Teska konjska zaprega
+VTZ
+Traktor
+OM36
+Mazge
+80mm M.36
+Laka konjska
+VTZ
+Tractor
+Teska konjska
+Prijevoz mazgama
+4cm vz36
+5,7cm vz41
+7,62cm vz42
+10cm M vz35
+8,76cm H vz40
+Motopechota
+Pechota
+Pechota
+SOS
+Carrier
+Humber IV
+Cromwell IV
+Stuart VI
+Firefly IIC
+ST vz39
+Lehke sprezeni
+C8
+LN
+Carrier
+MW 15cwt
+30cwt
+Carrier
+T-III
+Tezke sprezeni
+Hurricane IA
+Hurricane IIB
+Spitfire VB
+Spitfire IX
+B.35
+A.100
+Liberator IIIA
+C-47
+76,2mm M-09
+Muly
+Hawk 75A-2
+D.520
+.50 M2 AB
+Cykliste
+2 Flak30
+TD-14
+75mm D/46
+50mm D/60
+105mm D/22
+77mm D/23
+Milicija
+Bf 109G-6 Strela
+S-328 Vrana
+Light horse
+S-440B
+S-640
+P4-100
+Maultier
+KM-11
+Heavy horse
+Pociag pancerny
+Bronepoezd
+Panzerzug
+Pancelvonat
+Obrneny vlak
+Obrneny vlak
+Field HQ
+klKKrad
+DFS 230A-1
+Me 323D-1
+10cm H vz16/19
+1st Btn Transvestite Brigade
+M3 GMC
+M8
+43 Legionnaire
+CMD 178
+Marmon-Herrington III
+P-63C-5
+Spitfire IIA
+Blenheim IV
+Baltimore V
+Boston IIIA
+Halifax II
+UE
+Attelage legere
+Attelage lourd
+GMC 2.5t
+Mack 7.5t
+Carrier
+Carrier
+M3A1
+Jeep
+P107
+OY
+S20TL
+M2TZ
+S35
+FTARH
+37L
+Mules
+MW 15cwt
+T214
+P19
+41 Garde
+44 Infanterie Alpine
+43 Infanterie Mecanisee
+44 FFI
+37 GRDI
+AMD 178 MG
+Valentine V
+43 Sapeurs
+Bicyclette
+60pdr
+44 Infanterie Mecanisee
+T48 GMC
+75mm Gun M1897A1
+43 Mountain
+39 Infantry
+42 Infantry
+M1917
+M1
+M2A2
+M2A1
+P-26B
+P-36A
+P-12E
+F3F-3
+A-25A
+B-10B
+B-18A
+T4M-1
+A-17A
+B-17E
+Churruca DD
+Almirante Cervera CL
+Espana BB
+Mendez Nunez LC
+B-1 SS
+C-1 SS
+Jaime I BB
+Libertad CL
+Churruca DD
+Ca.101
+CR.20bis
+Ro.1
+Wellington IC
+Wellington IC
+Wellington IC
+Wellington IC
+Wellington IC
+Me 163B-1a
+V-waffe
+K-7
+Sisu
+Fort
+57mm AB
+37mm M3 AB
+GP AB
+GP
+GP AB
+Chevrolet 1.5t
+M2
+Mack 7.5t
+M1
+M4
+Tre Kronor CL
+Motor pool
+Motor pool
+Motor pool
+6pdr III AB
+Bren AB
+Jeep AB
+Jeep AB
+42 ME Infantry
+43 Motor Infantry
+42 Pzgrenadiere (mot)
+Light horse
+Heavy horse
+Dodge T9
+Dodge T214
+Dodge 3t
+Dodge T223
+44 Infantaria
+Milicia
+Guardia
+Fury II
+P-39D
+Ju-86
+Ju-52
+Horsa II
+Hamilcar
+Raubtier TB
+T22 DD
+CG-4A
+C-54
+12,7mm DShK-38 AB
+45mm PTP-37 AB
+76,2mm E-2 AB
+A-7
+G-2
+Wellington IV
+Bf 109T-1
+Fi 167A-0
+Ar 196A-3
+BV 155A-1
+Ju 87E-1
+Re.2001OR
+Berliet
+Auto
+Light truck
+Light horse
+Heavy horse
+T4
+BA-6
+Muli
+Leichte Schiffe
+Schwere Schiffe
+Flugzeugtrager
+Unterseeboot
+M1 AM
+S30 PT
+U-2501 SS
+Caballos Ligero
+Caballos Pesado
+T166
+NAG
+Tractor
+23U
+Peugeot 402
+Mulas
+Chevrolet con Breda
+81mm M.36
+40 Infanteria
+44 Infanteria
+40 Ingenieria
+I-16-10
+I-15 M-25
+Bf 109G-4
+Bf 109F-4
+Fw 190A-3
+He 70D
+RV
+Landesa
+Infanteria de Marina
+Caballos Ligero
+Caballos Pesado
+Tractor
+Ford A
+Komintern
+ZiS-5
+Mulas
+T-1 TB
+T-1 TB
+Barco ligero
+Navio
+Submarino
+Barco ligero
+Navio
+Submarino
+4cm M 940
+Light vessel
+Capital ship
+Carrier
+Submarine
+Latt skepp
+Artilleriskepp
+G-5 PT
+Ubat
+Javier Quirogo PT
+Fugas AM
+Shtorm TB
+Leogkoye sudno
+Tyazholoye sudno
+Podvodnaya lodka
+37mm M36
+13.2mm M29
+40mm M36
+57mm M41
+87.6mm M40
+41 Pezikon
+44 Pezikon
+41 Michanikon
+ELAS
+Scout
+Humber IV
+Hurricane IA
+Hurricane IA tropical
+Spitfire VB tropical
+BH-33E-SHS
+Hurricane IIC
+Baltimore IV
+Po.25A2 Grec
+40 Cercetasi Cav
+C-47
+Elafri Ippilaton
+G5
+LG 65/3
+F618
+Vari Ippilaton
+P4-100
+LG 68
+Podelato
+Emionikon
+MW 15cwt
+Carrier
+Carrier
+OYD
+T1 PT
+Aspis TB
+Katadromikon
+Thorikton
+Ipovrichion
+105mm 105/11
+BA-20
+BA-27M
+MG
+Attelage leger
+Utility B
+91Y
+GMC 1,5t
+Attelage lourd
+FN-Kegresse
+FN-63
+Bicyclette
+Carrier
+MW 15cwt
+OYD
+G-5 PT
+45mm
+76.2mm
+MS.406C.1
+Laka konjska zaprega
+VTZ
+Dovunque
+Bf-109G-6
+A.100
+Lahke zaprah
+T-57
+RV
+6STP6L
+T-4
+Tazke zaprah
+Cyklisti
+Muly
+Trado III
+Lichte paard
+Zware paard
+T-18
+Fietsen
+Carrier
+MW 15cwt
+Stuart I (beute)
+Carrier
+30cwt
+ELAS Ippikon
+Ieros Lochos
+Distrutti
+Destroyed
+Destroyed
+Zerstorte
+Detruit
+Podbitye
+T4 PT
+Arholma AM
+TM 4 PT
+Jacob van Amstel AM
+Z 3 TB
+Brinio G
+Soloven AM
+Nordkap AM
+Snogg TB
+Light ship
+Uredd SS
+PT-20 PT
+Raven AM
+Sargo SS
+S-1 SS
+MTB-459 PT
+Bangor AM
+MTB PT
+Halcyon AM
+H SS
+T SS
+S-1 PT
+Jaskolka AM
+Dragon CL
+MTV-4 PT
+Rautu AM
+Uusimaa G
+T-1 TB
+Velebit PT
+Malinska AM
+T-1 TB
+Zmaj AV
+Criti DD
+Field HQ
+1 PT
+Derzki TB
+Dogan PT
+Karak AM
+Peyk-i-Sevket TB
+Vijelia PT
+Capitan Dumitrescu AM
+Sborul TB
+MAS 423 PT
+RD AM
+Bathurst AM
+Breeze AM
+VTB 3 PT
+Elan AM
+La Melpomene TB
+Sirene SS
+Cer TB
+40 Pionieri de Munte
+38 Gebirgspioniere
+40 Genio Alpini
+43 Mountain Engineers
+38 Gornosaperny
+Nave leggera
+Nave da battaglia
+Portaerei
+Sottomarino
+Cagni SS
+H 1 SS
+Light ship
+Latt skib
+Kustforsvarskib
+Undervattensbat
+Bateau leger
+Batiment de Ligne
+Sous-marin
+Porte-avion
+Bretagne BB
+Laki brod
+Krstarica
+Laki brod
+Krstarica
+Nosac hidroaviona
+Podmornica
+Laki brod
+Licht schip
+Kruiser
+Onderzeeboot
+Lett skip
+Panserskip
+Ubat
+Lekka jednostka
+Krazownik
+Lodz podwodna
+Submarine
+Nava usoara
+Submarin
+Kevyt alus
+Tykkivene
+Sukellusvene
+Light ship
+Heavy ship
+Submarine
+Light vessel
+Capital ship
+Carrier
+Submarine
+Light vessel
+Cruiser
+Submarine
+Light vessel
+Cruiser
+Carrier
+Cruiser
+Minesweeper
+Frigate
+57mm Portee
+M15
+M16
+YaG-10/76,2mm
+Moored
+Firefly VC
+20mm wz.30
+40M Nimrod
+Civilian truck
+Civilian truck
+Civilan truck
+Sand banks
+Field HQ
+Field HQ
+43 Kavalleri
+43 Cykelkavalleri
+Utility B
+TBS30
+Jeep
+TBS45
+Maple Leaf
+70mm M.26
+70mm
+Communists
+75mm M03/26
+IT
+Konjica
+Soerabaja B
+Planinska Pehota
+44 Planinska Pehota
+Mule
+100mm D/24
+75mm D/22
+Sukset
+SS Infanterie
+SS Schutzen
+SS Gebirgsjager
+75 K/17
+100mm H vz16/19
+Malinska AM
+Motopehota
+44 Motopehota
+Motopechota
+38 Kavallerie-schutzen
+38 Infanterie
+40 Grossdeutschland
+37 Infanterie Motorisee
+Pezomachon
+40 Fanteria Motorizzata
+H-39
+L6/40
+Motorizovana Pesadija
+Lichte Infanterie
+20mm AB
+38 Strzelcy
+20mm wz.30 SP
+57mm wz.41 SP
+75mm wz.38 SP
+38 Krakusi
+Mitchell II
+13.2mm M31
+40 Vanatori
+43 Vanatori
+Rychla
+41 Motostrelkovy
+43 Motostrelkovy
+Bilbataljon
+Motorbataljon
+Motopiyade
+44 Motopiyade
+He 111E-4
+Do 17Z-1
+Ca.310
+Jeep SP
+57mm wz.44 SP
+6pdr AB
+Crusader GT I
+Crusader GT I
+Crusader GT I
+M39
+43 Infanterie de l'Air
+BA-6
+BA-20
+M3A1
+107mm M mle35
+Oromia Chitet
+Zeriba
+Ski
+Cavalaria Motorizada
+Colonial
+9,4cm M 940
+8cm M 936
+7cm M 906-911
+77mm 77/28
+Infanteri
+7,92mm m/29
+Berliet
+43 Dragoni
+Tiger
+Train
+Seafire IB
+Ba.65bis
+5,7cm M 943
+8,8cm M 943
+15,5cm M 917
+10,5cm M 941
+15cm M 941
+14cm M 943
+44 Cacadores
+44 Engenharia
+BM-13-16
+Szekely
+Nyilaskeresztes
+44 Hegyivadasz
+25mm I
+Destroyer
+Ju-52/3m
+C-47
+V11GB
+V-11GB
+Hawk III
+Hurricane IIC
+25mm M.34
+20mm M.39
+41 Paracadutisti Guastatori
+81mm 81/14 Para
+47mm 47/32 Para
+Oletta Cadets
+Linge
+Wellesley I
+Spot the map
+15,5cm K418(f)
+25pdr
+Field HQ
+Field HQ
+White 6t
+37mm I
+2pdr Portee
+Motor Infantry
+L3/33
+Lv101
+LRDG
+Regional GHQ
+Lt VI
+Field HQ
+75mm A Ppanc wz.02/26
+155mm A wz.40
+75mm C mle16
+105mm C mle16
+Boston III
+76,5mm M.05/08
+76,5mm M.28
+Diana
+Bf 109F-4/B
+Kittyhawk IA
+41 Jalkavaki
+41 Jaakari
+44 Ratsuvaki
+Stuart VI
+44 Rajavartio-osasto
+36 Strelkovy
+Stuart VI
+Cromwell V
+Staghound AA
+44 Gvardeiskaya
+Strv m/41-II
+Cromwell V
+20mm Quad
+Paramilitary
+Rezerva
+Paramilitary Mortar
+Paramilitary MG
+15 sFH auf GWLrS(f)
+22 Piechota
+Achilles
+Priest
+L5/21
+P.40F
+Chevrolet 1,5ton
+81mm mle29
+40 Ckm Pechota
+12,7mm DShK-38
+38 Kavaleria
+37mm mle40
+43 Force Publique
+30 Stosstruppen
+30 Bruckenpioniere
+35 Stosstruppen
+38 Bruckenpioniere
+38 Pioniere
+40 Bruckenpioniere
+43 Bruckenpioniere
+43 Pioniere
+44 Sturmpioniere
+43 Jager (L)
+38 MG-Schutzen
+40 Schutzen
+40 Kradschutzen
+40 Infanterie (mot)
+35 Kradschutzen
+42 Grossdeutschland
+35 Schutzen
+43 Jager
+30 Reservisten
+38 Schutzen
+42 Grenadiere
+46 Grenadiere
+46 Sturmpioniere
+30 Infanterie (mot)
+46 Pzgrenadiere (mot)
+41 MG-Schutzen
+41 Kavallerie
+46 Gebirgsjager
+36 Gebirgspioniere
+46 Gebirgspioniere
+30 Gebirgsjager
+43 Gebirgsjager
+35 Gebirgsjager
+40 Gebirgsjager
+40 Gebirgspioniere
+35 Kavallerie
+43 Gebirgspioniere
+39 Ebbinghaus
+40 Kavallerie
+44 Kavallerie
+30 Kavallerie
+43 Brandenburger
+38 Infanterie (mot)
+30 Infanterie
+40 Luftlande-infanterie
+43 Kustenjager
+26 SA
+43 Fallschirm-pioniere
+43 Feldschule
+34 SA
+43 Polizei-schutzen
+Selbstschutz
+Polizei
+38 Luftlande-Sturm
+38 Fallschirmjager
+38 Feldersatz
+38 Landwehr
+35 Feldersatz
+39 Polizei-schutzen
+43 Landes-schutzen
+35 Landwehr
+43 Festungs-grenadiere
+40 Feldschule
+41 Landes-schutzen
+38 Feldschule
+35 Grenzschutz
+105mm D/28
+41 Kosaken
+43 Kosaken
+43 Pzgrenadiere (gep)
+46 Pzgrenadiere (gep)
+44 Pioniere
+43 Pzpioniere
+44 Pzpioniere
+46 Fallschirmjager
+38 Aufklarungsinfanterie
+35 Aufklarungsinfanterie
+46 Fusiliere
+30 Spahkavallerie
+35 Aufklarungskavallerie
+41 Aufklarungskavallerie
+38 Aufklarungskavallerie
+40 Aufklarungskavallerie
+44 Aufklarungskavallerie
+30 MG Kavallerie
+35 MG Infanterie
+40 MG Infanterie
+43 MG Infanterie
+43 FJ MG
+42 Pzgrenadiere (gep)
+38 Gebirgs-aufklarung
+41 Gebirgs-aufklarung
+43 Gebirgs-aufklarung
+40 Fallschirm-aufklarer
+43 Fallschirm-aufklarer
+46 Fallschirm-aufklarer
+klFWg Sechszug
+31 Piechota
+24 KOP
+31 KOP
+36 Obrona Narodowa
+40 Piechota
+41 MMG
+43 MMG
+M3A1
+22 Saperzy
+22 Pionierzy
+42mm M87
+37mm M72
+P.11c (2 km)
+S.61/2
+PWS-A
+Wibault 7
+PWS 10
+Potez XV
+Potez XXV
+Bre.XIX
+F.68
+F.VIIb/3m
+22 Krakusi
+31 Krakusi
+31 Zwiadowcy Rowerowi
+22 Ckm Piechota
+31 Ckm Piechota
+31 Ckm Kawaleria
+39 Ckm Kawaleria
+31 Kawaleria
+22 Kawaleria
+37mm wz.18
+SamPanc Peugeot
+SamPanc FT-B
+43 Saperzy
+39 Krakusi
+39 Krakusi Gorska
+31 Saperzy
+31 Pionierzy
+31 KOP Gorska
+39 Pionierzy
+41 Piechota
+44 Piechota
+40 Saperzy
+40 Pionerzy
+41 Saperzy
+40 Krakusi
+40 Zwiadowcy Rowerowi
+42 SP Piechota
+41 SP Piechota
+43 Pionierzy
+Taczanka
+21 Fanteria
+21 Alpini
+21 Fanteria da Montagna
+21 Cavalleria
+21 Ascari
+21 Ascari Cavalleria
+23 MVSN
+21 Carabinieri
+21 Genio
+21 Assolto
+21 San Marco
+36 Ascari
+21 Libici
+40 Dubats
+32 Dubats
+21 Bersaglieri
+42 Recon
+40 Irregulare
+21 Spahi
+32 Spahi
+36 Spahi
+38 Spahi
+40 Spahi
+36 PAI
+38 PAI
+40 PAI
+40 Ascari
+21 MG Fanteria
+36 MG Fanteria
+38 MG Fanteria
+40 MG Fanteria
+42 MG Fanteria
+32 Libici
+32 Fanteria
+32 Alpini
+32 Fanteria da Montagna
+32 Cavalleria
+32 Bersaglieri
+32 Carabinieri
+32 San Marco
+32 Genio
+32 Assolto
+36 Fanteria
+36 Alpini
+36 Genio Alpini
+36 Fanteria da Montagna
+36 Cavalleria
+36 MVSN
+36 Ascari Cavalleria
+36 Libici
+36 Bersaglieri
+36 Carabinieri
+36 San Marco
+36 Fanteria Motorizzata
+36 GAF
+36 Genio
+36 Assolto
+24 Dubats
+38 Fanteria
+38 Alpini
+38 Genio Alpini
+38 Fanteria da Montagna
+38 Cavalleria
+L3/35-38
+L2/29
+40 AS Fanteria
+38 Ascari Cavalleria
+38 Ascari
+38 Libici
+38 Bersaglieri
+38 Carabinieri
+38 San Marco
+38 MVSN
+38 Fanteria Motorizzata
+38 GAF
+40 GAF
+38 Genio
+38 Assalto
+40 Ascari Cavalleria
+40 Paracadutisti Libici
+42 Assalto
+43 Genio
+43 Fanteria Motorizzata
+43 Genio Guastatori
+43 Paracadutisti
+43 Paracadutisti Guastatori
+43 Genio Alpini
+42 ADRA
+42 MVSN
+42 Carabinieri
+41 Giovani Fascisti
+43 San Marco
+41 Aliante
+105mm 105/32
+152mm 152/13
+149mm 149/19
+120mm 120/25
+42 SS Pzgrenadiere (gep)
+7,5 GebK15
+7,5 GebG43
+10,5 GebH40
+43 Ckm Pechota
+21 Cavalerie
+32 Cavalerie
+37 Cavalerie
+43 Cavalerie
+44 Cavalerie
+21 Cercetasi Cav
+21 Infanterie
+32 Infanterie
+37 Infanterie
+42 Infanterie
+44 Infanterie
+21 Pontonieri
+32 Pontonieri
+37 Pontonieri
+43 Pontoneri
+44 Pontonieri
+21 Trupe de Asalt
+32 Trupe de Asalt
+37 Trupe de Asalt
+43 Pionieri
+44 Pionieri
+21 Vanatori de Munte
+32 Vanatori de Munte
+37 Vanatori de Munte
+44 Vanatori de Munte
+21 Garda
+32 Garda
+37 Garda
+21 Graniceri
+32 Graniceri
+37 Graniceri
+21 Pionieri de Munte
+32 Pionieri de Munte
+37 Pionieri de Munte
+43 Pionieri de Munte
+44 Pionieri de Munte
+21 Jandarmi
+32 Jandarmi
+37 Jandarmi
+37 Vanatori
+43 Rezervisti
+21 Mtr Infanterie
+32 Mtr Infanterie
+37 Mtr Infanterie
+43 Mtr Infanterie
+44 Mtr Infanterie
+32 Cercetasi Cav
+37 Cercetasi Cav
+43 Cercetasi Cav
+44 Cercetasi Cav
+37 Cercetasi Mot
+40 Cercetasi Mot
+43 Cercetasi Mot
+Atelaj usor (sase cai)
+37 Puscasi Marini
+43 Puscasi Marini
+41 Parasutisti
+21 Infanterie Fortificatii
+32 Infanterie Fortificatii
+37 Infanterie Fortificatii
+40 Infanterie Fortificatii
+43 Infanterie Fortificatii
+100mm M30
+75mm M02/36
+75mm M12
+120mm M78
+105mm M09
+152mm M10/30
+150mm M14
+105mm M18/40
+105mm M39
+25 Strelkovy
+25 Kavaleria
+25 Sthurmovoi
+25 Vnutrennie Voiska NKVD
+25 Sapernii
+31 Strelkovy
+31 Kavaleria
+31 Shturmovoi
+31 Sapernii
+31 Vnutrennie Voiska NKVD
+31 Motostrelkovy
+31 Parashutisti
+34 Prograchnik
+36 Kazaki
+36 Kavaleria
+36 Shturmovoi
+36 Sapernii
+36 Vnutrennie Voiska NKVD
+36 Motostrelkovy
+36 Pogranichnik
+36 Parashutisti
+36 Gornostrelky
+36 Gornosaperny
+36 Motociklisti
+38 Saperno-Shturmovoi
+38 Vnutrennie Voiska NKVD
+38 Motostrelkovy
+38 Pogranichnik
+38 Parashutisti
+38 Motociklisti
+41 Voiska NKVD
+41 Novobranets
+Sixhorse
+25 Territorialny
+41 Kazaki
+41 Sapernii
+31 Territorialny
+41 Gornostrelky
+41 Gornosaperny
+42 Desantny
+42 Morskaya Pehota
+43 Morskaya Pehota
+43 Voiska NKVD
+44 Novobranets
+43 Saperno-Shturmovoi
+43 Sapernii
+33 SS Infanterie
+43 Pogranichnik
+43 Parashutisti
+43 Gornostrelky
+43 Gornosaperny
+43 Motociklisti
+43 Partisani
+44 Specnaz
+46 Voiska NKVD
+46 Strelkovy
+46 Kavaleria
+46 Saperno-Shturmovoi
+46 Sapernii
+35 SS Infanterie
+46 Motostrelkovy
+46 Pogranichnik
+46 Parashutisti
+46 Gornostrelky
+46 Gornosaperny
+46 Motociklisti
+46 Gvardeskaya
+25 Konnaya Razvedka
+31 Konnaya Razvedka
+36 Konnaya Razvedka
+36 Gornaya Kavaleria
+36 Mototsikletnaya Razvedka
+38 Razvedchiki
+38 Mototsikletnaya Razvedka
+38 Konnaya Razvedka
+38 Gornaya Kavaleria
+41 Razvedchiki
+41 Mototsikletnaya Razvedka
+41 Konnaya Razvedka
+41 Gornaya Kavaleria
+43 Razvedchiki
+43 Mototsikletnaya Razvedka
+43 Konnaya Razvedka
+43 Gornaya Kavaleria
+46 Mototsikletnaya Razvedka
+25 Tachanka
+25 Pulemetny
+31 Tachanka
+31 Pulemetny
+36 Tachanka
+36 Pulemetny
+38 Tachanka
+41 Tachanka
+41 Pulemetny
+43 Pulemetny
+46 Pulemetny
+36 Territorialny
+38 Territorialny
+39 SS Infanterie (mot)
+41 SS Infanterie
+43 SS Grenadiere
+43 SS Gebirgsjager
+43 SS Pzgrenadiere (gep)
+42 SS Kavallerie
+44 SS Kosaken
+42 SS Pzgrenadiere (mot)
+37 Constabulary
+37 Motor Infantry
+37 Engineers
+37 Bridging
+37 Territorial
+37 Scots Infantry
+37 Cavalry
+37 Royal Marines
+37 Colonial Cavalry
+37 Camel
+37 Indian Infantry
+37 Ghurkas
+37 Sikhs
+37 Indian Constabulary
+37 Arab Legion
+40 Home Infantry
+40 Motor Infantry
+40 Cavalry
+40 Constabulary
+40 Camel
+40 Colonial Cavalry
+40 Sikhs
+40 Indian Constabulary
+40 LDV
+41 Light Infantry
+37 Crown Volunteers
+42 ME Motor Infantry
+41 Motor Infantry
+41 Engineers
+41 Bridging
+41 Scots Infantry
+41 Commandos
+41 Royal Marines
+3.7inch
+44 Indian Infantry
+44 Ghurka
+44 Sikhs
+41 Indian Infantry
+41 Ghurkas
+41 Sikhs
+44 Parachute Engineers
+41 Arab Legion
+41 Home Guard
+41 Crown Volunteers
+42 Parachute Infantry
+43 Light Infantry
+43 Chindits
+43 Engineers
+43 Bridging
+43 Commandos
+43 Royal Marines
+43 Constabulary
+43 Colonial Infantry
+43 Colonial Cavalry
+43 Camel
+43 Sikhs
+43 Indian Constabulary
+43 Arab Legion
+43 Home Guard
+43 Crown Volunteers
+43 Parachute Infantry
+43 Air Landing Infantry
+44 Armoured Infantry
+44 Light Infantry
+44 Engineers
+44 Bridging
+44 Parachute Infantry
+44 Motor Infantry
+44 Air Landing Infantry
+44 Scots Infantry
+37 MMG
+41 Ckm Pechota
+44 Saperzy
+40 Motorcycle
+Ford Rusesc
+40 Motorized Infantry
+40 Armoured Infantry
+40 USMC
+44 Glider Infantry
+40 Combat Engineers
+40 Bridging
+40 Cavalry
+41 Mountain
+41 Parachute Infantry
+41 MP
+42 Armored Infantry
+44 Parachute Infantry
+42 Naval Construction
+42 Airborne Engineers
+42 National Guard
+42 Parachute Infantry
+42 MP
+25mm M37
+44 Pionerzy
+43 Naval Construction
+43 Combat Engineers
+43 Bridging
+43 National Guard
+43 Glider Infantry
+43 MP
+43 Ranger
+44 Armored Infantry
+44 SP Pionerzy
+44 SP Piechota
+44 Dragoni
+42 Komandosi
+43 Komandosi
+37 Spahis Motorisee
+37 Chameaux
+37 Tirailleurs Montagnards
+37 Infanterie Levant
+40 Dragons Blindees
+37 GRDChA
+40 Infanterie Legere
+37 Circassien
+41 FFL Pontonniers
+41 FFL Sapeurs
+43 Tirailleurs Montagnards
+Free slot
+Free Slot
+43 Pontonniers
+43 Spahis
+44 Infanterie de l'Air
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot
+Free Slot

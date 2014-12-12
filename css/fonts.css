@@ -39,3 +39,12 @@
     font-weight: normal;
     font-style: normal;
 }
+
+/* font for menu widgets */
+@font-face
+{
+    font-family: 'openpanzer-menu';
+    src:url('../resources/fonts/openpanzer-menu.ttf') format('truetype'), url('../resources/fonts/openpanzer-menu.svg#openpanzer-menu') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

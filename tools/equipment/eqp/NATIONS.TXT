@@ -1,0 +1,38 @@
+* Read carefully before editing!
+* Each line can be any length, but only first 96 chars will be read
+* Empty lines and those starting with * will be skipped.
+* Can replace any text but do no change the sequence of lines
+*-------------------------------------------------------------------
+* Sides
+Axis
+Allied
+
+* Nations
+All Countries
+Slovakia
+Belgium
+Bulgaria
+Czechoslovakia
+Denmark
+Finland
+France
+Germany
+Greece
+USA
+Hungary
+Turkey
+Italy
+Netherlands
+Norway
+Poland
+Portugal
+Romania
+Croatia
+Russia
+Sweden
+Allied Yugoslavia
+United Kingdom
+Yugoslavia
+Nationalist Spain
+Republican Spain
+
